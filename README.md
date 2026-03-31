@@ -12,7 +12,7 @@ Consumes the export produced by [apigee-migrate-tool](https://github.com/apigeec
 |------|--------|-------------|
 | **Tool 1 — Extractor** | ✅ Complete | Reads apigee-migrate-tool `data/` output → writes IR to `ir/` |
 | **Tool 2 — Parser + Mapper** | ✅ Complete | Reads IR → parses proxy AST → emits Gravitee v4 API definition JSON |
-| Developers Migration Tool | 🟡 In design/scaffolding | Migrates Apigee developers, apps, and product approvals into Gravitee users, applications, and subscriptions |
+| Developers Migration Tool | 🟡 In active implementation | Migrates Apigee developers, apps, and product approvals into Gravitee users, applications, and subscriptions |
 | Tool 3 — LLM Fallback | 🔲 Planned | Translates JavaScript/JavaCallout policies via Claude API |
 | Tool 4 — Importer | 🔲 Planned | POSTs API definitions to Gravitee Management API |
 | Tool 5 — Gap Reporter | 🔲 Planned | Generates HTML report of all migration gaps and review items |
@@ -263,7 +263,7 @@ Every API definition output includes a `_migrationMeta` block. **Strip this befo
 
 ## Developers Migration Tool
 
-This repo now includes the **developer migration contract and scaffolding** for migrating:
+This repo now includes an **active developers migration workflow** for migrating:
 
 - Apigee developers → Gravitee users
 - Apigee developer apps → Gravitee applications
@@ -273,9 +273,10 @@ This repo now includes the **developer migration contract and scaffolding** for 
 
 - The migration context and config/schema are defined.
 - Shared IR loading support for developers/apps/credentials/references is in place.
-- The CLI subcommands are **documented but not fully wired yet**.
+- `developers analyze`, `developers plan`, `developers import`, and `developers reconcile` are implemented as a manifest-driven workflow.
+- The current implementation is tested with mocked Gravitee interactions and produces resumable state, id maps, reports, and reconciliation output.
 
-Use this section to prepare the inputs and the exact command shape the tool is expected to use.
+Use this section to prepare inputs and run the current command surface.
 
 ### Prerequisites
 
@@ -286,6 +287,7 @@ Before running this part of the migration:
 3. Create a config file from [`config/developers.config.example.json`](/Users/danielroder/Sites/apigee2gravitee/config/developers.config.example.json).
 4. Fill in `productPlanMap` for every Apigee product that should become a Gravitee subscription.
 5. Set Gravitee URL, org, env, roles, and policies in that config.
+6. Set capability attestations for silent user creation, application ownership, and credential preservation.
 
 ### Required IR inputs
 
@@ -320,12 +322,22 @@ Then update at minimum:
 - `roles.organization`
 - `roles.environment`
 - `policies.userProvisioning`
+- `capabilities.silentUserCreation`
+- `capabilities.applicationOwnership`
+- `capabilities.apiKeyValuePreservation`
+- `capabilities.oauthClientValuePreservation`
 - `productPlanMap`
 
 Example `productPlanMap` entry:
 
 ```json
 {
+  "capabilities": {
+    "silentUserCreation": "supported",
+    "apiKeyValuePreservation": "unknown",
+    "oauthClientValuePreservation": "unknown",
+    "applicationOwnership": "metadata-only"
+  },
   "productPlanMap": {
     "orders-product": {
       "targetApi": "orders-api",
@@ -339,9 +351,7 @@ Example `productPlanMap` entry:
 
 If a source product is missing from `productPlanMap`, `developers analyze` should fail preflight.
 
-### Intended commands
-
-The developers tool is designed around these commands:
+### Commands
 
 ```bash
 node bin/migrator.js developers analyze   --ir-dir ./ir --config ./config/developers.config.json
@@ -350,7 +360,7 @@ node bin/migrator.js developers import    --ir-dir ./ir --config ./config/develo
 node bin/migrator.js developers reconcile --ir-dir ./ir --config ./config/developers.config.json
 ```
 
-Expected first milestone command:
+Recommended first pass:
 
 ```bash
 node bin/migrator.js developers analyze \
@@ -361,19 +371,57 @@ node bin/migrator.js developers analyze \
   --org DEFAULT \
   --env DEFAULT \
   --report-dir ./report \
-  --state-file ./state/developers-import-state.json
+  --state-file ./state/developers-import-state.json \
+  --dry-run
 ```
 
-### What `developers analyze` should do
+Recommended execution sequence:
 
-The first meaningful run should:
+```bash
+node bin/migrator.js developers analyze   --ir-dir ./ir --config ./config/developers.config.json --gravitee-token "$GRAVITEE_TOKEN"
+node bin/migrator.js developers plan      --ir-dir ./ir --config ./config/developers.config.json --gravitee-token "$GRAVITEE_TOKEN"
+node bin/migrator.js developers import    --ir-dir ./ir --config ./config/developers.config.json --gravitee-token "$GRAVITEE_TOKEN" --resume
+node bin/migrator.js developers reconcile --ir-dir ./ir --config ./config/developers.config.json --gravitee-token "$GRAVITEE_TOKEN"
+```
+
+`developers import` also supports scoped execution flags:
+
+- `--users-only`
+- `--apps-only`
+- `--subscriptions-only`
+- `--resume`
+- `--force`
+- `--max-errors <n>`
+
+### What the commands do
+
+`developers analyze` will:
 
 - validate the config against `config/developers.config.schema.json`
 - verify IR readability
 - confirm target connectivity and auth
 - fail if any required product-to-plan mappings are missing
+- fail if `reuse-or-create-silently` is configured but `capabilities.silentUserCreation` is not `supported`
 - read credential-level subscription intent from `ir/references/subscription-intent.json`
-- produce a gap/risk report and a machine-readable plan skeleton without writing to Gravitee
+- produce a gap/risk report, executable manifest, state ledger, id map, and structured log without writing to Gravitee
+
+`developers plan` will:
+
+- resolve target lookups into an executable action manifest
+- classify actions as ready, blocked, skipped, or manual review
+- refresh report/state artifacts without mutating Gravitee
+
+`developers import` will:
+
+- execute user, application, plan-resolution, subscription, and verification actions in dependency order
+- persist action status after each step for resume support
+- stop on continuity-critical failures and continue through non-critical failures until `--max-errors` is reached
+
+`developers reconcile` will:
+
+- compare expected users, apps, subscriptions, and continuity-sensitive fields against live Gravitee state
+- write a structured mismatch report
+- exit non-zero when blocking mismatches remain
 
 ### Expected outputs
 

@@ -8,6 +8,7 @@
     "gravitee",
     "roles",
     "policies",
+    "capabilities",
     "productPlanMap",
     "reporting"
   ],
@@ -141,6 +142,46 @@
             "type": "string",
             "minLength": 1
           }
+        }
+      }
+    },
+    "capabilities": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "silentUserCreation",
+        "apiKeyValuePreservation",
+        "oauthClientValuePreservation",
+        "applicationOwnership"
+      ],
+      "properties": {
+        "silentUserCreation": {
+          "enum": [
+            "supported",
+            "unsupported",
+            "unknown"
+          ]
+        },
+        "apiKeyValuePreservation": {
+          "enum": [
+            "supported",
+            "unsupported",
+            "unknown"
+          ]
+        },
+        "oauthClientValuePreservation": {
+          "enum": [
+            "supported",
+            "unsupported",
+            "unknown"
+          ]
+        },
+        "applicationOwnership": {
+          "enum": [
+            "direct-member",
+            "metadata-only",
+            "unknown"
+          ]
         }
       }
     },

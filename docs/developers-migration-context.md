@@ -13,7 +13,7 @@ It should migrate:
 - **Apigee Product approvals on app credentials** → **Gravitee Subscriptions**
 - **Relevant credential continuity data** → Gravitee app/subscription configuration where possible
 
-Assume the tool itself is still missing, but the repo **does already contain useful shared scaffold** that should be extended rather than replaced.
+Assume the repo now contains a working first implementation of the tool, and that future work should **extend the existing shared scaffold and command flow** rather than replacing it.
 
 In particular, reuse and extend:
 
@@ -581,6 +581,12 @@ Create a config file like:
     "existingApplication": "match-and-reuse",
     "userProvisioning": "reuse-or-create-silently"
   },
+  "capabilities": {
+    "silentUserCreation": "supported",
+    "apiKeyValuePreservation": "unknown",
+    "oauthClientValuePreservation": "unknown",
+    "applicationOwnership": "metadata-only"
+  },
   "productPlanMap": {
     "orders-product": {
       "targetApi": "orders-api",
@@ -610,6 +616,8 @@ Create a config file like:
 Also add a JSON schema for validation.
 
 `productPlanMap` is required for the first milestone. `developers analyze` should fail preflight when any source product participating in a planned subscription lacks a target API/plan mapping.
+
+The `capabilities` block is also required for the first milestone so the tool can fail fast on unsupported one-to-one expectations instead of silently degrading.
 
 ---
 
@@ -646,23 +654,16 @@ For v1 user migration behavior:
 
 ## Recommended implementation sequence
 
-Build in this order:
+The repo now has a meaningful vertical slice in place. Remaining work should continue in this order:
 
-1. CLI skeleton
-2. config loading + schema validation
-3. IR loading
-4. preflight validator
-5. normalized models and mappers
-6. `developers analyze`
-7. `developers plan`
-8. user importer
-9. application importer
-10. subscription importer
-11. state persistence / resume logic
-12. `developers reconcile`
-13. improved reporting and structured logs
+1. deepen live Gravitee endpoint compatibility validation
+2. harden user importer behavior against deployment-specific provisioning nuances
+3. harden application importer and ownership preservation behavior
+4. harden subscription importer and continuity verification behavior
+5. expand reconcile coverage for real-world drift cases
+6. improve operator-facing reporting and remediation guidance
 
-This sequence gets a safe vertical slice working before live import complexity grows.
+This sequence keeps the current vertical slice and pushes it toward production-hardening.
 
 ---
 
@@ -728,24 +729,23 @@ This should be treated as a high-importance validation case.
 
 ## What Codex should build first
 
-If continuing from scratch on the developers tool itself, the best immediate next step is:
+If continuing from the current developers tool implementation, the best immediate next step is:
 
-1. add the command parser in `bin/migrator.js`
-2. add `developers analyze`
-3. add config schema + runtime validation
-4. add IR loading
-5. add mapper stubs and normalized models
-6. add preflight checks with report output
+1. validate the live Gravitee write paths against the target deployment
+2. expand mutation-path coverage for user, application, and subscription edge cases
+3. tighten resume/retry behavior around partial failures
+4. broaden reconcile reporting for ownership, continuity, and inactive-user handling
+5. add more fixture coverage for mixed reuse/create/update scenarios
 
-That work should extend the repo's current scaffold instead of introducing parallel replacements for shared CLI, loader, or Gravitee transport code.
+That work should extend the repo's current scaffold and implementation instead of introducing parallel replacements for shared CLI, loader, or Gravitee transport code.
 
-Only after that should live import calls be wired.
+The import calls are now wired; the remaining focus is production hardening and environment validation.
 
 ---
 
 ## Acceptance criteria for the first meaningful milestone
 
-A good first milestone is complete when:
+That first milestone is complete when:
 
 - `developers analyze` runs end-to-end
 - it loads IR successfully
@@ -755,6 +755,13 @@ A good first milestone is complete when:
 - it produces a gap/risk report
 - it emits a machine-readable plan skeleton
 - it does not require live import to prove progress
+
+The repo has now progressed beyond that milestone. The current bar for the next milestone is:
+
+- `developers plan` produces an executable action manifest
+- `developers import` persists resumable action state and id maps
+- `developers reconcile` verifies live target parity and exits non-zero on blocking mismatches
+- mocked and fixture-based tests cover create, reuse, failure, resume, and drift detection paths
 
 ---
 

@@ -21,6 +21,12 @@
     "existingApplication": "match-and-reuse",
     "userProvisioning": "reuse-or-create-silently"
   },
+  "capabilities": {
+    "silentUserCreation": "supported",
+    "apiKeyValuePreservation": "unknown",
+    "oauthClientValuePreservation": "unknown",
+    "applicationOwnership": "metadata-only"
+  },
   "productPlanMap": {
     "orders-product": {
       "targetApi": "orders-api",

@@ -257,6 +257,172 @@ class GraviteeClient {
       return { ok: false, error: err.message, status: err.status };
     }
   }
+
+  async verifyEnvironmentAccess() {
+    try {
+      await this.get(this.envUrl());
+      return { ok: true };
+    } catch (err) {
+      return { ok: false, error: err.message, status: err.status };
+    }
+  }
+
+  async listApplications() {
+    const body = await this.get(this.envUrl('/applications'));
+    return Array.isArray(body?.data) ? body.data : (Array.isArray(body) ? body : []);
+  }
+
+  async listRoles() {
+    const body = await this.get(this.orgUrl('/rolescopes'));
+    const roles = new Set();
+
+    const scopes = Array.isArray(body?.data) ? body.data : (Array.isArray(body) ? body : []);
+    for (const scope of scopes) {
+      for (const role of (scope.roles || [])) {
+        if (role?.scope && role?.name) {
+          roles.add(`${role.scope}:${role.name}`);
+        }
+      }
+    }
+
+    return roles;
+  }
+
+  async listCustomFields() {
+    const names = new Set();
+    for (const suffix of ['/metadata', '/applications/metadata']) {
+      try {
+        const body = await this.get(this.envUrl(suffix));
+        const items = Array.isArray(body?.data) ? body.data : (Array.isArray(body) ? body : []);
+        for (const item of items) {
+          if (item?.key) names.add(item.key);
+          if (item?.name) names.add(item.name);
+        }
+      } catch (_) {
+        // Different APIM versions expose metadata on different endpoints.
+      }
+    }
+    return names;
+  }
+
+  async findUserByEmail(email) {
+    const body = await this.get(this.orgUrl(`/users?query=${encodeURIComponent(email)}`));
+    const items = Array.isArray(body?.data) ? body.data : (Array.isArray(body) ? body : []);
+    return items.find((item) => item.email === email) || null;
+  }
+
+  async getUserRoles(userId) {
+    const body = await this.get(this.orgUrl(`/users/${userId}/roles`));
+    const roles = new Set();
+    const items = Array.isArray(body?.data) ? body.data : (Array.isArray(body) ? body : []);
+    for (const scope of items) {
+      if (scope?.scope && Array.isArray(scope.roles)) {
+        for (const role of scope.roles) {
+          if (role?.name) roles.add(`${scope.scope}:${role.name}`);
+        }
+      } else if (scope?.scope && scope?.name) {
+        roles.add(`${scope.scope}:${scope.name}`);
+      }
+    }
+    return roles;
+  }
+
+  async createUser(payload) {
+    return this.post(this.orgUrl('/users'), payload);
+  }
+
+  async updateUser(userId, payload) {
+    return this.put(this.orgUrl(`/users/${userId}`), payload);
+  }
+
+  async assignUserRoles(userId, roles) {
+    return this.put(this.orgUrl(`/users/${userId}/roles`), roles);
+  }
+
+  async findApplicationByNameAndOwnerHint({ name, ownerHint }) {
+    const items = await this.listApplications();
+    return items.find((item) => (
+      item.name === name && (
+        !ownerHint ||
+        item.owner?.displayName === ownerHint ||
+        item.owner?.email === ownerHint ||
+        item.metadata?.developerEmail === ownerHint
+      )
+    )) || items.find((item) => item.name === name) || null;
+  }
+
+  async listApplicationMembers(applicationId) {
+    const body = await this.get(this.envUrl(`/applications/${applicationId}/members`));
+    return Array.isArray(body?.data) ? body.data : (Array.isArray(body) ? body : []);
+  }
+
+  async createApplication(payload) {
+    return this.post(this.envUrl('/applications'), payload);
+  }
+
+  async updateApplication(applicationId, payload) {
+    return this.put(this.envUrl(`/applications/${applicationId}`), payload);
+  }
+
+  async addApplicationMember(applicationId, payload) {
+    return this.post(this.envUrl(`/applications/${applicationId}/members`), payload);
+  }
+
+  async findPlan(mapping) {
+    if (mapping.targetApiId && mapping.targetPlanId) {
+      const plan = await this.get(this.v2Url(`/apis/${mapping.targetApiId}/plans/${mapping.targetPlanId}`));
+      return plan ? { ...plan, apiId: plan.apiId || mapping.targetApiId } : null;
+    }
+
+    if (!mapping.targetApiId) {
+      return {
+        id: mapping.targetPlanId || mapping.targetPlan,
+        apiId: mapping.targetApiId || null,
+        name: mapping.targetPlan,
+      };
+    }
+
+    const body = await this.get(this.v2Url(`/apis/${mapping.targetApiId}/plans`));
+    const items = Array.isArray(body?.data) ? body.data : (Array.isArray(body) ? body : []);
+    const found = items.find((item) => item.id === mapping.targetPlanId || item.name === mapping.targetPlan);
+    return found ? { ...found, apiId: found.apiId || mapping.targetApiId } : null;
+  }
+
+  async findSubscription({ applicationId, apiId, planId }) {
+    const body = await this.get(this.v2Url(`/apis/${apiId}/subscriptions`));
+    const items = Array.isArray(body?.data) ? body.data : (Array.isArray(body) ? body : []);
+    return items.find((item) => (
+      item.application?.id === applicationId && item.plan?.id === planId
+    )) || null;
+  }
+
+  async listSubscriptionApiKeys({ apiId, subscriptionId }) {
+    const body = await this.get(this.v2Url(`/apis/${apiId}/subscriptions/${subscriptionId}/api-keys`));
+    return Array.isArray(body?.data) ? body.data : (Array.isArray(body) ? body : []);
+  }
+
+  async createSubscription({ apiId, applicationId, planId }) {
+    return this.post(this.v2Url(`/apis/${apiId}/subscriptions`), { applicationId, planId });
+  }
+
+  async closeOrPauseSubscription({ apiId, subscriptionId, status }) {
+    return this.patch(this.v2Url(`/apis/${apiId}/subscriptions/${subscriptionId}`), { status });
+  }
+
+  async verifyUserProvisioningCapabilities() {
+    const health = await this.healthCheck();
+    return { ok: health.ok, supported: health.ok };
+  }
+
+  async verifyApplicationOwnershipCapabilities() {
+    const check = await this.verifyEnvironmentAccess();
+    return { ok: check.ok, supported: check.ok };
+  }
+
+  async verifyApiKeyContinuityCapabilities() {
+    const check = await this.verifyEnvironmentAccess();
+    return { ok: check.ok, supported: check.ok };
+  }
 }
 
 module.exports = { GraviteeClient, GraviteeApiError };

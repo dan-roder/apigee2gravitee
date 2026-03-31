@@ -20,6 +20,7 @@
 const { spawn } = require('child_process');
 const path = require('path');
 const fs = require('fs');
+const { runDevelopersCommand } = require('../src/developers');
 
 // ─── Colours (no dependencies) ───────────────────────────────────────────────
 const c = {
@@ -245,6 +246,7 @@ ${fmt.bold('Usage:')}
 
 ${fmt.bold('Commands:')}
   extract    Parse apigee-migrate-tool data/ output into the IR
+  developers Analyze or migrate developers/apps/subscriptions
 
 ${fmt.bold('extract options:')}
   --data-dir <path>   Path to apigee-migrate-tool data/ directory  (required)
@@ -256,27 +258,35 @@ ${fmt.bold('extract options:')}
 ${fmt.bold('Examples:')}
   migrator extract --data-dir ./data --ir-dir ./ir
   migrator extract --data-dir ./data --ir-dir ./ir --org advana --env dev -v
+  migrator developers analyze --ir-dir ./ir --config ./config/developers.config.json
 `);
 }
 
-// ─── Entry point ─────────────────────────────────────────────────────────────
+async function main() {
+  const args = parseArgs(process.argv.slice(2));
+  const [command, subcommand] = args.positional;
 
-const argv = process.argv.slice(2);
-const { flags, positional } = parseArgs(argv);
-const command = positional[0];
+  if (!command || command === 'help' || command === '--help' || command === '-h') {
+    printHelp();
+    process.exit(0);
+  }
 
-switch (command) {
-  case 'extract':
-    cmdExtract(flags);
-    break;
-  case 'help':
-  case '--help':
-  case '-h':
-  case undefined:
-    printHelp();
-    break;
-  default:
-    console.error(fmt.err(`Unknown command: ${command}`));
-    printHelp();
-    process.exit(1);
+  if (command === 'extract') {
+    cmdExtract(args.flags);
+    return;
+  }
+
+  if (command === 'developers') {
+    const exitCode = await runDevelopersCommand(subcommand, args.flags, fmt);
+    process.exit(exitCode);
+  }
+
+  console.error(fmt.err(`Unknown command: ${command}`));
+  printHelp();
+  process.exit(1);
 }
+
+main().catch((err) => {
+  console.error(fmt.err(err.message));
+  process.exit(1);
+});

@@ -1,0 +1,109 @@
+'use strict';
+
+const { runDevelopersAnalyze } = require('./analyze');
+const { runDevelopersPlan } = require('./plan');
+const { runDevelopersImport } = require('./import');
+const { runDevelopersReconcile } = require('./reconcile');
+
+function printFindings(findings, fmt, label) {
+  if (findings.length === 0) return;
+  for (const finding of findings) {
+    const printer = finding.severity === 'blocker' ? fmt.err : fmt.warn;
+    console.log(printer(`${label} ${finding.code}: ${finding.message}`));
+  }
+}
+
+async function runDevelopersCommand(subcommand, flags, fmt) {
+  if (subcommand === 'plan') {
+    const result = await runDevelopersPlan(flags);
+    if (result.validationErrors) {
+      console.log(fmt.err('Developers config validation failed'));
+      for (const err of result.validationErrors) console.log(`  - ${err}`);
+      return result.exitCode;
+    }
+
+    if (flags.json) {
+      console.log(JSON.stringify(result.manifest, null, 2));
+    } else {
+      console.log(fmt.header('Developers plan'));
+      console.log('');
+      console.log(`[plan] ${result.manifest.actions.length} actions generated`);
+      console.log(`[plan] ${result.manifest.summary.actionsByStatus.READY || 0} ready, ${result.manifest.summary.actionsByStatus.BLOCKED || 0} blocked, ${result.manifest.summary.actionsByStatus.SKIPPED || 0} skipped`);
+      console.log('');
+      console.log(`  Plan:       ${fmt.dim(result.outputPaths.plan)}`);
+      console.log(`  Gap report: ${fmt.dim(result.outputPaths.gapReport)}`);
+      console.log(`  State:      ${fmt.dim(result.outputPaths.state)}`);
+      console.log(`  Id map:     ${fmt.dim(result.outputPaths.idMap)}`);
+      console.log(`  Log:        ${fmt.dim(result.outputPaths.log)}`);
+    }
+    return result.exitCode;
+  }
+
+  if (subcommand === 'analyze') {
+    const result = await runDevelopersAnalyze(flags);
+
+    if (result.validationErrors) {
+      console.log(fmt.err('Developers config validation failed'));
+      for (const err of result.validationErrors) console.log(`  - ${err}`);
+      return result.exitCode;
+    }
+
+    console.log(fmt.header('Developers analyze'));
+    console.log('');
+    console.log(`[preflight] ${result.domain.users.length} developers, ${result.domain.applications.length} apps, ${result.domain.subscriptions.length} subscriptions discovered`);
+    console.log(`[preflight] ${result.preflight.blockers.length} blocker(s), ${result.preflight.warnings.length} warning(s)`);
+    printFindings(result.preflight.blockers, fmt, '[blocker]');
+    printFindings(result.preflight.warnings, fmt, '[warn]');
+    console.log('');
+    console.log(`  Plan:       ${fmt.dim(result.outputPaths.plan)}`);
+    console.log(`  Gap report: ${fmt.dim(result.outputPaths.gapReport)}`);
+    console.log(`  State:      ${fmt.dim(result.outputPaths.state)}`);
+    console.log(`  Id map:     ${fmt.dim(result.outputPaths.idMap)}`);
+    console.log(`  Log:        ${fmt.dim(result.outputPaths.log)}`);
+    return result.exitCode;
+  }
+
+  if (subcommand === 'import') {
+    const result = await runDevelopersImport(flags);
+    if (result.validationErrors) {
+      console.log(fmt.err('Developers config validation failed'));
+      for (const err of result.validationErrors) console.log(`  - ${err}`);
+      return result.exitCode;
+    }
+    console.log(fmt.header('Developers import'));
+    console.log('');
+    const statuses = Object.values(result.state.actions).reduce((acc, item) => {
+      acc[item.status] = (acc[item.status] || 0) + 1;
+      return acc;
+    }, {});
+    console.log(`[import] ${statuses.SUCCEEDED || 0} succeeded, ${statuses.FAILED || 0} failed, ${statuses.BLOCKED || 0} blocked, ${statuses.SKIPPED || 0} skipped`);
+    console.log('');
+    console.log(`  Plan:       ${fmt.dim(result.outputPaths.plan)}`);
+    console.log(`  State:      ${fmt.dim(result.outputPaths.state)}`);
+    console.log(`  Id map:     ${fmt.dim(result.outputPaths.idMap)}`);
+    console.log(`  Log:        ${fmt.dim(result.outputPaths.log)}`);
+    return result.exitCode;
+  }
+
+  if (subcommand === 'reconcile') {
+    const result = await runDevelopersReconcile(flags);
+    if (result.validationErrors) {
+      console.log(fmt.err('Developers config validation failed'));
+      for (const err of result.validationErrors) console.log(`  - ${err}`);
+      return result.exitCode;
+    }
+    console.log(fmt.header('Developers reconcile'));
+    console.log('');
+    console.log(`[reconcile] ${result.report.summary.checkedUsers} users, ${result.report.summary.checkedApplications} apps, ${result.report.summary.checkedSubscriptions} subscriptions checked`);
+    console.log(`[reconcile] ${result.report.summary.blockers} blocker(s), ${result.report.summary.warnings} warning(s)`);
+    console.log('');
+    console.log(`  Report:     ${fmt.dim(result.outputPaths.reconcileReport)}`);
+    console.log(`  Log:        ${fmt.dim(result.outputPaths.log)}`);
+    return result.exitCode;
+  }
+
+  console.log(fmt.err(`Unknown developers subcommand: ${subcommand || '<none>'}`));
+  return 1;
+}
+
+module.exports = { runDevelopersCommand };
