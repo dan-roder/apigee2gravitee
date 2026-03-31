@@ -12,6 +12,7 @@ Consumes the export produced by [apigee-migrate-tool](https://github.com/apigeec
 |------|--------|-------------|
 | **Tool 1 — Extractor** | ✅ Complete | Reads apigee-migrate-tool `data/` output → writes IR to `ir/` |
 | **Tool 2 — Parser + Mapper** | ✅ Complete | Reads IR → parses proxy AST → emits Gravitee v4 API definition JSON |
+| Developers Migration Tool | 🟡 In design/scaffolding | Migrates Apigee developers, apps, and product approvals into Gravitee users, applications, and subscriptions |
 | Tool 3 — LLM Fallback | 🔲 Planned | Translates JavaScript/JavaCallout policies via Claude API |
 | Tool 4 — Importer | 🔲 Planned | POSTs API definitions to Gravitee Management API |
 | Tool 5 — Gap Reporter | 🔲 Planned | Generates HTML report of all migration gaps and review items |
@@ -257,6 +258,134 @@ A complete Gravitee v4 API definition ready for `POST /management/v2/organizatio
 ### The `_migrationMeta` block
 
 Every API definition output includes a `_migrationMeta` block. **Strip this before posting to the Gravitee Management API** — it is for tooling use only:
+
+---
+
+## Developers Migration Tool
+
+This repo now includes the **developer migration contract and scaffolding** for migrating:
+
+- Apigee developers → Gravitee users
+- Apigee developer apps → Gravitee applications
+- Apigee product approvals on credentials → Gravitee subscriptions
+
+### Current state
+
+- The migration context and config/schema are defined.
+- Shared IR loading support for developers/apps/credentials/references is in place.
+- The CLI subcommands are **documented but not fully wired yet**.
+
+Use this section to prepare the inputs and the exact command shape the tool is expected to use.
+
+### Prerequisites
+
+Before running this part of the migration:
+
+1. Run Tool 1 and generate `./ir`.
+2. Ensure target Gravitee APIs and plans already exist.
+3. Create a config file from [`config/developers.config.example.json`](/Users/danielroder/Sites/apigee2gravitee/config/developers.config.example.json).
+4. Fill in `productPlanMap` for every Apigee product that should become a Gravitee subscription.
+5. Set Gravitee URL, org, env, roles, and policies in that config.
+
+### Required IR inputs
+
+The developers migration flow expects these IR inputs under `./ir`:
+
+```text
+ir/
+  developers/
+  apps/
+  credentials/
+  products/
+  references/subscription-intent.json
+  references/credential-continuity-index.json
+  references/inactive-impact.json
+  _protected/credentials/...    (when continuity review needs secret presence metadata)
+  manifest.json
+```
+
+### Config setup
+
+Start with:
+
+```bash
+cp ./config/developers.config.example.json ./config/developers.config.json
+```
+
+Then update at minimum:
+
+- `gravitee.url`
+- `gravitee.orgId`
+- `gravitee.envId`
+- `roles.organization`
+- `roles.environment`
+- `policies.userProvisioning`
+- `productPlanMap`
+
+Example `productPlanMap` entry:
+
+```json
+{
+  "productPlanMap": {
+    "orders-product": {
+      "targetApi": "orders-api",
+      "targetApiId": "api_orders_123",
+      "targetPlan": "Orders API Key",
+      "targetPlanId": "plan_orders_key_123"
+    }
+  }
+}
+```
+
+If a source product is missing from `productPlanMap`, `developers analyze` should fail preflight.
+
+### Intended commands
+
+The developers tool is designed around these commands:
+
+```bash
+node bin/migrator.js developers analyze   --ir-dir ./ir --config ./config/developers.config.json
+node bin/migrator.js developers plan      --ir-dir ./ir --config ./config/developers.config.json
+node bin/migrator.js developers import    --ir-dir ./ir --config ./config/developers.config.json
+node bin/migrator.js developers reconcile --ir-dir ./ir --config ./config/developers.config.json
+```
+
+Expected first milestone command:
+
+```bash
+node bin/migrator.js developers analyze \
+  --ir-dir ./ir \
+  --config ./config/developers.config.json \
+  --gravitee-url https://gravitee.example.com \
+  --gravitee-token "$GRAVITEE_TOKEN" \
+  --org DEFAULT \
+  --env DEFAULT \
+  --report-dir ./report \
+  --state-file ./state/developers-import-state.json
+```
+
+### What `developers analyze` should do
+
+The first meaningful run should:
+
+- validate the config against `config/developers.config.schema.json`
+- verify IR readability
+- confirm target connectivity and auth
+- fail if any required product-to-plan mappings are missing
+- read credential-level subscription intent from `ir/references/subscription-intent.json`
+- produce a gap/risk report and a machine-readable plan skeleton without writing to Gravitee
+
+### Expected outputs
+
+```text
+report/developers-plan.json
+report/developers-gap-report.json
+state/developers-import-state.json
+state/developers-id-map.json
+logs/developers.ndjson
+```
+
+For the detailed design and policy rules, see [`docs/developers-migration-context.md`](/Users/danielroder/Sites/apigee2gravitee/docs/developers-migration-context.md).
 
 | Field | Description |
 |---|---|

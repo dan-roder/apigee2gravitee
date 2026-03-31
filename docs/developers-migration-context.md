@@ -13,7 +13,13 @@ It should migrate:
 - **Apigee Product approvals on app credentials** → **Gravitee Subscriptions**
 - **Relevant credential continuity data** → Gravitee app/subscription configuration where possible
 
-Assume the **current repo does not already contain a scaffold** for this tool. Build from scratch in a way that cleanly fits into the repo.
+Assume the tool itself is still missing, but the repo **does already contain useful shared scaffold** that should be extended rather than replaced.
+
+In particular, reuse and extend:
+
+- `bin/migrator.js`
+- `src/shared/gravitee-client.js`
+- `src/shared/ir-loader.js`
 
 ---
 
@@ -107,7 +113,7 @@ This makes the tool safer for bulk migrations and easier to resume after partial
 
 The tool should read IR produced by earlier extraction steps.
 
-Assume an input structure like:
+Use the richer Tool 1 contract as the source of truth. The developers tool should read at minimum:
 
 ```text
 ir/
@@ -116,12 +122,32 @@ ir/
   apps/
     {email}/
       {appName}.json
+  credentials/
+    {email}/
+      {appName}/
+        {consumerKey}.json
   products/
     {productName}.json
+  references/
+    subscription-intent.json
+    credential-continuity-index.json
+    inactive-impact.json
+  _protected/
+    credentials/
+      {email}/
+        {appName}/
+          {consumerKey}/
+            consumer-secret.txt
+            secret-meta.json
   manifest.json
 ```
 
-The implementation should not hardcode too many assumptions beyond that. Keep the loaders modular so field mapping can be adjusted once the actual extractor output is confirmed.
+Notes:
+
+- `credentials/` is the continuity-critical input and should not be inferred indirectly from apps.
+- `references/subscription-intent.json` should drive one-subscription-per-product planning for multi-product credentials.
+- `references/credential-continuity-index.json` and `_protected/credentials/...` should be used when continuity policy requires inspecting secret/key preservation risk.
+- Keep the loaders modular so field mapping can evolve without rewriting orchestration.
 
 ---
 
@@ -148,6 +174,16 @@ Suggested directories:
 report/
 state/
 logs/
+```
+
+Suggested machine-readable filenames for this tool:
+
+```text
+report/developers-plan.json
+report/developers-gap-report.json
+state/developers-import-state.json
+state/developers-id-map.json
+logs/developers.ndjson
 ```
 
 ---
@@ -200,6 +236,10 @@ node bin/migrator.js developers reconcile [options]
 -v, --verbose
 --json
 ```
+
+Additional recommendation:
+
+- `--config` should point to a schema-validated JSON file containing policy defaults and the explicit product-to-plan mapping.
 
 ### Policy flags
 
@@ -277,6 +317,7 @@ Responsibility:
 Key design note:
 - keep file loading separate from mapping logic
 - support partial filters like include/exclude developer subsets
+- load `credentials/`, `references/`, `inventories/`, and protected secret metadata in addition to developers/apps/products
 
 ### 2. Mapper layer
 
@@ -348,6 +389,7 @@ Target expectations:
 - ownership should be preserved by carrying `developer_email`
 - metadata should be preserved where practical
 - OAuth-oriented client IDs should be preserved exactly when required
+- the source credential, not just the app, is the continuity-critical identity
 
 ### Approved product relationship → Subscription
 
@@ -380,6 +422,14 @@ Supported values:
 - `acknowledged`
 - `suppressed`
 - `live`
+
+### User provisioning policy
+
+Supported values:
+
+- `reuse-only`
+- `reuse-or-create-silently`
+- `allow-invites`
 
 ### Default application policy
 
@@ -416,6 +466,7 @@ These should be treated as hard requirements.
 4. **Never allow OAuth client ID drift when continuity is required.**
 5. **Never collapse multi-product credentials into a single subscription.**
 6. **Never rely on one-shot import behavior.** Safe re-runs are required.
+7. **Never depend on invitation/registration side effects in v1.** Reuse existing users by email, otherwise create them through a silent admin path.
 
 ---
 
@@ -431,12 +482,14 @@ This tool must be resumable and safe to re-run.
 - optionally attach a deterministic external marker if needed
 
 ### Subscription matching
-- match by application + API + plan
+- persist and match using the source identity `developerEmail/appName/consumerKey/productName`
+- also store target application + API + plan identifiers for reconciliation
 
 ### State persistence
 - write to state file after every successful create/update
 - support `--resume`
 - support `--force` when intentional overwrite/replay is needed
+- persist id maps for users, applications, and subscriptions keyed by source identities
 
 Suggested state file path:
 
@@ -459,6 +512,8 @@ Before live import, the tool should validate at least the following:
 7. SMTP policy is explicitly set
 8. default app behavior is explicitly acknowledged
 9. role configuration exists
+10. explicit source product → target API/plan mappings exist for all planned subscriptions
+11. the target deployment can satisfy the configured user provisioning mode, especially silent user creation in v1
 
 Preflight should be reusable across `analyze`, `plan`, and `import`.
 
@@ -473,9 +528,11 @@ Should stop the run when configured or when critical:
 - authentication failure
 - invalid config
 - unresolved required plan
+- missing explicit product-to-plan mapping
 - required role assignment failure
 - client ID mismatch when continuity is required
 - key continuity violation when policy says to fail
+- silent user provisioning required but unsupported in the target environment
 
 ### Soft failures / warnings
 Should be logged and included in reports:
@@ -521,7 +578,16 @@ Create a config file like:
     "defaultApplication": "must-be-disabled",
     "apiKeyContinuity": "preserve-if-supported",
     "existingUser": "match-and-reuse",
-    "existingApplication": "match-and-reuse"
+    "existingApplication": "match-and-reuse",
+    "userProvisioning": "reuse-or-create-silently"
+  },
+  "productPlanMap": {
+    "orders-product": {
+      "targetApi": "orders-api",
+      "targetApiId": "api_orders_123",
+      "targetPlan": "Orders API Key",
+      "targetPlanId": "plan_orders_key_123"
+    }
   },
   "customFieldMap": {
     "team": "team",
@@ -542,6 +608,8 @@ Create a config file like:
 ```
 
 Also add a JSON schema for validation.
+
+`productPlanMap` is required for the first milestone. `developers analyze` should fail preflight when any source product participating in a planned subscription lacks a target API/plan mapping.
 
 ---
 
@@ -566,6 +634,13 @@ Responsibilities:
 Do not spread HTTP calls throughout the codebase.
 
 The rest of the tool should depend on a client interface, not direct fetch calls.
+
+For v1 user migration behavior:
+
+- look up existing users by email first
+- if missing, create them through a silent admin path
+- always assign configured organization/environment roles as part of provisioning
+- do not rely on invitation or self-registration flows unless a later version explicitly enables them
 
 ---
 
@@ -599,6 +674,7 @@ Human-readable mode should emit concise progress like:
 [preflight] 148 developers, 221 apps, 412 product associations discovered
 [preflight] 6 inactive developers
 [preflight] 14 custom attributes missing matching Gravitee custom fields
+[preflight] 0 missing product-plan mappings
 [preflight] 23 OAuth client_id continuity cases
 [plan]      142 users to create, 6 users to skip
 [plan]      221 applications to create
@@ -623,6 +699,7 @@ The reconcile mode should verify:
 - each application belongs to the expected developer
 - each expected subscription exists
 - subscription target plan/API mapping is correct
+- recorded source identity maps back to the correct target object ids
 - OAuth client ID continuity is preserved where required
 - inactive developer handling matches the chosen policy
 
@@ -651,7 +728,7 @@ This should be treated as a high-importance validation case.
 
 ## What Codex should build first
 
-If continuing from scratch, the best immediate next step is:
+If continuing from scratch on the developers tool itself, the best immediate next step is:
 
 1. add the command parser in `bin/migrator.js`
 2. add `developers analyze`
@@ -659,6 +736,8 @@ If continuing from scratch, the best immediate next step is:
 4. add IR loading
 5. add mapper stubs and normalized models
 6. add preflight checks with report output
+
+That work should extend the repo's current scaffold instead of introducing parallel replacements for shared CLI, loader, or Gravitee transport code.
 
 Only after that should live import calls be wired.
 
@@ -672,6 +751,7 @@ A good first milestone is complete when:
 - it loads IR successfully
 - it validates config
 - it validates target connectivity
+- it validates explicit product-to-plan mappings
 - it produces a gap/risk report
 - it emits a machine-readable plan skeleton
 - it does not require live import to prove progress
@@ -680,7 +760,7 @@ A good first milestone is complete when:
 
 ## Final instruction to Codex
 
-Please implement this as a **clean, testable, modular addition** to the repo, assuming there is **no existing scaffold** for the developers migration tool.
+Please implement this as a **clean, testable, modular addition** to the repo, extending the existing shared scaffold rather than replacing it.
 
 Prefer:
 

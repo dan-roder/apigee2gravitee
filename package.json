@@ -10,11 +10,12 @@
     "node": ">=18.0.0"
   },
   "scripts": {
+    "test:shared":      "node test/shared/test-ir-loader.js",
     "test:extractor":   "python3 -m unittest test.extractor.test_extractor -v",
     "test:translator":  "node test/translator/test-parser.js && node test/translator/test-mapper.js",
     "test:parser":      "node test/translator/test-parser.js",
     "test:mapper":      "node test/translator/test-mapper.js",
-    "test":             "npm run test:extractor && npm run test:translator"
+    "test":             "npm run test:extractor && npm run test:translator && npm run test:shared"
   },
   "dependencies": {
     "sax": "^1.4.1"

@@ -24,6 +24,11 @@ function readJson(filePath) {
   return JSON.parse(fs.readFileSync(filePath, 'utf8'));
 }
 
+function readText(filePath) {
+  if (!fs.existsSync(filePath)) return null;
+  return fs.readFileSync(filePath, 'utf8');
+}
+
 /**
  * Recursively collect all .json files under a directory.
  * Returns [] if the directory doesn't exist.
@@ -54,6 +59,10 @@ class IrLoader {
 
   manifest() {
     return readJson(path.join(this.irDir, 'manifest.json'));
+  }
+
+  extractionReport() {
+    return readJson(path.join(this.irDir, 'extraction-report.json'));
   }
 
   // ── Bundles ──────────────────────────────────────────────────────────────────
@@ -107,8 +116,66 @@ class IrLoader {
     return findJsonFiles(path.join(this.irDir, 'apps')).map(readJson).filter(Boolean);
   }
 
+  credentials() {
+    return findJsonFiles(path.join(this.irDir, 'credentials')).map(readJson).filter(Boolean);
+  }
+
   products() {
     return findJsonFiles(path.join(this.irDir, 'products')).map(readJson).filter(Boolean);
+  }
+
+  // ── Inventories / references ────────────────────────────────────────────────
+
+  inventories() {
+    return findJsonFiles(path.join(this.irDir, 'inventories'))
+      .sort()
+      .reduce((acc, filePath) => {
+        acc[path.basename(filePath, '.json')] = readJson(filePath);
+        return acc;
+      }, {});
+  }
+
+  inventory(name) {
+    return readJson(path.join(this.irDir, 'inventories', `${name}.json`));
+  }
+
+  references() {
+    return findJsonFiles(path.join(this.irDir, 'references'))
+      .sort()
+      .reduce((acc, filePath) => {
+        acc[path.basename(filePath, '.json')] = readJson(filePath);
+        return acc;
+      }, {});
+  }
+
+  reference(name) {
+    return readJson(path.join(this.irDir, 'references', `${name}.json`));
+  }
+
+  // ── Protected credential material ───────────────────────────────────────────
+
+  credentialSecretMeta(developerEmail, appName, consumerKey) {
+    return readJson(path.join(
+      this.irDir,
+      '_protected',
+      'credentials',
+      developerEmail,
+      appName,
+      consumerKey,
+      'secret-meta.json',
+    ));
+  }
+
+  credentialSecret(developerEmail, appName, consumerKey) {
+    return readText(path.join(
+      this.irDir,
+      '_protected',
+      'credentials',
+      developerEmail,
+      appName,
+      consumerKey,
+      'consumer-secret.txt',
+    ));
   }
 
   // ── Derived: group names from app attributes ──────────────────────────────────

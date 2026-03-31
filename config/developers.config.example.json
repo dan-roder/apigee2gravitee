@@ -1,0 +1,47 @@
+{
+  "gravitee": {
+    "url": "https://gravitee.example.com",
+    "orgId": "DEFAULT",
+    "envId": "DEFAULT"
+  },
+  "roles": {
+    "organization": [
+      "ORGANIZATION:USER"
+    ],
+    "environment": [
+      "ENVIRONMENT:API_CONSUMER"
+    ]
+  },
+  "policies": {
+    "inactiveDeveloper": "import-and-revoke",
+    "smtp": "acknowledged",
+    "defaultApplication": "must-be-disabled",
+    "apiKeyContinuity": "preserve-if-supported",
+    "existingUser": "match-and-reuse",
+    "existingApplication": "match-and-reuse",
+    "userProvisioning": "reuse-or-create-silently"
+  },
+  "productPlanMap": {
+    "orders-product": {
+      "targetApi": "orders-api",
+      "targetApiId": "api_orders_123",
+      "targetPlan": "Orders API Key",
+      "targetPlanId": "plan_orders_key_123"
+    }
+  },
+  "customFieldMap": {
+    "team": "team",
+    "department": "department",
+    "contact": "contact"
+  },
+  "filters": {
+    "includeDevelopers": [],
+    "excludeDevelopers": [],
+    "includeApps": [],
+    "excludeApps": []
+  },
+  "reporting": {
+    "reportDir": "./report",
+    "stateFile": "./state/developers-import-state.json"
+  }
+}
