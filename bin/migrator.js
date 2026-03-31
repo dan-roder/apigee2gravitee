@@ -4,7 +4,7 @@
 /**
  * bin/migrator.js
  *
- * CLI entry point for apigee-gravitee-migrator.
+ * CLI entry point for apigee2gravitee.
  *
  * Commands:
  *   migrator extract  --data-dir <path> --ir-dir <path> [--org <name>] [--env <name>] [-v]
@@ -186,7 +186,7 @@ function cmdExtract(flags) {
   if (env)     pyArgs.push('--env', env);
   if (verbose) pyArgs.push('-v');
 
-  console.log(fmt.header('apigee-gravitee-migrator — extract'));
+  console.log(fmt.header('apigee2gravitee — extract'));
   console.log('');
   console.log(`  ${fmt.bold('data-dir')}  ${dataDir}`);
   console.log(`  ${fmt.bold('ir-dir')}    ${irDir}`);
@@ -238,7 +238,7 @@ function cmdExtract(flags) {
 
 function printHelp() {
   console.log(`
-${fmt.bold('apigee-gravitee-migrator')}
+${fmt.bold('apigee2gravitee')}
 
 ${fmt.bold('Usage:')}
   migrator <command> [options]

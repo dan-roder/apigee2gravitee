@@ -1,7 +1,7 @@
 """
 extractor.py
 
-Main entry point for the extractor phase of apigee-gravitee-migrator.
+Main entry point for the extractor phase of apigee2gravitee.
 
 Usage (called by the Node.js CLI wrapper):
   python3 -m src.extractor.extractor --data-dir ./data --ir-dir ./ir [--org advana] [--env dev]

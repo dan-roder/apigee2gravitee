@@ -1,4 +1,4 @@
-# apigee-gravitee-migrator — Extractor
+# apigee2gravitee — Extractor
 
 **Phase 1 of the migration pipeline.** Reads the `./data/` directory produced by
 [apigee-migrate-tool](https://github.com/apigeecs/apigee-migrate-tool) and writes a

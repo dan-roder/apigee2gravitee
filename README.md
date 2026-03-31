@@ -1,4 +1,4 @@
-# apigee-gravitee-migrator
+# apigee2gravitee
 
 Automated migration pipeline for moving from **Apigee Edge OPDK** to **Gravitee API Management**.
 
@@ -33,7 +33,7 @@ Consumes the export produced by [apigee-migrate-tool](https://github.com/apigeec
 
 ```bash
 git clone <this-repo>
-cd apigee-gravitee-migrator
+cd apigee2gravitee
 npm install
 ```
 
@@ -321,7 +321,7 @@ on the Node.js side:
 ## File Reference
 
 ```
-apigee-gravitee-migrator/
+apigee2gravitee/
 │
 ├── package.json                        Node.js manifest (single dep: sax)
 ├── README.md
