@@ -1,0 +1,1 @@
+{"name": "orders-product", "displayName": "Orders Product", "description": "Access to the Orders API", "approvalType": "auto", "quota": "1000", "quotaInterval": "1", "quotaTimeUnit": "hour", "scopes": ["read", "write"], "environments": ["dev", "prod"], "proxies": ["orders-api"], "attributes": [{"name": "access", "value": "public"}]}

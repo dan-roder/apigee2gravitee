@@ -1,0 +1,22 @@
+{
+  "name": "apigee-gravitee-migrator",
+  "version": "0.1.0",
+  "description": "Migration tool: Apigee OPDK → Gravitee APIM",
+  "main": "src/index.js",
+  "bin": {
+    "migrator": "./bin/migrator.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "test:extractor":   "python3 -m unittest test.extractor.test_extractor -v",
+    "test:translator":  "node test/translator/test-parser.js && node test/translator/test-mapper.js",
+    "test:parser":      "node test/translator/test-parser.js",
+    "test:mapper":      "node test/translator/test-mapper.js",
+    "test":             "npm run test:extractor && npm run test:translator"
+  },
+  "dependencies": {
+    "sax": "^1.4.1"
+  }
+}

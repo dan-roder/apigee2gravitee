@@ -1,0 +1,1 @@
+{"name": "orders-consumer", "appId": "app-uuid-001", "status": "approved", "callbackUrl": "", "attributes": [{"name": "environment", "value": "production"}], "credentials": [{"consumerKey": "abc123def456", "consumerSecret": "secret-value-here", "status": "approved", "expiresAt": -1, "scopes": [], "apiProducts": [{"apiproduct": "orders-product", "status": "approved"}]}]}

@@ -1,0 +1,1 @@
+{"name": "env-config", "encrypted": false, "entry": [{"name": "target-url", "value": "https://orders-backend.dev.example.com"}, {"name": "timeout-ms", "value": "5000"}]}

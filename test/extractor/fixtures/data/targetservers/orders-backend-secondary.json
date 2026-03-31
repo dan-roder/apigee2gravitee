@@ -1,0 +1,1 @@
+{"name": "orders-backend-secondary", "host": "secondary.orders.internal", "port": 8443, "isEnabled": true, "sSLInfo": {"enabled": true}}

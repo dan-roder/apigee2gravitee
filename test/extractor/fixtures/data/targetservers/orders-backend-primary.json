@@ -1,0 +1,1 @@
+{"name": "orders-backend-primary", "host": "primary.orders.internal", "port": 8443, "isEnabled": true, "sSLInfo": {"enabled": true, "trustStore": "truststore1", "clientAuthEnabled": false}}

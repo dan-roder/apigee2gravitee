@@ -1,0 +1,1 @@
+{"email": "alice@example.com", "firstName": "Alice", "lastName": "Smith", "userName": "alice", "status": "active", "attributes": [{"name": "team", "value": "platform"}], "apps": ["orders-consumer"]}
