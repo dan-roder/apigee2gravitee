@@ -206,12 +206,89 @@ async function checkRolesAndFields(config, domain, client) {
   return findings;
 }
 
+function pushProbeFindings(findings, prefix, result, options = {}) {
+  if (!result) return;
+  const checks = result.checks || {};
+  for (const [name, check] of Object.entries(checks)) {
+    if (!check) continue;
+    const unsupportedSeverity = check.required === false
+      ? (options.degradedSeverity || 'warning')
+      : (options.unsupportedSeverity || 'blocker');
+    if (!check.supported) {
+      findings.push(issue(
+        unsupportedSeverity,
+        `${prefix}_${name.toUpperCase()}_UNSUPPORTED`,
+        `${options.label || prefix} probe failed for ${name}`,
+        { status: check.status || null, classification: check.classification || null, error: check.error || null },
+      ));
+    } else if (!check.ok) {
+      findings.push(issue(
+        options.degradedSeverity || 'warning',
+        `${prefix}_${name.toUpperCase()}_UNVERIFIED`,
+        `${options.label || prefix} probe could not fully verify ${name}`,
+        { status: check.status || null, classification: check.classification || null, error: check.error || null },
+      ));
+    }
+  }
+}
+
+async function checkCapabilityProbes(config, client) {
+  const findings = [];
+  if (!client) return findings;
+
+  let userProvisioning = null;
+  let applicationOwnership = null;
+  let apiKeyContinuity = null;
+
+  if (typeof client.verifyUserProvisioningCapabilities === 'function') {
+    userProvisioning = await client.verifyUserProvisioningCapabilities();
+    pushProbeFindings(findings, 'USER_PROVISIONING', userProvisioning, { label: 'User provisioning' });
+  }
+
+  if (typeof client.verifyApplicationOwnershipCapabilities === 'function') {
+    applicationOwnership = await client.verifyApplicationOwnershipCapabilities();
+    pushProbeFindings(findings, 'APPLICATION_OWNERSHIP', applicationOwnership, { label: 'Application ownership' });
+  }
+
+  if (typeof client.verifyApiKeyContinuityCapabilities === 'function') {
+    apiKeyContinuity = await client.verifyApiKeyContinuityCapabilities();
+    pushProbeFindings(findings, 'API_KEY_CONTINUITY', apiKeyContinuity, { label: 'API key continuity' });
+  }
+
+  if (config.policies?.userProvisioning === 'reuse-or-create-silently' && userProvisioning && !userProvisioning.supported) {
+    findings.push(issue(
+      'blocker',
+      'SILENT_USER_CREATION_PROBE_FAILED',
+      'Live Gravitee probes did not confirm silent user provisioning support',
+    ));
+  }
+
+  if (config.capabilities?.applicationOwnership === 'direct-member' && applicationOwnership && !applicationOwnership.supported) {
+    findings.push(issue(
+      'blocker',
+      'APPLICATION_OWNERSHIP_PROBE_FAILED',
+      'Live Gravitee probes did not confirm direct-member application ownership support',
+    ));
+  }
+
+  if (config.policies?.apiKeyContinuity === 'fail-if-not-preservable' && apiKeyContinuity && !apiKeyContinuity.supported) {
+    findings.push(issue(
+      'blocker',
+      'API_KEY_CONTINUITY_PROBE_FAILED',
+      'Live Gravitee probes did not confirm API key continuity support',
+    ));
+  }
+
+  return findings;
+}
+
 async function validateAnalyzePreflight({ config, domain, client }) {
   const findings = [
     ...checkCompleteness(domain),
     ...checkProductPlanMappings(domain, config),
     ...checkCapabilities(config, domain),
     ...(await checkTargetAccess(config, client)),
+    ...(await checkCapabilityProbes(config, client)),
     ...(await checkRolesAndFields(config, domain, client)),
   ];
 

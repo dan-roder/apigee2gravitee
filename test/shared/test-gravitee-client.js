@@ -2,7 +2,7 @@
 
 const assert = require('assert');
 
-const { GraviteeClient } = require('../../src/shared/gravitee-client');
+const { GraviteeClient, normalizeCollection } = require('../../src/shared/gravitee-client');
 
 async function testFindUserByEmailFiltersResults() {
   const client = new GraviteeClient({ baseUrl: 'https://gravitee.example.com', orgId: 'DEFAULT', envId: 'DEFAULT', token: 'token' });
@@ -35,10 +35,31 @@ async function testFindPlanByIdUsesExpectedEndpoint() {
   assert.strictEqual(plan.id, 'plan-1');
 }
 
+async function testFindApplicationPrefersSourceMarker() {
+  const client = new GraviteeClient({ baseUrl: 'https://gravitee.example.com', orgId: 'DEFAULT', envId: 'DEFAULT', token: 'token' });
+  client.listApplications = async () => ([
+    { id: 'app-1', name: 'Orders', metadata: { sourceId: 'someone@example.com/Orders', developerEmail: 'someone@example.com' } },
+    { id: 'app-2', name: 'Orders', metadata: { sourceId: 'alice@example.com/Orders', developerEmail: 'alice@example.com' } },
+  ]);
+  const app = await client.findApplicationByNameAndOwnerHint({
+    name: 'Orders',
+    ownerHint: 'alice@example.com',
+    sourceId: 'alice@example.com/Orders',
+  });
+  assert.strictEqual(app.id, 'app-2');
+}
+
+async function testNormalizeCollectionSupportsItemsShape() {
+  const items = normalizeCollection({ items: [{ id: 'a' }] });
+  assert.deepStrictEqual(items, [{ id: 'a' }]);
+}
+
 async function run() {
   await testFindUserByEmailFiltersResults();
   await testCreateSubscriptionUsesV2Endpoint();
   await testFindPlanByIdUsesExpectedEndpoint();
+  await testFindApplicationPrefersSourceMarker();
+  await testNormalizeCollectionSupportsItemsShape();
   console.log('test-gravitee-client.js passed');
 }
 

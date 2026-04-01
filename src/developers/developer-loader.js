@@ -50,6 +50,7 @@ function loadDeveloperDomain(irDir, config) {
 
   const developers = filterByRules(loader.developers(), includeDevelopers, excludeDevelopers, (developer) => developer.email);
   const developerEmails = new Set(developers.map((developer) => developer.email));
+  const developerByEmail = new Map(developers.map((developer) => [developer.email, developer]));
 
   const apps = filterByRules(
     loader.apps().filter((app) => developerEmails.size === 0 || developerEmails.has(app.developer_email)),
@@ -103,6 +104,7 @@ function loadDeveloperDomain(irDir, config) {
       sourceId,
       kind: 'MigratedApplication',
       developerEmail: app.developer_email,
+      developerStatus: developerByEmail.get(app.developer_email)?.status || 'active',
       appName: app.name,
       appId: app.app_id || '',
       status: app.status || 'approved',
@@ -170,6 +172,7 @@ function loadDeveloperDomain(irDir, config) {
         kind: 'MigratedSubscription',
         credentialId: credential.credentialId,
         developerEmail: credential.developerEmail,
+        developerStatus: developerByEmail.get(credential.developerEmail)?.status || 'active',
         appName: credential.appName,
         consumerKey: credential.consumerKey,
         productName: association.productName,
@@ -177,6 +180,7 @@ function loadDeveloperDomain(irDir, config) {
         recommendedAction: association.recommendedAction,
         targetStatusHint: association.targetStatusHint,
         desiredStatus: association.targetStatusHint,
+        inactiveDeveloperPolicy: config.policies?.inactiveDeveloper || 'skip',
         planMapping: config.productPlanMap?.[association.productName] || null,
         lookupHints: {
           productName: association.productName,

@@ -274,7 +274,8 @@ This repo now includes an **active developers migration workflow** for migrating
 - The migration context and config/schema are defined.
 - Shared IR loading support for developers/apps/credentials/references is in place.
 - `developers analyze`, `developers plan`, `developers import`, and `developers reconcile` are implemented as a manifest-driven workflow.
-- The current implementation is tested with mocked Gravitee interactions and produces resumable state, id maps, reports, and reconciliation output.
+- The current implementation now performs live compatibility probes during preflight and produces resumable state, id maps, reports, and reconciliation output.
+- The remaining production risk is deployment-specific Gravitee behavior, so a non-production smoke run is strongly recommended before any broad import.
 
 Use this section to prepare inputs and run the current command surface.
 
@@ -400,8 +401,10 @@ node bin/migrator.js developers reconcile --ir-dir ./ir --config ./config/develo
 - validate the config against `config/developers.config.schema.json`
 - verify IR readability
 - confirm target connectivity and auth
+- probe the live Gravitee user, application, plan, subscription, and API key surfaces used by the migration workflow
 - fail if any required product-to-plan mappings are missing
 - fail if `reuse-or-create-silently` is configured but `capabilities.silentUserCreation` is not `supported`
+- fail when live capability probes contradict required one-to-one behaviors
 - read credential-level subscription intent from `ir/references/subscription-intent.json`
 - produce a gap/risk report, executable manifest, state ledger, id map, and structured log without writing to Gravitee
 
@@ -415,13 +418,44 @@ node bin/migrator.js developers reconcile --ir-dir ./ir --config ./config/develo
 
 - execute user, application, plan-resolution, subscription, and verification actions in dependency order
 - persist action status after each step for resume support
+- persist deterministic source markers on migrated applications so reruns do not depend only on name matching
 - stop on continuity-critical failures and continue through non-critical failures until `--max-errors` is reached
 
 `developers reconcile` will:
 
-- compare expected users, apps, subscriptions, and continuity-sensitive fields against live Gravitee state
+- compare expected users, apps, subscriptions, source markers, and continuity-sensitive fields against live Gravitee state
 - write a structured mismatch report
 - exit non-zero when blocking mismatches remain
+
+### Recommended smoke test
+
+Run the first live pass in a non-production Gravitee environment with a small filtered dataset:
+
+```bash
+node bin/migrator.js developers analyze \
+  --ir-dir ./ir \
+  --config ./config/developers.config.json \
+  --gravitee-token "$GRAVITEE_TOKEN"
+
+node bin/migrator.js developers plan \
+  --ir-dir ./ir \
+  --config ./config/developers.config.json \
+  --gravitee-token "$GRAVITEE_TOKEN"
+
+node bin/migrator.js developers import \
+  --ir-dir ./ir \
+  --config ./config/developers.config.json \
+  --gravitee-token "$GRAVITEE_TOKEN" \
+  --resume \
+  --users-only
+
+node bin/migrator.js developers reconcile \
+  --ir-dir ./ir \
+  --config ./config/developers.config.json \
+  --gravitee-token "$GRAVITEE_TOKEN"
+```
+
+After the user-only pass is clean, repeat with application and subscription scope enabled for the same small sample before attempting a broader import.
 
 ### Expected outputs
 

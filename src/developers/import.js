@@ -39,6 +39,24 @@ function buildImportContext(result) {
   };
 }
 
+function persistRuntimeArtifacts(outputPaths, state, idMap, events) {
+  writeJson(outputPaths.state, state);
+  writeJson(outputPaths.idMap, idMap);
+  writeNdjson(outputPaths.log, events);
+}
+
+function inactivePolicySatisfied(target, policy) {
+  if (!target || !policy || policy === 'skip') return true;
+  const status = String(target.status || target.state || '').toLowerCase();
+  if (policy === 'import-disabled') {
+    return target.enabled === false || ['inactive', 'disabled', 'suspended'].includes(status);
+  }
+  if (policy === 'import-and-revoke') {
+    return target.revoked === true || target.enabled === false || ['revoked', 'inactive', 'disabled', 'suspended'].includes(status);
+  }
+  return true;
+}
+
 async function ensureUser(action, ctx, client, idMap) {
   const user = ctx.usersBySourceId.get(action.sourceId);
   let target = null;
@@ -82,6 +100,9 @@ async function verifyUser(action, ctx, client, idMap) {
   for (const role of [...action.payload.expectedRoles.organization, ...action.payload.expectedRoles.environment]) {
     if (!roles.has(role)) throw new Error(`User ${user.email} is missing role ${role}`);
   }
+  if (user.status !== 'active' && !inactivePolicySatisfied(target, action.payload.inactivePolicy)) {
+    throw new Error(`User ${user.email} does not satisfy inactive policy ${action.payload.inactivePolicy}`);
+  }
   setIdMapValue(idMap, action.kind, action.sourceId, target.id);
   return { userId: target.id };
 }
@@ -121,6 +142,9 @@ async function verifyApplication(action, ctx, client, idMap) {
   const application = ctx.appsBySourceId.get(action.sourceId);
   const target = await client.findApplicationByNameAndOwnerHint(action.lookup);
   if (!target) throw new Error(`Application ${application.appName} was not found`);
+  if (action.lookup.sourceId && target.metadata?.sourceId && target.metadata.sourceId !== action.lookup.sourceId) {
+    throw new Error(`Application ${application.appName} matched unexpected source marker ${target.metadata.sourceId}`);
+  }
   if (action.payload.ownershipStrategy === 'direct-member') {
     const members = await client.listApplicationMembers(target.id);
     const ownerUserId = idMap.users[application.developerEmail];
@@ -171,6 +195,12 @@ async function verifySubscription(action, ctx, client, idMap, state) {
   const applicationId = idMap.applications[action.lookup.applicationSourceId];
   const target = await client.findSubscription({ applicationId, apiId, planId });
   if (!target) throw new Error(`Subscription ${action.sourceId} was not found`);
+  if (target.plan?.id && target.plan.id !== planId) {
+    throw new Error(`Subscription ${action.sourceId} resolved to unexpected plan ${target.plan.id}`);
+  }
+  if (target.apiId && apiId && target.apiId !== apiId) {
+    throw new Error(`Subscription ${action.sourceId} resolved to unexpected API ${target.apiId}`);
+  }
 
   if (action.payload.apiKeyPolicy === 'fail-if-not-preservable') {
     const apiKeys = await client.listSubscriptionApiKeys({ apiId, subscriptionId: target.id });
@@ -208,7 +238,7 @@ async function executeAction(action, ctx, client, idMap, state) {
 async function runDevelopersImport(flags, deps = {}) {
   const result = await prepareDevelopersWorkflow(flags, deps);
   if (result.validationErrors) return result;
-  persistPlanningArtifacts(result);
+  persistPlanningArtifacts(result, { preserveRuntimeState: !!(flags.resume || flags.force) });
 
   if (result.preflight.blockers.length > 0 && !flags.force) {
     return {
@@ -232,14 +262,17 @@ async function runDevelopersImport(flags, deps = {}) {
     const current = state.actions[action.actionId];
     if (action.plannedStatus === 'BLOCKED') {
       markActionCompleted(state, action.actionId, 'BLOCKED', { lastError: action.blockers.join(', ') || null });
+      persistRuntimeArtifacts(result.outputPaths, state, idMap, events);
       continue;
     }
     if (action.plannedStatus === 'SKIPPED' || action.operation === 'SKIP') {
       markActionCompleted(state, action.actionId, 'SKIPPED');
+      persistRuntimeArtifacts(result.outputPaths, state, idMap, events);
       continue;
     }
     if (action.manualReviewReasons?.length > 0 && action.plannedStatus !== 'READY') {
       markActionCompleted(state, action.actionId, 'MANUAL_REVIEW', { lastError: action.manualReviewReasons.join(', ') });
+      persistRuntimeArtifacts(result.outputPaths, state, idMap, events);
       continue;
     }
     if (flags.resume && !flags.force && current?.status === 'SUCCEEDED') {
@@ -260,22 +293,18 @@ async function runDevelopersImport(flags, deps = {}) {
       }
     }
 
-    writeJson(result.outputPaths.state, state);
-    writeJson(result.outputPaths.idMap, idMap);
-    writeNdjson(result.outputPaths.log, events);
+    persistRuntimeArtifacts(result.outputPaths, state, idMap, events);
   }
 
   for (const action of result.manifest.actions) {
     if (state.actions[action.actionId].status === 'PENDING') {
       markActionCompleted(state, action.actionId, 'BLOCKED', {
-        lastError: 'Dependencies were not satisfied',
+        lastError: `Dependencies were not satisfied: ${(action.dependencies || []).join(', ') || 'none'}`,
       });
     }
   }
 
-  writeJson(result.outputPaths.state, state);
-  writeJson(result.outputPaths.idMap, idMap);
-  writeNdjson(result.outputPaths.log, events);
+  persistRuntimeArtifacts(result.outputPaths, state, idMap, events);
 
   const failed = Object.values(state.actions).filter((item) => item.status === 'FAILED').length;
   const blocked = Object.values(state.actions).filter((item) => item.status === 'BLOCKED').length;

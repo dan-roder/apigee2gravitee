@@ -26,6 +26,15 @@ function action(actionId, kind, sourceId, payload = {}) {
 }
 
 function resolveUserOperation(user, config, targetState) {
+  if (user.status !== 'active' && config.policies.inactiveDeveloper === 'skip') {
+    return {
+      plannedStatus: 'SKIPPED',
+      operation: 'SKIP',
+      targetId: null,
+      skipConditions: ['INACTIVE_DEVELOPER_SKIPPED'],
+    };
+  }
+
   const existing = targetState.usersByEmail.get(user.email);
   if (!existing) {
     if (config.policies.userProvisioning === 'reuse-only') {
@@ -59,6 +68,15 @@ function resolveUserOperation(user, config, targetState) {
 }
 
 function resolveApplicationOperation(application, config, targetState) {
+  if (application.developerStatus !== 'active' && config.policies.inactiveDeveloper === 'skip') {
+    return {
+      plannedStatus: 'SKIPPED',
+      operation: 'SKIP',
+      targetId: null,
+      skipConditions: ['INACTIVE_DEVELOPER_SKIPPED'],
+    };
+  }
+
   const existing = targetState.applicationsBySourceId.get(application.sourceId);
   if (!existing) {
     return {
@@ -85,6 +103,14 @@ function resolveApplicationOperation(application, config, targetState) {
 }
 
 function resolveSubscriptionOperation(subscription, targetState) {
+  if (subscription.developerStatus !== 'active' && subscription.inactiveDeveloperPolicy === 'skip') {
+    return {
+      plannedStatus: 'SKIPPED',
+      operation: 'SKIP',
+      skipConditions: ['INACTIVE_DEVELOPER_SKIPPED'],
+    };
+  }
+
   if (subscription.recommendedAction === 'SKIP_SUBSCRIPTION') {
     return {
       plannedStatus: 'SKIPPED',
@@ -145,6 +171,7 @@ function buildPlan(domain, preflight, config, targetState = {
       blockers: [...user.blockers, ...(resolution.blockers || [])],
       warnings: [...user.warnings],
       manualReviewReasons: [...user.manualReviewReasons],
+      skipConditions: resolution.skipConditions || [],
       targetHint: resolution.targetId ? { userId: resolution.targetId } : {},
       failConditions: resolution.blockers || [],
     });
@@ -184,6 +211,7 @@ function buildPlan(domain, preflight, config, targetState = {
       blockers: [...application.blockers, ...(resolution.blockers || [])],
       warnings: [...application.warnings],
       manualReviewReasons: [...application.manualReviewReasons],
+      skipConditions: resolution.skipConditions || [],
       targetHint: resolution.targetId ? { applicationId: resolution.targetId } : {},
       failConditions: resolution.blockers || [],
     });

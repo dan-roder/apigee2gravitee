@@ -1,6 +1,7 @@
 'use strict';
 
 const path = require('path');
+const fs = require('fs');
 
 const { loadDevelopersConfig, validateDevelopersConfig } = require('./config');
 const { loadDeveloperDomain } = require('./developer-loader');
@@ -158,11 +159,18 @@ async function prepareDevelopersWorkflow(flags, deps = {}) {
   };
 }
 
-function persistPlanningArtifacts(result) {
+function persistPlanningArtifacts(result, options = {}) {
+  const {
+    preserveRuntimeState = false,
+  } = options;
   writeJson(result.outputPaths.plan, result.manifest);
   writeJson(result.outputPaths.gapReport, result.gapReport);
-  writeJson(result.outputPaths.state, result.state);
-  writeJson(result.outputPaths.idMap, result.idMap);
+  if (!preserveRuntimeState || !fs.existsSync(result.outputPaths.state)) {
+    writeJson(result.outputPaths.state, result.state);
+  }
+  if (!preserveRuntimeState || !fs.existsSync(result.outputPaths.idMap)) {
+    writeJson(result.outputPaths.idMap, result.idMap);
+  }
   writeNdjson(result.outputPaths.log, result.events);
 }
 

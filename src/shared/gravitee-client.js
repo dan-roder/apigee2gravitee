@@ -44,6 +44,27 @@ class GraviteeApiError extends Error {
   }
 }
 
+function normalizeCollection(body) {
+  if (Array.isArray(body?.data)) return body.data;
+  if (Array.isArray(body?.items)) return body.items;
+  if (Array.isArray(body)) return body;
+  return [];
+}
+
+function classifyApiError(err) {
+  if (!err) return 'unknown';
+  if (typeof err.status === 'number') {
+    if (err.status === 401) return 'auth';
+    if (err.status === 403) return 'permission';
+    if (err.status === 404) return 'unsupported-endpoint';
+    if (err.status === 409) return 'conflict';
+    if (err.status >= 400 && err.status < 500) return 'request';
+    if (err.status >= 500) return 'server';
+  }
+  if (String(err.message || '').toLowerCase().includes('timed out')) return 'timeout';
+  return 'network';
+}
+
 // ─── HTTP primitive (no dependencies — Node built-ins only) ───────────────────
 
 function httpRequest(method, urlStr, headers, bodyStr, timeoutMs = 30000) {
@@ -269,14 +290,14 @@ class GraviteeClient {
 
   async listApplications() {
     const body = await this.get(this.envUrl('/applications'));
-    return Array.isArray(body?.data) ? body.data : (Array.isArray(body) ? body : []);
+    return normalizeCollection(body);
   }
 
   async listRoles() {
     const body = await this.get(this.orgUrl('/rolescopes'));
     const roles = new Set();
 
-    const scopes = Array.isArray(body?.data) ? body.data : (Array.isArray(body) ? body : []);
+    const scopes = normalizeCollection(body);
     for (const scope of scopes) {
       for (const role of (scope.roles || [])) {
         if (role?.scope && role?.name) {
@@ -293,7 +314,7 @@ class GraviteeClient {
     for (const suffix of ['/metadata', '/applications/metadata']) {
       try {
         const body = await this.get(this.envUrl(suffix));
-        const items = Array.isArray(body?.data) ? body.data : (Array.isArray(body) ? body : []);
+        const items = normalizeCollection(body);
         for (const item of items) {
           if (item?.key) names.add(item.key);
           if (item?.name) names.add(item.name);
@@ -307,14 +328,14 @@ class GraviteeClient {
 
   async findUserByEmail(email) {
     const body = await this.get(this.orgUrl(`/users?query=${encodeURIComponent(email)}`));
-    const items = Array.isArray(body?.data) ? body.data : (Array.isArray(body) ? body : []);
+    const items = normalizeCollection(body);
     return items.find((item) => item.email === email) || null;
   }
 
   async getUserRoles(userId) {
     const body = await this.get(this.orgUrl(`/users/${userId}/roles`));
     const roles = new Set();
-    const items = Array.isArray(body?.data) ? body.data : (Array.isArray(body) ? body : []);
+    const items = normalizeCollection(body);
     for (const scope of items) {
       if (scope?.scope && Array.isArray(scope.roles)) {
         for (const role of scope.roles) {
@@ -339,8 +360,12 @@ class GraviteeClient {
     return this.put(this.orgUrl(`/users/${userId}/roles`), roles);
   }
 
-  async findApplicationByNameAndOwnerHint({ name, ownerHint }) {
+  async findApplicationByNameAndOwnerHint({ name, ownerHint, sourceId }) {
     const items = await this.listApplications();
+    if (sourceId) {
+      const bySourceId = items.find((item) => item.metadata?.sourceId === sourceId);
+      if (bySourceId) return bySourceId;
+    }
     return items.find((item) => (
       item.name === name && (
         !ownerHint ||
@@ -353,7 +378,7 @@ class GraviteeClient {
 
   async listApplicationMembers(applicationId) {
     const body = await this.get(this.envUrl(`/applications/${applicationId}/members`));
-    return Array.isArray(body?.data) ? body.data : (Array.isArray(body) ? body : []);
+    return normalizeCollection(body);
   }
 
   async createApplication(payload) {
@@ -383,14 +408,14 @@ class GraviteeClient {
     }
 
     const body = await this.get(this.v2Url(`/apis/${mapping.targetApiId}/plans`));
-    const items = Array.isArray(body?.data) ? body.data : (Array.isArray(body) ? body : []);
+    const items = normalizeCollection(body);
     const found = items.find((item) => item.id === mapping.targetPlanId || item.name === mapping.targetPlan);
     return found ? { ...found, apiId: found.apiId || mapping.targetApiId } : null;
   }
 
   async findSubscription({ applicationId, apiId, planId }) {
     const body = await this.get(this.v2Url(`/apis/${apiId}/subscriptions`));
-    const items = Array.isArray(body?.data) ? body.data : (Array.isArray(body) ? body : []);
+    const items = normalizeCollection(body);
     return items.find((item) => (
       item.application?.id === applicationId && item.plan?.id === planId
     )) || null;
@@ -398,7 +423,7 @@ class GraviteeClient {
 
   async listSubscriptionApiKeys({ apiId, subscriptionId }) {
     const body = await this.get(this.v2Url(`/apis/${apiId}/subscriptions/${subscriptionId}/api-keys`));
-    return Array.isArray(body?.data) ? body.data : (Array.isArray(body) ? body : []);
+    return normalizeCollection(body);
   }
 
   async createSubscription({ apiId, applicationId, planId }) {
@@ -409,20 +434,99 @@ class GraviteeClient {
     return this.patch(this.v2Url(`/apis/${apiId}/subscriptions/${subscriptionId}`), { status });
   }
 
+  async probeEndpoint(method, urlStr, body = null, acceptableStatuses = [200, 400, 401, 403, 404, 405, 409, 415, 422]) {
+    try {
+      const res = await this._request(method, urlStr, body);
+      return {
+        ok: acceptableStatuses.includes(res.status),
+        supported: res.status !== 404,
+        status: res.status,
+        classification: res.status === 404 ? 'unsupported-endpoint' : null,
+      };
+    } catch (err) {
+      return {
+        ok: false,
+        supported: false,
+        status: err.status || null,
+        classification: classifyApiError(err),
+        error: err.message,
+      };
+    }
+  }
+
   async verifyUserProvisioningCapabilities() {
-    const health = await this.healthCheck();
-    return { ok: health.ok, supported: health.ok };
+    const lookup = await this.probeEndpoint('GET', this.orgUrl(`/users?query=${encodeURIComponent('__codex_probe__')}`));
+    const create = await this.probeEndpoint('POST', this.orgUrl('/users'), {});
+    const roleAssign = await this.probeEndpoint('PUT', this.orgUrl('/users/__codex_probe__/roles'), {});
+    const update = await this.probeEndpoint('PUT', this.orgUrl('/users/__codex_probe__'), {});
+    roleAssign.required = false;
+    update.required = false;
+    if (roleAssign.status === 404) {
+      roleAssign.ok = true;
+      roleAssign.supported = true;
+      roleAssign.classification = 'indeterminate-resource';
+    }
+    if (update.status === 404) {
+      update.ok = true;
+      update.supported = true;
+      update.classification = 'indeterminate-resource';
+    }
+    return {
+      ok: lookup.ok && create.supported,
+      supported: lookup.supported && create.supported,
+      checks: { lookup, create, update, roleAssign },
+    };
   }
 
   async verifyApplicationOwnershipCapabilities() {
-    const check = await this.verifyEnvironmentAccess();
-    return { ok: check.ok, supported: check.ok };
+    const list = await this.probeEndpoint('GET', this.envUrl('/applications'));
+    const create = await this.probeEndpoint('POST', this.envUrl('/applications'), {});
+    const members = await this.probeEndpoint('GET', this.envUrl('/applications/__codex_probe__/members'));
+    const addMember = await this.probeEndpoint('POST', this.envUrl('/applications/__codex_probe__/members'), {});
+    members.required = false;
+    addMember.required = false;
+    if (members.status === 404) {
+      members.ok = true;
+      members.supported = true;
+      members.classification = 'indeterminate-resource';
+    }
+    if (addMember.status === 404) {
+      addMember.ok = true;
+      addMember.supported = true;
+      addMember.classification = 'indeterminate-resource';
+    }
+    return {
+      ok: list.ok && create.supported,
+      supported: list.supported && create.supported,
+      checks: { list, create, members, addMember },
+    };
   }
 
   async verifyApiKeyContinuityCapabilities() {
-    const check = await this.verifyEnvironmentAccess();
-    return { ok: check.ok, supported: check.ok };
+    const subscriptions = await this.probeEndpoint('GET', this.v2Url('/apis/__codex_probe__/subscriptions'));
+    const create = await this.probeEndpoint('POST', this.v2Url('/apis/__codex_probe__/subscriptions'), {});
+    const apiKeys = await this.probeEndpoint('GET', this.v2Url('/apis/__codex_probe__/subscriptions/__codex_probe__/api-keys'));
+    subscriptions.required = false;
+    create.required = false;
+    apiKeys.required = false;
+    for (const check of [subscriptions, create, apiKeys]) {
+      if (check.status === 404) {
+        check.ok = true;
+        check.supported = true;
+        check.classification = 'indeterminate-resource';
+      }
+    }
+    return {
+      ok: subscriptions.ok && create.supported,
+      supported: subscriptions.supported && create.supported,
+      checks: { subscriptions, create, apiKeys },
+    };
   }
 }
 
-module.exports = { GraviteeClient, GraviteeApiError };
+module.exports = {
+  GraviteeClient,
+  GraviteeApiError,
+  normalizeCollection,
+  classifyApiError,
+};

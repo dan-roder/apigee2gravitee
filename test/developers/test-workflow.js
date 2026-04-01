@@ -213,6 +213,39 @@ async function testPlanBuildsExecutableManifest() {
   });
 }
 
+async function testPlanFailsWhenCapabilityProbeContradictsConfig() {
+  await withTempDir(async (dir) => {
+    const dataDir = path.join(dir, 'data');
+    const irDir = path.join(dir, 'ir');
+    copyDir(FIXTURES_DATA, dataDir);
+    generateIrFromData(dataDir, irDir);
+
+    const result = await runDevelopersPlan(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json') },
+      {
+        config: makeConfig(dir),
+        client: makeWorkflowClient({
+          overrides: {
+            async verifyUserProvisioningCapabilities() {
+              return {
+                ok: false,
+                supported: false,
+                checks: {
+                  lookup: { ok: true, supported: true, status: 200 },
+                  create: { ok: false, supported: false, status: 404, classification: 'unsupported-endpoint' },
+                },
+              };
+            },
+          },
+        }),
+      },
+    );
+
+    assert.strictEqual(result.exitCode, 3);
+    assert.ok(result.preflight.blockers.some((item) => item.code === 'SILENT_USER_CREATION_PROBE_FAILED'));
+  });
+}
+
 async function testImportCreatesResourcesAndResumeSkipsRework() {
   await withTempDir(async (dir) => {
     const dataDir = path.join(dir, 'data');
@@ -315,11 +348,46 @@ async function testReconcileDetectsMismatches() {
   });
 }
 
+async function testImportAndReconcileSupportMetadataOnlyOwnership() {
+  await withTempDir(async (dir) => {
+    const dataDir = path.join(dir, 'data');
+    const irDir = path.join(dir, 'ir');
+    copyDir(FIXTURES_DATA, dataDir);
+    generateIrFromData(dataDir, irDir);
+
+    const client = makeWorkflowClient();
+    const config = makeConfig(dir, {
+      capabilities: {
+        silentUserCreation: 'supported',
+        apiKeyValuePreservation: 'supported',
+        oauthClientValuePreservation: 'unknown',
+        applicationOwnership: 'metadata-only',
+      },
+    });
+
+    const imported = await runDevelopersImport(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json') },
+      { config, client },
+    );
+
+    assert.strictEqual(imported.exitCode, 0);
+
+    const reconciled = await runDevelopersReconcile(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json') },
+      { config, client },
+    );
+
+    assert.strictEqual(reconciled.exitCode, 0);
+  });
+}
+
 async function run() {
   await testPlanBuildsExecutableManifest();
+  await testPlanFailsWhenCapabilityProbeContradictsConfig();
   await testImportCreatesResourcesAndResumeSkipsRework();
   await testImportFailsOnContinuityMismatch();
   await testReconcileDetectsMismatches();
+  await testImportAndReconcileSupportMetadataOnlyOwnership();
   console.log('test-workflow.js passed');
 }
 
