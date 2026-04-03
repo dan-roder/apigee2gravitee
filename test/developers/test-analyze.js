@@ -197,6 +197,41 @@ async function testAnalyzeFlagsMissingCustomFields() {
   });
 }
 
+async function testAnalyzeSurfacesAmbiguousProbeAsManualReview() {
+  await withTempDir(async (dir) => {
+    const dataDir = path.join(dir, 'data');
+    const irDir = path.join(dir, 'ir');
+    copyDir(FIXTURES_DATA, dataDir);
+    generateIrFromData(dataDir, irDir);
+
+    const config = makeConfig(dir);
+    const result = await runDevelopersAnalyze(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json') },
+      {
+        config,
+        client: makeClient({
+          async verifyApplicationOwnershipCapabilities() {
+            return {
+              ok: true,
+              supported: true,
+              checks: {
+                list: { ok: true, supported: true, status: 200 },
+                create: { ok: true, supported: true, status: 200 },
+                addMember: { ok: false, supported: true, status: 405, required: false, classification: 'method-not-allowed' },
+              },
+            };
+          },
+        }),
+      },
+    );
+
+    assert.strictEqual(result.exitCode, 0);
+    assert.ok(result.gapReport.summary.manualReview > 0);
+    assert.ok(result.gapReport.manualReviewFindings.some((item) => item.code === 'APPLICATION_OWNERSHIP_ADDMEMBER_UNVERIFIED'));
+    assert.strictEqual(result.gapReport.operatorGuidance.nextSuggestedScope, '--users-only');
+  });
+}
+
 async function testMultiProductCredentialCreatesMultipleSubscriptions() {
   await withTempDir(async (dir) => {
     const dataDir = path.join(dir, 'data');
@@ -252,6 +287,7 @@ async function run() {
   await testAnalyzeFailsWhenProductMappingMissing();
   await testAnalyzeFailsWhenSilentUserCreationUnsupported();
   await testAnalyzeFlagsMissingCustomFields();
+  await testAnalyzeSurfacesAmbiguousProbeAsManualReview();
   await testMultiProductCredentialCreatesMultipleSubscriptions();
   console.log('test-analyze.js passed');
 }

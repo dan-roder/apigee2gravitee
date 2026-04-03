@@ -457,6 +457,8 @@ node bin/migrator.js developers reconcile \
 
 After the user-only pass is clean, repeat with application and subscription scope enabled for the same small sample before attempting a broader import.
 
+For a full step-by-step controlled pilot, see [`docs/developers-pilot-runbook.md`](/Users/danielroder/Sites/apigee2gravitee/docs/developers-pilot-runbook.md).
+
 ### Expected outputs
 
 ```text
@@ -468,6 +470,7 @@ logs/developers.ndjson
 ```
 
 For the detailed design and policy rules, see [`docs/developers-migration-context.md`](/Users/danielroder/Sites/apigee2gravitee/docs/developers-migration-context.md).
+For the first non-production pilot workflow, see [`docs/developers-pilot-runbook.md`](/Users/danielroder/Sites/apigee2gravitee/docs/developers-pilot-runbook.md).
 
 | Field | Description |
 |---|---|

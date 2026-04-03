@@ -4,6 +4,53 @@ function addSummaryCount(map, key) {
   map[key] = (map[key] || 0) + 1;
 }
 
+function addNestedSummaryCount(map, key, nestedKey) {
+  map[key] = map[key] || {};
+  map[key][nestedKey] = (map[key][nestedKey] || 0) + 1;
+}
+
+function isManualReviewFinding(finding) {
+  return finding.severity === 'warning' && (
+    finding.code.endsWith('_UNVERIFIED') ||
+    finding.code.endsWith('_UNKNOWN') ||
+    finding.code.includes('LOOKUP_FAILED') ||
+    finding.code.includes('LOOKUP_UNVERIFIED') ||
+    finding.code.includes('CUSTOM_FIELD_MISSING')
+  );
+}
+
+function summarizeOperatorActions(actions) {
+  const byKind = {};
+  const byOperation = {};
+  const blockedReasons = {};
+
+  for (const item of actions) {
+    if (item.kind.startsWith('VERIFY_') || item.kind === 'RESOLVE_PLAN') continue;
+    addNestedSummaryCount(byKind, item.kind, item.operation || item.plannedStatus);
+    addSummaryCount(byOperation, item.operation || item.plannedStatus);
+    for (const blocker of item.blockers || []) addSummaryCount(blockedReasons, blocker);
+  }
+
+  return {
+    byKind,
+    byOperation,
+    blockedReasons,
+  };
+}
+
+function recommendNextScope(manifest, preflight) {
+  if (preflight.blockers.length > 0) return null;
+  const actions = manifest.actions || [];
+  const hasReadyUsers = actions.some((item) => item.kind === 'UPSERT_USER' && item.plannedStatus === 'READY');
+  const hasReadyApps = actions.some((item) => item.kind === 'UPSERT_APPLICATION' && item.plannedStatus === 'READY');
+  const hasReadySubscriptions = actions.some((item) => item.kind === 'UPSERT_SUBSCRIPTION' && item.plannedStatus === 'READY');
+
+  if (hasReadyUsers) return '--users-only';
+  if (hasReadyApps) return '--apps-only';
+  if (hasReadySubscriptions) return '--subscriptions-only';
+  return null;
+}
+
 function action(actionId, kind, sourceId, payload = {}) {
   return {
     actionId,
@@ -319,9 +366,11 @@ function buildPlan(domain, preflight, config, targetState = {
       subscriptions: domain.subscriptions.length,
       blockers: preflight.blockers.length,
       warnings: preflight.warnings.length,
+      manualReview: preflight.findings.filter(isManualReviewFinding).length,
       actions: actions.length,
       actionsByKind,
       actionsByStatus,
+      operatorActions: summarizeOperatorActions(actions),
     },
     records: {
       users: domain.users,
@@ -344,6 +393,8 @@ function buildGapReport(domain, preflight, config, manifest = null) {
       consumerSecretPresent: credential.consumerSecretPresent,
     }));
 
+  const manualReviewFindings = preflight.findings.filter(isManualReviewFinding);
+
   return {
     generatedAt: new Date().toISOString(),
     summary: {
@@ -354,13 +405,22 @@ function buildGapReport(domain, preflight, config, manifest = null) {
       actions: manifest?.actions?.length || 0,
       blockers: preflight.blockers.length,
       warnings: preflight.warnings.length,
+      manualReview: manualReviewFindings.length,
       inactiveDevelopers: domain.users.filter((user) => user.status !== 'active').length,
       continuityRiskCount: continuityRisks.length,
     },
     findings: preflight.findings,
+    manualReviewFindings,
     continuityRisks,
     capabilitySnapshot: config.capabilities,
     manifestSummary: manifest?.summary || null,
+    operatorGuidance: {
+      nextSuggestedScope: manifest ? recommendNextScope(manifest, preflight) : null,
+      resumeSafe: preflight.blockers.length === 0,
+      blockerCategories: Object.fromEntries(
+        preflight.blockers.map((item) => [item.code, (preflight.blockers.filter((entry) => entry.code === item.code).length)]),
+      ),
+    },
   };
 }
 

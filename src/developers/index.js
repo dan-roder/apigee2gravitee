@@ -13,6 +13,14 @@ function printFindings(findings, fmt, label) {
   }
 }
 
+function printObjectCounts(counts, fmt, prefix) {
+  const entries = Object.entries(counts || {});
+  if (entries.length === 0) return;
+  for (const [key, value] of entries) {
+    console.log(`${prefix} ${key}: ${fmt.dim(String(value))}`);
+  }
+}
+
 async function runDevelopersCommand(subcommand, flags, fmt) {
   if (subcommand === 'plan') {
     const result = await runDevelopersPlan(flags);
@@ -28,7 +36,12 @@ async function runDevelopersCommand(subcommand, flags, fmt) {
       console.log(fmt.header('Developers plan'));
       console.log('');
       console.log(`[plan] ${result.manifest.actions.length} actions generated`);
-      console.log(`[plan] ${result.manifest.summary.actionsByStatus.READY || 0} ready, ${result.manifest.summary.actionsByStatus.BLOCKED || 0} blocked, ${result.manifest.summary.actionsByStatus.SKIPPED || 0} skipped`);
+      console.log(`[plan] ${result.manifest.summary.actionsByStatus.READY || 0} ready, ${result.manifest.summary.actionsByStatus.BLOCKED || 0} blocked, ${result.manifest.summary.actionsByStatus.SKIPPED || 0} skipped, ${result.manifest.summary.manualReview || 0} manual review`);
+      const nextScope = result.gapReport?.operatorGuidance?.nextSuggestedScope;
+      if (nextScope) console.log(`[plan] next suggested scope: ${nextScope}`);
+      console.log('');
+      console.log('  Action summary:');
+      printObjectCounts(result.manifest.summary.operatorActions?.byOperation, fmt, '   -');
       console.log('');
       console.log(`  Plan:       ${fmt.dim(result.outputPaths.plan)}`);
       console.log(`  Gap report: ${fmt.dim(result.outputPaths.gapReport)}`);
@@ -51,9 +64,12 @@ async function runDevelopersCommand(subcommand, flags, fmt) {
     console.log(fmt.header('Developers analyze'));
     console.log('');
     console.log(`[preflight] ${result.domain.users.length} developers, ${result.domain.applications.length} apps, ${result.domain.subscriptions.length} subscriptions discovered`);
-    console.log(`[preflight] ${result.preflight.blockers.length} blocker(s), ${result.preflight.warnings.length} warning(s)`);
+    console.log(`[preflight] ${result.preflight.blockers.length} blocker(s), ${result.preflight.warnings.length} warning(s), ${result.gapReport.summary.manualReview || 0} manual review item(s)`);
     printFindings(result.preflight.blockers, fmt, '[blocker]');
     printFindings(result.preflight.warnings, fmt, '[warn]');
+    const nextScope = result.gapReport?.operatorGuidance?.nextSuggestedScope;
+    if (nextScope) console.log(fmt.info(`Next suggested pilot scope: ${nextScope}`));
+    console.log(`  Resume safe: ${fmt.dim(result.gapReport?.operatorGuidance?.resumeSafe ? 'yes' : 'no')}`);
     console.log('');
     console.log(`  Plan:       ${fmt.dim(result.outputPaths.plan)}`);
     console.log(`  Gap report: ${fmt.dim(result.outputPaths.gapReport)}`);
@@ -76,7 +92,15 @@ async function runDevelopersCommand(subcommand, flags, fmt) {
       acc[item.status] = (acc[item.status] || 0) + 1;
       return acc;
     }, {});
-    console.log(`[import] ${statuses.SUCCEEDED || 0} succeeded, ${statuses.FAILED || 0} failed, ${statuses.BLOCKED || 0} blocked, ${statuses.SKIPPED || 0} skipped`);
+    console.log(`[import] ${statuses.SUCCEEDED || 0} succeeded, ${statuses.FAILED || 0} failed, ${statuses.BLOCKED || 0} blocked, ${statuses.SKIPPED || 0} skipped, ${statuses.MANUAL_REVIEW || 0} manual review`);
+    console.log('');
+    console.log('  Planned operations:');
+    printObjectCounts(result.manifest.summary.operatorActions?.byOperation, fmt, '   -');
+    if ((result.preflight.blockers || []).length > 0) {
+      console.log('');
+      console.log('  Blocking categories:');
+      printObjectCounts(result.gapReport?.operatorGuidance?.blockerCategories, fmt, '   -');
+    }
     console.log('');
     console.log(`  Plan:       ${fmt.dim(result.outputPaths.plan)}`);
     console.log(`  State:      ${fmt.dim(result.outputPaths.state)}`);
@@ -96,6 +120,13 @@ async function runDevelopersCommand(subcommand, flags, fmt) {
     console.log('');
     console.log(`[reconcile] ${result.report.summary.checkedUsers} users, ${result.report.summary.checkedApplications} apps, ${result.report.summary.checkedSubscriptions} subscriptions checked`);
     console.log(`[reconcile] ${result.report.summary.blockers} blocker(s), ${result.report.summary.warnings} warning(s)`);
+    if (result.report.mismatches.length > 0) {
+      console.log('');
+      console.log('  Top mismatches:');
+      for (const mismatch of result.report.mismatches.slice(0, 5)) {
+        console.log(`   - ${mismatch.code}: ${mismatch.sourceId}`);
+      }
+    }
     console.log('');
     console.log(`  Report:     ${fmt.dim(result.outputPaths.reconcileReport)}`);
     console.log(`  Log:        ${fmt.dim(result.outputPaths.log)}`);
