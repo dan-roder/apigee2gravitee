@@ -14,7 +14,7 @@ Consumes the export produced by [apigee-migrate-tool](https://github.com/apigeec
 | **Tool 2 — Parser + Mapper** | ✅ Complete | Reads IR → parses proxy AST → emits Gravitee v4 API definition JSON |
 | Developers Migration Tool | 🟡 In active implementation | Migrates Apigee developers, apps, and product approvals into Gravitee users, applications, and subscriptions |
 | Tool 3 — LLM Fallback | 🔲 Planned | Translates JavaScript/JavaCallout policies via Claude API |
-| Tool 4 — Importer | 🔲 Planned | POSTs API definitions to Gravitee Management API |
+| API Migration Tool | 🟡 In active implementation | Analyzes, imports, and reconciles Gravitee APIs/plans from proxy IR |
 | Tool 5 — Gap Reporter | 🔲 Planned | Generates HTML report of all migration gaps and review items |
 
 ---
@@ -258,6 +258,118 @@ A complete Gravitee v4 API definition ready for `POST /management/v2/organizatio
 ### The `_migrationMeta` block
 
 Every API definition output includes a `_migrationMeta` block. **Strip this before posting to the Gravitee Management API** — it is for tooling use only:
+
+---
+
+## API Migration Tool
+
+Creates or updates Gravitee APIs and plans from extracted Apigee proxy IR. This is the missing upstream stage that should run before the developers migration tool, because developers migration expects the target APIs and plans to already exist.
+
+### Config
+
+Start from [`config/apis.config.example.json`](/Users/danielroder/Sites/apigee2gravitee/config/apis.config.example.json):
+
+```json
+{
+  "gravitee": {
+    "url": "http://localhost:8083",
+    "orgId": "DEFAULT",
+    "envId": "DEFAULT"
+  },
+  "filters": {
+    "includeProxies": [],
+    "excludeProxies": []
+  },
+  "reporting": {
+    "reportDir": "./report",
+    "stateFile": "./state/apis-import-state.json"
+  }
+}
+```
+
+`filters.includeProxies` is the safest way to run a small pilot. Start with one or two proxy names from `ir/proxies/`.
+
+### Commands
+
+```bash
+node bin/migrator.js apis analyze --ir-dir ./ir --config ./config/apis.config.example.json --gravitee-token "$GRAVITEE_TOKEN"
+node bin/migrator.js apis plan --ir-dir ./ir --config ./config/apis.config.example.json --gravitee-token "$GRAVITEE_TOKEN"
+node bin/migrator.js apis import --ir-dir ./ir --config ./config/apis.config.example.json --gravitee-token "$GRAVITEE_TOKEN"
+node bin/migrator.js apis reconcile --ir-dir ./ir --config ./config/apis.config.example.json --gravitee-token "$GRAVITEE_TOKEN"
+```
+
+### Recommended first run
+
+Run the API track before the developers track:
+
+```bash
+node bin/migrator.js extract --data-dir ./data --ir-dir ./ir --org your-org --env dev
+
+node bin/migrator.js apis analyze \
+  --ir-dir ./ir \
+  --config ./config/apis.config.example.json \
+  --gravitee-token "$GRAVITEE_TOKEN"
+
+node bin/migrator.js apis plan \
+  --ir-dir ./ir \
+  --config ./config/apis.config.example.json \
+  --gravitee-token "$GRAVITEE_TOKEN"
+
+node bin/migrator.js apis import \
+  --ir-dir ./ir \
+  --config ./config/apis.config.example.json \
+  --gravitee-token "$GRAVITEE_TOKEN"
+
+node bin/migrator.js apis reconcile \
+  --ir-dir ./ir \
+  --config ./config/apis.config.example.json \
+  --gravitee-token "$GRAVITEE_TOKEN"
+```
+
+After the APIs and plans exist in Gravitee, move to the developers flow:
+
+```bash
+node bin/migrator.js developers resolve-config-ids --config ./config/developers.config.json --gravitee-token "$GRAVITEE_TOKEN"
+node bin/migrator.js developers validate-config-targets --config ./config/developers.config.resolved.json --gravitee-token "$GRAVITEE_TOKEN"
+node bin/migrator.js developers analyze --ir-dir ./ir --config ./config/developers.config.resolved.json --gravitee-token "$GRAVITEE_TOKEN"
+```
+
+### What the API commands do
+
+`apis analyze` will:
+
+- validate API migration config
+- load proxy IR and mapped Gravitee API definitions
+- probe live Gravitee API import compatibility
+- write `report/apis-plan.json`, `report/apis-gap-report.json`, `state/apis-import-state.json`, `state/apis-id-map.json`, and `logs/apis.ndjson`
+
+`apis plan` will:
+
+- persist the executable API migration manifest
+- classify APIs as create or update based on live Gravitee lookups
+
+`apis import` will:
+
+- create or update APIs in Gravitee
+- persist a source-to-target API id map for resume and reconcile
+- verify that expected plan names exist after import
+
+`apis reconcile` will:
+
+- check that each expected API exists in Gravitee
+- verify the expected plan names are present
+- compare live targets with the saved API id map
+
+### Expected outputs
+
+```text
+report/apis-plan.json
+report/apis-gap-report.json
+report/apis-reconcile-report.json
+state/apis-import-state.json
+state/apis-id-map.json
+logs/apis.ndjson
+```
 
 ---
 

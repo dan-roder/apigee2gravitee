@@ -1,0 +1,15 @@
+{
+  "gravitee": {
+    "url": "http://localhost:8083",
+    "orgId": "DEFAULT",
+    "envId": "DEFAULT"
+  },
+  "filters": {
+    "includeProxies": [],
+    "excludeProxies": []
+  },
+  "reporting": {
+    "reportDir": "./report",
+    "stateFile": "./state/apis-import-state.json"
+  }
+}

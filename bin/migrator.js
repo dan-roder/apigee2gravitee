@@ -21,6 +21,7 @@ const { spawn } = require('child_process');
 const path = require('path');
 const fs = require('fs');
 const { runDevelopersCommand } = require('../src/developers');
+const { runApisCommand } = require('../src/apis');
 
 // ─── Colours (no dependencies) ───────────────────────────────────────────────
 const c = {
@@ -246,6 +247,7 @@ ${fmt.bold('Usage:')}
 
 ${fmt.bold('Commands:')}
   extract    Parse apigee-migrate-tool data/ output into the IR
+  apis       Analyze or migrate APIs/plans
   developers Analyze or migrate developers/apps/subscriptions
 
 ${fmt.bold('extract options:')}
@@ -258,9 +260,81 @@ ${fmt.bold('extract options:')}
 ${fmt.bold('Examples:')}
   migrator extract --data-dir ./data --ir-dir ./ir
   migrator extract --data-dir ./data --ir-dir ./ir --org advana --env dev -v
+  migrator apis analyze --ir-dir ./ir --config ./config/apis.config.example.json
   migrator developers resolve-config-ids --config ./config/developers.config.json
   migrator developers validate-config-targets --config ./config/developers.config.resolved.json
   migrator developers analyze --ir-dir ./ir --config ./config/developers.config.json
+`);
+}
+
+function printApisHelp() {
+  console.log(`
+${fmt.bold('apis')}
+
+${fmt.bold('Usage:')}
+  migrator apis <subcommand> [options]
+
+${fmt.bold('Subcommands:')}
+  analyze    Validate IR + Gravitee compatibility and build an API migration manifest
+  plan       Persist the executable API migration manifest and gap report
+  import     Create or update Gravitee APIs from translated proxy IR
+  reconcile  Compare expected APIs/plans against live Gravitee state
+
+${fmt.bold('Common options:')}
+  --ir-dir <path>         Path to extracted IR directory               (default: ./ir)
+  --config <path>         Path to API migration config                 (required)
+  --gravitee-token <tok>  Gravitee personal access token               (or GRAVITEE_TOKEN)
+  --gravitee-url <url>    Override gravitee.url from config
+  --org <id>              Override gravitee.orgId from config
+  --env <id>              Override gravitee.envId from config
+  --report-dir <path>     Override reporting.reportDir from config
+  --state-file <path>     Override reporting.stateFile from config
+  --dry-run               Skip live mutations where supported
+  --resume                Reuse previously saved runtime state
+  --force                 Continue past preflight blockers where supported
+
+${fmt.bold('Examples:')}
+  migrator apis analyze --ir-dir ./ir --config ./config/apis.config.example.json --gravitee-token "$GRAVITEE_TOKEN"
+  migrator apis plan --ir-dir ./ir --config ./config/apis.config.example.json --gravitee-token "$GRAVITEE_TOKEN"
+  migrator apis import --ir-dir ./ir --config ./config/apis.config.example.json --gravitee-token "$GRAVITEE_TOKEN"
+  migrator apis reconcile --ir-dir ./ir --config ./config/apis.config.example.json --gravitee-token "$GRAVITEE_TOKEN"
+`);
+}
+
+function printDevelopersHelp() {
+  console.log(`
+${fmt.bold('developers')}
+
+${fmt.bold('Usage:')}
+  migrator developers <subcommand> [options]
+
+${fmt.bold('Subcommands:')}
+  resolve-config-ids       Resolve API/plan ids in productPlanMap by name
+  validate-config-targets  Check productPlanMap targets against live Gravitee
+  analyze                  Validate IR + target compatibility and build a migration manifest
+  plan                     Persist the executable developer migration manifest
+  import                   Migrate users, applications, and subscriptions
+  reconcile                Compare expected developer state against live Gravitee
+
+${fmt.bold('Common options:')}
+  --ir-dir <path>         Path to extracted IR directory               (default: ./ir)
+  --config <path>         Path to developers config                    (required)
+  --gravitee-token <tok>  Gravitee personal access token               (or GRAVITEE_TOKEN)
+  --gravitee-url <url>    Override gravitee.url from config
+  --org <id>              Override gravitee.orgId from config
+  --env <id>              Override gravitee.envId from config
+  --report-dir <path>     Override reporting.reportDir from config
+  --state-file <path>     Override reporting.stateFile from config
+  --dry-run               Skip live mutations where supported
+  --resume                Reuse previously saved runtime state
+  --force                 Continue past blockers where supported
+
+${fmt.bold('Examples:')}
+  migrator developers resolve-config-ids --config ./config/developers.config.json --gravitee-token "$GRAVITEE_TOKEN"
+  migrator developers validate-config-targets --config ./config/developers.config.resolved.json --gravitee-token "$GRAVITEE_TOKEN"
+  migrator developers analyze --ir-dir ./ir --config ./config/developers.config.resolved.json --gravitee-token "$GRAVITEE_TOKEN"
+  migrator developers import --ir-dir ./ir --config ./config/developers.config.resolved.json --gravitee-token "$GRAVITEE_TOKEN" --resume
+  migrator developers reconcile --ir-dir ./ir --config ./config/developers.config.resolved.json --gravitee-token "$GRAVITEE_TOKEN"
 `);
 }
 
@@ -279,7 +353,20 @@ async function main() {
   }
 
   if (command === 'developers') {
+    if (!subcommand || args.flags.help || args.flags.h) {
+      printDevelopersHelp();
+      process.exit(args.flags.help || args.flags.h ? 0 : 1);
+    }
     const exitCode = await runDevelopersCommand(subcommand, args.flags, fmt);
+    process.exit(exitCode);
+  }
+
+  if (command === 'apis') {
+    if (!subcommand || args.flags.help || args.flags.h) {
+      printApisHelp();
+      process.exit(args.flags.help || args.flags.h ? 0 : 1);
+    }
+    const exitCode = await runApisCommand(subcommand, args.flags, fmt);
     process.exit(exitCode);
   }
 

@@ -71,6 +71,10 @@ class IrLoader {
     return findJsonFiles(path.join(this.irDir, 'proxies')).map(readJson).filter(Boolean);
   }
 
+  proxy(name) {
+    return readJson(path.join(this.irDir, 'proxies', `${name}.json`));
+  }
+
   sharedFlows() {
     return findJsonFiles(path.join(this.irDir, 'sharedflows')).map(readJson).filter(Boolean);
   }

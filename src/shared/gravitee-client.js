@@ -313,6 +313,14 @@ class GraviteeClient {
     return null;
   }
 
+  async createApi(payload) {
+    return this.post(this.v2Url('/apis'), payload);
+  }
+
+  async updateApi(apiId, payload) {
+    return this.put(this.v2Url(`/apis/${apiId}`), payload);
+  }
+
   async listRoles() {
     const body = await this.get(this.orgUrl('/rolescopes'));
     const roles = new Set();
@@ -550,6 +558,23 @@ class GraviteeClient {
       ok: subscriptions.ok && create.supported,
       supported: subscriptions.supported && create.supported,
       checks: { subscriptions, create, apiKeys },
+    };
+  }
+
+  async verifyApiImportCapabilities() {
+    const listApis = await this.probeEndpoint('GET', this.v2Url('/apis'));
+    const createApi = await this.probeEndpoint('POST', this.v2Url('/apis'), {});
+    const updateApi = await this.probeEndpoint('PUT', this.v2Url('/apis/__codex_probe__'), {});
+    updateApi.required = false;
+    if (updateApi.status === 404) {
+      updateApi.ok = true;
+      updateApi.supported = true;
+      updateApi.classification = 'indeterminate-resource';
+    }
+    return {
+      ok: listApis.ok && createApi.supported,
+      supported: listApis.supported && createApi.supported,
+      checks: { listApis, createApi, updateApi },
     };
   }
 }
