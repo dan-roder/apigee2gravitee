@@ -1,0 +1,24 @@
+{
+  "items": [
+    {
+      "appId": "dev1@540.co/kanye-dev-app",
+      "appName": "kanye-dev-app",
+      "developerEmail": "dev1@540.co"
+    },
+    {
+      "appId": "dev1@540.co/wizards-dev-app",
+      "appName": "wizards-dev-app",
+      "developerEmail": "dev1@540.co"
+    },
+    {
+      "appId": "dev2@540.co/chuck-norris-dev-app",
+      "appName": "chuck-norris-dev-app",
+      "developerEmail": "dev2@540.co"
+    },
+    {
+      "appId": "dev2@540.co/dog-breeds-dev-app",
+      "appName": "dog-breeds-dev-app",
+      "developerEmail": "dev2@540.co"
+    }
+  ]
+}

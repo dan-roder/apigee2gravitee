@@ -1,0 +1,191 @@
+{
+  "_meta": {
+    "artifactId": "harry-potter-characters",
+    "artifactType": "proxy",
+    "blockers": [],
+    "extractedAt": "2026-04-06T21:03:44.645925Z",
+    "riskFlags": [],
+    "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/proxies/harry-potter-characters.zip",
+    "warnings": []
+  },
+  "base_path": "",
+  "description": "",
+  "display_name": "harry-potter-characters",
+  "kvm_refs": [],
+  "meta": {
+    "parsed_at": "2026-04-06T21:03:44.649683Z",
+    "source_zip": "/Users/daniel.roder/Sites/apigee2gravitee/data/proxies/harry-potter-characters.zip"
+  },
+  "name": "harry-potter-characters",
+  "policies": {
+    "Spike-Arrest-staff": {
+      "enabled": true,
+      "name": "Spike-Arrest-staff",
+      "policy_type": "SpikeArrest",
+      "raw_dict": {
+        "_attrs": {
+          "async": "false",
+          "continueOnError": "false",
+          "enabled": "true",
+          "name": "Spike-Arrest-staff"
+        },
+        "_children": [
+          {
+            "_attrs": {},
+            "_tag": "DisplayName",
+            "_text": "Spike Arrest-staff"
+          },
+          {
+            "_attrs": {},
+            "_tag": "Properties",
+            "_text": ""
+          },
+          {
+            "_attrs": {
+              "ref": "request.header.some-header-name"
+            },
+            "_tag": "Identifier",
+            "_text": ""
+          },
+          {
+            "_attrs": {
+              "ref": "request.header.weight"
+            },
+            "_tag": "MessageWeight",
+            "_text": ""
+          },
+          {
+            "_attrs": {},
+            "_tag": "Rate",
+            "_text": "12pm"
+          }
+        ],
+        "_tag": "SpikeArrest",
+        "_text": ""
+      },
+      "raw_xml": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<SpikeArrest async=\"false\" continueOnError=\"false\" enabled=\"true\" name=\"Spike-Arrest-staff\">\n    <DisplayName>Spike Arrest-staff</DisplayName>\n    <Properties/>\n    <Identifier ref=\"request.header.some-header-name\"/>\n    <MessageWeight ref=\"request.header.weight\"/>\n    <Rate>12pm</Rate>\n</SpikeArrest>",
+      "resource_urls": []
+    },
+    "Spike-Arrest-students": {
+      "enabled": true,
+      "name": "Spike-Arrest-students",
+      "policy_type": "SpikeArrest",
+      "raw_dict": {
+        "_attrs": {
+          "async": "false",
+          "continueOnError": "false",
+          "enabled": "true",
+          "name": "Spike-Arrest-students"
+        },
+        "_children": [
+          {
+            "_attrs": {},
+            "_tag": "DisplayName",
+            "_text": "Spike Arrest-students"
+          },
+          {
+            "_attrs": {},
+            "_tag": "Properties",
+            "_text": ""
+          },
+          {
+            "_attrs": {
+              "ref": "request.header.some-header-name"
+            },
+            "_tag": "Identifier",
+            "_text": ""
+          },
+          {
+            "_attrs": {
+              "ref": "request.header.weight"
+            },
+            "_tag": "MessageWeight",
+            "_text": ""
+          },
+          {
+            "_attrs": {},
+            "_tag": "Rate",
+            "_text": "12pm"
+          }
+        ],
+        "_tag": "SpikeArrest",
+        "_text": ""
+      },
+      "raw_xml": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<SpikeArrest async=\"false\" continueOnError=\"false\" enabled=\"true\" name=\"Spike-Arrest-students\">\n    <DisplayName>Spike Arrest-students</DisplayName>\n    <Properties/>\n    <Identifier ref=\"request.header.some-header-name\"/>\n    <MessageWeight ref=\"request.header.weight\"/>\n    <Rate>12pm</Rate>\n</SpikeArrest>",
+      "resource_urls": []
+    }
+  },
+  "proxy_endpoints": [
+    {
+      "connection": {
+        "base_path": "/harry-potter-characters",
+        "virtual_hosts": [
+          "default"
+        ]
+      },
+      "flows": [
+        {
+          "condition": "(proxy.pathsuffix MatchesPath \"/students\") and (request.verb = \"GET\")",
+          "name": "students",
+          "request": [
+            {
+              "condition": "",
+              "name": "Spike-Arrest-students"
+            }
+          ],
+          "response": []
+        },
+        {
+          "condition": "(proxy.pathsuffix MatchesPath \"/staff\") and (request.verb = \"GET\")",
+          "name": "staff",
+          "request": [
+            {
+              "condition": "",
+              "name": "Spike-Arrest-staff"
+            }
+          ],
+          "response": []
+        }
+      ],
+      "name": "default",
+      "post_flow": {
+        "request": [],
+        "response": []
+      },
+      "pre_flow": {
+        "request": [],
+        "response": []
+      },
+      "route_rules": [
+        {
+          "condition": "",
+          "name": "default",
+          "target": "default"
+        }
+      ]
+    }
+  ],
+  "resources": {},
+  "revision": "1",
+  "shared_flow_refs": [],
+  "target_endpoints": [
+    {
+      "connection": {
+        "properties": {},
+        "url": "https://hp-api.onrender.com/api/characters"
+      },
+      "flows": [],
+      "name": "default",
+      "post_flow": {
+        "request": [],
+        "response": []
+      },
+      "pre_flow": {
+        "request": [],
+        "response": []
+      }
+    }
+  ],
+  "target_server_refs": [],
+  "type": "proxy"
+}

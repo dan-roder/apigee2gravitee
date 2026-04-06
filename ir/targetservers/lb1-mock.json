@@ -1,0 +1,19 @@
+{
+  "_meta": {
+    "artifactId": "lb1-mock",
+    "artifactType": "targetserver",
+    "blockers": [],
+    "extractedAt": "2026-04-06T21:03:44.645925Z",
+    "riskFlags": [],
+    "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/targetservers/lb1-mock",
+    "warnings": []
+  },
+  "host": "mocktarget.apigee.net",
+  "is_enabled": true,
+  "meta": {
+    "source_path": "./data/targetservers/lb1-mock"
+  },
+  "name": "lb1-mock",
+  "port": 80,
+  "ssl_enabled": false
+}

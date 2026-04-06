@@ -1,0 +1,16 @@
+{
+  "items": [
+    {
+      "proxies": [
+        "load-balance-target-servers-api"
+      ],
+      "targetServerName": "lb1-mock"
+    },
+    {
+      "proxies": [
+        "load-balance-target-servers-api"
+      ],
+      "targetServerName": "lb2-mock"
+    }
+  ]
+}

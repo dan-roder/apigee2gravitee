@@ -1,0 +1,262 @@
+{
+  "_meta": {
+    "artifactId": "villian-chain",
+    "artifactType": "proxy",
+    "blockers": [],
+    "extractedAt": "2026-04-06T21:03:44.645925Z",
+    "riskFlags": [],
+    "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/proxies/villian-chain.zip",
+    "warnings": []
+  },
+  "base_path": "",
+  "description": "",
+  "display_name": "villian-chain",
+  "kvm_refs": [],
+  "meta": {
+    "parsed_at": "2026-04-06T21:03:44.651600Z",
+    "source_zip": "/Users/daniel.roder/Sites/apigee2gravitee/data/proxies/villian-chain.zip"
+  },
+  "name": "villian-chain",
+  "policies": {
+    "SC-Villian-1": {
+      "enabled": true,
+      "name": "SC-Villian-1",
+      "policy_type": "ServiceCallout",
+      "raw_dict": {
+        "_attrs": {
+          "async": "false",
+          "continueOnError": "false",
+          "enabled": "true",
+          "name": "SC-Villian-1"
+        },
+        "_children": [
+          {
+            "_attrs": {},
+            "_tag": "Request",
+            "_text": ""
+          },
+          {
+            "_attrs": {},
+            "_tag": "Response",
+            "_text": "backend1Response"
+          },
+          {
+            "_attrs": {},
+            "_tag": "HTTPTargetConnection",
+            "_text": ""
+          }
+        ],
+        "_tag": "ServiceCallout",
+        "_text": ""
+      },
+      "raw_xml": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<ServiceCallout async=\"false\" continueOnError=\"false\" enabled=\"true\" name=\"SC-Villian-1\">\n    <Request>\n        <Set>\n            <Verb>GET</Verb>\n            <Path>/people/4</Path>\n        </Set>\n    </Request>\n    <Response>backend1Response</Response>\n    <HTTPTargetConnection>\n        <URL>https://swapi.dev/api</URL>\n    </HTTPTargetConnection>\n</ServiceCallout>",
+      "resource_urls": []
+    },
+    "SC-Villian-2": {
+      "enabled": true,
+      "name": "SC-Villian-2",
+      "policy_type": "ServiceCallout",
+      "raw_dict": {
+        "_attrs": {
+          "async": "false",
+          "continueOnError": "false",
+          "enabled": "true",
+          "name": "SC-Villian-2"
+        },
+        "_children": [
+          {
+            "_attrs": {},
+            "_tag": "Request",
+            "_text": ""
+          },
+          {
+            "_attrs": {},
+            "_tag": "Response",
+            "_text": "backend2Response"
+          },
+          {
+            "_attrs": {},
+            "_tag": "HTTPTargetConnection",
+            "_text": ""
+          }
+        ],
+        "_tag": "ServiceCallout",
+        "_text": ""
+      },
+      "raw_xml": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<ServiceCallout async=\"false\" continueOnError=\"false\" enabled=\"true\" name=\"SC-Villian-2\">\n    <Request>\n        <Set>\n            <Verb>GET</Verb>\n            <Path>/villains/thanos</Path>\n        </Set>\n    </Request>\n    <Response>backend2Response</Response>\n    <HTTPTargetConnection>\n        <URL>https://marvel-villains.herokuapp.com</URL>\n    </HTTPTargetConnection>\n</ServiceCallout>",
+      "resource_urls": []
+    },
+    "SC-Villian-3": {
+      "enabled": true,
+      "name": "SC-Villian-3",
+      "policy_type": "ServiceCallout",
+      "raw_dict": {
+        "_attrs": {
+          "async": "false",
+          "continueOnError": "false",
+          "enabled": "true",
+          "name": "SC-Villian-3"
+        },
+        "_children": [
+          {
+            "_attrs": {},
+            "_tag": "Request",
+            "_text": ""
+          },
+          {
+            "_attrs": {},
+            "_tag": "Response",
+            "_text": "backend3Response"
+          },
+          {
+            "_attrs": {},
+            "_tag": "HTTPTargetConnection",
+            "_text": ""
+          }
+        ],
+        "_tag": "ServiceCallout",
+        "_text": ""
+      },
+      "raw_xml": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<ServiceCallout async=\"false\" continueOnError=\"false\" enabled=\"true\" name=\"SC-Villian-3\">\n    <Request>\n        <Set>\n            <Verb>GET</Verb>\n            <Path>/people/21</Path>\n        </Set>\n    </Request>\n    <Response>backend3Response</Response>\n    <HTTPTargetConnection>\n        <URL>https://swapi.dev/api</URL>\n    </HTTPTargetConnection>\n</ServiceCallout>",
+      "resource_urls": []
+    },
+    "createJsonResponse": {
+      "enabled": true,
+      "name": "createJsonResponse",
+      "policy_type": "Javascript",
+      "raw_dict": {
+        "_attrs": {
+          "async": "false",
+          "continueOnError": "false",
+          "enabled": "true",
+          "name": "createJsonResponse",
+          "timeLimit": "200"
+        },
+        "_children": [
+          {
+            "_attrs": {},
+            "_tag": "DisplayName",
+            "_text": "createJsonResponse"
+          },
+          {
+            "_attrs": {},
+            "_tag": "Properties",
+            "_text": ""
+          },
+          {
+            "_attrs": {},
+            "_tag": "ResourceURL",
+            "_text": "jsc://createResponse.js"
+          }
+        ],
+        "_tag": "Javascript",
+        "_text": ""
+      },
+      "raw_xml": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<Javascript async=\"false\" continueOnError=\"false\" enabled=\"true\" timeLimit=\"200\" name=\"createJsonResponse\">\n    <DisplayName>createJsonResponse</DisplayName>\n    <Properties/>\n    <ResourceURL>jsc://createResponse.js</ResourceURL>\n</Javascript>\n",
+      "resource_urls": [
+        "jsc/createResponse.js"
+      ]
+    }
+  },
+  "proxy_endpoints": [
+    {
+      "connection": {
+        "base_path": "/v1/villians",
+        "virtual_hosts": [
+          "default"
+        ]
+      },
+      "flows": [
+        {
+          "condition": "(request.verb = \"GET\") and (proxy.pathsuffix MatchesPath \"\") and (request.queryparam.filters = null) and (request.queryparam.universe = null)",
+          "name": "GET /villian-chain",
+          "request": [
+            {
+              "condition": "",
+              "name": "SC-Villian-1"
+            },
+            {
+              "condition": "",
+              "name": "SC-Villian-2"
+            },
+            {
+              "condition": "",
+              "name": "SC-Villian-3"
+            }
+          ],
+          "response": [
+            {
+              "condition": "",
+              "name": "createJsonResponse"
+            }
+          ]
+        },
+        {
+          "condition": "(proxy.pathsuffix MatchesPath \"\") and (request.verb = \"GET\") and NOT (request.queryparam.universe = null)",
+          "name": "GET /villian-chain?universe=value",
+          "request": [
+            {
+              "condition": "(request.queryparam.universe == \"sw\")",
+              "name": "SC-Villian-1"
+            },
+            {
+              "condition": "(request.queryparam.universe == \"marvel\")",
+              "name": "SC-Villian-2"
+            },
+            {
+              "condition": "(request.queryparam.universe == \"sw\")",
+              "name": "SC-Villian-3"
+            }
+          ],
+          "response": [
+            {
+              "condition": "",
+              "name": "createJsonResponse"
+            }
+          ]
+        }
+      ],
+      "name": "default",
+      "post_flow": {
+        "request": [],
+        "response": []
+      },
+      "pre_flow": {
+        "request": [],
+        "response": []
+      },
+      "route_rules": [
+        {
+          "condition": "",
+          "name": "NoRoute",
+          "target": ""
+        }
+      ]
+    }
+  ],
+  "resources": {
+    "jsc/createResponse.js": "function safeParse(jsonStr) {\n  if (!jsonStr || jsonStr === \"\") return null;\n  try {\n    return JSON.parse(jsonStr);\n  } catch (e) {\n    return null;\n  }\n}\n\n\nvar r1 = safeParse(context.getVariable('backend1Response.content'));\nvar r2 = safeParse(context.getVariable('backend2Response.content'));\nvar r3 = safeParse(context.getVariable('backend3Response.content'));\n\nvar villianList = [];\nif(r1 !== null){\n    villianList.push(r1);\n}\n\nif(r2 !== null){\n    villianList.push(r2);\n}\n\nif(r3 !== null){\n    villianList.push(r3);\n}\n\nvar response = villianList;\n\ncontext.setVariable('response.content', JSON.stringify(villianList, null, 2));\ncontext.setVariable('response.header.Content-Type', 'application/json');"
+  },
+  "revision": "1",
+  "shared_flow_refs": [],
+  "target_endpoints": [
+    {
+      "connection": {
+        "properties": {},
+        "url": "https://test.com"
+      },
+      "flows": [],
+      "name": "default",
+      "post_flow": {
+        "request": [],
+        "response": []
+      },
+      "pre_flow": {
+        "request": [],
+        "response": []
+      }
+    }
+  ],
+  "target_server_refs": [],
+  "type": "proxy"
+}

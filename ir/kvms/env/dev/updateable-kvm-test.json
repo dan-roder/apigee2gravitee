@@ -1,0 +1,25 @@
+{
+  "_meta": {
+    "artifactId": "env:updateable-kvm-test",
+    "artifactType": "kvm",
+    "blockers": [],
+    "extractedAt": "2026-04-06T21:03:44.645925Z",
+    "riskFlags": [],
+    "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/kvm/env/dev/updateable-kvm-test",
+    "warnings": [
+      "REVIEW_REQUIRED"
+    ]
+  },
+  "encrypted": true,
+  "entries": [
+    {
+      "name": "testing-key"
+    }
+  ],
+  "environment": "dev",
+  "meta": {
+    "source_path": "./data/kvm/env/dev/updateable-kvm-test"
+  },
+  "name": "updateable-kvm-test",
+  "scope": "env"
+}

@@ -1,0 +1,28 @@
+{
+  "_meta": {
+    "artifactId": "env:kvm-3-encrypted",
+    "artifactType": "kvm",
+    "blockers": [],
+    "extractedAt": "2026-04-06T21:03:44.645925Z",
+    "riskFlags": [],
+    "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/kvm/env/dev/kvm-3-encrypted",
+    "warnings": [
+      "REVIEW_REQUIRED"
+    ]
+  },
+  "encrypted": true,
+  "entries": [
+    {
+      "name": "upstream-password-1"
+    },
+    {
+      "name": "upstream-password-2"
+    }
+  ],
+  "environment": "dev",
+  "meta": {
+    "source_path": "./data/kvm/env/dev/kvm-3-encrypted"
+  },
+  "name": "kvm-3-encrypted",
+  "scope": "env"
+}

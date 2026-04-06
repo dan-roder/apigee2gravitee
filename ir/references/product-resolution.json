@@ -1,0 +1,147 @@
+{
+  "products": [
+    {
+      "_meta": {
+        "blockers": [],
+        "riskFlags": [],
+        "warnings": []
+      },
+      "missingProxies": [],
+      "productName": "cats-api-product",
+      "recommendedPlanModel": "ONE_PLAN_ON_ONE_API",
+      "referencedProxies": [
+        "cats-api-7"
+      ],
+      "resolutionType": "SINGLE_API",
+      "resolvedProxies": [
+        "cats-api-7"
+      ]
+    },
+    {
+      "_meta": {
+        "blockers": [],
+        "riskFlags": [],
+        "warnings": []
+      },
+      "missingProxies": [],
+      "productName": "chuck-norris-api-product",
+      "recommendedPlanModel": "ONE_PLAN_ON_ONE_API",
+      "referencedProxies": [
+        "chuck-norris-api-10"
+      ],
+      "resolutionType": "SINGLE_API",
+      "resolvedProxies": [
+        "chuck-norris-api-10"
+      ]
+    },
+    {
+      "_meta": {
+        "blockers": [],
+        "riskFlags": [],
+        "warnings": []
+      },
+      "missingProxies": [],
+      "productName": "dog-breeds-api-product",
+      "recommendedPlanModel": "ONE_PLAN_ON_ONE_API",
+      "referencedProxies": [
+        "dog-breeds-api-6"
+      ],
+      "resolutionType": "SINGLE_API",
+      "resolvedProxies": [
+        "dog-breeds-api-6"
+      ]
+    },
+    {
+      "_meta": {
+        "blockers": [],
+        "riskFlags": [],
+        "warnings": []
+      },
+      "missingProxies": [],
+      "productName": "hogwarts-houses-api-product",
+      "recommendedPlanModel": "ONE_PLAN_ON_ONE_API",
+      "referencedProxies": [
+        "hogwarts-houses-api-8"
+      ],
+      "resolutionType": "SINGLE_API",
+      "resolvedProxies": [
+        "hogwarts-houses-api-8"
+      ]
+    },
+    {
+      "_meta": {
+        "blockers": [],
+        "riskFlags": [],
+        "warnings": []
+      },
+      "missingProxies": [],
+      "productName": "kanye-api-product",
+      "recommendedPlanModel": "ONE_PLAN_ON_ONE_API",
+      "referencedProxies": [
+        "kanye-rest-api-5"
+      ],
+      "resolutionType": "SINGLE_API",
+      "resolvedProxies": [
+        "kanye-rest-api-5"
+      ]
+    },
+    {
+      "_meta": {
+        "blockers": [],
+        "riskFlags": [],
+        "warnings": [
+          "MULTI_API_PRODUCT",
+          "PLAN_SPLIT_REQUIRED"
+        ]
+      },
+      "missingProxies": [],
+      "productName": "misc-api-product",
+      "recommendedPlanModel": "PLAN_SPLIT_REQUIRED",
+      "referencedProxies": [
+        "apigee-hello-api-1",
+        "car-makes-api-3",
+        "cat-fact-api-2"
+      ],
+      "resolutionType": "MULTI_API",
+      "resolvedProxies": [
+        "apigee-hello-api-1",
+        "car-makes-api-3",
+        "cat-fact-api-2"
+      ]
+    },
+    {
+      "_meta": {
+        "blockers": [],
+        "riskFlags": [],
+        "warnings": []
+      },
+      "missingProxies": [],
+      "productName": "wizards-api-product",
+      "recommendedPlanModel": "ONE_PLAN_ON_ONE_API",
+      "referencedProxies": [
+        "wizards-api-9"
+      ],
+      "resolutionType": "SINGLE_API",
+      "resolvedProxies": [
+        "wizards-api-9"
+      ]
+    },
+    {
+      "_meta": {
+        "blockers": [],
+        "riskFlags": [],
+        "warnings": []
+      },
+      "missingProxies": [],
+      "productName": "yes-or-no-api-product",
+      "recommendedPlanModel": "ONE_PLAN_ON_ONE_API",
+      "referencedProxies": [
+        "yes-or-no-api-4"
+      ],
+      "resolutionType": "SINGLE_API",
+      "resolvedProxies": [
+        "yes-or-no-api-4"
+      ]
+    }
+  ]
+}

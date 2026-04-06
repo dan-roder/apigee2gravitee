@@ -1,0 +1,45 @@
+{
+  "_meta": {
+    "artifactId": "dev1@540.co/kanye-dev-app",
+    "artifactType": "app",
+    "blockers": [],
+    "extractedAt": "2026-04-06T21:03:44.645925Z",
+    "riskFlags": [],
+    "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/apps/dev1@540.co/kanye-dev-app",
+    "warnings": []
+  },
+  "app_id": "18180382-349a-4c59-ac46-deca701e2b3c",
+  "attributes": [
+    {
+      "name": "DisplayName",
+      "value": "kanye-dev-app"
+    },
+    {
+      "name": "Notes",
+      "value": ""
+    }
+  ],
+  "callback_url": "",
+  "credentials": [
+    {
+      "api_products": [
+        {
+          "apiproduct": "kanye-api-product",
+          "status": "approved"
+        }
+      ],
+      "consumer_key": "om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1",
+      "consumer_secret_present": true,
+      "consumer_secret_ref": "_protected/credentials/dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/consumer-secret.txt",
+      "expires_at": -1,
+      "scopes": [],
+      "status": "approved"
+    }
+  ],
+  "developer_email": "dev1@540.co",
+  "meta": {
+    "source_path": "./data/apps/dev1@540.co/kanye-dev-app"
+  },
+  "name": "kanye-dev-app",
+  "status": "approved"
+}

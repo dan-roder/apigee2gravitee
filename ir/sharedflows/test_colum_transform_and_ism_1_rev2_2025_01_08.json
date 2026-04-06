@@ -1,0 +1,112 @@
+{
+  "_meta": {
+    "artifactId": "test_colum_transform_and_ism_1_rev2_2025_01_08",
+    "artifactType": "sharedflow",
+    "blockers": [],
+    "extractedAt": "2026-04-06T21:03:44.645925Z",
+    "riskFlags": [],
+    "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/sharedflows/test_colum_transform_and_ism_1_rev2_2025_01_08.zip",
+    "warnings": []
+  },
+  "base_path": "",
+  "description": "Flow to modify and test column transform shared flow",
+  "display_name": "test_colum_transform_and_ism_1",
+  "kvm_refs": [],
+  "meta": {
+    "parsed_at": "2026-04-06T21:03:44.655769Z",
+    "source_zip": "/Users/daniel.roder/Sites/apigee2gravitee/data/sharedflows/test_colum_transform_and_ism_1_rev2_2025_01_08.zip"
+  },
+  "name": "test_colum_transform_and_ism_1_rev2_2025_01_08",
+  "policies": {
+    "Test-Column-Transform-AND-ISM": {
+      "enabled": true,
+      "name": "Test-Column-Transform-AND-ISM",
+      "policy_type": "Javascript",
+      "raw_dict": {
+        "_attrs": {
+          "async": "false",
+          "continueOnError": "false",
+          "enabled": "true",
+          "name": "Test-Column-Transform-AND-ISM",
+          "timeLimit": "200"
+        },
+        "_children": [
+          {
+            "_attrs": {},
+            "_tag": "DisplayName",
+            "_text": "Test-Column-Transform-AND-ISM"
+          },
+          {
+            "_attrs": {},
+            "_tag": "Properties",
+            "_text": ""
+          },
+          {
+            "_attrs": {},
+            "_tag": "ResourceURL",
+            "_text": "jsc://column-transform.js"
+          }
+        ],
+        "_tag": "Javascript",
+        "_text": ""
+      },
+      "raw_xml": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<Javascript async=\"false\" continueOnError=\"false\" enabled=\"true\" timeLimit=\"200\" name=\"Test-Column-Transform-AND-ISM\">\n    <DisplayName>Test-Column-Transform-AND-ISM</DisplayName>\n    <Properties/>\n    <ResourceURL>jsc://column-transform.js</ResourceURL>\n</Javascript>",
+      "resource_urls": [
+        "jsc/column-transform.js"
+      ]
+    },
+    "XML-to-JSON-1": {
+      "enabled": true,
+      "name": "XML-to-JSON-1",
+      "policy_type": "XMLToJSON",
+      "raw_dict": {
+        "_attrs": {
+          "async": "false",
+          "continueOnError": "false",
+          "enabled": "true",
+          "name": "XML-to-JSON-1"
+        },
+        "_children": [
+          {
+            "_attrs": {},
+            "_tag": "DisplayName",
+            "_text": "XML to JSON-1"
+          },
+          {
+            "_attrs": {},
+            "_tag": "Properties",
+            "_text": ""
+          },
+          {
+            "_attrs": {},
+            "_tag": "Format",
+            "_text": "yahoo"
+          },
+          {
+            "_attrs": {},
+            "_tag": "OutputVariable",
+            "_text": "response"
+          },
+          {
+            "_attrs": {},
+            "_tag": "Source",
+            "_text": "response"
+          }
+        ],
+        "_tag": "XMLToJSON",
+        "_text": ""
+      },
+      "raw_xml": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<XMLToJSON async=\"false\" continueOnError=\"false\" enabled=\"true\" name=\"XML-to-JSON-1\">\n    <DisplayName>XML to JSON-1</DisplayName>\n    <Properties/>\n    <Format>yahoo</Format>\n    <OutputVariable>response</OutputVariable>\n    <Source>response</Source>\n</XMLToJSON>\n",
+      "resource_urls": []
+    }
+  },
+  "proxy_endpoints": [],
+  "resources": {
+    "jsc/column-transform.js": " "
+  },
+  "revision": "1",
+  "shared_flow_refs": [],
+  "target_endpoints": [],
+  "target_server_refs": [],
+  "type": "sharedflow"
+}

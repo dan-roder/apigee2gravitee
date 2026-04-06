@@ -1,0 +1,155 @@
+{
+  "_meta": {
+    "artifactId": "dog-breeds-api-6",
+    "artifactType": "proxy",
+    "blockers": [],
+    "extractedAt": "2026-04-06T21:03:44.645925Z",
+    "riskFlags": [],
+    "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/proxies/dog-breeds-api-6.zip",
+    "warnings": []
+  },
+  "base_path": "",
+  "description": "return all dog breeds",
+  "display_name": "dog-breeds-api-6",
+  "kvm_refs": [],
+  "meta": {
+    "parsed_at": "2026-04-06T21:03:44.649249Z",
+    "source_zip": "/Users/daniel.roder/Sites/apigee2gravitee/data/proxies/dog-breeds-api-6.zip"
+  },
+  "name": "dog-breeds-api-6",
+  "policies": {
+    "remove-query-param-apikey": {
+      "enabled": true,
+      "name": "remove-query-param-apikey",
+      "policy_type": "AssignMessage",
+      "raw_dict": {
+        "_attrs": {
+          "async": "false",
+          "continueOnError": "false",
+          "enabled": "true",
+          "name": "remove-query-param-apikey"
+        },
+        "_children": [
+          {
+            "_attrs": {},
+            "_tag": "DisplayName",
+            "_text": "Remove Query Param apikey"
+          },
+          {
+            "_attrs": {},
+            "_tag": "Remove",
+            "_text": ""
+          },
+          {
+            "_attrs": {},
+            "_tag": "IgnoreUnresolvedVariables",
+            "_text": "true"
+          },
+          {
+            "_attrs": {
+              "createNew": "false",
+              "transport": "http",
+              "type": "request"
+            },
+            "_tag": "AssignTo",
+            "_text": ""
+          }
+        ],
+        "_tag": "AssignMessage",
+        "_text": ""
+      },
+      "raw_xml": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<AssignMessage async=\"false\" continueOnError=\"false\" enabled=\"true\" name=\"remove-query-param-apikey\">\n    <DisplayName>Remove Query Param apikey</DisplayName>\n\u00a0 \u00a0 <Remove>\n        <QueryParams>\n    \u00a0 \u00a0 \u00a0 \u00a0 <QueryParam name=\"apikey\"/>\n\u00a0 \u00a0 \u00a0 \u00a0 </QueryParams>\n    \u00a0 \u00a0</Remove>\n\u00a0 \u00a0<IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>\n\u00a0 \u00a0<AssignTo createNew=\"false\" transport=\"http\" type=\"request\"/>\n</AssignMessage>",
+      "resource_urls": []
+    },
+    "verify-api-key": {
+      "enabled": true,
+      "name": "verify-api-key",
+      "policy_type": "VerifyAPIKey",
+      "raw_dict": {
+        "_attrs": {
+          "async": "false",
+          "continueOnError": "false",
+          "enabled": "true",
+          "name": "verify-api-key"
+        },
+        "_children": [
+          {
+            "_attrs": {},
+            "_tag": "DisplayName",
+            "_text": "Verify API Key"
+          },
+          {
+            "_attrs": {
+              "ref": "request.queryparam.apikey"
+            },
+            "_tag": "APIKey",
+            "_text": ""
+          }
+        ],
+        "_tag": "VerifyAPIKey",
+        "_text": ""
+      },
+      "raw_xml": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<VerifyAPIKey async=\"false\" continueOnError=\"false\" enabled=\"true\" name=\"verify-api-key\">\n    <DisplayName>Verify API Key</DisplayName>\n    <APIKey ref=\"request.queryparam.apikey\"/>\n</VerifyAPIKey>",
+      "resource_urls": []
+    }
+  },
+  "proxy_endpoints": [
+    {
+      "connection": {
+        "base_path": "/v1/dog-breeds-api-6",
+        "virtual_hosts": [
+          "default"
+        ]
+      },
+      "flows": [],
+      "name": "default",
+      "post_flow": {
+        "request": [],
+        "response": []
+      },
+      "pre_flow": {
+        "request": [
+          {
+            "condition": "",
+            "name": "verify-api-key"
+          },
+          {
+            "condition": "",
+            "name": "remove-query-param-apikey"
+          }
+        ],
+        "response": []
+      },
+      "route_rules": [
+        {
+          "condition": "",
+          "name": "default",
+          "target": "default"
+        }
+      ]
+    }
+  ],
+  "resources": {},
+  "revision": "1",
+  "shared_flow_refs": [],
+  "target_endpoints": [
+    {
+      "connection": {
+        "properties": {},
+        "url": "https://api.thedogapi.com/v1/breeds"
+      },
+      "flows": [],
+      "name": "default",
+      "post_flow": {
+        "request": [],
+        "response": []
+      },
+      "pre_flow": {
+        "request": [],
+        "response": []
+      }
+    }
+  ],
+  "target_server_refs": [],
+  "type": "proxy"
+}

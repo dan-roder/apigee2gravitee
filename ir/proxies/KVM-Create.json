@@ -1,0 +1,348 @@
+{
+  "_meta": {
+    "artifactId": "KVM-Create",
+    "artifactType": "proxy",
+    "blockers": [],
+    "extractedAt": "2026-04-06T21:03:44.645925Z",
+    "riskFlags": [],
+    "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/proxies/KVM-Create.zip",
+    "warnings": []
+  },
+  "base_path": "",
+  "description": "",
+  "display_name": "KVM-Create",
+  "kvm_refs": [
+    {
+      "flagged": false,
+      "map_identifier": "devops-credentials",
+      "operations": [
+        "Get"
+      ],
+      "policy_name": "KVM-GetCredentials",
+      "scope": "apiproxy"
+    }
+  ],
+  "meta": {
+    "parsed_at": "2026-04-06T21:03:44.646774Z",
+    "source_zip": "/Users/daniel.roder/Sites/apigee2gravitee/data/proxies/KVM-Create.zip"
+  },
+  "name": "KVM-Create",
+  "policies": {
+    "AM-ErrorResponse": {
+      "enabled": true,
+      "name": "AM-ErrorResponse",
+      "policy_type": "AssignMessage",
+      "raw_dict": {
+        "_attrs": {
+          "name": "AM-ErrorResponse"
+        },
+        "_children": [
+          {
+            "_attrs": {},
+            "_tag": "Set",
+            "_text": ""
+          },
+          {
+            "_attrs": {},
+            "_tag": "IgnoreUnresolvedVariables",
+            "_text": "true"
+          },
+          {
+            "_attrs": {
+              "createNew": "false",
+              "transport": "http",
+              "type": "response"
+            },
+            "_tag": "AssignTo",
+            "_text": ""
+          }
+        ],
+        "_tag": "AssignMessage",
+        "_text": ""
+      },
+      "raw_xml": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<AssignMessage name=\"AM-ErrorResponse\">\n    <Set>\n        <Payload contentType=\"application/json\"><![CDATA[{\n  \"error\": true,\n  \"fault_name\": \"{fault.name}\",\n  \"fault_type\": \"{fault.type}\",\n  \"message\": \"Failed to create KVM\",\n  \"response_status\": \"{kvm.create.response.status.code}\",\n  \"response_content\": \"{kvm.create.response.content}\"\n}]]></Payload>\n    </Set>\n    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>\n    <AssignTo createNew=\"false\" transport=\"http\" type=\"response\"/>\n</AssignMessage>",
+      "resource_urls": []
+    },
+    "AM-SetResponse": {
+      "enabled": true,
+      "name": "AM-SetResponse",
+      "policy_type": "AssignMessage",
+      "raw_dict": {
+        "_attrs": {
+          "name": "AM-SetResponse"
+        },
+        "_children": [
+          {
+            "_attrs": {},
+            "_tag": "Set",
+            "_text": ""
+          },
+          {
+            "_attrs": {},
+            "_tag": "IgnoreUnresolvedVariables",
+            "_text": "false"
+          },
+          {
+            "_attrs": {
+              "createNew": "false",
+              "transport": "http",
+              "type": "response"
+            },
+            "_tag": "AssignTo",
+            "_text": ""
+          }
+        ],
+        "_tag": "AssignMessage",
+        "_text": ""
+      },
+      "raw_xml": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<AssignMessage name=\"AM-SetResponse\">\n    <Set>\n        <Payload contentType=\"application/json\">{kvm.response.body}</Payload>\n        <Headers>\n            <Header name=\"Content-Type\">application/json</Header>\n        </Headers>\n    </Set>\n    <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>\n    <AssignTo createNew=\"false\" transport=\"http\" type=\"response\"/>\n</AssignMessage>",
+      "resource_urls": []
+    },
+    "CreateKVM": {
+      "enabled": true,
+      "name": "CreateKVM",
+      "policy_type": "ServiceCallout",
+      "raw_dict": {
+        "_attrs": {
+          "name": "CreateKVM"
+        },
+        "_children": [
+          {
+            "_attrs": {},
+            "_tag": "Request",
+            "_text": ""
+          },
+          {
+            "_attrs": {},
+            "_tag": "Response",
+            "_text": "kvm.create.response"
+          },
+          {
+            "_attrs": {},
+            "_tag": "Timeout",
+            "_text": "30000"
+          },
+          {
+            "_attrs": {},
+            "_tag": "HTTPTargetConnection",
+            "_text": ""
+          }
+        ],
+        "_tag": "ServiceCallout",
+        "_text": ""
+      },
+      "raw_xml": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<ServiceCallout name=\"CreateKVM\">\n    <Request>\n        <Set>\n            <Headers>\n                <Header name=\"Content-Type\">application/json</Header>\n                <Header name=\"Authorization\">{auth.header}</Header>\n            </Headers>\n            <Verb>POST</Verb>\n            <Payload contentType=\"application/json\">{kvm.request.body}</Payload>\n        </Set>\n    </Request>\n    <Response>kvm.create.response</Response>\n    <Timeout>30000</Timeout>\n    <HTTPTargetConnection>\n        <URL>http://{kvm.api.url}</URL>\n    </HTTPTargetConnection>\n</ServiceCallout>",
+      "resource_urls": []
+    },
+    "JS-CreateAuthHeader": {
+      "enabled": true,
+      "name": "JS-CreateAuthHeader",
+      "policy_type": "Javascript",
+      "raw_dict": {
+        "_attrs": {
+          "async": "false",
+          "continueOnError": "false",
+          "enabled": "true",
+          "name": "JS-CreateAuthHeader",
+          "timeLimit": "200"
+        },
+        "_children": [
+          {
+            "_attrs": {},
+            "_tag": "DisplayName",
+            "_text": "JS-CreateAuthHeader"
+          },
+          {
+            "_attrs": {},
+            "_tag": "Properties",
+            "_text": ""
+          },
+          {
+            "_attrs": {},
+            "_tag": "ResourceURL",
+            "_text": "jsc://createAuthHeader.js"
+          }
+        ],
+        "_tag": "Javascript",
+        "_text": ""
+      },
+      "raw_xml": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<Javascript async=\"false\" continueOnError=\"false\" enabled=\"true\" timeLimit=\"200\" name=\"JS-CreateAuthHeader\">\n    <DisplayName>JS-CreateAuthHeader</DisplayName>\n    <Properties/>\n    <ResourceURL>jsc://createAuthHeader.js</ResourceURL>\n</Javascript>\n",
+      "resource_urls": [
+        "jsc/createAuthHeader.js"
+      ]
+    },
+    "JS-ProcessCreateKVM": {
+      "enabled": true,
+      "name": "JS-ProcessCreateKVM",
+      "policy_type": "Javascript",
+      "raw_dict": {
+        "_attrs": {
+          "async": "false",
+          "continueOnError": "false",
+          "enabled": "true",
+          "name": "JS-ProcessCreateKVM",
+          "timeLimit": "200"
+        },
+        "_children": [
+          {
+            "_attrs": {},
+            "_tag": "DisplayName",
+            "_text": "JS-ProcessCreateKVM"
+          },
+          {
+            "_attrs": {},
+            "_tag": "Properties",
+            "_text": ""
+          },
+          {
+            "_attrs": {},
+            "_tag": "ResourceURL",
+            "_text": "jsc://processCreateKVM.js"
+          }
+        ],
+        "_tag": "Javascript",
+        "_text": ""
+      },
+      "raw_xml": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<Javascript async=\"false\" continueOnError=\"false\" enabled=\"true\" timeLimit=\"200\" name=\"JS-ProcessCreateKVM\">\n    <DisplayName>JS-ProcessCreateKVM</DisplayName>\n    <Properties/>\n    <ResourceURL>jsc://processCreateKVM.js</ResourceURL>\n</Javascript>\n",
+      "resource_urls": [
+        "jsc/processCreateKVM.js"
+      ]
+    },
+    "JS-ValidateRequest": {
+      "enabled": true,
+      "name": "JS-ValidateRequest",
+      "policy_type": "Javascript",
+      "raw_dict": {
+        "_attrs": {
+          "async": "false",
+          "continueOnError": "false",
+          "enabled": "true",
+          "name": "JS-ValidateRequest",
+          "timeLimit": "200"
+        },
+        "_children": [
+          {
+            "_attrs": {},
+            "_tag": "DisplayName",
+            "_text": "JS-ValidateRequest"
+          },
+          {
+            "_attrs": {},
+            "_tag": "Properties",
+            "_text": ""
+          },
+          {
+            "_attrs": {},
+            "_tag": "ResourceURL",
+            "_text": "jsc://validateRequest.js"
+          }
+        ],
+        "_tag": "Javascript",
+        "_text": ""
+      },
+      "raw_xml": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<Javascript async=\"false\" continueOnError=\"false\" enabled=\"true\" timeLimit=\"200\" name=\"JS-ValidateRequest\">\n    <DisplayName>JS-ValidateRequest</DisplayName>\n    <Properties/>\n    <ResourceURL>jsc://validateRequest.js</ResourceURL>\n</Javascript>\n",
+      "resource_urls": [
+        "jsc/validateRequest.js"
+      ]
+    },
+    "KVM-GetCredentials": {
+      "enabled": true,
+      "name": "KVM-GetCredentials",
+      "policy_type": "KeyValueMapOperations",
+      "raw_dict": {
+        "_attrs": {
+          "mapIdentifier": "devops-credentials",
+          "name": "KVM-GetCredentials"
+        },
+        "_children": [
+          {
+            "_attrs": {},
+            "_tag": "ExpiryTimeInSecs",
+            "_text": "86400"
+          },
+          {
+            "_attrs": {
+              "assignTo": "private.username"
+            },
+            "_tag": "Get",
+            "_text": ""
+          },
+          {
+            "_attrs": {
+              "assignTo": "private.password"
+            },
+            "_tag": "Get",
+            "_text": ""
+          }
+        ],
+        "_tag": "KeyValueMapOperations",
+        "_text": ""
+      },
+      "raw_xml": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<KeyValueMapOperations name=\"KVM-GetCredentials\" mapIdentifier=\"devops-credentials\">\n    <ExpiryTimeInSecs>86400</ExpiryTimeInSecs>\n    <Get assignTo=\"private.username\">\n        <Key>\n            <Parameter>username</Parameter>\n        </Key>\n    </Get>\n    <Get assignTo=\"private.password\">\n        <Key>\n            <Parameter>password</Parameter>\n        </Key>\n    </Get>\n</KeyValueMapOperations>",
+      "resource_urls": []
+    }
+  },
+  "proxy_endpoints": [
+    {
+      "connection": {
+        "base_path": "/kvm-create",
+        "virtual_hosts": [
+          "api-grover"
+        ]
+      },
+      "flows": [],
+      "name": "default",
+      "post_flow": {
+        "request": [],
+        "response": []
+      },
+      "pre_flow": {
+        "request": [
+          {
+            "condition": "",
+            "name": "KVM-GetCredentials"
+          },
+          {
+            "condition": "",
+            "name": "JS-CreateAuthHeader"
+          },
+          {
+            "condition": "",
+            "name": "JS-ValidateRequest"
+          },
+          {
+            "condition": "",
+            "name": "CreateKVM"
+          },
+          {
+            "condition": "",
+            "name": "JS-ProcessCreateKVM"
+          }
+        ],
+        "response": [
+          {
+            "condition": "",
+            "name": "AM-SetResponse"
+          }
+        ]
+      },
+      "route_rules": [
+        {
+          "condition": "",
+          "name": "noroute",
+          "target": ""
+        }
+      ]
+    }
+  ],
+  "resources": {
+    "jsc/createAuthHeader.js": "var username = context.getVariable(\"private.username\");\nvar password = context.getVariable(\"private.password\");\n\n// Pure JavaScript Base64 encoding function\nfunction base64Encode(str) {\n    var b64 = \"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=\";\n    var o1, o2, o3, h1, h2, h3, h4, bits, i = 0, ac = 0, enc = \"\", tmp_arr = [];\n    \n    if (!str) {\n        return str;\n    }\n    \n    do {\n        o1 = str.charCodeAt(i++);\n        o2 = str.charCodeAt(i++);\n        o3 = str.charCodeAt(i++);\n        \n        bits = o1 << 16 | o2 << 8 | o3;\n        \n        h1 = bits >> 18 & 0x3f;\n        h2 = bits >> 12 & 0x3f;\n        h3 = bits >> 6 & 0x3f;\n        h4 = bits & 0x3f;\n        \n        tmp_arr[ac++] = b64.charAt(h1) + b64.charAt(h2) + b64.charAt(h3) + b64.charAt(h4);\n    } while (i < str.length);\n    \n    enc = tmp_arr.join('');\n    \n    var r = str.length % 3;\n    \n    return (r ? enc.slice(0, r - 3) : enc) + '==='.slice(r || 3);\n}\n\nif (username && password) {\n    var credentials = username + \":\" + password;\n    var base64Credentials = base64Encode(credentials);\n    \n    context.setVariable(\"auth.header\", \"Basic \" + base64Credentials);\n} else {\n    context.setVariable(\"auth.header\", \"CREDENTIALS_NOT_FOUND\");\n}",
+    "jsc/processCreateKVM.js": "// apiproxy/resources/jsc/processCreateKVM.js\n// This script processes the KVM creation response\n\ntry {\n    var createResponseContent = context.getVariable(\"kvm.create.response.content\");\n    var createStatus = context.getVariable(\"kvm.create.response.status.code\");\n    \n    // Check if we got a response\n    if (!createResponseContent) {\n        throw new Error(\"No response from KVM creation\");\n    }\n    \n    var createResponse = JSON.parse(createResponseContent);\n    \n    // Check if KVM was created successfully\n    if (createStatus != \"201\" && createStatus != \"200\") {\n        throw new Error(\"Failed to create KVM. Status: \" + createStatus + \", Response: \" + createResponseContent);\n    }\n    \n    var kvmName = createResponse.name;\n    var hasEntries = context.getVariable(\"kvm.has.entries\");\n    var entryCount = context.getVariable(\"kvm.entry.count\");\n    var scope = context.getVariable(\"kvm.scope\") || \"environment\";\n    \n    // Count actual entries returned\n    var actualEntryCount = 0;\n    if (createResponse.entry && createResponse.entry.length) {\n        actualEntryCount = createResponse.entry.length;\n    }\n    \n    var result = {\n        success: true,\n        kvm_created: kvmName,\n        scope: scope,\n        encrypted: createResponse.encrypted || false,\n        entries_requested: entryCount || \"0\",\n        entries_created: actualEntryCount.toString(),\n        http_status: createStatus\n    };\n    \n    // Include entry details if present\n    if (createResponse.entry && createResponse.entry.length > 0) {\n        result.entries = [];\n        for (var i = 0; i < createResponse.entry.length; i++) {\n            result.entries.push({\n                name: createResponse.entry[i].name,\n                value: createResponse.entry[i].value || \"(encrypted/hidden)\"\n            });\n        }\n    }\n    \n    context.setVariable(\"kvm.response.body\", JSON.stringify(result, null, 2));\n    \n} catch (e) {\n    context.setVariable(\"kvm.response.body\", JSON.stringify({\n        error: true,\n        message: \"Error processing KVM creation: \" + e.toString(),\n        stack: e.stack || \"No stack trace available\",\n        raw_response: context.getVariable(\"kvm.create.response.content\")\n    }, null, 2));\n}",
+    "jsc/validateRequest.js": "try {\n    var requestBody = context.getVariable(\"request.content\");\n    var orgName = context.getVariable(\"organization.name\");\n    var envName = context.getVariable(\"environment.name\");\n    \n    // Parse the incoming request\n    var kvmData = JSON.parse(requestBody);\n    \n    // Validate required fields\n    if (!kvmData.name) {\n        throw new Error(\"KVM name is required\");\n    }\n    \n    // Get scope from request (default to environment)\n    var scope = kvmData.scope || \"environment\";\n    \n    // Build the Management API URL based on scope\n    var apiUrl;\n    if (scope === \"environment\") {\n        apiUrl = \"127.0.0.1:8080/v1/organizations/\" + orgName + \"/environments/\" + envName + \"/keyvaluemaps\";\n    } else if (scope === \"organization\") {\n        apiUrl = \"127.0.0.1:8080/v1/organizations/\" + orgName + \"/keyvaluemaps\";\n    } else {\n        throw new Error(\"Invalid scope. Must be 'organization' or 'environment'\");\n    }\n    \n    context.setVariable(\"kvm.api.url\", apiUrl);\n    context.setVariable(\"kvm.scope\", scope);\n    \n    // Build the KVM creation payload with entries inline\n    var kvmPayload = {\n        name: kvmData.name,\n        encrypted: kvmData.encrypted || false\n    };\n    \n    // Add entries to the payload if provided\n    if (kvmData.entries) {\n        var entryArray = [];\n        var entryCount = 0;\n        \n        for (var key in kvmData.entries) {\n            if (kvmData.entries.hasOwnProperty(key)) {\n                entryArray.push({\n                    name: key,\n                    value: kvmData.entries[key]\n                });\n                entryCount++;\n            }\n        }\n        \n        if (entryCount > 0) {\n            kvmPayload.entry = entryArray;\n            context.setVariable(\"kvm.has.entries\", \"true\");\n            context.setVariable(\"kvm.entry.count\", entryCount.toString());\n        } else {\n            context.setVariable(\"kvm.has.entries\", \"false\");\n        }\n    } else {\n        context.setVariable(\"kvm.has.entries\", \"false\");\n    }\n    \n    context.setVariable(\"kvm.request.body\", JSON.stringify(kvmPayload));\n    \n} catch (e) {\n    // Set error in response\n    context.setVariable(\"kvm.response.body\", JSON.stringify({\n        error: true,\n        message: \"Invalid request: \" + e.toString()\n    }));\n    \n    throw e;\n}"
+  },
+  "revision": "1",
+  "shared_flow_refs": [],
+  "target_endpoints": [],
+  "target_server_refs": [],
+  "type": "proxy"
+}

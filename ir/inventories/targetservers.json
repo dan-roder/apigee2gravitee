@@ -1,0 +1,20 @@
+{
+  "items": [
+    {
+      "blockers": [],
+      "id": "lb1-mock",
+      "name": "lb1-mock",
+      "riskFlags": [],
+      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/targetservers/lb1-mock",
+      "warnings": []
+    },
+    {
+      "blockers": [],
+      "id": "lb2-mock",
+      "name": "lb2-mock",
+      "riskFlags": [],
+      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/targetservers/lb2-mock",
+      "warnings": []
+    }
+  ]
+}

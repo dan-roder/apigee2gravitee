@@ -1,0 +1,23 @@
+{
+  "_meta": {
+    "artifactId": "org:CustomReportsadvana#23c04d89-5ac2-43db-8f91-af2bd41c9cb8",
+    "artifactType": "kvm",
+    "blockers": [],
+    "extractedAt": "2026-04-06T21:03:44.645925Z",
+    "riskFlags": [],
+    "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/kvm/org/CustomReportsadvana#23c04d89-5ac2-43db-8f91-af2bd41c9cb8",
+    "warnings": []
+  },
+  "encrypted": false,
+  "entries": [
+    {
+      "name": "23c04d89-5ac2-43db-8f91-af2bd41c9cb8",
+      "value": "{\"createdBy\":\"3.30.235.29\",\"lastModifiedBy\":\"3.30.235.29\",\"displayName\":\"traffic by proxy\",\"sortbyCols\":[],\"timeUnit\":\"hour\",\"dimensions\":[\"apiproxy\"],\"chartType\":\"column\",\"tags\":[],\"comments\":[],\"metrics\":[{\"function\":\"sum\",\"name\":\"message_count\"}],\"properties\":{\"__ui__\":[{\"name\":\"description\",\"value\":\"identify unused proxies\"},{\"name\":\"accuracy\"}]},\"org\":\"advana\",\"env\":\"dev\",\"createdAt\":1772718642599,\"lastViewedAt\":1773336976668,\"lastModifiedAt\":1772718642599,\"name\":\"23c04d89-5ac2-43db-8f91-af2bd41c9cb8\"}"
+    }
+  ],
+  "meta": {
+    "source_path": "./data/kvm/org/CustomReportsadvana#23c04d89-5ac2-43db-8f91-af2bd41c9cb8"
+  },
+  "name": "CustomReportsadvana#23c04d89-5ac2-43db-8f91-af2bd41c9cb8",
+  "scope": "org"
+}

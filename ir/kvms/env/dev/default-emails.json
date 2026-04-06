@@ -1,0 +1,32 @@
+{
+  "_meta": {
+    "artifactId": "env:default-emails",
+    "artifactType": "kvm",
+    "blockers": [],
+    "extractedAt": "2026-04-06T21:03:44.645925Z",
+    "riskFlags": [],
+    "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/kvm/env/dev/default-emails",
+    "warnings": []
+  },
+  "encrypted": false,
+  "entries": [
+    {
+      "name": "default-jira-email",
+      "value": "email1@email.com"
+    },
+    {
+      "name": "default-apigee-email",
+      "value": "email2@email.com"
+    },
+    {
+      "name": "default-aws-email",
+      "value": "email3@email.com"
+    }
+  ],
+  "environment": "dev",
+  "meta": {
+    "source_path": "./data/kvm/env/dev/default-emails"
+  },
+  "name": "default-emails",
+  "scope": "env"
+}

@@ -1,0 +1,261 @@
+{
+  "_meta": {
+    "artifactId": "SF05-dbrx-traffic-control",
+    "artifactType": "sharedflow",
+    "blockers": [],
+    "extractedAt": "2026-04-06T21:03:44.645925Z",
+    "riskFlags": [],
+    "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/sharedflows/SF05-dbrx-traffic-control.zip",
+    "warnings": []
+  },
+  "base_path": "",
+  "description": "undefined",
+  "display_name": "dbrx-traffic-control",
+  "kvm_refs": [
+    {
+      "flagged": false,
+      "map_identifier": "dbrx-secrets",
+      "operations": [
+        "Get"
+      ],
+      "policy_name": "Key-Value-Map-Operations-dbrx",
+      "scope": "apiproxy"
+    }
+  ],
+  "meta": {
+    "parsed_at": "2026-04-06T21:03:44.654183Z",
+    "source_zip": "/Users/daniel.roder/Sites/apigee2gravitee/data/sharedflows/SF05-dbrx-traffic-control.zip"
+  },
+  "name": "SF05-dbrx-traffic-control",
+  "policies": {
+    "Access-Control-1": {
+      "enabled": true,
+      "name": "Access-Control-1",
+      "policy_type": "AccessControl",
+      "raw_dict": {
+        "_attrs": {
+          "async": "false",
+          "continueOnError": "false",
+          "enabled": "true",
+          "name": "Access-Control-1"
+        },
+        "_children": [
+          {
+            "_attrs": {},
+            "_tag": "DisplayName",
+            "_text": "Access Control-1"
+          },
+          {
+            "_attrs": {},
+            "_tag": "IgnoreTrueClientIPHeader",
+            "_text": "true"
+          },
+          {
+            "_attrs": {},
+            "_tag": "Properties",
+            "_text": ""
+          },
+          {
+            "_attrs": {
+              "noRuleMatchAction": "ALLOW"
+            },
+            "_tag": "IPRules",
+            "_text": ""
+          }
+        ],
+        "_tag": "AccessControl",
+        "_text": ""
+      },
+      "raw_xml": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<AccessControl async=\"false\" continueOnError=\"false\" enabled=\"true\" name=\"Access-Control-1\">\n    <DisplayName>Access Control-1</DisplayName>\n    <IgnoreTrueClientIPHeader>true</IgnoreTrueClientIPHeader>\n    <Properties/>\n    <IPRules noRuleMatchAction=\"ALLOW\">\n        <MatchRule action=\"DENY\">\n            <SourceAddress mask=\"24\">{private.ip1}</SourceAddress>\n        </MatchRule>\n        <MatchRule action=\"DENY\">\n            <SourceAddress mask=\"24\">{private.ip2}</SourceAddress>\n        </MatchRule>\n        <MatchRule action=\"DENY\">\n            <SourceAddress mask=\"24\">{private.ip3}</SourceAddress>\n        </MatchRule>\n        <MatchRule action=\"DENY\">\n            <SourceAddress mask=\"24\">{private.ip4}</SourceAddress>\n        </MatchRule>\n        <MatchRule action=\"DENY\">\n            <SourceAddress mask=\"24\">{private.ip5}</SourceAddress>\n        </MatchRule>\n        <MatchRule action=\"DENY\">\n            <SourceAddress mask=\"24\">{private.ip6}</SourceAddress>\n        </MatchRule>\n        <MatchRule action=\"DENY\">\n            <SourceAddress mask=\"24\">{private.ip7}</SourceAddress>\n        </MatchRule>\n        <MatchRule action=\"DENY\">\n            <SourceAddress mask=\"24\">{private.ip8}</SourceAddress>\n        </MatchRule>\n        <MatchRule action=\"DENY\">\n            <SourceAddress mask=\"24\">{private.ip9}</SourceAddress>\n        </MatchRule>\n        <MatchRule action=\"DENY\">\n            <SourceAddress mask=\"24\">{private.ip10}</SourceAddress>\n        </MatchRule>\n        <MatchRule action=\"DENY\">\n            <SourceAddress mask=\"24\">{private.ip11}</SourceAddress>\n        </MatchRule>\n        <MatchRule action=\"DENY\">\n            <SourceAddress mask=\"24\">{private.ip12}</SourceAddress>\n        </MatchRule>\n        <MatchRule action=\"DENY\">\n            <SourceAddress mask=\"24\">{private.ip13}</SourceAddress>\n        </MatchRule>\n        <MatchRule action=\"DENY\">\n            <SourceAddress mask=\"24\">{private.ip14}</SourceAddress>\n        </MatchRule>\n        <MatchRule action=\"DENY\">\n            <SourceAddress mask=\"24\">{private.ip15}</SourceAddress>\n        </MatchRule>\n        <MatchRule action=\"DENY\">\n            <SourceAddress mask=\"24\">{private.ip16}</SourceAddress>\n        </MatchRule>\n        <MatchRule action=\"DENY\">\n            <SourceAddress mask=\"24\">{private.ip17}</SourceAddress>\n        </MatchRule>\n    </IPRules>\n</AccessControl>",
+      "resource_urls": []
+    },
+    "Key-Value-Map-Operations-dbrx": {
+      "enabled": true,
+      "name": "Key-Value-Map-Operations-dbrx",
+      "policy_type": "KeyValueMapOperations",
+      "raw_dict": {
+        "_attrs": {
+          "async": "false",
+          "continueOnError": "false",
+          "enabled": "true",
+          "mapIdentifier": "dbrx-secrets",
+          "name": "Key-Value-Map-Operations-dbrx"
+        },
+        "_children": [
+          {
+            "_attrs": {},
+            "_tag": "DisplayName",
+            "_text": "Key Value Map Operations-dbrx"
+          },
+          {
+            "_attrs": {},
+            "_tag": "Properties",
+            "_text": ""
+          },
+          {
+            "_attrs": {},
+            "_tag": "ExclusiveCache",
+            "_text": "false"
+          },
+          {
+            "_attrs": {},
+            "_tag": "ExpiryTimeInSecs",
+            "_text": "60"
+          },
+          {
+            "_attrs": {
+              "assignTo": "private.ip1",
+              "index": "1"
+            },
+            "_tag": "Get",
+            "_text": ""
+          },
+          {
+            "_attrs": {
+              "assignTo": "private.ip2",
+              "index": "1"
+            },
+            "_tag": "Get",
+            "_text": ""
+          },
+          {
+            "_attrs": {
+              "assignTo": "private.ip3",
+              "index": "1"
+            },
+            "_tag": "Get",
+            "_text": ""
+          },
+          {
+            "_attrs": {
+              "assignTo": "private.ip4",
+              "index": "1"
+            },
+            "_tag": "Get",
+            "_text": ""
+          },
+          {
+            "_attrs": {
+              "assignTo": "private.ip5",
+              "index": "1"
+            },
+            "_tag": "Get",
+            "_text": ""
+          },
+          {
+            "_attrs": {
+              "assignTo": "private.ip6",
+              "index": "1"
+            },
+            "_tag": "Get",
+            "_text": ""
+          },
+          {
+            "_attrs": {
+              "assignTo": "private.ip7",
+              "index": "1"
+            },
+            "_tag": "Get",
+            "_text": ""
+          },
+          {
+            "_attrs": {
+              "assignTo": "private.ip8",
+              "index": "1"
+            },
+            "_tag": "Get",
+            "_text": ""
+          },
+          {
+            "_attrs": {
+              "assignTo": "private.ip9",
+              "index": "1"
+            },
+            "_tag": "Get",
+            "_text": ""
+          },
+          {
+            "_attrs": {
+              "assignTo": "private.ip10",
+              "index": "1"
+            },
+            "_tag": "Get",
+            "_text": ""
+          },
+          {
+            "_attrs": {
+              "assignTo": "private.ip11",
+              "index": "1"
+            },
+            "_tag": "Get",
+            "_text": ""
+          },
+          {
+            "_attrs": {
+              "assignTo": "private.ip12",
+              "index": "1"
+            },
+            "_tag": "Get",
+            "_text": ""
+          },
+          {
+            "_attrs": {
+              "assignTo": "private.ip13",
+              "index": "1"
+            },
+            "_tag": "Get",
+            "_text": ""
+          },
+          {
+            "_attrs": {
+              "assignTo": "private.ip14",
+              "index": "1"
+            },
+            "_tag": "Get",
+            "_text": ""
+          },
+          {
+            "_attrs": {
+              "assignTo": "private.ip15",
+              "index": "1"
+            },
+            "_tag": "Get",
+            "_text": ""
+          },
+          {
+            "_attrs": {
+              "assignTo": "private.ip16",
+              "index": "1"
+            },
+            "_tag": "Get",
+            "_text": ""
+          },
+          {
+            "_attrs": {
+              "assignTo": "private.ip17",
+              "index": "1"
+            },
+            "_tag": "Get",
+            "_text": ""
+          },
+          {
+            "_attrs": {},
+            "_tag": "Scope",
+            "_text": "environment"
+          }
+        ],
+        "_tag": "KeyValueMapOperations",
+        "_text": ""
+      },
+      "raw_xml": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<KeyValueMapOperations async=\"false\" continueOnError=\"false\" enabled=\"true\" name=\"Key-Value-Map-Operations-dbrx\" mapIdentifier=\"dbrx-secrets\">\n    <DisplayName>Key Value Map Operations-dbrx</DisplayName>\n    <Properties/>\n    <ExclusiveCache>false</ExclusiveCache>\n    <ExpiryTimeInSecs>60</ExpiryTimeInSecs>\n    <Get assignTo=\"private.ip1\" index=\"1\">\n        <Key>\n            <Parameter>dbrx-access-control-ip1</Parameter>\n        </Key>\n    </Get>\n    <Get assignTo=\"private.ip2\" index=\"1\">\n        <Key>\n            <Parameter>dbrx-access-control-ip2</Parameter>\n        </Key>\n    </Get>\n    <Get assignTo=\"private.ip3\" index=\"1\">\n        <Key>\n            <Parameter>dbrx-access-control-ip3</Parameter>\n        </Key>\n    </Get>\n    <Get assignTo=\"private.ip4\" index=\"1\">\n        <Key>\n            <Parameter>dbrx-access-control-ip4</Parameter>\n        </Key>\n    </Get>\n    <Get assignTo=\"private.ip5\" index=\"1\">\n        <Key>\n            <Parameter>dbrx-access-control-ip5</Parameter>\n        </Key>\n    </Get>\n    <Get assignTo=\"private.ip6\" index=\"1\">\n        <Key>\n            <Parameter>dbrx-access-control-ip6</Parameter>\n        </Key>\n    </Get>\n    <Get assignTo=\"private.ip7\" index=\"1\">\n        <Key>\n            <Parameter>dbrx-access-control-ip7</Parameter>\n        </Key>\n    </Get>\n    <Get assignTo=\"private.ip8\" index=\"1\">\n        <Key>\n            <Parameter>dbrx-access-control-ip8</Parameter>\n        </Key>\n    </Get>\n    <Get assignTo=\"private.ip9\" index=\"1\">\n        <Key>\n            <Parameter>dbrx-access-control-ip9</Parameter>\n        </Key>\n    </Get>\n    <Get assignTo=\"private.ip10\" index=\"1\">\n        <Key>\n            <Parameter>dbrx-access-control-ip10</Parameter>\n        </Key>\n    </Get>\n    <Get assignTo=\"private.ip11\" index=\"1\">\n        <Key>\n            <Parameter>dbrx-access-control-ip11</Parameter>\n        </Key>\n    </Get>\n    <Get assignTo=\"private.ip12\" index=\"1\">\n        <Key>\n            <Parameter>dbrx-access-control-ip12</Parameter>\n        </Key>\n    </Get>\n    <Get assignTo=\"private.ip13\" index=\"1\">\n        <Key>\n            <Parameter>dbrx-access-control-ip13</Parameter>\n        </Key>\n    </Get>\n    <Get assignTo=\"private.ip14\" index=\"1\">\n        <Key>\n            <Parameter>dbrx-access-control-ip14</Parameter>\n        </Key>\n    </Get>\n    <Get assignTo=\"private.ip15\" index=\"1\">\n        <Key>\n            <Parameter>dbrx-access-control-ip15</Parameter>\n        </Key>\n    </Get>\n    <Get assignTo=\"private.ip16\" index=\"1\">\n        <Key>\n            <Parameter>dbrx-access-control-ip16</Parameter>\n        </Key>\n    </Get>\n    <Get assignTo=\"private.ip17\" index=\"1\">\n        <Key>\n            <Parameter>dbrx-access-control-ip17</Parameter>\n        </Key>\n    </Get>\n    <Scope>environment</Scope>\n</KeyValueMapOperations>",
+      "resource_urls": []
+    }
+  },
+  "proxy_endpoints": [],
+  "resources": {},
+  "revision": "1",
+  "shared_flow_refs": [],
+  "target_endpoints": [],
+  "target_server_refs": [],
+  "type": "sharedflow"
+}

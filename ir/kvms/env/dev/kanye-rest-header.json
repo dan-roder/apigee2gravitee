@@ -1,0 +1,25 @@
+{
+  "_meta": {
+    "artifactId": "env:kanye-rest-header",
+    "artifactType": "kvm",
+    "blockers": [],
+    "extractedAt": "2026-04-06T21:03:44.645925Z",
+    "riskFlags": [],
+    "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/kvm/env/dev/kanye-rest-header",
+    "warnings": [
+      "REVIEW_REQUIRED"
+    ]
+  },
+  "encrypted": true,
+  "entries": [
+    {
+      "name": "fake-header"
+    }
+  ],
+  "environment": "dev",
+  "meta": {
+    "source_path": "./data/kvm/env/dev/kanye-rest-header"
+  },
+  "name": "kanye-rest-header",
+  "scope": "env"
+}

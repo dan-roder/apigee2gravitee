@@ -1,0 +1,23 @@
+{
+  "_meta": {
+    "artifactId": "org:CustomReportsadvana#dcf04b1a-cf3a-4a8f-8d8e-ddb4427c654c",
+    "artifactType": "kvm",
+    "blockers": [],
+    "extractedAt": "2026-04-06T21:03:44.645925Z",
+    "riskFlags": [],
+    "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/kvm/org/CustomReportsadvana#dcf04b1a-cf3a-4a8f-8d8e-ddb4427c654c",
+    "warnings": []
+  },
+  "encrypted": false,
+  "entries": [
+    {
+      "name": "dcf04b1a-cf3a-4a8f-8d8e-ddb4427c654c",
+      "value": "{\"createdBy\":\"3.30.235.29\",\"lastModifiedBy\":\"3.30.235.29\",\"displayName\":\"test report\",\"sortbyCols\":[],\"timeUnit\":\"hour\",\"dimensions\":[\"apiproxy\"],\"chartType\":\"column\",\"tags\":[],\"comments\":[],\"metrics\":[{\"function\":\"sum\",\"name\":\"message_count\"}],\"properties\":{\"__ui__\":[{\"name\":\"description\"},{\"name\":\"accuracy\"}]},\"org\":\"advana\",\"env\":\"dev\",\"createdAt\":1772129891552,\"lastViewedAt\":1772129993880,\"lastModifiedAt\":1772129993658,\"name\":\"dcf04b1a-cf3a-4a8f-8d8e-ddb4427c654c\"}"
+    }
+  ],
+  "meta": {
+    "source_path": "./data/kvm/org/CustomReportsadvana#dcf04b1a-cf3a-4a8f-8d8e-ddb4427c654c"
+  },
+  "name": "CustomReportsadvana#dcf04b1a-cf3a-4a8f-8d8e-ddb4427c654c",
+  "scope": "org"
+}

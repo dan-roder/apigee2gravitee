@@ -1,0 +1,45 @@
+{
+  "attributes": [
+    {
+      "appCount": 4,
+      "apps": [
+        "dev1@540.co/kanye-dev-app",
+        "dev1@540.co/wizards-dev-app",
+        "dev2@540.co/chuck-norris-dev-app",
+        "dev2@540.co/dog-breeds-dev-app"
+      ],
+      "emptyValueCount": 0,
+      "name": "DisplayName",
+      "nonEmptyValueCount": 4,
+      "occurrenceCount": 4,
+      "recommendedAction": "MAP_VERBATIM",
+      "riskFlags": [
+        "HIGH_CARDINALITY"
+      ],
+      "sampleValues": [
+        "chuck-norris-dev-app",
+        "dog-breeds-dev-app",
+        "kanye-dev-app",
+        "wizards-dev-app"
+      ]
+    },
+    {
+      "appCount": 4,
+      "apps": [
+        "dev1@540.co/kanye-dev-app",
+        "dev1@540.co/wizards-dev-app",
+        "dev2@540.co/chuck-norris-dev-app",
+        "dev2@540.co/dog-breeds-dev-app"
+      ],
+      "emptyValueCount": 4,
+      "name": "Notes",
+      "nonEmptyValueCount": 0,
+      "occurrenceCount": 4,
+      "recommendedAction": "REVIEW_REQUIRED",
+      "riskFlags": [
+        "EMPTY_ONLY"
+      ],
+      "sampleValues": []
+    }
+  ]
+}

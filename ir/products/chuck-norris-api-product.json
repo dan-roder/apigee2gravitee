@@ -1,0 +1,26 @@
+{
+  "_meta": {
+    "artifactId": "chuck-norris-api-product",
+    "artifactType": "product",
+    "blockers": [],
+    "extractedAt": "2026-04-06T21:03:44.645925Z",
+    "riskFlags": [],
+    "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/products/chuck-norris-api-product",
+    "warnings": []
+  },
+  "approval_type": "auto",
+  "attributes": [],
+  "description": "",
+  "display_name": "chuck-norris-api-product",
+  "environments": [
+    "dev"
+  ],
+  "meta": {
+    "source_path": "./data/products/chuck-norris-api-product"
+  },
+  "name": "chuck-norris-api-product",
+  "proxies": [
+    "chuck-norris-api-10"
+  ],
+  "scopes": []
+}

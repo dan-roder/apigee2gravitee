@@ -1,0 +1,49 @@
+{
+  "references": [
+    {
+      "_meta": {
+        "blockers": [],
+        "riskFlags": [],
+        "warnings": [
+          "SHAREDFLOW_REFERENCE",
+          "MANUAL_SHARED_POLICY_GROUP_MAPPING_REQUIRED"
+        ]
+      },
+      "proxyName": "apigee-hello-api-1",
+      "recommendedFollowUp": "MANUAL_SHARED_POLICY_GROUP_MAPPING_REQUIRED",
+      "referencePoints": [],
+      "resolved": true,
+      "sharedFlowName": "SF-Shared-Flow-Test-SpikeArrest"
+    },
+    {
+      "_meta": {
+        "blockers": [],
+        "riskFlags": [],
+        "warnings": [
+          "SHAREDFLOW_REFERENCE",
+          "MANUAL_SHARED_POLICY_GROUP_MAPPING_REQUIRED"
+        ]
+      },
+      "proxyName": "proxy-sharedflow-api-11",
+      "recommendedFollowUp": "MANUAL_SHARED_POLICY_GROUP_MAPPING_REQUIRED",
+      "referencePoints": [],
+      "resolved": true,
+      "sharedFlowName": "SF-Shared-Flow-Test-SpikeArrest"
+    },
+    {
+      "_meta": {
+        "blockers": [],
+        "riskFlags": [],
+        "warnings": [
+          "SHAREDFLOW_REFERENCE",
+          "MANUAL_SHARED_POLICY_GROUP_MAPPING_REQUIRED"
+        ]
+      },
+      "proxyName": "proxy-sharedflow-api-11",
+      "recommendedFollowUp": "MANUAL_SHARED_POLICY_GROUP_MAPPING_REQUIRED",
+      "referencePoints": [],
+      "resolved": true,
+      "sharedFlowName": "SF-SharedFlow-Test-Quota"
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "_meta": {
+    "artifactId": "misc-api-product",
+    "artifactType": "product",
+    "blockers": [],
+    "extractedAt": "2026-04-06T21:03:44.645925Z",
+    "riskFlags": [],
+    "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/products/misc-api-product",
+    "warnings": [
+      "MULTI_API_PRODUCT",
+      "PLAN_SPLIT_REQUIRED"
+    ]
+  },
+  "approval_type": "auto",
+  "attributes": [
+    {
+      "name": "approverName",
+      "value": "Jim Smith"
+    },
+    {
+      "name": "approverEmail",
+      "value": "jim.smith@email.com"
+    },
+    {
+      "name": "productOwnerName",
+      "value": "Sally Jones"
+    },
+    {
+      "name": "productOwnerEmail",
+      "value": "sally.jones@email.com"
+    },
+    {
+      "name": "highestDataClassification",
+      "value": "cui"
+    },
+    {
+      "name": "approvalRequired",
+      "value": "true"
+    },
+    {
+      "name": "poweredBy",
+      "value": "advana"
+    }
+  ],
+  "description": "",
+  "display_name": "misc-api-product",
+  "environments": [
+    "dev"
+  ],
+  "meta": {
+    "source_path": "./data/products/misc-api-product"
+  },
+  "name": "misc-api-product",
+  "proxies": [
+    "apigee-hello-api-1",
+    "cat-fact-api-2",
+    "car-makes-api-3"
+  ],
+  "scopes": []
+}

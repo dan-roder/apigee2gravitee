@@ -1,0 +1,194 @@
+{
+  "_meta": {
+    "artifactId": "sf-commonValidations_rev1_2025_01_08",
+    "artifactType": "sharedflow",
+    "blockers": [],
+    "extractedAt": "2026-04-06T21:03:44.645925Z",
+    "riskFlags": [],
+    "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/sharedflows/sf-commonValidations_rev1_2025_01_08.zip",
+    "warnings": []
+  },
+  "base_path": "",
+  "description": "",
+  "display_name": "SF-CommonValidations",
+  "kvm_refs": [],
+  "meta": {
+    "parsed_at": "2026-04-06T21:03:44.655589Z",
+    "source_zip": "/Users/daniel.roder/Sites/apigee2gravitee/data/sharedflows/sf-commonValidations_rev1_2025_01_08.zip"
+  },
+  "name": "sf-commonValidations_rev1_2025_01_08",
+  "policies": {
+    "Q-EnforceQuota": {
+      "enabled": true,
+      "name": "Q-EnforceQuota",
+      "policy_type": "Quota",
+      "raw_dict": {
+        "_attrs": {
+          "async": "false",
+          "continueOnError": "false",
+          "enabled": "true",
+          "name": "Q-EnforceQuota"
+        },
+        "_children": [
+          {
+            "_attrs": {},
+            "_tag": "DisplayName",
+            "_text": "Q-EnforceQuota"
+          },
+          {
+            "_attrs": {
+              "count": "10",
+              "countRef": "verifyapikey.VAK-VerifyKey.apiproduct.developer.quota.limit"
+            },
+            "_tag": "Allow",
+            "_text": ""
+          },
+          {
+            "_attrs": {
+              "ref": "verifyapikey.VAK-VerifyKey.apiproduct.developer.quota.interval"
+            },
+            "_tag": "Interval",
+            "_text": "1"
+          },
+          {
+            "_attrs": {},
+            "_tag": "Distributed",
+            "_text": "true"
+          },
+          {
+            "_attrs": {},
+            "_tag": "Synchronous",
+            "_text": "true"
+          },
+          {
+            "_attrs": {
+              "ref": "verifyapikey.VAK-VerifyKey.apiproduct.developer.quota.timeunit"
+            },
+            "_tag": "TimeUnit",
+            "_text": "minute"
+          }
+        ],
+        "_tag": "Quota",
+        "_text": ""
+      },
+      "raw_xml": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<Quota async=\"false\" continueOnError=\"false\" enabled=\"true\" name=\"Q-EnforceQuota\">\n    <DisplayName>Q-EnforceQuota</DisplayName>\n    <Allow count=\"10\" countRef=\"verifyapikey.VAK-VerifyKey.apiproduct.developer.quota.limit\"/>\n    <Interval ref=\"verifyapikey.VAK-VerifyKey.apiproduct.developer.quota.interval\">1</Interval>\n    <Distributed>true</Distributed>\n    <Synchronous>true</Synchronous>\n    <TimeUnit ref=\"verifyapikey.VAK-VerifyKey.apiproduct.developer.quota.timeunit\">minute</TimeUnit>\n</Quota>",
+      "resource_urls": []
+    },
+    "RF-InvalidAPIKeys": {
+      "enabled": true,
+      "name": "RF-InvalidAPIKeys",
+      "policy_type": "RaiseFault",
+      "raw_dict": {
+        "_attrs": {
+          "async": "false",
+          "continueOnError": "false",
+          "enabled": "true",
+          "name": "RF-InvalidAPIKeys"
+        },
+        "_children": [
+          {
+            "_attrs": {},
+            "_tag": "DisplayName",
+            "_text": "RF-InvalidAPIKeys"
+          },
+          {
+            "_attrs": {},
+            "_tag": "Properties",
+            "_text": ""
+          },
+          {
+            "_attrs": {},
+            "_tag": "FaultResponse",
+            "_text": ""
+          },
+          {
+            "_attrs": {},
+            "_tag": "IgnoreUnresolvedVariables",
+            "_text": "true"
+          }
+        ],
+        "_tag": "RaiseFault",
+        "_text": ""
+      },
+      "raw_xml": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<RaiseFault async=\"false\" continueOnError=\"false\" enabled=\"true\" name=\"RF-InvalidAPIKeys\">\n    <DisplayName>RF-InvalidAPIKeys</DisplayName>\n    <Properties/>\n    <FaultResponse>\n        <Set>\n            <Payload contentType=\"application/json\">\n            {\n              \"error\": {\n                \"developerMessage\": \"Unauthorized\",\n                \"userMessage\": \"Invalid API Key provided\",\n                \"errorCode\": \"401\"\n                }\n            }\n            </Payload>\n        </Set>\n    </FaultResponse>\n    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>\n</RaiseFault>",
+      "resource_urls": []
+    },
+    "SA-SpikeArrest": {
+      "enabled": true,
+      "name": "SA-SpikeArrest",
+      "policy_type": "SpikeArrest",
+      "raw_dict": {
+        "_attrs": {
+          "async": "false",
+          "continueOnError": "false",
+          "enabled": "true",
+          "name": "SA-SpikeArrest"
+        },
+        "_children": [
+          {
+            "_attrs": {},
+            "_tag": "DisplayName",
+            "_text": "SA-SpikeArrest"
+          },
+          {
+            "_attrs": {},
+            "_tag": "Properties",
+            "_text": ""
+          },
+          {
+            "_attrs": {},
+            "_tag": "Rate",
+            "_text": "30ps"
+          }
+        ],
+        "_tag": "SpikeArrest",
+        "_text": ""
+      },
+      "raw_xml": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<SpikeArrest async=\"false\" continueOnError=\"false\" enabled=\"true\" name=\"SA-SpikeArrest\">\n    <DisplayName>SA-SpikeArrest</DisplayName>\n    <Properties/>\n    <Rate>30ps</Rate>\n</SpikeArrest>",
+      "resource_urls": []
+    },
+    "VAK-VerifyKey": {
+      "enabled": true,
+      "name": "VAK-VerifyKey",
+      "policy_type": "VerifyAPIKey",
+      "raw_dict": {
+        "_attrs": {
+          "async": "false",
+          "continueOnError": "false",
+          "enabled": "true",
+          "name": "VAK-VerifyKey"
+        },
+        "_children": [
+          {
+            "_attrs": {},
+            "_tag": "DisplayName",
+            "_text": "VAK-VerifyKey"
+          },
+          {
+            "_attrs": {},
+            "_tag": "Properties",
+            "_text": ""
+          },
+          {
+            "_attrs": {
+              "ref": "request.header.x-api-key"
+            },
+            "_tag": "APIKey",
+            "_text": ""
+          }
+        ],
+        "_tag": "VerifyAPIKey",
+        "_text": ""
+      },
+      "raw_xml": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<VerifyAPIKey async=\"false\" continueOnError=\"false\" enabled=\"true\" name=\"VAK-VerifyKey\">\n    <DisplayName>VAK-VerifyKey</DisplayName>\n    <Properties/>\n    <APIKey ref=\"request.header.x-api-key\"/>\n</VerifyAPIKey>",
+      "resource_urls": []
+    }
+  },
+  "proxy_endpoints": [],
+  "resources": {},
+  "revision": "1",
+  "shared_flow_refs": [],
+  "target_endpoints": [],
+  "target_server_refs": [],
+  "type": "sharedflow"
+}

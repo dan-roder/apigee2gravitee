@@ -1,0 +1,28 @@
+{
+  "_meta": {
+    "artifactId": "env:kvm-2-unencrypted",
+    "artifactType": "kvm",
+    "blockers": [],
+    "extractedAt": "2026-04-06T21:03:44.645925Z",
+    "riskFlags": [],
+    "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/kvm/env/dev/kvm-2-unencrypted",
+    "warnings": []
+  },
+  "encrypted": false,
+  "entries": [
+    {
+      "name": "key-2",
+      "value": "key2-123"
+    },
+    {
+      "name": "key-3",
+      "value": "key3-456"
+    }
+  ],
+  "environment": "dev",
+  "meta": {
+    "source_path": "./data/kvm/env/dev/kvm-2-unencrypted"
+  },
+  "name": "kvm-2-unencrypted",
+  "scope": "env"
+}

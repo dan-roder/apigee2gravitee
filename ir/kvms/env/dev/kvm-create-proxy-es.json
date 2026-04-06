@@ -1,0 +1,28 @@
+{
+  "_meta": {
+    "artifactId": "env:kvm-create-proxy-es",
+    "artifactType": "kvm",
+    "blockers": [],
+    "extractedAt": "2026-04-06T21:03:44.645925Z",
+    "riskFlags": [],
+    "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/kvm/env/dev/kvm-create-proxy-es",
+    "warnings": []
+  },
+  "encrypted": false,
+  "entries": [
+    {
+      "name": "username",
+      "value": "erik-update"
+    },
+    {
+      "name": "password",
+      "value": "erik123-update"
+    }
+  ],
+  "environment": "dev",
+  "meta": {
+    "source_path": "./data/kvm/env/dev/kvm-create-proxy-es"
+  },
+  "name": "kvm-create-proxy-es",
+  "scope": "env"
+}

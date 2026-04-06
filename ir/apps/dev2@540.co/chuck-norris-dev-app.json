@@ -1,0 +1,45 @@
+{
+  "_meta": {
+    "artifactId": "dev2@540.co/chuck-norris-dev-app",
+    "artifactType": "app",
+    "blockers": [],
+    "extractedAt": "2026-04-06T21:03:44.645925Z",
+    "riskFlags": [],
+    "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/apps/dev2@540.co/chuck-norris-dev-app",
+    "warnings": []
+  },
+  "app_id": "a6a9d756-2851-4a04-9b4f-40e4f7dc3e59",
+  "attributes": [
+    {
+      "name": "DisplayName",
+      "value": "chuck-norris-dev-app"
+    },
+    {
+      "name": "Notes",
+      "value": ""
+    }
+  ],
+  "callback_url": "",
+  "credentials": [
+    {
+      "api_products": [
+        {
+          "apiproduct": "chuck-norris-api-product",
+          "status": "approved"
+        }
+      ],
+      "consumer_key": "3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3",
+      "consumer_secret_present": true,
+      "consumer_secret_ref": "_protected/credentials/dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/consumer-secret.txt",
+      "expires_at": -1,
+      "scopes": [],
+      "status": "approved"
+    }
+  ],
+  "developer_email": "dev2@540.co",
+  "meta": {
+    "source_path": "./data/apps/dev2@540.co/chuck-norris-dev-app"
+  },
+  "name": "chuck-norris-dev-app",
+  "status": "approved"
+}

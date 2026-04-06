@@ -1,0 +1,379 @@
+{
+  "_meta": {
+    "artifactId": "SF06-sf-advana-dsu_rev7",
+    "artifactType": "sharedflow",
+    "blockers": [],
+    "extractedAt": "2026-04-06T21:03:44.645925Z",
+    "riskFlags": [],
+    "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/sharedflows/SF06-sf-advana-dsu_rev7.zip",
+    "warnings": []
+  },
+  "base_path": "",
+  "description": "undefined",
+  "display_name": "sf-advana-dsu",
+  "kvm_refs": [
+    {
+      "flagged": false,
+      "map_identifier": "Advana-Token-Map",
+      "operations": [
+        "Get"
+      ],
+      "policy_name": "KVM-Advana-Token",
+      "scope": "apiproxy"
+    }
+  ],
+  "meta": {
+    "parsed_at": "2026-04-06T21:03:44.654485Z",
+    "source_zip": "/Users/daniel.roder/Sites/apigee2gravitee/data/sharedflows/SF06-sf-advana-dsu_rev7.zip"
+  },
+  "name": "SF06-sf-advana-dsu_rev7",
+  "policies": {
+    "AM-Advana-Auth-Header": {
+      "enabled": true,
+      "name": "AM-Advana-Auth-Header",
+      "policy_type": "AssignMessage",
+      "raw_dict": {
+        "_attrs": {
+          "async": "false",
+          "continueOnError": "false",
+          "enabled": "true",
+          "name": "AM-Advana-Auth-Header"
+        },
+        "_children": [
+          {
+            "_attrs": {},
+            "_tag": "DisplayName",
+            "_text": "AM-Advana-Auth-Header"
+          },
+          {
+            "_attrs": {},
+            "_tag": "Properties",
+            "_text": ""
+          },
+          {
+            "_attrs": {},
+            "_tag": "Set",
+            "_text": ""
+          },
+          {
+            "_attrs": {},
+            "_tag": "IgnoreUnresolvedVariables",
+            "_text": "true"
+          },
+          {
+            "_attrs": {
+              "createNew": "false",
+              "transport": "http",
+              "type": "request"
+            },
+            "_tag": "AssignTo",
+            "_text": ""
+          }
+        ],
+        "_tag": "AssignMessage",
+        "_text": ""
+      },
+      "raw_xml": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<AssignMessage async=\"false\" continueOnError=\"false\" enabled=\"true\" name=\"AM-Advana-Auth-Header\">\n    <DisplayName>AM-Advana-Auth-Header</DisplayName>\n    <Properties/>\n    <Set>\n        <Headers>\n            <Header name=\"Authorization\">Bearer {advanaToken}</Header>\n        </Headers>\n    </Set>\n    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>\n    <AssignTo createNew=\"false\" transport=\"http\" type=\"request\"/>\n</AssignMessage>",
+      "resource_urls": []
+    },
+    "EV-AdvanaTokenResponse": {
+      "enabled": true,
+      "name": "EV-AdvanaTokenResponse",
+      "policy_type": "ExtractVariables",
+      "raw_dict": {
+        "_attrs": {
+          "async": "false",
+          "continueOnError": "false",
+          "enabled": "true",
+          "name": "EV-AdvanaTokenResponse"
+        },
+        "_children": [
+          {
+            "_attrs": {},
+            "_tag": "DisplayName",
+            "_text": "EV-AdvanaTokenResponse"
+          },
+          {
+            "_attrs": {},
+            "_tag": "Properties",
+            "_text": ""
+          },
+          {
+            "_attrs": {},
+            "_tag": "IgnoreUnresolvedVariables",
+            "_text": "true"
+          },
+          {
+            "_attrs": {},
+            "_tag": "JSONPayload",
+            "_text": ""
+          },
+          {
+            "_attrs": {},
+            "_tag": "Source",
+            "_text": "advanaTokenResponse.content"
+          }
+        ],
+        "_tag": "ExtractVariables",
+        "_text": ""
+      },
+      "raw_xml": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<ExtractVariables async=\"false\" continueOnError=\"false\" enabled=\"true\" name=\"EV-AdvanaTokenResponse\">\n    <DisplayName>EV-AdvanaTokenResponse</DisplayName>\n    <Properties/>\n    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>\n    <JSONPayload>\n        <Variable name=\"advanaToken\">\n            <JSONPath>$.access_token</JSONPath>\n        </Variable>\n        <Variable name=\"expiryTime\">\n            <JSONPath>$.expires_in</JSONPath>\n        </Variable>\n    </JSONPayload>\n    <Source>advanaTokenResponse.content</Source>\n</ExtractVariables>",
+      "resource_urls": []
+    },
+    "JS-CacheExpiry": {
+      "enabled": true,
+      "name": "JS-CacheExpiry",
+      "policy_type": "Javascript",
+      "raw_dict": {
+        "_attrs": {
+          "async": "false",
+          "continueOnError": "false",
+          "enabled": "true",
+          "name": "JS-CacheExpiry",
+          "timeLimit": "200"
+        },
+        "_children": [
+          {
+            "_attrs": {},
+            "_tag": "DisplayName",
+            "_text": "JS-CacheExpiry"
+          },
+          {
+            "_attrs": {},
+            "_tag": "Properties",
+            "_text": ""
+          },
+          {
+            "_attrs": {},
+            "_tag": "ResourceURL",
+            "_text": "jsc://CacheExpiry.js"
+          }
+        ],
+        "_tag": "Javascript",
+        "_text": ""
+      },
+      "raw_xml": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<Javascript async=\"false\" continueOnError=\"false\" enabled=\"true\" timeLimit=\"200\" name=\"JS-CacheExpiry\">\n    <DisplayName>JS-CacheExpiry</DisplayName>\n    <Properties/>\n    <ResourceURL>jsc://CacheExpiry.js</ResourceURL>\n</Javascript>\n",
+      "resource_urls": [
+        "jsc/CacheExpiry.js"
+      ]
+    },
+    "KVM-Advana-Token": {
+      "enabled": true,
+      "name": "KVM-Advana-Token",
+      "policy_type": "KeyValueMapOperations",
+      "raw_dict": {
+        "_attrs": {
+          "async": "false",
+          "continueOnError": "false",
+          "enabled": "true",
+          "mapIdentifier": "Advana-Token-Map",
+          "name": "KVM-Advana-Token"
+        },
+        "_children": [
+          {
+            "_attrs": {},
+            "_tag": "DisplayName",
+            "_text": "KVM-Advana-Token"
+          },
+          {
+            "_attrs": {},
+            "_tag": "Properties",
+            "_text": ""
+          },
+          {
+            "_attrs": {
+              "assignTo": "private.advana_client_id",
+              "index": "1"
+            },
+            "_tag": "Get",
+            "_text": ""
+          },
+          {
+            "_attrs": {
+              "assignTo": "private.advana_client_secret",
+              "index": "1"
+            },
+            "_tag": "Get",
+            "_text": ""
+          },
+          {
+            "_attrs": {
+              "assignTo": "private.advana_scopes",
+              "index": "1"
+            },
+            "_tag": "Get",
+            "_text": ""
+          },
+          {
+            "_attrs": {},
+            "_tag": "Scope",
+            "_text": "environment"
+          }
+        ],
+        "_tag": "KeyValueMapOperations",
+        "_text": ""
+      },
+      "raw_xml": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<KeyValueMapOperations async=\"false\" continueOnError=\"false\" enabled=\"true\" name=\"KVM-Advana-Token\" mapIdentifier=\"Advana-Token-Map\">\n    <DisplayName>KVM-Advana-Token</DisplayName>\n    <Properties/>\n    <Get assignTo=\"private.advana_client_id\" index=\"1\">\n        <Key>\n            <Parameter>advana_client_id</Parameter>\n        </Key>\n    </Get>\n    <Get assignTo=\"private.advana_client_secret\" index=\"1\">\n        <Key>\n            <Parameter>advana_client_secret</Parameter>\n        </Key>\n    </Get>\n    <Get assignTo=\"private.advana_scopes\" index=\"1\">\n        <Key>\n            <Parameter>advana_client_scopes</Parameter>\n        </Key>\n    </Get>\n    <Scope>environment</Scope>\n</KeyValueMapOperations>",
+      "resource_urls": []
+    },
+    "LC-Advana-Token": {
+      "enabled": true,
+      "name": "LC-Advana-Token",
+      "policy_type": "LookupCache",
+      "raw_dict": {
+        "_attrs": {
+          "async": "false",
+          "continueOnError": "false",
+          "enabled": "true",
+          "name": "LC-Advana-Token"
+        },
+        "_children": [
+          {
+            "_attrs": {},
+            "_tag": "DisplayName",
+            "_text": "LC-Advana-Token"
+          },
+          {
+            "_attrs": {},
+            "_tag": "Properties",
+            "_text": ""
+          },
+          {
+            "_attrs": {},
+            "_tag": "CacheKey",
+            "_text": ""
+          },
+          {
+            "_attrs": {},
+            "_tag": "CacheResource",
+            "_text": "advana-token-cache"
+          },
+          {
+            "_attrs": {},
+            "_tag": "Scope",
+            "_text": "Exclusive"
+          },
+          {
+            "_attrs": {},
+            "_tag": "AssignTo",
+            "_text": "advanaToken"
+          }
+        ],
+        "_tag": "LookupCache",
+        "_text": ""
+      },
+      "raw_xml": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<LookupCache async=\"false\" continueOnError=\"false\" enabled=\"true\" name=\"LC-Advana-Token\">\n    <DisplayName>LC-Advana-Token</DisplayName>\n    <Properties/>\n    <CacheKey>\n        <Prefix/>\n        <KeyFragment ref=\"client_id\"/>\n    </CacheKey>\n    <CacheResource>advana-token-cache</CacheResource>\n    <Scope>Exclusive</Scope>\n    <AssignTo>advanaToken</AssignTo>\n</LookupCache>",
+      "resource_urls": []
+    },
+    "PC-Advana-Token": {
+      "enabled": true,
+      "name": "PC-Advana-Token",
+      "policy_type": "PopulateCache",
+      "raw_dict": {
+        "_attrs": {
+          "async": "false",
+          "continueOnError": "false",
+          "enabled": "true",
+          "name": "PC-Advana-Token"
+        },
+        "_children": [
+          {
+            "_attrs": {},
+            "_tag": "DisplayName",
+            "_text": "PC-Advana-Token"
+          },
+          {
+            "_attrs": {},
+            "_tag": "Properties",
+            "_text": ""
+          },
+          {
+            "_attrs": {},
+            "_tag": "CacheKey",
+            "_text": ""
+          },
+          {
+            "_attrs": {},
+            "_tag": "CacheResource",
+            "_text": "advana-token-cache"
+          },
+          {
+            "_attrs": {},
+            "_tag": "Scope",
+            "_text": "Exclusive"
+          },
+          {
+            "_attrs": {},
+            "_tag": "ExpirySettings",
+            "_text": ""
+          },
+          {
+            "_attrs": {},
+            "_tag": "Source",
+            "_text": "advanaToken"
+          }
+        ],
+        "_tag": "PopulateCache",
+        "_text": ""
+      },
+      "raw_xml": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<PopulateCache async=\"false\" continueOnError=\"false\" enabled=\"true\" name=\"PC-Advana-Token\">\n    <DisplayName>PC-Advana-Token</DisplayName>\n    <Properties/>\n    <CacheKey>\n        <Prefix/>\n        <KeyFragment ref=\"client_id\"/>\n    </CacheKey>\n    <CacheResource>advana-token-cache</CacheResource>\n    <Scope>Exclusive</Scope>\n    <ExpirySettings>\n        <TimeoutInSeconds ref=\"expiryTime\"/>\n        <!--set to 9 minutes.-->\n        <!--Set the cache expiry time slightly lower than the backend token expiry time-->\n    </ExpirySettings>\n    <Source>advanaToken</Source>\n</PopulateCache>",
+      "resource_urls": []
+    },
+    "SC-Advana-Token": {
+      "enabled": true,
+      "name": "SC-Advana-Token",
+      "policy_type": "ServiceCallout",
+      "raw_dict": {
+        "_attrs": {
+          "async": "false",
+          "continueOnError": "false",
+          "enabled": "true",
+          "name": "SC-Advana-Token"
+        },
+        "_children": [
+          {
+            "_attrs": {},
+            "_tag": "DisplayName",
+            "_text": "SC-Advana-Token"
+          },
+          {
+            "_attrs": {},
+            "_tag": "Properties",
+            "_text": ""
+          },
+          {
+            "_attrs": {
+              "clearPayload": "true",
+              "variable": "myRequest"
+            },
+            "_tag": "Request",
+            "_text": ""
+          },
+          {
+            "_attrs": {},
+            "_tag": "Response",
+            "_text": "advanaTokenResponse"
+          },
+          {
+            "_attrs": {},
+            "_tag": "HTTPTargetConnection",
+            "_text": ""
+          }
+        ],
+        "_tag": "ServiceCallout",
+        "_text": ""
+      },
+      "raw_xml": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<ServiceCallout async=\"false\" continueOnError=\"false\" enabled=\"true\" name=\"SC-Advana-Token\">\n    <DisplayName>SC-Advana-Token</DisplayName>\n    <Properties/>\n    <Request clearPayload=\"true\" variable=\"myRequest\">\n        <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>\n        <Set>\n            <FormParams>\n                <FormParam name=\"client_id\">{private.advana_client_id}</FormParam>\n                <FormParam name=\"client_secret\">{private.advana_client_secret}</FormParam>\n                <!--<FormParam name=\"scope\">{private.advana_scopes}</FormParam>-->\n                <FormParam name=\"grant_type\">client_credentials</FormParam>\n            </FormParams>\n        </Set>\n    </Request>\n    <Response>advanaTokenResponse</Response>\n    <HTTPTargetConnection>\n        <URL>https://catalog.advana.data.mil/auth/sessions</URL>\n        <Properties/>\n    </HTTPTargetConnection>\n</ServiceCallout>",
+      "resource_urls": []
+    }
+  },
+  "proxy_endpoints": [],
+  "resources": {
+    "jsc/CacheExpiry.js": "var expiryTime= context.getVariable(\"expiryTime\");\nexpiryTime = expiryTime - 60;\nexpiryTime = (parseInt(expiryTime, 10) +1).toFixed(0);\ncontext.setVariable(\"expiryTime\", expiryTime);"
+  },
+  "revision": "1",
+  "shared_flow_refs": [],
+  "target_endpoints": [],
+  "target_server_refs": [],
+  "type": "sharedflow"
+}

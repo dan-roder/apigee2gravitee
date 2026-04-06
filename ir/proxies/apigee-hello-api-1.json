@@ -1,0 +1,121 @@
+{
+  "_meta": {
+    "artifactId": "apigee-hello-api-1",
+    "artifactType": "proxy",
+    "blockers": [],
+    "extractedAt": "2026-04-06T21:03:44.645925Z",
+    "riskFlags": [],
+    "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/proxies/apigee-hello-api-1.zip",
+    "warnings": [
+      "SHAREDFLOW_REFERENCE",
+      "MANUAL_SHARED_POLICY_GROUP_MAPPING_REQUIRED"
+    ]
+  },
+  "base_path": "",
+  "description": "return apigee hello",
+  "display_name": "apigee-hello-api-1",
+  "kvm_refs": [],
+  "meta": {
+    "parsed_at": "2026-04-06T21:03:44.648116Z",
+    "source_zip": "/Users/daniel.roder/Sites/apigee2gravitee/data/proxies/apigee-hello-api-1.zip"
+  },
+  "name": "apigee-hello-api-1",
+  "policies": {
+    "FC-SharedFlow-SpikeArrest": {
+      "enabled": true,
+      "name": "FC-SharedFlow-SpikeArrest",
+      "policy_type": "FlowCallout",
+      "raw_dict": {
+        "_attrs": {
+          "async": "false",
+          "continueOnError": "false",
+          "enabled": "true",
+          "name": "FC-SharedFlow-SpikeArrest"
+        },
+        "_children": [
+          {
+            "_attrs": {},
+            "_tag": "DisplayName",
+            "_text": "FC-SharedFlow-SpikeArrest"
+          },
+          {
+            "_attrs": {},
+            "_tag": "FaultRules",
+            "_text": ""
+          },
+          {
+            "_attrs": {},
+            "_tag": "Properties",
+            "_text": ""
+          },
+          {
+            "_attrs": {},
+            "_tag": "SharedFlowBundle",
+            "_text": "SF-Shared-Flow-Test-SpikeArrest"
+          }
+        ],
+        "_tag": "FlowCallout",
+        "_text": ""
+      },
+      "raw_xml": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<FlowCallout async=\"false\" continueOnError=\"false\" enabled=\"true\" name=\"FC-SharedFlow-SpikeArrest\">\n    <DisplayName>FC-SharedFlow-SpikeArrest</DisplayName>\n    <FaultRules/>\n    <Properties/>\n    <SharedFlowBundle>SF-Shared-Flow-Test-SpikeArrest</SharedFlowBundle>\n</FlowCallout>\n",
+      "resource_urls": []
+    }
+  },
+  "proxy_endpoints": [
+    {
+      "connection": {
+        "base_path": "/apigee-hello-api-1",
+        "virtual_hosts": [
+          "api-grover"
+        ]
+      },
+      "flows": [],
+      "name": "default",
+      "post_flow": {
+        "request": [],
+        "response": []
+      },
+      "pre_flow": {
+        "request": [
+          {
+            "condition": "",
+            "name": "FC-SharedFlow-SpikeArrest"
+          }
+        ],
+        "response": []
+      },
+      "route_rules": [
+        {
+          "condition": "",
+          "name": "default",
+          "target": "default"
+        }
+      ]
+    }
+  ],
+  "resources": {},
+  "revision": "1",
+  "shared_flow_refs": [
+    "SF-Shared-Flow-Test-SpikeArrest"
+  ],
+  "target_endpoints": [
+    {
+      "connection": {
+        "properties": {},
+        "url": "https://mocktarget.apigee.net/"
+      },
+      "flows": [],
+      "name": "default",
+      "post_flow": {
+        "request": [],
+        "response": []
+      },
+      "pre_flow": {
+        "request": [],
+        "response": []
+      }
+    }
+  ],
+  "target_server_refs": [],
+  "type": "proxy"
+}

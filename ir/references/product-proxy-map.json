@@ -1,0 +1,54 @@
+{
+  "items": [
+    {
+      "productName": "cats-api-product",
+      "referencedProxies": [
+        "cats-api-7"
+      ]
+    },
+    {
+      "productName": "chuck-norris-api-product",
+      "referencedProxies": [
+        "chuck-norris-api-10"
+      ]
+    },
+    {
+      "productName": "dog-breeds-api-product",
+      "referencedProxies": [
+        "dog-breeds-api-6"
+      ]
+    },
+    {
+      "productName": "hogwarts-houses-api-product",
+      "referencedProxies": [
+        "hogwarts-houses-api-8"
+      ]
+    },
+    {
+      "productName": "kanye-api-product",
+      "referencedProxies": [
+        "kanye-rest-api-5"
+      ]
+    },
+    {
+      "productName": "misc-api-product",
+      "referencedProxies": [
+        "apigee-hello-api-1",
+        "car-makes-api-3",
+        "cat-fact-api-2"
+      ]
+    },
+    {
+      "productName": "wizards-api-product",
+      "referencedProxies": [
+        "wizards-api-9"
+      ]
+    },
+    {
+      "productName": "yes-or-no-api-product",
+      "referencedProxies": [
+        "yes-or-no-api-4"
+      ]
+    }
+  ]
+}

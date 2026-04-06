@@ -1,0 +1,110 @@
+{
+  "_meta": {
+    "artifactId": "SF02-advana-security-preflow",
+    "artifactType": "sharedflow",
+    "blockers": [],
+    "extractedAt": "2026-04-06T21:03:44.645925Z",
+    "riskFlags": [],
+    "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/sharedflows/SF02-advana-security-preflow.zip",
+    "warnings": []
+  },
+  "base_path": "",
+  "description": "Complete Advana API Preflow Security FlowHook Policies",
+  "display_name": "advana-security-preflow",
+  "kvm_refs": [],
+  "meta": {
+    "parsed_at": "2026-04-06T21:03:44.653583Z",
+    "source_zip": "/Users/daniel.roder/Sites/apigee2gravitee/data/sharedflows/SF02-advana-security-preflow.zip"
+  },
+  "name": "SF02-advana-security-preflow",
+  "policies": {
+    "advana-cors": {
+      "enabled": true,
+      "name": "advana-cors",
+      "policy_type": "FlowCallout",
+      "raw_dict": {
+        "_attrs": {
+          "async": "false",
+          "continueOnError": "false",
+          "enabled": "true",
+          "name": "advana-cors"
+        },
+        "_children": [
+          {
+            "_attrs": {},
+            "_tag": "DisplayName",
+            "_text": "advana-cors"
+          },
+          {
+            "_attrs": {},
+            "_tag": "FaultRules",
+            "_text": ""
+          },
+          {
+            "_attrs": {},
+            "_tag": "Properties",
+            "_text": ""
+          },
+          {
+            "_attrs": {},
+            "_tag": "SharedFlowBundle",
+            "_text": "advana-cors"
+          }
+        ],
+        "_tag": "FlowCallout",
+        "_text": ""
+      },
+      "raw_xml": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<FlowCallout async=\"false\" continueOnError=\"false\" enabled=\"true\" name=\"advana-cors\">\n    <DisplayName>advana-cors</DisplayName>\n    <FaultRules/>\n    <Properties/>\n    <SharedFlowBundle>advana-cors</SharedFlowBundle>\n</FlowCallout>\n",
+      "resource_urls": []
+    },
+    "advana-traffic-security": {
+      "enabled": true,
+      "name": "advana-traffic-security",
+      "policy_type": "FlowCallout",
+      "raw_dict": {
+        "_attrs": {
+          "async": "false",
+          "continueOnError": "false",
+          "enabled": "true",
+          "name": "advana-traffic-security"
+        },
+        "_children": [
+          {
+            "_attrs": {},
+            "_tag": "DisplayName",
+            "_text": "advana-traffic-security"
+          },
+          {
+            "_attrs": {},
+            "_tag": "FaultRules",
+            "_text": ""
+          },
+          {
+            "_attrs": {},
+            "_tag": "Properties",
+            "_text": ""
+          },
+          {
+            "_attrs": {},
+            "_tag": "SharedFlowBundle",
+            "_text": "advana-traffic-security"
+          }
+        ],
+        "_tag": "FlowCallout",
+        "_text": ""
+      },
+      "raw_xml": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<FlowCallout async=\"false\" continueOnError=\"false\" enabled=\"true\" name=\"advana-traffic-security\">\n    <DisplayName>advana-traffic-security</DisplayName>\n    <FaultRules/>\n    <Properties/>\n    <SharedFlowBundle>advana-traffic-security</SharedFlowBundle>\n</FlowCallout>\n",
+      "resource_urls": []
+    }
+  },
+  "proxy_endpoints": [],
+  "resources": {},
+  "revision": "1",
+  "shared_flow_refs": [
+    "advana-cors",
+    "advana-traffic-security"
+  ],
+  "target_endpoints": [],
+  "target_server_refs": [],
+  "type": "sharedflow"
+}

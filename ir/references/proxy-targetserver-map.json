@@ -1,0 +1,105 @@
+{
+  "items": [
+    {
+      "proxyName": "KVM-Create",
+      "targetServers": []
+    },
+    {
+      "proxyName": "KVM-Reader",
+      "targetServers": []
+    },
+    {
+      "proxyName": "KVM-Update",
+      "targetServers": []
+    },
+    {
+      "proxyName": "admin-kvm-export",
+      "targetServers": []
+    },
+    {
+      "proxyName": "apigee-hello",
+      "targetServers": []
+    },
+    {
+      "proxyName": "apigee-hello-api-1",
+      "targetServers": []
+    },
+    {
+      "proxyName": "car-makes-api-3",
+      "targetServers": []
+    },
+    {
+      "proxyName": "cat-fact-api-2",
+      "targetServers": []
+    },
+    {
+      "proxyName": "cats-api-7",
+      "targetServers": []
+    },
+    {
+      "proxyName": "chuck-norris-api-10",
+      "targetServers": []
+    },
+    {
+      "proxyName": "dog-breeds-api-6",
+      "targetServers": []
+    },
+    {
+      "proxyName": "get-kvm-proxy",
+      "targetServers": []
+    },
+    {
+      "proxyName": "harry-potter-characters",
+      "targetServers": []
+    },
+    {
+      "proxyName": "hogwarts-houses-api-8",
+      "targetServers": []
+    },
+    {
+      "proxyName": "kanye-rest-api-5",
+      "targetServers": []
+    },
+    {
+      "proxyName": "kvm-test",
+      "targetServers": []
+    },
+    {
+      "proxyName": "load-balance-target-servers-api",
+      "targetServers": [
+        {
+          "resolved": true,
+          "targetServerName": "lb1-mock"
+        },
+        {
+          "resolved": true,
+          "targetServerName": "lb2-mock"
+        }
+      ]
+    },
+    {
+      "proxyName": "mock-target-api",
+      "targetServers": []
+    },
+    {
+      "proxyName": "proxy-sharedflow-api-11",
+      "targetServers": []
+    },
+    {
+      "proxyName": "v1-ships",
+      "targetServers": []
+    },
+    {
+      "proxyName": "villian-chain",
+      "targetServers": []
+    },
+    {
+      "proxyName": "wizards-api-9",
+      "targetServers": []
+    },
+    {
+      "proxyName": "yes-or-no-api-4",
+      "targetServers": []
+    }
+  ]
+}

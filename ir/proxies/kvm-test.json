@@ -1,0 +1,140 @@
+{
+  "_meta": {
+    "artifactId": "kvm-test",
+    "artifactType": "proxy",
+    "blockers": [],
+    "extractedAt": "2026-04-06T21:03:44.645925Z",
+    "riskFlags": [],
+    "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/proxies/kvm-test.zip",
+    "warnings": []
+  },
+  "base_path": "",
+  "description": "",
+  "display_name": "kvm-test",
+  "kvm_refs": [
+    {
+      "flagged": false,
+      "map_identifier": "working-kvm-encrypted",
+      "operations": [
+        "Get"
+      ],
+      "policy_name": "KVM-GetCredentials",
+      "scope": "apiproxy"
+    }
+  ],
+  "meta": {
+    "parsed_at": "2026-04-06T21:03:44.650438Z",
+    "source_zip": "/Users/daniel.roder/Sites/apigee2gravitee/data/proxies/kvm-test.zip"
+  },
+  "name": "kvm-test",
+  "policies": {
+    "AM-TestResponse": {
+      "enabled": true,
+      "name": "AM-TestResponse",
+      "policy_type": "AssignMessage",
+      "raw_dict": {
+        "_attrs": {
+          "name": "AM-TestResponse"
+        },
+        "_children": [
+          {
+            "_attrs": {},
+            "_tag": "Set",
+            "_text": ""
+          },
+          {
+            "_attrs": {},
+            "_tag": "IgnoreUnresolvedVariables",
+            "_text": "true"
+          },
+          {
+            "_attrs": {
+              "createNew": "false",
+              "transport": "http",
+              "type": "response"
+            },
+            "_tag": "AssignTo",
+            "_text": ""
+          }
+        ],
+        "_tag": "AssignMessage",
+        "_text": ""
+      },
+      "raw_xml": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<AssignMessage name=\"AM-TestResponse\">\n    <Set>\n        <Payload contentType=\"application/json\"><![CDATA[{\n  \"kvm_test\": \"success\",\n  \"username_retrieved\": \"{private.username}\",\n  \"password_exists\": \"{private.password}\",\n  \"organization\": \"{organization.name}\",\n  \"environment\": \"{environment.name}\"\n}]]></Payload>\n    </Set>\n    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>\n    <AssignTo createNew=\"false\" transport=\"http\" type=\"response\"/>\n</AssignMessage>",
+      "resource_urls": []
+    },
+    "KVM-GetCredentials": {
+      "enabled": true,
+      "name": "KVM-GetCredentials",
+      "policy_type": "KeyValueMapOperations",
+      "raw_dict": {
+        "_attrs": {
+          "mapIdentifier": "working-kvm-encrypted",
+          "name": "KVM-GetCredentials"
+        },
+        "_children": [
+          {
+            "_attrs": {
+              "assignTo": "private.username"
+            },
+            "_tag": "Get",
+            "_text": ""
+          },
+          {
+            "_attrs": {
+              "assignTo": "private.password"
+            },
+            "_tag": "Get",
+            "_text": ""
+          }
+        ],
+        "_tag": "KeyValueMapOperations",
+        "_text": ""
+      },
+      "raw_xml": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<KeyValueMapOperations name=\"KVM-GetCredentials\" mapIdentifier=\"working-kvm-encrypted\">\n    <Get assignTo=\"private.username\">\n        <Key>\n            <Parameter>username</Parameter>\n        </Key>\n    </Get>\n    <Get assignTo=\"private.password\">\n        <Key>\n            <Parameter>password</Parameter>\n        </Key>\n    </Get>\n</KeyValueMapOperations>",
+      "resource_urls": []
+    }
+  },
+  "proxy_endpoints": [
+    {
+      "connection": {
+        "base_path": "/kvm-test",
+        "virtual_hosts": [
+          "api-grover"
+        ]
+      },
+      "flows": [],
+      "name": "default",
+      "post_flow": {
+        "request": [],
+        "response": []
+      },
+      "pre_flow": {
+        "request": [
+          {
+            "condition": "",
+            "name": "KVM-GetCredentials"
+          },
+          {
+            "condition": "",
+            "name": "AM-TestResponse"
+          }
+        ],
+        "response": []
+      },
+      "route_rules": [
+        {
+          "condition": "",
+          "name": "noroute",
+          "target": ""
+        }
+      ]
+    }
+  ],
+  "resources": {},
+  "revision": "2",
+  "shared_flow_refs": [],
+  "target_endpoints": [],
+  "target_server_refs": [],
+  "type": "proxy"
+}

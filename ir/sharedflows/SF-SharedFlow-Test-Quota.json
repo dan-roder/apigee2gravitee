@@ -1,0 +1,90 @@
+{
+  "_meta": {
+    "artifactId": "SF-SharedFlow-Test-Quota",
+    "artifactType": "sharedflow",
+    "blockers": [],
+    "extractedAt": "2026-04-06T21:03:44.645925Z",
+    "riskFlags": [],
+    "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/sharedflows/SF-SharedFlow-Test-Quota.zip",
+    "warnings": []
+  },
+  "base_path": "",
+  "description": "",
+  "display_name": "SF-SharedFlow-Test-Quota",
+  "kvm_refs": [],
+  "meta": {
+    "parsed_at": "2026-04-06T21:03:44.652406Z",
+    "source_zip": "/Users/daniel.roder/Sites/apigee2gravitee/data/sharedflows/SF-SharedFlow-Test-Quota.zip"
+  },
+  "name": "SF-SharedFlow-Test-Quota",
+  "policies": {
+    "Quota-SF-Test": {
+      "enabled": true,
+      "name": "Quota-SF-Test",
+      "policy_type": "Quota",
+      "raw_dict": {
+        "_attrs": {
+          "async": "false",
+          "continueOnError": "false",
+          "enabled": "true",
+          "name": "Quota-SF-Test"
+        },
+        "_children": [
+          {
+            "_attrs": {},
+            "_tag": "DisplayName",
+            "_text": "Quota-SF-Test"
+          },
+          {
+            "_attrs": {},
+            "_tag": "Properties",
+            "_text": ""
+          },
+          {
+            "_attrs": {
+              "count": "3",
+              "countRef": "request.header.allowed_quota"
+            },
+            "_tag": "Allow",
+            "_text": ""
+          },
+          {
+            "_attrs": {
+              "ref": "request.header.quota_count"
+            },
+            "_tag": "Interval",
+            "_text": "1"
+          },
+          {
+            "_attrs": {},
+            "_tag": "Distributed",
+            "_text": "true"
+          },
+          {
+            "_attrs": {},
+            "_tag": "Synchronous",
+            "_text": "true"
+          },
+          {
+            "_attrs": {
+              "ref": "request.header.quota_timeout"
+            },
+            "_tag": "TimeUnit",
+            "_text": "minute"
+          }
+        ],
+        "_tag": "Quota",
+        "_text": ""
+      },
+      "raw_xml": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<Quota async=\"false\" continueOnError=\"false\" enabled=\"true\" name=\"Quota-SF-Test\">\n    <DisplayName>Quota-SF-Test</DisplayName>\n    <Properties/>\n    <Allow count=\"3\" countRef=\"request.header.allowed_quota\"/>\n    <Interval ref=\"request.header.quota_count\">1</Interval>\n    <Distributed>true</Distributed>\n    <Synchronous>true</Synchronous>\n    <TimeUnit ref=\"request.header.quota_timeout\">minute</TimeUnit>\n</Quota>",
+      "resource_urls": []
+    }
+  },
+  "proxy_endpoints": [],
+  "resources": {},
+  "revision": "1",
+  "shared_flow_refs": [],
+  "target_endpoints": [],
+  "target_server_refs": [],
+  "type": "sharedflow"
+}

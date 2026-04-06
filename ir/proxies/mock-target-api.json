@@ -1,0 +1,274 @@
+{
+  "_meta": {
+    "artifactId": "mock-target-api",
+    "artifactType": "proxy",
+    "blockers": [],
+    "extractedAt": "2026-04-06T21:03:44.645925Z",
+    "riskFlags": [],
+    "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/proxies/mock-target-api.zip",
+    "warnings": []
+  },
+  "base_path": "",
+  "description": "test proxy",
+  "display_name": "mock-target-api",
+  "kvm_refs": [
+    {
+      "flagged": false,
+      "map_identifier": "secret-passwords",
+      "operations": [
+        "Get"
+      ],
+      "policy_name": "GetKVM",
+      "scope": "apiproxy"
+    }
+  ],
+  "meta": {
+    "parsed_at": "2026-04-06T21:03:44.650897Z",
+    "source_zip": "/Users/daniel.roder/Sites/apigee2gravitee/data/proxies/mock-target-api.zip"
+  },
+  "name": "mock-target-api",
+  "policies": {
+    "Assign-Message-1": {
+      "enabled": true,
+      "name": "Assign-Message-1",
+      "policy_type": "AssignMessage",
+      "raw_dict": {
+        "_attrs": {
+          "async": "false",
+          "continueOnError": "false",
+          "enabled": "true",
+          "name": "Assign-Message-1"
+        },
+        "_children": [
+          {
+            "_attrs": {},
+            "_tag": "DisplayName",
+            "_text": "Assign Message-1"
+          },
+          {
+            "_attrs": {},
+            "_tag": "Properties",
+            "_text": ""
+          },
+          {
+            "_attrs": {
+              "source": "request"
+            },
+            "_tag": "Copy",
+            "_text": ""
+          },
+          {
+            "_attrs": {},
+            "_tag": "Remove",
+            "_text": ""
+          },
+          {
+            "_attrs": {},
+            "_tag": "Add",
+            "_text": ""
+          },
+          {
+            "_attrs": {},
+            "_tag": "Set",
+            "_text": ""
+          },
+          {
+            "_attrs": {},
+            "_tag": "AssignVariable",
+            "_text": ""
+          },
+          {
+            "_attrs": {},
+            "_tag": "IgnoreUnresolvedVariables",
+            "_text": "true"
+          },
+          {
+            "_attrs": {
+              "createNew": "false",
+              "transport": "http",
+              "type": "request"
+            },
+            "_tag": "AssignTo",
+            "_text": ""
+          }
+        ],
+        "_tag": "AssignMessage",
+        "_text": ""
+      },
+      "raw_xml": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<AssignMessage async=\"false\" continueOnError=\"false\" enabled=\"true\" name=\"Assign-Message-1\">\n    <DisplayName>Assign Message-1</DisplayName>\n    <Properties/>\n    <Copy source=\"request\">\n        <Headers/>\n        <QueryParams/>\n        <FormParams/>\n        <Payload/>\n        <Verb/>\n        <StatusCode/>\n        <ReasonPhrase/>\n        <Path/>\n    </Copy>\n    <Remove>\n        <Headers>\n            <Header name=\"h1\"/>\n        </Headers>\n        <QueryParams>\n            <QueryParam name=\"q1\"/>\n        </QueryParams>\n        <FormParams>\n            <FormParam name=\"f1\"/>\n        </FormParams>\n        <Payload/>\n    </Remove>\n    <Add>\n        <Headers/>\n        <QueryParams/>\n        <FormParams/>\n    </Add>\n    <Set>\n        <Headers/>\n        <QueryParams/>\n        <FormParams/>\n        <!-- <Verb>GET</Verb> -->\n        <Path/>\n    </Set>\n    <AssignVariable>\n        <Name>name</Name>\n        <Value/>\n        <Ref/>\n    </AssignVariable>\n    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>\n    <AssignTo createNew=\"false\" transport=\"http\" type=\"request\"/>\n</AssignMessage>",
+      "resource_urls": []
+    },
+    "Assign-MockResponse": {
+      "enabled": true,
+      "name": "Assign-MockResponse",
+      "policy_type": "AssignMessage",
+      "raw_dict": {
+        "_attrs": {
+          "async": "false",
+          "continueOnError": "false",
+          "enabled": "true",
+          "name": "Assign-MockResponse"
+        },
+        "_children": [
+          {
+            "_attrs": {},
+            "_tag": "DisplayName",
+            "_text": "mockResponse"
+          },
+          {
+            "_attrs": {},
+            "_tag": "Set",
+            "_text": ""
+          },
+          {
+            "_attrs": {},
+            "_tag": "IgnoreUnresolvedVariables",
+            "_text": "true"
+          },
+          {
+            "_attrs": {
+              "createNew": "false",
+              "transport": "http",
+              "type": "response"
+            },
+            "_tag": "AssignTo",
+            "_text": ""
+          }
+        ],
+        "_tag": "AssignMessage",
+        "_text": ""
+      },
+      "raw_xml": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<AssignMessage async=\"false\" continueOnError=\"false\" enabled=\"true\" name=\"Assign-MockResponse\">\n    <DisplayName>mockResponse</DisplayName>\n    <Set>\n        <Payload contentType=\"application/json\">{\n                \"mockData\": \"This is a mock response from Apigee\",\n                \"status\": \"success\"\n            }</Payload>\n        <Headers>\n            <Header name=\"Content-Type\">application/json</Header>\n        </Headers>\n        <StatusCode>200</StatusCode>\n        <ReasonPhrase>OK</ReasonPhrase>\n    </Set>\n    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>\n    <AssignTo createNew=\"false\" transport=\"http\" type=\"response\"/>\n</AssignMessage>",
+      "resource_urls": []
+    },
+    "GetKVM": {
+      "enabled": true,
+      "name": "GetKVM",
+      "policy_type": "KeyValueMapOperations",
+      "raw_dict": {
+        "_attrs": {
+          "async": "false",
+          "continueOnError": "false",
+          "enabled": "true",
+          "mapIdentifier": "secret-passwords",
+          "name": "GetKVM"
+        },
+        "_children": [
+          {
+            "_attrs": {},
+            "_tag": "DisplayName",
+            "_text": "GetKVM"
+          },
+          {
+            "_attrs": {},
+            "_tag": "ExpiryTimeInSecs",
+            "_text": "86400"
+          },
+          {
+            "_attrs": {},
+            "_tag": "Scope",
+            "_text": "environment"
+          },
+          {
+            "_attrs": {
+              "assignTo": "private.secret-password-1"
+            },
+            "_tag": "Get",
+            "_text": ""
+          }
+        ],
+        "_tag": "KeyValueMapOperations",
+        "_text": ""
+      },
+      "raw_xml": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<KeyValueMapOperations mapIdentifier=\"secret-passwords\" async=\"false\" continueOnError=\"false\" enabled=\"true\" name=\"GetKVM\">\n    <DisplayName>GetKVM</DisplayName>\n    <ExpiryTimeInSecs>86400</ExpiryTimeInSecs>\n    <Scope>environment</Scope>\n    <Get assignTo=\"private.secret-password-1\">\n        <Key>\n            <Parameter>secret-password-1</Parameter>\n        </Key>\n    </Get>\n</KeyValueMapOperations>",
+      "resource_urls": []
+    },
+    "Process-Encrypted-Value": {
+      "enabled": true,
+      "name": "Process-Encrypted-Value",
+      "policy_type": "Javascript",
+      "raw_dict": {
+        "_attrs": {
+          "async": "false",
+          "continueOnError": "false",
+          "enabled": "true",
+          "name": "Process-Encrypted-Value",
+          "timeLimit": "200"
+        },
+        "_children": [
+          {
+            "_attrs": {},
+            "_tag": "DisplayName",
+            "_text": "Process-Encrypted-Value"
+          },
+          {
+            "_attrs": {},
+            "_tag": "Properties",
+            "_text": ""
+          },
+          {
+            "_attrs": {},
+            "_tag": "ResourceURL",
+            "_text": "jsc://processEncryptedValue.js"
+          }
+        ],
+        "_tag": "Javascript",
+        "_text": ""
+      },
+      "raw_xml": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<Javascript async=\"false\" continueOnError=\"false\" enabled=\"true\" timeLimit=\"200\" name=\"Process-Encrypted-Value\">\n    <DisplayName>Process-Encrypted-Value</DisplayName>\n    <Properties/>\n    <ResourceURL>jsc://processEncryptedValue.js</ResourceURL>\n</Javascript>",
+      "resource_urls": [
+        "jsc/processEncryptedValue.js"
+      ]
+    }
+  },
+  "proxy_endpoints": [
+    {
+      "connection": {
+        "base_path": "/mock-target-api",
+        "virtual_hosts": [
+          "api-grover"
+        ]
+      },
+      "flows": [],
+      "name": "default",
+      "post_flow": {
+        "request": [],
+        "response": [
+          {
+            "condition": "",
+            "name": "Assign-MockResponse"
+          }
+        ]
+      },
+      "pre_flow": {
+        "request": [
+          {
+            "condition": "",
+            "name": "GetKVM"
+          },
+          {
+            "condition": "",
+            "name": "Process-Encrypted-Value"
+          }
+        ],
+        "response": []
+      },
+      "route_rules": [
+        {
+          "condition": "",
+          "name": "noroute",
+          "target": ""
+        }
+      ]
+    }
+  ],
+  "resources": {
+    "jsc/JavaScript-1.js": " ",
+    "jsc/processEncryptedValue.js": "     // processEncryptedValue.js\n    var decryptedValue = context.getVariable(\"private.secret-password-1\");\n    var myVariable = context.getVariable(\"private.secret-password-1\")\n    // Set a new response header with the variable's value\n    context.setVariable(\"response.header.X-Custom-Header\", myVariable);"
+  },
+  "revision": "4",
+  "shared_flow_refs": [],
+  "target_endpoints": [],
+  "target_server_refs": [],
+  "type": "proxy"
+}

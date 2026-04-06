@@ -1,0 +1,17 @@
+{
+  "items": [
+    {
+      "proxies": [
+        "apigee-hello-api-1",
+        "proxy-sharedflow-api-11"
+      ],
+      "sharedFlowName": "SF-Shared-Flow-Test-SpikeArrest"
+    },
+    {
+      "proxies": [
+        "proxy-sharedflow-api-11"
+      ],
+      "sharedFlowName": "SF-SharedFlow-Test-Quota"
+    }
+  ]
+}

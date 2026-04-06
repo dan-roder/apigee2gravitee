@@ -1,0 +1,28 @@
+{
+  "_meta": {
+    "artifactId": "env:kvm-feb4-test",
+    "artifactType": "kvm",
+    "blockers": [],
+    "extractedAt": "2026-04-06T21:03:44.645925Z",
+    "riskFlags": [],
+    "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/kvm/env/dev/kvm-feb4-test",
+    "warnings": []
+  },
+  "encrypted": false,
+  "entries": [
+    {
+      "name": "username",
+      "value": "feb4-test-user"
+    },
+    {
+      "name": "password",
+      "value": "feb4-test-password"
+    }
+  ],
+  "environment": "dev",
+  "meta": {
+    "source_path": "./data/kvm/env/dev/kvm-feb4-test"
+  },
+  "name": "kvm-feb4-test",
+  "scope": "env"
+}
