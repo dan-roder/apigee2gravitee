@@ -1,0 +1,16 @@
+{
+  "apps" : [ "dog-breeds-dev-app", "chuck-norris-dev-app" ],
+  "companies" : [ ],
+  "email" : "dev2@540.co",
+  "developerId" : "WyvqnDpNqrAZzecT",
+  "firstName" : "Developer",
+  "lastName" : "Two",
+  "userName" : "dev2@540.co",
+  "organizationName" : "advana",
+  "status" : "active",
+  "attributes" : [ ],
+  "createdAt" : 1758733212080,
+  "createdBy" : "devops@540.co",
+  "lastModifiedAt" : 1758733212080,
+  "lastModifiedBy" : "devops@540.co"
+}

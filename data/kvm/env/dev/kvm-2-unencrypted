@@ -1,0 +1,11 @@
+{
+  "encrypted" : false,
+  "entry" : [ {
+    "name" : "key-2",
+    "value" : "key2-123"
+  }, {
+    "name" : "key-3",
+    "value" : "key3-456"
+  } ],
+  "name" : "kvm-2-unencrypted"
+}

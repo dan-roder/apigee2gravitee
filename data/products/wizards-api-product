@@ -1,0 +1,15 @@
+{
+  "apiResources" : [ ],
+  "approvalType" : "auto",
+  "attributes" : [ ],
+  "createdAt" : 1758733212776,
+  "createdBy" : "devops@540.co",
+  "description" : "",
+  "displayName" : "wizards-api-product",
+  "environments" : [ "dev" ],
+  "lastModifiedAt" : 1758733212776,
+  "lastModifiedBy" : "devops@540.co",
+  "name" : "wizards-api-product",
+  "proxies" : [ "wizards-api-9" ],
+  "scopes" : [ "" ]
+}

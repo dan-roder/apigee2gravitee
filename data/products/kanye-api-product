@@ -1,0 +1,15 @@
+{
+  "apiResources" : [ ],
+  "approvalType" : "auto",
+  "attributes" : [ ],
+  "createdAt" : 1758733212776,
+  "createdBy" : "devops@540.co",
+  "description" : "",
+  "displayName" : "kanye-api-product",
+  "environments" : [ "dev" ],
+  "lastModifiedAt" : 1758733212776,
+  "lastModifiedBy" : "devops@540.co",
+  "name" : "kanye-api-product",
+  "proxies" : [ "kanye-rest-api-5" ],
+  "scopes" : [ "" ]
+}

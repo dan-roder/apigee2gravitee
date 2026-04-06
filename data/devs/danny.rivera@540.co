@@ -1,0 +1,16 @@
+{
+  "apps" : [ ],
+  "companies" : [ ],
+  "email" : "danny.rivera@540.co",
+  "developerId" : "KcgdkDtp77K4x8cH",
+  "firstName" : "Danny",
+  "lastName" : "Rivera",
+  "userName" : "danny.rivera@540.co",
+  "organizationName" : "advana",
+  "status" : "active",
+  "attributes" : [ ],
+  "createdAt" : 1758733212078,
+  "createdBy" : "devops@540.co",
+  "lastModifiedAt" : 1758733212078,
+  "lastModifiedBy" : "devops@540.co"
+}

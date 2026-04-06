@@ -1,0 +1,11 @@
+{
+  "encrypted" : false,
+  "entry" : [ {
+    "name" : "username",
+    "value" : "new-username"
+  }, {
+    "name" : "password",
+    "value" : "updated-password"
+  } ],
+  "name" : "kvm-create-proxy"
+}

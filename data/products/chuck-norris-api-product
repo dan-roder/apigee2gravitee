@@ -1,0 +1,15 @@
+{
+  "apiResources" : [ ],
+  "approvalType" : "auto",
+  "attributes" : [ ],
+  "createdAt" : 1758733212776,
+  "createdBy" : "devops@540.co",
+  "description" : "",
+  "displayName" : "chuck-norris-api-product",
+  "environments" : [ "dev" ],
+  "lastModifiedAt" : 1758733212776,
+  "lastModifiedBy" : "devops@540.co",
+  "name" : "chuck-norris-api-product",
+  "proxies" : [ "chuck-norris-api-10" ],
+  "scopes" : [ "" ]
+}

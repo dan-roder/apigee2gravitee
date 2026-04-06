@@ -1,0 +1,6 @@
+{
+  "host" : "mocktarget.apigee.net",
+  "isEnabled" : true,
+  "name" : "lb1-mock",
+  "port" : 80
+}

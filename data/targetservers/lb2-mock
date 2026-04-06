@@ -1,0 +1,6 @@
+{
+  "host" : "httpbin.org",
+  "isEnabled" : true,
+  "name" : "lb2-mock",
+  "port" : 80
+}

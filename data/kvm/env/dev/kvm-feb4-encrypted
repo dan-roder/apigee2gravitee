@@ -1,0 +1,11 @@
+{
+  "encrypted" : true,
+  "entry" : [ {
+    "name" : "username",
+    "value" : "*****"
+  }, {
+    "name" : "password",
+    "value" : "*****"
+  } ],
+  "name" : "kvm-feb4-encrypted"
+}

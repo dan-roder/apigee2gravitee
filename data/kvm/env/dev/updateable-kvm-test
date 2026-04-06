@@ -1,0 +1,8 @@
+{
+  "encrypted" : true,
+  "entry" : [ {
+    "name" : "testing-key",
+    "value" : "*****"
+  } ],
+  "name" : "updateable-kvm-test"
+}

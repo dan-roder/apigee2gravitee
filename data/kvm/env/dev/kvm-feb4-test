@@ -1,0 +1,11 @@
+{
+  "encrypted" : false,
+  "entry" : [ {
+    "name" : "username",
+    "value" : "feb4-test-user"
+  }, {
+    "name" : "password",
+    "value" : "feb4-test-password"
+  } ],
+  "name" : "kvm-feb4-test"
+}

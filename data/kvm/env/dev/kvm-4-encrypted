@@ -1,0 +1,14 @@
+{
+  "encrypted" : true,
+  "entry" : [ {
+    "name" : "super-secret-password-3",
+    "value" : "*****"
+  }, {
+    "name" : "super-secret-password-1",
+    "value" : "*****"
+  }, {
+    "name" : "super-secret-password-2",
+    "value" : "*****"
+  } ],
+  "name" : "kvm-4-encrypted"
+}
