@@ -1,0 +1,655 @@
+{
+  "generatedAt": "2026-04-06T21:21:43.122Z",
+  "summary": {
+    "proxies": 23,
+    "blockers": 0,
+    "warnings": 10,
+    "actions": 46,
+    "manualReview": 16
+  },
+  "findings": [
+    {
+      "severity": "warning",
+      "code": "PROXY_LLM_POLICIES_PRESENT",
+      "message": "Proxy KVM-Create contains LLM-review policy steps",
+      "details": {
+        "proxyName": "KVM-Create",
+        "llmSteps": [
+          "JS-CreateAuthHeader",
+          "JS-ValidateRequest",
+          "JS-ProcessCreateKVM"
+        ]
+      }
+    },
+    {
+      "severity": "warning",
+      "code": "PROXY_LLM_POLICIES_PRESENT",
+      "message": "Proxy KVM-Reader contains LLM-review policy steps",
+      "details": {
+        "proxyName": "KVM-Reader",
+        "llmSteps": [
+          "JS-CreateAuthHeader",
+          "processKVMs"
+        ]
+      }
+    },
+    {
+      "severity": "warning",
+      "code": "PROXY_LLM_POLICIES_PRESENT",
+      "message": "Proxy KVM-Update contains LLM-review policy steps",
+      "details": {
+        "proxyName": "KVM-Update",
+        "llmSteps": [
+          "JS-CreateAuthHeader",
+          "JS-ValidateUpdateRequest",
+          "JS-CheckFixedKVM",
+          "JS-UpdateEntries"
+        ]
+      }
+    },
+    {
+      "severity": "warning",
+      "code": "PROXY_LLM_POLICIES_PRESENT",
+      "message": "Proxy admin-kvm-export contains LLM-review policy steps",
+      "details": {
+        "proxyName": "admin-kvm-export",
+        "llmSteps": [
+          "Fetch-KVMs"
+        ]
+      }
+    },
+    {
+      "severity": "warning",
+      "code": "PROXY_SHARED_FLOW_REFS_PRESENT",
+      "message": "Proxy apigee-hello-api-1 references shared flows",
+      "details": {
+        "proxyName": "apigee-hello-api-1",
+        "sharedFlowRefs": [
+          "SF-Shared-Flow-Test-SpikeArrest"
+        ]
+      }
+    },
+    {
+      "severity": "warning",
+      "code": "PROXY_LLM_POLICIES_PRESENT",
+      "message": "Proxy get-kvm-proxy contains LLM-review policy steps",
+      "details": {
+        "proxyName": "get-kvm-proxy",
+        "llmSteps": [
+          "Process-Encrypted-Value"
+        ]
+      }
+    },
+    {
+      "severity": "warning",
+      "code": "PROXY_LLM_POLICIES_PRESENT",
+      "message": "Proxy kanye-rest-api-5 contains LLM-review policy steps",
+      "details": {
+        "proxyName": "kanye-rest-api-5",
+        "llmSteps": [
+          "ProcessEncryptedValue"
+        ]
+      }
+    },
+    {
+      "severity": "warning",
+      "code": "PROXY_LLM_POLICIES_PRESENT",
+      "message": "Proxy mock-target-api contains LLM-review policy steps",
+      "details": {
+        "proxyName": "mock-target-api",
+        "llmSteps": [
+          "Process-Encrypted-Value"
+        ]
+      }
+    },
+    {
+      "severity": "warning",
+      "code": "PROXY_SHARED_FLOW_REFS_PRESENT",
+      "message": "Proxy proxy-sharedflow-api-11 references shared flows",
+      "details": {
+        "proxyName": "proxy-sharedflow-api-11",
+        "sharedFlowRefs": [
+          "SF-Shared-Flow-Test-SpikeArrest",
+          "SF-SharedFlow-Test-Quota"
+        ]
+      }
+    },
+    {
+      "severity": "warning",
+      "code": "PROXY_LLM_POLICIES_PRESENT",
+      "message": "Proxy villian-chain contains LLM-review policy steps",
+      "details": {
+        "proxyName": "villian-chain",
+        "llmSteps": [
+          "createJsonResponse",
+          "createJsonResponse"
+        ]
+      }
+    }
+  ],
+  "proxies": [
+    {
+      "proxyName": "KVM-Create",
+      "manualReviewReasons": [
+        "LLM_POLICY:JS-CreateAuthHeader",
+        "LLM_POLICY:JS-ValidateRequest",
+        "LLM_POLICY:JS-ProcessCreateKVM"
+      ],
+      "migrationMeta": {
+        "sourceProxy": "KVM-Create",
+        "sourceRevision": "1",
+        "securityScheme": "KEYLESS",
+        "needsReviewSteps": [
+          "JS-CreateAuthHeader",
+          "JS-ValidateRequest",
+          "JS-ProcessCreateKVM"
+        ],
+        "llmSteps": [
+          {
+            "name": "JS-CreateAuthHeader"
+          },
+          {
+            "name": "JS-ValidateRequest"
+          },
+          {
+            "name": "JS-ProcessCreateKVM"
+          }
+        ],
+        "manualSteps": [],
+        "unmappedConditions": [],
+        "kvmWriteOps": [],
+        "encryptedProperties": [],
+        "sharedFlowRefs": [],
+        "targetServerRefs": []
+      }
+    },
+    {
+      "proxyName": "KVM-Reader",
+      "manualReviewReasons": [
+        "LLM_POLICY:JS-CreateAuthHeader",
+        "LLM_POLICY:processKVMs"
+      ],
+      "migrationMeta": {
+        "sourceProxy": "KVM-Reader",
+        "sourceRevision": "5",
+        "securityScheme": "KEYLESS",
+        "needsReviewSteps": [
+          "JS-CreateAuthHeader",
+          "processKVMs"
+        ],
+        "llmSteps": [
+          {
+            "name": "JS-CreateAuthHeader"
+          },
+          {
+            "name": "processKVMs"
+          }
+        ],
+        "manualSteps": [],
+        "unmappedConditions": [],
+        "kvmWriteOps": [],
+        "encryptedProperties": [],
+        "sharedFlowRefs": [],
+        "targetServerRefs": []
+      }
+    },
+    {
+      "proxyName": "KVM-Update",
+      "manualReviewReasons": [
+        "LLM_POLICY:JS-CreateAuthHeader",
+        "LLM_POLICY:JS-ValidateUpdateRequest",
+        "LLM_POLICY:JS-CheckFixedKVM",
+        "LLM_POLICY:JS-UpdateEntries"
+      ],
+      "migrationMeta": {
+        "sourceProxy": "KVM-Update",
+        "sourceRevision": "2",
+        "securityScheme": "KEYLESS",
+        "needsReviewSteps": [
+          "JS-CreateAuthHeader",
+          "JS-ValidateUpdateRequest",
+          "JS-CheckFixedKVM",
+          "JS-UpdateEntries"
+        ],
+        "llmSteps": [
+          {
+            "name": "JS-CreateAuthHeader"
+          },
+          {
+            "name": "JS-ValidateUpdateRequest"
+          },
+          {
+            "name": "JS-CheckFixedKVM"
+          },
+          {
+            "name": "JS-UpdateEntries"
+          }
+        ],
+        "manualSteps": [],
+        "unmappedConditions": [],
+        "kvmWriteOps": [],
+        "encryptedProperties": [],
+        "sharedFlowRefs": [],
+        "targetServerRefs": []
+      }
+    },
+    {
+      "proxyName": "admin-kvm-export",
+      "manualReviewReasons": [
+        "LLM_POLICY:Fetch-KVMs"
+      ],
+      "migrationMeta": {
+        "sourceProxy": "admin-kvm-export",
+        "sourceRevision": "3",
+        "securityScheme": "KEYLESS",
+        "needsReviewSteps": [
+          "Fetch-KVMs"
+        ],
+        "llmSteps": [
+          {
+            "name": "Fetch-KVMs"
+          }
+        ],
+        "manualSteps": [],
+        "unmappedConditions": [],
+        "kvmWriteOps": [],
+        "encryptedProperties": [],
+        "sharedFlowRefs": [],
+        "targetServerRefs": []
+      }
+    },
+    {
+      "proxyName": "apigee-hello-api-1",
+      "manualReviewReasons": [
+        "SHARED_FLOW_REFS_PRESENT"
+      ],
+      "migrationMeta": {
+        "sourceProxy": "apigee-hello-api-1",
+        "sourceRevision": "1",
+        "securityScheme": "KEYLESS",
+        "needsReviewSteps": [
+          "FC-SharedFlow-SpikeArrest"
+        ],
+        "llmSteps": [],
+        "manualSteps": [],
+        "unmappedConditions": [],
+        "kvmWriteOps": [],
+        "encryptedProperties": [],
+        "sharedFlowRefs": [
+          "SF-Shared-Flow-Test-SpikeArrest"
+        ],
+        "targetServerRefs": []
+      }
+    },
+    {
+      "proxyName": "apigee-hello",
+      "manualReviewReasons": [],
+      "migrationMeta": {
+        "sourceProxy": "apigee-hello",
+        "sourceRevision": "1",
+        "securityScheme": "KEYLESS",
+        "needsReviewSteps": [],
+        "llmSteps": [],
+        "manualSteps": [],
+        "unmappedConditions": [],
+        "kvmWriteOps": [],
+        "encryptedProperties": [],
+        "sharedFlowRefs": [],
+        "targetServerRefs": []
+      }
+    },
+    {
+      "proxyName": "car-makes-api-3",
+      "manualReviewReasons": [],
+      "migrationMeta": {
+        "sourceProxy": "car-makes-api-3",
+        "sourceRevision": "1",
+        "securityScheme": "KEYLESS",
+        "needsReviewSteps": [],
+        "llmSteps": [],
+        "manualSteps": [],
+        "unmappedConditions": [],
+        "kvmWriteOps": [],
+        "encryptedProperties": [],
+        "sharedFlowRefs": [],
+        "targetServerRefs": []
+      }
+    },
+    {
+      "proxyName": "cat-fact-api-2",
+      "manualReviewReasons": [],
+      "migrationMeta": {
+        "sourceProxy": "cat-fact-api-2",
+        "sourceRevision": "1",
+        "securityScheme": "KEYLESS",
+        "needsReviewSteps": [],
+        "llmSteps": [],
+        "manualSteps": [],
+        "unmappedConditions": [],
+        "kvmWriteOps": [],
+        "encryptedProperties": [],
+        "sharedFlowRefs": [],
+        "targetServerRefs": []
+      }
+    },
+    {
+      "proxyName": "cats-api-7",
+      "manualReviewReasons": [],
+      "migrationMeta": {
+        "sourceProxy": "cats-api-7",
+        "sourceRevision": "1",
+        "securityScheme": "API_KEY",
+        "needsReviewSteps": [
+          "remove-query-param-apikey"
+        ],
+        "llmSteps": [],
+        "manualSteps": [],
+        "unmappedConditions": [],
+        "kvmWriteOps": [],
+        "encryptedProperties": [],
+        "sharedFlowRefs": [],
+        "targetServerRefs": []
+      }
+    },
+    {
+      "proxyName": "chuck-norris-api-10",
+      "manualReviewReasons": [],
+      "migrationMeta": {
+        "sourceProxy": "chuck-norris-api-10",
+        "sourceRevision": "2",
+        "securityScheme": "API_KEY",
+        "needsReviewSteps": [
+          "remove-query-param-apikey"
+        ],
+        "llmSteps": [],
+        "manualSteps": [],
+        "unmappedConditions": [],
+        "kvmWriteOps": [],
+        "encryptedProperties": [],
+        "sharedFlowRefs": [],
+        "targetServerRefs": []
+      }
+    },
+    {
+      "proxyName": "dog-breeds-api-6",
+      "manualReviewReasons": [],
+      "migrationMeta": {
+        "sourceProxy": "dog-breeds-api-6",
+        "sourceRevision": "1",
+        "securityScheme": "API_KEY",
+        "needsReviewSteps": [
+          "remove-query-param-apikey"
+        ],
+        "llmSteps": [],
+        "manualSteps": [],
+        "unmappedConditions": [],
+        "kvmWriteOps": [],
+        "encryptedProperties": [],
+        "sharedFlowRefs": [],
+        "targetServerRefs": []
+      }
+    },
+    {
+      "proxyName": "get-kvm-proxy",
+      "manualReviewReasons": [
+        "LLM_POLICY:Process-Encrypted-Value"
+      ],
+      "migrationMeta": {
+        "sourceProxy": "get-kvm-proxy",
+        "sourceRevision": "1",
+        "securityScheme": "KEYLESS",
+        "needsReviewSteps": [
+          "Process-Encrypted-Value"
+        ],
+        "llmSteps": [
+          {
+            "name": "Process-Encrypted-Value"
+          }
+        ],
+        "manualSteps": [],
+        "unmappedConditions": [],
+        "kvmWriteOps": [],
+        "encryptedProperties": [],
+        "sharedFlowRefs": [],
+        "targetServerRefs": []
+      }
+    },
+    {
+      "proxyName": "harry-potter-characters",
+      "manualReviewReasons": [],
+      "migrationMeta": {
+        "sourceProxy": "harry-potter-characters",
+        "sourceRevision": "1",
+        "securityScheme": "KEYLESS",
+        "needsReviewSteps": [],
+        "llmSteps": [],
+        "manualSteps": [],
+        "unmappedConditions": [],
+        "kvmWriteOps": [],
+        "encryptedProperties": [],
+        "sharedFlowRefs": [],
+        "targetServerRefs": []
+      }
+    },
+    {
+      "proxyName": "hogwarts-houses-api-8",
+      "manualReviewReasons": [],
+      "migrationMeta": {
+        "sourceProxy": "hogwarts-houses-api-8",
+        "sourceRevision": "1",
+        "securityScheme": "API_KEY",
+        "needsReviewSteps": [
+          "remove-query-param-apikey"
+        ],
+        "llmSteps": [],
+        "manualSteps": [],
+        "unmappedConditions": [],
+        "kvmWriteOps": [],
+        "encryptedProperties": [],
+        "sharedFlowRefs": [],
+        "targetServerRefs": []
+      }
+    },
+    {
+      "proxyName": "kanye-rest-api-5",
+      "manualReviewReasons": [
+        "LLM_POLICY:ProcessEncryptedValue"
+      ],
+      "migrationMeta": {
+        "sourceProxy": "kanye-rest-api-5",
+        "sourceRevision": "9",
+        "securityScheme": "API_KEY",
+        "needsReviewSteps": [
+          "remove-query-param-apikey",
+          "ProcessEncryptedValue"
+        ],
+        "llmSteps": [
+          {
+            "name": "ProcessEncryptedValue"
+          }
+        ],
+        "manualSteps": [],
+        "unmappedConditions": [],
+        "kvmWriteOps": [],
+        "encryptedProperties": [],
+        "sharedFlowRefs": [],
+        "targetServerRefs": []
+      }
+    },
+    {
+      "proxyName": "kvm-test",
+      "manualReviewReasons": [],
+      "migrationMeta": {
+        "sourceProxy": "kvm-test",
+        "sourceRevision": "2",
+        "securityScheme": "KEYLESS",
+        "needsReviewSteps": [],
+        "llmSteps": [],
+        "manualSteps": [],
+        "unmappedConditions": [],
+        "kvmWriteOps": [],
+        "encryptedProperties": [],
+        "sharedFlowRefs": [],
+        "targetServerRefs": []
+      }
+    },
+    {
+      "proxyName": "load-balance-target-servers-api",
+      "manualReviewReasons": [],
+      "migrationMeta": {
+        "sourceProxy": "load-balance-target-servers-api",
+        "sourceRevision": "1",
+        "securityScheme": "KEYLESS",
+        "needsReviewSteps": [],
+        "llmSteps": [],
+        "manualSteps": [],
+        "unmappedConditions": [],
+        "kvmWriteOps": [],
+        "encryptedProperties": [],
+        "sharedFlowRefs": [],
+        "targetServerRefs": [
+          "lb1-mock",
+          "lb2-mock"
+        ]
+      }
+    },
+    {
+      "proxyName": "mock-target-api",
+      "manualReviewReasons": [
+        "LLM_POLICY:Process-Encrypted-Value"
+      ],
+      "migrationMeta": {
+        "sourceProxy": "mock-target-api",
+        "sourceRevision": "4",
+        "securityScheme": "KEYLESS",
+        "needsReviewSteps": [
+          "Process-Encrypted-Value"
+        ],
+        "llmSteps": [
+          {
+            "name": "Process-Encrypted-Value"
+          }
+        ],
+        "manualSteps": [],
+        "unmappedConditions": [],
+        "kvmWriteOps": [],
+        "encryptedProperties": [],
+        "sharedFlowRefs": [],
+        "targetServerRefs": []
+      }
+    },
+    {
+      "proxyName": "proxy-sharedflow-api-11",
+      "manualReviewReasons": [
+        "SHARED_FLOW_REFS_PRESENT"
+      ],
+      "migrationMeta": {
+        "sourceProxy": "proxy-sharedflow-api-11",
+        "sourceRevision": "1",
+        "securityScheme": "KEYLESS",
+        "needsReviewSteps": [
+          "SF-Flow-Callout-1",
+          "SF-Flow-Callout-2"
+        ],
+        "llmSteps": [],
+        "manualSteps": [],
+        "unmappedConditions": [],
+        "kvmWriteOps": [],
+        "encryptedProperties": [],
+        "sharedFlowRefs": [
+          "SF-Shared-Flow-Test-SpikeArrest",
+          "SF-SharedFlow-Test-Quota"
+        ],
+        "targetServerRefs": []
+      }
+    },
+    {
+      "proxyName": "v1-ships",
+      "manualReviewReasons": [],
+      "migrationMeta": {
+        "sourceProxy": "v1-ships",
+        "sourceRevision": "1",
+        "securityScheme": "KEYLESS",
+        "needsReviewSteps": [],
+        "llmSteps": [],
+        "manualSteps": [],
+        "unmappedConditions": [],
+        "kvmWriteOps": [],
+        "encryptedProperties": [],
+        "sharedFlowRefs": [],
+        "targetServerRefs": []
+      }
+    },
+    {
+      "proxyName": "villian-chain",
+      "manualReviewReasons": [
+        "LLM_POLICY:createJsonResponse"
+      ],
+      "migrationMeta": {
+        "sourceProxy": "villian-chain",
+        "sourceRevision": "1",
+        "securityScheme": "KEYLESS",
+        "needsReviewSteps": [
+          "createJsonResponse"
+        ],
+        "llmSteps": [
+          {
+            "name": "createJsonResponse"
+          },
+          {
+            "name": "createJsonResponse"
+          }
+        ],
+        "manualSteps": [],
+        "unmappedConditions": [
+          "(request.verb = \"GET\") and (proxy.pathsuffix MatchesPath \"\") and (request.queryparam.filters = null) and (request.queryparam.universe = null)",
+          "(proxy.pathsuffix MatchesPath \"\") and (request.verb = \"GET\") and NOT (request.queryparam.universe = null)",
+          "(request.queryparam.universe == \"sw\")",
+          "(request.queryparam.universe == \"marvel\")"
+        ],
+        "kvmWriteOps": [],
+        "encryptedProperties": [],
+        "sharedFlowRefs": [],
+        "targetServerRefs": []
+      }
+    },
+    {
+      "proxyName": "wizards-api-9",
+      "manualReviewReasons": [],
+      "migrationMeta": {
+        "sourceProxy": "wizards-api-9",
+        "sourceRevision": "1",
+        "securityScheme": "API_KEY",
+        "needsReviewSteps": [
+          "remove-query-param-apikey"
+        ],
+        "llmSteps": [],
+        "manualSteps": [],
+        "unmappedConditions": [],
+        "kvmWriteOps": [],
+        "encryptedProperties": [],
+        "sharedFlowRefs": [],
+        "targetServerRefs": []
+      }
+    },
+    {
+      "proxyName": "yes-or-no-api-4",
+      "manualReviewReasons": [],
+      "migrationMeta": {
+        "sourceProxy": "yes-or-no-api-4",
+        "sourceRevision": "1",
+        "securityScheme": "API_KEY",
+        "needsReviewSteps": [
+          "remove-query-param-apikey"
+        ],
+        "llmSteps": [],
+        "manualSteps": [],
+        "unmappedConditions": [],
+        "kvmWriteOps": [],
+        "encryptedProperties": [],
+        "sharedFlowRefs": [],
+        "targetServerRefs": []
+      }
+    }
+  ]
+}
