@@ -306,6 +306,7 @@ function buildPlan(domain, preflight, config, targetState = {
         applicationSourceId: appSourceId,
         productName: subscription.productName,
         credentialId: subscription.credentialId,
+        targetKey: subscription.planMapping?.targetKey || null,
       },
       payload: {
         productName: subscription.productName,
@@ -315,6 +316,7 @@ function buildPlan(domain, preflight, config, targetState = {
       continuity: {
         apiKeyPolicy: config.policies.apiKeyContinuity,
         sourceConsumerKey: subscription.consumerKey,
+        sourceCredentialId: subscription.credentialId,
       },
       blockers: [...subscription.blockers, ...(resolution.blockers || [])],
       warnings: [...subscription.warnings],

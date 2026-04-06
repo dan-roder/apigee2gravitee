@@ -44,10 +44,14 @@ function checkCompleteness(domain) {
 function checkProductPlanMappings(domain, config) {
   const findings = [];
   const missing = new Set();
+  const multiTarget = new Set();
 
   for (const subscription of domain.subscriptions) {
     if (!subscription.planMapping) {
       missing.add(subscription.productName);
+    }
+    if ((subscription.planTargets || []).length > 1) {
+      multiTarget.add(subscription.productName);
     }
   }
 
@@ -56,6 +60,15 @@ function checkProductPlanMappings(domain, config) {
       'blocker',
       'PRODUCT_PLAN_MAPPING_MISSING',
       `Missing productPlanMap entry for source product ${productName}`,
+      { productName },
+    ));
+  }
+
+  for (const productName of Array.from(multiTarget).sort()) {
+    findings.push(issue(
+      'warning',
+      'PRODUCT_PLAN_MAPPING_MULTI_TARGET',
+      `Source product ${productName} maps to multiple Gravitee API/plan targets`,
       { productName },
     ));
   }

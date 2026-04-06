@@ -33,7 +33,21 @@
       "targetApiId": "api_orders_123",
       "targetPlan": "Orders API Key",
       "targetPlanId": "plan_orders_key_123"
-    }
+    },
+    "misc-product": [
+      {
+        "targetApi": "hello-api",
+        "targetApiId": "api_hello_123",
+        "targetPlan": "Hello API Key",
+        "targetPlanId": "plan_hello_key_123"
+      },
+      {
+        "targetApi": "facts-api",
+        "targetApiId": "api_facts_123",
+        "targetPlan": "Facts API Key",
+        "targetPlanId": "plan_facts_key_123"
+      }
+    ]
   },
   "customFieldMap": {
     "team": "team",

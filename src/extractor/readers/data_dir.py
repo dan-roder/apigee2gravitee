@@ -97,6 +97,29 @@ def _find_files(root: str, ext: str) -> list[str]:
     return results
 
 
+def _find_json_documents(root: str) -> list[str]:
+    """
+    Recursively collect JSON documents under root.
+
+    Supports both:
+      - conventional *.json files
+      - extensionless files that still contain JSON payloads
+    """
+    results = []
+    if not os.path.isdir(root):
+        return results
+    for dirpath, _, files in os.walk(root):
+        for fname in files:
+            path = os.path.join(dirpath, fname)
+            if fname.endswith('.json'):
+                results.append(path)
+                continue
+            raw = _read_json(path)
+            if raw is not None:
+                results.append(path)
+    return sorted(results)
+
+
 # ─── ZIP discovery ────────────────────────────────────────────────────────────
 
 def find_proxy_zips(data_dir: str) -> list[str]:
@@ -133,16 +156,21 @@ def _normalise_kvm(raw: dict, path: str, scope: str,
 
 def read_org_kvms(data_dir: str) -> list[KvmIR]:
     """Collect org-scoped KVMs. Handles both flat and nested org/ layouts."""
-    kvms_dir = os.path.join(data_dir, 'kvms')
-    # Try nested org/ first, fall back to scanning top-level kvms/ dir directly
-    org_dir = os.path.join(kvms_dir, 'org')
-    search_dir = org_dir if os.path.isdir(org_dir) else kvms_dir
-
     results = []
-    for f in _find_files(search_dir, '.json'):
-        raw = _read_json(f)
-        if raw:
-            results.append(_normalise_kvm(raw, f, scope='org'))
+    seen = set()
+    for kvms_dir in [os.path.join(data_dir, 'kvms'), os.path.join(data_dir, 'kvm')]:
+        # Try nested org/ first, fall back to scanning top-level directory directly
+        org_dir = os.path.join(kvms_dir, 'org')
+        search_dir = org_dir if os.path.isdir(org_dir) else kvms_dir
+
+        for f in _find_json_documents(search_dir):
+            raw = _read_json(f)
+            if raw:
+                key = raw.get('name') or os.path.splitext(os.path.basename(f))[0]
+                if key in seen:
+                    continue
+                seen.add(key)
+                results.append(_normalise_kvm(raw, f, scope='org'))
     return results
 
 
@@ -182,31 +210,37 @@ def read_env_kvms(data_dir: str) -> list[KvmIR]:
                 _add(_normalise_kvm(raw, f, scope='env', environment=env))
 
     # Pattern 3: data/kvms/env/{env}/{KVMName}.json
-    kvms_env_dir = os.path.join(data_dir, 'kvms', 'env')
-    for env_entry in _list_dir(kvms_env_dir):
-        if not os.path.isdir(env_entry):
-            continue
-        env = os.path.basename(env_entry)
-        for f in _find_files(env_entry, '.json'):
-            raw = _read_json(f)
-            if raw:
-                _add(_normalise_kvm(raw, f, scope='env', environment=env))
+    for kvms_root in [os.path.join(data_dir, 'kvms'), os.path.join(data_dir, 'kvm')]:
+        kvms_env_dir = os.path.join(kvms_root, 'env')
+        for env_entry in _list_dir(kvms_env_dir):
+            if not os.path.isdir(env_entry):
+                continue
+            env = os.path.basename(env_entry)
+            for f in _find_json_documents(env_entry):
+                raw = _read_json(f)
+                if raw:
+                    _add(_normalise_kvm(raw, f, scope='env', environment=env))
 
     return results
 
 
 def read_proxy_kvms(data_dir: str) -> list[KvmIR]:
-    """Collect proxy-scoped KVMs from data/kvms/proxy/{proxyName}/."""
-    proxy_kvm_dir = os.path.join(data_dir, 'kvms', 'proxy')
+    """Collect proxy-scoped KVMs from data/kvms/proxy/{proxyName}/ or data/kvm/proxy/{proxyName}/."""
     results = []
-    for proxy_entry in _list_dir(proxy_kvm_dir):
-        if not os.path.isdir(proxy_entry):
-            continue
-        proxy_name = os.path.basename(proxy_entry)
-        for f in _find_files(proxy_entry, '.json'):
-            raw = _read_json(f)
-            if raw:
-                results.append(_normalise_kvm(raw, f, scope='proxy', proxy_name=proxy_name))
+    seen = set()
+    for proxy_kvm_dir in [os.path.join(data_dir, 'kvms', 'proxy'), os.path.join(data_dir, 'kvm', 'proxy')]:
+        for proxy_entry in _list_dir(proxy_kvm_dir):
+            if not os.path.isdir(proxy_entry):
+                continue
+            proxy_name = os.path.basename(proxy_entry)
+            for f in _find_json_documents(proxy_entry):
+                raw = _read_json(f)
+                if raw:
+                    key = f'{proxy_name}/{raw.get("name") or os.path.splitext(os.path.basename(f))[0]}'
+                    if key in seen:
+                        continue
+                    seen.add(key)
+                    results.append(_normalise_kvm(raw, f, scope='proxy', proxy_name=proxy_name))
     return results
 
 
@@ -249,7 +283,7 @@ def read_target_servers(data_dir: str) -> list[TargetServerIR]:
             results.append(ts)
 
     # Top-level
-    for f in _find_files(os.path.join(data_dir, 'targetservers'), '.json'):
+    for f in _find_json_documents(os.path.join(data_dir, 'targetservers')):
         raw = _read_json(f)
         if raw:
             _add(_normalise_target_server(raw, f))
@@ -258,7 +292,7 @@ def read_target_servers(data_dir: str) -> list[TargetServerIR]:
     for env_entry in _list_dir(os.path.join(data_dir, 'envs')):
         if not os.path.isdir(env_entry):
             continue
-        for f in _find_files(os.path.join(env_entry, 'targetservers'), '.json'):
+        for f in _find_json_documents(os.path.join(env_entry, 'targetservers')):
             raw = _read_json(f)
             if raw:
                 _add(_normalise_target_server(raw, f))
@@ -281,6 +315,23 @@ def _normalise_flow_hook(raw: dict, path: str, environment: str = '') -> FlowHoo
     )
 
 
+def _normalise_flow_hook_config(raw: dict, path: str, environment: str = '') -> list[FlowHookIR]:
+    hooks = []
+    for hook_name in ('PreProxyFlowHook', 'PostProxyFlowHook', 'PreTargetFlowHook', 'PostTargetFlowHook'):
+        shared_flow = raw.get(hook_name, '')
+        if not shared_flow:
+            continue
+        hooks.append(FlowHookIR(
+            hook_name=hook_name,
+            environment=environment,
+            shared_flow=shared_flow,
+            continue_on_error=True,
+            description='',
+            meta={'source_path': path},
+        ))
+    return hooks
+
+
 def read_flow_hooks(data_dir: str) -> list[FlowHookIR]:
     """Collect flow hooks from top-level and per-env directories."""
     seen: set[str] = set()
@@ -293,20 +344,28 @@ def read_flow_hooks(data_dir: str) -> list[FlowHookIR]:
             results.append(fh)
 
     # Top-level data/flowhooks/
-    for f in _find_files(os.path.join(data_dir, 'flowhooks'), '.json'):
+    for f in _find_json_documents(os.path.join(data_dir, 'flowhooks')):
         raw = _read_json(f)
         if raw:
-            _add(_normalise_flow_hook(raw, f))
+            if any(key in raw for key in ('PreProxyFlowHook', 'PostProxyFlowHook', 'PreTargetFlowHook', 'PostTargetFlowHook')):
+                for hook in _normalise_flow_hook_config(raw, f):
+                    _add(hook)
+            else:
+                _add(_normalise_flow_hook(raw, f))
 
     # Per-env data/envs/{env}/flowhooks/
     for env_entry in _list_dir(os.path.join(data_dir, 'envs')):
         if not os.path.isdir(env_entry):
             continue
         env = os.path.basename(env_entry)
-        for f in _find_files(os.path.join(env_entry, 'flowhooks'), '.json'):
+        for f in _find_json_documents(os.path.join(env_entry, 'flowhooks')):
             raw = _read_json(f)
             if raw:
-                _add(_normalise_flow_hook(raw, f, environment=env))
+                if any(key in raw for key in ('PreProxyFlowHook', 'PostProxyFlowHook', 'PreTargetFlowHook', 'PostTargetFlowHook')):
+                    for hook in _normalise_flow_hook_config(raw, f, environment=env):
+                        _add(hook)
+                else:
+                    _add(_normalise_flow_hook(raw, f, environment=env))
 
     return results
 
@@ -332,7 +391,7 @@ def _normalise_developer(raw: dict, path: str) -> DeveloperIR:
 
 def read_developers(data_dir: str) -> list[DeveloperIR]:
     results = []
-    for f in _find_files(os.path.join(data_dir, 'devs'), '.json'):
+    for f in _find_json_documents(os.path.join(data_dir, 'devs')):
         raw = _read_json(f)
         if raw:
             results.append(_normalise_developer(raw, f))
@@ -378,7 +437,7 @@ def read_apps(data_dir: str) -> list[AppIR]:
         if not os.path.isdir(dev_dir):
             continue
         developer_email = os.path.basename(dev_dir)
-        for f in _find_files(dev_dir, '.json'):
+        for f in _find_json_documents(dev_dir):
             raw = _read_json(f)
             if raw:
                 results.append(_normalise_app(raw, f, developer_email))
@@ -407,7 +466,7 @@ def _normalise_product(raw: dict, path: str) -> ProductIR:
         description=raw.get('description', ''),
         approval_type=raw.get('approvalType', 'auto').lower(),
         quota=quota,
-        scopes=raw.get('scopes', []),
+        scopes=[scope for scope in raw.get('scopes', []) if scope],
         environments=raw.get('environments', []),
         proxies=raw.get('proxies', []),
         attributes=attrs,
@@ -417,7 +476,7 @@ def _normalise_product(raw: dict, path: str) -> ProductIR:
 
 def read_products(data_dir: str) -> list[ProductIR]:
     results = []
-    for f in _find_files(os.path.join(data_dir, 'products'), '.json'):
+    for f in _find_json_documents(os.path.join(data_dir, 'products')):
         raw = _read_json(f)
         if raw:
             results.append(_normalise_product(raw, f))

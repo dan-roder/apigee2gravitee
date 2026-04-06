@@ -36,6 +36,20 @@ function filterByRules(items, includeSet, excludeSet, keyFn) {
   });
 }
 
+function normalizePlanTargets(productName, mapping) {
+  if (!mapping) return [];
+  const entries = Array.isArray(mapping) ? mapping : [mapping];
+  return entries.map((entry, index) => ({
+    productName,
+    targetApi: entry.targetApi,
+    targetApiId: entry.targetApiId || null,
+    targetPlan: entry.targetPlan,
+    targetPlanId: entry.targetPlanId || null,
+    targetIndex: index,
+    targetKey: `${entry.targetApi}::${entry.targetPlan}`,
+  }));
+}
+
 function loadDeveloperDomain(irDir, config) {
   const loader = new IrLoader(irDir);
   const manifest = loader.manifest();
@@ -167,29 +181,70 @@ function loadDeveloperDomain(irDir, config) {
   for (const credential of normalizedCredentials) {
     const associations = credential.subscriptionIntent?.productAssociations || [];
     for (const association of associations) {
-      subscriptions.push({
-        sourceId: `${credential.credentialId}/${association.productName}`,
-        kind: 'MigratedSubscription',
-        credentialId: credential.credentialId,
-        developerEmail: credential.developerEmail,
-        developerStatus: developerByEmail.get(credential.developerEmail)?.status || 'active',
-        appName: credential.appName,
-        consumerKey: credential.consumerKey,
-        productName: association.productName,
-        sourceStatus: association.sourceStatus || null,
-        recommendedAction: association.recommendedAction,
-        targetStatusHint: association.targetStatusHint,
-        desiredStatus: association.targetStatusHint,
-        inactiveDeveloperPolicy: config.policies?.inactiveDeveloper || 'skip',
-        planMapping: config.productPlanMap?.[association.productName] || null,
-        lookupHints: {
+      const planTargets = normalizePlanTargets(
+        association.productName,
+        config.productPlanMap?.[association.productName] || null,
+      );
+
+      if (planTargets.length === 0) {
+        subscriptions.push({
+          sourceId: `${credential.credentialId}/${association.productName}`,
+          baseSourceId: `${credential.credentialId}/${association.productName}`,
+          kind: 'MigratedSubscription',
+          credentialId: credential.credentialId,
+          developerEmail: credential.developerEmail,
+          developerStatus: developerByEmail.get(credential.developerEmail)?.status || 'active',
+          appName: credential.appName,
+          consumerKey: credential.consumerKey,
           productName: association.productName,
-          applicationSourceId: `${credential.developerEmail}/${credential.appName}`,
-        },
-        blockers: [],
-        warnings: [],
-        manualReviewReasons: [],
-      });
+          sourceStatus: association.sourceStatus || null,
+          recommendedAction: association.recommendedAction,
+          targetStatusHint: association.targetStatusHint,
+          desiredStatus: association.targetStatusHint,
+          inactiveDeveloperPolicy: config.policies?.inactiveDeveloper || 'skip',
+          planMapping: null,
+          planTargets: [],
+          lookupHints: {
+            productName: association.productName,
+            applicationSourceId: `${credential.developerEmail}/${credential.appName}`,
+          },
+          blockers: [],
+          warnings: [],
+          manualReviewReasons: [],
+        });
+        continue;
+      }
+
+      for (const planTarget of planTargets) {
+        subscriptions.push({
+          sourceId: `${credential.credentialId}/${association.productName}/${planTarget.targetKey}`,
+          baseSourceId: `${credential.credentialId}/${association.productName}`,
+          kind: 'MigratedSubscription',
+          credentialId: credential.credentialId,
+          developerEmail: credential.developerEmail,
+          developerStatus: developerByEmail.get(credential.developerEmail)?.status || 'active',
+          appName: credential.appName,
+          consumerKey: credential.consumerKey,
+          productName: association.productName,
+          sourceStatus: association.sourceStatus || null,
+          recommendedAction: association.recommendedAction,
+          targetStatusHint: association.targetStatusHint,
+          desiredStatus: association.targetStatusHint,
+          inactiveDeveloperPolicy: config.policies?.inactiveDeveloper || 'skip',
+          planMapping: planTarget,
+          planTargets,
+          lookupHints: {
+            productName: association.productName,
+            applicationSourceId: `${credential.developerEmail}/${credential.appName}`,
+            targetApi: planTarget.targetApi,
+            targetPlan: planTarget.targetPlan,
+            targetKey: planTarget.targetKey,
+          },
+          blockers: [],
+          warnings: [],
+          manualReviewReasons: planTargets.length > 1 ? ['MULTI_TARGET_PRODUCT_MAPPING'] : [],
+        });
+      }
     }
   }
 

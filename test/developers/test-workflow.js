@@ -112,6 +112,7 @@ function makeWorkflowClient(options = {}) {
     members: new Map(),
     plans: new Map([
       ['plan-orders-1', { id: 'plan-orders-1', apiId: 'api-orders-1', name: 'Orders API Key' }],
+      ['plan-orders-audit-1', { id: 'plan-orders-audit-1', apiId: 'api-orders-audit-1', name: 'Orders Audit API Key' }],
       ['plan-billing-1', { id: 'plan-billing-1', apiId: 'api-billing-1', name: 'Billing API Key' }],
     ]),
     subscriptions: new Map(),
@@ -343,7 +344,10 @@ async function testImportReusesExistingResourcesBySourceMarker() {
     assert.strictEqual(client._state.counts.createSubscription, 0);
     assert.strictEqual(result.idMap.users['alice@example.com'], 'user-existing');
     assert.strictEqual(result.idMap.applications['alice@example.com/orders-consumer'], 'app-existing');
-    assert.strictEqual(result.idMap.subscriptions['alice@example.com/orders-consumer/abc123def456/orders-product'], 'sub-existing');
+    assert.strictEqual(
+      result.idMap.subscriptions['alice@example.com/orders-consumer/abc123def456/orders-product/orders-api::Orders API Key'],
+      'sub-existing',
+    );
   });
 }
 
@@ -499,6 +503,53 @@ async function testMultiProductImportAndReconcile() {
   });
 }
 
+async function testMultiTargetProductImportAndReconcile() {
+  await withTempDir(async (dir) => {
+    const dataDir = path.join(dir, 'data');
+    const irDir = path.join(dir, 'ir');
+    copyDir(FIXTURES_DATA, dataDir);
+    generateIrFromData(dataDir, irDir);
+
+    const client = makeWorkflowClient();
+    const config = makeConfig(dir, {
+      productPlanMap: {
+        'orders-product': [
+          {
+            targetApi: 'orders-api',
+            targetApiId: 'api-orders-1',
+            targetPlan: 'Orders API Key',
+            targetPlanId: 'plan-orders-1',
+          },
+          {
+            targetApi: 'orders-audit-api',
+            targetApiId: 'api-orders-audit-1',
+            targetPlan: 'Orders Audit API Key',
+            targetPlanId: 'plan-orders-audit-1',
+          },
+        ],
+      },
+    });
+
+    const imported = await runDevelopersImport(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json') },
+      { config, client },
+    );
+
+    assert.strictEqual(imported.exitCode, 0);
+    assert.strictEqual(client._state.counts.createSubscription, 2);
+    assert.ok(imported.manifest.records.subscriptions.every((item) => item.productName === 'orders-product'));
+    assert.ok(imported.manifest.records.subscriptions.some((item) => item.planTargets.length === 2));
+
+    const reconciled = await runDevelopersReconcile(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json') },
+      { config, client },
+    );
+
+    assert.strictEqual(reconciled.exitCode, 0);
+    assert.strictEqual(reconciled.report.summary.checkedSubscriptions, 2);
+  });
+}
+
 async function testImportAndReconcileSupportMetadataOnlyOwnership() {
   await withTempDir(async (dir) => {
     const dataDir = path.join(dir, 'data');
@@ -541,6 +592,7 @@ async function run() {
   await testInactiveDeveloperSkipPolicySkipsActions();
   await testReconcileDetectsMismatches();
   await testMultiProductImportAndReconcile();
+  await testMultiTargetProductImportAndReconcile();
   await testImportAndReconcileSupportMetadataOnlyOwnership();
   console.log('test-workflow.js passed');
 }

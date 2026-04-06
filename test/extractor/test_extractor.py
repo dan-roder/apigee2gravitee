@@ -43,6 +43,7 @@ from src.extractor.paths import credential_file_path, protected_secret_dir
 from src.extractor.enums import WARNING_CODES, BLOCKER_CODES, RISK_FLAG_CODES
 
 FIXTURES = os.path.join(os.path.dirname(__file__), 'fixtures', 'data')
+PROJECT_DATA = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'data'))
 PROXY_ZIP = os.path.join(FIXTURES, 'proxies', 'orders-api.zip')
 SF_ZIP    = os.path.join(FIXTURES, 'sharedflows', 'security-common.zip')
 
@@ -263,6 +264,41 @@ class TestBundleParser(unittest.TestCase):
 
 class TestDataDirReaders(unittest.TestCase):
 
+    def test_extensionless_json_documents_are_discovered(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            dev_dir = os.path.join(tmp, 'devs')
+            product_dir = os.path.join(tmp, 'products')
+            os.makedirs(dev_dir, exist_ok=True)
+            os.makedirs(product_dir, exist_ok=True)
+
+            with open(os.path.join(dev_dir, 'dev@example.com'), 'w') as f:
+                json.dump({
+                    'email': 'dev@example.com',
+                    'firstName': 'Dev',
+                    'lastName': 'Example',
+                    'userName': 'dev@example.com',
+                    'status': 'active',
+                    'apps': [],
+                    'attributes': [],
+                }, f)
+            with open(os.path.join(product_dir, 'sample-product'), 'w') as f:
+                json.dump({
+                    'name': 'sample-product',
+                    'displayName': 'Sample Product',
+                    'approvalType': 'auto',
+                    'proxies': ['sample-api'],
+                    'scopes': [''],
+                }, f)
+
+            devs = read_developers(tmp)
+            products = read_products(tmp)
+
+            self.assertEqual(len(devs), 1)
+            self.assertEqual(devs[0].email, 'dev@example.com')
+            self.assertEqual(len(products), 1)
+            self.assertEqual(products[0].name, 'sample-product')
+            self.assertEqual(products[0].scopes, [])
+
     # ── ZIP discovery ─────────────────────────────────────────────────────────
 
     def test_find_proxy_zips(self):
@@ -327,6 +363,35 @@ class TestDataDirReaders(unittest.TestCase):
         self.assertEqual(kvms[0].scope, 'proxy')
         self.assertEqual(kvms[0].proxy_name, 'orders-api')
 
+    def test_singular_kvm_layout_is_supported(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            org_dir = os.path.join(tmp, 'kvm', 'org')
+            env_dir = os.path.join(tmp, 'kvm', 'env', 'dev')
+            os.makedirs(org_dir, exist_ok=True)
+            os.makedirs(env_dir, exist_ok=True)
+
+            with open(os.path.join(org_dir, 'org-kvm'), 'w') as f:
+                json.dump({
+                    'name': 'org-kvm',
+                    'encrypted': False,
+                    'entry': [{'name': 'key', 'value': 'value'}],
+                }, f)
+            with open(os.path.join(env_dir, 'env-kvm'), 'w') as f:
+                json.dump({
+                    'name': 'env-kvm',
+                    'encrypted': False,
+                    'entry': [{'name': 'key', 'value': 'value'}],
+                }, f)
+
+            org_kvms = read_org_kvms(tmp)
+            env_kvms = read_env_kvms(tmp)
+
+            self.assertEqual(len(org_kvms), 1)
+            self.assertEqual(org_kvms[0].name, 'org-kvm')
+            self.assertEqual(len(env_kvms), 1)
+            self.assertEqual(env_kvms[0].name, 'env-kvm')
+            self.assertEqual(env_kvms[0].environment, 'dev')
+
     # ── Target Servers ────────────────────────────────────────────────────────
 
     def test_target_servers(self):
@@ -352,6 +417,26 @@ class TestDataDirReaders(unittest.TestCase):
         hook = next(h for h in hooks if h.hook_name == 'PreProxyFlowHook')
         self.assertEqual(hook.shared_flow, 'security-common')
         self.assertTrue(hook.continue_on_error)
+
+    def test_flow_hook_config_object_emits_populated_hooks_only(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            hooks_dir = os.path.join(tmp, 'flowhooks')
+            os.makedirs(hooks_dir, exist_ok=True)
+            with open(os.path.join(hooks_dir, 'flow_hook_config'), 'w') as f:
+                json.dump({
+                    'PreProxyFlowHook': 'sf-pre-proxy',
+                    'PostProxyFlowHook': '',
+                    'PreTargetFlowHook': 'sf-pre-target',
+                    'PostTargetFlowHook': '',
+                }, f)
+
+            hooks = read_flow_hooks(tmp)
+            names = {hook.hook_name for hook in hooks}
+
+            self.assertEqual(len(hooks), 2)
+            self.assertIn('PreProxyFlowHook', names)
+            self.assertIn('PreTargetFlowHook', names)
+            self.assertNotIn('PostProxyFlowHook', names)
 
     # ── Developers ───────────────────────────────────────────────────────────
 
@@ -780,6 +865,37 @@ class TestExtendedOutputs(unittest.TestCase):
             self.assertEqual(dangling['references'][0]['referenceType'], 'PRODUCT_PROXY')
         finally:
             shutil.rmtree(tmp_root, ignore_errors=True)
+            shutil.rmtree(ir_dir, ignore_errors=True)
+
+    def test_new_export_shape_extracts_non_bundle_assets(self):
+        if not os.path.isdir(PROJECT_DATA):
+            self.skipTest('project data export is not present')
+
+        ir_dir = tempfile.mkdtemp()
+        try:
+            code = run_extraction(PROJECT_DATA, ir_dir)
+            self.assertEqual(code, 0)
+
+            with open(os.path.join(ir_dir, 'manifest.json')) as f:
+                manifest = json.load(f)
+
+            self.assertEqual(manifest['developer_count'], 4)
+            self.assertEqual(manifest['app_count'], 4)
+            self.assertEqual(manifest['product_count'], 8)
+            self.assertEqual(manifest['kvm_count'], 19)
+            self.assertEqual(manifest['target_server_count'], 2)
+            self.assertEqual(manifest['flow_hook_count'], 0)
+
+            self.assertTrue(os.path.isfile(os.path.join(ir_dir, 'developers', 'dev1@540.co.json')))
+            self.assertTrue(os.path.isfile(os.path.join(ir_dir, 'apps', 'dev1@540.co', 'kanye-dev-app.json')))
+            self.assertTrue(os.path.isfile(os.path.join(ir_dir, 'products', 'kanye-api-product.json')))
+            self.assertTrue(os.path.isfile(os.path.join(ir_dir, 'targetservers', 'lb1-mock.json')))
+            self.assertTrue(os.path.isfile(os.path.join(ir_dir, 'kvms', 'env', 'dev', 'kvm-1-unencrypted.json')))
+
+            with open(os.path.join(ir_dir, 'products', 'kanye-api-product.json')) as f:
+                product = json.load(f)
+            self.assertEqual(product['scopes'], [])
+        finally:
             shutil.rmtree(ir_dir, ignore_errors=True)
 
 

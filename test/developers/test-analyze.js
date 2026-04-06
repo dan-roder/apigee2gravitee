@@ -282,6 +282,44 @@ async function testMultiProductCredentialCreatesMultipleSubscriptions() {
   });
 }
 
+async function testSingleProductCanMapToMultipleTargets() {
+  await withTempDir(async (dir) => {
+    const dataDir = path.join(dir, 'data');
+    const irDir = path.join(dir, 'ir');
+    copyDir(FIXTURES_DATA, dataDir);
+    generateIrFromData(dataDir, irDir);
+
+    const config = makeConfig(dir, {
+      productPlanMap: {
+        'orders-product': [
+          {
+            targetApi: 'orders-api',
+            targetApiId: 'api-orders-1',
+            targetPlan: 'Orders API Key',
+            targetPlanId: 'plan-orders-1',
+          },
+          {
+            targetApi: 'orders-audit-api',
+            targetApiId: 'api-orders-audit-1',
+            targetPlan: 'Orders Audit API Key',
+            targetPlanId: 'plan-orders-audit-1',
+          },
+        ],
+      },
+    });
+
+    const result = await runDevelopersAnalyze(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json') },
+      { config, client: makeClient() },
+    );
+
+    assert.strictEqual(result.exitCode, 0);
+    assert.strictEqual(result.plan.records.subscriptions.length, 2);
+    assert.ok(result.plan.records.subscriptions.every((item) => item.productName === 'orders-product'));
+    assert.ok(result.preflight.warnings.some((item) => item.code === 'PRODUCT_PLAN_MAPPING_MULTI_TARGET'));
+  });
+}
+
 async function run() {
   await testAnalyzeSucceedsAndWritesOutputs();
   await testAnalyzeFailsWhenProductMappingMissing();
@@ -289,6 +327,7 @@ async function run() {
   await testAnalyzeFlagsMissingCustomFields();
   await testAnalyzeSurfacesAmbiguousProbeAsManualReview();
   await testMultiProductCredentialCreatesMultipleSubscriptions();
+  await testSingleProductCanMapToMultipleTargets();
   console.log('test-analyze.js passed');
 }
 

@@ -89,6 +89,21 @@ function validateEnum(value, field, allowed, errors) {
   }
 }
 
+function validatePlanTarget(entry, field, errors) {
+  if (!entry || typeof entry !== 'object' || Array.isArray(entry)) {
+    errors.push(`${field} must be an object`);
+    return;
+  }
+  validateString(entry.targetApi, `${field}.targetApi`, errors);
+  validateString(entry.targetPlan, `${field}.targetPlan`, errors);
+  if (entry.targetApiId !== undefined) {
+    validateString(entry.targetApiId, `${field}.targetApiId`, errors);
+  }
+  if (entry.targetPlanId !== undefined) {
+    validateString(entry.targetPlanId, `${field}.targetPlanId`, errors);
+  }
+}
+
 function validateProductPlanMap(map, errors) {
   if (!map || typeof map !== 'object' || Array.isArray(map)) {
     errors.push('productPlanMap must be an object');
@@ -100,18 +115,17 @@ function validateProductPlanMap(map, errors) {
     return;
   }
   for (const [productName, entry] of entries) {
-    if (!entry || typeof entry !== 'object' || Array.isArray(entry)) {
-      errors.push(`productPlanMap.${productName} must be an object`);
+    if (Array.isArray(entry)) {
+      if (entry.length === 0) {
+        errors.push(`productPlanMap.${productName} must contain at least one target mapping`);
+        continue;
+      }
+      for (let index = 0; index < entry.length; index += 1) {
+        validatePlanTarget(entry[index], `productPlanMap.${productName}[${index}]`, errors);
+      }
       continue;
     }
-    validateString(entry.targetApi, `productPlanMap.${productName}.targetApi`, errors);
-    validateString(entry.targetPlan, `productPlanMap.${productName}.targetPlan`, errors);
-    if (entry.targetApiId !== undefined) {
-      validateString(entry.targetApiId, `productPlanMap.${productName}.targetApiId`, errors);
-    }
-    if (entry.targetPlanId !== undefined) {
-      validateString(entry.targetPlanId, `productPlanMap.${productName}.targetPlanId`, errors);
-    }
+    validatePlanTarget(entry, `productPlanMap.${productName}`, errors);
   }
 }
 

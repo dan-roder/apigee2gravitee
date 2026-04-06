@@ -345,12 +345,36 @@ Example `productPlanMap` entry:
       "targetApiId": "api_orders_123",
       "targetPlan": "Orders API Key",
       "targetPlanId": "plan_orders_key_123"
-    }
+    },
+    "misc-product": [
+      {
+        "targetApi": "hello-api",
+        "targetApiId": "api_hello_123",
+        "targetPlan": "Hello API Key",
+        "targetPlanId": "plan_hello_key_123"
+      },
+      {
+        "targetApi": "facts-api",
+        "targetApiId": "api_facts_123",
+        "targetPlan": "Facts API Key",
+        "targetPlanId": "plan_facts_key_123"
+      }
+    ]
   }
 }
 ```
 
+`productPlanMap.<product>` may be either:
+- one target object when an Apigee product maps to one Gravitee API/plan
+- an array of target objects when one Apigee product must fan out to multiple Gravitee APIs/plans
+
+Each target entry becomes its own planned subscription during developers migration.
+
 If a source product is missing from `productPlanMap`, `developers analyze` should fail preflight.
+
+For the current sample Apigee export in [`data/`](/Users/danielroder/Sites/apigee2gravitee/data), a starter mapping stub is available at [`config/developers.product-plan-map.from-data.example.json`](/Users/danielroder/Sites/apigee2gravitee/config/developers.product-plan-map.from-data.example.json), and a full local starter config is available at [`config/developers.config.json`](/Users/danielroder/Sites/apigee2gravitee/config/developers.config.json). Both mirror the extracted Apigee product-to-proxy relationships and use placeholder Gravitee API and plan ids to fill in.
+
+In that sample, `misc-api-product` fronts three Apigee proxies. The config now supports that directly by allowing one source product to map to an array of Gravitee API/plan targets.
 
 ### Commands
 
