@@ -4,6 +4,8 @@ const { runDevelopersAnalyze } = require('./analyze');
 const { runDevelopersPlan } = require('./plan');
 const { runDevelopersImport } = require('./import');
 const { runDevelopersReconcile } = require('./reconcile');
+const { runResolveDevelopersConfigIds } = require('./resolve-config-ids');
+const { runValidateDevelopersConfigTargets } = require('./validate-config-targets');
 
 function printFindings(findings, fmt, label) {
   if (findings.length === 0) return;
@@ -21,7 +23,83 @@ function printObjectCounts(counts, fmt, prefix) {
   }
 }
 
+function hasFinding(findings, code) {
+  return (findings || []).some((item) => item.code === code);
+}
+
+function printOperatorHints(preflight, fmt) {
+  if (!preflight) return;
+
+  if (hasFinding(preflight.blockers, 'PRODUCT_PLAN_TARGET_IDS_UNRESOLVED')) {
+    console.log('');
+    console.log(fmt.info('Resolve placeholder target ids before retrying this command:'));
+    console.log(`  ${fmt.dim('1. node bin/migrator.js developers resolve-config-ids --config ./config/developers.config.json --gravitee-token "$GRAVITEE_TOKEN"')}`);
+    console.log(`  ${fmt.dim('2. node bin/migrator.js developers validate-config-targets --config ./config/developers.config.resolved.json --gravitee-token "$GRAVITEE_TOKEN"')}`);
+    console.log(`  ${fmt.dim('3. rerun this command with --config ./config/developers.config.resolved.json')}`);
+  }
+}
+
 async function runDevelopersCommand(subcommand, flags, fmt) {
+  if (subcommand === 'resolve-config-ids') {
+    const result = await runResolveDevelopersConfigIds(flags);
+    if (result.validationErrors) {
+      console.log(fmt.err('Developers config validation failed'));
+      for (const err of result.validationErrors) console.log(`  - ${err}`);
+      return 1;
+    }
+    if (result.error) {
+      console.log(fmt.err(result.error));
+      return result.exitCode;
+    }
+
+    console.log(fmt.header('Developers resolve-config-ids'));
+    console.log('');
+    console.log(`[resolve] ${result.summary.products} products, ${result.summary.targets} target mapping(s) checked`);
+    console.log(`[resolve] ${result.summary.apiIdsResolved} API id(s) resolved, ${result.summary.planIdsResolved} plan id(s) resolved, ${result.summary.unresolved} unresolved mapping(s)`);
+    if (result.findings.length > 0) {
+      console.log('');
+      console.log('  Unresolved targets:');
+      for (const finding of result.findings) {
+        console.log(`   - ${finding.productName}[${finding.targetIndex}] ${finding.targetApi} / ${finding.targetPlan}`);
+        for (const issue of finding.issues) {
+          console.log(`     ${fmt.dim(issue)}`);
+        }
+      }
+    }
+    console.log('');
+    console.log(`  Output:     ${fmt.dim(result.outputPath)}`);
+    return result.exitCode;
+  }
+
+  if (subcommand === 'validate-config-targets') {
+    const result = await runValidateDevelopersConfigTargets(flags);
+    if (result.validationErrors) {
+      console.log(fmt.err('Developers config validation failed'));
+      for (const err of result.validationErrors) console.log(`  - ${err}`);
+      return 1;
+    }
+    if (result.error) {
+      console.log(fmt.err(result.error));
+      return result.exitCode;
+    }
+
+    console.log(fmt.header('Developers validate-config-targets'));
+    console.log('');
+    console.log(`[validate] ${result.report.summary.products} products, ${result.report.summary.targets} target mapping(s) checked`);
+    console.log(`[validate] ${result.report.summary.validTargets} valid, ${result.report.summary.blockers} blocker(s), ${result.report.summary.warnings} warning(s)`);
+    if (result.report.findings.length > 0) {
+      console.log('');
+      console.log('  Findings:');
+      for (const finding of result.report.findings.slice(0, 10)) {
+        const printer = finding.severity === 'blocker' ? fmt.err : fmt.warn;
+        console.log(printer(`${finding.code}: ${finding.productName}[${finding.targetIndex}] ${finding.message}`));
+      }
+    }
+    console.log('');
+    console.log(`  Report:     ${fmt.dim(result.outputPath)}`);
+    return result.exitCode;
+  }
+
   if (subcommand === 'plan') {
     const result = await runDevelopersPlan(flags);
     if (result.validationErrors) {
@@ -39,6 +117,7 @@ async function runDevelopersCommand(subcommand, flags, fmt) {
       console.log(`[plan] ${result.manifest.summary.actionsByStatus.READY || 0} ready, ${result.manifest.summary.actionsByStatus.BLOCKED || 0} blocked, ${result.manifest.summary.actionsByStatus.SKIPPED || 0} skipped, ${result.manifest.summary.manualReview || 0} manual review`);
       const nextScope = result.gapReport?.operatorGuidance?.nextSuggestedScope;
       if (nextScope) console.log(`[plan] next suggested scope: ${nextScope}`);
+      printOperatorHints(result.preflight, fmt);
       console.log('');
       console.log('  Action summary:');
       printObjectCounts(result.manifest.summary.operatorActions?.byOperation, fmt, '   -');
@@ -69,6 +148,7 @@ async function runDevelopersCommand(subcommand, flags, fmt) {
     printFindings(result.preflight.warnings, fmt, '[warn]');
     const nextScope = result.gapReport?.operatorGuidance?.nextSuggestedScope;
     if (nextScope) console.log(fmt.info(`Next suggested pilot scope: ${nextScope}`));
+    printOperatorHints(result.preflight, fmt);
     console.log(`  Resume safe: ${fmt.dim(result.gapReport?.operatorGuidance?.resumeSafe ? 'yes' : 'no')}`);
     console.log('');
     console.log(`  Plan:       ${fmt.dim(result.outputPaths.plan)}`);
@@ -101,6 +181,7 @@ async function runDevelopersCommand(subcommand, flags, fmt) {
       console.log('  Blocking categories:');
       printObjectCounts(result.gapReport?.operatorGuidance?.blockerCategories, fmt, '   -');
     }
+    printOperatorHints(result.preflight, fmt);
     console.log('');
     console.log(`  Plan:       ${fmt.dim(result.outputPaths.plan)}`);
     console.log(`  State:      ${fmt.dim(result.outputPaths.state)}`);
@@ -127,6 +208,7 @@ async function runDevelopersCommand(subcommand, flags, fmt) {
         console.log(`   - ${mismatch.code}: ${mismatch.sourceId}`);
       }
     }
+    printOperatorHints(result.preflight, fmt);
     console.log('');
     console.log(`  Report:     ${fmt.dim(result.outputPaths.reconcileReport)}`);
     console.log(`  Log:        ${fmt.dim(result.outputPaths.log)}`);
@@ -137,4 +219,4 @@ async function runDevelopersCommand(subcommand, flags, fmt) {
   return 1;
 }
 
-module.exports = { runDevelopersCommand };
+module.exports = { runDevelopersCommand, printOperatorHints };

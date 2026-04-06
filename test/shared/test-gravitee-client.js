@@ -54,12 +54,35 @@ async function testNormalizeCollectionSupportsItemsShape() {
   assert.deepStrictEqual(items, [{ id: 'a' }]);
 }
 
+async function testFindApiByNameFiltersExactName() {
+  const client = new GraviteeClient({ baseUrl: 'https://gravitee.example.com', orgId: 'DEFAULT', envId: 'DEFAULT', token: 'token' });
+  client.listApis = async () => ([
+    { id: 'api-1', name: 'Orders API' },
+    { id: 'api-2', name: 'Billing API' },
+  ]);
+  const api = await client.findApiByName('Billing API');
+  assert.strictEqual(api.id, 'api-2');
+}
+
+async function testFindPlanResolvesApiByNameWhenIdMissing() {
+  const client = new GraviteeClient({ baseUrl: 'https://gravitee.example.com', orgId: 'DEFAULT', envId: 'DEFAULT', token: 'token' });
+  client.findApiByName = async (name) => ({ id: 'api-1', name });
+  client.listApiPlans = async (apiId) => ([
+    { id: 'plan-1', apiId, name: 'Orders API Key' },
+  ]);
+  const plan = await client.findPlan({ targetApi: 'Orders API', targetPlan: 'Orders API Key' });
+  assert.strictEqual(plan.id, 'plan-1');
+  assert.strictEqual(plan.apiId, 'api-1');
+}
+
 async function run() {
   await testFindUserByEmailFiltersResults();
   await testCreateSubscriptionUsesV2Endpoint();
   await testFindPlanByIdUsesExpectedEndpoint();
   await testFindApplicationPrefersSourceMarker();
   await testNormalizeCollectionSupportsItemsShape();
+  await testFindApiByNameFiltersExactName();
+  await testFindPlanResolvesApiByNameWhenIdMissing();
   console.log('test-gravitee-client.js passed');
 }
 

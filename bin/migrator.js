@@ -258,6 +258,8 @@ ${fmt.bold('extract options:')}
 ${fmt.bold('Examples:')}
   migrator extract --data-dir ./data --ir-dir ./ir
   migrator extract --data-dir ./data --ir-dir ./ir --org advana --env dev -v
+  migrator developers resolve-config-ids --config ./config/developers.config.json
+  migrator developers validate-config-targets --config ./config/developers.config.resolved.json
   migrator developers analyze --ir-dir ./ir --config ./config/developers.config.json
 `);
 }

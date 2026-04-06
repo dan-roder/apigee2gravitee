@@ -1,0 +1,132 @@
+{
+  "generatedAt": "2026-04-06T20:26:59.847Z",
+  "configPath": "/var/folders/d6/gps0jnn52j7cb_wz9r3p9j7w0000gn/T/developers-validate-config-ZRYfjE/developers.config.json",
+  "summary": {
+    "products": 2,
+    "targets": 3,
+    "validTargets": 0,
+    "blockers": 3,
+    "warnings": 0
+  },
+  "targets": [
+    {
+      "productName": "orders-product",
+      "targetIndex": 0,
+      "configured": {
+        "targetApi": "Orders API",
+        "targetApiId": "api-orders-1",
+        "targetPlan": "Orders API Key",
+        "targetPlanId": "plan-orders-1"
+      },
+      "resolved": {
+        "apiId": null,
+        "apiName": "Orders API",
+        "planId": null,
+        "planName": "Orders API Key"
+      },
+      "status": "BLOCKED",
+      "findings": [
+        {
+          "severity": "blocker",
+          "code": "TARGET_API_ID_NOT_FOUND",
+          "productName": "orders-product",
+          "targetIndex": 0,
+          "message": "Configured targetApiId api-orders-1 could not be loaded",
+          "details": {
+            "targetApiId": "api-orders-1",
+            "error": "not found"
+          }
+        }
+      ]
+    },
+    {
+      "productName": "misc-product",
+      "targetIndex": 0,
+      "configured": {
+        "targetApi": "Hello API",
+        "targetPlan": "Hello API Key"
+      },
+      "resolved": {
+        "apiId": null,
+        "apiName": "Hello API",
+        "planId": null,
+        "planName": "Hello API Key"
+      },
+      "status": "BLOCKED",
+      "findings": [
+        {
+          "severity": "blocker",
+          "code": "TARGET_API_NAME_AMBIGUOUS",
+          "productName": "misc-product",
+          "targetIndex": 0,
+          "message": "API lookup for Hello API was ambiguous",
+          "details": {
+            "targetApi": "Hello API",
+            "error": "Ambiguous Gravitee API match for Hello API"
+          }
+        }
+      ]
+    },
+    {
+      "productName": "misc-product",
+      "targetIndex": 1,
+      "configured": {
+        "targetApi": "Facts API",
+        "targetPlan": "Facts API Key"
+      },
+      "resolved": {
+        "apiId": null,
+        "apiName": "Facts API",
+        "planId": null,
+        "planName": "Facts API Key"
+      },
+      "status": "BLOCKED",
+      "findings": [
+        {
+          "severity": "blocker",
+          "code": "TARGET_API_NAME_NOT_FOUND",
+          "productName": "misc-product",
+          "targetIndex": 1,
+          "message": "No Gravitee API found with name Facts API",
+          "details": {
+            "targetApi": "Facts API"
+          }
+        }
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "severity": "blocker",
+      "code": "TARGET_API_ID_NOT_FOUND",
+      "productName": "orders-product",
+      "targetIndex": 0,
+      "message": "Configured targetApiId api-orders-1 could not be loaded",
+      "details": {
+        "targetApiId": "api-orders-1",
+        "error": "not found"
+      }
+    },
+    {
+      "severity": "blocker",
+      "code": "TARGET_API_NAME_AMBIGUOUS",
+      "productName": "misc-product",
+      "targetIndex": 0,
+      "message": "API lookup for Hello API was ambiguous",
+      "details": {
+        "targetApi": "Hello API",
+        "error": "Ambiguous Gravitee API match for Hello API"
+      }
+    },
+    {
+      "severity": "blocker",
+      "code": "TARGET_API_NAME_NOT_FOUND",
+      "productName": "misc-product",
+      "targetIndex": 1,
+      "message": "No Gravitee API found with name Facts API",
+      "details": {
+        "targetApi": "Facts API"
+      }
+    }
+  ]
+}

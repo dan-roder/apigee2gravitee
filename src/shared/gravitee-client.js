@@ -293,6 +293,26 @@ class GraviteeClient {
     return normalizeCollection(body);
   }
 
+  async listApis() {
+    const body = await this.get(this.v2Url('/apis'));
+    return normalizeCollection(body);
+  }
+
+  async getApi(apiId) {
+    return this.get(this.v2Url(`/apis/${apiId}`));
+  }
+
+  async findApiByName(name) {
+    if (!name) return null;
+    const items = await this.listApis();
+    const exact = items.filter((item) => item?.name === name);
+    if (exact.length > 1) {
+      throw new Error(`Ambiguous Gravitee API match for ${name}`);
+    }
+    if (exact.length === 1) return exact[0];
+    return null;
+  }
+
   async listRoles() {
     const body = await this.get(this.orgUrl('/rolescopes'));
     const roles = new Set();
@@ -393,24 +413,34 @@ class GraviteeClient {
     return this.post(this.envUrl(`/applications/${applicationId}/members`), payload);
   }
 
+  async listApiPlans(apiId) {
+    const body = await this.get(this.v2Url(`/apis/${apiId}/plans`));
+    return normalizeCollection(body);
+  }
+
   async findPlan(mapping) {
+    let resolvedApiId = mapping.targetApiId || null;
+    if (!resolvedApiId && mapping.targetApi) {
+      const api = await this.findApiByName(mapping.targetApi);
+      resolvedApiId = api?.id || null;
+    }
+
     if (mapping.targetApiId && mapping.targetPlanId) {
       const plan = await this.get(this.v2Url(`/apis/${mapping.targetApiId}/plans/${mapping.targetPlanId}`));
       return plan ? { ...plan, apiId: plan.apiId || mapping.targetApiId } : null;
     }
 
-    if (!mapping.targetApiId) {
+    if (!resolvedApiId) {
       return {
         id: mapping.targetPlanId || mapping.targetPlan,
-        apiId: mapping.targetApiId || null,
+        apiId: null,
         name: mapping.targetPlan,
       };
     }
 
-    const body = await this.get(this.v2Url(`/apis/${mapping.targetApiId}/plans`));
-    const items = normalizeCollection(body);
+    const items = await this.listApiPlans(resolvedApiId);
     const found = items.find((item) => item.id === mapping.targetPlanId || item.name === mapping.targetPlan);
-    return found ? { ...found, apiId: found.apiId || mapping.targetApiId } : null;
+    return found ? { ...found, apiId: found.apiId || resolvedApiId } : null;
   }
 
   async findSubscription({ applicationId, apiId, planId }) {

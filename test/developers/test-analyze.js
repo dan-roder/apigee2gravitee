@@ -179,6 +179,34 @@ async function testAnalyzeFailsWhenSilentUserCreationUnsupported() {
   });
 }
 
+async function testAnalyzeFailsWhenTargetIdsAreUnresolved() {
+  await withTempDir(async (dir) => {
+    const dataDir = path.join(dir, 'data');
+    const irDir = path.join(dir, 'ir');
+    copyDir(FIXTURES_DATA, dataDir);
+    generateIrFromData(dataDir, irDir);
+
+    const config = makeConfig(dir, {
+      productPlanMap: {
+        'orders-product': {
+          targetApi: 'orders-api',
+          targetApiId: 'REPLACE_WITH_GRAVITEE_API_ID_FOR_ORDERS_API',
+          targetPlan: 'Orders API Key',
+          targetPlanId: 'REPLACE_WITH_GRAVITEE_PLAN_ID_FOR_ORDERS_API_KEY',
+        },
+      },
+    });
+
+    const result = await runDevelopersAnalyze(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json') },
+      { config, client: makeClient() },
+    );
+
+    assert.strictEqual(result.exitCode, 3);
+    assert.ok(result.preflight.blockers.some((item) => item.code === 'PRODUCT_PLAN_TARGET_IDS_UNRESOLVED'));
+  });
+}
+
 async function testAnalyzeFlagsMissingCustomFields() {
   await withTempDir(async (dir) => {
     const dataDir = path.join(dir, 'data');
@@ -263,11 +291,15 @@ async function testMultiProductCredentialCreatesMultipleSubscriptions() {
       productPlanMap: {
         'orders-product': {
           targetApi: 'orders-api',
+          targetApiId: 'api-orders-1',
           targetPlan: 'Orders API Key',
+          targetPlanId: 'plan-orders-1',
         },
         'billing-product': {
           targetApi: 'billing-api',
+          targetApiId: 'api-billing-1',
           targetPlan: 'Billing API Key',
+          targetPlanId: 'plan-billing-1',
         },
       },
     });
@@ -324,6 +356,7 @@ async function run() {
   await testAnalyzeSucceedsAndWritesOutputs();
   await testAnalyzeFailsWhenProductMappingMissing();
   await testAnalyzeFailsWhenSilentUserCreationUnsupported();
+  await testAnalyzeFailsWhenTargetIdsAreUnresolved();
   await testAnalyzeFlagsMissingCustomFields();
   await testAnalyzeSurfacesAmbiguousProbeAsManualReview();
   await testMultiProductCredentialCreatesMultipleSubscriptions();

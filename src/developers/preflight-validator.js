@@ -45,6 +45,7 @@ function checkProductPlanMappings(domain, config) {
   const findings = [];
   const missing = new Set();
   const multiTarget = new Set();
+  const unresolvedTargets = [];
 
   for (const subscription of domain.subscriptions) {
     if (!subscription.planMapping) {
@@ -52,6 +53,21 @@ function checkProductPlanMappings(domain, config) {
     }
     if ((subscription.planTargets || []).length > 1) {
       multiTarget.add(subscription.productName);
+    }
+    if (subscription.planMapping) {
+      const target = subscription.planMapping;
+      const apiIdUnresolved = !target.targetApiId || String(target.targetApiId).startsWith('REPLACE_WITH_');
+      const planIdUnresolved = !target.targetPlanId || String(target.targetPlanId).startsWith('REPLACE_WITH_');
+      if (apiIdUnresolved || planIdUnresolved) {
+        unresolvedTargets.push({
+          productName: subscription.productName,
+          targetApi: target.targetApi,
+          targetPlan: target.targetPlan,
+          targetIndex: target.targetIndex ?? 0,
+          missingTargetApiId: apiIdUnresolved,
+          missingTargetPlanId: planIdUnresolved,
+        });
+      }
     }
   }
 
@@ -70,6 +86,15 @@ function checkProductPlanMappings(domain, config) {
       'PRODUCT_PLAN_MAPPING_MULTI_TARGET',
       `Source product ${productName} maps to multiple Gravitee API/plan targets`,
       { productName },
+    ));
+  }
+
+  for (const target of unresolvedTargets) {
+    findings.push(issue(
+      'blocker',
+      'PRODUCT_PLAN_TARGET_IDS_UNRESOLVED',
+      `Source product ${target.productName} must resolve targetApiId and targetPlanId before analyze`,
+      target,
     ));
   }
 

@@ -10,7 +10,7 @@
     "node": ">=18.0.0"
   },
   "scripts": {
-    "test:developers":  "node test/developers/test-analyze.js && node test/developers/test-workflow.js",
+    "test:developers":  "node test/developers/test-analyze.js && node test/developers/test-workflow.js && node test/developers/test-resolve-config-ids.js && node test/developers/test-validate-config-targets.js && node test/developers/test-index.js",
     "test:shared":      "node test/shared/test-ir-loader.js && node test/shared/test-gravitee-client.js",
     "test:extractor":   "python3 -m unittest test.extractor.test_extractor -v",
     "test:translator":  "node test/translator/test-parser.js && node test/translator/test-mapper.js",

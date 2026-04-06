@@ -379,10 +379,24 @@ In that sample, `misc-api-product` fronts three Apigee proxies. The config now s
 ### Commands
 
 ```bash
+node bin/migrator.js developers resolve-config-ids --config ./config/developers.config.json --gravitee-token "$GRAVITEE_TOKEN"
+node bin/migrator.js developers validate-config-targets --config ./config/developers.config.resolved.json --gravitee-token "$GRAVITEE_TOKEN"
 node bin/migrator.js developers analyze   --ir-dir ./ir --config ./config/developers.config.json
 node bin/migrator.js developers plan      --ir-dir ./ir --config ./config/developers.config.json
 node bin/migrator.js developers import    --ir-dir ./ir --config ./config/developers.config.json
 node bin/migrator.js developers reconcile --ir-dir ./ir --config ./config/developers.config.json
+```
+
+Use `developers resolve-config-ids` before `developers analyze` when your config still contains placeholder `targetApiId` and `targetPlanId` values. It resolves Gravitee API ids by `targetApi` name and plan ids by `targetPlan` name, then writes a sibling file such as `config/developers.config.resolved.json`.
+
+Use `developers validate-config-targets` after that to confirm every `productPlanMap` target matches a live Gravitee API and plan exactly. It writes `report/developers-config-targets-report.json` by default and treats missing or ambiguous API/plan matches as blockers.
+
+`developers analyze` now fails fast when any `productPlanMap` target still has placeholder or missing `targetApiId` or `targetPlanId` values. The intended operator sequence is:
+
+```bash
+node bin/migrator.js developers resolve-config-ids --config ./config/developers.config.json --gravitee-token "$GRAVITEE_TOKEN"
+node bin/migrator.js developers validate-config-targets --config ./config/developers.config.resolved.json --gravitee-token "$GRAVITEE_TOKEN"
+node bin/migrator.js developers analyze --ir-dir ./ir --config ./config/developers.config.resolved.json --gravitee-token "$GRAVITEE_TOKEN"
 ```
 
 Recommended first pass:
