@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-07T19:30:40.626Z",
+  "generatedAt": "2026-04-07T19:33:15.709Z",
   "kind": "ApisMigrationManifest",
   "source": {
     "irDir": "/Users/daniel.roder/Sites/apigee2gravitee/ir",
@@ -4409,7 +4409,7 @@
       "sourceId": "apigee-hello-api-1",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "UPDATE",
       "lookup": {
         "sourceId": "apigee-hello-api-1",
         "name": "apigee-hello-api-1"
@@ -4523,7 +4523,9 @@
       "manualReviewReasons": [
         "SHARED_FLOW_REFS_PRESENT"
       ],
-      "targetHint": {}
+      "targetHint": {
+        "apiId": "6c993791-2e40-4dbd-9937-912e40edbd63"
+      }
     },
     {
       "actionId": "UPSERT_PLAN:apigee-hello-api-1:KEYLESS",
@@ -4614,7 +4616,7 @@
       "sourceId": "apigee-hello",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "UPDATE",
       "lookup": {
         "sourceId": "apigee-hello",
         "name": "apigee-hello"
@@ -4697,7 +4699,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "apiId": "d42f4a24-a4bd-46ba-af4a-24a4bde6ba74"
+      }
     },
     {
       "actionId": "UPSERT_PLAN:apigee-hello:KEYLESS",
@@ -4782,7 +4786,7 @@
       "sourceId": "car-makes-api-3",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "UPDATE",
       "lookup": {
         "sourceId": "car-makes-api-3",
         "name": "car-makes-api-3"
@@ -4865,7 +4869,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "apiId": "24c27776-60d0-4bc2-8277-7660d01bc283"
+      }
     },
     {
       "actionId": "UPSERT_PLAN:car-makes-api-3:KEYLESS",
@@ -4950,7 +4956,7 @@
       "sourceId": "cat-fact-api-2",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "UPDATE",
       "lookup": {
         "sourceId": "cat-fact-api-2",
         "name": "cat-fact-api-2"
@@ -5033,7 +5039,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "apiId": "35ee4c77-ea76-4880-ae4c-77ea76c88056"
+      }
     },
     {
       "actionId": "UPSERT_PLAN:cat-fact-api-2:KEYLESS",
@@ -5118,7 +5126,7 @@
       "sourceId": "cats-api-7",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "UPDATE",
       "lookup": {
         "sourceId": "cats-api-7",
         "name": "cats-api-7"
@@ -5240,7 +5248,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "apiId": "f8e3ea2b-80cf-4588-a3ea-2b80cf9588cb"
+      }
     },
     {
       "actionId": "UPSERT_PLAN:cats-api-7:API_KEY",
@@ -5325,7 +5335,7 @@
       "sourceId": "chuck-norris-api-10",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "UPDATE",
       "lookup": {
         "sourceId": "chuck-norris-api-10",
         "name": "chuck-norris-api-10"
@@ -5464,7 +5474,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "apiId": "6373bf84-dce9-4ce5-b3bf-84dce9dce5b5"
+      }
     },
     {
       "actionId": "UPSERT_PLAN:chuck-norris-api-10:API_KEY",
@@ -5549,7 +5561,7 @@
       "sourceId": "dog-breeds-api-6",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "UPDATE",
       "lookup": {
         "sourceId": "dog-breeds-api-6",
         "name": "dog-breeds-api-6"
@@ -5671,7 +5683,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "apiId": "9f189d36-01a8-4247-989d-3601a81247d7"
+      }
     },
     {
       "actionId": "UPSERT_PLAN:dog-breeds-api-6:API_KEY",
@@ -5978,7 +5992,7 @@
       "sourceId": "harry-potter-characters",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "UPDATE",
       "lookup": {
         "sourceId": "harry-potter-characters",
         "name": "harry-potter-characters"
@@ -6130,7 +6144,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "apiId": "01ccef8b-6f8f-48b7-8cef-8b6f8f28b7bd"
+      }
     },
     {
       "actionId": "UPSERT_PLAN:harry-potter-characters:KEYLESS",
@@ -6215,7 +6231,7 @@
       "sourceId": "hogwarts-houses-api-8",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "UPDATE",
       "lookup": {
         "sourceId": "hogwarts-houses-api-8",
         "name": "hogwarts-houses-api-8"
@@ -6337,7 +6353,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "apiId": "289bc6c1-ad22-43f6-9bc6-c1ad2253f654"
+      }
     },
     {
       "actionId": "UPSERT_PLAN:hogwarts-houses-api-8:API_KEY",
@@ -6888,7 +6906,7 @@
       "sourceId": "load-balance-target-servers-api",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "UPDATE",
       "lookup": {
         "sourceId": "load-balance-target-servers-api",
         "name": "load-balance-target-servers-api"
@@ -6989,7 +7007,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "apiId": "fa8bbe2e-9ef3-4024-8bbe-2e9ef3d024dc"
+      }
     },
     {
       "actionId": "UPSERT_PLAN:load-balance-target-servers-api:KEYLESS",
