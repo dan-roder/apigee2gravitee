@@ -56,11 +56,37 @@ async function executeAction(action, result, idMap) {
 
 function formatImportError(err) {
   if (!err) return 'Unknown import error';
+  if (Array.isArray(err.attempts)) {
+    return err.attempts.map((attempt) => {
+      const body = attempt.body === undefined
+        ? ''
+        : `: ${typeof attempt.body === 'string' ? attempt.body : JSON.stringify(attempt.body)}`;
+      return `${attempt.strategy} -> ${attempt.message}${body}`;
+    }).join(' | ');
+  }
   if (err.body !== undefined) {
     const rendered = typeof err.body === 'string' ? err.body : JSON.stringify(err.body);
     return `${err.message}: ${rendered}`;
   }
   return err.message || String(err);
+}
+
+function isCompatibilityError(err) {
+  if (!err) return false;
+  if (err.classification === 'compatibility') return true;
+  const message = formatImportError(err).toLowerCase();
+  return message.includes('deserialize')
+    || message.includes('virtualhosts')
+    || message.includes('getproxy()')
+    || message.includes('unsupported-endpoint')
+    || message.includes('unverified');
+}
+
+function markDependentActions(state, manifest, actionId, status, reason) {
+  const dependents = manifest.actions.filter((item) => (item.dependencies || []).includes(actionId));
+  for (const dependent of dependents) {
+    markActionCompleted(state, dependent.actionId, status, { lastError: reason });
+  }
 }
 
 async function runApisImport(flags, deps = {}) {
@@ -75,9 +101,25 @@ async function runApisImport(flags, deps = {}) {
   const state = mergeSavedActionState(result.state, savedState);
   const idMap = readJsonIfExists(result.outputPaths.idMap) || result.idMap;
   const events = [...result.events];
+  const maxErrors = Number.isFinite(Number(flags['max-errors'])) ? Number(flags['max-errors']) : 10;
+  let failureCount = 0;
 
   for (const action of result.manifest.actions) {
     if (flags.resume && !flags.force && state.actions[action.actionId]?.status === 'SUCCEEDED') continue;
+    const dependencyStatuses = (action.dependencies || []).map((id) => state.actions[id]?.status);
+    if (dependencyStatuses.some((status) => status && status !== 'SUCCEEDED')) {
+      const dependencyReason = `dependency not satisfied: ${(action.dependencies || []).map((id) => `${id}=${state.actions[id]?.status || 'UNKNOWN'}`).join(', ')}`;
+      const inheritedStatus = dependencyStatuses.some((status) => status === 'MANUAL_REVIEW') ? 'MANUAL_REVIEW' : 'BLOCKED';
+      markActionCompleted(state, action.actionId, inheritedStatus, { lastError: dependencyReason });
+      events.push({
+        ts: new Date().toISOString(),
+        type: inheritedStatus === 'MANUAL_REVIEW' ? 'import.manual_review' : 'import.blocked',
+        actionId: action.actionId,
+        kind: action.kind,
+        error: dependencyReason,
+      });
+      continue;
+    }
     if (action.plannedStatus === 'BLOCKED') {
       markActionCompleted(state, action.actionId, 'BLOCKED', { lastError: action.blockers.join(', ') || null });
       continue;
@@ -90,9 +132,28 @@ async function runApisImport(flags, deps = {}) {
       events.push({ ts: new Date().toISOString(), type: 'import.succeeded', actionId: action.actionId, kind: action.kind });
     } catch (err) {
       const detailedError = formatImportError(err);
-      markActionCompleted(state, action.actionId, 'FAILED', { lastError: detailedError });
-      events.push({ ts: new Date().toISOString(), type: 'import.failed', actionId: action.actionId, kind: action.kind, error: detailedError });
-      break;
+      if (isCompatibilityError(err)) {
+        markActionCompleted(state, action.actionId, 'MANUAL_REVIEW', { lastError: detailedError });
+        markDependentActions(state, result.manifest, action.actionId, 'MANUAL_REVIEW', `upstream action requires manual review: ${action.actionId}`);
+        events.push({
+          ts: new Date().toISOString(),
+          type: 'import.manual_review',
+          actionId: action.actionId,
+          kind: action.kind,
+          error: detailedError,
+        });
+      } else {
+        failureCount += 1;
+        markActionCompleted(state, action.actionId, 'FAILED', { lastError: detailedError });
+        markDependentActions(state, result.manifest, action.actionId, 'BLOCKED', `upstream action failed: ${action.actionId}`);
+        events.push({ ts: new Date().toISOString(), type: 'import.failed', actionId: action.actionId, kind: action.kind, error: detailedError });
+        if (failureCount >= maxErrors) {
+          writeJson(result.outputPaths.state, state);
+          writeJson(result.outputPaths.idMap, idMap);
+          writeNdjson(result.outputPaths.log, events);
+          break;
+        }
+      }
     }
     writeJson(result.outputPaths.state, state);
     writeJson(result.outputPaths.idMap, idMap);

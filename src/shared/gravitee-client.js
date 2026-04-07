@@ -314,14 +314,11 @@ class GraviteeClient {
   }
 
   async createApi(payload) {
-    return this.post(this.envUrl('/apis/import'), { api: payload });
+    return this._writeApiWithFallbacks('create', null, payload);
   }
 
   async updateApi(apiId, payload) {
-    if (apiId) {
-      return this.put(this.envUrl(`/apis/${apiId}/import`), { api: payload });
-    }
-    return this.put(this.envUrl('/apis/import'), { api: payload });
+    return this._writeApiWithFallbacks('update', apiId, payload);
   }
 
   async listRoles() {
@@ -566,7 +563,8 @@ class GraviteeClient {
 
   async verifyApiImportCapabilities() {
     const listApis = await this.probeEndpoint('GET', this.v2Url('/apis'));
-    const createApi = await this.probeEndpoint('POST', this.envUrl('/apis/import'), {});
+    const createViaV4 = await this.probeEndpoint('POST', this.v2Url('/apis'), {});
+    const createApi = await this.probeEndpoint('POST', this.envUrl('/apis/import'), { api: {} });
     const updateApi = await this.probeEndpoint('PUT', this.envUrl('/apis/import'), {});
     updateApi.required = false;
     if (updateApi.status === 404 || updateApi.status === 400) {
@@ -575,10 +573,79 @@ class GraviteeClient {
       updateApi.classification = 'indeterminate-resource';
     }
     return {
-      ok: listApis.ok && createApi.supported,
-      supported: listApis.supported && createApi.supported,
-      checks: { listApis, createApi, updateApi },
+      ok: listApis.ok && (createViaV4.supported || createApi.supported),
+      supported: listApis.supported && (createViaV4.supported || createApi.supported),
+      checks: { listApis, createViaV4, createApi, updateApi },
     };
+  }
+
+  _clone(value) {
+    return JSON.parse(JSON.stringify(value));
+  }
+
+  _stripPlans(payload) {
+    const clone = this._clone(payload);
+    delete clone.plans;
+    return clone;
+  }
+
+  _buildApiWriteStrategies(mode, apiId, payload) {
+    const v4Full = {
+      name: 'v4-management-full',
+      exec: () => mode === 'create'
+        ? this.post(this.v2Url('/apis'), payload)
+        : this.put(this.v2Url(`/apis/${apiId}`), payload),
+    };
+    const v4Shell = {
+      name: 'v4-management-shell',
+      exec: () => mode === 'create'
+        ? this.post(this.v2Url('/apis'), this._stripPlans(payload))
+        : this.put(this.v2Url(`/apis/${apiId}`), this._stripPlans(payload)),
+    };
+    const legacyImport = {
+      name: 'legacy-import-wrapper',
+      exec: () => {
+        if (mode === 'create') {
+          return this.post(this.envUrl('/apis/import'), { api: payload });
+        }
+        if (apiId) {
+          return this.put(this.envUrl(`/apis/${apiId}/import`), { api: payload });
+        }
+        return this.put(this.envUrl('/apis/import'), { api: payload });
+      },
+    };
+    return [v4Full, v4Shell, legacyImport];
+  }
+
+  async _writeApiWithFallbacks(mode, apiId, payload) {
+    const attempts = [];
+    for (const strategy of this._buildApiWriteStrategies(mode, apiId, payload)) {
+      try {
+        const response = await strategy.exec();
+        if (response && typeof response === 'object' && !Array.isArray(response)) {
+          response._strategy = strategy.name;
+        }
+        return response;
+      } catch (err) {
+        attempts.push({
+          strategy: strategy.name,
+          status: err.status || null,
+          classification: classifyApiError(err),
+          message: err.message,
+          body: err.body,
+        });
+      }
+    }
+
+    const fallbackError = new Error(
+      attempts
+        .map((attempt) => `${attempt.strategy}: ${attempt.message}${attempt.body ? `: ${typeof attempt.body === 'string' ? attempt.body : JSON.stringify(attempt.body)}` : ''}`)
+        .join(' | ')
+    );
+    fallbackError.name = 'GraviteeApiCompatibilityError';
+    fallbackError.classification = 'compatibility';
+    fallbackError.attempts = attempts;
+    throw fallbackError;
   }
 }
 

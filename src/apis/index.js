@@ -51,7 +51,7 @@ async function runApisCommand(subcommand, flags, fmt) {
       acc[item.status] = (acc[item.status] || 0) + 1;
       return acc;
     }, {});
-    console.log(`[import] ${statuses.SUCCEEDED || 0} succeeded, ${statuses.FAILED || 0} failed, ${statuses.BLOCKED || 0} blocked`);
+    console.log(`[import] ${statuses.SUCCEEDED || 0} succeeded, ${statuses.FAILED || 0} failed, ${statuses.BLOCKED || 0} blocked, ${statuses.MANUAL_REVIEW || 0} manual review`);
     console.log(`  State:      ${fmt.dim(result.outputPaths.state)}`);
     console.log(`  Id map:     ${fmt.dim(result.outputPaths.idMap)}`);
     return result.exitCode;

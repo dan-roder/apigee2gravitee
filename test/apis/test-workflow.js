@@ -133,6 +133,38 @@ async function testApisImportCreatesApiAndPlans() {
   });
 }
 
+async function testApisImportCompatibilityIssuesBecomeManualReview() {
+  await withTempDir(async (dir) => {
+    const dataDir = path.join(dir, 'data');
+    const irDir = path.join(dir, 'ir');
+    copyDir(FIXTURES_DATA, dataDir);
+    generateIrFromData(dataDir, irDir);
+
+    const client = makeClient();
+    client.createApi = async () => {
+      const err = new Error('legacy-import-wrapper: deserialize failure');
+      err.classification = 'compatibility';
+      err.attempts = [
+        {
+          strategy: 'legacy-import-wrapper',
+          message: 'HTTP 500',
+          body: { message: 'deserialize failure' },
+        },
+      ];
+      throw err;
+    };
+
+    const result = await runApisImport(
+      { 'ir-dir': irDir, config: path.join(dir, 'apis.config.json') },
+      { config: makeConfig(dir), client },
+    );
+
+    assert.strictEqual(result.exitCode, 0);
+    assert.strictEqual(result.state.actions['UPSERT_API:orders-api'].status, 'MANUAL_REVIEW');
+    assert.strictEqual(result.state.actions['VERIFY_API:orders-api'].status, 'MANUAL_REVIEW');
+  });
+}
+
 async function testApisReconcileDetectsMissingApi() {
   await withTempDir(async (dir) => {
     const dataDir = path.join(dir, 'data');
@@ -154,6 +186,7 @@ async function testApisReconcileDetectsMissingApi() {
 async function run() {
   await testApisAnalyzeBuildsPlan();
   await testApisImportCreatesApiAndPlans();
+  await testApisImportCompatibilityIssuesBecomeManualReview();
   await testApisReconcileDetectsMissingApi();
   console.log('test-workflow.js passed');
 }
