@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-04-07T15:22:07.213Z",
+  "generatedAt": "2026-04-07T15:32:52.421Z",
   "summary": {
     "proxies": 23,
     "blockers": 0,
-    "warnings": 10,
+    "warnings": 11,
     "actions": 46,
     "manualReview": 16
   },
@@ -124,6 +124,17 @@
           "createJsonResponse",
           "createJsonResponse"
         ]
+      }
+    },
+    {
+      "severity": "warning",
+      "code": "API_IMPORT_CREATEAPI_UNVERIFIED",
+      "message": "API import probe could not fully verify createApi",
+      "details": {
+        "ok": false,
+        "supported": true,
+        "status": 500,
+        "classification": null
       }
     }
   ],

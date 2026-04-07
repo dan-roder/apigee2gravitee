@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-04-07T15:22:07.213Z",
-  "updatedAt": "2026-04-07T15:22:07.379Z",
+  "generatedAt": "2026-04-07T15:32:52.421Z",
+  "updatedAt": "2026-04-07T15:32:59.830Z",
   "mode": "plan",
   "summary": {
     "proxies": 23,
     "blockers": 0,
-    "warnings": 10,
+    "warnings": 11,
     "actions": 46,
     "actionsByKind": {
       "UPSERT_API": 23,
@@ -25,9 +25,9 @@
       "dependencies": [],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 400",
-      "startedAt": "2026-04-07T15:22:07.218Z",
-      "completedAt": "2026-04-07T15:22:07.379Z"
+      "lastError": "POST http://localhost:8083/management/organizations/DEFAULT/environments/DEFAULT/apis/import → HTTP 500: {\"message\":\"An error occurs while trying to JSON deserialize the API definition.\",\"technicalCode\":\"unexpected\",\"http_status\":500}",
+      "startedAt": "2026-04-07T15:32:52.425Z",
+      "completedAt": "2026-04-07T15:32:59.830Z"
     },
     "VERIFY_API:KVM-Create": {
       "actionId": "VERIFY_API:KVM-Create",
