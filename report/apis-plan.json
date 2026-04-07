@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-07T17:00:07.814Z",
+  "generatedAt": "2026-04-07T17:13:14.858Z",
   "kind": "ApisMigrationManifest",
   "source": {
     "irDir": "/Users/daniel.roder/Sites/apigee2gravitee/ir",
@@ -9,13 +9,15 @@
     "proxies": 23,
     "blockers": 0,
     "warnings": 11,
-    "actions": 46,
+    "actions": 92,
     "actionsByKind": {
       "UPSERT_API": 23,
+      "UPSERT_PLAN": 23,
+      "VERIFY_PLAN": 23,
       "VERIFY_API": 23
     },
     "actionsByStatus": {
-      "READY": 46
+      "READY": 92
     }
   },
   "records": {
@@ -3463,11 +3465,76 @@
       "targetHint": {}
     },
     {
+      "actionId": "UPSERT_PLAN:KVM-Create:KEYLESS",
+      "kind": "UPSERT_PLAN",
+      "sourceId": "KVM-Create",
+      "dependencies": [
+        "UPSERT_API:KVM-Create"
+      ],
+      "plannedStatus": "READY",
+      "operation": "CREATE",
+      "lookup": {
+        "sourceId": "KVM-Create",
+        "name": "KVM-Create",
+        "planKey": "KEYLESS",
+        "planName": "Keyless Plan"
+      },
+      "payload": {
+        "planKey": "KEYLESS",
+        "definition": {
+          "name": "Keyless Plan",
+          "description": "No security — migrated from Apigee proxy with no auth policy",
+          "security": {
+            "type": "KEY_LESS"
+          },
+          "mode": "STANDARD",
+          "status": "STAGING",
+          "flows": []
+        }
+      },
+      "blockers": [],
+      "warnings": [],
+      "manualReviewReasons": [
+        "LLM_POLICY:JS-CreateAuthHeader",
+        "LLM_POLICY:JS-ValidateRequest",
+        "LLM_POLICY:JS-ProcessCreateKVM"
+      ],
+      "targetHint": {}
+    },
+    {
+      "actionId": "VERIFY_PLAN:KVM-Create:KEYLESS",
+      "kind": "VERIFY_PLAN",
+      "sourceId": "KVM-Create",
+      "dependencies": [
+        "UPSERT_PLAN:KVM-Create:KEYLESS"
+      ],
+      "plannedStatus": "READY",
+      "operation": "VERIFY",
+      "lookup": {
+        "sourceId": "KVM-Create",
+        "name": "KVM-Create",
+        "planKey": "KEYLESS",
+        "planName": "Keyless Plan"
+      },
+      "payload": {
+        "planKey": "KEYLESS",
+        "expectedName": "Keyless Plan"
+      },
+      "blockers": [],
+      "warnings": [],
+      "manualReviewReasons": [
+        "LLM_POLICY:JS-CreateAuthHeader",
+        "LLM_POLICY:JS-ValidateRequest",
+        "LLM_POLICY:JS-ProcessCreateKVM"
+      ]
+    },
+    {
       "actionId": "VERIFY_API:KVM-Create",
       "kind": "VERIFY_API",
       "sourceId": "KVM-Create",
       "dependencies": [
-        "UPSERT_API:KVM-Create"
+        "UPSERT_API:KVM-Create",
+        "VERIFY_PLAN:KVM-Create:KEYLESS"
       ],
       "plannedStatus": "READY",
       "operation": "VERIFY",
@@ -3476,10 +3543,7 @@
         "name": "KVM-Create"
       },
       "payload": {
-        "expectedName": "KVM-Create",
-        "expectedPlans": [
-          "Keyless Plan"
-        ]
+        "expectedName": "KVM-Create"
       },
       "blockers": [],
       "warnings": [],
@@ -3711,11 +3775,74 @@
       "targetHint": {}
     },
     {
+      "actionId": "UPSERT_PLAN:KVM-Reader:KEYLESS",
+      "kind": "UPSERT_PLAN",
+      "sourceId": "KVM-Reader",
+      "dependencies": [
+        "UPSERT_API:KVM-Reader"
+      ],
+      "plannedStatus": "READY",
+      "operation": "CREATE",
+      "lookup": {
+        "sourceId": "KVM-Reader",
+        "name": "KVM-Reader",
+        "planKey": "KEYLESS",
+        "planName": "Keyless Plan"
+      },
+      "payload": {
+        "planKey": "KEYLESS",
+        "definition": {
+          "name": "Keyless Plan",
+          "description": "No security — migrated from Apigee proxy with no auth policy",
+          "security": {
+            "type": "KEY_LESS"
+          },
+          "mode": "STANDARD",
+          "status": "STAGING",
+          "flows": []
+        }
+      },
+      "blockers": [],
+      "warnings": [],
+      "manualReviewReasons": [
+        "LLM_POLICY:JS-CreateAuthHeader",
+        "LLM_POLICY:processKVMs"
+      ],
+      "targetHint": {}
+    },
+    {
+      "actionId": "VERIFY_PLAN:KVM-Reader:KEYLESS",
+      "kind": "VERIFY_PLAN",
+      "sourceId": "KVM-Reader",
+      "dependencies": [
+        "UPSERT_PLAN:KVM-Reader:KEYLESS"
+      ],
+      "plannedStatus": "READY",
+      "operation": "VERIFY",
+      "lookup": {
+        "sourceId": "KVM-Reader",
+        "name": "KVM-Reader",
+        "planKey": "KEYLESS",
+        "planName": "Keyless Plan"
+      },
+      "payload": {
+        "planKey": "KEYLESS",
+        "expectedName": "Keyless Plan"
+      },
+      "blockers": [],
+      "warnings": [],
+      "manualReviewReasons": [
+        "LLM_POLICY:JS-CreateAuthHeader",
+        "LLM_POLICY:processKVMs"
+      ]
+    },
+    {
       "actionId": "VERIFY_API:KVM-Reader",
       "kind": "VERIFY_API",
       "sourceId": "KVM-Reader",
       "dependencies": [
-        "UPSERT_API:KVM-Reader"
+        "UPSERT_API:KVM-Reader",
+        "VERIFY_PLAN:KVM-Reader:KEYLESS"
       ],
       "plannedStatus": "READY",
       "operation": "VERIFY",
@@ -3724,10 +3851,7 @@
         "name": "KVM-Reader"
       },
       "payload": {
-        "expectedName": "KVM-Reader",
-        "expectedPlans": [
-          "Keyless Plan"
-        ]
+        "expectedName": "KVM-Reader"
       },
       "blockers": [],
       "warnings": [],
@@ -3942,11 +4066,78 @@
       "targetHint": {}
     },
     {
+      "actionId": "UPSERT_PLAN:KVM-Update:KEYLESS",
+      "kind": "UPSERT_PLAN",
+      "sourceId": "KVM-Update",
+      "dependencies": [
+        "UPSERT_API:KVM-Update"
+      ],
+      "plannedStatus": "READY",
+      "operation": "CREATE",
+      "lookup": {
+        "sourceId": "KVM-Update",
+        "name": "KVM-Update",
+        "planKey": "KEYLESS",
+        "planName": "Keyless Plan"
+      },
+      "payload": {
+        "planKey": "KEYLESS",
+        "definition": {
+          "name": "Keyless Plan",
+          "description": "No security — migrated from Apigee proxy with no auth policy",
+          "security": {
+            "type": "KEY_LESS"
+          },
+          "mode": "STANDARD",
+          "status": "STAGING",
+          "flows": []
+        }
+      },
+      "blockers": [],
+      "warnings": [],
+      "manualReviewReasons": [
+        "LLM_POLICY:JS-CreateAuthHeader",
+        "LLM_POLICY:JS-ValidateUpdateRequest",
+        "LLM_POLICY:JS-CheckFixedKVM",
+        "LLM_POLICY:JS-UpdateEntries"
+      ],
+      "targetHint": {}
+    },
+    {
+      "actionId": "VERIFY_PLAN:KVM-Update:KEYLESS",
+      "kind": "VERIFY_PLAN",
+      "sourceId": "KVM-Update",
+      "dependencies": [
+        "UPSERT_PLAN:KVM-Update:KEYLESS"
+      ],
+      "plannedStatus": "READY",
+      "operation": "VERIFY",
+      "lookup": {
+        "sourceId": "KVM-Update",
+        "name": "KVM-Update",
+        "planKey": "KEYLESS",
+        "planName": "Keyless Plan"
+      },
+      "payload": {
+        "planKey": "KEYLESS",
+        "expectedName": "Keyless Plan"
+      },
+      "blockers": [],
+      "warnings": [],
+      "manualReviewReasons": [
+        "LLM_POLICY:JS-CreateAuthHeader",
+        "LLM_POLICY:JS-ValidateUpdateRequest",
+        "LLM_POLICY:JS-CheckFixedKVM",
+        "LLM_POLICY:JS-UpdateEntries"
+      ]
+    },
+    {
       "actionId": "VERIFY_API:KVM-Update",
       "kind": "VERIFY_API",
       "sourceId": "KVM-Update",
       "dependencies": [
-        "UPSERT_API:KVM-Update"
+        "UPSERT_API:KVM-Update",
+        "VERIFY_PLAN:KVM-Update:KEYLESS"
       ],
       "plannedStatus": "READY",
       "operation": "VERIFY",
@@ -3955,10 +4146,7 @@
         "name": "KVM-Update"
       },
       "payload": {
-        "expectedName": "KVM-Update",
-        "expectedPlans": [
-          "Keyless Plan"
-        ]
+        "expectedName": "KVM-Update"
       },
       "blockers": [],
       "warnings": [],
@@ -4133,11 +4321,72 @@
       "targetHint": {}
     },
     {
+      "actionId": "UPSERT_PLAN:admin-kvm-export:KEYLESS",
+      "kind": "UPSERT_PLAN",
+      "sourceId": "admin-kvm-export",
+      "dependencies": [
+        "UPSERT_API:admin-kvm-export"
+      ],
+      "plannedStatus": "READY",
+      "operation": "CREATE",
+      "lookup": {
+        "sourceId": "admin-kvm-export",
+        "name": "admin-kvm-export",
+        "planKey": "KEYLESS",
+        "planName": "Keyless Plan"
+      },
+      "payload": {
+        "planKey": "KEYLESS",
+        "definition": {
+          "name": "Keyless Plan",
+          "description": "No security — migrated from Apigee proxy with no auth policy",
+          "security": {
+            "type": "KEY_LESS"
+          },
+          "mode": "STANDARD",
+          "status": "STAGING",
+          "flows": []
+        }
+      },
+      "blockers": [],
+      "warnings": [],
+      "manualReviewReasons": [
+        "LLM_POLICY:Fetch-KVMs"
+      ],
+      "targetHint": {}
+    },
+    {
+      "actionId": "VERIFY_PLAN:admin-kvm-export:KEYLESS",
+      "kind": "VERIFY_PLAN",
+      "sourceId": "admin-kvm-export",
+      "dependencies": [
+        "UPSERT_PLAN:admin-kvm-export:KEYLESS"
+      ],
+      "plannedStatus": "READY",
+      "operation": "VERIFY",
+      "lookup": {
+        "sourceId": "admin-kvm-export",
+        "name": "admin-kvm-export",
+        "planKey": "KEYLESS",
+        "planName": "Keyless Plan"
+      },
+      "payload": {
+        "planKey": "KEYLESS",
+        "expectedName": "Keyless Plan"
+      },
+      "blockers": [],
+      "warnings": [],
+      "manualReviewReasons": [
+        "LLM_POLICY:Fetch-KVMs"
+      ]
+    },
+    {
       "actionId": "VERIFY_API:admin-kvm-export",
       "kind": "VERIFY_API",
       "sourceId": "admin-kvm-export",
       "dependencies": [
-        "UPSERT_API:admin-kvm-export"
+        "UPSERT_API:admin-kvm-export",
+        "VERIFY_PLAN:admin-kvm-export:KEYLESS"
       ],
       "plannedStatus": "READY",
       "operation": "VERIFY",
@@ -4146,10 +4395,7 @@
         "name": "admin-kvm-export"
       },
       "payload": {
-        "expectedName": "admin-kvm-export",
-        "expectedPlans": [
-          "Keyless Plan"
-        ]
+        "expectedName": "admin-kvm-export"
       },
       "blockers": [],
       "warnings": [],
@@ -4163,7 +4409,7 @@
       "sourceId": "apigee-hello-api-1",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "UPDATE",
+      "operation": "CREATE",
       "lookup": {
         "sourceId": "apigee-hello-api-1",
         "name": "apigee-hello-api-1"
@@ -4277,16 +4523,75 @@
       "manualReviewReasons": [
         "SHARED_FLOW_REFS_PRESENT"
       ],
-      "targetHint": {
-        "apiId": "4d0effda-0bc6-4f71-8eff-da0bc63f71df"
-      }
+      "targetHint": {}
+    },
+    {
+      "actionId": "UPSERT_PLAN:apigee-hello-api-1:KEYLESS",
+      "kind": "UPSERT_PLAN",
+      "sourceId": "apigee-hello-api-1",
+      "dependencies": [
+        "UPSERT_API:apigee-hello-api-1"
+      ],
+      "plannedStatus": "READY",
+      "operation": "CREATE",
+      "lookup": {
+        "sourceId": "apigee-hello-api-1",
+        "name": "apigee-hello-api-1",
+        "planKey": "KEYLESS",
+        "planName": "Keyless Plan"
+      },
+      "payload": {
+        "planKey": "KEYLESS",
+        "definition": {
+          "name": "Keyless Plan",
+          "description": "No security — migrated from Apigee proxy with no auth policy",
+          "security": {
+            "type": "KEY_LESS"
+          },
+          "mode": "STANDARD",
+          "status": "STAGING",
+          "flows": []
+        }
+      },
+      "blockers": [],
+      "warnings": [],
+      "manualReviewReasons": [
+        "SHARED_FLOW_REFS_PRESENT"
+      ],
+      "targetHint": {}
+    },
+    {
+      "actionId": "VERIFY_PLAN:apigee-hello-api-1:KEYLESS",
+      "kind": "VERIFY_PLAN",
+      "sourceId": "apigee-hello-api-1",
+      "dependencies": [
+        "UPSERT_PLAN:apigee-hello-api-1:KEYLESS"
+      ],
+      "plannedStatus": "READY",
+      "operation": "VERIFY",
+      "lookup": {
+        "sourceId": "apigee-hello-api-1",
+        "name": "apigee-hello-api-1",
+        "planKey": "KEYLESS",
+        "planName": "Keyless Plan"
+      },
+      "payload": {
+        "planKey": "KEYLESS",
+        "expectedName": "Keyless Plan"
+      },
+      "blockers": [],
+      "warnings": [],
+      "manualReviewReasons": [
+        "SHARED_FLOW_REFS_PRESENT"
+      ]
     },
     {
       "actionId": "VERIFY_API:apigee-hello-api-1",
       "kind": "VERIFY_API",
       "sourceId": "apigee-hello-api-1",
       "dependencies": [
-        "UPSERT_API:apigee-hello-api-1"
+        "UPSERT_API:apigee-hello-api-1",
+        "VERIFY_PLAN:apigee-hello-api-1:KEYLESS"
       ],
       "plannedStatus": "READY",
       "operation": "VERIFY",
@@ -4295,10 +4600,7 @@
         "name": "apigee-hello-api-1"
       },
       "payload": {
-        "expectedName": "apigee-hello-api-1",
-        "expectedPlans": [
-          "Keyless Plan"
-        ]
+        "expectedName": "apigee-hello-api-1"
       },
       "blockers": [],
       "warnings": [],
@@ -4398,11 +4700,68 @@
       "targetHint": {}
     },
     {
+      "actionId": "UPSERT_PLAN:apigee-hello:KEYLESS",
+      "kind": "UPSERT_PLAN",
+      "sourceId": "apigee-hello",
+      "dependencies": [
+        "UPSERT_API:apigee-hello"
+      ],
+      "plannedStatus": "READY",
+      "operation": "CREATE",
+      "lookup": {
+        "sourceId": "apigee-hello",
+        "name": "apigee-hello",
+        "planKey": "KEYLESS",
+        "planName": "Keyless Plan"
+      },
+      "payload": {
+        "planKey": "KEYLESS",
+        "definition": {
+          "name": "Keyless Plan",
+          "description": "No security — migrated from Apigee proxy with no auth policy",
+          "security": {
+            "type": "KEY_LESS"
+          },
+          "mode": "STANDARD",
+          "status": "STAGING",
+          "flows": []
+        }
+      },
+      "blockers": [],
+      "warnings": [],
+      "manualReviewReasons": [],
+      "targetHint": {}
+    },
+    {
+      "actionId": "VERIFY_PLAN:apigee-hello:KEYLESS",
+      "kind": "VERIFY_PLAN",
+      "sourceId": "apigee-hello",
+      "dependencies": [
+        "UPSERT_PLAN:apigee-hello:KEYLESS"
+      ],
+      "plannedStatus": "READY",
+      "operation": "VERIFY",
+      "lookup": {
+        "sourceId": "apigee-hello",
+        "name": "apigee-hello",
+        "planKey": "KEYLESS",
+        "planName": "Keyless Plan"
+      },
+      "payload": {
+        "planKey": "KEYLESS",
+        "expectedName": "Keyless Plan"
+      },
+      "blockers": [],
+      "warnings": [],
+      "manualReviewReasons": []
+    },
+    {
       "actionId": "VERIFY_API:apigee-hello",
       "kind": "VERIFY_API",
       "sourceId": "apigee-hello",
       "dependencies": [
-        "UPSERT_API:apigee-hello"
+        "UPSERT_API:apigee-hello",
+        "VERIFY_PLAN:apigee-hello:KEYLESS"
       ],
       "plannedStatus": "READY",
       "operation": "VERIFY",
@@ -4411,10 +4770,7 @@
         "name": "apigee-hello"
       },
       "payload": {
-        "expectedName": "apigee-hello",
-        "expectedPlans": [
-          "Keyless Plan"
-        ]
+        "expectedName": "apigee-hello"
       },
       "blockers": [],
       "warnings": [],
@@ -4512,11 +4868,68 @@
       "targetHint": {}
     },
     {
+      "actionId": "UPSERT_PLAN:car-makes-api-3:KEYLESS",
+      "kind": "UPSERT_PLAN",
+      "sourceId": "car-makes-api-3",
+      "dependencies": [
+        "UPSERT_API:car-makes-api-3"
+      ],
+      "plannedStatus": "READY",
+      "operation": "CREATE",
+      "lookup": {
+        "sourceId": "car-makes-api-3",
+        "name": "car-makes-api-3",
+        "planKey": "KEYLESS",
+        "planName": "Keyless Plan"
+      },
+      "payload": {
+        "planKey": "KEYLESS",
+        "definition": {
+          "name": "Keyless Plan",
+          "description": "No security — migrated from Apigee proxy with no auth policy",
+          "security": {
+            "type": "KEY_LESS"
+          },
+          "mode": "STANDARD",
+          "status": "STAGING",
+          "flows": []
+        }
+      },
+      "blockers": [],
+      "warnings": [],
+      "manualReviewReasons": [],
+      "targetHint": {}
+    },
+    {
+      "actionId": "VERIFY_PLAN:car-makes-api-3:KEYLESS",
+      "kind": "VERIFY_PLAN",
+      "sourceId": "car-makes-api-3",
+      "dependencies": [
+        "UPSERT_PLAN:car-makes-api-3:KEYLESS"
+      ],
+      "plannedStatus": "READY",
+      "operation": "VERIFY",
+      "lookup": {
+        "sourceId": "car-makes-api-3",
+        "name": "car-makes-api-3",
+        "planKey": "KEYLESS",
+        "planName": "Keyless Plan"
+      },
+      "payload": {
+        "planKey": "KEYLESS",
+        "expectedName": "Keyless Plan"
+      },
+      "blockers": [],
+      "warnings": [],
+      "manualReviewReasons": []
+    },
+    {
       "actionId": "VERIFY_API:car-makes-api-3",
       "kind": "VERIFY_API",
       "sourceId": "car-makes-api-3",
       "dependencies": [
-        "UPSERT_API:car-makes-api-3"
+        "UPSERT_API:car-makes-api-3",
+        "VERIFY_PLAN:car-makes-api-3:KEYLESS"
       ],
       "plannedStatus": "READY",
       "operation": "VERIFY",
@@ -4525,10 +4938,7 @@
         "name": "car-makes-api-3"
       },
       "payload": {
-        "expectedName": "car-makes-api-3",
-        "expectedPlans": [
-          "Keyless Plan"
-        ]
+        "expectedName": "car-makes-api-3"
       },
       "blockers": [],
       "warnings": [],
@@ -4626,11 +5036,68 @@
       "targetHint": {}
     },
     {
+      "actionId": "UPSERT_PLAN:cat-fact-api-2:KEYLESS",
+      "kind": "UPSERT_PLAN",
+      "sourceId": "cat-fact-api-2",
+      "dependencies": [
+        "UPSERT_API:cat-fact-api-2"
+      ],
+      "plannedStatus": "READY",
+      "operation": "CREATE",
+      "lookup": {
+        "sourceId": "cat-fact-api-2",
+        "name": "cat-fact-api-2",
+        "planKey": "KEYLESS",
+        "planName": "Keyless Plan"
+      },
+      "payload": {
+        "planKey": "KEYLESS",
+        "definition": {
+          "name": "Keyless Plan",
+          "description": "No security — migrated from Apigee proxy with no auth policy",
+          "security": {
+            "type": "KEY_LESS"
+          },
+          "mode": "STANDARD",
+          "status": "STAGING",
+          "flows": []
+        }
+      },
+      "blockers": [],
+      "warnings": [],
+      "manualReviewReasons": [],
+      "targetHint": {}
+    },
+    {
+      "actionId": "VERIFY_PLAN:cat-fact-api-2:KEYLESS",
+      "kind": "VERIFY_PLAN",
+      "sourceId": "cat-fact-api-2",
+      "dependencies": [
+        "UPSERT_PLAN:cat-fact-api-2:KEYLESS"
+      ],
+      "plannedStatus": "READY",
+      "operation": "VERIFY",
+      "lookup": {
+        "sourceId": "cat-fact-api-2",
+        "name": "cat-fact-api-2",
+        "planKey": "KEYLESS",
+        "planName": "Keyless Plan"
+      },
+      "payload": {
+        "planKey": "KEYLESS",
+        "expectedName": "Keyless Plan"
+      },
+      "blockers": [],
+      "warnings": [],
+      "manualReviewReasons": []
+    },
+    {
       "actionId": "VERIFY_API:cat-fact-api-2",
       "kind": "VERIFY_API",
       "sourceId": "cat-fact-api-2",
       "dependencies": [
-        "UPSERT_API:cat-fact-api-2"
+        "UPSERT_API:cat-fact-api-2",
+        "VERIFY_PLAN:cat-fact-api-2:KEYLESS"
       ],
       "plannedStatus": "READY",
       "operation": "VERIFY",
@@ -4639,10 +5106,7 @@
         "name": "cat-fact-api-2"
       },
       "payload": {
-        "expectedName": "cat-fact-api-2",
-        "expectedPlans": [
-          "Keyless Plan"
-        ]
+        "expectedName": "cat-fact-api-2"
       },
       "blockers": [],
       "warnings": [],
@@ -4779,11 +5243,68 @@
       "targetHint": {}
     },
     {
+      "actionId": "UPSERT_PLAN:cats-api-7:API_KEY",
+      "kind": "UPSERT_PLAN",
+      "sourceId": "cats-api-7",
+      "dependencies": [
+        "UPSERT_API:cats-api-7"
+      ],
+      "plannedStatus": "READY",
+      "operation": "CREATE",
+      "lookup": {
+        "sourceId": "cats-api-7",
+        "name": "cats-api-7",
+        "planKey": "API_KEY",
+        "planName": "API Key Plan"
+      },
+      "payload": {
+        "planKey": "API_KEY",
+        "definition": {
+          "name": "API Key Plan",
+          "description": "Migrated from Apigee VerifyAPIKey — key header: request.queryparam.apikey",
+          "security": {
+            "type": "API_KEY"
+          },
+          "mode": "STANDARD",
+          "status": "STAGING",
+          "flows": []
+        }
+      },
+      "blockers": [],
+      "warnings": [],
+      "manualReviewReasons": [],
+      "targetHint": {}
+    },
+    {
+      "actionId": "VERIFY_PLAN:cats-api-7:API_KEY",
+      "kind": "VERIFY_PLAN",
+      "sourceId": "cats-api-7",
+      "dependencies": [
+        "UPSERT_PLAN:cats-api-7:API_KEY"
+      ],
+      "plannedStatus": "READY",
+      "operation": "VERIFY",
+      "lookup": {
+        "sourceId": "cats-api-7",
+        "name": "cats-api-7",
+        "planKey": "API_KEY",
+        "planName": "API Key Plan"
+      },
+      "payload": {
+        "planKey": "API_KEY",
+        "expectedName": "API Key Plan"
+      },
+      "blockers": [],
+      "warnings": [],
+      "manualReviewReasons": []
+    },
+    {
       "actionId": "VERIFY_API:cats-api-7",
       "kind": "VERIFY_API",
       "sourceId": "cats-api-7",
       "dependencies": [
-        "UPSERT_API:cats-api-7"
+        "UPSERT_API:cats-api-7",
+        "VERIFY_PLAN:cats-api-7:API_KEY"
       ],
       "plannedStatus": "READY",
       "operation": "VERIFY",
@@ -4792,10 +5313,7 @@
         "name": "cats-api-7"
       },
       "payload": {
-        "expectedName": "cats-api-7",
-        "expectedPlans": [
-          "API Key Plan"
-        ]
+        "expectedName": "cats-api-7"
       },
       "blockers": [],
       "warnings": [],
@@ -4949,11 +5467,68 @@
       "targetHint": {}
     },
     {
+      "actionId": "UPSERT_PLAN:chuck-norris-api-10:API_KEY",
+      "kind": "UPSERT_PLAN",
+      "sourceId": "chuck-norris-api-10",
+      "dependencies": [
+        "UPSERT_API:chuck-norris-api-10"
+      ],
+      "plannedStatus": "READY",
+      "operation": "CREATE",
+      "lookup": {
+        "sourceId": "chuck-norris-api-10",
+        "name": "chuck-norris-api-10",
+        "planKey": "API_KEY",
+        "planName": "API Key Plan"
+      },
+      "payload": {
+        "planKey": "API_KEY",
+        "definition": {
+          "name": "API Key Plan",
+          "description": "Migrated from Apigee VerifyAPIKey — key header: request.queryparam.apikey",
+          "security": {
+            "type": "API_KEY"
+          },
+          "mode": "STANDARD",
+          "status": "STAGING",
+          "flows": []
+        }
+      },
+      "blockers": [],
+      "warnings": [],
+      "manualReviewReasons": [],
+      "targetHint": {}
+    },
+    {
+      "actionId": "VERIFY_PLAN:chuck-norris-api-10:API_KEY",
+      "kind": "VERIFY_PLAN",
+      "sourceId": "chuck-norris-api-10",
+      "dependencies": [
+        "UPSERT_PLAN:chuck-norris-api-10:API_KEY"
+      ],
+      "plannedStatus": "READY",
+      "operation": "VERIFY",
+      "lookup": {
+        "sourceId": "chuck-norris-api-10",
+        "name": "chuck-norris-api-10",
+        "planKey": "API_KEY",
+        "planName": "API Key Plan"
+      },
+      "payload": {
+        "planKey": "API_KEY",
+        "expectedName": "API Key Plan"
+      },
+      "blockers": [],
+      "warnings": [],
+      "manualReviewReasons": []
+    },
+    {
       "actionId": "VERIFY_API:chuck-norris-api-10",
       "kind": "VERIFY_API",
       "sourceId": "chuck-norris-api-10",
       "dependencies": [
-        "UPSERT_API:chuck-norris-api-10"
+        "UPSERT_API:chuck-norris-api-10",
+        "VERIFY_PLAN:chuck-norris-api-10:API_KEY"
       ],
       "plannedStatus": "READY",
       "operation": "VERIFY",
@@ -4962,10 +5537,7 @@
         "name": "chuck-norris-api-10"
       },
       "payload": {
-        "expectedName": "chuck-norris-api-10",
-        "expectedPlans": [
-          "API Key Plan"
-        ]
+        "expectedName": "chuck-norris-api-10"
       },
       "blockers": [],
       "warnings": [],
@@ -5102,11 +5674,68 @@
       "targetHint": {}
     },
     {
+      "actionId": "UPSERT_PLAN:dog-breeds-api-6:API_KEY",
+      "kind": "UPSERT_PLAN",
+      "sourceId": "dog-breeds-api-6",
+      "dependencies": [
+        "UPSERT_API:dog-breeds-api-6"
+      ],
+      "plannedStatus": "READY",
+      "operation": "CREATE",
+      "lookup": {
+        "sourceId": "dog-breeds-api-6",
+        "name": "dog-breeds-api-6",
+        "planKey": "API_KEY",
+        "planName": "API Key Plan"
+      },
+      "payload": {
+        "planKey": "API_KEY",
+        "definition": {
+          "name": "API Key Plan",
+          "description": "Migrated from Apigee VerifyAPIKey — key header: request.queryparam.apikey",
+          "security": {
+            "type": "API_KEY"
+          },
+          "mode": "STANDARD",
+          "status": "STAGING",
+          "flows": []
+        }
+      },
+      "blockers": [],
+      "warnings": [],
+      "manualReviewReasons": [],
+      "targetHint": {}
+    },
+    {
+      "actionId": "VERIFY_PLAN:dog-breeds-api-6:API_KEY",
+      "kind": "VERIFY_PLAN",
+      "sourceId": "dog-breeds-api-6",
+      "dependencies": [
+        "UPSERT_PLAN:dog-breeds-api-6:API_KEY"
+      ],
+      "plannedStatus": "READY",
+      "operation": "VERIFY",
+      "lookup": {
+        "sourceId": "dog-breeds-api-6",
+        "name": "dog-breeds-api-6",
+        "planKey": "API_KEY",
+        "planName": "API Key Plan"
+      },
+      "payload": {
+        "planKey": "API_KEY",
+        "expectedName": "API Key Plan"
+      },
+      "blockers": [],
+      "warnings": [],
+      "manualReviewReasons": []
+    },
+    {
       "actionId": "VERIFY_API:dog-breeds-api-6",
       "kind": "VERIFY_API",
       "sourceId": "dog-breeds-api-6",
       "dependencies": [
-        "UPSERT_API:dog-breeds-api-6"
+        "UPSERT_API:dog-breeds-api-6",
+        "VERIFY_PLAN:dog-breeds-api-6:API_KEY"
       ],
       "plannedStatus": "READY",
       "operation": "VERIFY",
@@ -5115,10 +5744,7 @@
         "name": "dog-breeds-api-6"
       },
       "payload": {
-        "expectedName": "dog-breeds-api-6",
-        "expectedPlans": [
-          "API Key Plan"
-        ]
+        "expectedName": "dog-breeds-api-6"
       },
       "blockers": [],
       "warnings": [],
@@ -5264,11 +5890,72 @@
       "targetHint": {}
     },
     {
+      "actionId": "UPSERT_PLAN:get-kvm-proxy:KEYLESS",
+      "kind": "UPSERT_PLAN",
+      "sourceId": "get-kvm-proxy",
+      "dependencies": [
+        "UPSERT_API:get-kvm-proxy"
+      ],
+      "plannedStatus": "READY",
+      "operation": "CREATE",
+      "lookup": {
+        "sourceId": "get-kvm-proxy",
+        "name": "get-kvm-proxy",
+        "planKey": "KEYLESS",
+        "planName": "Keyless Plan"
+      },
+      "payload": {
+        "planKey": "KEYLESS",
+        "definition": {
+          "name": "Keyless Plan",
+          "description": "No security — migrated from Apigee proxy with no auth policy",
+          "security": {
+            "type": "KEY_LESS"
+          },
+          "mode": "STANDARD",
+          "status": "STAGING",
+          "flows": []
+        }
+      },
+      "blockers": [],
+      "warnings": [],
+      "manualReviewReasons": [
+        "LLM_POLICY:Process-Encrypted-Value"
+      ],
+      "targetHint": {}
+    },
+    {
+      "actionId": "VERIFY_PLAN:get-kvm-proxy:KEYLESS",
+      "kind": "VERIFY_PLAN",
+      "sourceId": "get-kvm-proxy",
+      "dependencies": [
+        "UPSERT_PLAN:get-kvm-proxy:KEYLESS"
+      ],
+      "plannedStatus": "READY",
+      "operation": "VERIFY",
+      "lookup": {
+        "sourceId": "get-kvm-proxy",
+        "name": "get-kvm-proxy",
+        "planKey": "KEYLESS",
+        "planName": "Keyless Plan"
+      },
+      "payload": {
+        "planKey": "KEYLESS",
+        "expectedName": "Keyless Plan"
+      },
+      "blockers": [],
+      "warnings": [],
+      "manualReviewReasons": [
+        "LLM_POLICY:Process-Encrypted-Value"
+      ]
+    },
+    {
       "actionId": "VERIFY_API:get-kvm-proxy",
       "kind": "VERIFY_API",
       "sourceId": "get-kvm-proxy",
       "dependencies": [
-        "UPSERT_API:get-kvm-proxy"
+        "UPSERT_API:get-kvm-proxy",
+        "VERIFY_PLAN:get-kvm-proxy:KEYLESS"
       ],
       "plannedStatus": "READY",
       "operation": "VERIFY",
@@ -5277,10 +5964,7 @@
         "name": "get-kvm-proxy"
       },
       "payload": {
-        "expectedName": "get-kvm-proxy",
-        "expectedPlans": [
-          "Keyless Plan"
-        ]
+        "expectedName": "get-kvm-proxy"
       },
       "blockers": [],
       "warnings": [],
@@ -5449,11 +6133,68 @@
       "targetHint": {}
     },
     {
+      "actionId": "UPSERT_PLAN:harry-potter-characters:KEYLESS",
+      "kind": "UPSERT_PLAN",
+      "sourceId": "harry-potter-characters",
+      "dependencies": [
+        "UPSERT_API:harry-potter-characters"
+      ],
+      "plannedStatus": "READY",
+      "operation": "CREATE",
+      "lookup": {
+        "sourceId": "harry-potter-characters",
+        "name": "harry-potter-characters",
+        "planKey": "KEYLESS",
+        "planName": "Keyless Plan"
+      },
+      "payload": {
+        "planKey": "KEYLESS",
+        "definition": {
+          "name": "Keyless Plan",
+          "description": "No security — migrated from Apigee proxy with no auth policy",
+          "security": {
+            "type": "KEY_LESS"
+          },
+          "mode": "STANDARD",
+          "status": "STAGING",
+          "flows": []
+        }
+      },
+      "blockers": [],
+      "warnings": [],
+      "manualReviewReasons": [],
+      "targetHint": {}
+    },
+    {
+      "actionId": "VERIFY_PLAN:harry-potter-characters:KEYLESS",
+      "kind": "VERIFY_PLAN",
+      "sourceId": "harry-potter-characters",
+      "dependencies": [
+        "UPSERT_PLAN:harry-potter-characters:KEYLESS"
+      ],
+      "plannedStatus": "READY",
+      "operation": "VERIFY",
+      "lookup": {
+        "sourceId": "harry-potter-characters",
+        "name": "harry-potter-characters",
+        "planKey": "KEYLESS",
+        "planName": "Keyless Plan"
+      },
+      "payload": {
+        "planKey": "KEYLESS",
+        "expectedName": "Keyless Plan"
+      },
+      "blockers": [],
+      "warnings": [],
+      "manualReviewReasons": []
+    },
+    {
       "actionId": "VERIFY_API:harry-potter-characters",
       "kind": "VERIFY_API",
       "sourceId": "harry-potter-characters",
       "dependencies": [
-        "UPSERT_API:harry-potter-characters"
+        "UPSERT_API:harry-potter-characters",
+        "VERIFY_PLAN:harry-potter-characters:KEYLESS"
       ],
       "plannedStatus": "READY",
       "operation": "VERIFY",
@@ -5462,10 +6203,7 @@
         "name": "harry-potter-characters"
       },
       "payload": {
-        "expectedName": "harry-potter-characters",
-        "expectedPlans": [
-          "Keyless Plan"
-        ]
+        "expectedName": "harry-potter-characters"
       },
       "blockers": [],
       "warnings": [],
@@ -5602,11 +6340,68 @@
       "targetHint": {}
     },
     {
+      "actionId": "UPSERT_PLAN:hogwarts-houses-api-8:API_KEY",
+      "kind": "UPSERT_PLAN",
+      "sourceId": "hogwarts-houses-api-8",
+      "dependencies": [
+        "UPSERT_API:hogwarts-houses-api-8"
+      ],
+      "plannedStatus": "READY",
+      "operation": "CREATE",
+      "lookup": {
+        "sourceId": "hogwarts-houses-api-8",
+        "name": "hogwarts-houses-api-8",
+        "planKey": "API_KEY",
+        "planName": "API Key Plan"
+      },
+      "payload": {
+        "planKey": "API_KEY",
+        "definition": {
+          "name": "API Key Plan",
+          "description": "Migrated from Apigee VerifyAPIKey — key header: request.queryparam.apikey",
+          "security": {
+            "type": "API_KEY"
+          },
+          "mode": "STANDARD",
+          "status": "STAGING",
+          "flows": []
+        }
+      },
+      "blockers": [],
+      "warnings": [],
+      "manualReviewReasons": [],
+      "targetHint": {}
+    },
+    {
+      "actionId": "VERIFY_PLAN:hogwarts-houses-api-8:API_KEY",
+      "kind": "VERIFY_PLAN",
+      "sourceId": "hogwarts-houses-api-8",
+      "dependencies": [
+        "UPSERT_PLAN:hogwarts-houses-api-8:API_KEY"
+      ],
+      "plannedStatus": "READY",
+      "operation": "VERIFY",
+      "lookup": {
+        "sourceId": "hogwarts-houses-api-8",
+        "name": "hogwarts-houses-api-8",
+        "planKey": "API_KEY",
+        "planName": "API Key Plan"
+      },
+      "payload": {
+        "planKey": "API_KEY",
+        "expectedName": "API Key Plan"
+      },
+      "blockers": [],
+      "warnings": [],
+      "manualReviewReasons": []
+    },
+    {
       "actionId": "VERIFY_API:hogwarts-houses-api-8",
       "kind": "VERIFY_API",
       "sourceId": "hogwarts-houses-api-8",
       "dependencies": [
-        "UPSERT_API:hogwarts-houses-api-8"
+        "UPSERT_API:hogwarts-houses-api-8",
+        "VERIFY_PLAN:hogwarts-houses-api-8:API_KEY"
       ],
       "plannedStatus": "READY",
       "operation": "VERIFY",
@@ -5615,10 +6410,7 @@
         "name": "hogwarts-houses-api-8"
       },
       "payload": {
-        "expectedName": "hogwarts-houses-api-8",
-        "expectedPlans": [
-          "API Key Plan"
-        ]
+        "expectedName": "hogwarts-houses-api-8"
       },
       "blockers": [],
       "warnings": [],
@@ -5797,11 +6589,72 @@
       "targetHint": {}
     },
     {
+      "actionId": "UPSERT_PLAN:kanye-rest-api-5:API_KEY",
+      "kind": "UPSERT_PLAN",
+      "sourceId": "kanye-rest-api-5",
+      "dependencies": [
+        "UPSERT_API:kanye-rest-api-5"
+      ],
+      "plannedStatus": "READY",
+      "operation": "CREATE",
+      "lookup": {
+        "sourceId": "kanye-rest-api-5",
+        "name": "kanye-rest-api-5",
+        "planKey": "API_KEY",
+        "planName": "API Key Plan"
+      },
+      "payload": {
+        "planKey": "API_KEY",
+        "definition": {
+          "name": "API Key Plan",
+          "description": "Migrated from Apigee VerifyAPIKey — key header: request.queryparam.apikey",
+          "security": {
+            "type": "API_KEY"
+          },
+          "mode": "STANDARD",
+          "status": "STAGING",
+          "flows": []
+        }
+      },
+      "blockers": [],
+      "warnings": [],
+      "manualReviewReasons": [
+        "LLM_POLICY:ProcessEncryptedValue"
+      ],
+      "targetHint": {}
+    },
+    {
+      "actionId": "VERIFY_PLAN:kanye-rest-api-5:API_KEY",
+      "kind": "VERIFY_PLAN",
+      "sourceId": "kanye-rest-api-5",
+      "dependencies": [
+        "UPSERT_PLAN:kanye-rest-api-5:API_KEY"
+      ],
+      "plannedStatus": "READY",
+      "operation": "VERIFY",
+      "lookup": {
+        "sourceId": "kanye-rest-api-5",
+        "name": "kanye-rest-api-5",
+        "planKey": "API_KEY",
+        "planName": "API Key Plan"
+      },
+      "payload": {
+        "planKey": "API_KEY",
+        "expectedName": "API Key Plan"
+      },
+      "blockers": [],
+      "warnings": [],
+      "manualReviewReasons": [
+        "LLM_POLICY:ProcessEncryptedValue"
+      ]
+    },
+    {
       "actionId": "VERIFY_API:kanye-rest-api-5",
       "kind": "VERIFY_API",
       "sourceId": "kanye-rest-api-5",
       "dependencies": [
-        "UPSERT_API:kanye-rest-api-5"
+        "UPSERT_API:kanye-rest-api-5",
+        "VERIFY_PLAN:kanye-rest-api-5:API_KEY"
       ],
       "plannedStatus": "READY",
       "operation": "VERIFY",
@@ -5810,10 +6663,7 @@
         "name": "kanye-rest-api-5"
       },
       "payload": {
-        "expectedName": "kanye-rest-api-5",
-        "expectedPlans": [
-          "API Key Plan"
-        ]
+        "expectedName": "kanye-rest-api-5"
       },
       "blockers": [],
       "warnings": [],
@@ -5956,11 +6806,68 @@
       "targetHint": {}
     },
     {
+      "actionId": "UPSERT_PLAN:kvm-test:KEYLESS",
+      "kind": "UPSERT_PLAN",
+      "sourceId": "kvm-test",
+      "dependencies": [
+        "UPSERT_API:kvm-test"
+      ],
+      "plannedStatus": "READY",
+      "operation": "CREATE",
+      "lookup": {
+        "sourceId": "kvm-test",
+        "name": "kvm-test",
+        "planKey": "KEYLESS",
+        "planName": "Keyless Plan"
+      },
+      "payload": {
+        "planKey": "KEYLESS",
+        "definition": {
+          "name": "Keyless Plan",
+          "description": "No security — migrated from Apigee proxy with no auth policy",
+          "security": {
+            "type": "KEY_LESS"
+          },
+          "mode": "STANDARD",
+          "status": "STAGING",
+          "flows": []
+        }
+      },
+      "blockers": [],
+      "warnings": [],
+      "manualReviewReasons": [],
+      "targetHint": {}
+    },
+    {
+      "actionId": "VERIFY_PLAN:kvm-test:KEYLESS",
+      "kind": "VERIFY_PLAN",
+      "sourceId": "kvm-test",
+      "dependencies": [
+        "UPSERT_PLAN:kvm-test:KEYLESS"
+      ],
+      "plannedStatus": "READY",
+      "operation": "VERIFY",
+      "lookup": {
+        "sourceId": "kvm-test",
+        "name": "kvm-test",
+        "planKey": "KEYLESS",
+        "planName": "Keyless Plan"
+      },
+      "payload": {
+        "planKey": "KEYLESS",
+        "expectedName": "Keyless Plan"
+      },
+      "blockers": [],
+      "warnings": [],
+      "manualReviewReasons": []
+    },
+    {
       "actionId": "VERIFY_API:kvm-test",
       "kind": "VERIFY_API",
       "sourceId": "kvm-test",
       "dependencies": [
-        "UPSERT_API:kvm-test"
+        "UPSERT_API:kvm-test",
+        "VERIFY_PLAN:kvm-test:KEYLESS"
       ],
       "plannedStatus": "READY",
       "operation": "VERIFY",
@@ -5969,10 +6876,7 @@
         "name": "kvm-test"
       },
       "payload": {
-        "expectedName": "kvm-test",
-        "expectedPlans": [
-          "Keyless Plan"
-        ]
+        "expectedName": "kvm-test"
       },
       "blockers": [],
       "warnings": [],
@@ -6088,11 +6992,68 @@
       "targetHint": {}
     },
     {
+      "actionId": "UPSERT_PLAN:load-balance-target-servers-api:KEYLESS",
+      "kind": "UPSERT_PLAN",
+      "sourceId": "load-balance-target-servers-api",
+      "dependencies": [
+        "UPSERT_API:load-balance-target-servers-api"
+      ],
+      "plannedStatus": "READY",
+      "operation": "CREATE",
+      "lookup": {
+        "sourceId": "load-balance-target-servers-api",
+        "name": "load-balance-target-servers-api",
+        "planKey": "KEYLESS",
+        "planName": "Keyless Plan"
+      },
+      "payload": {
+        "planKey": "KEYLESS",
+        "definition": {
+          "name": "Keyless Plan",
+          "description": "No security — migrated from Apigee proxy with no auth policy",
+          "security": {
+            "type": "KEY_LESS"
+          },
+          "mode": "STANDARD",
+          "status": "STAGING",
+          "flows": []
+        }
+      },
+      "blockers": [],
+      "warnings": [],
+      "manualReviewReasons": [],
+      "targetHint": {}
+    },
+    {
+      "actionId": "VERIFY_PLAN:load-balance-target-servers-api:KEYLESS",
+      "kind": "VERIFY_PLAN",
+      "sourceId": "load-balance-target-servers-api",
+      "dependencies": [
+        "UPSERT_PLAN:load-balance-target-servers-api:KEYLESS"
+      ],
+      "plannedStatus": "READY",
+      "operation": "VERIFY",
+      "lookup": {
+        "sourceId": "load-balance-target-servers-api",
+        "name": "load-balance-target-servers-api",
+        "planKey": "KEYLESS",
+        "planName": "Keyless Plan"
+      },
+      "payload": {
+        "planKey": "KEYLESS",
+        "expectedName": "Keyless Plan"
+      },
+      "blockers": [],
+      "warnings": [],
+      "manualReviewReasons": []
+    },
+    {
       "actionId": "VERIFY_API:load-balance-target-servers-api",
       "kind": "VERIFY_API",
       "sourceId": "load-balance-target-servers-api",
       "dependencies": [
-        "UPSERT_API:load-balance-target-servers-api"
+        "UPSERT_API:load-balance-target-servers-api",
+        "VERIFY_PLAN:load-balance-target-servers-api:KEYLESS"
       ],
       "plannedStatus": "READY",
       "operation": "VERIFY",
@@ -6101,10 +7062,7 @@
         "name": "load-balance-target-servers-api"
       },
       "payload": {
-        "expectedName": "load-balance-target-servers-api",
-        "expectedPlans": [
-          "Keyless Plan"
-        ]
+        "expectedName": "load-balance-target-servers-api"
       },
       "blockers": [],
       "warnings": [],
@@ -6267,11 +7225,72 @@
       "targetHint": {}
     },
     {
+      "actionId": "UPSERT_PLAN:mock-target-api:KEYLESS",
+      "kind": "UPSERT_PLAN",
+      "sourceId": "mock-target-api",
+      "dependencies": [
+        "UPSERT_API:mock-target-api"
+      ],
+      "plannedStatus": "READY",
+      "operation": "CREATE",
+      "lookup": {
+        "sourceId": "mock-target-api",
+        "name": "mock-target-api",
+        "planKey": "KEYLESS",
+        "planName": "Keyless Plan"
+      },
+      "payload": {
+        "planKey": "KEYLESS",
+        "definition": {
+          "name": "Keyless Plan",
+          "description": "No security — migrated from Apigee proxy with no auth policy",
+          "security": {
+            "type": "KEY_LESS"
+          },
+          "mode": "STANDARD",
+          "status": "STAGING",
+          "flows": []
+        }
+      },
+      "blockers": [],
+      "warnings": [],
+      "manualReviewReasons": [
+        "LLM_POLICY:Process-Encrypted-Value"
+      ],
+      "targetHint": {}
+    },
+    {
+      "actionId": "VERIFY_PLAN:mock-target-api:KEYLESS",
+      "kind": "VERIFY_PLAN",
+      "sourceId": "mock-target-api",
+      "dependencies": [
+        "UPSERT_PLAN:mock-target-api:KEYLESS"
+      ],
+      "plannedStatus": "READY",
+      "operation": "VERIFY",
+      "lookup": {
+        "sourceId": "mock-target-api",
+        "name": "mock-target-api",
+        "planKey": "KEYLESS",
+        "planName": "Keyless Plan"
+      },
+      "payload": {
+        "planKey": "KEYLESS",
+        "expectedName": "Keyless Plan"
+      },
+      "blockers": [],
+      "warnings": [],
+      "manualReviewReasons": [
+        "LLM_POLICY:Process-Encrypted-Value"
+      ]
+    },
+    {
       "actionId": "VERIFY_API:mock-target-api",
       "kind": "VERIFY_API",
       "sourceId": "mock-target-api",
       "dependencies": [
-        "UPSERT_API:mock-target-api"
+        "UPSERT_API:mock-target-api",
+        "VERIFY_PLAN:mock-target-api:KEYLESS"
       ],
       "plannedStatus": "READY",
       "operation": "VERIFY",
@@ -6280,10 +7299,7 @@
         "name": "mock-target-api"
       },
       "payload": {
-        "expectedName": "mock-target-api",
-        "expectedPlans": [
-          "Keyless Plan"
-        ]
+        "expectedName": "mock-target-api"
       },
       "blockers": [],
       "warnings": [],
@@ -6426,11 +7442,72 @@
       "targetHint": {}
     },
     {
+      "actionId": "UPSERT_PLAN:proxy-sharedflow-api-11:KEYLESS",
+      "kind": "UPSERT_PLAN",
+      "sourceId": "proxy-sharedflow-api-11",
+      "dependencies": [
+        "UPSERT_API:proxy-sharedflow-api-11"
+      ],
+      "plannedStatus": "READY",
+      "operation": "CREATE",
+      "lookup": {
+        "sourceId": "proxy-sharedflow-api-11",
+        "name": "proxy-sharedflow-api-11",
+        "planKey": "KEYLESS",
+        "planName": "Keyless Plan"
+      },
+      "payload": {
+        "planKey": "KEYLESS",
+        "definition": {
+          "name": "Keyless Plan",
+          "description": "No security — migrated from Apigee proxy with no auth policy",
+          "security": {
+            "type": "KEY_LESS"
+          },
+          "mode": "STANDARD",
+          "status": "STAGING",
+          "flows": []
+        }
+      },
+      "blockers": [],
+      "warnings": [],
+      "manualReviewReasons": [
+        "SHARED_FLOW_REFS_PRESENT"
+      ],
+      "targetHint": {}
+    },
+    {
+      "actionId": "VERIFY_PLAN:proxy-sharedflow-api-11:KEYLESS",
+      "kind": "VERIFY_PLAN",
+      "sourceId": "proxy-sharedflow-api-11",
+      "dependencies": [
+        "UPSERT_PLAN:proxy-sharedflow-api-11:KEYLESS"
+      ],
+      "plannedStatus": "READY",
+      "operation": "VERIFY",
+      "lookup": {
+        "sourceId": "proxy-sharedflow-api-11",
+        "name": "proxy-sharedflow-api-11",
+        "planKey": "KEYLESS",
+        "planName": "Keyless Plan"
+      },
+      "payload": {
+        "planKey": "KEYLESS",
+        "expectedName": "Keyless Plan"
+      },
+      "blockers": [],
+      "warnings": [],
+      "manualReviewReasons": [
+        "SHARED_FLOW_REFS_PRESENT"
+      ]
+    },
+    {
       "actionId": "VERIFY_API:proxy-sharedflow-api-11",
       "kind": "VERIFY_API",
       "sourceId": "proxy-sharedflow-api-11",
       "dependencies": [
-        "UPSERT_API:proxy-sharedflow-api-11"
+        "UPSERT_API:proxy-sharedflow-api-11",
+        "VERIFY_PLAN:proxy-sharedflow-api-11:KEYLESS"
       ],
       "plannedStatus": "READY",
       "operation": "VERIFY",
@@ -6439,10 +7516,7 @@
         "name": "proxy-sharedflow-api-11"
       },
       "payload": {
-        "expectedName": "proxy-sharedflow-api-11",
-        "expectedPlans": [
-          "Keyless Plan"
-        ]
+        "expectedName": "proxy-sharedflow-api-11"
       },
       "blockers": [],
       "warnings": [],
@@ -6542,11 +7616,68 @@
       "targetHint": {}
     },
     {
+      "actionId": "UPSERT_PLAN:v1-ships:KEYLESS",
+      "kind": "UPSERT_PLAN",
+      "sourceId": "v1-ships",
+      "dependencies": [
+        "UPSERT_API:v1-ships"
+      ],
+      "plannedStatus": "READY",
+      "operation": "CREATE",
+      "lookup": {
+        "sourceId": "v1-ships",
+        "name": "v1-ships",
+        "planKey": "KEYLESS",
+        "planName": "Keyless Plan"
+      },
+      "payload": {
+        "planKey": "KEYLESS",
+        "definition": {
+          "name": "Keyless Plan",
+          "description": "No security — migrated from Apigee proxy with no auth policy",
+          "security": {
+            "type": "KEY_LESS"
+          },
+          "mode": "STANDARD",
+          "status": "STAGING",
+          "flows": []
+        }
+      },
+      "blockers": [],
+      "warnings": [],
+      "manualReviewReasons": [],
+      "targetHint": {}
+    },
+    {
+      "actionId": "VERIFY_PLAN:v1-ships:KEYLESS",
+      "kind": "VERIFY_PLAN",
+      "sourceId": "v1-ships",
+      "dependencies": [
+        "UPSERT_PLAN:v1-ships:KEYLESS"
+      ],
+      "plannedStatus": "READY",
+      "operation": "VERIFY",
+      "lookup": {
+        "sourceId": "v1-ships",
+        "name": "v1-ships",
+        "planKey": "KEYLESS",
+        "planName": "Keyless Plan"
+      },
+      "payload": {
+        "planKey": "KEYLESS",
+        "expectedName": "Keyless Plan"
+      },
+      "blockers": [],
+      "warnings": [],
+      "manualReviewReasons": []
+    },
+    {
       "actionId": "VERIFY_API:v1-ships",
       "kind": "VERIFY_API",
       "sourceId": "v1-ships",
       "dependencies": [
-        "UPSERT_API:v1-ships"
+        "UPSERT_API:v1-ships",
+        "VERIFY_PLAN:v1-ships:KEYLESS"
       ],
       "plannedStatus": "READY",
       "operation": "VERIFY",
@@ -6555,10 +7686,7 @@
         "name": "v1-ships"
       },
       "payload": {
-        "expectedName": "v1-ships",
-        "expectedPlans": [
-          "Keyless Plan"
-        ]
+        "expectedName": "v1-ships"
       },
       "blockers": [],
       "warnings": [],
@@ -6870,11 +7998,72 @@
       "targetHint": {}
     },
     {
+      "actionId": "UPSERT_PLAN:villian-chain:KEYLESS",
+      "kind": "UPSERT_PLAN",
+      "sourceId": "villian-chain",
+      "dependencies": [
+        "UPSERT_API:villian-chain"
+      ],
+      "plannedStatus": "READY",
+      "operation": "CREATE",
+      "lookup": {
+        "sourceId": "villian-chain",
+        "name": "villian-chain",
+        "planKey": "KEYLESS",
+        "planName": "Keyless Plan"
+      },
+      "payload": {
+        "planKey": "KEYLESS",
+        "definition": {
+          "name": "Keyless Plan",
+          "description": "No security — migrated from Apigee proxy with no auth policy",
+          "security": {
+            "type": "KEY_LESS"
+          },
+          "mode": "STANDARD",
+          "status": "STAGING",
+          "flows": []
+        }
+      },
+      "blockers": [],
+      "warnings": [],
+      "manualReviewReasons": [
+        "LLM_POLICY:createJsonResponse"
+      ],
+      "targetHint": {}
+    },
+    {
+      "actionId": "VERIFY_PLAN:villian-chain:KEYLESS",
+      "kind": "VERIFY_PLAN",
+      "sourceId": "villian-chain",
+      "dependencies": [
+        "UPSERT_PLAN:villian-chain:KEYLESS"
+      ],
+      "plannedStatus": "READY",
+      "operation": "VERIFY",
+      "lookup": {
+        "sourceId": "villian-chain",
+        "name": "villian-chain",
+        "planKey": "KEYLESS",
+        "planName": "Keyless Plan"
+      },
+      "payload": {
+        "planKey": "KEYLESS",
+        "expectedName": "Keyless Plan"
+      },
+      "blockers": [],
+      "warnings": [],
+      "manualReviewReasons": [
+        "LLM_POLICY:createJsonResponse"
+      ]
+    },
+    {
       "actionId": "VERIFY_API:villian-chain",
       "kind": "VERIFY_API",
       "sourceId": "villian-chain",
       "dependencies": [
-        "UPSERT_API:villian-chain"
+        "UPSERT_API:villian-chain",
+        "VERIFY_PLAN:villian-chain:KEYLESS"
       ],
       "plannedStatus": "READY",
       "operation": "VERIFY",
@@ -6883,10 +8072,7 @@
         "name": "villian-chain"
       },
       "payload": {
-        "expectedName": "villian-chain",
-        "expectedPlans": [
-          "Keyless Plan"
-        ]
+        "expectedName": "villian-chain"
       },
       "blockers": [],
       "warnings": [],
@@ -7025,11 +8211,68 @@
       "targetHint": {}
     },
     {
+      "actionId": "UPSERT_PLAN:wizards-api-9:API_KEY",
+      "kind": "UPSERT_PLAN",
+      "sourceId": "wizards-api-9",
+      "dependencies": [
+        "UPSERT_API:wizards-api-9"
+      ],
+      "plannedStatus": "READY",
+      "operation": "CREATE",
+      "lookup": {
+        "sourceId": "wizards-api-9",
+        "name": "wizards-api-9",
+        "planKey": "API_KEY",
+        "planName": "API Key Plan"
+      },
+      "payload": {
+        "planKey": "API_KEY",
+        "definition": {
+          "name": "API Key Plan",
+          "description": "Migrated from Apigee VerifyAPIKey — key header: request.queryparam.apikey",
+          "security": {
+            "type": "API_KEY"
+          },
+          "mode": "STANDARD",
+          "status": "STAGING",
+          "flows": []
+        }
+      },
+      "blockers": [],
+      "warnings": [],
+      "manualReviewReasons": [],
+      "targetHint": {}
+    },
+    {
+      "actionId": "VERIFY_PLAN:wizards-api-9:API_KEY",
+      "kind": "VERIFY_PLAN",
+      "sourceId": "wizards-api-9",
+      "dependencies": [
+        "UPSERT_PLAN:wizards-api-9:API_KEY"
+      ],
+      "plannedStatus": "READY",
+      "operation": "VERIFY",
+      "lookup": {
+        "sourceId": "wizards-api-9",
+        "name": "wizards-api-9",
+        "planKey": "API_KEY",
+        "planName": "API Key Plan"
+      },
+      "payload": {
+        "planKey": "API_KEY",
+        "expectedName": "API Key Plan"
+      },
+      "blockers": [],
+      "warnings": [],
+      "manualReviewReasons": []
+    },
+    {
       "actionId": "VERIFY_API:wizards-api-9",
       "kind": "VERIFY_API",
       "sourceId": "wizards-api-9",
       "dependencies": [
-        "UPSERT_API:wizards-api-9"
+        "UPSERT_API:wizards-api-9",
+        "VERIFY_PLAN:wizards-api-9:API_KEY"
       ],
       "plannedStatus": "READY",
       "operation": "VERIFY",
@@ -7038,10 +8281,7 @@
         "name": "wizards-api-9"
       },
       "payload": {
-        "expectedName": "wizards-api-9",
-        "expectedPlans": [
-          "API Key Plan"
-        ]
+        "expectedName": "wizards-api-9"
       },
       "blockers": [],
       "warnings": [],
@@ -7178,11 +8418,68 @@
       "targetHint": {}
     },
     {
+      "actionId": "UPSERT_PLAN:yes-or-no-api-4:API_KEY",
+      "kind": "UPSERT_PLAN",
+      "sourceId": "yes-or-no-api-4",
+      "dependencies": [
+        "UPSERT_API:yes-or-no-api-4"
+      ],
+      "plannedStatus": "READY",
+      "operation": "CREATE",
+      "lookup": {
+        "sourceId": "yes-or-no-api-4",
+        "name": "yes-or-no-api-4",
+        "planKey": "API_KEY",
+        "planName": "API Key Plan"
+      },
+      "payload": {
+        "planKey": "API_KEY",
+        "definition": {
+          "name": "API Key Plan",
+          "description": "Migrated from Apigee VerifyAPIKey — key header: request.queryparam.apikey",
+          "security": {
+            "type": "API_KEY"
+          },
+          "mode": "STANDARD",
+          "status": "STAGING",
+          "flows": []
+        }
+      },
+      "blockers": [],
+      "warnings": [],
+      "manualReviewReasons": [],
+      "targetHint": {}
+    },
+    {
+      "actionId": "VERIFY_PLAN:yes-or-no-api-4:API_KEY",
+      "kind": "VERIFY_PLAN",
+      "sourceId": "yes-or-no-api-4",
+      "dependencies": [
+        "UPSERT_PLAN:yes-or-no-api-4:API_KEY"
+      ],
+      "plannedStatus": "READY",
+      "operation": "VERIFY",
+      "lookup": {
+        "sourceId": "yes-or-no-api-4",
+        "name": "yes-or-no-api-4",
+        "planKey": "API_KEY",
+        "planName": "API Key Plan"
+      },
+      "payload": {
+        "planKey": "API_KEY",
+        "expectedName": "API Key Plan"
+      },
+      "blockers": [],
+      "warnings": [],
+      "manualReviewReasons": []
+    },
+    {
       "actionId": "VERIFY_API:yes-or-no-api-4",
       "kind": "VERIFY_API",
       "sourceId": "yes-or-no-api-4",
       "dependencies": [
-        "UPSERT_API:yes-or-no-api-4"
+        "UPSERT_API:yes-or-no-api-4",
+        "VERIFY_PLAN:yes-or-no-api-4:API_KEY"
       ],
       "plannedStatus": "READY",
       "operation": "VERIFY",
@@ -7191,10 +8488,7 @@
         "name": "yes-or-no-api-4"
       },
       "payload": {
-        "expectedName": "yes-or-no-api-4",
-        "expectedPlans": [
-          "API Key Plan"
-        ]
+        "expectedName": "yes-or-no-api-4"
       },
       "blockers": [],
       "warnings": [],

@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-04-07T17:00:07.816Z",
+  "generatedAt": "2026-04-07T17:13:14.860Z",
   "summary": {
     "proxies": 23,
     "blockers": 0,
     "warnings": 11,
-    "actions": 46,
+    "actions": 92,
     "manualReview": 16
   },
   "findings": [
