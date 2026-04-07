@@ -314,14 +314,14 @@ class GraviteeClient {
   }
 
   async createApi(payload) {
-    return this.post(this.envUrl('/apis/import'), payload);
+    return this.post(this.envUrl('/apis/import'), { api: payload });
   }
 
   async updateApi(apiId, payload) {
     if (apiId) {
-      return this.put(this.envUrl(`/apis/${apiId}/import`), payload);
+      return this.put(this.envUrl(`/apis/${apiId}/import`), { api: payload });
     }
-    return this.put(this.envUrl('/apis/import'), payload);
+    return this.put(this.envUrl('/apis/import'), { api: payload });
   }
 
   async listRoles() {
