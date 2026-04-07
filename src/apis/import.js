@@ -71,6 +71,13 @@ async function executeAction(action, result, idMap) {
       : await result.client.createApiPlan(api.id, payload);
 
     const resolvedPlanId = plan?.id || existing?.id || null;
+    if (resolvedPlanId && typeof result.client.publishApiPlan === 'function') {
+      try {
+        await result.client.publishApiPlan(api.id, resolvedPlanId);
+      } catch (_) {
+        // Some deployments may not require or support explicit publish here.
+      }
+    }
     setIdMapValue(idMap, action.kind, action.sourceId, { planKey, planId: resolvedPlanId });
     return { apiId: api.id, planId: resolvedPlanId, planKey };
   }

@@ -129,6 +129,9 @@ function makeClient() {
       state.plans.set(apiId, plans);
       return plan;
     },
+    async publishApiPlan() {
+      return null;
+    },
     async findApiBySourceId(sourceId) {
       return Array.from(state.apis.values()).find((item) => {
         return item.definitionContext?.origin?.sourceId === sourceId || item.crossId === sourceId;

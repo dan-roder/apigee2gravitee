@@ -75,6 +75,24 @@ async function testFindPlanResolvesApiByNameWhenIdMissing() {
   assert.strictEqual(plan.apiId, 'api-1');
 }
 
+async function testCreateApiPlanNormalizesPlanPayload() {
+  const client = new GraviteeClient({ baseUrl: 'https://gravitee.example.com', orgId: 'DEFAULT', envId: 'DEFAULT', token: 'token' });
+  let called = null;
+  client.post = async (url, body) => {
+    called = { url, body };
+    return { id: 'plan-1' };
+  };
+  await client.createApiPlan('api-1', {
+    name: 'Keyless Plan',
+    security: { type: 'KEY_LESS' },
+    flows: [],
+  });
+  assert.strictEqual(called.url, 'https://gravitee.example.com/management/v2/organizations/DEFAULT/environments/DEFAULT/apis/api-1/plans');
+  assert.strictEqual(called.body.name, 'Keyless Plan');
+  assert.strictEqual(called.body.security, 'KEY_LESS');
+  assert.strictEqual(called.body.definition, '{"\/":[]}');
+}
+
 async function run() {
   await testFindUserByEmailFiltersResults();
   await testCreateSubscriptionUsesV2Endpoint();
@@ -83,6 +101,7 @@ async function run() {
   await testNormalizeCollectionSupportsItemsShape();
   await testFindApiByNameFiltersExactName();
   await testFindPlanResolvesApiByNameWhenIdMissing();
+  await testCreateApiPlanNormalizesPlanPayload();
   console.log('test-gravitee-client.js passed');
 }
 

@@ -452,11 +452,89 @@ class GraviteeClient {
   }
 
   async createApiPlan(apiId, payload) {
-    return this.post(this.v2Url(`/apis/${apiId}/plans`), payload);
+    const normalizedPayload = this._normalizePlanPayload(payload);
+    const attempts = [];
+    const strategies = [
+      {
+        name: 'v4-plan-raw',
+        exec: () => this.post(this.v2Url(`/apis/${apiId}/plans`), normalizedPayload),
+      },
+      {
+        name: 'v4-plan-create-wrapper',
+        exec: () => this.post(this.v2Url(`/apis/${apiId}/plans`), { createPlan: normalizedPayload }),
+      },
+    ];
+    for (const strategy of strategies) {
+      try {
+        const response = await strategy.exec();
+        if (response && typeof response === 'object' && !Array.isArray(response)) {
+          response._strategy = strategy.name;
+        }
+        return response;
+      } catch (err) {
+        attempts.push({
+          strategy: strategy.name,
+          status: err.status || null,
+          classification: classifyApiError(err),
+          message: err.message,
+          body: err.body,
+        });
+      }
+    }
+    const fallbackError = new Error(
+      attempts
+        .map((attempt) => `${attempt.strategy}: ${attempt.message}${attempt.body ? `: ${typeof attempt.body === 'string' ? attempt.body : JSON.stringify(attempt.body)}` : ''}`)
+        .join(' | ')
+    );
+    fallbackError.name = 'GraviteePlanCompatibilityError';
+    fallbackError.classification = 'compatibility';
+    fallbackError.attempts = attempts;
+    throw fallbackError;
   }
 
   async updateApiPlan(apiId, planId, payload) {
-    return this.put(this.v2Url(`/apis/${apiId}/plans/${planId}`), payload);
+    const normalizedPayload = this._normalizePlanPayload(payload);
+    const attempts = [];
+    const strategies = [
+      {
+        name: 'v4-plan-raw',
+        exec: () => this.put(this.v2Url(`/apis/${apiId}/plans/${planId}`), normalizedPayload),
+      },
+      {
+        name: 'v4-plan-update-wrapper',
+        exec: () => this.put(this.v2Url(`/apis/${apiId}/plans/${planId}`), { updatePlan: normalizedPayload }),
+      },
+    ];
+    for (const strategy of strategies) {
+      try {
+        const response = await strategy.exec();
+        if (response && typeof response === 'object' && !Array.isArray(response)) {
+          response._strategy = strategy.name;
+        }
+        return response;
+      } catch (err) {
+        attempts.push({
+          strategy: strategy.name,
+          status: err.status || null,
+          classification: classifyApiError(err),
+          message: err.message,
+          body: err.body,
+        });
+      }
+    }
+    const fallbackError = new Error(
+      attempts
+        .map((attempt) => `${attempt.strategy}: ${attempt.message}${attempt.body ? `: ${typeof attempt.body === 'string' ? attempt.body : JSON.stringify(attempt.body)}` : ''}`)
+        .join(' | ')
+    );
+    fallbackError.name = 'GraviteePlanCompatibilityError';
+    fallbackError.classification = 'compatibility';
+    fallbackError.attempts = attempts;
+    throw fallbackError;
+  }
+
+  async publishApiPlan(apiId, planId) {
+    return this.post(this.v2Url(`/apis/${apiId}/plans/${planId}/_publish`), {});
   }
 
   async findPlan(mapping) {
@@ -620,6 +698,37 @@ class GraviteeClient {
     const clone = this._clone(payload);
     delete clone.plans;
     return clone;
+  }
+
+  _normalizePlanPayload(payload) {
+    const clone = this._clone(payload);
+    const securityType = clone?.security?.type || clone?.security || 'KEY_LESS';
+    const securityDefinition = clone?.security?.configuration || clone?.securityDefinition || {};
+    const definition = typeof clone.definition === 'string'
+      ? clone.definition
+      : JSON.stringify({ '/': Array.isArray(clone.flows) ? clone.flows : [] });
+
+    return {
+      name: clone.name,
+      description: clone.description || '',
+      validation: clone.validation || 'AUTO',
+      type: clone.type || 'API',
+      status: clone.status || 'STAGING',
+      mode: clone.mode || 'STANDARD',
+      order: Number.isFinite(clone.order) ? clone.order : 0,
+      characteristics: clone.characteristics || [],
+      commentRequired: !!clone.commentRequired,
+      commentMessage: clone.commentMessage || '',
+      excludedGroups: clone.excludedGroups || [],
+      generalConditions: clone.generalConditions || '',
+      selectionRule: clone.selectionRule || '',
+      tags: clone.tags || [],
+      security: securityType,
+      securityDefinition: typeof securityDefinition === 'string'
+        ? securityDefinition
+        : JSON.stringify(securityDefinition),
+      definition,
+    };
   }
 
   _buildApiWriteStrategies(mode, apiId, payload) {
