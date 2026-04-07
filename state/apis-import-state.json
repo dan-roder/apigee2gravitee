@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-04-07T15:32:52.421Z",
-  "updatedAt": "2026-04-07T15:32:59.830Z",
+  "generatedAt": "2026-04-07T15:39:32.722Z",
+  "updatedAt": "2026-04-07T15:39:40.117Z",
   "mode": "plan",
   "summary": {
     "proxies": 23,
@@ -25,9 +25,9 @@
       "dependencies": [],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "POST http://localhost:8083/management/organizations/DEFAULT/environments/DEFAULT/apis/import → HTTP 500: {\"message\":\"An error occurs while trying to JSON deserialize the API definition.\",\"technicalCode\":\"unexpected\",\"http_status\":500}",
-      "startedAt": "2026-04-07T15:32:52.425Z",
-      "completedAt": "2026-04-07T15:32:59.830Z"
+      "lastError": "POST http://localhost:8083/management/organizations/DEFAULT/environments/DEFAULT/apis/import → HTTP 500: {\"message\":\"Cannot invoke \\\"io.gravitee.definition.model.Proxy.getVirtualHosts()\\\" because the return value of \\\"io.gravitee.rest.api.model.api.UpdateApiEntity.getProxy()\\\" is null\",\"http_status\":500}",
+      "startedAt": "2026-04-07T15:39:32.726Z",
+      "completedAt": "2026-04-07T15:39:40.117Z"
     },
     "VERIFY_API:KVM-Create": {
       "actionId": "VERIFY_API:KVM-Create",
