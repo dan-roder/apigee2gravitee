@@ -23,9 +23,22 @@ async function runApisReconcile(flags, deps = {}) {
       mismatches.push({ severity: 'blocker', code: 'API_ID_MAP_MISMATCH', sourceId: proxy.sourceId, message: `API ${proxy.definition.name} resolved to ${target.id} instead of ${expectedId}` });
     }
     const plans = await result.client.listApiPlans(target.id);
-    for (const planName of Object.values(proxy.definition.plans || {}).map((plan) => plan.name)) {
+    const expectedPlanIds = idMap.plans?.[proxy.sourceId] || {};
+    for (const [planKey, planDefinition] of Object.entries(proxy.definition.plans || {})) {
+      const planName = planDefinition.name;
       if (!plans.some((item) => item.name === planName)) {
         mismatches.push({ severity: 'blocker', code: 'API_PLAN_MISSING', sourceId: proxy.sourceId, message: `API ${proxy.definition.name} is missing plan ${planName}` });
+        continue;
+      }
+      const expectedPlanId = expectedPlanIds[planKey];
+      const actualPlan = plans.find((item) => item.name === planName);
+      if (expectedPlanId && actualPlan && actualPlan.id !== expectedPlanId) {
+        mismatches.push({
+          severity: 'blocker',
+          code: 'API_PLAN_ID_MAP_MISMATCH',
+          sourceId: proxy.sourceId,
+          message: `API ${proxy.definition.name} plan ${planName} resolved to ${actualPlan.id} instead of ${expectedPlanId}`,
+        });
       }
     }
   }

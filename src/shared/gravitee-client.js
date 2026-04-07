@@ -446,6 +446,19 @@ class GraviteeClient {
     return normalizeCollection(body);
   }
 
+  async findApiPlanByName(apiId, name) {
+    const plans = await this.listApiPlans(apiId);
+    return plans.find((item) => item.name === name) || null;
+  }
+
+  async createApiPlan(apiId, payload) {
+    return this.post(this.v2Url(`/apis/${apiId}/plans`), payload);
+  }
+
+  async updateApiPlan(apiId, planId, payload) {
+    return this.put(this.v2Url(`/apis/${apiId}/plans/${planId}`), payload);
+  }
+
   async findPlan(mapping) {
     let resolvedApiId = mapping.targetApiId || null;
     if (!resolvedApiId && mapping.targetApi) {

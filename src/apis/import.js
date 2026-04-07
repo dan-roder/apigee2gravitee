@@ -38,15 +38,58 @@ async function executeAction(action, result, idMap) {
     return { apiId: resolvedId };
   }
 
+  if (action.kind === 'UPSERT_PLAN') {
+    const api = await result.client.findApiByName(proxy.definition.name);
+    if (!api) throw new Error(`API ${proxy.definition.name} was not found before plan import`);
+    const planKey = action.payload.planKey;
+    const planDefinition = proxy.definition.plans?.[planKey];
+    if (!planDefinition) throw new Error(`Plan ${planKey} is not defined for API ${proxy.definition.name}`);
+
+    const existing = await result.client.findApiPlanByName(api.id, planDefinition.name);
+    const payload = {
+      ...planDefinition,
+      name: planDefinition.name,
+      description: planDefinition.description,
+      security: planDefinition.security,
+      flows: Array.isArray(planDefinition.flows) ? planDefinition.flows : [],
+      characteristics: planDefinition.characteristics || [],
+      commentRequired: !!planDefinition.commentRequired,
+      commentMessage: planDefinition.commentMessage || '',
+      excludedGroups: planDefinition.excludedGroups || [],
+      generalConditions: planDefinition.generalConditions || '',
+      mode: planDefinition.mode,
+      order: Number.isFinite(planDefinition.order) ? planDefinition.order : 0,
+      selectionRule: planDefinition.selectionRule || '',
+      status: planDefinition.status,
+      tags: planDefinition.tags || [],
+      type: planDefinition.type || 'API',
+      validation: planDefinition.validation || 'AUTO',
+    };
+
+    const plan = existing
+      ? await result.client.updateApiPlan(api.id, existing.id, payload)
+      : await result.client.createApiPlan(api.id, payload);
+
+    const resolvedPlanId = plan?.id || existing?.id || null;
+    setIdMapValue(idMap, action.kind, action.sourceId, { planKey, planId: resolvedPlanId });
+    return { apiId: api.id, planId: resolvedPlanId, planKey };
+  }
+
+  if (action.kind === 'VERIFY_PLAN') {
+    const target = await result.client.findApiByName(proxy.definition.name);
+    if (!target) throw new Error(`API ${proxy.definition.name} was not found`);
+    const expectedName = action.payload.expectedName;
+    const plan = await result.client.findApiPlanByName(target.id, expectedName);
+    if (!plan) {
+      throw new Error(`API ${proxy.definition.name} is missing plan ${expectedName}`);
+    }
+    setIdMapValue(idMap, action.kind, action.sourceId, { planKey: action.payload.planKey, planId: plan.id });
+    return { apiId: target.id, planId: plan.id, planKey: action.payload.planKey };
+  }
+
   if (action.kind === 'VERIFY_API') {
     const target = await result.client.findApiByName(proxy.definition.name);
     if (!target) throw new Error(`API ${proxy.definition.name} was not found`);
-    const plans = await result.client.listApiPlans(target.id);
-    for (const planName of action.payload.expectedPlans) {
-      if (!plans.some((item) => item.name === planName)) {
-        throw new Error(`API ${proxy.definition.name} is missing plan ${planName}`);
-      }
-    }
     setIdMapValue(idMap, action.kind, action.sourceId, target.id);
     return { apiId: target.id };
   }

@@ -29,12 +29,20 @@ function initializeIdMap(domain) {
   return {
     generatedAt: new Date().toISOString(),
     apis: Object.fromEntries(domain.proxies.map((item) => [item.sourceId, null])),
+    plans: Object.fromEntries(domain.proxies.map((item) => [item.sourceId, {}])),
   };
 }
 
 function setIdMapValue(idMap, kind, sourceId, value) {
   if (kind === 'UPSERT_API' || kind === 'VERIFY_API') {
     idMap.apis[sourceId] = value;
+  }
+  if (kind === 'UPSERT_PLAN' || kind === 'VERIFY_PLAN') {
+    const bucket = idMap.plans[sourceId] || {};
+    idMap.plans[sourceId] = bucket;
+    if (value?.planKey) {
+      bucket[value.planKey] = value.planId || null;
+    }
   }
 }
 

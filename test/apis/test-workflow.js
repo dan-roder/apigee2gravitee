@@ -110,6 +110,25 @@ function makeClient() {
     async listApiPlans(apiId) {
       return state.plans.get(apiId) || [];
     },
+    async findApiPlanByName(apiId, name) {
+      return (state.plans.get(apiId) || []).find((item) => item.name === name) || null;
+    },
+    async createApiPlan(apiId, payload) {
+      const plans = state.plans.get(apiId) || [];
+      const plan = { id: `${apiId}-plan-${plans.length + 1}`, name: payload.name };
+      plans.push(plan);
+      state.plans.set(apiId, plans);
+      return plan;
+    },
+    async updateApiPlan(apiId, planId, payload) {
+      const plans = state.plans.get(apiId) || [];
+      const index = plans.findIndex((item) => item.id === planId);
+      const plan = { id: planId, name: payload.name };
+      if (index >= 0) plans[index] = plan;
+      else plans.push(plan);
+      state.plans.set(apiId, plans);
+      return plan;
+    },
     async findApiBySourceId(sourceId) {
       return Array.from(state.apis.values()).find((item) => {
         return item.definitionContext?.origin?.sourceId === sourceId || item.crossId === sourceId;
@@ -133,6 +152,8 @@ async function testApisAnalyzeBuildsPlan() {
     assert.strictEqual(result.exitCode, 0);
     assert.strictEqual(result.domain.proxies.length, 1);
     assert.ok(result.manifest.actions.some((item) => item.kind === 'UPSERT_API'));
+    assert.ok(result.manifest.actions.some((item) => item.kind === 'UPSERT_PLAN'));
+    assert.ok(result.manifest.actions.some((item) => item.kind === 'VERIFY_PLAN'));
     assert.ok(result.manifest.actions.some((item) => item.kind === 'VERIFY_API'));
   });
 }
@@ -153,6 +174,8 @@ async function testApisImportCreatesApiAndPlans() {
     assert.strictEqual(result.exitCode, 0);
     assert.strictEqual(client._state.createApi, 1);
     assert.ok(result.idMap.apis['orders-api']);
+    assert.ok(result.idMap.plans['orders-api']);
+    assert.ok(Object.keys(result.idMap.plans['orders-api']).length > 0);
   });
 }
 
