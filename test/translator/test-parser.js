@@ -695,6 +695,27 @@ suite('ProxyAST — parseProxyIr with synthetic data', () => {
     assert.strictEqual(step._missing, true);
     assert.strictEqual(step.policy, null);
   });
+
+  test('falls back to proxy endpoint base_path when bundle base_path is empty', () => {
+    const ir = {
+      type: 'proxy', name: 'v1-ships', revision: '1',
+      display_name: 'v1-ships', description: '', base_path: '',
+      policies: {},
+      proxy_endpoints: [{
+        name: 'default',
+        connection: { base_path: '/v1-ships', virtual_hosts: ['api-grover'] },
+        pre_flow: { request: [], response: [] },
+        flows: [],
+        post_flow: { request: [], response: [] },
+        route_rules: [],
+      }],
+      target_endpoints: [], resources: {}, kvm_refs: [],
+      shared_flow_refs: [], target_server_refs: [],
+    };
+    const ast = parseProxyIr(ir);
+    assert.strictEqual(ast.basePath, '/v1-ships');
+    assert.strictEqual(ast.proxyEndpoints[0].basePath, '/v1-ships');
+  });
 });
 
 // ─── Summary ──────────────────────────────────────────────────────────────────

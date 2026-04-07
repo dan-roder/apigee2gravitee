@@ -204,6 +204,7 @@ function buildFlowGraph(proxyEndpoint, policyMap) {
 function buildProxyEndpointAST(irEndpoint, policyMap) {
   return {
     name:        irEndpoint.name,
+    basePath:    irEndpoint.base_path || irEndpoint.connection?.base_path || '/',
     connection:  irEndpoint.connection,
     preFlow: {
       request:  (irEndpoint.pre_flow?.request  || []).map(s => resolveStep(s, policyMap)),
@@ -376,6 +377,10 @@ function parseProxyIr(irBundle) {
   const flowGraph = primaryEndpoint
     ? buildFlowGraph(primaryEndpoint, policyMap)
     : [];
+  const derivedBasePath = irBundle.base_path
+    || primaryEndpoint?.base_path
+    || primaryEndpoint?.connection?.base_path
+    || '/';
 
   // 4. Security classification
   const securityScheme = classifySecurityScheme(policyMap, proxyEndpoints);
@@ -390,7 +395,7 @@ function parseProxyIr(irBundle) {
     revision:     irBundle.revision     || '',
     displayName:  irBundle.display_name || irBundle.name,
     description:  irBundle.description  || '',
-    basePath:     irBundle.base_path    || '/',
+    basePath:     derivedBasePath,
 
     // Policy map as plain object for serialisation
     policies:       Object.fromEntries(policyMap),
