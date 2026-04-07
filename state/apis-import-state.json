@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-04-07T17:13:14.860Z",
-  "updatedAt": "2026-04-07T17:14:10.426Z",
+  "generatedAt": "2026-04-07T19:30:40.628Z",
+  "updatedAt": "2026-04-07T19:31:52.499Z",
   "mode": "plan",
   "summary": {
     "proxies": 23,
@@ -28,8 +28,8 @@
       "targetIds": {},
       "reconcileHints": {},
       "lastError": "v4-management-full -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 404: {\"httpStatus\":404,\"message\":\"Plugin [assign-attributes] cannot be found.\",\"technicalCode\":\"plugin.notFound\",\"parameters\":{\"plugin\":\"assign-attributes\"},\"details\":[]} | v4-management-shell -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 404: {\"httpStatus\":404,\"message\":\"Plugin [assign-attributes] cannot be found.\",\"technicalCode\":\"plugin.notFound\",\"parameters\":{\"plugin\":\"assign-attributes\"},\"details\":[]} | legacy-import-wrapper -> POST http://localhost:8083/management/organizations/DEFAULT/environments/DEFAULT/apis/import → HTTP 500: {\"message\":\"Cannot invoke \\\"io.gravitee.definition.model.Proxy.getVirtualHosts()\\\" because the return value of \\\"io.gravitee.rest.api.model.api.UpdateApiEntity.getProxy()\\\" is null\",\"http_status\":500}",
-      "startedAt": "2026-04-07T17:13:14.866Z",
-      "completedAt": "2026-04-07T17:13:22.378Z"
+      "startedAt": "2026-04-07T19:30:40.634Z",
+      "completedAt": "2026-04-07T19:30:48.157Z"
     },
     "UPSERT_PLAN:KVM-Create:KEYLESS": {
       "actionId": "UPSERT_PLAN:KVM-Create:KEYLESS",
@@ -44,7 +44,7 @@
       "reconcileHints": {},
       "lastError": "dependency not satisfied: UPSERT_API:KVM-Create=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-07T17:13:22.381Z"
+      "completedAt": "2026-04-07T19:30:48.160Z"
     },
     "VERIFY_PLAN:KVM-Create:KEYLESS": {
       "actionId": "VERIFY_PLAN:KVM-Create:KEYLESS",
@@ -59,7 +59,7 @@
       "reconcileHints": {},
       "lastError": "dependency not satisfied: UPSERT_PLAN:KVM-Create:KEYLESS=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-07T17:13:22.381Z"
+      "completedAt": "2026-04-07T19:30:48.160Z"
     },
     "VERIFY_API:KVM-Create": {
       "actionId": "VERIFY_API:KVM-Create",
@@ -75,7 +75,7 @@
       "reconcileHints": {},
       "lastError": "dependency not satisfied: UPSERT_API:KVM-Create=MANUAL_REVIEW, VERIFY_PLAN:KVM-Create:KEYLESS=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-07T17:13:22.381Z"
+      "completedAt": "2026-04-07T19:30:48.160Z"
     },
     "UPSERT_API:KVM-Reader": {
       "actionId": "UPSERT_API:KVM-Reader",
@@ -87,8 +87,8 @@
       "targetIds": {},
       "reconcileHints": {},
       "lastError": "v4-management-full -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 404: {\"httpStatus\":404,\"message\":\"Plugin [assign-attributes] cannot be found.\",\"technicalCode\":\"plugin.notFound\",\"parameters\":{\"plugin\":\"assign-attributes\"},\"details\":[]} | v4-management-shell -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 404: {\"httpStatus\":404,\"message\":\"Plugin [assign-attributes] cannot be found.\",\"technicalCode\":\"plugin.notFound\",\"parameters\":{\"plugin\":\"assign-attributes\"},\"details\":[]} | legacy-import-wrapper -> POST http://localhost:8083/management/organizations/DEFAULT/environments/DEFAULT/apis/import → HTTP 500: {\"message\":\"Cannot invoke \\\"io.gravitee.definition.model.Proxy.getVirtualHosts()\\\" because the return value of \\\"io.gravitee.rest.api.model.api.UpdateApiEntity.getProxy()\\\" is null\",\"http_status\":500}",
-      "startedAt": "2026-04-07T17:13:22.381Z",
-      "completedAt": "2026-04-07T17:13:29.888Z"
+      "startedAt": "2026-04-07T19:30:48.160Z",
+      "completedAt": "2026-04-07T19:30:55.665Z"
     },
     "UPSERT_PLAN:KVM-Reader:KEYLESS": {
       "actionId": "UPSERT_PLAN:KVM-Reader:KEYLESS",
@@ -103,7 +103,7 @@
       "reconcileHints": {},
       "lastError": "dependency not satisfied: UPSERT_API:KVM-Reader=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-07T17:13:29.891Z"
+      "completedAt": "2026-04-07T19:30:55.669Z"
     },
     "VERIFY_PLAN:KVM-Reader:KEYLESS": {
       "actionId": "VERIFY_PLAN:KVM-Reader:KEYLESS",
@@ -118,7 +118,7 @@
       "reconcileHints": {},
       "lastError": "dependency not satisfied: UPSERT_PLAN:KVM-Reader:KEYLESS=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-07T17:13:29.891Z"
+      "completedAt": "2026-04-07T19:30:55.669Z"
     },
     "VERIFY_API:KVM-Reader": {
       "actionId": "VERIFY_API:KVM-Reader",
@@ -134,7 +134,7 @@
       "reconcileHints": {},
       "lastError": "dependency not satisfied: UPSERT_API:KVM-Reader=MANUAL_REVIEW, VERIFY_PLAN:KVM-Reader:KEYLESS=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-07T17:13:29.891Z"
+      "completedAt": "2026-04-07T19:30:55.669Z"
     },
     "UPSERT_API:KVM-Update": {
       "actionId": "UPSERT_API:KVM-Update",
@@ -146,8 +146,8 @@
       "targetIds": {},
       "reconcileHints": {},
       "lastError": "v4-management-full -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 404: {\"httpStatus\":404,\"message\":\"Plugin [assign-attributes] cannot be found.\",\"technicalCode\":\"plugin.notFound\",\"parameters\":{\"plugin\":\"assign-attributes\"},\"details\":[]} | v4-management-shell -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 404: {\"httpStatus\":404,\"message\":\"Plugin [assign-attributes] cannot be found.\",\"technicalCode\":\"plugin.notFound\",\"parameters\":{\"plugin\":\"assign-attributes\"},\"details\":[]} | legacy-import-wrapper -> POST http://localhost:8083/management/organizations/DEFAULT/environments/DEFAULT/apis/import → HTTP 500: {\"message\":\"Cannot invoke \\\"io.gravitee.definition.model.Proxy.getVirtualHosts()\\\" because the return value of \\\"io.gravitee.rest.api.model.api.UpdateApiEntity.getProxy()\\\" is null\",\"http_status\":500}",
-      "startedAt": "2026-04-07T17:13:29.891Z",
-      "completedAt": "2026-04-07T17:13:37.405Z"
+      "startedAt": "2026-04-07T19:30:55.669Z",
+      "completedAt": "2026-04-07T19:31:03.175Z"
     },
     "UPSERT_PLAN:KVM-Update:KEYLESS": {
       "actionId": "UPSERT_PLAN:KVM-Update:KEYLESS",
@@ -162,7 +162,7 @@
       "reconcileHints": {},
       "lastError": "dependency not satisfied: UPSERT_API:KVM-Update=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-07T17:13:37.409Z"
+      "completedAt": "2026-04-07T19:31:03.178Z"
     },
     "VERIFY_PLAN:KVM-Update:KEYLESS": {
       "actionId": "VERIFY_PLAN:KVM-Update:KEYLESS",
@@ -177,7 +177,7 @@
       "reconcileHints": {},
       "lastError": "dependency not satisfied: UPSERT_PLAN:KVM-Update:KEYLESS=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-07T17:13:37.409Z"
+      "completedAt": "2026-04-07T19:31:03.178Z"
     },
     "VERIFY_API:KVM-Update": {
       "actionId": "VERIFY_API:KVM-Update",
@@ -193,7 +193,7 @@
       "reconcileHints": {},
       "lastError": "dependency not satisfied: UPSERT_API:KVM-Update=MANUAL_REVIEW, VERIFY_PLAN:KVM-Update:KEYLESS=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-07T17:13:37.409Z"
+      "completedAt": "2026-04-07T19:31:03.178Z"
     },
     "UPSERT_API:admin-kvm-export": {
       "actionId": "UPSERT_API:admin-kvm-export",
@@ -205,8 +205,8 @@
       "targetIds": {},
       "reconcileHints": {},
       "lastError": "v4-management-full -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 404: {\"httpStatus\":404,\"message\":\"Plugin [http-callout] cannot be found.\",\"technicalCode\":\"plugin.notFound\",\"parameters\":{\"plugin\":\"http-callout\"},\"details\":[]} | v4-management-shell -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 404: {\"httpStatus\":404,\"message\":\"Plugin [http-callout] cannot be found.\",\"technicalCode\":\"plugin.notFound\",\"parameters\":{\"plugin\":\"http-callout\"},\"details\":[]} | legacy-import-wrapper -> POST http://localhost:8083/management/organizations/DEFAULT/environments/DEFAULT/apis/import → HTTP 500: {\"message\":\"Cannot invoke \\\"io.gravitee.definition.model.Proxy.getVirtualHosts()\\\" because the return value of \\\"io.gravitee.rest.api.model.api.UpdateApiEntity.getProxy()\\\" is null\",\"http_status\":500}",
-      "startedAt": "2026-04-07T17:13:37.409Z",
-      "completedAt": "2026-04-07T17:13:44.914Z"
+      "startedAt": "2026-04-07T19:31:03.178Z",
+      "completedAt": "2026-04-07T19:31:10.680Z"
     },
     "UPSERT_PLAN:admin-kvm-export:KEYLESS": {
       "actionId": "UPSERT_PLAN:admin-kvm-export:KEYLESS",
@@ -221,7 +221,7 @@
       "reconcileHints": {},
       "lastError": "dependency not satisfied: UPSERT_API:admin-kvm-export=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-07T17:13:44.918Z"
+      "completedAt": "2026-04-07T19:31:10.683Z"
     },
     "VERIFY_PLAN:admin-kvm-export:KEYLESS": {
       "actionId": "VERIFY_PLAN:admin-kvm-export:KEYLESS",
@@ -236,7 +236,7 @@
       "reconcileHints": {},
       "lastError": "dependency not satisfied: UPSERT_PLAN:admin-kvm-export:KEYLESS=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-07T17:13:44.918Z"
+      "completedAt": "2026-04-07T19:31:10.684Z"
     },
     "VERIFY_API:admin-kvm-export": {
       "actionId": "VERIFY_API:admin-kvm-export",
@@ -252,7 +252,7 @@
       "reconcileHints": {},
       "lastError": "dependency not satisfied: UPSERT_API:admin-kvm-export=MANUAL_REVIEW, VERIFY_PLAN:admin-kvm-export:KEYLESS=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-07T17:13:44.918Z"
+      "completedAt": "2026-04-07T19:31:10.684Z"
     },
     "UPSERT_API:apigee-hello-api-1": {
       "actionId": "UPSERT_API:apigee-hello-api-1",
@@ -262,60 +262,60 @@
       "status": "SUCCEEDED",
       "dependencies": [],
       "targetIds": {
-        "apiId": "c11c2463-9f7e-4c82-9c24-639f7e1c82f7"
+        "apiId": "6c993791-2e40-4dbd-9937-912e40edbd63"
       },
       "reconcileHints": {
-        "apiId": "c11c2463-9f7e-4c82-9c24-639f7e1c82f7"
+        "apiId": "6c993791-2e40-4dbd-9937-912e40edbd63"
       },
       "lastError": null,
-      "startedAt": "2026-04-07T17:13:44.918Z",
-      "completedAt": "2026-04-07T17:13:45.042Z"
+      "startedAt": "2026-04-07T19:31:10.684Z",
+      "completedAt": "2026-04-07T19:31:10.808Z"
     },
     "UPSERT_PLAN:apigee-hello-api-1:KEYLESS": {
       "actionId": "UPSERT_PLAN:apigee-hello-api-1:KEYLESS",
       "kind": "UPSERT_PLAN",
       "sourceId": "apigee-hello-api-1",
       "plannedStatus": "READY",
-      "status": "FAILED",
+      "status": "MANUAL_REVIEW",
       "dependencies": [
         "UPSERT_API:apigee-hello-api-1"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis/c11c2463-9f7e-4c82-9c24-639f7e1c82f7/plans → HTTP 400: {\"httpStatus\":400,\"message\":\"Validation error\",\"parameters\":{},\"details\":[{\"message\":\"must not be null\",\"invalidValue\":{\"present\":true},\"location\":\"createApiPlan.createPlan\"}]}",
-      "startedAt": "2026-04-07T17:13:45.044Z",
-      "completedAt": "2026-04-07T17:13:45.221Z"
+      "lastError": "v4-plan-raw -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis/6c993791-2e40-4dbd-9937-912e40edbd63/plans → HTTP 400: {\"httpStatus\":400,\"message\":\"Validation error\",\"parameters\":{},\"details\":[{\"message\":\"must not be null\",\"invalidValue\":{\"present\":true},\"location\":\"createApiPlan.createPlan\"}]} | v4-plan-create-wrapper -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis/6c993791-2e40-4dbd-9937-912e40edbd63/plans → HTTP 400: {\"httpStatus\":400,\"message\":\"Validation error\",\"parameters\":{},\"details\":[{\"message\":\"must not be null\",\"invalidValue\":{\"present\":true},\"location\":\"createApiPlan.createPlan\"}]}",
+      "startedAt": "2026-04-07T19:31:10.809Z",
+      "completedAt": "2026-04-07T19:31:11.036Z"
     },
     "VERIFY_PLAN:apigee-hello-api-1:KEYLESS": {
       "actionId": "VERIFY_PLAN:apigee-hello-api-1:KEYLESS",
       "kind": "VERIFY_PLAN",
       "sourceId": "apigee-hello-api-1",
       "plannedStatus": "READY",
-      "status": "BLOCKED",
+      "status": "MANUAL_REVIEW",
       "dependencies": [
         "UPSERT_PLAN:apigee-hello-api-1:KEYLESS"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "dependency not satisfied: UPSERT_PLAN:apigee-hello-api-1:KEYLESS=FAILED",
+      "lastError": "dependency not satisfied: UPSERT_PLAN:apigee-hello-api-1:KEYLESS=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-07T17:13:45.223Z"
+      "completedAt": "2026-04-07T19:31:11.039Z"
     },
     "VERIFY_API:apigee-hello-api-1": {
       "actionId": "VERIFY_API:apigee-hello-api-1",
       "kind": "VERIFY_API",
       "sourceId": "apigee-hello-api-1",
       "plannedStatus": "READY",
-      "status": "BLOCKED",
+      "status": "MANUAL_REVIEW",
       "dependencies": [
         "UPSERT_API:apigee-hello-api-1",
         "VERIFY_PLAN:apigee-hello-api-1:KEYLESS"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "dependency not satisfied: UPSERT_API:apigee-hello-api-1=SUCCEEDED, VERIFY_PLAN:apigee-hello-api-1:KEYLESS=BLOCKED",
+      "lastError": "dependency not satisfied: UPSERT_API:apigee-hello-api-1=SUCCEEDED, VERIFY_PLAN:apigee-hello-api-1:KEYLESS=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-07T17:13:45.223Z"
+      "completedAt": "2026-04-07T19:31:11.039Z"
     },
     "UPSERT_API:apigee-hello": {
       "actionId": "UPSERT_API:apigee-hello",
@@ -325,60 +325,60 @@
       "status": "SUCCEEDED",
       "dependencies": [],
       "targetIds": {
-        "apiId": "9b271af4-b895-47ad-a71a-f4b895f7ad82"
+        "apiId": "d42f4a24-a4bd-46ba-af4a-24a4bde6ba74"
       },
       "reconcileHints": {
-        "apiId": "9b271af4-b895-47ad-a71a-f4b895f7ad82"
+        "apiId": "d42f4a24-a4bd-46ba-af4a-24a4bde6ba74"
       },
       "lastError": null,
-      "startedAt": "2026-04-07T17:13:45.223Z",
-      "completedAt": "2026-04-07T17:13:45.342Z"
+      "startedAt": "2026-04-07T19:31:11.039Z",
+      "completedAt": "2026-04-07T19:31:11.156Z"
     },
     "UPSERT_PLAN:apigee-hello:KEYLESS": {
       "actionId": "UPSERT_PLAN:apigee-hello:KEYLESS",
       "kind": "UPSERT_PLAN",
       "sourceId": "apigee-hello",
       "plannedStatus": "READY",
-      "status": "FAILED",
+      "status": "MANUAL_REVIEW",
       "dependencies": [
         "UPSERT_API:apigee-hello"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis/9b271af4-b895-47ad-a71a-f4b895f7ad82/plans → HTTP 400: {\"httpStatus\":400,\"message\":\"Validation error\",\"parameters\":{},\"details\":[{\"message\":\"must not be null\",\"invalidValue\":{\"present\":true},\"location\":\"createApiPlan.createPlan\"}]}",
-      "startedAt": "2026-04-07T17:13:45.344Z",
-      "completedAt": "2026-04-07T17:13:45.513Z"
+      "lastError": "v4-plan-raw -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis/d42f4a24-a4bd-46ba-af4a-24a4bde6ba74/plans → HTTP 400: {\"httpStatus\":400,\"message\":\"Validation error\",\"parameters\":{},\"details\":[{\"message\":\"must not be null\",\"invalidValue\":{\"present\":true},\"location\":\"createApiPlan.createPlan\"}]} | v4-plan-create-wrapper -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis/d42f4a24-a4bd-46ba-af4a-24a4bde6ba74/plans → HTTP 400: {\"httpStatus\":400,\"message\":\"Validation error\",\"parameters\":{},\"details\":[{\"message\":\"must not be null\",\"invalidValue\":{\"present\":true},\"location\":\"createApiPlan.createPlan\"}]}",
+      "startedAt": "2026-04-07T19:31:11.159Z",
+      "completedAt": "2026-04-07T19:31:11.382Z"
     },
     "VERIFY_PLAN:apigee-hello:KEYLESS": {
       "actionId": "VERIFY_PLAN:apigee-hello:KEYLESS",
       "kind": "VERIFY_PLAN",
       "sourceId": "apigee-hello",
       "plannedStatus": "READY",
-      "status": "BLOCKED",
+      "status": "MANUAL_REVIEW",
       "dependencies": [
         "UPSERT_PLAN:apigee-hello:KEYLESS"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "dependency not satisfied: UPSERT_PLAN:apigee-hello:KEYLESS=FAILED",
+      "lastError": "dependency not satisfied: UPSERT_PLAN:apigee-hello:KEYLESS=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-07T17:13:45.516Z"
+      "completedAt": "2026-04-07T19:31:11.386Z"
     },
     "VERIFY_API:apigee-hello": {
       "actionId": "VERIFY_API:apigee-hello",
       "kind": "VERIFY_API",
       "sourceId": "apigee-hello",
       "plannedStatus": "READY",
-      "status": "BLOCKED",
+      "status": "MANUAL_REVIEW",
       "dependencies": [
         "UPSERT_API:apigee-hello",
         "VERIFY_PLAN:apigee-hello:KEYLESS"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "dependency not satisfied: UPSERT_API:apigee-hello=SUCCEEDED, VERIFY_PLAN:apigee-hello:KEYLESS=BLOCKED",
+      "lastError": "dependency not satisfied: UPSERT_API:apigee-hello=SUCCEEDED, VERIFY_PLAN:apigee-hello:KEYLESS=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-07T17:13:45.516Z"
+      "completedAt": "2026-04-07T19:31:11.386Z"
     },
     "UPSERT_API:car-makes-api-3": {
       "actionId": "UPSERT_API:car-makes-api-3",
@@ -388,60 +388,60 @@
       "status": "SUCCEEDED",
       "dependencies": [],
       "targetIds": {
-        "apiId": "b78b8738-514c-4088-8b87-38514cb08825"
+        "apiId": "24c27776-60d0-4bc2-8277-7660d01bc283"
       },
       "reconcileHints": {
-        "apiId": "b78b8738-514c-4088-8b87-38514cb08825"
+        "apiId": "24c27776-60d0-4bc2-8277-7660d01bc283"
       },
       "lastError": null,
-      "startedAt": "2026-04-07T17:13:45.516Z",
-      "completedAt": "2026-04-07T17:13:45.635Z"
+      "startedAt": "2026-04-07T19:31:11.386Z",
+      "completedAt": "2026-04-07T19:31:11.504Z"
     },
     "UPSERT_PLAN:car-makes-api-3:KEYLESS": {
       "actionId": "UPSERT_PLAN:car-makes-api-3:KEYLESS",
       "kind": "UPSERT_PLAN",
       "sourceId": "car-makes-api-3",
       "plannedStatus": "READY",
-      "status": "FAILED",
+      "status": "MANUAL_REVIEW",
       "dependencies": [
         "UPSERT_API:car-makes-api-3"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis/b78b8738-514c-4088-8b87-38514cb08825/plans → HTTP 400: {\"httpStatus\":400,\"message\":\"Validation error\",\"parameters\":{},\"details\":[{\"message\":\"must not be null\",\"invalidValue\":{\"present\":true},\"location\":\"createApiPlan.createPlan\"}]}",
-      "startedAt": "2026-04-07T17:13:45.637Z",
-      "completedAt": "2026-04-07T17:13:45.807Z"
+      "lastError": "v4-plan-raw -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis/24c27776-60d0-4bc2-8277-7660d01bc283/plans → HTTP 400: {\"httpStatus\":400,\"message\":\"Validation error\",\"parameters\":{},\"details\":[{\"message\":\"must not be null\",\"invalidValue\":{\"present\":true},\"location\":\"createApiPlan.createPlan\"}]} | v4-plan-create-wrapper -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis/24c27776-60d0-4bc2-8277-7660d01bc283/plans → HTTP 400: {\"httpStatus\":400,\"message\":\"Validation error\",\"parameters\":{},\"details\":[{\"message\":\"must not be null\",\"invalidValue\":{\"present\":true},\"location\":\"createApiPlan.createPlan\"}]}",
+      "startedAt": "2026-04-07T19:31:11.506Z",
+      "completedAt": "2026-04-07T19:31:11.729Z"
     },
     "VERIFY_PLAN:car-makes-api-3:KEYLESS": {
       "actionId": "VERIFY_PLAN:car-makes-api-3:KEYLESS",
       "kind": "VERIFY_PLAN",
       "sourceId": "car-makes-api-3",
       "plannedStatus": "READY",
-      "status": "BLOCKED",
+      "status": "MANUAL_REVIEW",
       "dependencies": [
         "UPSERT_PLAN:car-makes-api-3:KEYLESS"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "dependency not satisfied: UPSERT_PLAN:car-makes-api-3:KEYLESS=FAILED",
+      "lastError": "dependency not satisfied: UPSERT_PLAN:car-makes-api-3:KEYLESS=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-07T17:13:45.811Z"
+      "completedAt": "2026-04-07T19:31:11.733Z"
     },
     "VERIFY_API:car-makes-api-3": {
       "actionId": "VERIFY_API:car-makes-api-3",
       "kind": "VERIFY_API",
       "sourceId": "car-makes-api-3",
       "plannedStatus": "READY",
-      "status": "BLOCKED",
+      "status": "MANUAL_REVIEW",
       "dependencies": [
         "UPSERT_API:car-makes-api-3",
         "VERIFY_PLAN:car-makes-api-3:KEYLESS"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "dependency not satisfied: UPSERT_API:car-makes-api-3=SUCCEEDED, VERIFY_PLAN:car-makes-api-3:KEYLESS=BLOCKED",
+      "lastError": "dependency not satisfied: UPSERT_API:car-makes-api-3=SUCCEEDED, VERIFY_PLAN:car-makes-api-3:KEYLESS=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-07T17:13:45.811Z"
+      "completedAt": "2026-04-07T19:31:11.733Z"
     },
     "UPSERT_API:cat-fact-api-2": {
       "actionId": "UPSERT_API:cat-fact-api-2",
@@ -451,60 +451,60 @@
       "status": "SUCCEEDED",
       "dependencies": [],
       "targetIds": {
-        "apiId": "e1dfd615-79f2-419e-9fd6-1579f2219ea3"
+        "apiId": "35ee4c77-ea76-4880-ae4c-77ea76c88056"
       },
       "reconcileHints": {
-        "apiId": "e1dfd615-79f2-419e-9fd6-1579f2219ea3"
+        "apiId": "35ee4c77-ea76-4880-ae4c-77ea76c88056"
       },
       "lastError": null,
-      "startedAt": "2026-04-07T17:13:45.811Z",
-      "completedAt": "2026-04-07T17:13:45.931Z"
+      "startedAt": "2026-04-07T19:31:11.733Z",
+      "completedAt": "2026-04-07T19:31:11.877Z"
     },
     "UPSERT_PLAN:cat-fact-api-2:KEYLESS": {
       "actionId": "UPSERT_PLAN:cat-fact-api-2:KEYLESS",
       "kind": "UPSERT_PLAN",
       "sourceId": "cat-fact-api-2",
       "plannedStatus": "READY",
-      "status": "FAILED",
+      "status": "MANUAL_REVIEW",
       "dependencies": [
         "UPSERT_API:cat-fact-api-2"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis/e1dfd615-79f2-419e-9fd6-1579f2219ea3/plans → HTTP 400: {\"httpStatus\":400,\"message\":\"Validation error\",\"parameters\":{},\"details\":[{\"message\":\"must not be null\",\"invalidValue\":{\"present\":true},\"location\":\"createApiPlan.createPlan\"}]}",
-      "startedAt": "2026-04-07T17:13:45.933Z",
-      "completedAt": "2026-04-07T17:13:46.103Z"
+      "lastError": "v4-plan-raw -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis/35ee4c77-ea76-4880-ae4c-77ea76c88056/plans → HTTP 400: {\"httpStatus\":400,\"message\":\"Validation error\",\"parameters\":{},\"details\":[{\"message\":\"must not be null\",\"invalidValue\":{\"present\":true},\"location\":\"createApiPlan.createPlan\"}]} | v4-plan-create-wrapper -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis/35ee4c77-ea76-4880-ae4c-77ea76c88056/plans → HTTP 400: {\"httpStatus\":400,\"message\":\"Validation error\",\"parameters\":{},\"details\":[{\"message\":\"must not be null\",\"invalidValue\":{\"present\":true},\"location\":\"createApiPlan.createPlan\"}]}",
+      "startedAt": "2026-04-07T19:31:11.879Z",
+      "completedAt": "2026-04-07T19:31:12.103Z"
     },
     "VERIFY_PLAN:cat-fact-api-2:KEYLESS": {
       "actionId": "VERIFY_PLAN:cat-fact-api-2:KEYLESS",
       "kind": "VERIFY_PLAN",
       "sourceId": "cat-fact-api-2",
       "plannedStatus": "READY",
-      "status": "BLOCKED",
+      "status": "MANUAL_REVIEW",
       "dependencies": [
         "UPSERT_PLAN:cat-fact-api-2:KEYLESS"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "dependency not satisfied: UPSERT_PLAN:cat-fact-api-2:KEYLESS=FAILED",
+      "lastError": "dependency not satisfied: UPSERT_PLAN:cat-fact-api-2:KEYLESS=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-07T17:13:46.106Z"
+      "completedAt": "2026-04-07T19:31:12.106Z"
     },
     "VERIFY_API:cat-fact-api-2": {
       "actionId": "VERIFY_API:cat-fact-api-2",
       "kind": "VERIFY_API",
       "sourceId": "cat-fact-api-2",
       "plannedStatus": "READY",
-      "status": "BLOCKED",
+      "status": "MANUAL_REVIEW",
       "dependencies": [
         "UPSERT_API:cat-fact-api-2",
         "VERIFY_PLAN:cat-fact-api-2:KEYLESS"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "dependency not satisfied: UPSERT_API:cat-fact-api-2=SUCCEEDED, VERIFY_PLAN:cat-fact-api-2:KEYLESS=BLOCKED",
+      "lastError": "dependency not satisfied: UPSERT_API:cat-fact-api-2=SUCCEEDED, VERIFY_PLAN:cat-fact-api-2:KEYLESS=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-07T17:13:46.106Z"
+      "completedAt": "2026-04-07T19:31:12.106Z"
     },
     "UPSERT_API:cats-api-7": {
       "actionId": "UPSERT_API:cats-api-7",
@@ -514,60 +514,60 @@
       "status": "SUCCEEDED",
       "dependencies": [],
       "targetIds": {
-        "apiId": "923b7145-5297-46ab-bb71-455297c6ab3b"
+        "apiId": "f8e3ea2b-80cf-4588-a3ea-2b80cf9588cb"
       },
       "reconcileHints": {
-        "apiId": "923b7145-5297-46ab-bb71-455297c6ab3b"
+        "apiId": "f8e3ea2b-80cf-4588-a3ea-2b80cf9588cb"
       },
       "lastError": null,
-      "startedAt": "2026-04-07T17:13:46.106Z",
-      "completedAt": "2026-04-07T17:13:46.228Z"
+      "startedAt": "2026-04-07T19:31:12.106Z",
+      "completedAt": "2026-04-07T19:31:12.226Z"
     },
     "UPSERT_PLAN:cats-api-7:API_KEY": {
       "actionId": "UPSERT_PLAN:cats-api-7:API_KEY",
       "kind": "UPSERT_PLAN",
       "sourceId": "cats-api-7",
       "plannedStatus": "READY",
-      "status": "FAILED",
+      "status": "MANUAL_REVIEW",
       "dependencies": [
         "UPSERT_API:cats-api-7"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis/923b7145-5297-46ab-bb71-455297c6ab3b/plans → HTTP 400: {\"httpStatus\":400,\"message\":\"Validation error\",\"parameters\":{},\"details\":[{\"message\":\"must not be null\",\"invalidValue\":{\"present\":true},\"location\":\"createApiPlan.createPlan\"}]}",
-      "startedAt": "2026-04-07T17:13:46.230Z",
-      "completedAt": "2026-04-07T17:13:46.399Z"
+      "lastError": "v4-plan-raw -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis/f8e3ea2b-80cf-4588-a3ea-2b80cf9588cb/plans → HTTP 400: {\"httpStatus\":400,\"message\":\"Validation error\",\"parameters\":{},\"details\":[{\"message\":\"must not be null\",\"invalidValue\":{\"present\":true},\"location\":\"createApiPlan.createPlan\"}]} | v4-plan-create-wrapper -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis/f8e3ea2b-80cf-4588-a3ea-2b80cf9588cb/plans → HTTP 400: {\"httpStatus\":400,\"message\":\"Validation error\",\"parameters\":{},\"details\":[{\"message\":\"must not be null\",\"invalidValue\":{\"present\":true},\"location\":\"createApiPlan.createPlan\"}]}",
+      "startedAt": "2026-04-07T19:31:12.229Z",
+      "completedAt": "2026-04-07T19:31:12.454Z"
     },
     "VERIFY_PLAN:cats-api-7:API_KEY": {
       "actionId": "VERIFY_PLAN:cats-api-7:API_KEY",
       "kind": "VERIFY_PLAN",
       "sourceId": "cats-api-7",
       "plannedStatus": "READY",
-      "status": "BLOCKED",
+      "status": "MANUAL_REVIEW",
       "dependencies": [
         "UPSERT_PLAN:cats-api-7:API_KEY"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "dependency not satisfied: UPSERT_PLAN:cats-api-7:API_KEY=FAILED",
+      "lastError": "dependency not satisfied: UPSERT_PLAN:cats-api-7:API_KEY=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-07T17:13:46.401Z"
+      "completedAt": "2026-04-07T19:31:12.457Z"
     },
     "VERIFY_API:cats-api-7": {
       "actionId": "VERIFY_API:cats-api-7",
       "kind": "VERIFY_API",
       "sourceId": "cats-api-7",
       "plannedStatus": "READY",
-      "status": "BLOCKED",
+      "status": "MANUAL_REVIEW",
       "dependencies": [
         "UPSERT_API:cats-api-7",
         "VERIFY_PLAN:cats-api-7:API_KEY"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "dependency not satisfied: UPSERT_API:cats-api-7=SUCCEEDED, VERIFY_PLAN:cats-api-7:API_KEY=BLOCKED",
+      "lastError": "dependency not satisfied: UPSERT_API:cats-api-7=SUCCEEDED, VERIFY_PLAN:cats-api-7:API_KEY=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-07T17:13:46.401Z"
+      "completedAt": "2026-04-07T19:31:12.457Z"
     },
     "UPSERT_API:chuck-norris-api-10": {
       "actionId": "UPSERT_API:chuck-norris-api-10",
@@ -577,60 +577,60 @@
       "status": "SUCCEEDED",
       "dependencies": [],
       "targetIds": {
-        "apiId": "256317b4-158a-498b-a317-b4158ad98b33"
+        "apiId": "6373bf84-dce9-4ce5-b3bf-84dce9dce5b5"
       },
       "reconcileHints": {
-        "apiId": "256317b4-158a-498b-a317-b4158ad98b33"
+        "apiId": "6373bf84-dce9-4ce5-b3bf-84dce9dce5b5"
       },
       "lastError": null,
-      "startedAt": "2026-04-07T17:13:46.401Z",
-      "completedAt": "2026-04-07T17:13:46.523Z"
+      "startedAt": "2026-04-07T19:31:12.457Z",
+      "completedAt": "2026-04-07T19:31:12.576Z"
     },
     "UPSERT_PLAN:chuck-norris-api-10:API_KEY": {
       "actionId": "UPSERT_PLAN:chuck-norris-api-10:API_KEY",
       "kind": "UPSERT_PLAN",
       "sourceId": "chuck-norris-api-10",
       "plannedStatus": "READY",
-      "status": "FAILED",
+      "status": "MANUAL_REVIEW",
       "dependencies": [
         "UPSERT_API:chuck-norris-api-10"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis/256317b4-158a-498b-a317-b4158ad98b33/plans → HTTP 400: {\"httpStatus\":400,\"message\":\"Validation error\",\"parameters\":{},\"details\":[{\"message\":\"must not be null\",\"invalidValue\":{\"present\":true},\"location\":\"createApiPlan.createPlan\"}]}",
-      "startedAt": "2026-04-07T17:13:46.526Z",
-      "completedAt": "2026-04-07T17:13:46.698Z"
+      "lastError": "v4-plan-raw -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis/6373bf84-dce9-4ce5-b3bf-84dce9dce5b5/plans → HTTP 400: {\"httpStatus\":400,\"message\":\"Validation error\",\"parameters\":{},\"details\":[{\"message\":\"must not be null\",\"invalidValue\":{\"present\":true},\"location\":\"createApiPlan.createPlan\"}]} | v4-plan-create-wrapper -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis/6373bf84-dce9-4ce5-b3bf-84dce9dce5b5/plans → HTTP 400: {\"httpStatus\":400,\"message\":\"Validation error\",\"parameters\":{},\"details\":[{\"message\":\"must not be null\",\"invalidValue\":{\"present\":true},\"location\":\"createApiPlan.createPlan\"}]}",
+      "startedAt": "2026-04-07T19:31:12.579Z",
+      "completedAt": "2026-04-07T19:31:12.802Z"
     },
     "VERIFY_PLAN:chuck-norris-api-10:API_KEY": {
       "actionId": "VERIFY_PLAN:chuck-norris-api-10:API_KEY",
       "kind": "VERIFY_PLAN",
       "sourceId": "chuck-norris-api-10",
       "plannedStatus": "READY",
-      "status": "BLOCKED",
+      "status": "MANUAL_REVIEW",
       "dependencies": [
         "UPSERT_PLAN:chuck-norris-api-10:API_KEY"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "dependency not satisfied: UPSERT_PLAN:chuck-norris-api-10:API_KEY=FAILED",
+      "lastError": "dependency not satisfied: UPSERT_PLAN:chuck-norris-api-10:API_KEY=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-07T17:13:46.701Z"
+      "completedAt": "2026-04-07T19:31:12.805Z"
     },
     "VERIFY_API:chuck-norris-api-10": {
       "actionId": "VERIFY_API:chuck-norris-api-10",
       "kind": "VERIFY_API",
       "sourceId": "chuck-norris-api-10",
       "plannedStatus": "READY",
-      "status": "BLOCKED",
+      "status": "MANUAL_REVIEW",
       "dependencies": [
         "UPSERT_API:chuck-norris-api-10",
         "VERIFY_PLAN:chuck-norris-api-10:API_KEY"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "dependency not satisfied: UPSERT_API:chuck-norris-api-10=SUCCEEDED, VERIFY_PLAN:chuck-norris-api-10:API_KEY=BLOCKED",
+      "lastError": "dependency not satisfied: UPSERT_API:chuck-norris-api-10=SUCCEEDED, VERIFY_PLAN:chuck-norris-api-10:API_KEY=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-07T17:13:46.701Z"
+      "completedAt": "2026-04-07T19:31:12.805Z"
     },
     "UPSERT_API:dog-breeds-api-6": {
       "actionId": "UPSERT_API:dog-breeds-api-6",
@@ -640,60 +640,60 @@
       "status": "SUCCEEDED",
       "dependencies": [],
       "targetIds": {
-        "apiId": "e8b569d4-ae2a-4baa-b569-d4ae2a3baa84"
+        "apiId": "9f189d36-01a8-4247-989d-3601a81247d7"
       },
       "reconcileHints": {
-        "apiId": "e8b569d4-ae2a-4baa-b569-d4ae2a3baa84"
+        "apiId": "9f189d36-01a8-4247-989d-3601a81247d7"
       },
       "lastError": null,
-      "startedAt": "2026-04-07T17:13:46.701Z",
-      "completedAt": "2026-04-07T17:13:46.827Z"
+      "startedAt": "2026-04-07T19:31:12.805Z",
+      "completedAt": "2026-04-07T19:31:12.924Z"
     },
     "UPSERT_PLAN:dog-breeds-api-6:API_KEY": {
       "actionId": "UPSERT_PLAN:dog-breeds-api-6:API_KEY",
       "kind": "UPSERT_PLAN",
       "sourceId": "dog-breeds-api-6",
       "plannedStatus": "READY",
-      "status": "FAILED",
+      "status": "MANUAL_REVIEW",
       "dependencies": [
         "UPSERT_API:dog-breeds-api-6"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis/e8b569d4-ae2a-4baa-b569-d4ae2a3baa84/plans → HTTP 400: {\"httpStatus\":400,\"message\":\"Validation error\",\"parameters\":{},\"details\":[{\"message\":\"must not be null\",\"invalidValue\":{\"present\":true},\"location\":\"createApiPlan.createPlan\"}]}",
-      "startedAt": "2026-04-07T17:13:46.830Z",
-      "completedAt": "2026-04-07T17:13:47.000Z"
+      "lastError": "v4-plan-raw -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis/9f189d36-01a8-4247-989d-3601a81247d7/plans → HTTP 400: {\"httpStatus\":400,\"message\":\"Validation error\",\"parameters\":{},\"details\":[{\"message\":\"must not be null\",\"invalidValue\":{\"present\":true},\"location\":\"createApiPlan.createPlan\"}]} | v4-plan-create-wrapper -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis/9f189d36-01a8-4247-989d-3601a81247d7/plans → HTTP 400: {\"httpStatus\":400,\"message\":\"Validation error\",\"parameters\":{},\"details\":[{\"message\":\"must not be null\",\"invalidValue\":{\"present\":true},\"location\":\"createApiPlan.createPlan\"}]}",
+      "startedAt": "2026-04-07T19:31:12.927Z",
+      "completedAt": "2026-04-07T19:31:13.151Z"
     },
     "VERIFY_PLAN:dog-breeds-api-6:API_KEY": {
       "actionId": "VERIFY_PLAN:dog-breeds-api-6:API_KEY",
       "kind": "VERIFY_PLAN",
       "sourceId": "dog-breeds-api-6",
       "plannedStatus": "READY",
-      "status": "BLOCKED",
+      "status": "MANUAL_REVIEW",
       "dependencies": [
         "UPSERT_PLAN:dog-breeds-api-6:API_KEY"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "dependency not satisfied: UPSERT_PLAN:dog-breeds-api-6:API_KEY=FAILED",
+      "lastError": "dependency not satisfied: UPSERT_PLAN:dog-breeds-api-6:API_KEY=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-07T17:13:47.003Z"
+      "completedAt": "2026-04-07T19:31:13.154Z"
     },
     "VERIFY_API:dog-breeds-api-6": {
       "actionId": "VERIFY_API:dog-breeds-api-6",
       "kind": "VERIFY_API",
       "sourceId": "dog-breeds-api-6",
       "plannedStatus": "READY",
-      "status": "BLOCKED",
+      "status": "MANUAL_REVIEW",
       "dependencies": [
         "UPSERT_API:dog-breeds-api-6",
         "VERIFY_PLAN:dog-breeds-api-6:API_KEY"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "dependency not satisfied: UPSERT_API:dog-breeds-api-6=SUCCEEDED, VERIFY_PLAN:dog-breeds-api-6:API_KEY=BLOCKED",
+      "lastError": "dependency not satisfied: UPSERT_API:dog-breeds-api-6=SUCCEEDED, VERIFY_PLAN:dog-breeds-api-6:API_KEY=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-07T17:13:47.003Z"
+      "completedAt": "2026-04-07T19:31:13.154Z"
     },
     "UPSERT_API:get-kvm-proxy": {
       "actionId": "UPSERT_API:get-kvm-proxy",
@@ -705,8 +705,8 @@
       "targetIds": {},
       "reconcileHints": {},
       "lastError": "v4-management-full -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 404: {\"httpStatus\":404,\"message\":\"Plugin [assign-attributes] cannot be found.\",\"technicalCode\":\"plugin.notFound\",\"parameters\":{\"plugin\":\"assign-attributes\"},\"details\":[]} | v4-management-shell -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 404: {\"httpStatus\":404,\"message\":\"Plugin [assign-attributes] cannot be found.\",\"technicalCode\":\"plugin.notFound\",\"parameters\":{\"plugin\":\"assign-attributes\"},\"details\":[]} | legacy-import-wrapper -> POST http://localhost:8083/management/organizations/DEFAULT/environments/DEFAULT/apis/import → HTTP 500: {\"message\":\"Cannot invoke \\\"io.gravitee.definition.model.Proxy.getVirtualHosts()\\\" because the return value of \\\"io.gravitee.rest.api.model.api.UpdateApiEntity.getProxy()\\\" is null\",\"http_status\":500}",
-      "startedAt": "2026-04-07T17:13:47.003Z",
-      "completedAt": "2026-04-07T17:13:54.500Z"
+      "startedAt": "2026-04-07T19:31:13.154Z",
+      "completedAt": "2026-04-07T19:31:20.652Z"
     },
     "UPSERT_PLAN:get-kvm-proxy:KEYLESS": {
       "actionId": "UPSERT_PLAN:get-kvm-proxy:KEYLESS",
@@ -721,7 +721,7 @@
       "reconcileHints": {},
       "lastError": "dependency not satisfied: UPSERT_API:get-kvm-proxy=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-07T17:13:54.503Z"
+      "completedAt": "2026-04-07T19:31:20.656Z"
     },
     "VERIFY_PLAN:get-kvm-proxy:KEYLESS": {
       "actionId": "VERIFY_PLAN:get-kvm-proxy:KEYLESS",
@@ -736,7 +736,7 @@
       "reconcileHints": {},
       "lastError": "dependency not satisfied: UPSERT_PLAN:get-kvm-proxy:KEYLESS=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-07T17:13:54.503Z"
+      "completedAt": "2026-04-07T19:31:20.656Z"
     },
     "VERIFY_API:get-kvm-proxy": {
       "actionId": "VERIFY_API:get-kvm-proxy",
@@ -752,7 +752,7 @@
       "reconcileHints": {},
       "lastError": "dependency not satisfied: UPSERT_API:get-kvm-proxy=MANUAL_REVIEW, VERIFY_PLAN:get-kvm-proxy:KEYLESS=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-07T17:13:54.503Z"
+      "completedAt": "2026-04-07T19:31:20.656Z"
     },
     "UPSERT_API:harry-potter-characters": {
       "actionId": "UPSERT_API:harry-potter-characters",
@@ -762,60 +762,60 @@
       "status": "SUCCEEDED",
       "dependencies": [],
       "targetIds": {
-        "apiId": "194dd98d-1545-4936-8dd9-8d1545e93620"
+        "apiId": "01ccef8b-6f8f-48b7-8cef-8b6f8f28b7bd"
       },
       "reconcileHints": {
-        "apiId": "194dd98d-1545-4936-8dd9-8d1545e93620"
+        "apiId": "01ccef8b-6f8f-48b7-8cef-8b6f8f28b7bd"
       },
       "lastError": null,
-      "startedAt": "2026-04-07T17:13:54.503Z",
-      "completedAt": "2026-04-07T17:13:54.628Z"
+      "startedAt": "2026-04-07T19:31:20.656Z",
+      "completedAt": "2026-04-07T19:31:20.779Z"
     },
     "UPSERT_PLAN:harry-potter-characters:KEYLESS": {
       "actionId": "UPSERT_PLAN:harry-potter-characters:KEYLESS",
       "kind": "UPSERT_PLAN",
       "sourceId": "harry-potter-characters",
       "plannedStatus": "READY",
-      "status": "FAILED",
+      "status": "MANUAL_REVIEW",
       "dependencies": [
         "UPSERT_API:harry-potter-characters"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis/194dd98d-1545-4936-8dd9-8d1545e93620/plans → HTTP 400: {\"httpStatus\":400,\"message\":\"Validation error\",\"parameters\":{},\"details\":[{\"message\":\"must not be null\",\"invalidValue\":{\"present\":true},\"location\":\"createApiPlan.createPlan\"}]}",
-      "startedAt": "2026-04-07T17:13:54.631Z",
-      "completedAt": "2026-04-07T17:13:54.800Z"
+      "lastError": "v4-plan-raw -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis/01ccef8b-6f8f-48b7-8cef-8b6f8f28b7bd/plans → HTTP 400: {\"httpStatus\":400,\"message\":\"Validation error\",\"parameters\":{},\"details\":[{\"message\":\"must not be null\",\"invalidValue\":{\"present\":true},\"location\":\"createApiPlan.createPlan\"}]} | v4-plan-create-wrapper -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis/01ccef8b-6f8f-48b7-8cef-8b6f8f28b7bd/plans → HTTP 400: {\"httpStatus\":400,\"message\":\"Validation error\",\"parameters\":{},\"details\":[{\"message\":\"must not be null\",\"invalidValue\":{\"present\":true},\"location\":\"createApiPlan.createPlan\"}]}",
+      "startedAt": "2026-04-07T19:31:20.781Z",
+      "completedAt": "2026-04-07T19:31:21.006Z"
     },
     "VERIFY_PLAN:harry-potter-characters:KEYLESS": {
       "actionId": "VERIFY_PLAN:harry-potter-characters:KEYLESS",
       "kind": "VERIFY_PLAN",
       "sourceId": "harry-potter-characters",
       "plannedStatus": "READY",
-      "status": "BLOCKED",
+      "status": "MANUAL_REVIEW",
       "dependencies": [
         "UPSERT_PLAN:harry-potter-characters:KEYLESS"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "dependency not satisfied: UPSERT_PLAN:harry-potter-characters:KEYLESS=FAILED",
+      "lastError": "dependency not satisfied: UPSERT_PLAN:harry-potter-characters:KEYLESS=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-07T17:13:54.803Z"
+      "completedAt": "2026-04-07T19:31:21.009Z"
     },
     "VERIFY_API:harry-potter-characters": {
       "actionId": "VERIFY_API:harry-potter-characters",
       "kind": "VERIFY_API",
       "sourceId": "harry-potter-characters",
       "plannedStatus": "READY",
-      "status": "BLOCKED",
+      "status": "MANUAL_REVIEW",
       "dependencies": [
         "UPSERT_API:harry-potter-characters",
         "VERIFY_PLAN:harry-potter-characters:KEYLESS"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "dependency not satisfied: UPSERT_API:harry-potter-characters=SUCCEEDED, VERIFY_PLAN:harry-potter-characters:KEYLESS=BLOCKED",
+      "lastError": "dependency not satisfied: UPSERT_API:harry-potter-characters=SUCCEEDED, VERIFY_PLAN:harry-potter-characters:KEYLESS=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-07T17:13:54.803Z"
+      "completedAt": "2026-04-07T19:31:21.009Z"
     },
     "UPSERT_API:hogwarts-houses-api-8": {
       "actionId": "UPSERT_API:hogwarts-houses-api-8",
@@ -825,60 +825,60 @@
       "status": "SUCCEEDED",
       "dependencies": [],
       "targetIds": {
-        "apiId": "35b69312-f5cb-4595-b693-12f5cbc59515"
+        "apiId": "289bc6c1-ad22-43f6-9bc6-c1ad2253f654"
       },
       "reconcileHints": {
-        "apiId": "35b69312-f5cb-4595-b693-12f5cbc59515"
+        "apiId": "289bc6c1-ad22-43f6-9bc6-c1ad2253f654"
       },
       "lastError": null,
-      "startedAt": "2026-04-07T17:13:54.803Z",
-      "completedAt": "2026-04-07T17:13:54.925Z"
+      "startedAt": "2026-04-07T19:31:21.009Z",
+      "completedAt": "2026-04-07T19:31:21.128Z"
     },
     "UPSERT_PLAN:hogwarts-houses-api-8:API_KEY": {
       "actionId": "UPSERT_PLAN:hogwarts-houses-api-8:API_KEY",
       "kind": "UPSERT_PLAN",
       "sourceId": "hogwarts-houses-api-8",
       "plannedStatus": "READY",
-      "status": "FAILED",
+      "status": "MANUAL_REVIEW",
       "dependencies": [
         "UPSERT_API:hogwarts-houses-api-8"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis/35b69312-f5cb-4595-b693-12f5cbc59515/plans → HTTP 400: {\"httpStatus\":400,\"message\":\"Validation error\",\"parameters\":{},\"details\":[{\"message\":\"must not be null\",\"invalidValue\":{\"present\":true},\"location\":\"createApiPlan.createPlan\"}]}",
-      "startedAt": "2026-04-07T17:13:54.927Z",
-      "completedAt": "2026-04-07T17:13:55.102Z"
+      "lastError": "v4-plan-raw -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis/289bc6c1-ad22-43f6-9bc6-c1ad2253f654/plans → HTTP 400: {\"httpStatus\":400,\"message\":\"Validation error\",\"parameters\":{},\"details\":[{\"message\":\"must not be null\",\"invalidValue\":{\"present\":true},\"location\":\"createApiPlan.createPlan\"}]} | v4-plan-create-wrapper -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis/289bc6c1-ad22-43f6-9bc6-c1ad2253f654/plans → HTTP 400: {\"httpStatus\":400,\"message\":\"Validation error\",\"parameters\":{},\"details\":[{\"message\":\"must not be null\",\"invalidValue\":{\"present\":true},\"location\":\"createApiPlan.createPlan\"}]}",
+      "startedAt": "2026-04-07T19:31:21.130Z",
+      "completedAt": "2026-04-07T19:31:21.361Z"
     },
     "VERIFY_PLAN:hogwarts-houses-api-8:API_KEY": {
       "actionId": "VERIFY_PLAN:hogwarts-houses-api-8:API_KEY",
       "kind": "VERIFY_PLAN",
       "sourceId": "hogwarts-houses-api-8",
       "plannedStatus": "READY",
-      "status": "BLOCKED",
+      "status": "MANUAL_REVIEW",
       "dependencies": [
         "UPSERT_PLAN:hogwarts-houses-api-8:API_KEY"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "dependency not satisfied: UPSERT_PLAN:hogwarts-houses-api-8:API_KEY=FAILED",
+      "lastError": "dependency not satisfied: UPSERT_PLAN:hogwarts-houses-api-8:API_KEY=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-07T17:13:55.104Z"
+      "completedAt": "2026-04-07T19:31:21.364Z"
     },
     "VERIFY_API:hogwarts-houses-api-8": {
       "actionId": "VERIFY_API:hogwarts-houses-api-8",
       "kind": "VERIFY_API",
       "sourceId": "hogwarts-houses-api-8",
       "plannedStatus": "READY",
-      "status": "BLOCKED",
+      "status": "MANUAL_REVIEW",
       "dependencies": [
         "UPSERT_API:hogwarts-houses-api-8",
         "VERIFY_PLAN:hogwarts-houses-api-8:API_KEY"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "dependency not satisfied: UPSERT_API:hogwarts-houses-api-8=SUCCEEDED, VERIFY_PLAN:hogwarts-houses-api-8:API_KEY=BLOCKED",
+      "lastError": "dependency not satisfied: UPSERT_API:hogwarts-houses-api-8=SUCCEEDED, VERIFY_PLAN:hogwarts-houses-api-8:API_KEY=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-07T17:13:55.104Z"
+      "completedAt": "2026-04-07T19:31:21.364Z"
     },
     "UPSERT_API:kanye-rest-api-5": {
       "actionId": "UPSERT_API:kanye-rest-api-5",
@@ -890,8 +890,8 @@
       "targetIds": {},
       "reconcileHints": {},
       "lastError": "v4-management-full -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 404: {\"httpStatus\":404,\"message\":\"Plugin [assign-attributes] cannot be found.\",\"technicalCode\":\"plugin.notFound\",\"parameters\":{\"plugin\":\"assign-attributes\"},\"details\":[]} | v4-management-shell -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 404: {\"httpStatus\":404,\"message\":\"Plugin [assign-attributes] cannot be found.\",\"technicalCode\":\"plugin.notFound\",\"parameters\":{\"plugin\":\"assign-attributes\"},\"details\":[]} | legacy-import-wrapper -> POST http://localhost:8083/management/organizations/DEFAULT/environments/DEFAULT/apis/import → HTTP 500: {\"message\":\"Cannot invoke \\\"io.gravitee.definition.model.Proxy.getVirtualHosts()\\\" because the return value of \\\"io.gravitee.rest.api.model.api.UpdateApiEntity.getProxy()\\\" is null\",\"http_status\":500}",
-      "startedAt": "2026-04-07T17:13:55.104Z",
-      "completedAt": "2026-04-07T17:14:02.613Z"
+      "startedAt": "2026-04-07T19:31:21.364Z",
+      "completedAt": "2026-04-07T19:31:28.867Z"
     },
     "UPSERT_PLAN:kanye-rest-api-5:API_KEY": {
       "actionId": "UPSERT_PLAN:kanye-rest-api-5:API_KEY",
@@ -906,7 +906,7 @@
       "reconcileHints": {},
       "lastError": "dependency not satisfied: UPSERT_API:kanye-rest-api-5=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-07T17:14:02.615Z"
+      "completedAt": "2026-04-07T19:31:28.870Z"
     },
     "VERIFY_PLAN:kanye-rest-api-5:API_KEY": {
       "actionId": "VERIFY_PLAN:kanye-rest-api-5:API_KEY",
@@ -921,7 +921,7 @@
       "reconcileHints": {},
       "lastError": "dependency not satisfied: UPSERT_PLAN:kanye-rest-api-5:API_KEY=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-07T17:14:02.615Z"
+      "completedAt": "2026-04-07T19:31:28.870Z"
     },
     "VERIFY_API:kanye-rest-api-5": {
       "actionId": "VERIFY_API:kanye-rest-api-5",
@@ -937,7 +937,7 @@
       "reconcileHints": {},
       "lastError": "dependency not satisfied: UPSERT_API:kanye-rest-api-5=MANUAL_REVIEW, VERIFY_PLAN:kanye-rest-api-5:API_KEY=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-07T17:14:02.615Z"
+      "completedAt": "2026-04-07T19:31:28.870Z"
     },
     "UPSERT_API:kvm-test": {
       "actionId": "UPSERT_API:kvm-test",
@@ -949,8 +949,8 @@
       "targetIds": {},
       "reconcileHints": {},
       "lastError": "v4-management-full -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 404: {\"httpStatus\":404,\"message\":\"Plugin [assign-attributes] cannot be found.\",\"technicalCode\":\"plugin.notFound\",\"parameters\":{\"plugin\":\"assign-attributes\"},\"details\":[]} | v4-management-shell -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 404: {\"httpStatus\":404,\"message\":\"Plugin [assign-attributes] cannot be found.\",\"technicalCode\":\"plugin.notFound\",\"parameters\":{\"plugin\":\"assign-attributes\"},\"details\":[]} | legacy-import-wrapper -> POST http://localhost:8083/management/organizations/DEFAULT/environments/DEFAULT/apis/import → HTTP 500: {\"message\":\"Cannot invoke \\\"io.gravitee.definition.model.Proxy.getVirtualHosts()\\\" because the return value of \\\"io.gravitee.rest.api.model.api.UpdateApiEntity.getProxy()\\\" is null\",\"http_status\":500}",
-      "startedAt": "2026-04-07T17:14:02.615Z",
-      "completedAt": "2026-04-07T17:14:10.122Z"
+      "startedAt": "2026-04-07T19:31:28.870Z",
+      "completedAt": "2026-04-07T19:31:36.377Z"
     },
     "UPSERT_PLAN:kvm-test:KEYLESS": {
       "actionId": "UPSERT_PLAN:kvm-test:KEYLESS",
@@ -965,7 +965,7 @@
       "reconcileHints": {},
       "lastError": "dependency not satisfied: UPSERT_API:kvm-test=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-07T17:14:10.125Z"
+      "completedAt": "2026-04-07T19:31:36.381Z"
     },
     "VERIFY_PLAN:kvm-test:KEYLESS": {
       "actionId": "VERIFY_PLAN:kvm-test:KEYLESS",
@@ -980,7 +980,7 @@
       "reconcileHints": {},
       "lastError": "dependency not satisfied: UPSERT_PLAN:kvm-test:KEYLESS=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-07T17:14:10.125Z"
+      "completedAt": "2026-04-07T19:31:36.381Z"
     },
     "VERIFY_API:kvm-test": {
       "actionId": "VERIFY_API:kvm-test",
@@ -996,7 +996,7 @@
       "reconcileHints": {},
       "lastError": "dependency not satisfied: UPSERT_API:kvm-test=MANUAL_REVIEW, VERIFY_PLAN:kvm-test:KEYLESS=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-07T17:14:10.125Z"
+      "completedAt": "2026-04-07T19:31:36.381Z"
     },
     "UPSERT_API:load-balance-target-servers-api": {
       "actionId": "UPSERT_API:load-balance-target-servers-api",
@@ -1006,414 +1006,430 @@
       "status": "SUCCEEDED",
       "dependencies": [],
       "targetIds": {
-        "apiId": "49df9c36-9754-448a-9f9c-369754248a28"
+        "apiId": "fa8bbe2e-9ef3-4024-8bbe-2e9ef3d024dc"
       },
       "reconcileHints": {
-        "apiId": "49df9c36-9754-448a-9f9c-369754248a28"
+        "apiId": "fa8bbe2e-9ef3-4024-8bbe-2e9ef3d024dc"
       },
       "lastError": null,
-      "startedAt": "2026-04-07T17:14:10.125Z",
-      "completedAt": "2026-04-07T17:14:10.251Z"
+      "startedAt": "2026-04-07T19:31:36.381Z",
+      "completedAt": "2026-04-07T19:31:36.505Z"
     },
     "UPSERT_PLAN:load-balance-target-servers-api:KEYLESS": {
       "actionId": "UPSERT_PLAN:load-balance-target-servers-api:KEYLESS",
       "kind": "UPSERT_PLAN",
       "sourceId": "load-balance-target-servers-api",
       "plannedStatus": "READY",
-      "status": "FAILED",
+      "status": "MANUAL_REVIEW",
       "dependencies": [
         "UPSERT_API:load-balance-target-servers-api"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis/49df9c36-9754-448a-9f9c-369754248a28/plans → HTTP 400: {\"httpStatus\":400,\"message\":\"Validation error\",\"parameters\":{},\"details\":[{\"message\":\"must not be null\",\"invalidValue\":{\"present\":true},\"location\":\"createApiPlan.createPlan\"}]}",
-      "startedAt": "2026-04-07T17:14:10.253Z",
-      "completedAt": "2026-04-07T17:14:10.426Z"
+      "lastError": "v4-plan-raw -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis/fa8bbe2e-9ef3-4024-8bbe-2e9ef3d024dc/plans → HTTP 400: {\"httpStatus\":400,\"message\":\"Validation error\",\"parameters\":{},\"details\":[{\"message\":\"must not be null\",\"invalidValue\":{\"present\":true},\"location\":\"createApiPlan.createPlan\"}]} | v4-plan-create-wrapper -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis/fa8bbe2e-9ef3-4024-8bbe-2e9ef3d024dc/plans → HTTP 400: {\"httpStatus\":400,\"message\":\"Validation error\",\"parameters\":{},\"details\":[{\"message\":\"must not be null\",\"invalidValue\":{\"present\":true},\"location\":\"createApiPlan.createPlan\"}]}",
+      "startedAt": "2026-04-07T19:31:36.507Z",
+      "completedAt": "2026-04-07T19:31:36.733Z"
     },
     "VERIFY_PLAN:load-balance-target-servers-api:KEYLESS": {
       "actionId": "VERIFY_PLAN:load-balance-target-servers-api:KEYLESS",
       "kind": "VERIFY_PLAN",
       "sourceId": "load-balance-target-servers-api",
       "plannedStatus": "READY",
-      "status": "BLOCKED",
+      "status": "MANUAL_REVIEW",
       "dependencies": [
         "UPSERT_PLAN:load-balance-target-servers-api:KEYLESS"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "upstream action failed: UPSERT_PLAN:load-balance-target-servers-api:KEYLESS",
+      "lastError": "dependency not satisfied: UPSERT_PLAN:load-balance-target-servers-api:KEYLESS=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-07T17:14:10.426Z"
+      "completedAt": "2026-04-07T19:31:36.737Z"
     },
     "VERIFY_API:load-balance-target-servers-api": {
       "actionId": "VERIFY_API:load-balance-target-servers-api",
       "kind": "VERIFY_API",
       "sourceId": "load-balance-target-servers-api",
       "plannedStatus": "READY",
-      "status": "PENDING",
+      "status": "MANUAL_REVIEW",
       "dependencies": [
         "UPSERT_API:load-balance-target-servers-api",
         "VERIFY_PLAN:load-balance-target-servers-api:KEYLESS"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": null,
+      "lastError": "dependency not satisfied: UPSERT_API:load-balance-target-servers-api=SUCCEEDED, VERIFY_PLAN:load-balance-target-servers-api:KEYLESS=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": null
+      "completedAt": "2026-04-07T19:31:36.737Z"
     },
     "UPSERT_API:mock-target-api": {
       "actionId": "UPSERT_API:mock-target-api",
       "kind": "UPSERT_API",
       "sourceId": "mock-target-api",
       "plannedStatus": "READY",
-      "status": "PENDING",
+      "status": "MANUAL_REVIEW",
       "dependencies": [],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": null,
-      "startedAt": null,
-      "completedAt": null
+      "lastError": "v4-management-full -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 404: {\"httpStatus\":404,\"message\":\"Plugin [assign-attributes] cannot be found.\",\"technicalCode\":\"plugin.notFound\",\"parameters\":{\"plugin\":\"assign-attributes\"},\"details\":[]} | v4-management-shell -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 404: {\"httpStatus\":404,\"message\":\"Plugin [assign-attributes] cannot be found.\",\"technicalCode\":\"plugin.notFound\",\"parameters\":{\"plugin\":\"assign-attributes\"},\"details\":[]} | legacy-import-wrapper -> POST http://localhost:8083/management/organizations/DEFAULT/environments/DEFAULT/apis/import → HTTP 500: {\"message\":\"Cannot invoke \\\"io.gravitee.definition.model.Proxy.getVirtualHosts()\\\" because the return value of \\\"io.gravitee.rest.api.model.api.UpdateApiEntity.getProxy()\\\" is null\",\"http_status\":500}",
+      "startedAt": "2026-04-07T19:31:36.737Z",
+      "completedAt": "2026-04-07T19:31:44.234Z"
     },
     "UPSERT_PLAN:mock-target-api:KEYLESS": {
       "actionId": "UPSERT_PLAN:mock-target-api:KEYLESS",
       "kind": "UPSERT_PLAN",
       "sourceId": "mock-target-api",
       "plannedStatus": "READY",
-      "status": "PENDING",
+      "status": "MANUAL_REVIEW",
       "dependencies": [
         "UPSERT_API:mock-target-api"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": null,
+      "lastError": "dependency not satisfied: UPSERT_API:mock-target-api=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": null
+      "completedAt": "2026-04-07T19:31:44.237Z"
     },
     "VERIFY_PLAN:mock-target-api:KEYLESS": {
       "actionId": "VERIFY_PLAN:mock-target-api:KEYLESS",
       "kind": "VERIFY_PLAN",
       "sourceId": "mock-target-api",
       "plannedStatus": "READY",
-      "status": "PENDING",
+      "status": "MANUAL_REVIEW",
       "dependencies": [
         "UPSERT_PLAN:mock-target-api:KEYLESS"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": null,
+      "lastError": "dependency not satisfied: UPSERT_PLAN:mock-target-api:KEYLESS=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": null
+      "completedAt": "2026-04-07T19:31:44.237Z"
     },
     "VERIFY_API:mock-target-api": {
       "actionId": "VERIFY_API:mock-target-api",
       "kind": "VERIFY_API",
       "sourceId": "mock-target-api",
       "plannedStatus": "READY",
-      "status": "PENDING",
+      "status": "MANUAL_REVIEW",
       "dependencies": [
         "UPSERT_API:mock-target-api",
         "VERIFY_PLAN:mock-target-api:KEYLESS"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": null,
+      "lastError": "dependency not satisfied: UPSERT_API:mock-target-api=MANUAL_REVIEW, VERIFY_PLAN:mock-target-api:KEYLESS=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": null
+      "completedAt": "2026-04-07T19:31:44.237Z"
     },
     "UPSERT_API:proxy-sharedflow-api-11": {
       "actionId": "UPSERT_API:proxy-sharedflow-api-11",
       "kind": "UPSERT_API",
       "sourceId": "proxy-sharedflow-api-11",
       "plannedStatus": "READY",
-      "status": "PENDING",
+      "status": "SUCCEEDED",
       "dependencies": [],
-      "targetIds": {},
-      "reconcileHints": {},
+      "targetIds": {
+        "apiId": "3c90a8f4-543f-4e53-90a8-f4543f6e534e"
+      },
+      "reconcileHints": {
+        "apiId": "3c90a8f4-543f-4e53-90a8-f4543f6e534e"
+      },
       "lastError": null,
-      "startedAt": null,
-      "completedAt": null
+      "startedAt": "2026-04-07T19:31:44.237Z",
+      "completedAt": "2026-04-07T19:31:44.361Z"
     },
     "UPSERT_PLAN:proxy-sharedflow-api-11:KEYLESS": {
       "actionId": "UPSERT_PLAN:proxy-sharedflow-api-11:KEYLESS",
       "kind": "UPSERT_PLAN",
       "sourceId": "proxy-sharedflow-api-11",
       "plannedStatus": "READY",
-      "status": "PENDING",
+      "status": "FAILED",
       "dependencies": [
         "UPSERT_API:proxy-sharedflow-api-11"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": null,
-      "startedAt": null,
-      "completedAt": null
+      "lastError": "API proxy-sharedflow-api-11 was not found before plan import",
+      "startedAt": "2026-04-07T19:31:44.365Z",
+      "completedAt": "2026-04-07T19:31:44.422Z"
     },
     "VERIFY_PLAN:proxy-sharedflow-api-11:KEYLESS": {
       "actionId": "VERIFY_PLAN:proxy-sharedflow-api-11:KEYLESS",
       "kind": "VERIFY_PLAN",
       "sourceId": "proxy-sharedflow-api-11",
       "plannedStatus": "READY",
-      "status": "PENDING",
+      "status": "BLOCKED",
       "dependencies": [
         "UPSERT_PLAN:proxy-sharedflow-api-11:KEYLESS"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": null,
+      "lastError": "dependency not satisfied: UPSERT_PLAN:proxy-sharedflow-api-11:KEYLESS=FAILED",
       "startedAt": null,
-      "completedAt": null
+      "completedAt": "2026-04-07T19:31:44.425Z"
     },
     "VERIFY_API:proxy-sharedflow-api-11": {
       "actionId": "VERIFY_API:proxy-sharedflow-api-11",
       "kind": "VERIFY_API",
       "sourceId": "proxy-sharedflow-api-11",
       "plannedStatus": "READY",
-      "status": "PENDING",
+      "status": "BLOCKED",
       "dependencies": [
         "UPSERT_API:proxy-sharedflow-api-11",
         "VERIFY_PLAN:proxy-sharedflow-api-11:KEYLESS"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": null,
+      "lastError": "dependency not satisfied: UPSERT_API:proxy-sharedflow-api-11=SUCCEEDED, VERIFY_PLAN:proxy-sharedflow-api-11:KEYLESS=BLOCKED",
       "startedAt": null,
-      "completedAt": null
+      "completedAt": "2026-04-07T19:31:44.425Z"
     },
     "UPSERT_API:v1-ships": {
       "actionId": "UPSERT_API:v1-ships",
       "kind": "UPSERT_API",
       "sourceId": "v1-ships",
       "plannedStatus": "READY",
-      "status": "PENDING",
+      "status": "SUCCEEDED",
       "dependencies": [],
-      "targetIds": {},
-      "reconcileHints": {},
+      "targetIds": {
+        "apiId": "dc2a4a34-e2c0-4162-aa4a-34e2c0b162f5"
+      },
+      "reconcileHints": {
+        "apiId": "dc2a4a34-e2c0-4162-aa4a-34e2c0b162f5"
+      },
       "lastError": null,
-      "startedAt": null,
-      "completedAt": null
+      "startedAt": "2026-04-07T19:31:44.425Z",
+      "completedAt": "2026-04-07T19:31:44.548Z"
     },
     "UPSERT_PLAN:v1-ships:KEYLESS": {
       "actionId": "UPSERT_PLAN:v1-ships:KEYLESS",
       "kind": "UPSERT_PLAN",
       "sourceId": "v1-ships",
       "plannedStatus": "READY",
-      "status": "PENDING",
+      "status": "FAILED",
       "dependencies": [
         "UPSERT_API:v1-ships"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": null,
-      "startedAt": null,
-      "completedAt": null
+      "lastError": "API v1-ships was not found before plan import",
+      "startedAt": "2026-04-07T19:31:44.551Z",
+      "completedAt": "2026-04-07T19:31:44.607Z"
     },
     "VERIFY_PLAN:v1-ships:KEYLESS": {
       "actionId": "VERIFY_PLAN:v1-ships:KEYLESS",
       "kind": "VERIFY_PLAN",
       "sourceId": "v1-ships",
       "plannedStatus": "READY",
-      "status": "PENDING",
+      "status": "BLOCKED",
       "dependencies": [
         "UPSERT_PLAN:v1-ships:KEYLESS"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": null,
+      "lastError": "dependency not satisfied: UPSERT_PLAN:v1-ships:KEYLESS=FAILED",
       "startedAt": null,
-      "completedAt": null
+      "completedAt": "2026-04-07T19:31:44.611Z"
     },
     "VERIFY_API:v1-ships": {
       "actionId": "VERIFY_API:v1-ships",
       "kind": "VERIFY_API",
       "sourceId": "v1-ships",
       "plannedStatus": "READY",
-      "status": "PENDING",
+      "status": "BLOCKED",
       "dependencies": [
         "UPSERT_API:v1-ships",
         "VERIFY_PLAN:v1-ships:KEYLESS"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": null,
+      "lastError": "dependency not satisfied: UPSERT_API:v1-ships=SUCCEEDED, VERIFY_PLAN:v1-ships:KEYLESS=BLOCKED",
       "startedAt": null,
-      "completedAt": null
+      "completedAt": "2026-04-07T19:31:44.611Z"
     },
     "UPSERT_API:villian-chain": {
       "actionId": "UPSERT_API:villian-chain",
       "kind": "UPSERT_API",
       "sourceId": "villian-chain",
       "plannedStatus": "READY",
-      "status": "PENDING",
+      "status": "MANUAL_REVIEW",
       "dependencies": [],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": null,
-      "startedAt": null,
-      "completedAt": null
+      "lastError": "v4-management-full -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 404: {\"httpStatus\":404,\"message\":\"Plugin [http-callout] cannot be found.\",\"technicalCode\":\"plugin.notFound\",\"parameters\":{\"plugin\":\"http-callout\"},\"details\":[]} | v4-management-shell -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 404: {\"httpStatus\":404,\"message\":\"Plugin [http-callout] cannot be found.\",\"technicalCode\":\"plugin.notFound\",\"parameters\":{\"plugin\":\"http-callout\"},\"details\":[]} | legacy-import-wrapper -> POST http://localhost:8083/management/organizations/DEFAULT/environments/DEFAULT/apis/import → HTTP 500: {\"message\":\"Cannot invoke \\\"io.gravitee.definition.model.Proxy.getVirtualHosts()\\\" because the return value of \\\"io.gravitee.rest.api.model.api.UpdateApiEntity.getProxy()\\\" is null\",\"http_status\":500}",
+      "startedAt": "2026-04-07T19:31:44.611Z",
+      "completedAt": "2026-04-07T19:31:52.120Z"
     },
     "UPSERT_PLAN:villian-chain:KEYLESS": {
       "actionId": "UPSERT_PLAN:villian-chain:KEYLESS",
       "kind": "UPSERT_PLAN",
       "sourceId": "villian-chain",
       "plannedStatus": "READY",
-      "status": "PENDING",
+      "status": "MANUAL_REVIEW",
       "dependencies": [
         "UPSERT_API:villian-chain"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": null,
+      "lastError": "dependency not satisfied: UPSERT_API:villian-chain=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": null
+      "completedAt": "2026-04-07T19:31:52.123Z"
     },
     "VERIFY_PLAN:villian-chain:KEYLESS": {
       "actionId": "VERIFY_PLAN:villian-chain:KEYLESS",
       "kind": "VERIFY_PLAN",
       "sourceId": "villian-chain",
       "plannedStatus": "READY",
-      "status": "PENDING",
+      "status": "MANUAL_REVIEW",
       "dependencies": [
         "UPSERT_PLAN:villian-chain:KEYLESS"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": null,
+      "lastError": "dependency not satisfied: UPSERT_PLAN:villian-chain:KEYLESS=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": null
+      "completedAt": "2026-04-07T19:31:52.123Z"
     },
     "VERIFY_API:villian-chain": {
       "actionId": "VERIFY_API:villian-chain",
       "kind": "VERIFY_API",
       "sourceId": "villian-chain",
       "plannedStatus": "READY",
-      "status": "PENDING",
+      "status": "MANUAL_REVIEW",
       "dependencies": [
         "UPSERT_API:villian-chain",
         "VERIFY_PLAN:villian-chain:KEYLESS"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": null,
+      "lastError": "dependency not satisfied: UPSERT_API:villian-chain=MANUAL_REVIEW, VERIFY_PLAN:villian-chain:KEYLESS=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": null
+      "completedAt": "2026-04-07T19:31:52.123Z"
     },
     "UPSERT_API:wizards-api-9": {
       "actionId": "UPSERT_API:wizards-api-9",
       "kind": "UPSERT_API",
       "sourceId": "wizards-api-9",
       "plannedStatus": "READY",
-      "status": "PENDING",
+      "status": "SUCCEEDED",
       "dependencies": [],
-      "targetIds": {},
-      "reconcileHints": {},
+      "targetIds": {
+        "apiId": "a58c5224-6d54-4881-8c52-246d541881fc"
+      },
+      "reconcileHints": {
+        "apiId": "a58c5224-6d54-4881-8c52-246d541881fc"
+      },
       "lastError": null,
-      "startedAt": null,
-      "completedAt": null
+      "startedAt": "2026-04-07T19:31:52.123Z",
+      "completedAt": "2026-04-07T19:31:52.250Z"
     },
     "UPSERT_PLAN:wizards-api-9:API_KEY": {
       "actionId": "UPSERT_PLAN:wizards-api-9:API_KEY",
       "kind": "UPSERT_PLAN",
       "sourceId": "wizards-api-9",
       "plannedStatus": "READY",
-      "status": "PENDING",
+      "status": "FAILED",
       "dependencies": [
         "UPSERT_API:wizards-api-9"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": null,
-      "startedAt": null,
-      "completedAt": null
+      "lastError": "API wizards-api-9 was not found before plan import",
+      "startedAt": "2026-04-07T19:31:52.252Z",
+      "completedAt": "2026-04-07T19:31:52.311Z"
     },
     "VERIFY_PLAN:wizards-api-9:API_KEY": {
       "actionId": "VERIFY_PLAN:wizards-api-9:API_KEY",
       "kind": "VERIFY_PLAN",
       "sourceId": "wizards-api-9",
       "plannedStatus": "READY",
-      "status": "PENDING",
+      "status": "BLOCKED",
       "dependencies": [
         "UPSERT_PLAN:wizards-api-9:API_KEY"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": null,
+      "lastError": "dependency not satisfied: UPSERT_PLAN:wizards-api-9:API_KEY=FAILED",
       "startedAt": null,
-      "completedAt": null
+      "completedAt": "2026-04-07T19:31:52.314Z"
     },
     "VERIFY_API:wizards-api-9": {
       "actionId": "VERIFY_API:wizards-api-9",
       "kind": "VERIFY_API",
       "sourceId": "wizards-api-9",
       "plannedStatus": "READY",
-      "status": "PENDING",
+      "status": "BLOCKED",
       "dependencies": [
         "UPSERT_API:wizards-api-9",
         "VERIFY_PLAN:wizards-api-9:API_KEY"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": null,
+      "lastError": "dependency not satisfied: UPSERT_API:wizards-api-9=SUCCEEDED, VERIFY_PLAN:wizards-api-9:API_KEY=BLOCKED",
       "startedAt": null,
-      "completedAt": null
+      "completedAt": "2026-04-07T19:31:52.314Z"
     },
     "UPSERT_API:yes-or-no-api-4": {
       "actionId": "UPSERT_API:yes-or-no-api-4",
       "kind": "UPSERT_API",
       "sourceId": "yes-or-no-api-4",
       "plannedStatus": "READY",
-      "status": "PENDING",
+      "status": "SUCCEEDED",
       "dependencies": [],
-      "targetIds": {},
-      "reconcileHints": {},
+      "targetIds": {
+        "apiId": "2950afb3-d319-4ac3-90af-b3d3192ac3a5"
+      },
+      "reconcileHints": {
+        "apiId": "2950afb3-d319-4ac3-90af-b3d3192ac3a5"
+      },
       "lastError": null,
-      "startedAt": null,
-      "completedAt": null
+      "startedAt": "2026-04-07T19:31:52.314Z",
+      "completedAt": "2026-04-07T19:31:52.435Z"
     },
     "UPSERT_PLAN:yes-or-no-api-4:API_KEY": {
       "actionId": "UPSERT_PLAN:yes-or-no-api-4:API_KEY",
       "kind": "UPSERT_PLAN",
       "sourceId": "yes-or-no-api-4",
       "plannedStatus": "READY",
-      "status": "PENDING",
+      "status": "FAILED",
       "dependencies": [
         "UPSERT_API:yes-or-no-api-4"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": null,
-      "startedAt": null,
-      "completedAt": null
+      "lastError": "API yes-or-no-api-4 was not found before plan import",
+      "startedAt": "2026-04-07T19:31:52.437Z",
+      "completedAt": "2026-04-07T19:31:52.496Z"
     },
     "VERIFY_PLAN:yes-or-no-api-4:API_KEY": {
       "actionId": "VERIFY_PLAN:yes-or-no-api-4:API_KEY",
       "kind": "VERIFY_PLAN",
       "sourceId": "yes-or-no-api-4",
       "plannedStatus": "READY",
-      "status": "PENDING",
+      "status": "BLOCKED",
       "dependencies": [
         "UPSERT_PLAN:yes-or-no-api-4:API_KEY"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": null,
+      "lastError": "dependency not satisfied: UPSERT_PLAN:yes-or-no-api-4:API_KEY=FAILED",
       "startedAt": null,
-      "completedAt": null
+      "completedAt": "2026-04-07T19:31:52.499Z"
     },
     "VERIFY_API:yes-or-no-api-4": {
       "actionId": "VERIFY_API:yes-or-no-api-4",
       "kind": "VERIFY_API",
       "sourceId": "yes-or-no-api-4",
       "plannedStatus": "READY",
-      "status": "PENDING",
+      "status": "BLOCKED",
       "dependencies": [
         "UPSERT_API:yes-or-no-api-4",
         "VERIFY_PLAN:yes-or-no-api-4:API_KEY"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": null,
+      "lastError": "dependency not satisfied: UPSERT_API:yes-or-no-api-4=SUCCEEDED, VERIFY_PLAN:yes-or-no-api-4:API_KEY=BLOCKED",
       "startedAt": null,
-      "completedAt": null
+      "completedAt": "2026-04-07T19:31:52.499Z"
     }
   }
 }
