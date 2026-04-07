@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-04-06T21:21:43.122Z",
-  "updatedAt": "2026-04-06T21:21:43.122Z",
+  "generatedAt": "2026-04-07T15:22:07.213Z",
+  "updatedAt": "2026-04-07T15:22:07.379Z",
   "mode": "plan",
   "summary": {
     "proxies": 23,
@@ -21,13 +21,13 @@
       "kind": "UPSERT_API",
       "sourceId": "KVM-Create",
       "plannedStatus": "READY",
-      "status": "PENDING",
+      "status": "FAILED",
       "dependencies": [],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": null,
-      "startedAt": null,
-      "completedAt": null
+      "lastError": "POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 400",
+      "startedAt": "2026-04-07T15:22:07.218Z",
+      "completedAt": "2026-04-07T15:22:07.379Z"
     },
     "VERIFY_API:KVM-Create": {
       "actionId": "VERIFY_API:KVM-Create",
