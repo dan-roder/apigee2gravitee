@@ -314,11 +314,14 @@ class GraviteeClient {
   }
 
   async createApi(payload) {
-    return this.post(this.v2Url('/apis'), payload);
+    return this.post(this.envUrl('/apis/import'), payload);
   }
 
   async updateApi(apiId, payload) {
-    return this.put(this.v2Url(`/apis/${apiId}`), payload);
+    if (apiId) {
+      return this.put(this.envUrl(`/apis/${apiId}/import`), payload);
+    }
+    return this.put(this.envUrl('/apis/import'), payload);
   }
 
   async listRoles() {
@@ -563,10 +566,10 @@ class GraviteeClient {
 
   async verifyApiImportCapabilities() {
     const listApis = await this.probeEndpoint('GET', this.v2Url('/apis'));
-    const createApi = await this.probeEndpoint('POST', this.v2Url('/apis'), {});
-    const updateApi = await this.probeEndpoint('PUT', this.v2Url('/apis/__codex_probe__'), {});
+    const createApi = await this.probeEndpoint('POST', this.envUrl('/apis/import'), {});
+    const updateApi = await this.probeEndpoint('PUT', this.envUrl('/apis/import'), {});
     updateApi.required = false;
-    if (updateApi.status === 404) {
+    if (updateApi.status === 404 || updateApi.status === 400) {
       updateApi.ok = true;
       updateApi.supported = true;
       updateApi.classification = 'indeterminate-resource';

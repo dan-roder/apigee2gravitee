@@ -17,6 +17,7 @@ async function executeAction(action, result, idMap) {
     const existing = await result.client.findApiByName(proxy.definition.name);
     const payload = {
       ...proxy.definition,
+      crossId: proxy.sourceId,
       definitionContext: {
         origin: {
           sourceId: proxy.sourceId,
@@ -32,8 +33,9 @@ async function executeAction(action, result, idMap) {
     } else {
       api = await result.client.updateApi(existing.id, payload);
     }
-    setIdMapValue(idMap, action.kind, action.sourceId, api.id);
-    return { apiId: api.id };
+    const resolvedId = api?.id || existing?.id || null;
+    setIdMapValue(idMap, action.kind, action.sourceId, resolvedId);
+    return { apiId: resolvedId };
   }
 
   if (action.kind === 'VERIFY_API') {
@@ -50,6 +52,15 @@ async function executeAction(action, result, idMap) {
   }
 
   return {};
+}
+
+function formatImportError(err) {
+  if (!err) return 'Unknown import error';
+  if (err.body !== undefined) {
+    const rendered = typeof err.body === 'string' ? err.body : JSON.stringify(err.body);
+    return `${err.message}: ${rendered}`;
+  }
+  return err.message || String(err);
 }
 
 async function runApisImport(flags, deps = {}) {
@@ -78,8 +89,9 @@ async function runApisImport(flags, deps = {}) {
       markActionCompleted(state, action.actionId, 'SUCCEEDED', { targetIds, reconcileHints: targetIds });
       events.push({ ts: new Date().toISOString(), type: 'import.succeeded', actionId: action.actionId, kind: action.kind });
     } catch (err) {
-      markActionCompleted(state, action.actionId, 'FAILED', { lastError: err.message });
-      events.push({ ts: new Date().toISOString(), type: 'import.failed', actionId: action.actionId, kind: action.kind, error: err.message });
+      const detailedError = formatImportError(err);
+      markActionCompleted(state, action.actionId, 'FAILED', { lastError: detailedError });
+      events.push({ ts: new Date().toISOString(), type: 'import.failed', actionId: action.actionId, kind: action.kind, error: detailedError });
       break;
     }
     writeJson(result.outputPaths.state, state);
