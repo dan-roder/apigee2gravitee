@@ -9,6 +9,7 @@ const { spawnSync } = require('child_process');
 const { runApisAnalyze } = require('../../src/apis/analyze');
 const { runApisImport } = require('../../src/apis/import');
 const { runApisReconcile } = require('../../src/apis/reconcile');
+const { runApisDeleteImported } = require('../../src/apis/delete-imported');
 
 const PROJECT_ROOT = path.resolve(__dirname, '..', '..');
 const FIXTURES_DATA = path.join(PROJECT_ROOT, 'test', 'extractor', 'fixtures', 'data');
@@ -59,6 +60,7 @@ function makeClient() {
     apis: new Map(),
     plans: new Map(),
     createApi: 0,
+    deleteApi: 0,
   };
 
   return {
@@ -78,19 +80,40 @@ function makeClient() {
     async findApiByName(name) { return Array.from(state.apis.values()).find((item) => item.name === name) || null; },
     async createApi(payload) {
       state.createApi += 1;
-      const api = { id: `api-${state.createApi}`, name: payload.name, definitionContext: payload.definitionContext };
+      const api = {
+        id: `api-${state.createApi}`,
+        name: payload.name,
+        crossId: payload.crossId,
+        definitionContext: payload.definitionContext,
+      };
       state.apis.set(api.id, api);
       state.plans.set(api.id, Object.values(payload.plans || {}).map((plan, index) => ({ id: `${api.id}-plan-${index + 1}`, name: plan.name })));
       return api;
     },
     async updateApi(apiId, payload) {
-      const api = { id: apiId, name: payload.name, definitionContext: payload.definitionContext };
+      const api = {
+        id: apiId,
+        name: payload.name,
+        crossId: payload.crossId,
+        definitionContext: payload.definitionContext,
+      };
       state.apis.set(apiId, api);
       state.plans.set(apiId, Object.values(payload.plans || {}).map((plan, index) => ({ id: `${api.id}-plan-${index + 1}`, name: plan.name })));
       return api;
     },
+    async deleteApi(apiId) {
+      state.deleteApi += 1;
+      state.apis.delete(apiId);
+      state.plans.delete(apiId);
+      return null;
+    },
     async listApiPlans(apiId) {
       return state.plans.get(apiId) || [];
+    },
+    async findApiBySourceId(sourceId) {
+      return Array.from(state.apis.values()).find((item) => {
+        return item.definitionContext?.origin?.sourceId === sourceId || item.crossId === sourceId;
+      }) || null;
     },
   };
 }
@@ -183,11 +206,39 @@ async function testApisReconcileDetectsMissingApi() {
   });
 }
 
+async function testApisDeleteImportedDeletesKnownApis() {
+  await withTempDir(async (dir) => {
+    const dataDir = path.join(dir, 'data');
+    const irDir = path.join(dir, 'ir');
+    copyDir(FIXTURES_DATA, dataDir);
+    generateIrFromData(dataDir, irDir);
+
+    const client = makeClient();
+    const importResult = await runApisImport(
+      { 'ir-dir': irDir, config: path.join(dir, 'apis.config.json') },
+      { config: makeConfig(dir), client },
+    );
+
+    assert.strictEqual(importResult.exitCode, 0);
+    assert.ok(importResult.idMap.apis['orders-api']);
+
+    const cleanupResult = await runApisDeleteImported(
+      { 'ir-dir': irDir, config: path.join(dir, 'apis.config.json') },
+      { config: makeConfig(dir), client },
+    );
+
+    assert.strictEqual(cleanupResult.exitCode, 0);
+    assert.strictEqual(client._state.deleteApi, 1);
+    assert.strictEqual(cleanupResult.idMap.apis['orders-api'], null);
+  });
+}
+
 async function run() {
   await testApisAnalyzeBuildsPlan();
   await testApisImportCreatesApiAndPlans();
   await testApisImportCompatibilityIssuesBecomeManualReview();
   await testApisReconcileDetectsMissingApi();
+  await testApisDeleteImportedDeletesKnownApis();
   console.log('test-workflow.js passed');
 }
 

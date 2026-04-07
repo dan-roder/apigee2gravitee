@@ -302,6 +302,26 @@ class GraviteeClient {
     return this.get(this.v2Url(`/apis/${apiId}`));
   }
 
+  async deleteApi(apiId) {
+    return this.delete(this.v2Url(`/apis/${apiId}`));
+  }
+
+  async findApiBySourceId(sourceId) {
+    if (!sourceId) return null;
+    const items = await this.listApis();
+    const exact = items.filter((item) => {
+      const itemSourceId = item?.definitionContext?.origin?.sourceId
+        || item?.crossId
+        || item?.metadata?.sourceId
+        || null;
+      return itemSourceId === sourceId;
+    });
+    if (exact.length > 1) {
+      throw new Error(`Ambiguous Gravitee API match for sourceId ${sourceId}`);
+    }
+    return exact[0] || null;
+  }
+
   async findApiByName(name) {
     if (!name) return null;
     const items = await this.listApis();

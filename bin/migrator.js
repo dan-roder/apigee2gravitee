@@ -279,6 +279,7 @@ ${fmt.bold('Subcommands:')}
   plan       Persist the executable API migration manifest and gap report
   import     Create or update Gravitee APIs from translated proxy IR
   reconcile  Compare expected APIs/plans against live Gravitee state
+  delete-imported  Delete APIs previously imported by this tool
 
 ${fmt.bold('Common options:')}
   --ir-dir <path>         Path to extracted IR directory               (default: ./ir)
@@ -298,6 +299,7 @@ ${fmt.bold('Examples:')}
   migrator apis plan --ir-dir ./ir --config ./config/apis.config.example.json --gravitee-token "$GRAVITEE_TOKEN"
   migrator apis import --ir-dir ./ir --config ./config/apis.config.example.json --gravitee-token "$GRAVITEE_TOKEN"
   migrator apis reconcile --ir-dir ./ir --config ./config/apis.config.example.json --gravitee-token "$GRAVITEE_TOKEN"
+  migrator apis delete-imported --ir-dir ./ir --config ./config/apis.config.example.json --gravitee-token "$GRAVITEE_TOKEN"
 `);
 }
 

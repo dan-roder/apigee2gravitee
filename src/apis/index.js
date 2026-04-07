@@ -4,6 +4,7 @@ const { runApisAnalyze } = require('./analyze');
 const { runApisPlan } = require('./plan');
 const { runApisImport } = require('./import');
 const { runApisReconcile } = require('./reconcile');
+const { runApisDeleteImported } = require('./delete-imported');
 
 async function runApisCommand(subcommand, flags, fmt) {
   if (subcommand === 'analyze') {
@@ -69,6 +70,28 @@ async function runApisCommand(subcommand, flags, fmt) {
     console.log(`[reconcile] ${result.report.summary.checkedApis} apis checked`);
     console.log(`[reconcile] ${result.report.summary.blockers} blocker(s), ${result.report.summary.warnings} warning(s)`);
     console.log(`  Report:     ${fmt.dim(result.outputPaths.reconcileReport)}`);
+    return result.exitCode;
+  }
+
+  if (subcommand === 'delete-imported') {
+    const result = await runApisDeleteImported(flags);
+    if (result.validationErrors) {
+      console.log(fmt.err('Apis config validation failed'));
+      for (const err of result.validationErrors) console.log(`  - ${err}`);
+      return result.exitCode;
+    }
+    console.log(fmt.header('Apis delete-imported'));
+    console.log('');
+    console.log(`[cleanup] ${result.cleanup.summary.deleted} deleted, ${result.cleanup.summary.skipped} skipped, ${result.cleanup.summary.failed} failed`);
+    if (result.cleanup.failures.length > 0) {
+      console.log('');
+      console.log('  Failures:');
+      for (const failure of result.cleanup.failures.slice(0, 10)) {
+        console.log(`   - ${failure.proxyName}: ${failure.error}`);
+      }
+    }
+    console.log(`  Id map:     ${fmt.dim(result.outputPaths.idMap)}`);
+    console.log(`  Log:        ${fmt.dim(result.outputPaths.log)}`);
     return result.exitCode;
   }
 

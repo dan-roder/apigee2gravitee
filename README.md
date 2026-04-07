@@ -296,6 +296,7 @@ node bin/migrator.js apis analyze --ir-dir ./ir --config ./config/apis.config.ex
 node bin/migrator.js apis plan --ir-dir ./ir --config ./config/apis.config.example.json --gravitee-token "$GRAVITEE_TOKEN"
 node bin/migrator.js apis import --ir-dir ./ir --config ./config/apis.config.example.json --gravitee-token "$GRAVITEE_TOKEN"
 node bin/migrator.js apis reconcile --ir-dir ./ir --config ./config/apis.config.example.json --gravitee-token "$GRAVITEE_TOKEN"
+node bin/migrator.js apis delete-imported --ir-dir ./ir --config ./config/apis.config.example.json --gravitee-token "$GRAVITEE_TOKEN"
 ```
 
 ### Recommended first run
@@ -359,6 +360,13 @@ node bin/migrator.js developers analyze --ir-dir ./ir --config ./config/develope
 - check that each expected API exists in Gravitee
 - verify the expected plan names are present
 - compare live targets with the saved API id map
+
+`apis delete-imported` will:
+
+- delete APIs that this tool can positively identify as imported
+- prefer the saved `state/apis-id-map.json`
+- fall back to live source markers like `definitionContext.origin.sourceId` when available
+- leave unrelated Gravitee APIs untouched
 
 ### Expected outputs
 

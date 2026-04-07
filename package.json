@@ -15,6 +15,7 @@
     "apis:plan":    "node bin/migrator.js apis plan --ir-dir ./ir --config ./config/apis.config.example.json --gravitee-token $GRAVITEE_TOKEN",
     "apis:import":  "node bin/migrator.js apis import --ir-dir ./ir --config ./config/apis.config.example.json --gravitee-token $GRAVITEE_TOKEN",
     "apis:reconcile": "node bin/migrator.js apis reconcile --ir-dir ./ir --config ./config/apis.config.example.json --gravitee-token $GRAVITEE_TOKEN",
+    "apis:delete":  "node bin/migrator.js apis delete-imported --ir-dir ./ir --config ./config/apis.config.example.json --gravitee-token $GRAVITEE_TOKEN",
     "test:developers":  "node test/developers/test-analyze.js && node test/developers/test-workflow.js && node test/developers/test-resolve-config-ids.js && node test/developers/test-validate-config-targets.js && node test/developers/test-index.js",
     "test:apis":        "node test/apis/test-workflow.js",
     "test:shared":      "node test/shared/test-ir-loader.js && node test/shared/test-gravitee-client.js",
