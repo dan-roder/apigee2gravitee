@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-04-07T16:26:41.553Z",
-  "updatedAt": "2026-04-07T16:29:27.274Z",
+  "generatedAt": "2026-04-07T17:00:07.816Z",
+  "updatedAt": "2026-04-07T17:01:03.023Z",
   "mode": "plan",
   "summary": {
     "proxies": 23,
@@ -25,9 +25,9 @@
       "dependencies": [],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "v4-management-full -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 404: {\"httpStatus\":404,\"message\":\"Plugin [assign-attributes] cannot be found.\",\"technicalCode\":\"plugin.notFound\",\"parameters\":{\"plugin\":\"assign-attributes\"},\"details\":[]} | v4-management-shell -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 404: {\"httpStatus\":404,\"message\":\"Plugin [assign-attributes] cannot be found.\",\"technicalCode\":\"plugin.notFound\",\"parameters\":{\"plugin\":\"assign-attributes\"},\"details\":[]} | legacy-import-wrapper -> POST http://localhost:8083/management/organizations/DEFAULT/environments/DEFAULT/apis/import → HTTP 500: {\"message\":\"Cannot invoke \\\"io.gravitee.definition.model.Proxy.getVirtualHosts()\\\" because the return value of \\\"io.gravitee.rest.api.model.api.UpdateApiEntity.getProxy()\\\" is null\",\"http_status\":500}",
-      "startedAt": "2026-04-07T16:26:41.559Z",
-      "completedAt": "2026-04-07T16:26:49.076Z"
+      "lastError": "v4-management-full -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 400: {\"httpStatus\":400,\"message\":\"Path [/] already exists\",\"parameters\":{},\"details\":[]} | v4-management-shell -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 400: {\"httpStatus\":400,\"message\":\"Path [/] already exists\",\"parameters\":{},\"details\":[]} | legacy-import-wrapper -> POST http://localhost:8083/management/organizations/DEFAULT/environments/DEFAULT/apis/import → HTTP 500: {\"message\":\"Cannot invoke \\\"io.gravitee.definition.model.Proxy.getVirtualHosts()\\\" because the return value of \\\"io.gravitee.rest.api.model.api.UpdateApiEntity.getProxy()\\\" is null\",\"http_status\":500}",
+      "startedAt": "2026-04-07T17:00:07.824Z",
+      "completedAt": "2026-04-07T17:00:15.349Z"
     },
     "VERIFY_API:KVM-Create": {
       "actionId": "VERIFY_API:KVM-Create",
@@ -42,7 +42,7 @@
       "reconcileHints": {},
       "lastError": "dependency not satisfied: UPSERT_API:KVM-Create=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-07T16:26:49.079Z"
+      "completedAt": "2026-04-07T17:00:15.352Z"
     },
     "UPSERT_API:KVM-Reader": {
       "actionId": "UPSERT_API:KVM-Reader",
@@ -53,9 +53,9 @@
       "dependencies": [],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "v4-management-full -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 404: {\"httpStatus\":404,\"message\":\"Plugin [assign-attributes] cannot be found.\",\"technicalCode\":\"plugin.notFound\",\"parameters\":{\"plugin\":\"assign-attributes\"},\"details\":[]} | v4-management-shell -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 404: {\"httpStatus\":404,\"message\":\"Plugin [assign-attributes] cannot be found.\",\"technicalCode\":\"plugin.notFound\",\"parameters\":{\"plugin\":\"assign-attributes\"},\"details\":[]} | legacy-import-wrapper -> POST http://localhost:8083/management/organizations/DEFAULT/environments/DEFAULT/apis/import → HTTP 500: {\"message\":\"Cannot invoke \\\"io.gravitee.definition.model.Proxy.getVirtualHosts()\\\" because the return value of \\\"io.gravitee.rest.api.model.api.UpdateApiEntity.getProxy()\\\" is null\",\"http_status\":500}",
-      "startedAt": "2026-04-07T16:26:49.079Z",
-      "completedAt": "2026-04-07T16:26:56.604Z"
+      "lastError": "v4-management-full -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 400: {\"httpStatus\":400,\"message\":\"Path [/] already exists\",\"parameters\":{},\"details\":[]} | v4-management-shell -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 400: {\"httpStatus\":400,\"message\":\"Path [/] already exists\",\"parameters\":{},\"details\":[]} | legacy-import-wrapper -> POST http://localhost:8083/management/organizations/DEFAULT/environments/DEFAULT/apis/import → HTTP 500: {\"message\":\"Cannot invoke \\\"io.gravitee.definition.model.Proxy.getVirtualHosts()\\\" because the return value of \\\"io.gravitee.rest.api.model.api.UpdateApiEntity.getProxy()\\\" is null\",\"http_status\":500}",
+      "startedAt": "2026-04-07T17:00:15.352Z",
+      "completedAt": "2026-04-07T17:00:22.875Z"
     },
     "VERIFY_API:KVM-Reader": {
       "actionId": "VERIFY_API:KVM-Reader",
@@ -70,7 +70,7 @@
       "reconcileHints": {},
       "lastError": "dependency not satisfied: UPSERT_API:KVM-Reader=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-07T16:26:56.607Z"
+      "completedAt": "2026-04-07T17:00:22.878Z"
     },
     "UPSERT_API:KVM-Update": {
       "actionId": "UPSERT_API:KVM-Update",
@@ -81,9 +81,9 @@
       "dependencies": [],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "v4-management-full -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 404: {\"httpStatus\":404,\"message\":\"Plugin [assign-attributes] cannot be found.\",\"technicalCode\":\"plugin.notFound\",\"parameters\":{\"plugin\":\"assign-attributes\"},\"details\":[]} | v4-management-shell -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 404: {\"httpStatus\":404,\"message\":\"Plugin [assign-attributes] cannot be found.\",\"technicalCode\":\"plugin.notFound\",\"parameters\":{\"plugin\":\"assign-attributes\"},\"details\":[]} | legacy-import-wrapper -> POST http://localhost:8083/management/organizations/DEFAULT/environments/DEFAULT/apis/import → HTTP 500: {\"message\":\"Cannot invoke \\\"io.gravitee.definition.model.Proxy.getVirtualHosts()\\\" because the return value of \\\"io.gravitee.rest.api.model.api.UpdateApiEntity.getProxy()\\\" is null\",\"http_status\":500}",
-      "startedAt": "2026-04-07T16:26:56.607Z",
-      "completedAt": "2026-04-07T16:27:04.135Z"
+      "lastError": "v4-management-full -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 400: {\"httpStatus\":400,\"message\":\"Path [/] already exists\",\"parameters\":{},\"details\":[]} | v4-management-shell -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 400: {\"httpStatus\":400,\"message\":\"Path [/] already exists\",\"parameters\":{},\"details\":[]} | legacy-import-wrapper -> POST http://localhost:8083/management/organizations/DEFAULT/environments/DEFAULT/apis/import → HTTP 500: {\"message\":\"Cannot invoke \\\"io.gravitee.definition.model.Proxy.getVirtualHosts()\\\" because the return value of \\\"io.gravitee.rest.api.model.api.UpdateApiEntity.getProxy()\\\" is null\",\"http_status\":500}",
+      "startedAt": "2026-04-07T17:00:22.878Z",
+      "completedAt": "2026-04-07T17:00:30.377Z"
     },
     "VERIFY_API:KVM-Update": {
       "actionId": "VERIFY_API:KVM-Update",
@@ -98,7 +98,7 @@
       "reconcileHints": {},
       "lastError": "dependency not satisfied: UPSERT_API:KVM-Update=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-07T16:27:04.137Z"
+      "completedAt": "2026-04-07T17:00:30.379Z"
     },
     "UPSERT_API:admin-kvm-export": {
       "actionId": "UPSERT_API:admin-kvm-export",
@@ -109,9 +109,9 @@
       "dependencies": [],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "v4-management-full -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 404: {\"httpStatus\":404,\"message\":\"Plugin [http-callout] cannot be found.\",\"technicalCode\":\"plugin.notFound\",\"parameters\":{\"plugin\":\"http-callout\"},\"details\":[]} | v4-management-shell -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 404: {\"httpStatus\":404,\"message\":\"Plugin [http-callout] cannot be found.\",\"technicalCode\":\"plugin.notFound\",\"parameters\":{\"plugin\":\"http-callout\"},\"details\":[]} | legacy-import-wrapper -> POST http://localhost:8083/management/organizations/DEFAULT/environments/DEFAULT/apis/import → HTTP 500: {\"message\":\"Cannot invoke \\\"io.gravitee.definition.model.Proxy.getVirtualHosts()\\\" because the return value of \\\"io.gravitee.rest.api.model.api.UpdateApiEntity.getProxy()\\\" is null\",\"http_status\":500}",
-      "startedAt": "2026-04-07T16:27:04.137Z",
-      "completedAt": "2026-04-07T16:27:11.659Z"
+      "lastError": "v4-management-full -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 400: {\"httpStatus\":400,\"message\":\"Path [/] already exists\",\"parameters\":{},\"details\":[]} | v4-management-shell -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 400: {\"httpStatus\":400,\"message\":\"Path [/] already exists\",\"parameters\":{},\"details\":[]} | legacy-import-wrapper -> POST http://localhost:8083/management/organizations/DEFAULT/environments/DEFAULT/apis/import → HTTP 500: {\"message\":\"Cannot invoke \\\"io.gravitee.definition.model.Proxy.getVirtualHosts()\\\" because the return value of \\\"io.gravitee.rest.api.model.api.UpdateApiEntity.getProxy()\\\" is null\",\"http_status\":500}",
+      "startedAt": "2026-04-07T17:00:30.380Z",
+      "completedAt": "2026-04-07T17:00:37.895Z"
     },
     "VERIFY_API:admin-kvm-export": {
       "actionId": "VERIFY_API:admin-kvm-export",
@@ -126,7 +126,7 @@
       "reconcileHints": {},
       "lastError": "dependency not satisfied: UPSERT_API:admin-kvm-export=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-07T16:27:11.662Z"
+      "completedAt": "2026-04-07T17:00:37.897Z"
     },
     "UPSERT_API:apigee-hello-api-1": {
       "actionId": "UPSERT_API:apigee-hello-api-1",
@@ -142,8 +142,8 @@
         "apiId": "4d0effda-0bc6-4f71-8eff-da0bc63f71df"
       },
       "lastError": null,
-      "startedAt": "2026-04-07T16:27:11.662Z",
-      "completedAt": "2026-04-07T16:27:11.814Z"
+      "startedAt": "2026-04-07T17:00:37.897Z",
+      "completedAt": "2026-04-07T17:00:38.035Z"
     },
     "VERIFY_API:apigee-hello-api-1": {
       "actionId": "VERIFY_API:apigee-hello-api-1",
@@ -157,176 +157,200 @@
       "targetIds": {},
       "reconcileHints": {},
       "lastError": "API apigee-hello-api-1 is missing plan Keyless Plan",
-      "startedAt": "2026-04-07T16:27:11.816Z",
-      "completedAt": "2026-04-07T16:27:11.936Z"
+      "startedAt": "2026-04-07T17:00:38.037Z",
+      "completedAt": "2026-04-07T17:00:38.156Z"
     },
     "UPSERT_API:apigee-hello": {
       "actionId": "UPSERT_API:apigee-hello",
       "kind": "UPSERT_API",
       "sourceId": "apigee-hello",
       "plannedStatus": "READY",
-      "status": "MANUAL_REVIEW",
+      "status": "SUCCEEDED",
       "dependencies": [],
-      "targetIds": {},
-      "reconcileHints": {},
-      "lastError": "v4-management-full -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 400: {\"httpStatus\":400,\"message\":\"Path [/] already exists\",\"parameters\":{},\"details\":[]} | v4-management-shell -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 400: {\"httpStatus\":400,\"message\":\"Path [/] already exists\",\"parameters\":{},\"details\":[]} | legacy-import-wrapper -> POST http://localhost:8083/management/organizations/DEFAULT/environments/DEFAULT/apis/import → HTTP 500: {\"message\":\"Cannot invoke \\\"io.gravitee.definition.model.Proxy.getVirtualHosts()\\\" because the return value of \\\"io.gravitee.rest.api.model.api.UpdateApiEntity.getProxy()\\\" is null\",\"http_status\":500}",
-      "startedAt": "2026-04-07T16:27:11.939Z",
-      "completedAt": "2026-04-07T16:27:19.476Z"
+      "targetIds": {
+        "apiId": "814c8576-195b-4de0-8c85-76195b9de025"
+      },
+      "reconcileHints": {
+        "apiId": "814c8576-195b-4de0-8c85-76195b9de025"
+      },
+      "lastError": null,
+      "startedAt": "2026-04-07T17:00:38.158Z",
+      "completedAt": "2026-04-07T17:00:38.290Z"
     },
     "VERIFY_API:apigee-hello": {
       "actionId": "VERIFY_API:apigee-hello",
       "kind": "VERIFY_API",
       "sourceId": "apigee-hello",
       "plannedStatus": "READY",
-      "status": "MANUAL_REVIEW",
+      "status": "FAILED",
       "dependencies": [
         "UPSERT_API:apigee-hello"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "dependency not satisfied: UPSERT_API:apigee-hello=MANUAL_REVIEW",
-      "startedAt": null,
-      "completedAt": "2026-04-07T16:27:19.478Z"
+      "lastError": "API apigee-hello is missing plan Keyless Plan",
+      "startedAt": "2026-04-07T17:00:38.292Z",
+      "completedAt": "2026-04-07T17:00:38.414Z"
     },
     "UPSERT_API:car-makes-api-3": {
       "actionId": "UPSERT_API:car-makes-api-3",
       "kind": "UPSERT_API",
       "sourceId": "car-makes-api-3",
       "plannedStatus": "READY",
-      "status": "MANUAL_REVIEW",
+      "status": "SUCCEEDED",
       "dependencies": [],
-      "targetIds": {},
-      "reconcileHints": {},
-      "lastError": "v4-management-full -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 400: {\"httpStatus\":400,\"message\":\"Path [/] already exists\",\"parameters\":{},\"details\":[]} | v4-management-shell -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 400: {\"httpStatus\":400,\"message\":\"Path [/] already exists\",\"parameters\":{},\"details\":[]} | legacy-import-wrapper -> POST http://localhost:8083/management/organizations/DEFAULT/environments/DEFAULT/apis/import → HTTP 500: {\"message\":\"Cannot invoke \\\"io.gravitee.definition.model.Proxy.getVirtualHosts()\\\" because the return value of \\\"io.gravitee.rest.api.model.api.UpdateApiEntity.getProxy()\\\" is null\",\"http_status\":500}",
-      "startedAt": "2026-04-07T16:27:19.478Z",
-      "completedAt": "2026-04-07T16:27:26.989Z"
+      "targetIds": {
+        "apiId": "7a9e5d4e-ed28-445e-9e5d-4eed28945edc"
+      },
+      "reconcileHints": {
+        "apiId": "7a9e5d4e-ed28-445e-9e5d-4eed28945edc"
+      },
+      "lastError": null,
+      "startedAt": "2026-04-07T17:00:38.416Z",
+      "completedAt": "2026-04-07T17:00:38.544Z"
     },
     "VERIFY_API:car-makes-api-3": {
       "actionId": "VERIFY_API:car-makes-api-3",
       "kind": "VERIFY_API",
       "sourceId": "car-makes-api-3",
       "plannedStatus": "READY",
-      "status": "MANUAL_REVIEW",
+      "status": "FAILED",
       "dependencies": [
         "UPSERT_API:car-makes-api-3"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "dependency not satisfied: UPSERT_API:car-makes-api-3=MANUAL_REVIEW",
-      "startedAt": null,
-      "completedAt": "2026-04-07T16:27:26.992Z"
+      "lastError": "API car-makes-api-3 is missing plan Keyless Plan",
+      "startedAt": "2026-04-07T17:00:38.546Z",
+      "completedAt": "2026-04-07T17:00:38.669Z"
     },
     "UPSERT_API:cat-fact-api-2": {
       "actionId": "UPSERT_API:cat-fact-api-2",
       "kind": "UPSERT_API",
       "sourceId": "cat-fact-api-2",
       "plannedStatus": "READY",
-      "status": "MANUAL_REVIEW",
+      "status": "SUCCEEDED",
       "dependencies": [],
-      "targetIds": {},
-      "reconcileHints": {},
-      "lastError": "v4-management-full -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 400: {\"httpStatus\":400,\"message\":\"Path [/] already exists\",\"parameters\":{},\"details\":[]} | v4-management-shell -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 400: {\"httpStatus\":400,\"message\":\"Path [/] already exists\",\"parameters\":{},\"details\":[]} | legacy-import-wrapper -> POST http://localhost:8083/management/organizations/DEFAULT/environments/DEFAULT/apis/import → HTTP 500: {\"message\":\"Cannot invoke \\\"io.gravitee.definition.model.Proxy.getVirtualHosts()\\\" because the return value of \\\"io.gravitee.rest.api.model.api.UpdateApiEntity.getProxy()\\\" is null\",\"http_status\":500}",
-      "startedAt": "2026-04-07T16:27:26.993Z",
-      "completedAt": "2026-04-07T16:27:34.512Z"
+      "targetIds": {
+        "apiId": "6b42476b-9122-41bd-8247-6b912281bd31"
+      },
+      "reconcileHints": {
+        "apiId": "6b42476b-9122-41bd-8247-6b912281bd31"
+      },
+      "lastError": null,
+      "startedAt": "2026-04-07T17:00:38.672Z",
+      "completedAt": "2026-04-07T17:00:38.796Z"
     },
     "VERIFY_API:cat-fact-api-2": {
       "actionId": "VERIFY_API:cat-fact-api-2",
       "kind": "VERIFY_API",
       "sourceId": "cat-fact-api-2",
       "plannedStatus": "READY",
-      "status": "MANUAL_REVIEW",
+      "status": "FAILED",
       "dependencies": [
         "UPSERT_API:cat-fact-api-2"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "dependency not satisfied: UPSERT_API:cat-fact-api-2=MANUAL_REVIEW",
-      "startedAt": null,
-      "completedAt": "2026-04-07T16:27:34.515Z"
+      "lastError": "API cat-fact-api-2 is missing plan Keyless Plan",
+      "startedAt": "2026-04-07T17:00:38.799Z",
+      "completedAt": "2026-04-07T17:00:38.920Z"
     },
     "UPSERT_API:cats-api-7": {
       "actionId": "UPSERT_API:cats-api-7",
       "kind": "UPSERT_API",
       "sourceId": "cats-api-7",
       "plannedStatus": "READY",
-      "status": "MANUAL_REVIEW",
+      "status": "SUCCEEDED",
       "dependencies": [],
-      "targetIds": {},
-      "reconcileHints": {},
-      "lastError": "v4-management-full -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 400: {\"httpStatus\":400,\"message\":\"Path [/] already exists\",\"parameters\":{},\"details\":[]} | v4-management-shell -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 400: {\"httpStatus\":400,\"message\":\"Path [/] already exists\",\"parameters\":{},\"details\":[]} | legacy-import-wrapper -> POST http://localhost:8083/management/organizations/DEFAULT/environments/DEFAULT/apis/import → HTTP 500: {\"message\":\"Cannot invoke \\\"io.gravitee.definition.model.Proxy.getVirtualHosts()\\\" because the return value of \\\"io.gravitee.rest.api.model.api.UpdateApiEntity.getProxy()\\\" is null\",\"http_status\":500}",
-      "startedAt": "2026-04-07T16:27:34.515Z",
-      "completedAt": "2026-04-07T16:27:42.040Z"
+      "targetIds": {
+        "apiId": "8e08bdaf-1c6f-410d-88bd-af1c6f110d63"
+      },
+      "reconcileHints": {
+        "apiId": "8e08bdaf-1c6f-410d-88bd-af1c6f110d63"
+      },
+      "lastError": null,
+      "startedAt": "2026-04-07T17:00:38.923Z",
+      "completedAt": "2026-04-07T17:00:39.049Z"
     },
     "VERIFY_API:cats-api-7": {
       "actionId": "VERIFY_API:cats-api-7",
       "kind": "VERIFY_API",
       "sourceId": "cats-api-7",
       "plannedStatus": "READY",
-      "status": "MANUAL_REVIEW",
+      "status": "FAILED",
       "dependencies": [
         "UPSERT_API:cats-api-7"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "dependency not satisfied: UPSERT_API:cats-api-7=MANUAL_REVIEW",
-      "startedAt": null,
-      "completedAt": "2026-04-07T16:27:42.043Z"
+      "lastError": "API cats-api-7 is missing plan API Key Plan",
+      "startedAt": "2026-04-07T17:00:39.051Z",
+      "completedAt": "2026-04-07T17:00:39.174Z"
     },
     "UPSERT_API:chuck-norris-api-10": {
       "actionId": "UPSERT_API:chuck-norris-api-10",
       "kind": "UPSERT_API",
       "sourceId": "chuck-norris-api-10",
       "plannedStatus": "READY",
-      "status": "MANUAL_REVIEW",
+      "status": "SUCCEEDED",
       "dependencies": [],
-      "targetIds": {},
-      "reconcileHints": {},
-      "lastError": "v4-management-full -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 400: {\"httpStatus\":400,\"message\":\"Path [/] already exists\",\"parameters\":{},\"details\":[]} | v4-management-shell -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 400: {\"httpStatus\":400,\"message\":\"Path [/] already exists\",\"parameters\":{},\"details\":[]} | legacy-import-wrapper -> POST http://localhost:8083/management/organizations/DEFAULT/environments/DEFAULT/apis/import → HTTP 500: {\"message\":\"Cannot invoke \\\"io.gravitee.definition.model.Proxy.getVirtualHosts()\\\" because the return value of \\\"io.gravitee.rest.api.model.api.UpdateApiEntity.getProxy()\\\" is null\",\"http_status\":500}",
-      "startedAt": "2026-04-07T16:27:42.043Z",
-      "completedAt": "2026-04-07T16:27:49.558Z"
+      "targetIds": {
+        "apiId": "9cb04593-783f-45b6-b045-93783f65b6b1"
+      },
+      "reconcileHints": {
+        "apiId": "9cb04593-783f-45b6-b045-93783f65b6b1"
+      },
+      "lastError": null,
+      "startedAt": "2026-04-07T17:00:39.176Z",
+      "completedAt": "2026-04-07T17:00:39.305Z"
     },
     "VERIFY_API:chuck-norris-api-10": {
       "actionId": "VERIFY_API:chuck-norris-api-10",
       "kind": "VERIFY_API",
       "sourceId": "chuck-norris-api-10",
       "plannedStatus": "READY",
-      "status": "MANUAL_REVIEW",
+      "status": "FAILED",
       "dependencies": [
         "UPSERT_API:chuck-norris-api-10"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "dependency not satisfied: UPSERT_API:chuck-norris-api-10=MANUAL_REVIEW",
-      "startedAt": null,
-      "completedAt": "2026-04-07T16:27:49.560Z"
+      "lastError": "API chuck-norris-api-10 is missing plan API Key Plan",
+      "startedAt": "2026-04-07T17:00:39.307Z",
+      "completedAt": "2026-04-07T17:00:39.427Z"
     },
     "UPSERT_API:dog-breeds-api-6": {
       "actionId": "UPSERT_API:dog-breeds-api-6",
       "kind": "UPSERT_API",
       "sourceId": "dog-breeds-api-6",
       "plannedStatus": "READY",
-      "status": "MANUAL_REVIEW",
+      "status": "SUCCEEDED",
       "dependencies": [],
-      "targetIds": {},
-      "reconcileHints": {},
-      "lastError": "v4-management-full -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 400: {\"httpStatus\":400,\"message\":\"Path [/] already exists\",\"parameters\":{},\"details\":[]} | v4-management-shell -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 400: {\"httpStatus\":400,\"message\":\"Path [/] already exists\",\"parameters\":{},\"details\":[]} | legacy-import-wrapper -> POST http://localhost:8083/management/organizations/DEFAULT/environments/DEFAULT/apis/import → HTTP 500: {\"message\":\"Cannot invoke \\\"io.gravitee.definition.model.Proxy.getVirtualHosts()\\\" because the return value of \\\"io.gravitee.rest.api.model.api.UpdateApiEntity.getProxy()\\\" is null\",\"http_status\":500}",
-      "startedAt": "2026-04-07T16:27:49.560Z",
-      "completedAt": "2026-04-07T16:27:57.068Z"
+      "targetIds": {
+        "apiId": "bbdd37c7-8e91-4caa-9d37-c78e91ecaa1a"
+      },
+      "reconcileHints": {
+        "apiId": "bbdd37c7-8e91-4caa-9d37-c78e91ecaa1a"
+      },
+      "lastError": null,
+      "startedAt": "2026-04-07T17:00:39.430Z",
+      "completedAt": "2026-04-07T17:00:39.556Z"
     },
     "VERIFY_API:dog-breeds-api-6": {
       "actionId": "VERIFY_API:dog-breeds-api-6",
       "kind": "VERIFY_API",
       "sourceId": "dog-breeds-api-6",
       "plannedStatus": "READY",
-      "status": "MANUAL_REVIEW",
+      "status": "FAILED",
       "dependencies": [
         "UPSERT_API:dog-breeds-api-6"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "dependency not satisfied: UPSERT_API:dog-breeds-api-6=MANUAL_REVIEW",
-      "startedAt": null,
-      "completedAt": "2026-04-07T16:27:57.071Z"
+      "lastError": "API dog-breeds-api-6 is missing plan API Key Plan",
+      "startedAt": "2026-04-07T17:00:39.558Z",
+      "completedAt": "2026-04-07T17:00:39.677Z"
     },
     "UPSERT_API:get-kvm-proxy": {
       "actionId": "UPSERT_API:get-kvm-proxy",
@@ -337,9 +361,9 @@
       "dependencies": [],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "v4-management-full -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 400: {\"httpStatus\":400,\"message\":\"Path [/] already exists\",\"parameters\":{},\"details\":[]} | v4-management-shell -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 400: {\"httpStatus\":400,\"message\":\"Path [/] already exists\",\"parameters\":{},\"details\":[]} | legacy-import-wrapper -> POST http://localhost:8083/management/organizations/DEFAULT/environments/DEFAULT/apis/import → HTTP 500: {\"message\":\"Cannot invoke \\\"io.gravitee.definition.model.Proxy.getVirtualHosts()\\\" because the return value of \\\"io.gravitee.rest.api.model.api.UpdateApiEntity.getProxy()\\\" is null\",\"http_status\":500}",
-      "startedAt": "2026-04-07T16:27:57.071Z",
-      "completedAt": "2026-04-07T16:28:04.587Z"
+      "lastError": "v4-management-full -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 404: {\"httpStatus\":404,\"message\":\"Plugin [assign-attributes] cannot be found.\",\"technicalCode\":\"plugin.notFound\",\"parameters\":{\"plugin\":\"assign-attributes\"},\"details\":[]} | v4-management-shell -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 404: {\"httpStatus\":404,\"message\":\"Plugin [assign-attributes] cannot be found.\",\"technicalCode\":\"plugin.notFound\",\"parameters\":{\"plugin\":\"assign-attributes\"},\"details\":[]} | legacy-import-wrapper -> POST http://localhost:8083/management/organizations/DEFAULT/environments/DEFAULT/apis/import → HTTP 500: {\"message\":\"Cannot invoke \\\"io.gravitee.definition.model.Proxy.getVirtualHosts()\\\" because the return value of \\\"io.gravitee.rest.api.model.api.UpdateApiEntity.getProxy()\\\" is null\",\"http_status\":500}",
+      "startedAt": "2026-04-07T17:00:39.679Z",
+      "completedAt": "2026-04-07T17:00:47.201Z"
     },
     "VERIFY_API:get-kvm-proxy": {
       "actionId": "VERIFY_API:get-kvm-proxy",
@@ -354,63 +378,71 @@
       "reconcileHints": {},
       "lastError": "dependency not satisfied: UPSERT_API:get-kvm-proxy=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-07T16:28:04.591Z"
+      "completedAt": "2026-04-07T17:00:47.204Z"
     },
     "UPSERT_API:harry-potter-characters": {
       "actionId": "UPSERT_API:harry-potter-characters",
       "kind": "UPSERT_API",
       "sourceId": "harry-potter-characters",
       "plannedStatus": "READY",
-      "status": "MANUAL_REVIEW",
+      "status": "SUCCEEDED",
       "dependencies": [],
-      "targetIds": {},
-      "reconcileHints": {},
-      "lastError": "v4-management-full -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 400: {\"httpStatus\":400,\"message\":\"Path [/] already exists\",\"parameters\":{},\"details\":[]} | v4-management-shell -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 400: {\"httpStatus\":400,\"message\":\"Path [/] already exists\",\"parameters\":{},\"details\":[]} | legacy-import-wrapper -> POST http://localhost:8083/management/organizations/DEFAULT/environments/DEFAULT/apis/import → HTTP 500: {\"message\":\"Cannot invoke \\\"io.gravitee.definition.model.Proxy.getVirtualHosts()\\\" because the return value of \\\"io.gravitee.rest.api.model.api.UpdateApiEntity.getProxy()\\\" is null\",\"http_status\":500}",
-      "startedAt": "2026-04-07T16:28:04.591Z",
-      "completedAt": "2026-04-07T16:28:12.110Z"
+      "targetIds": {
+        "apiId": "195dd8c5-9e6e-4911-9dd8-c59e6e89116f"
+      },
+      "reconcileHints": {
+        "apiId": "195dd8c5-9e6e-4911-9dd8-c59e6e89116f"
+      },
+      "lastError": null,
+      "startedAt": "2026-04-07T17:00:47.205Z",
+      "completedAt": "2026-04-07T17:00:47.339Z"
     },
     "VERIFY_API:harry-potter-characters": {
       "actionId": "VERIFY_API:harry-potter-characters",
       "kind": "VERIFY_API",
       "sourceId": "harry-potter-characters",
       "plannedStatus": "READY",
-      "status": "MANUAL_REVIEW",
+      "status": "FAILED",
       "dependencies": [
         "UPSERT_API:harry-potter-characters"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "dependency not satisfied: UPSERT_API:harry-potter-characters=MANUAL_REVIEW",
-      "startedAt": null,
-      "completedAt": "2026-04-07T16:28:12.113Z"
+      "lastError": "API harry-potter-characters is missing plan Keyless Plan",
+      "startedAt": "2026-04-07T17:00:47.341Z",
+      "completedAt": "2026-04-07T17:00:47.467Z"
     },
     "UPSERT_API:hogwarts-houses-api-8": {
       "actionId": "UPSERT_API:hogwarts-houses-api-8",
       "kind": "UPSERT_API",
       "sourceId": "hogwarts-houses-api-8",
       "plannedStatus": "READY",
-      "status": "MANUAL_REVIEW",
+      "status": "SUCCEEDED",
       "dependencies": [],
-      "targetIds": {},
-      "reconcileHints": {},
-      "lastError": "v4-management-full -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 400: {\"httpStatus\":400,\"message\":\"Path [/] already exists\",\"parameters\":{},\"details\":[]} | v4-management-shell -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 400: {\"httpStatus\":400,\"message\":\"Path [/] already exists\",\"parameters\":{},\"details\":[]} | legacy-import-wrapper -> POST http://localhost:8083/management/organizations/DEFAULT/environments/DEFAULT/apis/import → HTTP 500: {\"message\":\"Cannot invoke \\\"io.gravitee.definition.model.Proxy.getVirtualHosts()\\\" because the return value of \\\"io.gravitee.rest.api.model.api.UpdateApiEntity.getProxy()\\\" is null\",\"http_status\":500}",
-      "startedAt": "2026-04-07T16:28:12.113Z",
-      "completedAt": "2026-04-07T16:28:19.627Z"
+      "targetIds": {
+        "apiId": "1a8c77e6-7557-4c2b-8c77-e675575c2b3b"
+      },
+      "reconcileHints": {
+        "apiId": "1a8c77e6-7557-4c2b-8c77-e675575c2b3b"
+      },
+      "lastError": null,
+      "startedAt": "2026-04-07T17:00:47.469Z",
+      "completedAt": "2026-04-07T17:00:47.608Z"
     },
     "VERIFY_API:hogwarts-houses-api-8": {
       "actionId": "VERIFY_API:hogwarts-houses-api-8",
       "kind": "VERIFY_API",
       "sourceId": "hogwarts-houses-api-8",
       "plannedStatus": "READY",
-      "status": "MANUAL_REVIEW",
+      "status": "FAILED",
       "dependencies": [
         "UPSERT_API:hogwarts-houses-api-8"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "dependency not satisfied: UPSERT_API:hogwarts-houses-api-8=MANUAL_REVIEW",
-      "startedAt": null,
-      "completedAt": "2026-04-07T16:28:19.630Z"
+      "lastError": "API hogwarts-houses-api-8 is missing plan API Key Plan",
+      "startedAt": "2026-04-07T17:00:47.610Z",
+      "completedAt": "2026-04-07T17:00:47.736Z"
     },
     "UPSERT_API:kanye-rest-api-5": {
       "actionId": "UPSERT_API:kanye-rest-api-5",
@@ -421,9 +453,9 @@
       "dependencies": [],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "v4-management-full -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 400: {\"httpStatus\":400,\"message\":\"Path [/] already exists\",\"parameters\":{},\"details\":[]} | v4-management-shell -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 400: {\"httpStatus\":400,\"message\":\"Path [/] already exists\",\"parameters\":{},\"details\":[]} | legacy-import-wrapper -> POST http://localhost:8083/management/organizations/DEFAULT/environments/DEFAULT/apis/import → HTTP 500: {\"message\":\"Cannot invoke \\\"io.gravitee.definition.model.Proxy.getVirtualHosts()\\\" because the return value of \\\"io.gravitee.rest.api.model.api.UpdateApiEntity.getProxy()\\\" is null\",\"http_status\":500}",
-      "startedAt": "2026-04-07T16:28:19.630Z",
-      "completedAt": "2026-04-07T16:28:27.135Z"
+      "lastError": "v4-management-full -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 404: {\"httpStatus\":404,\"message\":\"Plugin [assign-attributes] cannot be found.\",\"technicalCode\":\"plugin.notFound\",\"parameters\":{\"plugin\":\"assign-attributes\"},\"details\":[]} | v4-management-shell -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 404: {\"httpStatus\":404,\"message\":\"Plugin [assign-attributes] cannot be found.\",\"technicalCode\":\"plugin.notFound\",\"parameters\":{\"plugin\":\"assign-attributes\"},\"details\":[]} | legacy-import-wrapper -> POST http://localhost:8083/management/organizations/DEFAULT/environments/DEFAULT/apis/import → HTTP 500: {\"message\":\"Cannot invoke \\\"io.gravitee.definition.model.Proxy.getVirtualHosts()\\\" because the return value of \\\"io.gravitee.rest.api.model.api.UpdateApiEntity.getProxy()\\\" is null\",\"http_status\":500}",
+      "startedAt": "2026-04-07T17:00:47.738Z",
+      "completedAt": "2026-04-07T17:00:55.252Z"
     },
     "VERIFY_API:kanye-rest-api-5": {
       "actionId": "VERIFY_API:kanye-rest-api-5",
@@ -438,7 +470,7 @@
       "reconcileHints": {},
       "lastError": "dependency not satisfied: UPSERT_API:kanye-rest-api-5=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-07T16:28:27.138Z"
+      "completedAt": "2026-04-07T17:00:55.255Z"
     },
     "UPSERT_API:kvm-test": {
       "actionId": "UPSERT_API:kvm-test",
@@ -449,9 +481,9 @@
       "dependencies": [],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "v4-management-full -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 400: {\"httpStatus\":400,\"message\":\"Path [/] already exists\",\"parameters\":{},\"details\":[]} | v4-management-shell -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 400: {\"httpStatus\":400,\"message\":\"Path [/] already exists\",\"parameters\":{},\"details\":[]} | legacy-import-wrapper -> POST http://localhost:8083/management/organizations/DEFAULT/environments/DEFAULT/apis/import → HTTP 500: {\"message\":\"Cannot invoke \\\"io.gravitee.definition.model.Proxy.getVirtualHosts()\\\" because the return value of \\\"io.gravitee.rest.api.model.api.UpdateApiEntity.getProxy()\\\" is null\",\"http_status\":500}",
-      "startedAt": "2026-04-07T16:28:27.138Z",
-      "completedAt": "2026-04-07T16:28:34.651Z"
+      "lastError": "v4-management-full -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 404: {\"httpStatus\":404,\"message\":\"Plugin [assign-attributes] cannot be found.\",\"technicalCode\":\"plugin.notFound\",\"parameters\":{\"plugin\":\"assign-attributes\"},\"details\":[]} | v4-management-shell -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 404: {\"httpStatus\":404,\"message\":\"Plugin [assign-attributes] cannot be found.\",\"technicalCode\":\"plugin.notFound\",\"parameters\":{\"plugin\":\"assign-attributes\"},\"details\":[]} | legacy-import-wrapper -> POST http://localhost:8083/management/organizations/DEFAULT/environments/DEFAULT/apis/import → HTTP 500: {\"message\":\"Cannot invoke \\\"io.gravitee.definition.model.Proxy.getVirtualHosts()\\\" because the return value of \\\"io.gravitee.rest.api.model.api.UpdateApiEntity.getProxy()\\\" is null\",\"http_status\":500}",
+      "startedAt": "2026-04-07T17:00:55.255Z",
+      "completedAt": "2026-04-07T17:01:02.766Z"
     },
     "VERIFY_API:kvm-test": {
       "actionId": "VERIFY_API:kvm-test",
@@ -466,203 +498,207 @@
       "reconcileHints": {},
       "lastError": "dependency not satisfied: UPSERT_API:kvm-test=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-07T16:28:34.654Z"
+      "completedAt": "2026-04-07T17:01:02.769Z"
     },
     "UPSERT_API:load-balance-target-servers-api": {
       "actionId": "UPSERT_API:load-balance-target-servers-api",
       "kind": "UPSERT_API",
       "sourceId": "load-balance-target-servers-api",
       "plannedStatus": "READY",
-      "status": "MANUAL_REVIEW",
+      "status": "SUCCEEDED",
       "dependencies": [],
-      "targetIds": {},
-      "reconcileHints": {},
-      "lastError": "v4-management-full -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 400: {\"httpStatus\":400,\"message\":\"Path [/] already exists\",\"parameters\":{},\"details\":[]} | v4-management-shell -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 400: {\"httpStatus\":400,\"message\":\"Path [/] already exists\",\"parameters\":{},\"details\":[]} | legacy-import-wrapper -> POST http://localhost:8083/management/organizations/DEFAULT/environments/DEFAULT/apis/import → HTTP 500: {\"message\":\"Cannot invoke \\\"io.gravitee.definition.model.Proxy.getVirtualHosts()\\\" because the return value of \\\"io.gravitee.rest.api.model.api.UpdateApiEntity.getProxy()\\\" is null\",\"http_status\":500}",
-      "startedAt": "2026-04-07T16:28:34.654Z",
-      "completedAt": "2026-04-07T16:28:42.182Z"
+      "targetIds": {
+        "apiId": "d273efb7-b8d6-4685-b3ef-b7b8d6468598"
+      },
+      "reconcileHints": {
+        "apiId": "d273efb7-b8d6-4685-b3ef-b7b8d6468598"
+      },
+      "lastError": null,
+      "startedAt": "2026-04-07T17:01:02.769Z",
+      "completedAt": "2026-04-07T17:01:02.900Z"
     },
     "VERIFY_API:load-balance-target-servers-api": {
       "actionId": "VERIFY_API:load-balance-target-servers-api",
       "kind": "VERIFY_API",
       "sourceId": "load-balance-target-servers-api",
       "plannedStatus": "READY",
-      "status": "MANUAL_REVIEW",
+      "status": "FAILED",
       "dependencies": [
         "UPSERT_API:load-balance-target-servers-api"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "dependency not satisfied: UPSERT_API:load-balance-target-servers-api=MANUAL_REVIEW",
-      "startedAt": null,
-      "completedAt": "2026-04-07T16:28:42.185Z"
+      "lastError": "API load-balance-target-servers-api is missing plan Keyless Plan",
+      "startedAt": "2026-04-07T17:01:02.903Z",
+      "completedAt": "2026-04-07T17:01:03.023Z"
     },
     "UPSERT_API:mock-target-api": {
       "actionId": "UPSERT_API:mock-target-api",
       "kind": "UPSERT_API",
       "sourceId": "mock-target-api",
       "plannedStatus": "READY",
-      "status": "MANUAL_REVIEW",
+      "status": "PENDING",
       "dependencies": [],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "v4-management-full -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 400: {\"httpStatus\":400,\"message\":\"Path [/] already exists\",\"parameters\":{},\"details\":[]} | v4-management-shell -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 400: {\"httpStatus\":400,\"message\":\"Path [/] already exists\",\"parameters\":{},\"details\":[]} | legacy-import-wrapper -> POST http://localhost:8083/management/organizations/DEFAULT/environments/DEFAULT/apis/import → HTTP 500: {\"message\":\"Cannot invoke \\\"io.gravitee.definition.model.Proxy.getVirtualHosts()\\\" because the return value of \\\"io.gravitee.rest.api.model.api.UpdateApiEntity.getProxy()\\\" is null\",\"http_status\":500}",
-      "startedAt": "2026-04-07T16:28:42.185Z",
-      "completedAt": "2026-04-07T16:28:49.694Z"
+      "lastError": null,
+      "startedAt": null,
+      "completedAt": null
     },
     "VERIFY_API:mock-target-api": {
       "actionId": "VERIFY_API:mock-target-api",
       "kind": "VERIFY_API",
       "sourceId": "mock-target-api",
       "plannedStatus": "READY",
-      "status": "MANUAL_REVIEW",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_API:mock-target-api"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "dependency not satisfied: UPSERT_API:mock-target-api=MANUAL_REVIEW",
+      "lastError": null,
       "startedAt": null,
-      "completedAt": "2026-04-07T16:28:49.698Z"
+      "completedAt": null
     },
     "UPSERT_API:proxy-sharedflow-api-11": {
       "actionId": "UPSERT_API:proxy-sharedflow-api-11",
       "kind": "UPSERT_API",
       "sourceId": "proxy-sharedflow-api-11",
       "plannedStatus": "READY",
-      "status": "MANUAL_REVIEW",
+      "status": "PENDING",
       "dependencies": [],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "v4-management-full -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 400: {\"httpStatus\":400,\"message\":\"Path [/] already exists\",\"parameters\":{},\"details\":[]} | v4-management-shell -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 400: {\"httpStatus\":400,\"message\":\"Path [/] already exists\",\"parameters\":{},\"details\":[]} | legacy-import-wrapper -> POST http://localhost:8083/management/organizations/DEFAULT/environments/DEFAULT/apis/import → HTTP 500: {\"message\":\"Cannot invoke \\\"io.gravitee.definition.model.Proxy.getVirtualHosts()\\\" because the return value of \\\"io.gravitee.rest.api.model.api.UpdateApiEntity.getProxy()\\\" is null\",\"http_status\":500}",
-      "startedAt": "2026-04-07T16:28:49.698Z",
-      "completedAt": "2026-04-07T16:28:57.214Z"
+      "lastError": null,
+      "startedAt": null,
+      "completedAt": null
     },
     "VERIFY_API:proxy-sharedflow-api-11": {
       "actionId": "VERIFY_API:proxy-sharedflow-api-11",
       "kind": "VERIFY_API",
       "sourceId": "proxy-sharedflow-api-11",
       "plannedStatus": "READY",
-      "status": "MANUAL_REVIEW",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_API:proxy-sharedflow-api-11"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "dependency not satisfied: UPSERT_API:proxy-sharedflow-api-11=MANUAL_REVIEW",
+      "lastError": null,
       "startedAt": null,
-      "completedAt": "2026-04-07T16:28:57.217Z"
+      "completedAt": null
     },
     "UPSERT_API:v1-ships": {
       "actionId": "UPSERT_API:v1-ships",
       "kind": "UPSERT_API",
       "sourceId": "v1-ships",
       "plannedStatus": "READY",
-      "status": "MANUAL_REVIEW",
+      "status": "PENDING",
       "dependencies": [],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "v4-management-full -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 400: {\"httpStatus\":400,\"message\":\"Path [/] already exists\",\"parameters\":{},\"details\":[]} | v4-management-shell -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 400: {\"httpStatus\":400,\"message\":\"Path [/] already exists\",\"parameters\":{},\"details\":[]} | legacy-import-wrapper -> POST http://localhost:8083/management/organizations/DEFAULT/environments/DEFAULT/apis/import → HTTP 500: {\"message\":\"Cannot invoke \\\"io.gravitee.definition.model.Proxy.getVirtualHosts()\\\" because the return value of \\\"io.gravitee.rest.api.model.api.UpdateApiEntity.getProxy()\\\" is null\",\"http_status\":500}",
-      "startedAt": "2026-04-07T16:28:57.218Z",
-      "completedAt": "2026-04-07T16:29:04.720Z"
+      "lastError": null,
+      "startedAt": null,
+      "completedAt": null
     },
     "VERIFY_API:v1-ships": {
       "actionId": "VERIFY_API:v1-ships",
       "kind": "VERIFY_API",
       "sourceId": "v1-ships",
       "plannedStatus": "READY",
-      "status": "MANUAL_REVIEW",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_API:v1-ships"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "dependency not satisfied: UPSERT_API:v1-ships=MANUAL_REVIEW",
+      "lastError": null,
       "startedAt": null,
-      "completedAt": "2026-04-07T16:29:04.723Z"
+      "completedAt": null
     },
     "UPSERT_API:villian-chain": {
       "actionId": "UPSERT_API:villian-chain",
       "kind": "UPSERT_API",
       "sourceId": "villian-chain",
       "plannedStatus": "READY",
-      "status": "MANUAL_REVIEW",
+      "status": "PENDING",
       "dependencies": [],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "v4-management-full -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 400: {\"httpStatus\":400,\"message\":\"Path [/] already exists\",\"parameters\":{},\"details\":[]} | v4-management-shell -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 400: {\"httpStatus\":400,\"message\":\"Path [/] already exists\",\"parameters\":{},\"details\":[]} | legacy-import-wrapper -> POST http://localhost:8083/management/organizations/DEFAULT/environments/DEFAULT/apis/import → HTTP 500: {\"message\":\"Cannot invoke \\\"io.gravitee.definition.model.Proxy.getVirtualHosts()\\\" because the return value of \\\"io.gravitee.rest.api.model.api.UpdateApiEntity.getProxy()\\\" is null\",\"http_status\":500}",
-      "startedAt": "2026-04-07T16:29:04.723Z",
-      "completedAt": "2026-04-07T16:29:12.240Z"
+      "lastError": null,
+      "startedAt": null,
+      "completedAt": null
     },
     "VERIFY_API:villian-chain": {
       "actionId": "VERIFY_API:villian-chain",
       "kind": "VERIFY_API",
       "sourceId": "villian-chain",
       "plannedStatus": "READY",
-      "status": "MANUAL_REVIEW",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_API:villian-chain"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "dependency not satisfied: UPSERT_API:villian-chain=MANUAL_REVIEW",
+      "lastError": null,
       "startedAt": null,
-      "completedAt": "2026-04-07T16:29:12.244Z"
+      "completedAt": null
     },
     "UPSERT_API:wizards-api-9": {
       "actionId": "UPSERT_API:wizards-api-9",
       "kind": "UPSERT_API",
       "sourceId": "wizards-api-9",
       "plannedStatus": "READY",
-      "status": "MANUAL_REVIEW",
+      "status": "PENDING",
       "dependencies": [],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "v4-management-full -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 400: {\"httpStatus\":400,\"message\":\"Path [/] already exists\",\"parameters\":{},\"details\":[]} | v4-management-shell -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 400: {\"httpStatus\":400,\"message\":\"Path [/] already exists\",\"parameters\":{},\"details\":[]} | legacy-import-wrapper -> POST http://localhost:8083/management/organizations/DEFAULT/environments/DEFAULT/apis/import → HTTP 500: {\"message\":\"Cannot invoke \\\"io.gravitee.definition.model.Proxy.getVirtualHosts()\\\" because the return value of \\\"io.gravitee.rest.api.model.api.UpdateApiEntity.getProxy()\\\" is null\",\"http_status\":500}",
-      "startedAt": "2026-04-07T16:29:12.244Z",
-      "completedAt": "2026-04-07T16:29:19.752Z"
+      "lastError": null,
+      "startedAt": null,
+      "completedAt": null
     },
     "VERIFY_API:wizards-api-9": {
       "actionId": "VERIFY_API:wizards-api-9",
       "kind": "VERIFY_API",
       "sourceId": "wizards-api-9",
       "plannedStatus": "READY",
-      "status": "MANUAL_REVIEW",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_API:wizards-api-9"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "dependency not satisfied: UPSERT_API:wizards-api-9=MANUAL_REVIEW",
+      "lastError": null,
       "startedAt": null,
-      "completedAt": "2026-04-07T16:29:19.755Z"
+      "completedAt": null
     },
     "UPSERT_API:yes-or-no-api-4": {
       "actionId": "UPSERT_API:yes-or-no-api-4",
       "kind": "UPSERT_API",
       "sourceId": "yes-or-no-api-4",
       "plannedStatus": "READY",
-      "status": "MANUAL_REVIEW",
+      "status": "PENDING",
       "dependencies": [],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "v4-management-full -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 400: {\"httpStatus\":400,\"message\":\"Path [/] already exists\",\"parameters\":{},\"details\":[]} | v4-management-shell -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 400: {\"httpStatus\":400,\"message\":\"Path [/] already exists\",\"parameters\":{},\"details\":[]} | legacy-import-wrapper -> POST http://localhost:8083/management/organizations/DEFAULT/environments/DEFAULT/apis/import → HTTP 500: {\"message\":\"Cannot invoke \\\"io.gravitee.definition.model.Proxy.getVirtualHosts()\\\" because the return value of \\\"io.gravitee.rest.api.model.api.UpdateApiEntity.getProxy()\\\" is null\",\"http_status\":500}",
-      "startedAt": "2026-04-07T16:29:19.755Z",
-      "completedAt": "2026-04-07T16:29:27.271Z"
+      "lastError": null,
+      "startedAt": null,
+      "completedAt": null
     },
     "VERIFY_API:yes-or-no-api-4": {
       "actionId": "VERIFY_API:yes-or-no-api-4",
       "kind": "VERIFY_API",
       "sourceId": "yes-or-no-api-4",
       "plannedStatus": "READY",
-      "status": "MANUAL_REVIEW",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_API:yes-or-no-api-4"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "dependency not satisfied: UPSERT_API:yes-or-no-api-4=MANUAL_REVIEW",
+      "lastError": null,
       "startedAt": null,
-      "completedAt": "2026-04-07T16:29:27.274Z"
+      "completedAt": null
     }
   }
 }
