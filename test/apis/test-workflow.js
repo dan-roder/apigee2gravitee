@@ -77,6 +77,7 @@ function makeClient() {
       };
     },
     async listApis() { return Array.from(state.apis.values()); },
+    async getApi(apiId) { return state.apis.get(apiId) || null; },
     async findApiByName(name) { return Array.from(state.apis.values()).find((item) => item.name === name) || null; },
     async createApi(payload) {
       state.createApi += 1;

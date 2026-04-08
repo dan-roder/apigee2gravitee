@@ -703,31 +703,22 @@ class GraviteeClient {
   _normalizePlanPayload(payload) {
     const clone = this._clone(payload);
     const securityType = clone?.security?.type || clone?.security || 'KEY_LESS';
-    const securityDefinition = clone?.security?.configuration || clone?.securityDefinition || {};
-    const definition = typeof clone.definition === 'string'
-      ? clone.definition
-      : JSON.stringify({ '/': Array.isArray(clone.flows) ? clone.flows : [] });
+    const securityConfiguration = clone?.security?.configuration || {};
+    const normalizedSecurity = { type: securityType };
+    if (Object.keys(securityConfiguration).length > 0) {
+      normalizedSecurity.configuration = securityConfiguration;
+    }
 
     return {
+      definitionVersion: clone.definitionVersion || 'V4',
       name: clone.name,
       description: clone.description || '',
       validation: clone.validation || 'AUTO',
-      type: clone.type || 'API',
       status: clone.status || 'STAGING',
       mode: clone.mode || 'STANDARD',
-      order: Number.isFinite(clone.order) ? clone.order : 0,
       characteristics: clone.characteristics || [],
-      commentRequired: !!clone.commentRequired,
-      commentMessage: clone.commentMessage || '',
-      excludedGroups: clone.excludedGroups || [],
-      generalConditions: clone.generalConditions || '',
-      selectionRule: clone.selectionRule || '',
-      tags: clone.tags || [],
-      security: securityType,
-      securityDefinition: typeof securityDefinition === 'string'
-        ? securityDefinition
-        : JSON.stringify(securityDefinition),
-      definition,
+      security: normalizedSecurity,
+      flows: Array.isArray(clone.flows) ? clone.flows : [],
     };
   }
 

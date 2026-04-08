@@ -13,12 +13,29 @@ async function runApisReconcile(flags, deps = {}) {
   const mismatches = [];
 
   for (const proxy of result.domain.proxies) {
-    const target = await result.client.findApiByName(proxy.definition.name);
+    const expectedId = idMap.apis[proxy.sourceId];
+    let target = null;
+    if (expectedId && typeof result.client.getApi === 'function') {
+      try {
+        target = await result.client.getApi(expectedId);
+      } catch (_) {
+        target = null;
+      }
+    }
+    if (!target && typeof result.client.findApiBySourceId === 'function') {
+      try {
+        target = await result.client.findApiBySourceId(proxy.sourceId);
+      } catch (_) {
+        target = null;
+      }
+    }
+    if (!target) {
+      target = await result.client.findApiByName(proxy.definition.name);
+    }
     if (!target) {
       mismatches.push({ severity: 'blocker', code: 'API_MISSING', sourceId: proxy.sourceId, message: `API ${proxy.definition.name} is missing` });
       continue;
     }
-    const expectedId = idMap.apis[proxy.sourceId];
     if (expectedId && target.id !== expectedId) {
       mismatches.push({ severity: 'blocker', code: 'API_ID_MAP_MISMATCH', sourceId: proxy.sourceId, message: `API ${proxy.definition.name} resolved to ${target.id} instead of ${expectedId}` });
     }

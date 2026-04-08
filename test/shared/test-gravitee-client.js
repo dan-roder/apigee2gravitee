@@ -89,8 +89,9 @@ async function testCreateApiPlanNormalizesPlanPayload() {
   });
   assert.strictEqual(called.url, 'https://gravitee.example.com/management/v2/organizations/DEFAULT/environments/DEFAULT/apis/api-1/plans');
   assert.strictEqual(called.body.name, 'Keyless Plan');
-  assert.strictEqual(called.body.security, 'KEY_LESS');
-  assert.strictEqual(called.body.definition, '{"\/":[]}');
+  assert.strictEqual(called.body.definitionVersion, 'V4');
+  assert.deepStrictEqual(called.body.security, { type: 'KEY_LESS' });
+  assert.deepStrictEqual(called.body.flows, []);
 }
 
 async function run() {
