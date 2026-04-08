@@ -11,10 +11,31 @@ const {
 } = require('./state-store');
 const { prepareApisWorkflow, persistPlanningArtifacts } = require('./workflow');
 
+async function resolveTargetApi(proxy, action, result, idMap) {
+  const hintedApiId = action?.targetHint?.apiId || idMap?.apis?.[proxy.sourceId] || null;
+  if (hintedApiId && typeof result.client.getApi === 'function') {
+    try {
+      const api = await result.client.getApi(hintedApiId);
+      if (api) return api;
+    } catch (_) {
+      // Fall through to other lookup strategies.
+    }
+  }
+  if (typeof result.client.findApiBySourceId === 'function') {
+    try {
+      const api = await result.client.findApiBySourceId(proxy.sourceId);
+      if (api) return api;
+    } catch (_) {
+      // Fall back to name lookup.
+    }
+  }
+  return result.client.findApiByName(proxy.definition.name);
+}
+
 async function executeAction(action, result, idMap) {
   const proxy = result.domain.proxies.find((item) => item.sourceId === action.sourceId);
   if (action.kind === 'UPSERT_API') {
-    const existing = await result.client.findApiByName(proxy.definition.name);
+    const existing = await resolveTargetApi(proxy, action, result, idMap);
     const payload = {
       ...proxy.definition,
       crossId: proxy.sourceId,
@@ -39,7 +60,7 @@ async function executeAction(action, result, idMap) {
   }
 
   if (action.kind === 'UPSERT_PLAN') {
-    const api = await result.client.findApiByName(proxy.definition.name);
+    const api = await resolveTargetApi(proxy, action, result, idMap);
     if (!api) throw new Error(`API ${proxy.definition.name} was not found before plan import`);
     const planKey = action.payload.planKey;
     const planDefinition = proxy.definition.plans?.[planKey];
@@ -83,7 +104,7 @@ async function executeAction(action, result, idMap) {
   }
 
   if (action.kind === 'VERIFY_PLAN') {
-    const target = await result.client.findApiByName(proxy.definition.name);
+    const target = await resolveTargetApi(proxy, action, result, idMap);
     if (!target) throw new Error(`API ${proxy.definition.name} was not found`);
     const expectedName = action.payload.expectedName;
     const plan = await result.client.findApiPlanByName(target.id, expectedName);
@@ -95,7 +116,7 @@ async function executeAction(action, result, idMap) {
   }
 
   if (action.kind === 'VERIFY_API') {
-    const target = await result.client.findApiByName(proxy.definition.name);
+    const target = await resolveTargetApi(proxy, action, result, idMap);
     if (!target) throw new Error(`API ${proxy.definition.name} was not found`);
     setIdMapValue(idMap, action.kind, action.sourceId, target.id);
     return { apiId: target.id };
