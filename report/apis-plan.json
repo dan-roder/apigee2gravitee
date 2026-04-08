@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-07T19:33:15.709Z",
+  "generatedAt": "2026-04-08T17:41:45.212Z",
   "kind": "ApisMigrationManifest",
   "source": {
     "irDir": "/Users/daniel.roder/Sites/apigee2gravitee/ir",
@@ -4524,7 +4524,7 @@
         "SHARED_FLOW_REFS_PRESENT"
       ],
       "targetHint": {
-        "apiId": "6c993791-2e40-4dbd-9937-912e40edbd63"
+        "apiId": "92cebf29-465d-40ef-8ebf-29465d00eff9"
       }
     },
     {
@@ -4535,7 +4535,7 @@
         "UPSERT_API:apigee-hello-api-1"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "UPDATE",
       "lookup": {
         "sourceId": "apigee-hello-api-1",
         "name": "apigee-hello-api-1",
@@ -4560,7 +4560,9 @@
       "manualReviewReasons": [
         "SHARED_FLOW_REFS_PRESENT"
       ],
-      "targetHint": {}
+      "targetHint": {
+        "planId": "852a86a9-14a9-4c8b-aa86-a914a94c8b13"
+      }
     },
     {
       "actionId": "VERIFY_PLAN:apigee-hello-api-1:KEYLESS",
@@ -4700,7 +4702,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "apiId": "d42f4a24-a4bd-46ba-af4a-24a4bde6ba74"
+        "apiId": "2db40b83-a346-4552-b40b-83a34645528b"
       }
     },
     {
@@ -4711,7 +4713,7 @@
         "UPSERT_API:apigee-hello"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "UPDATE",
       "lookup": {
         "sourceId": "apigee-hello",
         "name": "apigee-hello",
@@ -4734,7 +4736,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "planId": "0e020d94-e25c-4714-820d-94e25ce71467"
+      }
     },
     {
       "actionId": "VERIFY_PLAN:apigee-hello:KEYLESS",
@@ -4870,7 +4874,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "apiId": "24c27776-60d0-4bc2-8277-7660d01bc283"
+        "apiId": "0719d4b5-9bc7-40dd-99d4-b59bc720ddce"
       }
     },
     {
@@ -4881,7 +4885,7 @@
         "UPSERT_API:car-makes-api-3"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "UPDATE",
       "lookup": {
         "sourceId": "car-makes-api-3",
         "name": "car-makes-api-3",
@@ -4904,7 +4908,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "planId": "a63acf42-589f-4f0f-bacf-42589f7f0ff3"
+      }
     },
     {
       "actionId": "VERIFY_PLAN:car-makes-api-3:KEYLESS",
@@ -5040,7 +5046,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "apiId": "35ee4c77-ea76-4880-ae4c-77ea76c88056"
+        "apiId": "81882689-0ed2-4e7c-8826-890ed2de7c58"
       }
     },
     {
@@ -5051,7 +5057,7 @@
         "UPSERT_API:cat-fact-api-2"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "UPDATE",
       "lookup": {
         "sourceId": "cat-fact-api-2",
         "name": "cat-fact-api-2",
@@ -5074,7 +5080,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "planId": "4ae6a39c-a88e-422c-a6a3-9ca88e822c5a"
+      }
     },
     {
       "actionId": "VERIFY_PLAN:cat-fact-api-2:KEYLESS",
@@ -5249,7 +5257,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "apiId": "f8e3ea2b-80cf-4588-a3ea-2b80cf9588cb"
+        "apiId": "3c5f6bcb-7326-441d-9f6b-cb7326641d81"
       }
     },
     {
@@ -5260,7 +5268,7 @@
         "UPSERT_API:cats-api-7"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "UPDATE",
       "lookup": {
         "sourceId": "cats-api-7",
         "name": "cats-api-7",
@@ -5283,7 +5291,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "planId": "2a965e0a-f7f9-4821-965e-0af7f9e82151"
+      }
     },
     {
       "actionId": "VERIFY_PLAN:cats-api-7:API_KEY",
@@ -5475,7 +5485,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "apiId": "6373bf84-dce9-4ce5-b3bf-84dce9dce5b5"
+        "apiId": "fa91fcdb-489c-4176-91fc-db489ca17665"
       }
     },
     {
@@ -5486,7 +5496,7 @@
         "UPSERT_API:chuck-norris-api-10"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "UPDATE",
       "lookup": {
         "sourceId": "chuck-norris-api-10",
         "name": "chuck-norris-api-10",
@@ -5509,7 +5519,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "planId": "9cbe4ead-e8f7-438d-be4e-ade8f7e38dfb"
+      }
     },
     {
       "actionId": "VERIFY_PLAN:chuck-norris-api-10:API_KEY",
@@ -5684,7 +5696,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "apiId": "9f189d36-01a8-4247-989d-3601a81247d7"
+        "apiId": "e06eb919-a21a-4014-aeb9-19a21a20147a"
       }
     },
     {
@@ -5695,7 +5707,7 @@
         "UPSERT_API:dog-breeds-api-6"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "UPDATE",
       "lookup": {
         "sourceId": "dog-breeds-api-6",
         "name": "dog-breeds-api-6",
@@ -5718,7 +5730,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "planId": "59b42f80-5ce8-498d-b42f-805ce8d98de6"
+      }
     },
     {
       "actionId": "VERIFY_PLAN:dog-breeds-api-6:API_KEY",
@@ -6145,7 +6159,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "apiId": "01ccef8b-6f8f-48b7-8cef-8b6f8f28b7bd"
+        "apiId": "edf78fcd-aed8-4578-b78f-cdaed8c57893"
       }
     },
     {
@@ -6156,7 +6170,7 @@
         "UPSERT_API:harry-potter-characters"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "UPDATE",
       "lookup": {
         "sourceId": "harry-potter-characters",
         "name": "harry-potter-characters",
@@ -6179,7 +6193,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "planId": "8218faf9-0ba3-46da-98fa-f90ba386da7f"
+      }
     },
     {
       "actionId": "VERIFY_PLAN:harry-potter-characters:KEYLESS",
@@ -6354,7 +6370,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "apiId": "289bc6c1-ad22-43f6-9bc6-c1ad2253f654"
+        "apiId": "64f051c6-945b-4b6f-b051-c6945bbb6f6c"
       }
     },
     {
@@ -6365,7 +6381,7 @@
         "UPSERT_API:hogwarts-houses-api-8"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "UPDATE",
       "lookup": {
         "sourceId": "hogwarts-houses-api-8",
         "name": "hogwarts-houses-api-8",
@@ -6388,7 +6404,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "planId": "cae35e7e-be75-41ef-a35e-7ebe75d1ef15"
+      }
     },
     {
       "actionId": "VERIFY_PLAN:hogwarts-houses-api-8:API_KEY",
@@ -7008,7 +7026,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "apiId": "fa8bbe2e-9ef3-4024-8bbe-2e9ef3d024dc"
+        "apiId": "4c93e833-2048-4d5d-93e8-3320481d5df7"
       }
     },
     {
@@ -7019,7 +7037,7 @@
         "UPSERT_API:load-balance-target-servers-api"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "UPDATE",
       "lookup": {
         "sourceId": "load-balance-target-servers-api",
         "name": "load-balance-target-servers-api",
@@ -7042,7 +7060,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "planId": "cd3a0ba1-c2e8-4409-ba0b-a1c2e864096c"
+      }
     },
     {
       "actionId": "VERIFY_PLAN:load-balance-target-servers-api:KEYLESS",

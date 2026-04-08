@@ -1,24 +1,14 @@
-{"ts":"2026-04-07T19:33:17.569Z","type":"reconcile.summary","checkedApis":23,"blockers":23,"warnings":0}
-{"ts":"2026-04-07T19:33:17.569Z","type":"reconcile.blocker","severity":"blocker","code":"API_MISSING","sourceId":"KVM-Create","message":"API KVM-Create is missing"}
-{"ts":"2026-04-07T19:33:17.569Z","type":"reconcile.blocker","severity":"blocker","code":"API_MISSING","sourceId":"KVM-Reader","message":"API KVM-Reader is missing"}
-{"ts":"2026-04-07T19:33:17.569Z","type":"reconcile.blocker","severity":"blocker","code":"API_MISSING","sourceId":"KVM-Update","message":"API KVM-Update is missing"}
-{"ts":"2026-04-07T19:33:17.569Z","type":"reconcile.blocker","severity":"blocker","code":"API_MISSING","sourceId":"admin-kvm-export","message":"API admin-kvm-export is missing"}
-{"ts":"2026-04-07T19:33:17.569Z","type":"reconcile.blocker","severity":"blocker","code":"API_PLAN_MISSING","sourceId":"apigee-hello-api-1","message":"API apigee-hello-api-1 is missing plan Keyless Plan"}
-{"ts":"2026-04-07T19:33:17.569Z","type":"reconcile.blocker","severity":"blocker","code":"API_PLAN_MISSING","sourceId":"apigee-hello","message":"API apigee-hello is missing plan Keyless Plan"}
-{"ts":"2026-04-07T19:33:17.569Z","type":"reconcile.blocker","severity":"blocker","code":"API_PLAN_MISSING","sourceId":"car-makes-api-3","message":"API car-makes-api-3 is missing plan Keyless Plan"}
-{"ts":"2026-04-07T19:33:17.569Z","type":"reconcile.blocker","severity":"blocker","code":"API_PLAN_MISSING","sourceId":"cat-fact-api-2","message":"API cat-fact-api-2 is missing plan Keyless Plan"}
-{"ts":"2026-04-07T19:33:17.569Z","type":"reconcile.blocker","severity":"blocker","code":"API_PLAN_MISSING","sourceId":"cats-api-7","message":"API cats-api-7 is missing plan API Key Plan"}
-{"ts":"2026-04-07T19:33:17.569Z","type":"reconcile.blocker","severity":"blocker","code":"API_PLAN_MISSING","sourceId":"chuck-norris-api-10","message":"API chuck-norris-api-10 is missing plan API Key Plan"}
-{"ts":"2026-04-07T19:33:17.569Z","type":"reconcile.blocker","severity":"blocker","code":"API_PLAN_MISSING","sourceId":"dog-breeds-api-6","message":"API dog-breeds-api-6 is missing plan API Key Plan"}
-{"ts":"2026-04-07T19:33:17.569Z","type":"reconcile.blocker","severity":"blocker","code":"API_MISSING","sourceId":"get-kvm-proxy","message":"API get-kvm-proxy is missing"}
-{"ts":"2026-04-07T19:33:17.569Z","type":"reconcile.blocker","severity":"blocker","code":"API_PLAN_MISSING","sourceId":"harry-potter-characters","message":"API harry-potter-characters is missing plan Keyless Plan"}
-{"ts":"2026-04-07T19:33:17.569Z","type":"reconcile.blocker","severity":"blocker","code":"API_PLAN_MISSING","sourceId":"hogwarts-houses-api-8","message":"API hogwarts-houses-api-8 is missing plan API Key Plan"}
-{"ts":"2026-04-07T19:33:17.570Z","type":"reconcile.blocker","severity":"blocker","code":"API_MISSING","sourceId":"kanye-rest-api-5","message":"API kanye-rest-api-5 is missing"}
-{"ts":"2026-04-07T19:33:17.570Z","type":"reconcile.blocker","severity":"blocker","code":"API_MISSING","sourceId":"kvm-test","message":"API kvm-test is missing"}
-{"ts":"2026-04-07T19:33:17.570Z","type":"reconcile.blocker","severity":"blocker","code":"API_PLAN_MISSING","sourceId":"load-balance-target-servers-api","message":"API load-balance-target-servers-api is missing plan Keyless Plan"}
-{"ts":"2026-04-07T19:33:17.570Z","type":"reconcile.blocker","severity":"blocker","code":"API_MISSING","sourceId":"mock-target-api","message":"API mock-target-api is missing"}
-{"ts":"2026-04-07T19:33:17.570Z","type":"reconcile.blocker","severity":"blocker","code":"API_MISSING","sourceId":"proxy-sharedflow-api-11","message":"API proxy-sharedflow-api-11 is missing"}
-{"ts":"2026-04-07T19:33:17.570Z","type":"reconcile.blocker","severity":"blocker","code":"API_MISSING","sourceId":"v1-ships","message":"API v1-ships is missing"}
-{"ts":"2026-04-07T19:33:17.570Z","type":"reconcile.blocker","severity":"blocker","code":"API_MISSING","sourceId":"villian-chain","message":"API villian-chain is missing"}
-{"ts":"2026-04-07T19:33:17.570Z","type":"reconcile.blocker","severity":"blocker","code":"API_MISSING","sourceId":"wizards-api-9","message":"API wizards-api-9 is missing"}
-{"ts":"2026-04-07T19:33:17.570Z","type":"reconcile.blocker","severity":"blocker","code":"API_MISSING","sourceId":"yes-or-no-api-4","message":"API yes-or-no-api-4 is missing"}
+{"ts":"2026-04-08T17:41:47.843Z","type":"reconcile.summary","checkedApis":23,"blockers":13,"warnings":0}
+{"ts":"2026-04-08T17:41:47.843Z","type":"reconcile.blocker","severity":"blocker","code":"API_MISSING","sourceId":"KVM-Create","message":"API KVM-Create is missing"}
+{"ts":"2026-04-08T17:41:47.843Z","type":"reconcile.blocker","severity":"blocker","code":"API_MISSING","sourceId":"KVM-Reader","message":"API KVM-Reader is missing"}
+{"ts":"2026-04-08T17:41:47.843Z","type":"reconcile.blocker","severity":"blocker","code":"API_MISSING","sourceId":"KVM-Update","message":"API KVM-Update is missing"}
+{"ts":"2026-04-08T17:41:47.843Z","type":"reconcile.blocker","severity":"blocker","code":"API_MISSING","sourceId":"admin-kvm-export","message":"API admin-kvm-export is missing"}
+{"ts":"2026-04-08T17:41:47.843Z","type":"reconcile.blocker","severity":"blocker","code":"API_MISSING","sourceId":"get-kvm-proxy","message":"API get-kvm-proxy is missing"}
+{"ts":"2026-04-08T17:41:47.843Z","type":"reconcile.blocker","severity":"blocker","code":"API_MISSING","sourceId":"kanye-rest-api-5","message":"API kanye-rest-api-5 is missing"}
+{"ts":"2026-04-08T17:41:47.843Z","type":"reconcile.blocker","severity":"blocker","code":"API_MISSING","sourceId":"kvm-test","message":"API kvm-test is missing"}
+{"ts":"2026-04-08T17:41:47.843Z","type":"reconcile.blocker","severity":"blocker","code":"API_MISSING","sourceId":"mock-target-api","message":"API mock-target-api is missing"}
+{"ts":"2026-04-08T17:41:47.843Z","type":"reconcile.blocker","severity":"blocker","code":"API_PLAN_MISSING","sourceId":"proxy-sharedflow-api-11","message":"API proxy-sharedflow-api-11 is missing plan Keyless Plan"}
+{"ts":"2026-04-08T17:41:47.843Z","type":"reconcile.blocker","severity":"blocker","code":"API_PLAN_MISSING","sourceId":"v1-ships","message":"API v1-ships is missing plan Keyless Plan"}
+{"ts":"2026-04-08T17:41:47.843Z","type":"reconcile.blocker","severity":"blocker","code":"API_MISSING","sourceId":"villian-chain","message":"API villian-chain is missing"}
+{"ts":"2026-04-08T17:41:47.843Z","type":"reconcile.blocker","severity":"blocker","code":"API_PLAN_MISSING","sourceId":"wizards-api-9","message":"API wizards-api-9 is missing plan API Key Plan"}
+{"ts":"2026-04-08T17:41:47.843Z","type":"reconcile.blocker","severity":"blocker","code":"API_PLAN_MISSING","sourceId":"yes-or-no-api-4","message":"API yes-or-no-api-4 is missing plan API Key Plan"}
