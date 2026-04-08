@@ -537,6 +537,50 @@ class GraviteeClient {
     return this.post(this.v2Url(`/apis/${apiId}/plans/${planId}/_publish`), {});
   }
 
+  async closeApiPlan(apiId, planId) {
+    const attempts = [];
+    const strategies = [
+      {
+        name: 'v4-plan-close-endpoint',
+        exec: () => this.post(this.v2Url(`/apis/${apiId}/plans/${planId}/_close`), {}),
+      },
+      {
+        name: 'v4-plan-update-status-raw',
+        exec: () => this.put(this.v2Url(`/apis/${apiId}/plans/${planId}`), { status: 'CLOSED' }),
+      },
+      {
+        name: 'v4-plan-update-status-wrapper',
+        exec: () => this.put(this.v2Url(`/apis/${apiId}/plans/${planId}`), { updatePlan: { status: 'CLOSED' } }),
+      },
+    ];
+    for (const strategy of strategies) {
+      try {
+        const response = await strategy.exec();
+        if (response && typeof response === 'object' && !Array.isArray(response)) {
+          response._strategy = strategy.name;
+        }
+        return response;
+      } catch (err) {
+        attempts.push({
+          strategy: strategy.name,
+          status: err.status || null,
+          classification: classifyApiError(err),
+          message: err.message,
+          body: err.body,
+        });
+      }
+    }
+    const fallbackError = new Error(
+      attempts
+        .map((attempt) => `${attempt.strategy}: ${attempt.message}${attempt.body ? `: ${typeof attempt.body === 'string' ? attempt.body : JSON.stringify(attempt.body)}` : ''}`)
+        .join(' | ')
+    );
+    fallbackError.name = 'GraviteePlanCloseCompatibilityError';
+    fallbackError.classification = 'compatibility';
+    fallbackError.attempts = attempts;
+    throw fallbackError;
+  }
+
   async findPlan(mapping) {
     let resolvedApiId = mapping.targetApiId || null;
     if (!resolvedApiId && mapping.targetApi) {

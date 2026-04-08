@@ -61,6 +61,7 @@ function makeClient() {
     plans: new Map(),
     createApi: 0,
     deleteApi: 0,
+    closePlan: 0,
   };
 
   return {
@@ -103,6 +104,16 @@ function makeClient() {
       return api;
     },
     async deleteApi(apiId) {
+      const plans = state.plans.get(apiId) || [];
+      if (plans.some((item) => item.status !== 'CLOSED')) {
+        const err = new Error(`DELETE blocked for ${apiId}`);
+        err.status = 400;
+        err.body = {
+          httpStatus: 400,
+          message: `Plan(s) [${plans.map((item) => item.name).join(', ')}] must be closed before being able to delete the API !`,
+        };
+        throw err;
+      }
       state.deleteApi += 1;
       state.apis.delete(apiId);
       state.plans.delete(apiId);
@@ -116,7 +127,7 @@ function makeClient() {
     },
     async createApiPlan(apiId, payload) {
       const plans = state.plans.get(apiId) || [];
-      const plan = { id: `${apiId}-plan-${plans.length + 1}`, name: payload.name };
+      const plan = { id: `${apiId}-plan-${plans.length + 1}`, name: payload.name, status: 'PUBLISHED' };
       plans.push(plan);
       state.plans.set(apiId, plans);
       return plan;
@@ -124,7 +135,7 @@ function makeClient() {
     async updateApiPlan(apiId, planId, payload) {
       const plans = state.plans.get(apiId) || [];
       const index = plans.findIndex((item) => item.id === planId);
-      const plan = { id: planId, name: payload.name };
+      const plan = { id: planId, name: payload.name, status: 'PUBLISHED' };
       if (index >= 0) plans[index] = plan;
       else plans.push(plan);
       state.plans.set(apiId, plans);
@@ -132,6 +143,14 @@ function makeClient() {
     },
     async publishApiPlan() {
       return null;
+    },
+    async closeApiPlan(apiId, planId) {
+      state.closePlan += 1;
+      const plans = state.plans.get(apiId) || [];
+      const index = plans.findIndex((item) => item.id === planId);
+      if (index >= 0) plans[index] = { ...plans[index], status: 'CLOSED' };
+      state.plans.set(apiId, plans);
+      return plans[index] || null;
     },
     async findApiBySourceId(sourceId) {
       return Array.from(state.apis.values()).find((item) => {
@@ -256,7 +275,9 @@ async function testApisDeleteImportedDeletesKnownApis() {
 
     assert.strictEqual(cleanupResult.exitCode, 0);
     assert.strictEqual(client._state.deleteApi, 1);
+    assert.strictEqual(client._state.closePlan, 1);
     assert.strictEqual(cleanupResult.idMap.apis['orders-api'], null);
+    assert.deepStrictEqual(cleanupResult.idMap.plans['orders-api'], {});
   });
 }
 

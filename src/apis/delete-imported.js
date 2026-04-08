@@ -74,14 +74,41 @@ async function runApisDeleteImported(flags, deps = {}) {
     }
 
     try {
-      await result.client.deleteApi(target.apiId);
+      try {
+        await result.client.deleteApi(target.apiId);
+      } catch (err) {
+        const message = err.body !== undefined
+          ? `${err.message}: ${typeof err.body === 'string' ? err.body : JSON.stringify(err.body)}`
+          : err.message;
+        const requiresClosedPlans = err.status === 400
+          && /must be closed before being able to delete the api/i.test(message);
+        if (!requiresClosedPlans) throw err;
+
+        const plans = typeof result.client.listApiPlans === 'function'
+          ? await result.client.listApiPlans(target.apiId)
+          : [];
+        for (const plan of plans) {
+          if (!plan?.id) continue;
+          if (typeof result.client.closeApiPlan === 'function') {
+            await result.client.closeApiPlan(target.apiId, plan.id);
+            events.push(makeEvent('cleanup.plan_closed', {
+              ...target,
+              planId: plan.id,
+              planName: plan.name || null,
+            }));
+          }
+        }
+        await result.client.deleteApi(target.apiId);
+      }
       summary.deleted += 1;
       if (idMap.apis) idMap.apis[target.sourceId] = null;
+      if (idMap.plans) idMap.plans[target.sourceId] = {};
       events.push(makeEvent('cleanup.deleted', target));
     } catch (err) {
       if (err.status === 404) {
         summary.skipped += 1;
         if (idMap.apis) idMap.apis[target.sourceId] = null;
+        if (idMap.plans) idMap.plans[target.sourceId] = {};
         events.push(makeEvent('cleanup.already_missing', target));
         continue;
       }
