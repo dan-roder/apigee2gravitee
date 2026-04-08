@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-04-08T17:41:47.843Z",
+  "generatedAt": "2026-04-08T20:49:14.797Z",
   "summary": {
     "checkedApis": 23,
-    "blockers": 13,
+    "blockers": 9,
     "warnings": 0
   },
   "mismatches": [
@@ -56,33 +56,9 @@
     },
     {
       "severity": "blocker",
-      "code": "API_PLAN_MISSING",
-      "sourceId": "proxy-sharedflow-api-11",
-      "message": "API proxy-sharedflow-api-11 is missing plan Keyless Plan"
-    },
-    {
-      "severity": "blocker",
-      "code": "API_PLAN_MISSING",
-      "sourceId": "v1-ships",
-      "message": "API v1-ships is missing plan Keyless Plan"
-    },
-    {
-      "severity": "blocker",
       "code": "API_MISSING",
       "sourceId": "villian-chain",
       "message": "API villian-chain is missing"
-    },
-    {
-      "severity": "blocker",
-      "code": "API_PLAN_MISSING",
-      "sourceId": "wizards-api-9",
-      "message": "API wizards-api-9 is missing plan API Key Plan"
-    },
-    {
-      "severity": "blocker",
-      "code": "API_PLAN_MISSING",
-      "sourceId": "yes-or-no-api-4",
-      "message": "API yes-or-no-api-4 is missing plan API Key Plan"
     }
   ]
 }

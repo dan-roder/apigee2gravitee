@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-08T20:00:10.954Z",
+  "generatedAt": "2026-04-08T20:49:12.184Z",
   "kind": "ApisMigrationManifest",
   "source": {
     "irDir": "/Users/daniel.roder/Sites/apigee2gravitee/ir",
@@ -4524,7 +4524,7 @@
         "SHARED_FLOW_REFS_PRESENT"
       ],
       "targetHint": {
-        "apiId": "92cebf29-465d-40ef-8ebf-29465d00eff9"
+        "apiId": "2a186de1-fee7-474a-986d-e1fee7b74ad8"
       }
     },
     {
@@ -4561,7 +4561,7 @@
         "SHARED_FLOW_REFS_PRESENT"
       ],
       "targetHint": {
-        "planId": "852a86a9-14a9-4c8b-aa86-a914a94c8b13"
+        "planId": "200b82f0-e05e-426e-8b82-f0e05e526eb1"
       }
     },
     {
@@ -4702,7 +4702,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "apiId": "2db40b83-a346-4552-b40b-83a34645528b"
+        "apiId": "0b871aed-7a73-4a46-871a-ed7a73ca463a"
       }
     },
     {
@@ -4737,7 +4737,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "planId": "0e020d94-e25c-4714-820d-94e25ce71467"
+        "planId": "c81bdbca-3229-4ff5-9bdb-ca3229cff50b"
       }
     },
     {
@@ -4874,7 +4874,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "apiId": "0719d4b5-9bc7-40dd-99d4-b59bc720ddce"
+        "apiId": "eda94554-d01d-4db2-a945-54d01dcdb2a5"
       }
     },
     {
@@ -4909,7 +4909,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "planId": "a63acf42-589f-4f0f-bacf-42589f7f0ff3"
+        "planId": "d737bbe9-4415-4f2b-b7bb-e944151f2b6b"
       }
     },
     {
@@ -5046,7 +5046,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "apiId": "81882689-0ed2-4e7c-8826-890ed2de7c58"
+        "apiId": "04a961a5-9ab5-470b-a961-a59ab5a70b87"
       }
     },
     {
@@ -5081,7 +5081,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "planId": "4ae6a39c-a88e-422c-a6a3-9ca88e822c5a"
+        "planId": "98e3ba0c-0918-45d5-a3ba-0c0918b5d5f0"
       }
     },
     {
@@ -5257,7 +5257,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "apiId": "3c5f6bcb-7326-441d-9f6b-cb7326641d81"
+        "apiId": "e75119af-323c-4544-9119-af323c8544ee"
       }
     },
     {
@@ -5292,7 +5292,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "planId": "2a965e0a-f7f9-4821-965e-0af7f9e82151"
+        "planId": "b8ef4a15-763a-47a0-af4a-15763ae7a062"
       }
     },
     {
@@ -5485,7 +5485,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "apiId": "fa91fcdb-489c-4176-91fc-db489ca17665"
+        "apiId": "99f69240-3f32-4ca7-b692-403f324ca774"
       }
     },
     {
@@ -5520,7 +5520,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "planId": "9cbe4ead-e8f7-438d-be4e-ade8f7e38dfb"
+        "planId": "4349e7c0-6e76-4806-89e7-c06e76880667"
       }
     },
     {
@@ -5696,7 +5696,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "apiId": "e06eb919-a21a-4014-aeb9-19a21a20147a"
+        "apiId": "1af91ac0-3037-4d9b-b91a-c030373d9b70"
       }
     },
     {
@@ -5731,7 +5731,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "planId": "59b42f80-5ce8-498d-b42f-805ce8d98de6"
+        "planId": "aa7d6350-f7d8-4d4c-bd63-50f7d8cd4c55"
       }
     },
     {
@@ -6159,7 +6159,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "apiId": "edf78fcd-aed8-4578-b78f-cdaed8c57893"
+        "apiId": "e12365b9-a2f6-4133-a365-b9a2f61133ba"
       }
     },
     {
@@ -6194,7 +6194,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "planId": "8218faf9-0ba3-46da-98fa-f90ba386da7f"
+        "planId": "fd5dc33c-65a7-470d-9dc3-3c65a7b70d98"
       }
     },
     {
@@ -6370,7 +6370,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "apiId": "64f051c6-945b-4b6f-b051-c6945bbb6f6c"
+        "apiId": "8ff47997-a83c-4f5f-b479-97a83c6f5fab"
       }
     },
     {
@@ -6405,7 +6405,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "planId": "cae35e7e-be75-41ef-a35e-7ebe75d1ef15"
+        "planId": "422cbaee-57cf-4375-acba-ee57cfa375a4"
       }
     },
     {
@@ -7026,7 +7026,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "apiId": "4c93e833-2048-4d5d-93e8-3320481d5df7"
+        "apiId": "72f4634c-b282-4d9a-b463-4cb282fd9aa8"
       }
     },
     {
@@ -7061,7 +7061,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "planId": "cd3a0ba1-c2e8-4409-ba0b-a1c2e864096c"
+        "planId": "a1831ab3-2790-437a-831a-b32790337ad6"
       }
     },
     {

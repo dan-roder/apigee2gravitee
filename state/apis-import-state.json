@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-04-08T17:39:51.053Z",
-  "updatedAt": "2026-04-08T17:41:04.622Z",
+  "generatedAt": "2026-04-08T20:22:12.302Z",
+  "updatedAt": "2026-04-08T20:23:28.578Z",
   "mode": "plan",
   "summary": {
     "proxies": 23,
@@ -28,8 +28,8 @@
       "targetIds": {},
       "reconcileHints": {},
       "lastError": "v4-management-full -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 404: {\"httpStatus\":404,\"message\":\"Plugin [assign-attributes] cannot be found.\",\"technicalCode\":\"plugin.notFound\",\"parameters\":{\"plugin\":\"assign-attributes\"},\"details\":[]} | v4-management-shell -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 404: {\"httpStatus\":404,\"message\":\"Plugin [assign-attributes] cannot be found.\",\"technicalCode\":\"plugin.notFound\",\"parameters\":{\"plugin\":\"assign-attributes\"},\"details\":[]} | legacy-import-wrapper -> POST http://localhost:8083/management/organizations/DEFAULT/environments/DEFAULT/apis/import → HTTP 500: {\"message\":\"Cannot invoke \\\"io.gravitee.definition.model.Proxy.getVirtualHosts()\\\" because the return value of \\\"io.gravitee.rest.api.model.api.UpdateApiEntity.getProxy()\\\" is null\",\"http_status\":500}",
-      "startedAt": "2026-04-08T17:39:51.058Z",
-      "completedAt": "2026-04-08T17:39:58.572Z"
+      "startedAt": "2026-04-08T20:22:12.307Z",
+      "completedAt": "2026-04-08T20:22:19.884Z"
     },
     "UPSERT_PLAN:KVM-Create:KEYLESS": {
       "actionId": "UPSERT_PLAN:KVM-Create:KEYLESS",
@@ -44,7 +44,7 @@
       "reconcileHints": {},
       "lastError": "dependency not satisfied: UPSERT_API:KVM-Create=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-08T17:39:58.575Z"
+      "completedAt": "2026-04-08T20:22:19.888Z"
     },
     "VERIFY_PLAN:KVM-Create:KEYLESS": {
       "actionId": "VERIFY_PLAN:KVM-Create:KEYLESS",
@@ -59,7 +59,7 @@
       "reconcileHints": {},
       "lastError": "dependency not satisfied: UPSERT_PLAN:KVM-Create:KEYLESS=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-08T17:39:58.575Z"
+      "completedAt": "2026-04-08T20:22:19.888Z"
     },
     "VERIFY_API:KVM-Create": {
       "actionId": "VERIFY_API:KVM-Create",
@@ -75,7 +75,7 @@
       "reconcileHints": {},
       "lastError": "dependency not satisfied: UPSERT_API:KVM-Create=MANUAL_REVIEW, VERIFY_PLAN:KVM-Create:KEYLESS=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-08T17:39:58.575Z"
+      "completedAt": "2026-04-08T20:22:19.888Z"
     },
     "UPSERT_API:KVM-Reader": {
       "actionId": "UPSERT_API:KVM-Reader",
@@ -87,8 +87,8 @@
       "targetIds": {},
       "reconcileHints": {},
       "lastError": "v4-management-full -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 404: {\"httpStatus\":404,\"message\":\"Plugin [assign-attributes] cannot be found.\",\"technicalCode\":\"plugin.notFound\",\"parameters\":{\"plugin\":\"assign-attributes\"},\"details\":[]} | v4-management-shell -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 404: {\"httpStatus\":404,\"message\":\"Plugin [assign-attributes] cannot be found.\",\"technicalCode\":\"plugin.notFound\",\"parameters\":{\"plugin\":\"assign-attributes\"},\"details\":[]} | legacy-import-wrapper -> POST http://localhost:8083/management/organizations/DEFAULT/environments/DEFAULT/apis/import → HTTP 500: {\"message\":\"Cannot invoke \\\"io.gravitee.definition.model.Proxy.getVirtualHosts()\\\" because the return value of \\\"io.gravitee.rest.api.model.api.UpdateApiEntity.getProxy()\\\" is null\",\"http_status\":500}",
-      "startedAt": "2026-04-08T17:39:58.575Z",
-      "completedAt": "2026-04-08T17:40:06.078Z"
+      "startedAt": "2026-04-08T20:22:19.888Z",
+      "completedAt": "2026-04-08T20:22:27.447Z"
     },
     "UPSERT_PLAN:KVM-Reader:KEYLESS": {
       "actionId": "UPSERT_PLAN:KVM-Reader:KEYLESS",
@@ -103,7 +103,7 @@
       "reconcileHints": {},
       "lastError": "dependency not satisfied: UPSERT_API:KVM-Reader=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-08T17:40:06.082Z"
+      "completedAt": "2026-04-08T20:22:27.450Z"
     },
     "VERIFY_PLAN:KVM-Reader:KEYLESS": {
       "actionId": "VERIFY_PLAN:KVM-Reader:KEYLESS",
@@ -118,7 +118,7 @@
       "reconcileHints": {},
       "lastError": "dependency not satisfied: UPSERT_PLAN:KVM-Reader:KEYLESS=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-08T17:40:06.082Z"
+      "completedAt": "2026-04-08T20:22:27.450Z"
     },
     "VERIFY_API:KVM-Reader": {
       "actionId": "VERIFY_API:KVM-Reader",
@@ -134,7 +134,7 @@
       "reconcileHints": {},
       "lastError": "dependency not satisfied: UPSERT_API:KVM-Reader=MANUAL_REVIEW, VERIFY_PLAN:KVM-Reader:KEYLESS=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-08T17:40:06.082Z"
+      "completedAt": "2026-04-08T20:22:27.451Z"
     },
     "UPSERT_API:KVM-Update": {
       "actionId": "UPSERT_API:KVM-Update",
@@ -146,8 +146,8 @@
       "targetIds": {},
       "reconcileHints": {},
       "lastError": "v4-management-full -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 404: {\"httpStatus\":404,\"message\":\"Plugin [assign-attributes] cannot be found.\",\"technicalCode\":\"plugin.notFound\",\"parameters\":{\"plugin\":\"assign-attributes\"},\"details\":[]} | v4-management-shell -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 404: {\"httpStatus\":404,\"message\":\"Plugin [assign-attributes] cannot be found.\",\"technicalCode\":\"plugin.notFound\",\"parameters\":{\"plugin\":\"assign-attributes\"},\"details\":[]} | legacy-import-wrapper -> POST http://localhost:8083/management/organizations/DEFAULT/environments/DEFAULT/apis/import → HTTP 500: {\"message\":\"Cannot invoke \\\"io.gravitee.definition.model.Proxy.getVirtualHosts()\\\" because the return value of \\\"io.gravitee.rest.api.model.api.UpdateApiEntity.getProxy()\\\" is null\",\"http_status\":500}",
-      "startedAt": "2026-04-08T17:40:06.082Z",
-      "completedAt": "2026-04-08T17:40:13.585Z"
+      "startedAt": "2026-04-08T20:22:27.451Z",
+      "completedAt": "2026-04-08T20:22:35.013Z"
     },
     "UPSERT_PLAN:KVM-Update:KEYLESS": {
       "actionId": "UPSERT_PLAN:KVM-Update:KEYLESS",
@@ -162,7 +162,7 @@
       "reconcileHints": {},
       "lastError": "dependency not satisfied: UPSERT_API:KVM-Update=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-08T17:40:13.589Z"
+      "completedAt": "2026-04-08T20:22:35.016Z"
     },
     "VERIFY_PLAN:KVM-Update:KEYLESS": {
       "actionId": "VERIFY_PLAN:KVM-Update:KEYLESS",
@@ -177,7 +177,7 @@
       "reconcileHints": {},
       "lastError": "dependency not satisfied: UPSERT_PLAN:KVM-Update:KEYLESS=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-08T17:40:13.589Z"
+      "completedAt": "2026-04-08T20:22:35.016Z"
     },
     "VERIFY_API:KVM-Update": {
       "actionId": "VERIFY_API:KVM-Update",
@@ -193,7 +193,7 @@
       "reconcileHints": {},
       "lastError": "dependency not satisfied: UPSERT_API:KVM-Update=MANUAL_REVIEW, VERIFY_PLAN:KVM-Update:KEYLESS=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-08T17:40:13.589Z"
+      "completedAt": "2026-04-08T20:22:35.016Z"
     },
     "UPSERT_API:admin-kvm-export": {
       "actionId": "UPSERT_API:admin-kvm-export",
@@ -205,8 +205,8 @@
       "targetIds": {},
       "reconcileHints": {},
       "lastError": "v4-management-full -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 404: {\"httpStatus\":404,\"message\":\"Plugin [http-callout] cannot be found.\",\"technicalCode\":\"plugin.notFound\",\"parameters\":{\"plugin\":\"http-callout\"},\"details\":[]} | v4-management-shell -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 404: {\"httpStatus\":404,\"message\":\"Plugin [http-callout] cannot be found.\",\"technicalCode\":\"plugin.notFound\",\"parameters\":{\"plugin\":\"http-callout\"},\"details\":[]} | legacy-import-wrapper -> POST http://localhost:8083/management/organizations/DEFAULT/environments/DEFAULT/apis/import → HTTP 500: {\"message\":\"Cannot invoke \\\"io.gravitee.definition.model.Proxy.getVirtualHosts()\\\" because the return value of \\\"io.gravitee.rest.api.model.api.UpdateApiEntity.getProxy()\\\" is null\",\"http_status\":500}",
-      "startedAt": "2026-04-08T17:40:13.589Z",
-      "completedAt": "2026-04-08T17:40:21.104Z"
+      "startedAt": "2026-04-08T20:22:35.016Z",
+      "completedAt": "2026-04-08T20:22:42.571Z"
     },
     "UPSERT_PLAN:admin-kvm-export:KEYLESS": {
       "actionId": "UPSERT_PLAN:admin-kvm-export:KEYLESS",
@@ -221,7 +221,7 @@
       "reconcileHints": {},
       "lastError": "dependency not satisfied: UPSERT_API:admin-kvm-export=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-08T17:40:21.106Z"
+      "completedAt": "2026-04-08T20:22:42.575Z"
     },
     "VERIFY_PLAN:admin-kvm-export:KEYLESS": {
       "actionId": "VERIFY_PLAN:admin-kvm-export:KEYLESS",
@@ -236,7 +236,7 @@
       "reconcileHints": {},
       "lastError": "dependency not satisfied: UPSERT_PLAN:admin-kvm-export:KEYLESS=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-08T17:40:21.106Z"
+      "completedAt": "2026-04-08T20:22:42.575Z"
     },
     "VERIFY_API:admin-kvm-export": {
       "actionId": "VERIFY_API:admin-kvm-export",
@@ -252,7 +252,7 @@
       "reconcileHints": {},
       "lastError": "dependency not satisfied: UPSERT_API:admin-kvm-export=MANUAL_REVIEW, VERIFY_PLAN:admin-kvm-export:KEYLESS=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-08T17:40:21.106Z"
+      "completedAt": "2026-04-08T20:22:42.575Z"
     },
     "UPSERT_API:apigee-hello-api-1": {
       "actionId": "UPSERT_API:apigee-hello-api-1",
@@ -262,14 +262,14 @@
       "status": "SUCCEEDED",
       "dependencies": [],
       "targetIds": {
-        "apiId": "92cebf29-465d-40ef-8ebf-29465d00eff9"
+        "apiId": "2a186de1-fee7-474a-986d-e1fee7b74ad8"
       },
       "reconcileHints": {
-        "apiId": "92cebf29-465d-40ef-8ebf-29465d00eff9"
+        "apiId": "2a186de1-fee7-474a-986d-e1fee7b74ad8"
       },
       "lastError": null,
-      "startedAt": "2026-04-08T17:40:21.106Z",
-      "completedAt": "2026-04-08T17:40:21.231Z"
+      "startedAt": "2026-04-08T20:22:42.575Z",
+      "completedAt": "2026-04-08T20:22:42.765Z"
     },
     "UPSERT_PLAN:apigee-hello-api-1:KEYLESS": {
       "actionId": "UPSERT_PLAN:apigee-hello-api-1:KEYLESS",
@@ -281,18 +281,18 @@
         "UPSERT_API:apigee-hello-api-1"
       ],
       "targetIds": {
-        "apiId": "92cebf29-465d-40ef-8ebf-29465d00eff9",
-        "planId": "852a86a9-14a9-4c8b-aa86-a914a94c8b13",
+        "apiId": "2a186de1-fee7-474a-986d-e1fee7b74ad8",
+        "planId": "200b82f0-e05e-426e-8b82-f0e05e526eb1",
         "planKey": "KEYLESS"
       },
       "reconcileHints": {
-        "apiId": "92cebf29-465d-40ef-8ebf-29465d00eff9",
-        "planId": "852a86a9-14a9-4c8b-aa86-a914a94c8b13",
+        "apiId": "2a186de1-fee7-474a-986d-e1fee7b74ad8",
+        "planId": "200b82f0-e05e-426e-8b82-f0e05e526eb1",
         "planKey": "KEYLESS"
       },
       "lastError": null,
-      "startedAt": "2026-04-08T17:40:21.233Z",
-      "completedAt": "2026-04-08T17:40:21.472Z"
+      "startedAt": "2026-04-08T20:22:42.768Z",
+      "completedAt": "2026-04-08T20:22:43.003Z"
     },
     "VERIFY_PLAN:apigee-hello-api-1:KEYLESS": {
       "actionId": "VERIFY_PLAN:apigee-hello-api-1:KEYLESS",
@@ -304,18 +304,18 @@
         "UPSERT_PLAN:apigee-hello-api-1:KEYLESS"
       ],
       "targetIds": {
-        "apiId": "92cebf29-465d-40ef-8ebf-29465d00eff9",
-        "planId": "852a86a9-14a9-4c8b-aa86-a914a94c8b13",
+        "apiId": "2a186de1-fee7-474a-986d-e1fee7b74ad8",
+        "planId": "200b82f0-e05e-426e-8b82-f0e05e526eb1",
         "planKey": "KEYLESS"
       },
       "reconcileHints": {
-        "apiId": "92cebf29-465d-40ef-8ebf-29465d00eff9",
-        "planId": "852a86a9-14a9-4c8b-aa86-a914a94c8b13",
+        "apiId": "2a186de1-fee7-474a-986d-e1fee7b74ad8",
+        "planId": "200b82f0-e05e-426e-8b82-f0e05e526eb1",
         "planKey": "KEYLESS"
       },
       "lastError": null,
-      "startedAt": "2026-04-08T17:40:21.475Z",
-      "completedAt": "2026-04-08T17:40:21.587Z"
+      "startedAt": "2026-04-08T20:22:43.006Z",
+      "completedAt": "2026-04-08T20:22:43.120Z"
     },
     "VERIFY_API:apigee-hello-api-1": {
       "actionId": "VERIFY_API:apigee-hello-api-1",
@@ -328,14 +328,14 @@
         "VERIFY_PLAN:apigee-hello-api-1:KEYLESS"
       ],
       "targetIds": {
-        "apiId": "92cebf29-465d-40ef-8ebf-29465d00eff9"
+        "apiId": "2a186de1-fee7-474a-986d-e1fee7b74ad8"
       },
       "reconcileHints": {
-        "apiId": "92cebf29-465d-40ef-8ebf-29465d00eff9"
+        "apiId": "2a186de1-fee7-474a-986d-e1fee7b74ad8"
       },
       "lastError": null,
-      "startedAt": "2026-04-08T17:40:21.591Z",
-      "completedAt": "2026-04-08T17:40:21.647Z"
+      "startedAt": "2026-04-08T20:22:43.123Z",
+      "completedAt": "2026-04-08T20:22:43.180Z"
     },
     "UPSERT_API:apigee-hello": {
       "actionId": "UPSERT_API:apigee-hello",
@@ -345,14 +345,14 @@
       "status": "SUCCEEDED",
       "dependencies": [],
       "targetIds": {
-        "apiId": "2db40b83-a346-4552-b40b-83a34645528b"
+        "apiId": "0b871aed-7a73-4a46-871a-ed7a73ca463a"
       },
       "reconcileHints": {
-        "apiId": "2db40b83-a346-4552-b40b-83a34645528b"
+        "apiId": "0b871aed-7a73-4a46-871a-ed7a73ca463a"
       },
       "lastError": null,
-      "startedAt": "2026-04-08T17:40:21.650Z",
-      "completedAt": "2026-04-08T17:40:21.767Z"
+      "startedAt": "2026-04-08T20:22:43.182Z",
+      "completedAt": "2026-04-08T20:22:43.355Z"
     },
     "UPSERT_PLAN:apigee-hello:KEYLESS": {
       "actionId": "UPSERT_PLAN:apigee-hello:KEYLESS",
@@ -364,18 +364,18 @@
         "UPSERT_API:apigee-hello"
       ],
       "targetIds": {
-        "apiId": "2db40b83-a346-4552-b40b-83a34645528b",
-        "planId": "0e020d94-e25c-4714-820d-94e25ce71467",
+        "apiId": "0b871aed-7a73-4a46-871a-ed7a73ca463a",
+        "planId": "c81bdbca-3229-4ff5-9bdb-ca3229cff50b",
         "planKey": "KEYLESS"
       },
       "reconcileHints": {
-        "apiId": "2db40b83-a346-4552-b40b-83a34645528b",
-        "planId": "0e020d94-e25c-4714-820d-94e25ce71467",
+        "apiId": "0b871aed-7a73-4a46-871a-ed7a73ca463a",
+        "planId": "c81bdbca-3229-4ff5-9bdb-ca3229cff50b",
         "planKey": "KEYLESS"
       },
       "lastError": null,
-      "startedAt": "2026-04-08T17:40:21.769Z",
-      "completedAt": "2026-04-08T17:40:21.994Z"
+      "startedAt": "2026-04-08T20:22:43.357Z",
+      "completedAt": "2026-04-08T20:22:43.582Z"
     },
     "VERIFY_PLAN:apigee-hello:KEYLESS": {
       "actionId": "VERIFY_PLAN:apigee-hello:KEYLESS",
@@ -387,18 +387,18 @@
         "UPSERT_PLAN:apigee-hello:KEYLESS"
       ],
       "targetIds": {
-        "apiId": "2db40b83-a346-4552-b40b-83a34645528b",
-        "planId": "0e020d94-e25c-4714-820d-94e25ce71467",
+        "apiId": "0b871aed-7a73-4a46-871a-ed7a73ca463a",
+        "planId": "c81bdbca-3229-4ff5-9bdb-ca3229cff50b",
         "planKey": "KEYLESS"
       },
       "reconcileHints": {
-        "apiId": "2db40b83-a346-4552-b40b-83a34645528b",
-        "planId": "0e020d94-e25c-4714-820d-94e25ce71467",
+        "apiId": "0b871aed-7a73-4a46-871a-ed7a73ca463a",
+        "planId": "c81bdbca-3229-4ff5-9bdb-ca3229cff50b",
         "planKey": "KEYLESS"
       },
       "lastError": null,
-      "startedAt": "2026-04-08T17:40:21.997Z",
-      "completedAt": "2026-04-08T17:40:22.110Z"
+      "startedAt": "2026-04-08T20:22:43.584Z",
+      "completedAt": "2026-04-08T20:22:43.700Z"
     },
     "VERIFY_API:apigee-hello": {
       "actionId": "VERIFY_API:apigee-hello",
@@ -411,14 +411,14 @@
         "VERIFY_PLAN:apigee-hello:KEYLESS"
       ],
       "targetIds": {
-        "apiId": "2db40b83-a346-4552-b40b-83a34645528b"
+        "apiId": "0b871aed-7a73-4a46-871a-ed7a73ca463a"
       },
       "reconcileHints": {
-        "apiId": "2db40b83-a346-4552-b40b-83a34645528b"
+        "apiId": "0b871aed-7a73-4a46-871a-ed7a73ca463a"
       },
       "lastError": null,
-      "startedAt": "2026-04-08T17:40:22.113Z",
-      "completedAt": "2026-04-08T17:40:22.168Z"
+      "startedAt": "2026-04-08T20:22:43.701Z",
+      "completedAt": "2026-04-08T20:22:43.772Z"
     },
     "UPSERT_API:car-makes-api-3": {
       "actionId": "UPSERT_API:car-makes-api-3",
@@ -428,14 +428,14 @@
       "status": "SUCCEEDED",
       "dependencies": [],
       "targetIds": {
-        "apiId": "0719d4b5-9bc7-40dd-99d4-b59bc720ddce"
+        "apiId": "eda94554-d01d-4db2-a945-54d01dcdb2a5"
       },
       "reconcileHints": {
-        "apiId": "0719d4b5-9bc7-40dd-99d4-b59bc720ddce"
+        "apiId": "eda94554-d01d-4db2-a945-54d01dcdb2a5"
       },
       "lastError": null,
-      "startedAt": "2026-04-08T17:40:22.171Z",
-      "completedAt": "2026-04-08T17:40:22.289Z"
+      "startedAt": "2026-04-08T20:22:43.774Z",
+      "completedAt": "2026-04-08T20:22:43.957Z"
     },
     "UPSERT_PLAN:car-makes-api-3:KEYLESS": {
       "actionId": "UPSERT_PLAN:car-makes-api-3:KEYLESS",
@@ -447,18 +447,18 @@
         "UPSERT_API:car-makes-api-3"
       ],
       "targetIds": {
-        "apiId": "0719d4b5-9bc7-40dd-99d4-b59bc720ddce",
-        "planId": "a63acf42-589f-4f0f-bacf-42589f7f0ff3",
+        "apiId": "eda94554-d01d-4db2-a945-54d01dcdb2a5",
+        "planId": "d737bbe9-4415-4f2b-b7bb-e944151f2b6b",
         "planKey": "KEYLESS"
       },
       "reconcileHints": {
-        "apiId": "0719d4b5-9bc7-40dd-99d4-b59bc720ddce",
-        "planId": "a63acf42-589f-4f0f-bacf-42589f7f0ff3",
+        "apiId": "eda94554-d01d-4db2-a945-54d01dcdb2a5",
+        "planId": "d737bbe9-4415-4f2b-b7bb-e944151f2b6b",
         "planKey": "KEYLESS"
       },
       "lastError": null,
-      "startedAt": "2026-04-08T17:40:22.291Z",
-      "completedAt": "2026-04-08T17:40:22.516Z"
+      "startedAt": "2026-04-08T20:22:43.959Z",
+      "completedAt": "2026-04-08T20:22:44.185Z"
     },
     "VERIFY_PLAN:car-makes-api-3:KEYLESS": {
       "actionId": "VERIFY_PLAN:car-makes-api-3:KEYLESS",
@@ -470,18 +470,18 @@
         "UPSERT_PLAN:car-makes-api-3:KEYLESS"
       ],
       "targetIds": {
-        "apiId": "0719d4b5-9bc7-40dd-99d4-b59bc720ddce",
-        "planId": "a63acf42-589f-4f0f-bacf-42589f7f0ff3",
+        "apiId": "eda94554-d01d-4db2-a945-54d01dcdb2a5",
+        "planId": "d737bbe9-4415-4f2b-b7bb-e944151f2b6b",
         "planKey": "KEYLESS"
       },
       "reconcileHints": {
-        "apiId": "0719d4b5-9bc7-40dd-99d4-b59bc720ddce",
-        "planId": "a63acf42-589f-4f0f-bacf-42589f7f0ff3",
+        "apiId": "eda94554-d01d-4db2-a945-54d01dcdb2a5",
+        "planId": "d737bbe9-4415-4f2b-b7bb-e944151f2b6b",
         "planKey": "KEYLESS"
       },
       "lastError": null,
-      "startedAt": "2026-04-08T17:40:22.519Z",
-      "completedAt": "2026-04-08T17:40:22.631Z"
+      "startedAt": "2026-04-08T20:22:44.189Z",
+      "completedAt": "2026-04-08T20:22:44.301Z"
     },
     "VERIFY_API:car-makes-api-3": {
       "actionId": "VERIFY_API:car-makes-api-3",
@@ -494,14 +494,14 @@
         "VERIFY_PLAN:car-makes-api-3:KEYLESS"
       ],
       "targetIds": {
-        "apiId": "0719d4b5-9bc7-40dd-99d4-b59bc720ddce"
+        "apiId": "eda94554-d01d-4db2-a945-54d01dcdb2a5"
       },
       "reconcileHints": {
-        "apiId": "0719d4b5-9bc7-40dd-99d4-b59bc720ddce"
+        "apiId": "eda94554-d01d-4db2-a945-54d01dcdb2a5"
       },
       "lastError": null,
-      "startedAt": "2026-04-08T17:40:22.633Z",
-      "completedAt": "2026-04-08T17:40:22.688Z"
+      "startedAt": "2026-04-08T20:22:44.303Z",
+      "completedAt": "2026-04-08T20:22:44.360Z"
     },
     "UPSERT_API:cat-fact-api-2": {
       "actionId": "UPSERT_API:cat-fact-api-2",
@@ -511,14 +511,14 @@
       "status": "SUCCEEDED",
       "dependencies": [],
       "targetIds": {
-        "apiId": "81882689-0ed2-4e7c-8826-890ed2de7c58"
+        "apiId": "04a961a5-9ab5-470b-a961-a59ab5a70b87"
       },
       "reconcileHints": {
-        "apiId": "81882689-0ed2-4e7c-8826-890ed2de7c58"
+        "apiId": "04a961a5-9ab5-470b-a961-a59ab5a70b87"
       },
       "lastError": null,
-      "startedAt": "2026-04-08T17:40:22.691Z",
-      "completedAt": "2026-04-08T17:40:22.808Z"
+      "startedAt": "2026-04-08T20:22:44.363Z",
+      "completedAt": "2026-04-08T20:22:44.535Z"
     },
     "UPSERT_PLAN:cat-fact-api-2:KEYLESS": {
       "actionId": "UPSERT_PLAN:cat-fact-api-2:KEYLESS",
@@ -530,18 +530,18 @@
         "UPSERT_API:cat-fact-api-2"
       ],
       "targetIds": {
-        "apiId": "81882689-0ed2-4e7c-8826-890ed2de7c58",
-        "planId": "4ae6a39c-a88e-422c-a6a3-9ca88e822c5a",
+        "apiId": "04a961a5-9ab5-470b-a961-a59ab5a70b87",
+        "planId": "98e3ba0c-0918-45d5-a3ba-0c0918b5d5f0",
         "planKey": "KEYLESS"
       },
       "reconcileHints": {
-        "apiId": "81882689-0ed2-4e7c-8826-890ed2de7c58",
-        "planId": "4ae6a39c-a88e-422c-a6a3-9ca88e822c5a",
+        "apiId": "04a961a5-9ab5-470b-a961-a59ab5a70b87",
+        "planId": "98e3ba0c-0918-45d5-a3ba-0c0918b5d5f0",
         "planKey": "KEYLESS"
       },
       "lastError": null,
-      "startedAt": "2026-04-08T17:40:22.811Z",
-      "completedAt": "2026-04-08T17:40:23.036Z"
+      "startedAt": "2026-04-08T20:22:44.537Z",
+      "completedAt": "2026-04-08T20:22:44.764Z"
     },
     "VERIFY_PLAN:cat-fact-api-2:KEYLESS": {
       "actionId": "VERIFY_PLAN:cat-fact-api-2:KEYLESS",
@@ -553,18 +553,18 @@
         "UPSERT_PLAN:cat-fact-api-2:KEYLESS"
       ],
       "targetIds": {
-        "apiId": "81882689-0ed2-4e7c-8826-890ed2de7c58",
-        "planId": "4ae6a39c-a88e-422c-a6a3-9ca88e822c5a",
+        "apiId": "04a961a5-9ab5-470b-a961-a59ab5a70b87",
+        "planId": "98e3ba0c-0918-45d5-a3ba-0c0918b5d5f0",
         "planKey": "KEYLESS"
       },
       "reconcileHints": {
-        "apiId": "81882689-0ed2-4e7c-8826-890ed2de7c58",
-        "planId": "4ae6a39c-a88e-422c-a6a3-9ca88e822c5a",
+        "apiId": "04a961a5-9ab5-470b-a961-a59ab5a70b87",
+        "planId": "98e3ba0c-0918-45d5-a3ba-0c0918b5d5f0",
         "planKey": "KEYLESS"
       },
       "lastError": null,
-      "startedAt": "2026-04-08T17:40:23.039Z",
-      "completedAt": "2026-04-08T17:40:23.151Z"
+      "startedAt": "2026-04-08T20:22:44.767Z",
+      "completedAt": "2026-04-08T20:22:44.878Z"
     },
     "VERIFY_API:cat-fact-api-2": {
       "actionId": "VERIFY_API:cat-fact-api-2",
@@ -577,14 +577,14 @@
         "VERIFY_PLAN:cat-fact-api-2:KEYLESS"
       ],
       "targetIds": {
-        "apiId": "81882689-0ed2-4e7c-8826-890ed2de7c58"
+        "apiId": "04a961a5-9ab5-470b-a961-a59ab5a70b87"
       },
       "reconcileHints": {
-        "apiId": "81882689-0ed2-4e7c-8826-890ed2de7c58"
+        "apiId": "04a961a5-9ab5-470b-a961-a59ab5a70b87"
       },
       "lastError": null,
-      "startedAt": "2026-04-08T17:40:23.153Z",
-      "completedAt": "2026-04-08T17:40:23.209Z"
+      "startedAt": "2026-04-08T20:22:44.881Z",
+      "completedAt": "2026-04-08T20:22:44.937Z"
     },
     "UPSERT_API:cats-api-7": {
       "actionId": "UPSERT_API:cats-api-7",
@@ -594,14 +594,14 @@
       "status": "SUCCEEDED",
       "dependencies": [],
       "targetIds": {
-        "apiId": "3c5f6bcb-7326-441d-9f6b-cb7326641d81"
+        "apiId": "e75119af-323c-4544-9119-af323c8544ee"
       },
       "reconcileHints": {
-        "apiId": "3c5f6bcb-7326-441d-9f6b-cb7326641d81"
+        "apiId": "e75119af-323c-4544-9119-af323c8544ee"
       },
       "lastError": null,
-      "startedAt": "2026-04-08T17:40:23.211Z",
-      "completedAt": "2026-04-08T17:40:23.329Z"
+      "startedAt": "2026-04-08T20:22:44.939Z",
+      "completedAt": "2026-04-08T20:22:45.126Z"
     },
     "UPSERT_PLAN:cats-api-7:API_KEY": {
       "actionId": "UPSERT_PLAN:cats-api-7:API_KEY",
@@ -613,18 +613,18 @@
         "UPSERT_API:cats-api-7"
       ],
       "targetIds": {
-        "apiId": "3c5f6bcb-7326-441d-9f6b-cb7326641d81",
-        "planId": "2a965e0a-f7f9-4821-965e-0af7f9e82151",
+        "apiId": "e75119af-323c-4544-9119-af323c8544ee",
+        "planId": "b8ef4a15-763a-47a0-af4a-15763ae7a062",
         "planKey": "API_KEY"
       },
       "reconcileHints": {
-        "apiId": "3c5f6bcb-7326-441d-9f6b-cb7326641d81",
-        "planId": "2a965e0a-f7f9-4821-965e-0af7f9e82151",
+        "apiId": "e75119af-323c-4544-9119-af323c8544ee",
+        "planId": "b8ef4a15-763a-47a0-af4a-15763ae7a062",
         "planKey": "API_KEY"
       },
       "lastError": null,
-      "startedAt": "2026-04-08T17:40:23.331Z",
-      "completedAt": "2026-04-08T17:40:23.561Z"
+      "startedAt": "2026-04-08T20:22:45.128Z",
+      "completedAt": "2026-04-08T20:22:45.375Z"
     },
     "VERIFY_PLAN:cats-api-7:API_KEY": {
       "actionId": "VERIFY_PLAN:cats-api-7:API_KEY",
@@ -636,18 +636,18 @@
         "UPSERT_PLAN:cats-api-7:API_KEY"
       ],
       "targetIds": {
-        "apiId": "3c5f6bcb-7326-441d-9f6b-cb7326641d81",
-        "planId": "2a965e0a-f7f9-4821-965e-0af7f9e82151",
+        "apiId": "e75119af-323c-4544-9119-af323c8544ee",
+        "planId": "b8ef4a15-763a-47a0-af4a-15763ae7a062",
         "planKey": "API_KEY"
       },
       "reconcileHints": {
-        "apiId": "3c5f6bcb-7326-441d-9f6b-cb7326641d81",
-        "planId": "2a965e0a-f7f9-4821-965e-0af7f9e82151",
+        "apiId": "e75119af-323c-4544-9119-af323c8544ee",
+        "planId": "b8ef4a15-763a-47a0-af4a-15763ae7a062",
         "planKey": "API_KEY"
       },
       "lastError": null,
-      "startedAt": "2026-04-08T17:40:23.564Z",
-      "completedAt": "2026-04-08T17:40:23.676Z"
+      "startedAt": "2026-04-08T20:22:45.378Z",
+      "completedAt": "2026-04-08T20:22:45.490Z"
     },
     "VERIFY_API:cats-api-7": {
       "actionId": "VERIFY_API:cats-api-7",
@@ -660,14 +660,14 @@
         "VERIFY_PLAN:cats-api-7:API_KEY"
       ],
       "targetIds": {
-        "apiId": "3c5f6bcb-7326-441d-9f6b-cb7326641d81"
+        "apiId": "e75119af-323c-4544-9119-af323c8544ee"
       },
       "reconcileHints": {
-        "apiId": "3c5f6bcb-7326-441d-9f6b-cb7326641d81"
+        "apiId": "e75119af-323c-4544-9119-af323c8544ee"
       },
       "lastError": null,
-      "startedAt": "2026-04-08T17:40:23.678Z",
-      "completedAt": "2026-04-08T17:40:23.733Z"
+      "startedAt": "2026-04-08T20:22:45.493Z",
+      "completedAt": "2026-04-08T20:22:45.550Z"
     },
     "UPSERT_API:chuck-norris-api-10": {
       "actionId": "UPSERT_API:chuck-norris-api-10",
@@ -677,14 +677,14 @@
       "status": "SUCCEEDED",
       "dependencies": [],
       "targetIds": {
-        "apiId": "fa91fcdb-489c-4176-91fc-db489ca17665"
+        "apiId": "99f69240-3f32-4ca7-b692-403f324ca774"
       },
       "reconcileHints": {
-        "apiId": "fa91fcdb-489c-4176-91fc-db489ca17665"
+        "apiId": "99f69240-3f32-4ca7-b692-403f324ca774"
       },
       "lastError": null,
-      "startedAt": "2026-04-08T17:40:23.736Z",
-      "completedAt": "2026-04-08T17:40:23.854Z"
+      "startedAt": "2026-04-08T20:22:45.552Z",
+      "completedAt": "2026-04-08T20:22:45.727Z"
     },
     "UPSERT_PLAN:chuck-norris-api-10:API_KEY": {
       "actionId": "UPSERT_PLAN:chuck-norris-api-10:API_KEY",
@@ -696,18 +696,18 @@
         "UPSERT_API:chuck-norris-api-10"
       ],
       "targetIds": {
-        "apiId": "fa91fcdb-489c-4176-91fc-db489ca17665",
-        "planId": "9cbe4ead-e8f7-438d-be4e-ade8f7e38dfb",
+        "apiId": "99f69240-3f32-4ca7-b692-403f324ca774",
+        "planId": "4349e7c0-6e76-4806-89e7-c06e76880667",
         "planKey": "API_KEY"
       },
       "reconcileHints": {
-        "apiId": "fa91fcdb-489c-4176-91fc-db489ca17665",
-        "planId": "9cbe4ead-e8f7-438d-be4e-ade8f7e38dfb",
+        "apiId": "99f69240-3f32-4ca7-b692-403f324ca774",
+        "planId": "4349e7c0-6e76-4806-89e7-c06e76880667",
         "planKey": "API_KEY"
       },
       "lastError": null,
-      "startedAt": "2026-04-08T17:40:23.857Z",
-      "completedAt": "2026-04-08T17:40:24.081Z"
+      "startedAt": "2026-04-08T20:22:45.729Z",
+      "completedAt": "2026-04-08T20:22:45.955Z"
     },
     "VERIFY_PLAN:chuck-norris-api-10:API_KEY": {
       "actionId": "VERIFY_PLAN:chuck-norris-api-10:API_KEY",
@@ -719,18 +719,18 @@
         "UPSERT_PLAN:chuck-norris-api-10:API_KEY"
       ],
       "targetIds": {
-        "apiId": "fa91fcdb-489c-4176-91fc-db489ca17665",
-        "planId": "9cbe4ead-e8f7-438d-be4e-ade8f7e38dfb",
+        "apiId": "99f69240-3f32-4ca7-b692-403f324ca774",
+        "planId": "4349e7c0-6e76-4806-89e7-c06e76880667",
         "planKey": "API_KEY"
       },
       "reconcileHints": {
-        "apiId": "fa91fcdb-489c-4176-91fc-db489ca17665",
-        "planId": "9cbe4ead-e8f7-438d-be4e-ade8f7e38dfb",
+        "apiId": "99f69240-3f32-4ca7-b692-403f324ca774",
+        "planId": "4349e7c0-6e76-4806-89e7-c06e76880667",
         "planKey": "API_KEY"
       },
       "lastError": null,
-      "startedAt": "2026-04-08T17:40:24.085Z",
-      "completedAt": "2026-04-08T17:40:24.197Z"
+      "startedAt": "2026-04-08T20:22:45.958Z",
+      "completedAt": "2026-04-08T20:22:46.071Z"
     },
     "VERIFY_API:chuck-norris-api-10": {
       "actionId": "VERIFY_API:chuck-norris-api-10",
@@ -743,14 +743,14 @@
         "VERIFY_PLAN:chuck-norris-api-10:API_KEY"
       ],
       "targetIds": {
-        "apiId": "fa91fcdb-489c-4176-91fc-db489ca17665"
+        "apiId": "99f69240-3f32-4ca7-b692-403f324ca774"
       },
       "reconcileHints": {
-        "apiId": "fa91fcdb-489c-4176-91fc-db489ca17665"
+        "apiId": "99f69240-3f32-4ca7-b692-403f324ca774"
       },
       "lastError": null,
-      "startedAt": "2026-04-08T17:40:24.200Z",
-      "completedAt": "2026-04-08T17:40:24.255Z"
+      "startedAt": "2026-04-08T20:22:46.074Z",
+      "completedAt": "2026-04-08T20:22:46.131Z"
     },
     "UPSERT_API:dog-breeds-api-6": {
       "actionId": "UPSERT_API:dog-breeds-api-6",
@@ -760,14 +760,14 @@
       "status": "SUCCEEDED",
       "dependencies": [],
       "targetIds": {
-        "apiId": "e06eb919-a21a-4014-aeb9-19a21a20147a"
+        "apiId": "1af91ac0-3037-4d9b-b91a-c030373d9b70"
       },
       "reconcileHints": {
-        "apiId": "e06eb919-a21a-4014-aeb9-19a21a20147a"
+        "apiId": "1af91ac0-3037-4d9b-b91a-c030373d9b70"
       },
       "lastError": null,
-      "startedAt": "2026-04-08T17:40:24.257Z",
-      "completedAt": "2026-04-08T17:40:24.379Z"
+      "startedAt": "2026-04-08T20:22:46.134Z",
+      "completedAt": "2026-04-08T20:22:46.309Z"
     },
     "UPSERT_PLAN:dog-breeds-api-6:API_KEY": {
       "actionId": "UPSERT_PLAN:dog-breeds-api-6:API_KEY",
@@ -779,18 +779,18 @@
         "UPSERT_API:dog-breeds-api-6"
       ],
       "targetIds": {
-        "apiId": "e06eb919-a21a-4014-aeb9-19a21a20147a",
-        "planId": "59b42f80-5ce8-498d-b42f-805ce8d98de6",
+        "apiId": "1af91ac0-3037-4d9b-b91a-c030373d9b70",
+        "planId": "aa7d6350-f7d8-4d4c-bd63-50f7d8cd4c55",
         "planKey": "API_KEY"
       },
       "reconcileHints": {
-        "apiId": "e06eb919-a21a-4014-aeb9-19a21a20147a",
-        "planId": "59b42f80-5ce8-498d-b42f-805ce8d98de6",
+        "apiId": "1af91ac0-3037-4d9b-b91a-c030373d9b70",
+        "planId": "aa7d6350-f7d8-4d4c-bd63-50f7d8cd4c55",
         "planKey": "API_KEY"
       },
       "lastError": null,
-      "startedAt": "2026-04-08T17:40:24.381Z",
-      "completedAt": "2026-04-08T17:40:24.609Z"
+      "startedAt": "2026-04-08T20:22:46.311Z",
+      "completedAt": "2026-04-08T20:22:46.538Z"
     },
     "VERIFY_PLAN:dog-breeds-api-6:API_KEY": {
       "actionId": "VERIFY_PLAN:dog-breeds-api-6:API_KEY",
@@ -802,18 +802,18 @@
         "UPSERT_PLAN:dog-breeds-api-6:API_KEY"
       ],
       "targetIds": {
-        "apiId": "e06eb919-a21a-4014-aeb9-19a21a20147a",
-        "planId": "59b42f80-5ce8-498d-b42f-805ce8d98de6",
+        "apiId": "1af91ac0-3037-4d9b-b91a-c030373d9b70",
+        "planId": "aa7d6350-f7d8-4d4c-bd63-50f7d8cd4c55",
         "planKey": "API_KEY"
       },
       "reconcileHints": {
-        "apiId": "e06eb919-a21a-4014-aeb9-19a21a20147a",
-        "planId": "59b42f80-5ce8-498d-b42f-805ce8d98de6",
+        "apiId": "1af91ac0-3037-4d9b-b91a-c030373d9b70",
+        "planId": "aa7d6350-f7d8-4d4c-bd63-50f7d8cd4c55",
         "planKey": "API_KEY"
       },
       "lastError": null,
-      "startedAt": "2026-04-08T17:40:24.612Z",
-      "completedAt": "2026-04-08T17:40:24.724Z"
+      "startedAt": "2026-04-08T20:22:46.541Z",
+      "completedAt": "2026-04-08T20:22:46.654Z"
     },
     "VERIFY_API:dog-breeds-api-6": {
       "actionId": "VERIFY_API:dog-breeds-api-6",
@@ -826,14 +826,14 @@
         "VERIFY_PLAN:dog-breeds-api-6:API_KEY"
       ],
       "targetIds": {
-        "apiId": "e06eb919-a21a-4014-aeb9-19a21a20147a"
+        "apiId": "1af91ac0-3037-4d9b-b91a-c030373d9b70"
       },
       "reconcileHints": {
-        "apiId": "e06eb919-a21a-4014-aeb9-19a21a20147a"
+        "apiId": "1af91ac0-3037-4d9b-b91a-c030373d9b70"
       },
       "lastError": null,
-      "startedAt": "2026-04-08T17:40:24.727Z",
-      "completedAt": "2026-04-08T17:40:24.783Z"
+      "startedAt": "2026-04-08T20:22:46.656Z",
+      "completedAt": "2026-04-08T20:22:46.713Z"
     },
     "UPSERT_API:get-kvm-proxy": {
       "actionId": "UPSERT_API:get-kvm-proxy",
@@ -845,8 +845,8 @@
       "targetIds": {},
       "reconcileHints": {},
       "lastError": "v4-management-full -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 404: {\"httpStatus\":404,\"message\":\"Plugin [assign-attributes] cannot be found.\",\"technicalCode\":\"plugin.notFound\",\"parameters\":{\"plugin\":\"assign-attributes\"},\"details\":[]} | v4-management-shell -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 404: {\"httpStatus\":404,\"message\":\"Plugin [assign-attributes] cannot be found.\",\"technicalCode\":\"plugin.notFound\",\"parameters\":{\"plugin\":\"assign-attributes\"},\"details\":[]} | legacy-import-wrapper -> POST http://localhost:8083/management/organizations/DEFAULT/environments/DEFAULT/apis/import → HTTP 500: {\"message\":\"Cannot invoke \\\"io.gravitee.definition.model.Proxy.getVirtualHosts()\\\" because the return value of \\\"io.gravitee.rest.api.model.api.UpdateApiEntity.getProxy()\\\" is null\",\"http_status\":500}",
-      "startedAt": "2026-04-08T17:40:24.785Z",
-      "completedAt": "2026-04-08T17:40:32.290Z"
+      "startedAt": "2026-04-08T20:22:46.715Z",
+      "completedAt": "2026-04-08T20:22:54.253Z"
     },
     "UPSERT_PLAN:get-kvm-proxy:KEYLESS": {
       "actionId": "UPSERT_PLAN:get-kvm-proxy:KEYLESS",
@@ -861,7 +861,7 @@
       "reconcileHints": {},
       "lastError": "dependency not satisfied: UPSERT_API:get-kvm-proxy=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-08T17:40:32.294Z"
+      "completedAt": "2026-04-08T20:22:54.257Z"
     },
     "VERIFY_PLAN:get-kvm-proxy:KEYLESS": {
       "actionId": "VERIFY_PLAN:get-kvm-proxy:KEYLESS",
@@ -876,7 +876,7 @@
       "reconcileHints": {},
       "lastError": "dependency not satisfied: UPSERT_PLAN:get-kvm-proxy:KEYLESS=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-08T17:40:32.294Z"
+      "completedAt": "2026-04-08T20:22:54.257Z"
     },
     "VERIFY_API:get-kvm-proxy": {
       "actionId": "VERIFY_API:get-kvm-proxy",
@@ -892,7 +892,7 @@
       "reconcileHints": {},
       "lastError": "dependency not satisfied: UPSERT_API:get-kvm-proxy=MANUAL_REVIEW, VERIFY_PLAN:get-kvm-proxy:KEYLESS=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-08T17:40:32.294Z"
+      "completedAt": "2026-04-08T20:22:54.257Z"
     },
     "UPSERT_API:harry-potter-characters": {
       "actionId": "UPSERT_API:harry-potter-characters",
@@ -902,14 +902,14 @@
       "status": "SUCCEEDED",
       "dependencies": [],
       "targetIds": {
-        "apiId": "edf78fcd-aed8-4578-b78f-cdaed8c57893"
+        "apiId": "e12365b9-a2f6-4133-a365-b9a2f61133ba"
       },
       "reconcileHints": {
-        "apiId": "edf78fcd-aed8-4578-b78f-cdaed8c57893"
+        "apiId": "e12365b9-a2f6-4133-a365-b9a2f61133ba"
       },
       "lastError": null,
-      "startedAt": "2026-04-08T17:40:32.294Z",
-      "completedAt": "2026-04-08T17:40:32.417Z"
+      "startedAt": "2026-04-08T20:22:54.257Z",
+      "completedAt": "2026-04-08T20:22:54.436Z"
     },
     "UPSERT_PLAN:harry-potter-characters:KEYLESS": {
       "actionId": "UPSERT_PLAN:harry-potter-characters:KEYLESS",
@@ -921,18 +921,18 @@
         "UPSERT_API:harry-potter-characters"
       ],
       "targetIds": {
-        "apiId": "edf78fcd-aed8-4578-b78f-cdaed8c57893",
-        "planId": "8218faf9-0ba3-46da-98fa-f90ba386da7f",
+        "apiId": "e12365b9-a2f6-4133-a365-b9a2f61133ba",
+        "planId": "fd5dc33c-65a7-470d-9dc3-3c65a7b70d98",
         "planKey": "KEYLESS"
       },
       "reconcileHints": {
-        "apiId": "edf78fcd-aed8-4578-b78f-cdaed8c57893",
-        "planId": "8218faf9-0ba3-46da-98fa-f90ba386da7f",
+        "apiId": "e12365b9-a2f6-4133-a365-b9a2f61133ba",
+        "planId": "fd5dc33c-65a7-470d-9dc3-3c65a7b70d98",
         "planKey": "KEYLESS"
       },
       "lastError": null,
-      "startedAt": "2026-04-08T17:40:32.419Z",
-      "completedAt": "2026-04-08T17:40:32.646Z"
+      "startedAt": "2026-04-08T20:22:54.438Z",
+      "completedAt": "2026-04-08T20:22:54.663Z"
     },
     "VERIFY_PLAN:harry-potter-characters:KEYLESS": {
       "actionId": "VERIFY_PLAN:harry-potter-characters:KEYLESS",
@@ -944,18 +944,18 @@
         "UPSERT_PLAN:harry-potter-characters:KEYLESS"
       ],
       "targetIds": {
-        "apiId": "edf78fcd-aed8-4578-b78f-cdaed8c57893",
-        "planId": "8218faf9-0ba3-46da-98fa-f90ba386da7f",
+        "apiId": "e12365b9-a2f6-4133-a365-b9a2f61133ba",
+        "planId": "fd5dc33c-65a7-470d-9dc3-3c65a7b70d98",
         "planKey": "KEYLESS"
       },
       "reconcileHints": {
-        "apiId": "edf78fcd-aed8-4578-b78f-cdaed8c57893",
-        "planId": "8218faf9-0ba3-46da-98fa-f90ba386da7f",
+        "apiId": "e12365b9-a2f6-4133-a365-b9a2f61133ba",
+        "planId": "fd5dc33c-65a7-470d-9dc3-3c65a7b70d98",
         "planKey": "KEYLESS"
       },
       "lastError": null,
-      "startedAt": "2026-04-08T17:40:32.649Z",
-      "completedAt": "2026-04-08T17:40:32.761Z"
+      "startedAt": "2026-04-08T20:22:54.666Z",
+      "completedAt": "2026-04-08T20:22:54.779Z"
     },
     "VERIFY_API:harry-potter-characters": {
       "actionId": "VERIFY_API:harry-potter-characters",
@@ -968,14 +968,14 @@
         "VERIFY_PLAN:harry-potter-characters:KEYLESS"
       ],
       "targetIds": {
-        "apiId": "edf78fcd-aed8-4578-b78f-cdaed8c57893"
+        "apiId": "e12365b9-a2f6-4133-a365-b9a2f61133ba"
       },
       "reconcileHints": {
-        "apiId": "edf78fcd-aed8-4578-b78f-cdaed8c57893"
+        "apiId": "e12365b9-a2f6-4133-a365-b9a2f61133ba"
       },
       "lastError": null,
-      "startedAt": "2026-04-08T17:40:32.763Z",
-      "completedAt": "2026-04-08T17:40:32.823Z"
+      "startedAt": "2026-04-08T20:22:54.781Z",
+      "completedAt": "2026-04-08T20:22:54.837Z"
     },
     "UPSERT_API:hogwarts-houses-api-8": {
       "actionId": "UPSERT_API:hogwarts-houses-api-8",
@@ -985,14 +985,14 @@
       "status": "SUCCEEDED",
       "dependencies": [],
       "targetIds": {
-        "apiId": "64f051c6-945b-4b6f-b051-c6945bbb6f6c"
+        "apiId": "8ff47997-a83c-4f5f-b479-97a83c6f5fab"
       },
       "reconcileHints": {
-        "apiId": "64f051c6-945b-4b6f-b051-c6945bbb6f6c"
+        "apiId": "8ff47997-a83c-4f5f-b479-97a83c6f5fab"
       },
       "lastError": null,
-      "startedAt": "2026-04-08T17:40:32.826Z",
-      "completedAt": "2026-04-08T17:40:32.948Z"
+      "startedAt": "2026-04-08T20:22:54.840Z",
+      "completedAt": "2026-04-08T20:22:55.017Z"
     },
     "UPSERT_PLAN:hogwarts-houses-api-8:API_KEY": {
       "actionId": "UPSERT_PLAN:hogwarts-houses-api-8:API_KEY",
@@ -1004,18 +1004,18 @@
         "UPSERT_API:hogwarts-houses-api-8"
       ],
       "targetIds": {
-        "apiId": "64f051c6-945b-4b6f-b051-c6945bbb6f6c",
-        "planId": "cae35e7e-be75-41ef-a35e-7ebe75d1ef15",
+        "apiId": "8ff47997-a83c-4f5f-b479-97a83c6f5fab",
+        "planId": "422cbaee-57cf-4375-acba-ee57cfa375a4",
         "planKey": "API_KEY"
       },
       "reconcileHints": {
-        "apiId": "64f051c6-945b-4b6f-b051-c6945bbb6f6c",
-        "planId": "cae35e7e-be75-41ef-a35e-7ebe75d1ef15",
+        "apiId": "8ff47997-a83c-4f5f-b479-97a83c6f5fab",
+        "planId": "422cbaee-57cf-4375-acba-ee57cfa375a4",
         "planKey": "API_KEY"
       },
       "lastError": null,
-      "startedAt": "2026-04-08T17:40:32.951Z",
-      "completedAt": "2026-04-08T17:40:33.177Z"
+      "startedAt": "2026-04-08T20:22:55.020Z",
+      "completedAt": "2026-04-08T20:22:55.247Z"
     },
     "VERIFY_PLAN:hogwarts-houses-api-8:API_KEY": {
       "actionId": "VERIFY_PLAN:hogwarts-houses-api-8:API_KEY",
@@ -1027,18 +1027,18 @@
         "UPSERT_PLAN:hogwarts-houses-api-8:API_KEY"
       ],
       "targetIds": {
-        "apiId": "64f051c6-945b-4b6f-b051-c6945bbb6f6c",
-        "planId": "cae35e7e-be75-41ef-a35e-7ebe75d1ef15",
+        "apiId": "8ff47997-a83c-4f5f-b479-97a83c6f5fab",
+        "planId": "422cbaee-57cf-4375-acba-ee57cfa375a4",
         "planKey": "API_KEY"
       },
       "reconcileHints": {
-        "apiId": "64f051c6-945b-4b6f-b051-c6945bbb6f6c",
-        "planId": "cae35e7e-be75-41ef-a35e-7ebe75d1ef15",
+        "apiId": "8ff47997-a83c-4f5f-b479-97a83c6f5fab",
+        "planId": "422cbaee-57cf-4375-acba-ee57cfa375a4",
         "planKey": "API_KEY"
       },
       "lastError": null,
-      "startedAt": "2026-04-08T17:40:33.180Z",
-      "completedAt": "2026-04-08T17:40:33.292Z"
+      "startedAt": "2026-04-08T20:22:55.251Z",
+      "completedAt": "2026-04-08T20:22:55.363Z"
     },
     "VERIFY_API:hogwarts-houses-api-8": {
       "actionId": "VERIFY_API:hogwarts-houses-api-8",
@@ -1051,14 +1051,14 @@
         "VERIFY_PLAN:hogwarts-houses-api-8:API_KEY"
       ],
       "targetIds": {
-        "apiId": "64f051c6-945b-4b6f-b051-c6945bbb6f6c"
+        "apiId": "8ff47997-a83c-4f5f-b479-97a83c6f5fab"
       },
       "reconcileHints": {
-        "apiId": "64f051c6-945b-4b6f-b051-c6945bbb6f6c"
+        "apiId": "8ff47997-a83c-4f5f-b479-97a83c6f5fab"
       },
       "lastError": null,
-      "startedAt": "2026-04-08T17:40:33.296Z",
-      "completedAt": "2026-04-08T17:40:33.351Z"
+      "startedAt": "2026-04-08T20:22:55.367Z",
+      "completedAt": "2026-04-08T20:22:55.423Z"
     },
     "UPSERT_API:kanye-rest-api-5": {
       "actionId": "UPSERT_API:kanye-rest-api-5",
@@ -1070,8 +1070,8 @@
       "targetIds": {},
       "reconcileHints": {},
       "lastError": "v4-management-full -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 404: {\"httpStatus\":404,\"message\":\"Plugin [assign-attributes] cannot be found.\",\"technicalCode\":\"plugin.notFound\",\"parameters\":{\"plugin\":\"assign-attributes\"},\"details\":[]} | v4-management-shell -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 404: {\"httpStatus\":404,\"message\":\"Plugin [assign-attributes] cannot be found.\",\"technicalCode\":\"plugin.notFound\",\"parameters\":{\"plugin\":\"assign-attributes\"},\"details\":[]} | legacy-import-wrapper -> POST http://localhost:8083/management/organizations/DEFAULT/environments/DEFAULT/apis/import → HTTP 500: {\"message\":\"Cannot invoke \\\"io.gravitee.definition.model.Proxy.getVirtualHosts()\\\" because the return value of \\\"io.gravitee.rest.api.model.api.UpdateApiEntity.getProxy()\\\" is null\",\"http_status\":500}",
-      "startedAt": "2026-04-08T17:40:33.354Z",
-      "completedAt": "2026-04-08T17:40:40.856Z"
+      "startedAt": "2026-04-08T20:22:55.426Z",
+      "completedAt": "2026-04-08T20:23:02.966Z"
     },
     "UPSERT_PLAN:kanye-rest-api-5:API_KEY": {
       "actionId": "UPSERT_PLAN:kanye-rest-api-5:API_KEY",
@@ -1086,7 +1086,7 @@
       "reconcileHints": {},
       "lastError": "dependency not satisfied: UPSERT_API:kanye-rest-api-5=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-08T17:40:40.859Z"
+      "completedAt": "2026-04-08T20:23:02.969Z"
     },
     "VERIFY_PLAN:kanye-rest-api-5:API_KEY": {
       "actionId": "VERIFY_PLAN:kanye-rest-api-5:API_KEY",
@@ -1101,7 +1101,7 @@
       "reconcileHints": {},
       "lastError": "dependency not satisfied: UPSERT_PLAN:kanye-rest-api-5:API_KEY=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-08T17:40:40.859Z"
+      "completedAt": "2026-04-08T20:23:02.969Z"
     },
     "VERIFY_API:kanye-rest-api-5": {
       "actionId": "VERIFY_API:kanye-rest-api-5",
@@ -1117,7 +1117,7 @@
       "reconcileHints": {},
       "lastError": "dependency not satisfied: UPSERT_API:kanye-rest-api-5=MANUAL_REVIEW, VERIFY_PLAN:kanye-rest-api-5:API_KEY=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-08T17:40:40.859Z"
+      "completedAt": "2026-04-08T20:23:02.969Z"
     },
     "UPSERT_API:kvm-test": {
       "actionId": "UPSERT_API:kvm-test",
@@ -1129,8 +1129,8 @@
       "targetIds": {},
       "reconcileHints": {},
       "lastError": "v4-management-full -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 404: {\"httpStatus\":404,\"message\":\"Plugin [assign-attributes] cannot be found.\",\"technicalCode\":\"plugin.notFound\",\"parameters\":{\"plugin\":\"assign-attributes\"},\"details\":[]} | v4-management-shell -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 404: {\"httpStatus\":404,\"message\":\"Plugin [assign-attributes] cannot be found.\",\"technicalCode\":\"plugin.notFound\",\"parameters\":{\"plugin\":\"assign-attributes\"},\"details\":[]} | legacy-import-wrapper -> POST http://localhost:8083/management/organizations/DEFAULT/environments/DEFAULT/apis/import → HTTP 500: {\"message\":\"Cannot invoke \\\"io.gravitee.definition.model.Proxy.getVirtualHosts()\\\" because the return value of \\\"io.gravitee.rest.api.model.api.UpdateApiEntity.getProxy()\\\" is null\",\"http_status\":500}",
-      "startedAt": "2026-04-08T17:40:40.859Z",
-      "completedAt": "2026-04-08T17:40:48.366Z"
+      "startedAt": "2026-04-08T20:23:02.969Z",
+      "completedAt": "2026-04-08T20:23:10.534Z"
     },
     "UPSERT_PLAN:kvm-test:KEYLESS": {
       "actionId": "UPSERT_PLAN:kvm-test:KEYLESS",
@@ -1145,7 +1145,7 @@
       "reconcileHints": {},
       "lastError": "dependency not satisfied: UPSERT_API:kvm-test=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-08T17:40:48.369Z"
+      "completedAt": "2026-04-08T20:23:10.536Z"
     },
     "VERIFY_PLAN:kvm-test:KEYLESS": {
       "actionId": "VERIFY_PLAN:kvm-test:KEYLESS",
@@ -1160,7 +1160,7 @@
       "reconcileHints": {},
       "lastError": "dependency not satisfied: UPSERT_PLAN:kvm-test:KEYLESS=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-08T17:40:48.369Z"
+      "completedAt": "2026-04-08T20:23:10.536Z"
     },
     "VERIFY_API:kvm-test": {
       "actionId": "VERIFY_API:kvm-test",
@@ -1176,7 +1176,7 @@
       "reconcileHints": {},
       "lastError": "dependency not satisfied: UPSERT_API:kvm-test=MANUAL_REVIEW, VERIFY_PLAN:kvm-test:KEYLESS=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-08T17:40:48.369Z"
+      "completedAt": "2026-04-08T20:23:10.536Z"
     },
     "UPSERT_API:load-balance-target-servers-api": {
       "actionId": "UPSERT_API:load-balance-target-servers-api",
@@ -1186,14 +1186,14 @@
       "status": "SUCCEEDED",
       "dependencies": [],
       "targetIds": {
-        "apiId": "4c93e833-2048-4d5d-93e8-3320481d5df7"
+        "apiId": "72f4634c-b282-4d9a-b463-4cb282fd9aa8"
       },
       "reconcileHints": {
-        "apiId": "4c93e833-2048-4d5d-93e8-3320481d5df7"
+        "apiId": "72f4634c-b282-4d9a-b463-4cb282fd9aa8"
       },
       "lastError": null,
-      "startedAt": "2026-04-08T17:40:48.369Z",
-      "completedAt": "2026-04-08T17:40:48.492Z"
+      "startedAt": "2026-04-08T20:23:10.536Z",
+      "completedAt": "2026-04-08T20:23:10.714Z"
     },
     "UPSERT_PLAN:load-balance-target-servers-api:KEYLESS": {
       "actionId": "UPSERT_PLAN:load-balance-target-servers-api:KEYLESS",
@@ -1205,18 +1205,18 @@
         "UPSERT_API:load-balance-target-servers-api"
       ],
       "targetIds": {
-        "apiId": "4c93e833-2048-4d5d-93e8-3320481d5df7",
-        "planId": "cd3a0ba1-c2e8-4409-ba0b-a1c2e864096c",
+        "apiId": "72f4634c-b282-4d9a-b463-4cb282fd9aa8",
+        "planId": "a1831ab3-2790-437a-831a-b32790337ad6",
         "planKey": "KEYLESS"
       },
       "reconcileHints": {
-        "apiId": "4c93e833-2048-4d5d-93e8-3320481d5df7",
-        "planId": "cd3a0ba1-c2e8-4409-ba0b-a1c2e864096c",
+        "apiId": "72f4634c-b282-4d9a-b463-4cb282fd9aa8",
+        "planId": "a1831ab3-2790-437a-831a-b32790337ad6",
         "planKey": "KEYLESS"
       },
       "lastError": null,
-      "startedAt": "2026-04-08T17:40:48.494Z",
-      "completedAt": "2026-04-08T17:40:48.722Z"
+      "startedAt": "2026-04-08T20:23:10.716Z",
+      "completedAt": "2026-04-08T20:23:10.944Z"
     },
     "VERIFY_PLAN:load-balance-target-servers-api:KEYLESS": {
       "actionId": "VERIFY_PLAN:load-balance-target-servers-api:KEYLESS",
@@ -1228,18 +1228,18 @@
         "UPSERT_PLAN:load-balance-target-servers-api:KEYLESS"
       ],
       "targetIds": {
-        "apiId": "4c93e833-2048-4d5d-93e8-3320481d5df7",
-        "planId": "cd3a0ba1-c2e8-4409-ba0b-a1c2e864096c",
+        "apiId": "72f4634c-b282-4d9a-b463-4cb282fd9aa8",
+        "planId": "a1831ab3-2790-437a-831a-b32790337ad6",
         "planKey": "KEYLESS"
       },
       "reconcileHints": {
-        "apiId": "4c93e833-2048-4d5d-93e8-3320481d5df7",
-        "planId": "cd3a0ba1-c2e8-4409-ba0b-a1c2e864096c",
+        "apiId": "72f4634c-b282-4d9a-b463-4cb282fd9aa8",
+        "planId": "a1831ab3-2790-437a-831a-b32790337ad6",
         "planKey": "KEYLESS"
       },
       "lastError": null,
-      "startedAt": "2026-04-08T17:40:48.726Z",
-      "completedAt": "2026-04-08T17:40:48.840Z"
+      "startedAt": "2026-04-08T20:23:10.946Z",
+      "completedAt": "2026-04-08T20:23:11.059Z"
     },
     "VERIFY_API:load-balance-target-servers-api": {
       "actionId": "VERIFY_API:load-balance-target-servers-api",
@@ -1252,14 +1252,14 @@
         "VERIFY_PLAN:load-balance-target-servers-api:KEYLESS"
       ],
       "targetIds": {
-        "apiId": "4c93e833-2048-4d5d-93e8-3320481d5df7"
+        "apiId": "72f4634c-b282-4d9a-b463-4cb282fd9aa8"
       },
       "reconcileHints": {
-        "apiId": "4c93e833-2048-4d5d-93e8-3320481d5df7"
+        "apiId": "72f4634c-b282-4d9a-b463-4cb282fd9aa8"
       },
       "lastError": null,
-      "startedAt": "2026-04-08T17:40:48.844Z",
-      "completedAt": "2026-04-08T17:40:48.900Z"
+      "startedAt": "2026-04-08T20:23:11.061Z",
+      "completedAt": "2026-04-08T20:23:11.118Z"
     },
     "UPSERT_API:mock-target-api": {
       "actionId": "UPSERT_API:mock-target-api",
@@ -1271,8 +1271,8 @@
       "targetIds": {},
       "reconcileHints": {},
       "lastError": "v4-management-full -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 404: {\"httpStatus\":404,\"message\":\"Plugin [assign-attributes] cannot be found.\",\"technicalCode\":\"plugin.notFound\",\"parameters\":{\"plugin\":\"assign-attributes\"},\"details\":[]} | v4-management-shell -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 404: {\"httpStatus\":404,\"message\":\"Plugin [assign-attributes] cannot be found.\",\"technicalCode\":\"plugin.notFound\",\"parameters\":{\"plugin\":\"assign-attributes\"},\"details\":[]} | legacy-import-wrapper -> POST http://localhost:8083/management/organizations/DEFAULT/environments/DEFAULT/apis/import → HTTP 500: {\"message\":\"Cannot invoke \\\"io.gravitee.definition.model.Proxy.getVirtualHosts()\\\" because the return value of \\\"io.gravitee.rest.api.model.api.UpdateApiEntity.getProxy()\\\" is null\",\"http_status\":500}",
-      "startedAt": "2026-04-08T17:40:48.903Z",
-      "completedAt": "2026-04-08T17:40:56.401Z"
+      "startedAt": "2026-04-08T20:23:11.121Z",
+      "completedAt": "2026-04-08T20:23:18.673Z"
     },
     "UPSERT_PLAN:mock-target-api:KEYLESS": {
       "actionId": "UPSERT_PLAN:mock-target-api:KEYLESS",
@@ -1287,7 +1287,7 @@
       "reconcileHints": {},
       "lastError": "dependency not satisfied: UPSERT_API:mock-target-api=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-08T17:40:56.404Z"
+      "completedAt": "2026-04-08T20:23:18.676Z"
     },
     "VERIFY_PLAN:mock-target-api:KEYLESS": {
       "actionId": "VERIFY_PLAN:mock-target-api:KEYLESS",
@@ -1302,7 +1302,7 @@
       "reconcileHints": {},
       "lastError": "dependency not satisfied: UPSERT_PLAN:mock-target-api:KEYLESS=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-08T17:40:56.404Z"
+      "completedAt": "2026-04-08T20:23:18.676Z"
     },
     "VERIFY_API:mock-target-api": {
       "actionId": "VERIFY_API:mock-target-api",
@@ -1318,7 +1318,7 @@
       "reconcileHints": {},
       "lastError": "dependency not satisfied: UPSERT_API:mock-target-api=MANUAL_REVIEW, VERIFY_PLAN:mock-target-api:KEYLESS=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-08T17:40:56.404Z"
+      "completedAt": "2026-04-08T20:23:18.676Z"
     },
     "UPSERT_API:proxy-sharedflow-api-11": {
       "actionId": "UPSERT_API:proxy-sharedflow-api-11",
@@ -1328,60 +1328,80 @@
       "status": "SUCCEEDED",
       "dependencies": [],
       "targetIds": {
-        "apiId": "6a8815b9-17ca-40f6-8815-b917ca50f6de"
+        "apiId": "327d44c3-0b0b-4e38-bd44-c30b0b5e3852"
       },
       "reconcileHints": {
-        "apiId": "6a8815b9-17ca-40f6-8815-b917ca50f6de"
+        "apiId": "327d44c3-0b0b-4e38-bd44-c30b0b5e3852"
       },
       "lastError": null,
-      "startedAt": "2026-04-08T17:40:56.404Z",
-      "completedAt": "2026-04-08T17:40:56.526Z"
+      "startedAt": "2026-04-08T20:23:18.676Z",
+      "completedAt": "2026-04-08T20:23:18.854Z"
     },
     "UPSERT_PLAN:proxy-sharedflow-api-11:KEYLESS": {
       "actionId": "UPSERT_PLAN:proxy-sharedflow-api-11:KEYLESS",
       "kind": "UPSERT_PLAN",
       "sourceId": "proxy-sharedflow-api-11",
       "plannedStatus": "READY",
-      "status": "FAILED",
+      "status": "SUCCEEDED",
       "dependencies": [
         "UPSERT_API:proxy-sharedflow-api-11"
       ],
-      "targetIds": {},
-      "reconcileHints": {},
-      "lastError": "API proxy-sharedflow-api-11 was not found before plan import",
-      "startedAt": "2026-04-08T17:40:56.529Z",
-      "completedAt": "2026-04-08T17:40:56.585Z"
+      "targetIds": {
+        "apiId": "327d44c3-0b0b-4e38-bd44-c30b0b5e3852",
+        "planId": "ba4a0d04-268c-4182-8a0d-04268cc182f2",
+        "planKey": "KEYLESS"
+      },
+      "reconcileHints": {
+        "apiId": "327d44c3-0b0b-4e38-bd44-c30b0b5e3852",
+        "planId": "ba4a0d04-268c-4182-8a0d-04268cc182f2",
+        "planKey": "KEYLESS"
+      },
+      "lastError": null,
+      "startedAt": "2026-04-08T20:23:18.857Z",
+      "completedAt": "2026-04-08T20:23:19.085Z"
     },
     "VERIFY_PLAN:proxy-sharedflow-api-11:KEYLESS": {
       "actionId": "VERIFY_PLAN:proxy-sharedflow-api-11:KEYLESS",
       "kind": "VERIFY_PLAN",
       "sourceId": "proxy-sharedflow-api-11",
       "plannedStatus": "READY",
-      "status": "BLOCKED",
+      "status": "SUCCEEDED",
       "dependencies": [
         "UPSERT_PLAN:proxy-sharedflow-api-11:KEYLESS"
       ],
-      "targetIds": {},
-      "reconcileHints": {},
-      "lastError": "dependency not satisfied: UPSERT_PLAN:proxy-sharedflow-api-11:KEYLESS=FAILED",
-      "startedAt": null,
-      "completedAt": "2026-04-08T17:40:56.588Z"
+      "targetIds": {
+        "apiId": "327d44c3-0b0b-4e38-bd44-c30b0b5e3852",
+        "planId": "ba4a0d04-268c-4182-8a0d-04268cc182f2",
+        "planKey": "KEYLESS"
+      },
+      "reconcileHints": {
+        "apiId": "327d44c3-0b0b-4e38-bd44-c30b0b5e3852",
+        "planId": "ba4a0d04-268c-4182-8a0d-04268cc182f2",
+        "planKey": "KEYLESS"
+      },
+      "lastError": null,
+      "startedAt": "2026-04-08T20:23:19.089Z",
+      "completedAt": "2026-04-08T20:23:19.202Z"
     },
     "VERIFY_API:proxy-sharedflow-api-11": {
       "actionId": "VERIFY_API:proxy-sharedflow-api-11",
       "kind": "VERIFY_API",
       "sourceId": "proxy-sharedflow-api-11",
       "plannedStatus": "READY",
-      "status": "BLOCKED",
+      "status": "SUCCEEDED",
       "dependencies": [
         "UPSERT_API:proxy-sharedflow-api-11",
         "VERIFY_PLAN:proxy-sharedflow-api-11:KEYLESS"
       ],
-      "targetIds": {},
-      "reconcileHints": {},
-      "lastError": "dependency not satisfied: UPSERT_API:proxy-sharedflow-api-11=SUCCEEDED, VERIFY_PLAN:proxy-sharedflow-api-11:KEYLESS=BLOCKED",
-      "startedAt": null,
-      "completedAt": "2026-04-08T17:40:56.588Z"
+      "targetIds": {
+        "apiId": "327d44c3-0b0b-4e38-bd44-c30b0b5e3852"
+      },
+      "reconcileHints": {
+        "apiId": "327d44c3-0b0b-4e38-bd44-c30b0b5e3852"
+      },
+      "lastError": null,
+      "startedAt": "2026-04-08T20:23:19.205Z",
+      "completedAt": "2026-04-08T20:23:19.261Z"
     },
     "UPSERT_API:v1-ships": {
       "actionId": "UPSERT_API:v1-ships",
@@ -1391,60 +1411,80 @@
       "status": "SUCCEEDED",
       "dependencies": [],
       "targetIds": {
-        "apiId": "28e49402-70c1-4524-a494-0270c165248f"
+        "apiId": "18013af2-9e87-4e75-813a-f29e877e7576"
       },
       "reconcileHints": {
-        "apiId": "28e49402-70c1-4524-a494-0270c165248f"
+        "apiId": "18013af2-9e87-4e75-813a-f29e877e7576"
       },
       "lastError": null,
-      "startedAt": "2026-04-08T17:40:56.588Z",
-      "completedAt": "2026-04-08T17:40:56.705Z"
+      "startedAt": "2026-04-08T20:23:19.264Z",
+      "completedAt": "2026-04-08T20:23:19.435Z"
     },
     "UPSERT_PLAN:v1-ships:KEYLESS": {
       "actionId": "UPSERT_PLAN:v1-ships:KEYLESS",
       "kind": "UPSERT_PLAN",
       "sourceId": "v1-ships",
       "plannedStatus": "READY",
-      "status": "FAILED",
+      "status": "SUCCEEDED",
       "dependencies": [
         "UPSERT_API:v1-ships"
       ],
-      "targetIds": {},
-      "reconcileHints": {},
-      "lastError": "API v1-ships was not found before plan import",
-      "startedAt": "2026-04-08T17:40:56.708Z",
-      "completedAt": "2026-04-08T17:40:56.765Z"
+      "targetIds": {
+        "apiId": "18013af2-9e87-4e75-813a-f29e877e7576",
+        "planId": "e76b1731-7249-4a6d-ab17-317249ba6d03",
+        "planKey": "KEYLESS"
+      },
+      "reconcileHints": {
+        "apiId": "18013af2-9e87-4e75-813a-f29e877e7576",
+        "planId": "e76b1731-7249-4a6d-ab17-317249ba6d03",
+        "planKey": "KEYLESS"
+      },
+      "lastError": null,
+      "startedAt": "2026-04-08T20:23:19.438Z",
+      "completedAt": "2026-04-08T20:23:19.664Z"
     },
     "VERIFY_PLAN:v1-ships:KEYLESS": {
       "actionId": "VERIFY_PLAN:v1-ships:KEYLESS",
       "kind": "VERIFY_PLAN",
       "sourceId": "v1-ships",
       "plannedStatus": "READY",
-      "status": "BLOCKED",
+      "status": "SUCCEEDED",
       "dependencies": [
         "UPSERT_PLAN:v1-ships:KEYLESS"
       ],
-      "targetIds": {},
-      "reconcileHints": {},
-      "lastError": "dependency not satisfied: UPSERT_PLAN:v1-ships:KEYLESS=FAILED",
-      "startedAt": null,
-      "completedAt": "2026-04-08T17:40:56.768Z"
+      "targetIds": {
+        "apiId": "18013af2-9e87-4e75-813a-f29e877e7576",
+        "planId": "e76b1731-7249-4a6d-ab17-317249ba6d03",
+        "planKey": "KEYLESS"
+      },
+      "reconcileHints": {
+        "apiId": "18013af2-9e87-4e75-813a-f29e877e7576",
+        "planId": "e76b1731-7249-4a6d-ab17-317249ba6d03",
+        "planKey": "KEYLESS"
+      },
+      "lastError": null,
+      "startedAt": "2026-04-08T20:23:19.667Z",
+      "completedAt": "2026-04-08T20:23:19.780Z"
     },
     "VERIFY_API:v1-ships": {
       "actionId": "VERIFY_API:v1-ships",
       "kind": "VERIFY_API",
       "sourceId": "v1-ships",
       "plannedStatus": "READY",
-      "status": "BLOCKED",
+      "status": "SUCCEEDED",
       "dependencies": [
         "UPSERT_API:v1-ships",
         "VERIFY_PLAN:v1-ships:KEYLESS"
       ],
-      "targetIds": {},
-      "reconcileHints": {},
-      "lastError": "dependency not satisfied: UPSERT_API:v1-ships=SUCCEEDED, VERIFY_PLAN:v1-ships:KEYLESS=BLOCKED",
-      "startedAt": null,
-      "completedAt": "2026-04-08T17:40:56.768Z"
+      "targetIds": {
+        "apiId": "18013af2-9e87-4e75-813a-f29e877e7576"
+      },
+      "reconcileHints": {
+        "apiId": "18013af2-9e87-4e75-813a-f29e877e7576"
+      },
+      "lastError": null,
+      "startedAt": "2026-04-08T20:23:19.783Z",
+      "completedAt": "2026-04-08T20:23:19.838Z"
     },
     "UPSERT_API:villian-chain": {
       "actionId": "UPSERT_API:villian-chain",
@@ -1456,8 +1496,8 @@
       "targetIds": {},
       "reconcileHints": {},
       "lastError": "v4-management-full -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 404: {\"httpStatus\":404,\"message\":\"Plugin [http-callout] cannot be found.\",\"technicalCode\":\"plugin.notFound\",\"parameters\":{\"plugin\":\"http-callout\"},\"details\":[]} | v4-management-shell -> POST http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis → HTTP 404: {\"httpStatus\":404,\"message\":\"Plugin [http-callout] cannot be found.\",\"technicalCode\":\"plugin.notFound\",\"parameters\":{\"plugin\":\"http-callout\"},\"details\":[]} | legacy-import-wrapper -> POST http://localhost:8083/management/organizations/DEFAULT/environments/DEFAULT/apis/import → HTTP 500: {\"message\":\"Cannot invoke \\\"io.gravitee.definition.model.Proxy.getVirtualHosts()\\\" because the return value of \\\"io.gravitee.rest.api.model.api.UpdateApiEntity.getProxy()\\\" is null\",\"http_status\":500}",
-      "startedAt": "2026-04-08T17:40:56.768Z",
-      "completedAt": "2026-04-08T17:41:04.248Z"
+      "startedAt": "2026-04-08T20:23:19.842Z",
+      "completedAt": "2026-04-08T20:23:27.407Z"
     },
     "UPSERT_PLAN:villian-chain:KEYLESS": {
       "actionId": "UPSERT_PLAN:villian-chain:KEYLESS",
@@ -1472,7 +1512,7 @@
       "reconcileHints": {},
       "lastError": "dependency not satisfied: UPSERT_API:villian-chain=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-08T17:41:04.251Z"
+      "completedAt": "2026-04-08T20:23:27.410Z"
     },
     "VERIFY_PLAN:villian-chain:KEYLESS": {
       "actionId": "VERIFY_PLAN:villian-chain:KEYLESS",
@@ -1487,7 +1527,7 @@
       "reconcileHints": {},
       "lastError": "dependency not satisfied: UPSERT_PLAN:villian-chain:KEYLESS=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-08T17:41:04.251Z"
+      "completedAt": "2026-04-08T20:23:27.410Z"
     },
     "VERIFY_API:villian-chain": {
       "actionId": "VERIFY_API:villian-chain",
@@ -1503,7 +1543,7 @@
       "reconcileHints": {},
       "lastError": "dependency not satisfied: UPSERT_API:villian-chain=MANUAL_REVIEW, VERIFY_PLAN:villian-chain:KEYLESS=MANUAL_REVIEW",
       "startedAt": null,
-      "completedAt": "2026-04-08T17:41:04.251Z"
+      "completedAt": "2026-04-08T20:23:27.410Z"
     },
     "UPSERT_API:wizards-api-9": {
       "actionId": "UPSERT_API:wizards-api-9",
@@ -1513,60 +1553,80 @@
       "status": "SUCCEEDED",
       "dependencies": [],
       "targetIds": {
-        "apiId": "4a6c57b9-c6a6-4709-ac57-b9c6a6770980"
+        "apiId": "61b91b5d-e935-4e7d-b91b-5de9358e7d86"
       },
       "reconcileHints": {
-        "apiId": "4a6c57b9-c6a6-4709-ac57-b9c6a6770980"
+        "apiId": "61b91b5d-e935-4e7d-b91b-5de9358e7d86"
       },
       "lastError": null,
-      "startedAt": "2026-04-08T17:41:04.251Z",
-      "completedAt": "2026-04-08T17:41:04.375Z"
+      "startedAt": "2026-04-08T20:23:27.410Z",
+      "completedAt": "2026-04-08T20:23:27.588Z"
     },
     "UPSERT_PLAN:wizards-api-9:API_KEY": {
       "actionId": "UPSERT_PLAN:wizards-api-9:API_KEY",
       "kind": "UPSERT_PLAN",
       "sourceId": "wizards-api-9",
       "plannedStatus": "READY",
-      "status": "FAILED",
+      "status": "SUCCEEDED",
       "dependencies": [
         "UPSERT_API:wizards-api-9"
       ],
-      "targetIds": {},
-      "reconcileHints": {},
-      "lastError": "API wizards-api-9 was not found before plan import",
-      "startedAt": "2026-04-08T17:41:04.378Z",
-      "completedAt": "2026-04-08T17:41:04.435Z"
+      "targetIds": {
+        "apiId": "61b91b5d-e935-4e7d-b91b-5de9358e7d86",
+        "planId": "25c0c861-0b5a-4808-80c8-610b5af80854",
+        "planKey": "API_KEY"
+      },
+      "reconcileHints": {
+        "apiId": "61b91b5d-e935-4e7d-b91b-5de9358e7d86",
+        "planId": "25c0c861-0b5a-4808-80c8-610b5af80854",
+        "planKey": "API_KEY"
+      },
+      "lastError": null,
+      "startedAt": "2026-04-08T20:23:27.592Z",
+      "completedAt": "2026-04-08T20:23:27.818Z"
     },
     "VERIFY_PLAN:wizards-api-9:API_KEY": {
       "actionId": "VERIFY_PLAN:wizards-api-9:API_KEY",
       "kind": "VERIFY_PLAN",
       "sourceId": "wizards-api-9",
       "plannedStatus": "READY",
-      "status": "BLOCKED",
+      "status": "SUCCEEDED",
       "dependencies": [
         "UPSERT_PLAN:wizards-api-9:API_KEY"
       ],
-      "targetIds": {},
-      "reconcileHints": {},
-      "lastError": "dependency not satisfied: UPSERT_PLAN:wizards-api-9:API_KEY=FAILED",
-      "startedAt": null,
-      "completedAt": "2026-04-08T17:41:04.438Z"
+      "targetIds": {
+        "apiId": "61b91b5d-e935-4e7d-b91b-5de9358e7d86",
+        "planId": "25c0c861-0b5a-4808-80c8-610b5af80854",
+        "planKey": "API_KEY"
+      },
+      "reconcileHints": {
+        "apiId": "61b91b5d-e935-4e7d-b91b-5de9358e7d86",
+        "planId": "25c0c861-0b5a-4808-80c8-610b5af80854",
+        "planKey": "API_KEY"
+      },
+      "lastError": null,
+      "startedAt": "2026-04-08T20:23:27.821Z",
+      "completedAt": "2026-04-08T20:23:27.934Z"
     },
     "VERIFY_API:wizards-api-9": {
       "actionId": "VERIFY_API:wizards-api-9",
       "kind": "VERIFY_API",
       "sourceId": "wizards-api-9",
       "plannedStatus": "READY",
-      "status": "BLOCKED",
+      "status": "SUCCEEDED",
       "dependencies": [
         "UPSERT_API:wizards-api-9",
         "VERIFY_PLAN:wizards-api-9:API_KEY"
       ],
-      "targetIds": {},
-      "reconcileHints": {},
-      "lastError": "dependency not satisfied: UPSERT_API:wizards-api-9=SUCCEEDED, VERIFY_PLAN:wizards-api-9:API_KEY=BLOCKED",
-      "startedAt": null,
-      "completedAt": "2026-04-08T17:41:04.438Z"
+      "targetIds": {
+        "apiId": "61b91b5d-e935-4e7d-b91b-5de9358e7d86"
+      },
+      "reconcileHints": {
+        "apiId": "61b91b5d-e935-4e7d-b91b-5de9358e7d86"
+      },
+      "lastError": null,
+      "startedAt": "2026-04-08T20:23:27.938Z",
+      "completedAt": "2026-04-08T20:23:27.995Z"
     },
     "UPSERT_API:yes-or-no-api-4": {
       "actionId": "UPSERT_API:yes-or-no-api-4",
@@ -1576,60 +1636,80 @@
       "status": "SUCCEEDED",
       "dependencies": [],
       "targetIds": {
-        "apiId": "b9aca4bd-736e-4173-aca4-bd736eb173b0"
+        "apiId": "faa9013f-ca50-42a5-a901-3fca5042a5a6"
       },
       "reconcileHints": {
-        "apiId": "b9aca4bd-736e-4173-aca4-bd736eb173b0"
+        "apiId": "faa9013f-ca50-42a5-a901-3fca5042a5a6"
       },
       "lastError": null,
-      "startedAt": "2026-04-08T17:41:04.438Z",
-      "completedAt": "2026-04-08T17:41:04.559Z"
+      "startedAt": "2026-04-08T20:23:27.998Z",
+      "completedAt": "2026-04-08T20:23:28.174Z"
     },
     "UPSERT_PLAN:yes-or-no-api-4:API_KEY": {
       "actionId": "UPSERT_PLAN:yes-or-no-api-4:API_KEY",
       "kind": "UPSERT_PLAN",
       "sourceId": "yes-or-no-api-4",
       "plannedStatus": "READY",
-      "status": "FAILED",
+      "status": "SUCCEEDED",
       "dependencies": [
         "UPSERT_API:yes-or-no-api-4"
       ],
-      "targetIds": {},
-      "reconcileHints": {},
-      "lastError": "API yes-or-no-api-4 was not found before plan import",
-      "startedAt": "2026-04-08T17:41:04.561Z",
-      "completedAt": "2026-04-08T17:41:04.618Z"
+      "targetIds": {
+        "apiId": "faa9013f-ca50-42a5-a901-3fca5042a5a6",
+        "planId": "293f2407-7217-4b52-bf24-0772173b5208",
+        "planKey": "API_KEY"
+      },
+      "reconcileHints": {
+        "apiId": "faa9013f-ca50-42a5-a901-3fca5042a5a6",
+        "planId": "293f2407-7217-4b52-bf24-0772173b5208",
+        "planKey": "API_KEY"
+      },
+      "lastError": null,
+      "startedAt": "2026-04-08T20:23:28.176Z",
+      "completedAt": "2026-04-08T20:23:28.402Z"
     },
     "VERIFY_PLAN:yes-or-no-api-4:API_KEY": {
       "actionId": "VERIFY_PLAN:yes-or-no-api-4:API_KEY",
       "kind": "VERIFY_PLAN",
       "sourceId": "yes-or-no-api-4",
       "plannedStatus": "READY",
-      "status": "BLOCKED",
+      "status": "SUCCEEDED",
       "dependencies": [
         "UPSERT_PLAN:yes-or-no-api-4:API_KEY"
       ],
-      "targetIds": {},
-      "reconcileHints": {},
-      "lastError": "dependency not satisfied: UPSERT_PLAN:yes-or-no-api-4:API_KEY=FAILED",
-      "startedAt": null,
-      "completedAt": "2026-04-08T17:41:04.622Z"
+      "targetIds": {
+        "apiId": "faa9013f-ca50-42a5-a901-3fca5042a5a6",
+        "planId": "293f2407-7217-4b52-bf24-0772173b5208",
+        "planKey": "API_KEY"
+      },
+      "reconcileHints": {
+        "apiId": "faa9013f-ca50-42a5-a901-3fca5042a5a6",
+        "planId": "293f2407-7217-4b52-bf24-0772173b5208",
+        "planKey": "API_KEY"
+      },
+      "lastError": null,
+      "startedAt": "2026-04-08T20:23:28.406Z",
+      "completedAt": "2026-04-08T20:23:28.519Z"
     },
     "VERIFY_API:yes-or-no-api-4": {
       "actionId": "VERIFY_API:yes-or-no-api-4",
       "kind": "VERIFY_API",
       "sourceId": "yes-or-no-api-4",
       "plannedStatus": "READY",
-      "status": "BLOCKED",
+      "status": "SUCCEEDED",
       "dependencies": [
         "UPSERT_API:yes-or-no-api-4",
         "VERIFY_PLAN:yes-or-no-api-4:API_KEY"
       ],
-      "targetIds": {},
-      "reconcileHints": {},
-      "lastError": "dependency not satisfied: UPSERT_API:yes-or-no-api-4=SUCCEEDED, VERIFY_PLAN:yes-or-no-api-4:API_KEY=BLOCKED",
-      "startedAt": null,
-      "completedAt": "2026-04-08T17:41:04.622Z"
+      "targetIds": {
+        "apiId": "faa9013f-ca50-42a5-a901-3fca5042a5a6"
+      },
+      "reconcileHints": {
+        "apiId": "faa9013f-ca50-42a5-a901-3fca5042a5a6"
+      },
+      "lastError": null,
+      "startedAt": "2026-04-08T20:23:28.522Z",
+      "completedAt": "2026-04-08T20:23:28.578Z"
     }
   }
 }
