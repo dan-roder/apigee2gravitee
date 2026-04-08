@@ -8,6 +8,9 @@
     "includeProxies": [],
     "excludeProxies": []
   },
+  "compatibility": {
+    "fallbackPlugins": []
+  },
   "reporting": {
     "reportDir": "./report",
     "stateFile": "./state/apis-import-state.json"

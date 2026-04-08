@@ -32,6 +32,7 @@ function loadApisConfig(configPath, flags = {}) {
   config.gravitee = config.gravitee || {};
   config.reporting = config.reporting || {};
   config.filters = config.filters || {};
+  config.compatibility = config.compatibility || {};
 
   overrideIfPresent(config.gravitee, 'url', flags['gravitee-url']);
   overrideIfPresent(config.gravitee, 'orgId', flags.org);
@@ -75,6 +76,7 @@ function validateApisConfig(config) {
 
   validateStringArray(config.filters?.includeProxies || [], 'filters.includeProxies', errors);
   validateStringArray(config.filters?.excludeProxies || [], 'filters.excludeProxies', errors);
+  validateStringArray(config.compatibility?.fallbackPlugins || [], 'compatibility.fallbackPlugins', errors);
 
   return { valid: errors.length === 0, errors };
 }

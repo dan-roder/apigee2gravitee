@@ -53,6 +53,27 @@ function normaliseTimeUnit(unit) {
   return 'MINUTES';
 }
 
+function pluginFallbackStub(policyName, originalName, reason, scriptLines = []) {
+  return {
+    policy: 'groovy',
+    name: `${policyName} [PLUGIN FALLBACK]`,
+    configuration: {
+      scope: 'REQUEST',
+      script: [
+        `// Plugin fallback for ${originalName}`,
+        `// Reason: ${reason}`,
+        ...scriptLines,
+      ].join('\n'),
+    },
+    _needsReview: true,
+  };
+}
+
+function shouldFallbackPlugin(options, pluginName) {
+  const set = options?.fallbackPlugins;
+  return !!(set && set.has(pluginName));
+}
+
 // ─── Handler registry ─────────────────────────────────────────────────────────
 
 const HANDLERS = {
@@ -101,7 +122,7 @@ const HANDLERS = {
   },
 
   // ── AssignMessage → multiple Gravitee policies depending on what it does ────
-  AssignMessage(node) {
+  AssignMessage(node, options = {}) {
     const c = node.config || {};
 
     // If it sets headers — use transform-headers
@@ -150,6 +171,14 @@ const HANDLERS = {
 
     // If it assigns a variable → assign-attributes
     if (c.assignVariable?.length > 0) {
+      if (shouldFallbackPlugin(options, 'assign-attributes')) {
+        return pluginFallbackStub(
+          `Assign Attributes (migrated from: ${node.name})`,
+          node.name,
+          'assign-attributes plugin unavailable',
+          (c.assignVariable || []).map((item) => `// assign ${item.name} <= ${item.ref || JSON.stringify(item.value || '')}`),
+        );
+      }
       const attributes = c.assignVariable.map(v => ({
         name:  v.name,
         value: v.ref ? `{#context.attributes['${v.ref}']}` : v.value,
@@ -197,8 +226,19 @@ const HANDLERS = {
   },
 
   // ── ServiceCallout → http-callout ───────────────────────────────────────────
-  ServiceCallout(node) {
+  ServiceCallout(node, options = {}) {
     const c = node.config || {};
+    if (shouldFallbackPlugin(options, 'http-callout')) {
+      return pluginFallbackStub(
+        `HTTP Callout (migrated from ServiceCallout: ${node.name})`,
+        node.name,
+        'http-callout plugin unavailable',
+        [
+          `// targetUrl: ${c.targetUrl || ''}`,
+          `// responseVariable: ${c.responseVariable || ''}`,
+        ],
+      );
+    }
     return {
       policy: 'http-callout',
       name:   `HTTP Callout (migrated from ServiceCallout: ${node.name})`,
@@ -220,11 +260,19 @@ const HANDLERS = {
   },
 
   // ── KeyValueMapOperations → depends on operation type ───────────────────────
-  KeyValueMapOperations(node) {
+  KeyValueMapOperations(node, options = {}) {
     const c = node.config || {};
 
     // Read-only KVM get → assign-attributes using Dictionary EL
     if (!c.hasWrites && c.gets?.length > 0) {
+      if (shouldFallbackPlugin(options, 'assign-attributes')) {
+        return pluginFallbackStub(
+          `Assign Attributes from KVM (migrated from: ${node.name})`,
+          node.name,
+          'assign-attributes plugin unavailable',
+          (c.gets || []).map((get) => `// kvm get ${c.mapIdentifier}.${get.key || get.keyRef || ''} -> ${get.assignTo || get.key || ''}`),
+        );
+      }
       const attributes = c.gets.map(get => {
         let elValue;
         const scope = c.scope;
@@ -261,9 +309,17 @@ const HANDLERS = {
 
     // Empty KVM ops — passthrough stub
     return {
-      policy: 'assign-attributes',
-      name:   `KVM Operation (migrated from: ${node.name}) [EMPTY]`,
-      configuration: { scope: 'REQUEST', attributes: [] },
+      ...(shouldFallbackPlugin(options, 'assign-attributes')
+        ? pluginFallbackStub(
+          `KVM Operation (migrated from: ${node.name}) [EMPTY]`,
+          node.name,
+          'assign-attributes plugin unavailable',
+        )
+        : {
+          policy: 'assign-attributes',
+          name:   `KVM Operation (migrated from: ${node.name}) [EMPTY]`,
+          configuration: { scope: 'REQUEST', attributes: [] },
+        }),
     };
   },
 
@@ -355,8 +411,20 @@ const HANDLERS = {
   },
 
   // ── ExtractVariables → assign-attributes ────────────────────────────────────
-  ExtractVariables(node) {
+  ExtractVariables(node, options = {}) {
     const c = node.config || {};
+    if (shouldFallbackPlugin(options, 'assign-attributes')) {
+      return pluginFallbackStub(
+        `Assign Attributes from Extract (migrated from: ${node.name})`,
+        node.name,
+        'assign-attributes plugin unavailable',
+        [
+          ...((c.jsonPaths || []).map(v => `// extract json ${v.jsonPath} -> ${v.name}`)),
+          ...((c.xPaths || []).map(v => `// extract xpath ${v.xPath} -> ${v.name}`)),
+          ...((c.headers || []).map(v => `// extract header ${v.name}`)),
+        ],
+      );
+    }
     const attributes = [
       ...(c.jsonPaths || []).map(v => ({
         name:  v.name,
@@ -463,7 +531,7 @@ const HANDLERS = {
  * @param {string} [phase]    'request' | 'response' (for scope-sensitive handlers)
  * @returns {object}          Gravitee step
  */
-function mapPolicyStep(stepAst, phase = 'request') {
+function mapPolicyStep(stepAst, phase = 'request', options = {}) {
   const policy = stepAst.policy;
   const condition = stepAst.condition?.el || '';
 
@@ -567,7 +635,7 @@ function mapPolicyStep(stepAst, phase = 'request') {
     };
   }
 
-  const result = handler(policy);
+  const result = handler(policy, options);
 
   return {
     policy:        result.policy,

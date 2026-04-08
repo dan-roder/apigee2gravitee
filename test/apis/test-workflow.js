@@ -51,6 +51,9 @@ function makeConfig(baseDir, overrides = {}) {
       reportDir: path.join(baseDir, 'report'),
       stateFile: path.join(baseDir, 'state', 'apis-import-state.json'),
     },
+    compatibility: {
+      fallbackPlugins: [],
+    },
     ...overrides,
   };
 }

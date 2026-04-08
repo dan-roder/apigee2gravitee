@@ -145,6 +145,16 @@ suite('PolicyHandlers — AssignMessage (assignVariable) → assign-attributes',
   });
 });
 
+suite('PolicyHandlers — AssignMessage fallback when assign-attributes unavailable', () => {
+  const step = makeStep('set-var', 'AssignMessage', 'auto', {
+    assignVariable: [{ name: 'my-var', value: 'hello', ref: '' }],
+  });
+  const mapped = mapPolicyStep(step, 'request', { fallbackPlugins: new Set(['assign-attributes']) });
+
+  test('policy slug is groovy', () => assert.strictEqual(mapped.policy, 'groovy'));
+  test('fallback is marked for review', () => assert.strictEqual(mapped._needsReview, true));
+});
+
 suite('PolicyHandlers — AssignMessage (status code) → interrupt', () => {
   const step = makeStep('raise', 'AssignMessage', 'auto', {
     assignTo: { type: 'response', createNew: false },
@@ -185,6 +195,17 @@ suite('PolicyHandlers — ServiceCallout → http-callout', () => {
   test('variables includes calloutResult', () => {
     assert.ok(mapped.configuration.variables.some(v => v.name === 'calloutResult'));
   });
+});
+
+suite('PolicyHandlers — ServiceCallout fallback when http-callout unavailable', () => {
+  const step = makeStep('callout', 'ServiceCallout', 'auto', {
+    targetUrl: 'https://internal.api.example.com/lookup',
+    responseVariable: 'calloutResult',
+  });
+  const mapped = mapPolicyStep(step, 'request', { fallbackPlugins: new Set(['http-callout']) });
+
+  test('policy slug is groovy', () => assert.strictEqual(mapped.policy, 'groovy'));
+  test('fallback is marked for review', () => assert.strictEqual(mapped._needsReview, true));
 });
 
 suite('PolicyHandlers — KeyValueMapOperations (Get) → assign-attributes', () => {

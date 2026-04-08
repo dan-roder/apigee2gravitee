@@ -202,12 +202,12 @@ function buildSelectors(condition, basePath) {
  * @param {string}   side    'request' | 'response'
  * @returns {{ steps: object[], meta: object }}
  */
-function buildFlowSteps(steps, side) {
+function buildFlowSteps(steps, side, options = {}) {
   const graviteeSteps = [];
   const meta = { needsReview: [], llm: [], manual: [] };
 
   for (const stepAst of steps) {
-    const mapped = mapPolicyStep(stepAst, side);
+    const mapped = mapPolicyStep(stepAst, side, options);
 
     // Build the clean Gravitee step (strip internal _meta fields)
     const graviteeStep = {
@@ -253,7 +253,7 @@ function buildFlowSteps(steps, side) {
  * @param {string}   basePath
  * @returns {{ flows: object[], meta: object }}
  */
-function buildFlows(flowGraph, basePath) {
+function buildFlows(flowGraph, basePath, options = {}) {
   // Group phases by flowName ('' for pre/postflow)
   const flowMap = new Map();   // flowName → { request, response, condition, phase }
 
@@ -282,8 +282,8 @@ function buildFlows(flowGraph, basePath) {
   const allMeta = { needsReview: [], llm: [], manual: [] };
 
   for (const [, entry] of flowMap) {
-    const { steps: reqSteps, meta: reqMeta } = buildFlowSteps(entry.request, 'request');
-    const { steps: resSteps, meta: resMeta } = buildFlowSteps(entry.response, 'response');
+    const { steps: reqSteps, meta: reqMeta } = buildFlowSteps(entry.request, 'request', options);
+    const { steps: resSteps, meta: resMeta } = buildFlowSteps(entry.response, 'response', options);
 
     // Merge meta
     allMeta.needsReview.push(...reqMeta.needsReview, ...resMeta.needsReview);
@@ -440,6 +440,7 @@ function mapProxyToGraviteeApi(ast, opts = {}) {
   const resolvedServers = opts.resolvedServers || {};
   const proxyKvms       = opts.proxyKvms       || [];
   const apiVersion      = opts.apiVersion       || DEFAULT_API_VERSION;
+  const policyOptions   = opts.policyOptions    || {};
 
   const basePath = ast.basePath || '/';
 
@@ -454,7 +455,7 @@ function mapProxyToGraviteeApi(ast, opts = {}) {
   const endpointGroups = buildEndpointGroups(ast.targetEndpoints, resolvedServers);
 
   // ── Flows ───────────────────────────────────────────────────────────────────
-  const { flows, meta: flowMeta } = buildFlows(ast.flowGraph, basePath);
+  const { flows, meta: flowMeta } = buildFlows(ast.flowGraph, basePath, policyOptions);
 
   // ── Plans ───────────────────────────────────────────────────────────────────
   const plans = buildPlans(ast.securityScheme);

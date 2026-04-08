@@ -37,12 +37,14 @@ function loadApiDomain(irDir, config) {
   const exclude = new Set(config.filters?.excludeProxies || []);
   const resolvedServers = buildResolvedServers(loader);
   const proxyKvms = loader.proxyKvms();
+  const fallbackPlugins = new Set(config.compatibility?.fallbackPlugins || []);
 
   const proxies = filterByRules(loader.proxies(), include, exclude, (proxy) => proxy.name).map((proxy) => {
     const ast = parseProxyIr(proxy);
     const definition = mapProxyToGraviteeApi(ast, {
       resolvedServers,
       proxyKvms: proxyKvms.filter((kvm) => kvm.proxy_name === proxy.name || kvm.proxy === proxy.name),
+      policyOptions: { fallbackPlugins },
     });
     return {
       sourceId: proxy.name,

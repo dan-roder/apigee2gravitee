@@ -280,12 +280,25 @@ Start from [`config/apis.config.example.json`](/Users/danielroder/Sites/apigee2g
     "includeProxies": [],
     "excludeProxies": []
   },
+  "compatibility": {
+    "fallbackPlugins": []
+  },
   "reporting": {
     "reportDir": "./report",
     "stateFile": "./state/apis-import-state.json"
   }
 }
 ```
+
+If your local Gravitee does not have certain policy plugins installed, you can degrade those mapped steps into reviewable Groovy stubs instead of blocking API import:
+
+```json
+"compatibility": {
+  "fallbackPlugins": ["assign-attributes", "http-callout"]
+}
+```
+
+This is useful for APIs that otherwise fail on missing plugins during `apis import`. The API will still import, but the affected steps will be marked for review instead of behaving as a full one-to-one translation.
 
 `filters.includeProxies` is the safest way to run a small pilot. Start with one or two proxy names from `ir/proxies/`.
 
