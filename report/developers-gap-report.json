@@ -1,0 +1,183 @@
+{
+  "generatedAt": "2026-04-09T20:41:51.683Z",
+  "summary": {
+    "users": 4,
+    "applications": 4,
+    "credentials": 4,
+    "subscriptions": 4,
+    "actions": 28,
+    "blockers": 0,
+    "warnings": 5,
+    "manualReview": 5,
+    "inactiveDevelopers": 0,
+    "continuityRiskCount": 4
+  },
+  "findings": [
+    {
+      "severity": "warning",
+      "code": "OAUTH_CLIENT_CONTINUITY_UNKNOWN",
+      "message": "OAuth client value preservation is not confirmed as supported",
+      "details": {
+        "actual": "unknown"
+      }
+    },
+    {
+      "severity": "warning",
+      "code": "ROLE_LOOKUP_FAILED",
+      "message": "Unable to verify roles via Gravitee API: GET http://localhost:8083/management/organizations/DEFAULT/rolescopes → HTTP 404",
+      "details": {}
+    },
+    {
+      "severity": "warning",
+      "code": "ROLE_LOOKUP_UNVERIFIED",
+      "message": "Role configuration could not be auto-verified",
+      "details": {}
+    },
+    {
+      "severity": "warning",
+      "code": "CUSTOM_FIELD_MISSING",
+      "message": "Required custom field DisplayName was not found in Gravitee",
+      "details": {
+        "fieldName": "DisplayName"
+      }
+    },
+    {
+      "severity": "warning",
+      "code": "CUSTOM_FIELD_MISSING",
+      "message": "Required custom field Notes was not found in Gravitee",
+      "details": {
+        "fieldName": "Notes"
+      }
+    }
+  ],
+  "manualReviewFindings": [
+    {
+      "severity": "warning",
+      "code": "OAUTH_CLIENT_CONTINUITY_UNKNOWN",
+      "message": "OAuth client value preservation is not confirmed as supported",
+      "details": {
+        "actual": "unknown"
+      }
+    },
+    {
+      "severity": "warning",
+      "code": "ROLE_LOOKUP_FAILED",
+      "message": "Unable to verify roles via Gravitee API: GET http://localhost:8083/management/organizations/DEFAULT/rolescopes → HTTP 404",
+      "details": {}
+    },
+    {
+      "severity": "warning",
+      "code": "ROLE_LOOKUP_UNVERIFIED",
+      "message": "Role configuration could not be auto-verified",
+      "details": {}
+    },
+    {
+      "severity": "warning",
+      "code": "CUSTOM_FIELD_MISSING",
+      "message": "Required custom field DisplayName was not found in Gravitee",
+      "details": {
+        "fieldName": "DisplayName"
+      }
+    },
+    {
+      "severity": "warning",
+      "code": "CUSTOM_FIELD_MISSING",
+      "message": "Required custom field Notes was not found in Gravitee",
+      "details": {
+        "fieldName": "Notes"
+      }
+    }
+  ],
+  "continuityRisks": [
+    {
+      "credentialId": "dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1",
+      "riskFlags": [
+        "API_KEY_CONTINUITY_RISK"
+      ],
+      "authHints": [
+        "API_KEY"
+      ],
+      "consumerSecretPresent": true
+    },
+    {
+      "credentialId": "dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK",
+      "riskFlags": [
+        "API_KEY_CONTINUITY_RISK"
+      ],
+      "authHints": [
+        "API_KEY"
+      ],
+      "consumerSecretPresent": true
+    },
+    {
+      "credentialId": "dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3",
+      "riskFlags": [
+        "API_KEY_CONTINUITY_RISK"
+      ],
+      "authHints": [
+        "API_KEY"
+      ],
+      "consumerSecretPresent": true
+    },
+    {
+      "credentialId": "dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8",
+      "riskFlags": [
+        "API_KEY_CONTINUITY_RISK"
+      ],
+      "authHints": [
+        "API_KEY"
+      ],
+      "consumerSecretPresent": true
+    }
+  ],
+  "capabilitySnapshot": {
+    "silentUserCreation": "supported",
+    "apiKeyValuePreservation": "unknown",
+    "oauthClientValuePreservation": "unknown",
+    "applicationOwnership": "metadata-only"
+  },
+  "manifestSummary": {
+    "users": 4,
+    "applications": 4,
+    "credentials": 4,
+    "subscriptions": 4,
+    "blockers": 0,
+    "warnings": 5,
+    "manualReview": 5,
+    "actions": 28,
+    "actionsByKind": {
+      "UPSERT_USER": 4,
+      "VERIFY_USER": 4,
+      "UPSERT_APPLICATION": 4,
+      "VERIFY_APPLICATION": 4,
+      "RESOLVE_PLAN": 4,
+      "UPSERT_SUBSCRIPTION": 4,
+      "VERIFY_SUBSCRIPTION": 4
+    },
+    "actionsByStatus": {
+      "READY": 28
+    },
+    "operatorActions": {
+      "byKind": {
+        "UPSERT_USER": {
+          "CREATE": 4
+        },
+        "UPSERT_APPLICATION": {
+          "CREATE": 4
+        },
+        "UPSERT_SUBSCRIPTION": {
+          "CREATE": 4
+        }
+      },
+      "byOperation": {
+        "CREATE": 12
+      },
+      "blockedReasons": {}
+    }
+  },
+  "operatorGuidance": {
+    "nextSuggestedScope": "--users-only",
+    "resumeSafe": true,
+    "blockerCategories": {}
+  }
+}

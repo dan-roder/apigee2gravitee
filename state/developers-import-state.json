@@ -1,0 +1,462 @@
+{
+  "generatedAt": "2026-04-09T20:41:51.683Z",
+  "updatedAt": "2026-04-09T20:41:51.683Z",
+  "mode": "plan",
+  "summary": {
+    "users": 4,
+    "applications": 4,
+    "credentials": 4,
+    "subscriptions": 4,
+    "blockers": 0,
+    "warnings": 5,
+    "manualReview": 5,
+    "actions": 28,
+    "actionsByKind": {
+      "UPSERT_USER": 4,
+      "VERIFY_USER": 4,
+      "UPSERT_APPLICATION": 4,
+      "VERIFY_APPLICATION": 4,
+      "RESOLVE_PLAN": 4,
+      "UPSERT_SUBSCRIPTION": 4,
+      "VERIFY_SUBSCRIPTION": 4
+    },
+    "actionsByStatus": {
+      "READY": 28
+    },
+    "operatorActions": {
+      "byKind": {
+        "UPSERT_USER": {
+          "CREATE": 4
+        },
+        "UPSERT_APPLICATION": {
+          "CREATE": 4
+        },
+        "UPSERT_SUBSCRIPTION": {
+          "CREATE": 4
+        }
+      },
+      "byOperation": {
+        "CREATE": 12
+      },
+      "blockedReasons": {}
+    }
+  },
+  "actions": {
+    "UPSERT_USER:danny.rivera@540.co": {
+      "actionId": "UPSERT_USER:danny.rivera@540.co",
+      "kind": "UPSERT_USER",
+      "sourceId": "danny.rivera@540.co",
+      "plannedStatus": "READY",
+      "status": "PENDING",
+      "dependencies": [],
+      "targetIds": {},
+      "reconcileHints": {},
+      "lastError": null,
+      "startedAt": null,
+      "completedAt": null
+    },
+    "VERIFY_USER:danny.rivera@540.co": {
+      "actionId": "VERIFY_USER:danny.rivera@540.co",
+      "kind": "VERIFY_USER",
+      "sourceId": "danny.rivera@540.co",
+      "plannedStatus": "READY",
+      "status": "PENDING",
+      "dependencies": [
+        "UPSERT_USER:danny.rivera@540.co"
+      ],
+      "targetIds": {},
+      "reconcileHints": {},
+      "lastError": null,
+      "startedAt": null,
+      "completedAt": null
+    },
+    "UPSERT_USER:dev1@540.co": {
+      "actionId": "UPSERT_USER:dev1@540.co",
+      "kind": "UPSERT_USER",
+      "sourceId": "dev1@540.co",
+      "plannedStatus": "READY",
+      "status": "PENDING",
+      "dependencies": [],
+      "targetIds": {},
+      "reconcileHints": {},
+      "lastError": null,
+      "startedAt": null,
+      "completedAt": null
+    },
+    "VERIFY_USER:dev1@540.co": {
+      "actionId": "VERIFY_USER:dev1@540.co",
+      "kind": "VERIFY_USER",
+      "sourceId": "dev1@540.co",
+      "plannedStatus": "READY",
+      "status": "PENDING",
+      "dependencies": [
+        "UPSERT_USER:dev1@540.co"
+      ],
+      "targetIds": {},
+      "reconcileHints": {},
+      "lastError": null,
+      "startedAt": null,
+      "completedAt": null
+    },
+    "UPSERT_USER:dev2@540.co": {
+      "actionId": "UPSERT_USER:dev2@540.co",
+      "kind": "UPSERT_USER",
+      "sourceId": "dev2@540.co",
+      "plannedStatus": "READY",
+      "status": "PENDING",
+      "dependencies": [],
+      "targetIds": {},
+      "reconcileHints": {},
+      "lastError": null,
+      "startedAt": null,
+      "completedAt": null
+    },
+    "VERIFY_USER:dev2@540.co": {
+      "actionId": "VERIFY_USER:dev2@540.co",
+      "kind": "VERIFY_USER",
+      "sourceId": "dev2@540.co",
+      "plannedStatus": "READY",
+      "status": "PENDING",
+      "dependencies": [
+        "UPSERT_USER:dev2@540.co"
+      ],
+      "targetIds": {},
+      "reconcileHints": {},
+      "lastError": null,
+      "startedAt": null,
+      "completedAt": null
+    },
+    "UPSERT_USER:erik.severson@540.co": {
+      "actionId": "UPSERT_USER:erik.severson@540.co",
+      "kind": "UPSERT_USER",
+      "sourceId": "erik.severson@540.co",
+      "plannedStatus": "READY",
+      "status": "PENDING",
+      "dependencies": [],
+      "targetIds": {},
+      "reconcileHints": {},
+      "lastError": null,
+      "startedAt": null,
+      "completedAt": null
+    },
+    "VERIFY_USER:erik.severson@540.co": {
+      "actionId": "VERIFY_USER:erik.severson@540.co",
+      "kind": "VERIFY_USER",
+      "sourceId": "erik.severson@540.co",
+      "plannedStatus": "READY",
+      "status": "PENDING",
+      "dependencies": [
+        "UPSERT_USER:erik.severson@540.co"
+      ],
+      "targetIds": {},
+      "reconcileHints": {},
+      "lastError": null,
+      "startedAt": null,
+      "completedAt": null
+    },
+    "UPSERT_APPLICATION:dev1@540.co/kanye-dev-app": {
+      "actionId": "UPSERT_APPLICATION:dev1@540.co/kanye-dev-app",
+      "kind": "UPSERT_APPLICATION",
+      "sourceId": "dev1@540.co/kanye-dev-app",
+      "plannedStatus": "READY",
+      "status": "PENDING",
+      "dependencies": [
+        "UPSERT_USER:dev1@540.co"
+      ],
+      "targetIds": {},
+      "reconcileHints": {},
+      "lastError": null,
+      "startedAt": null,
+      "completedAt": null
+    },
+    "VERIFY_APPLICATION:dev1@540.co/kanye-dev-app": {
+      "actionId": "VERIFY_APPLICATION:dev1@540.co/kanye-dev-app",
+      "kind": "VERIFY_APPLICATION",
+      "sourceId": "dev1@540.co/kanye-dev-app",
+      "plannedStatus": "READY",
+      "status": "PENDING",
+      "dependencies": [
+        "UPSERT_APPLICATION:dev1@540.co/kanye-dev-app"
+      ],
+      "targetIds": {},
+      "reconcileHints": {},
+      "lastError": null,
+      "startedAt": null,
+      "completedAt": null
+    },
+    "UPSERT_APPLICATION:dev1@540.co/wizards-dev-app": {
+      "actionId": "UPSERT_APPLICATION:dev1@540.co/wizards-dev-app",
+      "kind": "UPSERT_APPLICATION",
+      "sourceId": "dev1@540.co/wizards-dev-app",
+      "plannedStatus": "READY",
+      "status": "PENDING",
+      "dependencies": [
+        "UPSERT_USER:dev1@540.co"
+      ],
+      "targetIds": {},
+      "reconcileHints": {},
+      "lastError": null,
+      "startedAt": null,
+      "completedAt": null
+    },
+    "VERIFY_APPLICATION:dev1@540.co/wizards-dev-app": {
+      "actionId": "VERIFY_APPLICATION:dev1@540.co/wizards-dev-app",
+      "kind": "VERIFY_APPLICATION",
+      "sourceId": "dev1@540.co/wizards-dev-app",
+      "plannedStatus": "READY",
+      "status": "PENDING",
+      "dependencies": [
+        "UPSERT_APPLICATION:dev1@540.co/wizards-dev-app"
+      ],
+      "targetIds": {},
+      "reconcileHints": {},
+      "lastError": null,
+      "startedAt": null,
+      "completedAt": null
+    },
+    "UPSERT_APPLICATION:dev2@540.co/chuck-norris-dev-app": {
+      "actionId": "UPSERT_APPLICATION:dev2@540.co/chuck-norris-dev-app",
+      "kind": "UPSERT_APPLICATION",
+      "sourceId": "dev2@540.co/chuck-norris-dev-app",
+      "plannedStatus": "READY",
+      "status": "PENDING",
+      "dependencies": [
+        "UPSERT_USER:dev2@540.co"
+      ],
+      "targetIds": {},
+      "reconcileHints": {},
+      "lastError": null,
+      "startedAt": null,
+      "completedAt": null
+    },
+    "VERIFY_APPLICATION:dev2@540.co/chuck-norris-dev-app": {
+      "actionId": "VERIFY_APPLICATION:dev2@540.co/chuck-norris-dev-app",
+      "kind": "VERIFY_APPLICATION",
+      "sourceId": "dev2@540.co/chuck-norris-dev-app",
+      "plannedStatus": "READY",
+      "status": "PENDING",
+      "dependencies": [
+        "UPSERT_APPLICATION:dev2@540.co/chuck-norris-dev-app"
+      ],
+      "targetIds": {},
+      "reconcileHints": {},
+      "lastError": null,
+      "startedAt": null,
+      "completedAt": null
+    },
+    "UPSERT_APPLICATION:dev2@540.co/dog-breeds-dev-app": {
+      "actionId": "UPSERT_APPLICATION:dev2@540.co/dog-breeds-dev-app",
+      "kind": "UPSERT_APPLICATION",
+      "sourceId": "dev2@540.co/dog-breeds-dev-app",
+      "plannedStatus": "READY",
+      "status": "PENDING",
+      "dependencies": [
+        "UPSERT_USER:dev2@540.co"
+      ],
+      "targetIds": {},
+      "reconcileHints": {},
+      "lastError": null,
+      "startedAt": null,
+      "completedAt": null
+    },
+    "VERIFY_APPLICATION:dev2@540.co/dog-breeds-dev-app": {
+      "actionId": "VERIFY_APPLICATION:dev2@540.co/dog-breeds-dev-app",
+      "kind": "VERIFY_APPLICATION",
+      "sourceId": "dev2@540.co/dog-breeds-dev-app",
+      "plannedStatus": "READY",
+      "status": "PENDING",
+      "dependencies": [
+        "UPSERT_APPLICATION:dev2@540.co/dog-breeds-dev-app"
+      ],
+      "targetIds": {},
+      "reconcileHints": {},
+      "lastError": null,
+      "startedAt": null,
+      "completedAt": null
+    },
+    "RESOLVE_PLAN:dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan": {
+      "actionId": "RESOLVE_PLAN:dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan",
+      "kind": "RESOLVE_PLAN",
+      "sourceId": "dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan",
+      "plannedStatus": "READY",
+      "status": "PENDING",
+      "dependencies": [
+        "UPSERT_APPLICATION:dev1@540.co/kanye-dev-app"
+      ],
+      "targetIds": {},
+      "reconcileHints": {},
+      "lastError": null,
+      "startedAt": null,
+      "completedAt": null
+    },
+    "UPSERT_SUBSCRIPTION:dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan": {
+      "actionId": "UPSERT_SUBSCRIPTION:dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan",
+      "kind": "UPSERT_SUBSCRIPTION",
+      "sourceId": "dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan",
+      "plannedStatus": "READY",
+      "status": "PENDING",
+      "dependencies": [
+        "UPSERT_APPLICATION:dev1@540.co/kanye-dev-app",
+        "RESOLVE_PLAN:dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan"
+      ],
+      "targetIds": {},
+      "reconcileHints": {},
+      "lastError": null,
+      "startedAt": null,
+      "completedAt": null
+    },
+    "VERIFY_SUBSCRIPTION:dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan": {
+      "actionId": "VERIFY_SUBSCRIPTION:dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan",
+      "kind": "VERIFY_SUBSCRIPTION",
+      "sourceId": "dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan",
+      "plannedStatus": "READY",
+      "status": "PENDING",
+      "dependencies": [
+        "UPSERT_SUBSCRIPTION:dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan"
+      ],
+      "targetIds": {},
+      "reconcileHints": {},
+      "lastError": null,
+      "startedAt": null,
+      "completedAt": null
+    },
+    "RESOLVE_PLAN:dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan": {
+      "actionId": "RESOLVE_PLAN:dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan",
+      "kind": "RESOLVE_PLAN",
+      "sourceId": "dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan",
+      "plannedStatus": "READY",
+      "status": "PENDING",
+      "dependencies": [
+        "UPSERT_APPLICATION:dev1@540.co/wizards-dev-app"
+      ],
+      "targetIds": {},
+      "reconcileHints": {},
+      "lastError": null,
+      "startedAt": null,
+      "completedAt": null
+    },
+    "UPSERT_SUBSCRIPTION:dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan": {
+      "actionId": "UPSERT_SUBSCRIPTION:dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan",
+      "kind": "UPSERT_SUBSCRIPTION",
+      "sourceId": "dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan",
+      "plannedStatus": "READY",
+      "status": "PENDING",
+      "dependencies": [
+        "UPSERT_APPLICATION:dev1@540.co/wizards-dev-app",
+        "RESOLVE_PLAN:dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan"
+      ],
+      "targetIds": {},
+      "reconcileHints": {},
+      "lastError": null,
+      "startedAt": null,
+      "completedAt": null
+    },
+    "VERIFY_SUBSCRIPTION:dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan": {
+      "actionId": "VERIFY_SUBSCRIPTION:dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan",
+      "kind": "VERIFY_SUBSCRIPTION",
+      "sourceId": "dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan",
+      "plannedStatus": "READY",
+      "status": "PENDING",
+      "dependencies": [
+        "UPSERT_SUBSCRIPTION:dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan"
+      ],
+      "targetIds": {},
+      "reconcileHints": {},
+      "lastError": null,
+      "startedAt": null,
+      "completedAt": null
+    },
+    "RESOLVE_PLAN:dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan": {
+      "actionId": "RESOLVE_PLAN:dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan",
+      "kind": "RESOLVE_PLAN",
+      "sourceId": "dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan",
+      "plannedStatus": "READY",
+      "status": "PENDING",
+      "dependencies": [
+        "UPSERT_APPLICATION:dev2@540.co/chuck-norris-dev-app"
+      ],
+      "targetIds": {},
+      "reconcileHints": {},
+      "lastError": null,
+      "startedAt": null,
+      "completedAt": null
+    },
+    "UPSERT_SUBSCRIPTION:dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan": {
+      "actionId": "UPSERT_SUBSCRIPTION:dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan",
+      "kind": "UPSERT_SUBSCRIPTION",
+      "sourceId": "dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan",
+      "plannedStatus": "READY",
+      "status": "PENDING",
+      "dependencies": [
+        "UPSERT_APPLICATION:dev2@540.co/chuck-norris-dev-app",
+        "RESOLVE_PLAN:dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan"
+      ],
+      "targetIds": {},
+      "reconcileHints": {},
+      "lastError": null,
+      "startedAt": null,
+      "completedAt": null
+    },
+    "VERIFY_SUBSCRIPTION:dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan": {
+      "actionId": "VERIFY_SUBSCRIPTION:dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan",
+      "kind": "VERIFY_SUBSCRIPTION",
+      "sourceId": "dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan",
+      "plannedStatus": "READY",
+      "status": "PENDING",
+      "dependencies": [
+        "UPSERT_SUBSCRIPTION:dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan"
+      ],
+      "targetIds": {},
+      "reconcileHints": {},
+      "lastError": null,
+      "startedAt": null,
+      "completedAt": null
+    },
+    "RESOLVE_PLAN:dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan": {
+      "actionId": "RESOLVE_PLAN:dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan",
+      "kind": "RESOLVE_PLAN",
+      "sourceId": "dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan",
+      "plannedStatus": "READY",
+      "status": "PENDING",
+      "dependencies": [
+        "UPSERT_APPLICATION:dev2@540.co/dog-breeds-dev-app"
+      ],
+      "targetIds": {},
+      "reconcileHints": {},
+      "lastError": null,
+      "startedAt": null,
+      "completedAt": null
+    },
+    "UPSERT_SUBSCRIPTION:dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan": {
+      "actionId": "UPSERT_SUBSCRIPTION:dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan",
+      "kind": "UPSERT_SUBSCRIPTION",
+      "sourceId": "dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan",
+      "plannedStatus": "READY",
+      "status": "PENDING",
+      "dependencies": [
+        "UPSERT_APPLICATION:dev2@540.co/dog-breeds-dev-app",
+        "RESOLVE_PLAN:dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan"
+      ],
+      "targetIds": {},
+      "reconcileHints": {},
+      "lastError": null,
+      "startedAt": null,
+      "completedAt": null
+    },
+    "VERIFY_SUBSCRIPTION:dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan": {
+      "actionId": "VERIFY_SUBSCRIPTION:dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan",
+      "kind": "VERIFY_SUBSCRIPTION",
+      "sourceId": "dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan",
+      "plannedStatus": "READY",
+      "status": "PENDING",
+      "dependencies": [
+        "UPSERT_SUBSCRIPTION:dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan"
+      ],
+      "targetIds": {},
+      "reconcileHints": {},
+      "lastError": null,
+      "startedAt": null,
+      "completedAt": null
+    }
+  }
+}
