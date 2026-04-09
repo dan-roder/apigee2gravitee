@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-08T20:49:12.185Z",
+  "generatedAt": "2026-04-09T15:59:25.717Z",
   "summary": {
     "proxies": 23,
     "blockers": 0,
@@ -151,8 +151,10 @@
         "sourceRevision": "1",
         "securityScheme": "KEYLESS",
         "needsReviewSteps": [
+          "KVM-GetCredentials",
           "JS-CreateAuthHeader",
           "JS-ValidateRequest",
+          "CreateKVM",
           "JS-ProcessCreateKVM"
         ],
         "llmSteps": [
@@ -185,7 +187,10 @@
         "sourceRevision": "5",
         "securityScheme": "KEYLESS",
         "needsReviewSteps": [
+          "KVM-GetCredentials",
+          "AM-SetDebugHeaders",
           "JS-CreateAuthHeader",
+          "ListKVMs",
           "processKVMs"
         ],
         "llmSteps": [
@@ -217,6 +222,7 @@
         "sourceRevision": "2",
         "securityScheme": "KEYLESS",
         "needsReviewSteps": [
+          "KVM-GetCredentials",
           "JS-CreateAuthHeader",
           "JS-ValidateUpdateRequest",
           "JS-CheckFixedKVM",
@@ -254,6 +260,7 @@
         "sourceRevision": "3",
         "securityScheme": "KEYLESS",
         "needsReviewSteps": [
+          "Service-Callout-List-KVMs",
           "Fetch-KVMs"
         ],
         "llmSteps": [
@@ -410,6 +417,7 @@
         "sourceRevision": "1",
         "securityScheme": "KEYLESS",
         "needsReviewSteps": [
+          "GetKVM",
           "Process-Encrypted-Value"
         ],
         "llmSteps": [
@@ -472,6 +480,7 @@
         "securityScheme": "API_KEY",
         "needsReviewSteps": [
           "remove-query-param-apikey",
+          "GetKVM",
           "ProcessEncryptedValue"
         ],
         "llmSteps": [
@@ -494,7 +503,9 @@
         "sourceProxy": "kvm-test",
         "sourceRevision": "2",
         "securityScheme": "KEYLESS",
-        "needsReviewSteps": [],
+        "needsReviewSteps": [
+          "KVM-GetCredentials"
+        ],
         "llmSteps": [],
         "manualSteps": [],
         "unmappedConditions": [],
@@ -534,6 +545,7 @@
         "sourceRevision": "4",
         "securityScheme": "KEYLESS",
         "needsReviewSteps": [
+          "GetKVM",
           "Process-Encrypted-Value"
         ],
         "llmSteps": [
@@ -601,6 +613,9 @@
         "sourceRevision": "1",
         "securityScheme": "KEYLESS",
         "needsReviewSteps": [
+          "SC-Villian-1",
+          "SC-Villian-2",
+          "SC-Villian-3",
           "createJsonResponse"
         ],
         "llmSteps": [

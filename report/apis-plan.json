@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-08T20:49:12.184Z",
+  "generatedAt": "2026-04-09T15:59:25.716Z",
   "kind": "ApisMigrationManifest",
   "source": {
     "irDir": "/Users/daniel.roder/Sites/apigee2gravitee/ir",
@@ -78,22 +78,13 @@
               ],
               "request": [
                 {
-                  "name": "Assign Attributes from KVM (migrated from: KVM-GetCredentials)",
+                  "name": "Assign Attributes from KVM (migrated from: KVM-GetCredentials) [PLUGIN FALLBACK]",
                   "description": "Migrated from Apigee KeyValueMapOperations: KVM-GetCredentials",
                   "enabled": true,
-                  "policy": "assign-attributes",
+                  "policy": "groovy",
                   "configuration": {
                     "scope": "REQUEST",
-                    "attributes": [
-                      {
-                        "name": "private.username",
-                        "value": "{#api.properties['username']}"
-                      },
-                      {
-                        "name": "private.password",
-                        "value": "{#api.properties['password']}"
-                      }
-                    ]
+                    "script": "// Plugin fallback for KVM-GetCredentials\n// Reason: assign-attributes plugin unavailable\n// kvm get devops-credentials.username -> private.username\n// kvm get devops-credentials.password -> private.password"
                   }
                 },
                 {
@@ -117,26 +108,13 @@
                   }
                 },
                 {
-                  "name": "HTTP Callout (migrated from ServiceCallout: CreateKVM)",
+                  "name": "HTTP Callout (migrated from ServiceCallout: CreateKVM) [PLUGIN FALLBACK]",
                   "description": "Migrated from Apigee ServiceCallout: CreateKVM",
                   "enabled": true,
-                  "policy": "http-callout",
+                  "policy": "groovy",
                   "configuration": {
-                    "method": "GET",
-                    "url": "http://{kvm.api.url}",
-                    "headers": [],
-                    "body": "",
-                    "fireAndForget": false,
-                    "exitOnError": true,
-                    "errorCondition": "{#calloutResponse.status >= 400}",
-                    "errorStatusCode": "500",
-                    "errorContent": "{\"error\":\"callout failed\"}",
-                    "variables": [
-                      {
-                        "name": "kvm.create.response",
-                        "value": "{#calloutResponse.content}"
-                      }
-                    ]
+                    "scope": "REQUEST",
+                    "script": "// Plugin fallback for CreateKVM\n// Reason: http-callout plugin unavailable\n// targetUrl: http://{kvm.api.url}\n// responseVariable: kvm.create.response"
                   }
                 },
                 {
@@ -193,8 +171,10 @@
             "sourceRevision": "1",
             "securityScheme": "KEYLESS",
             "needsReviewSteps": [
+              "KVM-GetCredentials",
               "JS-CreateAuthHeader",
               "JS-ValidateRequest",
+              "CreateKVM",
               "JS-ProcessCreateKVM"
             ],
             "llmSteps": [
@@ -278,45 +258,23 @@
               ],
               "request": [
                 {
-                  "name": "Assign Attributes from KVM (migrated from: KVM-GetCredentials)",
+                  "name": "Assign Attributes from KVM (migrated from: KVM-GetCredentials) [PLUGIN FALLBACK]",
                   "description": "Migrated from Apigee KeyValueMapOperations: KVM-GetCredentials",
                   "enabled": true,
-                  "policy": "assign-attributes",
+                  "policy": "groovy",
                   "configuration": {
                     "scope": "REQUEST",
-                    "attributes": [
-                      {
-                        "name": "private.username",
-                        "value": "{#api.properties['username']}"
-                      },
-                      {
-                        "name": "private.password",
-                        "value": "{#api.properties['password']}"
-                      }
-                    ]
+                    "script": "// Plugin fallback for KVM-GetCredentials\n// Reason: assign-attributes plugin unavailable\n// kvm get devops-credentials.username -> private.username\n// kvm get devops-credentials.password -> private.password"
                   }
                 },
                 {
-                  "name": "Assign Attributes (migrated from: AM-SetDebugHeaders)",
+                  "name": "Assign Attributes (migrated from: AM-SetDebugHeaders) [PLUGIN FALLBACK]",
                   "description": "Migrated from Apigee AssignMessage: AM-SetDebugHeaders",
                   "enabled": true,
-                  "policy": "assign-attributes",
+                  "policy": "groovy",
                   "configuration": {
                     "scope": "REQUEST",
-                    "attributes": [
-                      {
-                        "name": "debug.org",
-                        "value": "{organization.name}"
-                      },
-                      {
-                        "name": "debug.env",
-                        "value": "{environment.name}"
-                      },
-                      {
-                        "name": "debug.username",
-                        "value": "{private.username}"
-                      }
-                    ]
+                    "script": "// Plugin fallback for AM-SetDebugHeaders\n// Reason: assign-attributes plugin unavailable\n// assign debug.org <= \"{organization.name}\"\n// assign debug.env <= \"{environment.name}\"\n// assign debug.username <= \"{private.username}\""
                   }
                 },
                 {
@@ -330,26 +288,13 @@
                   }
                 },
                 {
-                  "name": "HTTP Callout (migrated from ServiceCallout: ListKVMs)",
+                  "name": "HTTP Callout (migrated from ServiceCallout: ListKVMs) [PLUGIN FALLBACK]",
                   "description": "Migrated from Apigee ServiceCallout: ListKVMs",
                   "enabled": true,
-                  "policy": "http-callout",
+                  "policy": "groovy",
                   "configuration": {
-                    "method": "GET",
-                    "url": "http://127.0.0.1:8080/v1/organizations/advana/environments/dev/keyvaluemaps",
-                    "headers": [],
-                    "body": "",
-                    "fireAndForget": false,
-                    "exitOnError": true,
-                    "errorCondition": "{#calloutResponse.status >= 400}",
-                    "errorStatusCode": "500",
-                    "errorContent": "{\"error\":\"callout failed\"}",
-                    "variables": [
-                      {
-                        "name": "kvm.list.response",
-                        "value": "{#calloutResponse.content}"
-                      }
-                    ]
+                    "scope": "REQUEST",
+                    "script": "// Plugin fallback for ListKVMs\n// Reason: http-callout plugin unavailable\n// targetUrl: http://127.0.0.1:8080/v1/organizations/advana/environments/dev/keyvaluemaps\n// responseVariable: kvm.list.response"
                   }
                 },
                 {
@@ -406,7 +351,10 @@
             "sourceRevision": "5",
             "securityScheme": "KEYLESS",
             "needsReviewSteps": [
+              "KVM-GetCredentials",
+              "AM-SetDebugHeaders",
               "JS-CreateAuthHeader",
+              "ListKVMs",
               "processKVMs"
             ],
             "llmSteps": [
@@ -486,22 +434,13 @@
               ],
               "request": [
                 {
-                  "name": "Assign Attributes from KVM (migrated from: KVM-GetCredentials)",
+                  "name": "Assign Attributes from KVM (migrated from: KVM-GetCredentials) [PLUGIN FALLBACK]",
                   "description": "Migrated from Apigee KeyValueMapOperations: KVM-GetCredentials",
                   "enabled": true,
-                  "policy": "assign-attributes",
+                  "policy": "groovy",
                   "configuration": {
                     "scope": "REQUEST",
-                    "attributes": [
-                      {
-                        "name": "private.username",
-                        "value": "{#api.properties['username']}"
-                      },
-                      {
-                        "name": "private.password",
-                        "value": "{#api.properties['password']}"
-                      }
-                    ]
+                    "script": "// Plugin fallback for KVM-GetCredentials\n// Reason: assign-attributes plugin unavailable\n// kvm get devops-credentials.username -> private.username\n// kvm get devops-credentials.password -> private.password"
                   }
                 },
                 {
@@ -588,6 +527,7 @@
             "sourceRevision": "2",
             "securityScheme": "KEYLESS",
             "needsReviewSteps": [
+              "KVM-GetCredentials",
               "JS-CreateAuthHeader",
               "JS-ValidateUpdateRequest",
               "JS-CheckFixedKVM",
@@ -678,26 +618,13 @@
               ],
               "request": [
                 {
-                  "name": "HTTP Callout (migrated from ServiceCallout: Service-Callout-List-KVMs)",
+                  "name": "HTTP Callout (migrated from ServiceCallout: Service-Callout-List-KVMs) [PLUGIN FALLBACK]",
                   "description": "Migrated from Apigee ServiceCallout: Service-Callout-List-KVMs",
                   "enabled": true,
-                  "policy": "http-callout",
+                  "policy": "groovy",
                   "configuration": {
-                    "method": "GET",
-                    "url": "https://api.enterprise.apigee.com",
-                    "headers": [],
-                    "body": "",
-                    "fireAndForget": false,
-                    "exitOnError": true,
-                    "errorCondition": "{#calloutResponse.status >= 400}",
-                    "errorStatusCode": "500",
-                    "errorContent": "{\"error\":\"callout failed\"}",
-                    "variables": [
-                      {
-                        "name": "kvmListResponse",
-                        "value": "{#calloutResponse.content}"
-                      }
-                    ]
+                    "scope": "REQUEST",
+                    "script": "// Plugin fallback for Service-Callout-List-KVMs\n// Reason: http-callout plugin unavailable\n// targetUrl: https://api.enterprise.apigee.com\n// responseVariable: kvmListResponse"
                   }
                 },
                 {
@@ -753,6 +680,7 @@
             "sourceRevision": "3",
             "securityScheme": "KEYLESS",
             "needsReviewSteps": [
+              "Service-Callout-List-KVMs",
               "Fetch-KVMs"
             ],
             "llmSteps": [
@@ -1540,18 +1468,13 @@
               ],
               "request": [
                 {
-                  "name": "Assign Attributes from KVM (migrated from: GetKVM)",
+                  "name": "Assign Attributes from KVM (migrated from: GetKVM) [PLUGIN FALLBACK]",
                   "description": "Migrated from Apigee KeyValueMapOperations: GetKVM",
                   "enabled": true,
-                  "policy": "assign-attributes",
+                  "policy": "groovy",
                   "configuration": {
                     "scope": "REQUEST",
-                    "attributes": [
-                      {
-                        "name": "private.secret-password-1",
-                        "value": "{#api.properties['secret-password-1']}"
-                      }
-                    ]
+                    "script": "// Plugin fallback for GetKVM\n// Reason: assign-attributes plugin unavailable\n// kvm get secret-passwords.secret-password-1 -> private.secret-password-1"
                   }
                 },
                 {
@@ -1590,6 +1513,7 @@
             "sourceRevision": "1",
             "securityScheme": "KEYLESS",
             "needsReviewSteps": [
+              "GetKVM",
               "Process-Encrypted-Value"
             ],
             "llmSteps": [
@@ -1952,18 +1876,13 @@
                   }
                 },
                 {
-                  "name": "Assign Attributes from KVM (migrated from: GetKVM)",
+                  "name": "Assign Attributes from KVM (migrated from: GetKVM) [PLUGIN FALLBACK]",
                   "description": "Migrated from Apigee KeyValueMapOperations: GetKVM",
                   "enabled": true,
-                  "policy": "assign-attributes",
+                  "policy": "groovy",
                   "configuration": {
                     "scope": "REQUEST",
-                    "attributes": [
-                      {
-                        "name": "private.super-secret-email",
-                        "value": "{#api.properties['fake-header']}"
-                      }
-                    ]
+                    "script": "// Plugin fallback for GetKVM\n// Reason: assign-attributes plugin unavailable\n// kvm get kanye-rest-header.fake-header -> private.super-secret-email"
                   }
                 },
                 {
@@ -2013,6 +1932,7 @@
             "securityScheme": "API_KEY",
             "needsReviewSteps": [
               "remove-query-param-apikey",
+              "GetKVM",
               "ProcessEncryptedValue"
             ],
             "llmSteps": [
@@ -2088,22 +2008,13 @@
               ],
               "request": [
                 {
-                  "name": "Assign Attributes from KVM (migrated from: KVM-GetCredentials)",
+                  "name": "Assign Attributes from KVM (migrated from: KVM-GetCredentials) [PLUGIN FALLBACK]",
                   "description": "Migrated from Apigee KeyValueMapOperations: KVM-GetCredentials",
                   "enabled": true,
-                  "policy": "assign-attributes",
+                  "policy": "groovy",
                   "configuration": {
                     "scope": "REQUEST",
-                    "attributes": [
-                      {
-                        "name": "private.username",
-                        "value": "{#api.properties['username']}"
-                      },
-                      {
-                        "name": "private.password",
-                        "value": "{#api.properties['password']}"
-                      }
-                    ]
+                    "script": "// Plugin fallback for KVM-GetCredentials\n// Reason: assign-attributes plugin unavailable\n// kvm get working-kvm-encrypted.username -> private.username\n// kvm get working-kvm-encrypted.password -> private.password"
                   }
                 },
                 {
@@ -2141,7 +2052,9 @@
             "sourceProxy": "kvm-test",
             "sourceRevision": "2",
             "securityScheme": "KEYLESS",
-            "needsReviewSteps": [],
+            "needsReviewSteps": [
+              "KVM-GetCredentials"
+            ],
             "llmSteps": [],
             "manualSteps": [],
             "unmappedConditions": [],
@@ -2305,18 +2218,13 @@
               ],
               "request": [
                 {
-                  "name": "Assign Attributes from KVM (migrated from: GetKVM)",
+                  "name": "Assign Attributes from KVM (migrated from: GetKVM) [PLUGIN FALLBACK]",
                   "description": "Migrated from Apigee KeyValueMapOperations: GetKVM",
                   "enabled": true,
-                  "policy": "assign-attributes",
+                  "policy": "groovy",
                   "configuration": {
                     "scope": "REQUEST",
-                    "attributes": [
-                      {
-                        "name": "private.secret-password-1",
-                        "value": "{#api.properties['secret-password-1']}"
-                      }
-                    ]
+                    "script": "// Plugin fallback for GetKVM\n// Reason: assign-attributes plugin unavailable\n// kvm get secret-passwords.secret-password-1 -> private.secret-password-1"
                   }
                 },
                 {
@@ -2373,6 +2281,7 @@
             "sourceRevision": "4",
             "securityScheme": "KEYLESS",
             "needsReviewSteps": [
+              "GetKVM",
               "Process-Encrypted-Value"
             ],
             "llmSteps": [
@@ -2651,72 +2560,33 @@
               ],
               "request": [
                 {
-                  "name": "HTTP Callout (migrated from ServiceCallout: SC-Villian-1)",
+                  "name": "HTTP Callout (migrated from ServiceCallout: SC-Villian-1) [PLUGIN FALLBACK]",
                   "description": "Migrated from Apigee ServiceCallout: SC-Villian-1",
                   "enabled": true,
-                  "policy": "http-callout",
+                  "policy": "groovy",
                   "configuration": {
-                    "method": "GET",
-                    "url": "https://swapi.dev/api",
-                    "headers": [],
-                    "body": "",
-                    "fireAndForget": false,
-                    "exitOnError": true,
-                    "errorCondition": "{#calloutResponse.status >= 400}",
-                    "errorStatusCode": "500",
-                    "errorContent": "{\"error\":\"callout failed\"}",
-                    "variables": [
-                      {
-                        "name": "backend1Response",
-                        "value": "{#calloutResponse.content}"
-                      }
-                    ]
+                    "scope": "REQUEST",
+                    "script": "// Plugin fallback for SC-Villian-1\n// Reason: http-callout plugin unavailable\n// targetUrl: https://swapi.dev/api\n// responseVariable: backend1Response"
                   }
                 },
                 {
-                  "name": "HTTP Callout (migrated from ServiceCallout: SC-Villian-2)",
+                  "name": "HTTP Callout (migrated from ServiceCallout: SC-Villian-2) [PLUGIN FALLBACK]",
                   "description": "Migrated from Apigee ServiceCallout: SC-Villian-2",
                   "enabled": true,
-                  "policy": "http-callout",
+                  "policy": "groovy",
                   "configuration": {
-                    "method": "GET",
-                    "url": "https://marvel-villains.herokuapp.com",
-                    "headers": [],
-                    "body": "",
-                    "fireAndForget": false,
-                    "exitOnError": true,
-                    "errorCondition": "{#calloutResponse.status >= 400}",
-                    "errorStatusCode": "500",
-                    "errorContent": "{\"error\":\"callout failed\"}",
-                    "variables": [
-                      {
-                        "name": "backend2Response",
-                        "value": "{#calloutResponse.content}"
-                      }
-                    ]
+                    "scope": "REQUEST",
+                    "script": "// Plugin fallback for SC-Villian-2\n// Reason: http-callout plugin unavailable\n// targetUrl: https://marvel-villains.herokuapp.com\n// responseVariable: backend2Response"
                   }
                 },
                 {
-                  "name": "HTTP Callout (migrated from ServiceCallout: SC-Villian-3)",
+                  "name": "HTTP Callout (migrated from ServiceCallout: SC-Villian-3) [PLUGIN FALLBACK]",
                   "description": "Migrated from Apigee ServiceCallout: SC-Villian-3",
                   "enabled": true,
-                  "policy": "http-callout",
+                  "policy": "groovy",
                   "configuration": {
-                    "method": "GET",
-                    "url": "https://swapi.dev/api",
-                    "headers": [],
-                    "body": "",
-                    "fireAndForget": false,
-                    "exitOnError": true,
-                    "errorCondition": "{#calloutResponse.status >= 400}",
-                    "errorStatusCode": "500",
-                    "errorContent": "{\"error\":\"callout failed\"}",
-                    "variables": [
-                      {
-                        "name": "backend3Response",
-                        "value": "{#calloutResponse.content}"
-                      }
-                    ]
+                    "scope": "REQUEST",
+                    "script": "// Plugin fallback for SC-Villian-3\n// Reason: http-callout plugin unavailable\n// targetUrl: https://swapi.dev/api\n// responseVariable: backend3Response"
                   }
                 }
               ],
@@ -2748,74 +2618,35 @@
               ],
               "request": [
                 {
-                  "name": "HTTP Callout (migrated from ServiceCallout: SC-Villian-1)",
+                  "name": "HTTP Callout (migrated from ServiceCallout: SC-Villian-1) [PLUGIN FALLBACK]",
                   "description": "Migrated from Apigee ServiceCallout: SC-Villian-1",
                   "enabled": true,
-                  "policy": "http-callout",
+                  "policy": "groovy",
                   "configuration": {
-                    "method": "GET",
-                    "url": "https://swapi.dev/api",
-                    "headers": [],
-                    "body": "",
-                    "fireAndForget": false,
-                    "exitOnError": true,
-                    "errorCondition": "{#calloutResponse.status >= 400}",
-                    "errorStatusCode": "500",
-                    "errorContent": "{\"error\":\"callout failed\"}",
-                    "variables": [
-                      {
-                        "name": "backend1Response",
-                        "value": "{#calloutResponse.content}"
-                      }
-                    ]
+                    "scope": "REQUEST",
+                    "script": "// Plugin fallback for SC-Villian-1\n// Reason: http-callout plugin unavailable\n// targetUrl: https://swapi.dev/api\n// responseVariable: backend1Response"
                   },
                   "condition": "{(request.queryparam.universe == \"sw\")}"
                 },
                 {
-                  "name": "HTTP Callout (migrated from ServiceCallout: SC-Villian-2)",
+                  "name": "HTTP Callout (migrated from ServiceCallout: SC-Villian-2) [PLUGIN FALLBACK]",
                   "description": "Migrated from Apigee ServiceCallout: SC-Villian-2",
                   "enabled": true,
-                  "policy": "http-callout",
+                  "policy": "groovy",
                   "configuration": {
-                    "method": "GET",
-                    "url": "https://marvel-villains.herokuapp.com",
-                    "headers": [],
-                    "body": "",
-                    "fireAndForget": false,
-                    "exitOnError": true,
-                    "errorCondition": "{#calloutResponse.status >= 400}",
-                    "errorStatusCode": "500",
-                    "errorContent": "{\"error\":\"callout failed\"}",
-                    "variables": [
-                      {
-                        "name": "backend2Response",
-                        "value": "{#calloutResponse.content}"
-                      }
-                    ]
+                    "scope": "REQUEST",
+                    "script": "// Plugin fallback for SC-Villian-2\n// Reason: http-callout plugin unavailable\n// targetUrl: https://marvel-villains.herokuapp.com\n// responseVariable: backend2Response"
                   },
                   "condition": "{(request.queryparam.universe == \"marvel\")}"
                 },
                 {
-                  "name": "HTTP Callout (migrated from ServiceCallout: SC-Villian-3)",
+                  "name": "HTTP Callout (migrated from ServiceCallout: SC-Villian-3) [PLUGIN FALLBACK]",
                   "description": "Migrated from Apigee ServiceCallout: SC-Villian-3",
                   "enabled": true,
-                  "policy": "http-callout",
+                  "policy": "groovy",
                   "configuration": {
-                    "method": "GET",
-                    "url": "https://swapi.dev/api",
-                    "headers": [],
-                    "body": "",
-                    "fireAndForget": false,
-                    "exitOnError": true,
-                    "errorCondition": "{#calloutResponse.status >= 400}",
-                    "errorStatusCode": "500",
-                    "errorContent": "{\"error\":\"callout failed\"}",
-                    "variables": [
-                      {
-                        "name": "backend3Response",
-                        "value": "{#calloutResponse.content}"
-                      }
-                    ]
+                    "scope": "REQUEST",
+                    "script": "// Plugin fallback for SC-Villian-3\n// Reason: http-callout plugin unavailable\n// targetUrl: https://swapi.dev/api\n// responseVariable: backend3Response"
                   },
                   "condition": "{(request.queryparam.universe == \"sw\")}"
                 }
@@ -2856,6 +2687,9 @@
             "sourceRevision": "1",
             "securityScheme": "KEYLESS",
             "needsReviewSteps": [
+              "SC-Villian-1",
+              "SC-Villian-2",
+              "SC-Villian-3",
               "createJsonResponse"
             ],
             "llmSteps": [
@@ -3316,22 +3150,13 @@
               ],
               "request": [
                 {
-                  "name": "Assign Attributes from KVM (migrated from: KVM-GetCredentials)",
+                  "name": "Assign Attributes from KVM (migrated from: KVM-GetCredentials) [PLUGIN FALLBACK]",
                   "description": "Migrated from Apigee KeyValueMapOperations: KVM-GetCredentials",
                   "enabled": true,
-                  "policy": "assign-attributes",
+                  "policy": "groovy",
                   "configuration": {
                     "scope": "REQUEST",
-                    "attributes": [
-                      {
-                        "name": "private.username",
-                        "value": "{#api.properties['username']}"
-                      },
-                      {
-                        "name": "private.password",
-                        "value": "{#api.properties['password']}"
-                      }
-                    ]
+                    "script": "// Plugin fallback for KVM-GetCredentials\n// Reason: assign-attributes plugin unavailable\n// kvm get devops-credentials.username -> private.username\n// kvm get devops-credentials.password -> private.password"
                   }
                 },
                 {
@@ -3355,26 +3180,13 @@
                   }
                 },
                 {
-                  "name": "HTTP Callout (migrated from ServiceCallout: CreateKVM)",
+                  "name": "HTTP Callout (migrated from ServiceCallout: CreateKVM) [PLUGIN FALLBACK]",
                   "description": "Migrated from Apigee ServiceCallout: CreateKVM",
                   "enabled": true,
-                  "policy": "http-callout",
+                  "policy": "groovy",
                   "configuration": {
-                    "method": "GET",
-                    "url": "http://{kvm.api.url}",
-                    "headers": [],
-                    "body": "",
-                    "fireAndForget": false,
-                    "exitOnError": true,
-                    "errorCondition": "{#calloutResponse.status >= 400}",
-                    "errorStatusCode": "500",
-                    "errorContent": "{\"error\":\"callout failed\"}",
-                    "variables": [
-                      {
-                        "name": "kvm.create.response",
-                        "value": "{#calloutResponse.content}"
-                      }
-                    ]
+                    "scope": "REQUEST",
+                    "script": "// Plugin fallback for CreateKVM\n// Reason: http-callout plugin unavailable\n// targetUrl: http://{kvm.api.url}\n// responseVariable: kvm.create.response"
                   }
                 },
                 {
@@ -3431,8 +3243,10 @@
             "sourceRevision": "1",
             "securityScheme": "KEYLESS",
             "needsReviewSteps": [
+              "KVM-GetCredentials",
               "JS-CreateAuthHeader",
               "JS-ValidateRequest",
+              "CreateKVM",
               "JS-ProcessCreateKVM"
             ],
             "llmSteps": [
@@ -3618,45 +3432,23 @@
               ],
               "request": [
                 {
-                  "name": "Assign Attributes from KVM (migrated from: KVM-GetCredentials)",
+                  "name": "Assign Attributes from KVM (migrated from: KVM-GetCredentials) [PLUGIN FALLBACK]",
                   "description": "Migrated from Apigee KeyValueMapOperations: KVM-GetCredentials",
                   "enabled": true,
-                  "policy": "assign-attributes",
+                  "policy": "groovy",
                   "configuration": {
                     "scope": "REQUEST",
-                    "attributes": [
-                      {
-                        "name": "private.username",
-                        "value": "{#api.properties['username']}"
-                      },
-                      {
-                        "name": "private.password",
-                        "value": "{#api.properties['password']}"
-                      }
-                    ]
+                    "script": "// Plugin fallback for KVM-GetCredentials\n// Reason: assign-attributes plugin unavailable\n// kvm get devops-credentials.username -> private.username\n// kvm get devops-credentials.password -> private.password"
                   }
                 },
                 {
-                  "name": "Assign Attributes (migrated from: AM-SetDebugHeaders)",
+                  "name": "Assign Attributes (migrated from: AM-SetDebugHeaders) [PLUGIN FALLBACK]",
                   "description": "Migrated from Apigee AssignMessage: AM-SetDebugHeaders",
                   "enabled": true,
-                  "policy": "assign-attributes",
+                  "policy": "groovy",
                   "configuration": {
                     "scope": "REQUEST",
-                    "attributes": [
-                      {
-                        "name": "debug.org",
-                        "value": "{organization.name}"
-                      },
-                      {
-                        "name": "debug.env",
-                        "value": "{environment.name}"
-                      },
-                      {
-                        "name": "debug.username",
-                        "value": "{private.username}"
-                      }
-                    ]
+                    "script": "// Plugin fallback for AM-SetDebugHeaders\n// Reason: assign-attributes plugin unavailable\n// assign debug.org <= \"{organization.name}\"\n// assign debug.env <= \"{environment.name}\"\n// assign debug.username <= \"{private.username}\""
                   }
                 },
                 {
@@ -3670,26 +3462,13 @@
                   }
                 },
                 {
-                  "name": "HTTP Callout (migrated from ServiceCallout: ListKVMs)",
+                  "name": "HTTP Callout (migrated from ServiceCallout: ListKVMs) [PLUGIN FALLBACK]",
                   "description": "Migrated from Apigee ServiceCallout: ListKVMs",
                   "enabled": true,
-                  "policy": "http-callout",
+                  "policy": "groovy",
                   "configuration": {
-                    "method": "GET",
-                    "url": "http://127.0.0.1:8080/v1/organizations/advana/environments/dev/keyvaluemaps",
-                    "headers": [],
-                    "body": "",
-                    "fireAndForget": false,
-                    "exitOnError": true,
-                    "errorCondition": "{#calloutResponse.status >= 400}",
-                    "errorStatusCode": "500",
-                    "errorContent": "{\"error\":\"callout failed\"}",
-                    "variables": [
-                      {
-                        "name": "kvm.list.response",
-                        "value": "{#calloutResponse.content}"
-                      }
-                    ]
+                    "scope": "REQUEST",
+                    "script": "// Plugin fallback for ListKVMs\n// Reason: http-callout plugin unavailable\n// targetUrl: http://127.0.0.1:8080/v1/organizations/advana/environments/dev/keyvaluemaps\n// responseVariable: kvm.list.response"
                   }
                 },
                 {
@@ -3746,7 +3525,10 @@
             "sourceRevision": "5",
             "securityScheme": "KEYLESS",
             "needsReviewSteps": [
+              "KVM-GetCredentials",
+              "AM-SetDebugHeaders",
               "JS-CreateAuthHeader",
+              "ListKVMs",
               "processKVMs"
             ],
             "llmSteps": [
@@ -3925,22 +3707,13 @@
               ],
               "request": [
                 {
-                  "name": "Assign Attributes from KVM (migrated from: KVM-GetCredentials)",
+                  "name": "Assign Attributes from KVM (migrated from: KVM-GetCredentials) [PLUGIN FALLBACK]",
                   "description": "Migrated from Apigee KeyValueMapOperations: KVM-GetCredentials",
                   "enabled": true,
-                  "policy": "assign-attributes",
+                  "policy": "groovy",
                   "configuration": {
                     "scope": "REQUEST",
-                    "attributes": [
-                      {
-                        "name": "private.username",
-                        "value": "{#api.properties['username']}"
-                      },
-                      {
-                        "name": "private.password",
-                        "value": "{#api.properties['password']}"
-                      }
-                    ]
+                    "script": "// Plugin fallback for KVM-GetCredentials\n// Reason: assign-attributes plugin unavailable\n// kvm get devops-credentials.username -> private.username\n// kvm get devops-credentials.password -> private.password"
                   }
                 },
                 {
@@ -4027,6 +3800,7 @@
             "sourceRevision": "2",
             "securityScheme": "KEYLESS",
             "needsReviewSteps": [
+              "KVM-GetCredentials",
               "JS-CreateAuthHeader",
               "JS-ValidateUpdateRequest",
               "JS-CheckFixedKVM",
@@ -4222,26 +3996,13 @@
               ],
               "request": [
                 {
-                  "name": "HTTP Callout (migrated from ServiceCallout: Service-Callout-List-KVMs)",
+                  "name": "HTTP Callout (migrated from ServiceCallout: Service-Callout-List-KVMs) [PLUGIN FALLBACK]",
                   "description": "Migrated from Apigee ServiceCallout: Service-Callout-List-KVMs",
                   "enabled": true,
-                  "policy": "http-callout",
+                  "policy": "groovy",
                   "configuration": {
-                    "method": "GET",
-                    "url": "https://api.enterprise.apigee.com",
-                    "headers": [],
-                    "body": "",
-                    "fireAndForget": false,
-                    "exitOnError": true,
-                    "errorCondition": "{#calloutResponse.status >= 400}",
-                    "errorStatusCode": "500",
-                    "errorContent": "{\"error\":\"callout failed\"}",
-                    "variables": [
-                      {
-                        "name": "kvmListResponse",
-                        "value": "{#calloutResponse.content}"
-                      }
-                    ]
+                    "scope": "REQUEST",
+                    "script": "// Plugin fallback for Service-Callout-List-KVMs\n// Reason: http-callout plugin unavailable\n// targetUrl: https://api.enterprise.apigee.com\n// responseVariable: kvmListResponse"
                   }
                 },
                 {
@@ -4297,6 +4058,7 @@
             "sourceRevision": "3",
             "securityScheme": "KEYLESS",
             "needsReviewSteps": [
+              "Service-Callout-List-KVMs",
               "Fetch-KVMs"
             ],
             "llmSteps": [
@@ -5844,18 +5606,13 @@
               ],
               "request": [
                 {
-                  "name": "Assign Attributes from KVM (migrated from: GetKVM)",
+                  "name": "Assign Attributes from KVM (migrated from: GetKVM) [PLUGIN FALLBACK]",
                   "description": "Migrated from Apigee KeyValueMapOperations: GetKVM",
                   "enabled": true,
-                  "policy": "assign-attributes",
+                  "policy": "groovy",
                   "configuration": {
                     "scope": "REQUEST",
-                    "attributes": [
-                      {
-                        "name": "private.secret-password-1",
-                        "value": "{#api.properties['secret-password-1']}"
-                      }
-                    ]
+                    "script": "// Plugin fallback for GetKVM\n// Reason: assign-attributes plugin unavailable\n// kvm get secret-passwords.secret-password-1 -> private.secret-password-1"
                   }
                 },
                 {
@@ -5894,6 +5651,7 @@
             "sourceRevision": "1",
             "securityScheme": "KEYLESS",
             "needsReviewSteps": [
+              "GetKVM",
               "Process-Encrypted-Value"
             ],
             "llmSteps": [
@@ -6540,18 +6298,13 @@
                   }
                 },
                 {
-                  "name": "Assign Attributes from KVM (migrated from: GetKVM)",
+                  "name": "Assign Attributes from KVM (migrated from: GetKVM) [PLUGIN FALLBACK]",
                   "description": "Migrated from Apigee KeyValueMapOperations: GetKVM",
                   "enabled": true,
-                  "policy": "assign-attributes",
+                  "policy": "groovy",
                   "configuration": {
                     "scope": "REQUEST",
-                    "attributes": [
-                      {
-                        "name": "private.super-secret-email",
-                        "value": "{#api.properties['fake-header']}"
-                      }
-                    ]
+                    "script": "// Plugin fallback for GetKVM\n// Reason: assign-attributes plugin unavailable\n// kvm get kanye-rest-header.fake-header -> private.super-secret-email"
                   }
                 },
                 {
@@ -6601,6 +6354,7 @@
             "securityScheme": "API_KEY",
             "needsReviewSteps": [
               "remove-query-param-apikey",
+              "GetKVM",
               "ProcessEncryptedValue"
             ],
             "llmSteps": [
@@ -6772,22 +6526,13 @@
               ],
               "request": [
                 {
-                  "name": "Assign Attributes from KVM (migrated from: KVM-GetCredentials)",
+                  "name": "Assign Attributes from KVM (migrated from: KVM-GetCredentials) [PLUGIN FALLBACK]",
                   "description": "Migrated from Apigee KeyValueMapOperations: KVM-GetCredentials",
                   "enabled": true,
-                  "policy": "assign-attributes",
+                  "policy": "groovy",
                   "configuration": {
                     "scope": "REQUEST",
-                    "attributes": [
-                      {
-                        "name": "private.username",
-                        "value": "{#api.properties['username']}"
-                      },
-                      {
-                        "name": "private.password",
-                        "value": "{#api.properties['password']}"
-                      }
-                    ]
+                    "script": "// Plugin fallback for KVM-GetCredentials\n// Reason: assign-attributes plugin unavailable\n// kvm get working-kvm-encrypted.username -> private.username\n// kvm get working-kvm-encrypted.password -> private.password"
                   }
                 },
                 {
@@ -6825,7 +6570,9 @@
             "sourceProxy": "kvm-test",
             "sourceRevision": "2",
             "securityScheme": "KEYLESS",
-            "needsReviewSteps": [],
+            "needsReviewSteps": [
+              "KVM-GetCredentials"
+            ],
             "llmSteps": [],
             "manualSteps": [],
             "unmappedConditions": [],
@@ -7173,18 +6920,13 @@
               ],
               "request": [
                 {
-                  "name": "Assign Attributes from KVM (migrated from: GetKVM)",
+                  "name": "Assign Attributes from KVM (migrated from: GetKVM) [PLUGIN FALLBACK]",
                   "description": "Migrated from Apigee KeyValueMapOperations: GetKVM",
                   "enabled": true,
-                  "policy": "assign-attributes",
+                  "policy": "groovy",
                   "configuration": {
                     "scope": "REQUEST",
-                    "attributes": [
-                      {
-                        "name": "private.secret-password-1",
-                        "value": "{#api.properties['secret-password-1']}"
-                      }
-                    ]
+                    "script": "// Plugin fallback for GetKVM\n// Reason: assign-attributes plugin unavailable\n// kvm get secret-passwords.secret-password-1 -> private.secret-password-1"
                   }
                 },
                 {
@@ -7241,6 +6983,7 @@
             "sourceRevision": "4",
             "securityScheme": "KEYLESS",
             "needsReviewSteps": [
+              "GetKVM",
               "Process-Encrypted-Value"
             ],
             "llmSteps": [
@@ -7801,72 +7544,33 @@
               ],
               "request": [
                 {
-                  "name": "HTTP Callout (migrated from ServiceCallout: SC-Villian-1)",
+                  "name": "HTTP Callout (migrated from ServiceCallout: SC-Villian-1) [PLUGIN FALLBACK]",
                   "description": "Migrated from Apigee ServiceCallout: SC-Villian-1",
                   "enabled": true,
-                  "policy": "http-callout",
+                  "policy": "groovy",
                   "configuration": {
-                    "method": "GET",
-                    "url": "https://swapi.dev/api",
-                    "headers": [],
-                    "body": "",
-                    "fireAndForget": false,
-                    "exitOnError": true,
-                    "errorCondition": "{#calloutResponse.status >= 400}",
-                    "errorStatusCode": "500",
-                    "errorContent": "{\"error\":\"callout failed\"}",
-                    "variables": [
-                      {
-                        "name": "backend1Response",
-                        "value": "{#calloutResponse.content}"
-                      }
-                    ]
+                    "scope": "REQUEST",
+                    "script": "// Plugin fallback for SC-Villian-1\n// Reason: http-callout plugin unavailable\n// targetUrl: https://swapi.dev/api\n// responseVariable: backend1Response"
                   }
                 },
                 {
-                  "name": "HTTP Callout (migrated from ServiceCallout: SC-Villian-2)",
+                  "name": "HTTP Callout (migrated from ServiceCallout: SC-Villian-2) [PLUGIN FALLBACK]",
                   "description": "Migrated from Apigee ServiceCallout: SC-Villian-2",
                   "enabled": true,
-                  "policy": "http-callout",
+                  "policy": "groovy",
                   "configuration": {
-                    "method": "GET",
-                    "url": "https://marvel-villains.herokuapp.com",
-                    "headers": [],
-                    "body": "",
-                    "fireAndForget": false,
-                    "exitOnError": true,
-                    "errorCondition": "{#calloutResponse.status >= 400}",
-                    "errorStatusCode": "500",
-                    "errorContent": "{\"error\":\"callout failed\"}",
-                    "variables": [
-                      {
-                        "name": "backend2Response",
-                        "value": "{#calloutResponse.content}"
-                      }
-                    ]
+                    "scope": "REQUEST",
+                    "script": "// Plugin fallback for SC-Villian-2\n// Reason: http-callout plugin unavailable\n// targetUrl: https://marvel-villains.herokuapp.com\n// responseVariable: backend2Response"
                   }
                 },
                 {
-                  "name": "HTTP Callout (migrated from ServiceCallout: SC-Villian-3)",
+                  "name": "HTTP Callout (migrated from ServiceCallout: SC-Villian-3) [PLUGIN FALLBACK]",
                   "description": "Migrated from Apigee ServiceCallout: SC-Villian-3",
                   "enabled": true,
-                  "policy": "http-callout",
+                  "policy": "groovy",
                   "configuration": {
-                    "method": "GET",
-                    "url": "https://swapi.dev/api",
-                    "headers": [],
-                    "body": "",
-                    "fireAndForget": false,
-                    "exitOnError": true,
-                    "errorCondition": "{#calloutResponse.status >= 400}",
-                    "errorStatusCode": "500",
-                    "errorContent": "{\"error\":\"callout failed\"}",
-                    "variables": [
-                      {
-                        "name": "backend3Response",
-                        "value": "{#calloutResponse.content}"
-                      }
-                    ]
+                    "scope": "REQUEST",
+                    "script": "// Plugin fallback for SC-Villian-3\n// Reason: http-callout plugin unavailable\n// targetUrl: https://swapi.dev/api\n// responseVariable: backend3Response"
                   }
                 }
               ],
@@ -7898,74 +7602,35 @@
               ],
               "request": [
                 {
-                  "name": "HTTP Callout (migrated from ServiceCallout: SC-Villian-1)",
+                  "name": "HTTP Callout (migrated from ServiceCallout: SC-Villian-1) [PLUGIN FALLBACK]",
                   "description": "Migrated from Apigee ServiceCallout: SC-Villian-1",
                   "enabled": true,
-                  "policy": "http-callout",
+                  "policy": "groovy",
                   "configuration": {
-                    "method": "GET",
-                    "url": "https://swapi.dev/api",
-                    "headers": [],
-                    "body": "",
-                    "fireAndForget": false,
-                    "exitOnError": true,
-                    "errorCondition": "{#calloutResponse.status >= 400}",
-                    "errorStatusCode": "500",
-                    "errorContent": "{\"error\":\"callout failed\"}",
-                    "variables": [
-                      {
-                        "name": "backend1Response",
-                        "value": "{#calloutResponse.content}"
-                      }
-                    ]
+                    "scope": "REQUEST",
+                    "script": "// Plugin fallback for SC-Villian-1\n// Reason: http-callout plugin unavailable\n// targetUrl: https://swapi.dev/api\n// responseVariable: backend1Response"
                   },
                   "condition": "{(request.queryparam.universe == \"sw\")}"
                 },
                 {
-                  "name": "HTTP Callout (migrated from ServiceCallout: SC-Villian-2)",
+                  "name": "HTTP Callout (migrated from ServiceCallout: SC-Villian-2) [PLUGIN FALLBACK]",
                   "description": "Migrated from Apigee ServiceCallout: SC-Villian-2",
                   "enabled": true,
-                  "policy": "http-callout",
+                  "policy": "groovy",
                   "configuration": {
-                    "method": "GET",
-                    "url": "https://marvel-villains.herokuapp.com",
-                    "headers": [],
-                    "body": "",
-                    "fireAndForget": false,
-                    "exitOnError": true,
-                    "errorCondition": "{#calloutResponse.status >= 400}",
-                    "errorStatusCode": "500",
-                    "errorContent": "{\"error\":\"callout failed\"}",
-                    "variables": [
-                      {
-                        "name": "backend2Response",
-                        "value": "{#calloutResponse.content}"
-                      }
-                    ]
+                    "scope": "REQUEST",
+                    "script": "// Plugin fallback for SC-Villian-2\n// Reason: http-callout plugin unavailable\n// targetUrl: https://marvel-villains.herokuapp.com\n// responseVariable: backend2Response"
                   },
                   "condition": "{(request.queryparam.universe == \"marvel\")}"
                 },
                 {
-                  "name": "HTTP Callout (migrated from ServiceCallout: SC-Villian-3)",
+                  "name": "HTTP Callout (migrated from ServiceCallout: SC-Villian-3) [PLUGIN FALLBACK]",
                   "description": "Migrated from Apigee ServiceCallout: SC-Villian-3",
                   "enabled": true,
-                  "policy": "http-callout",
+                  "policy": "groovy",
                   "configuration": {
-                    "method": "GET",
-                    "url": "https://swapi.dev/api",
-                    "headers": [],
-                    "body": "",
-                    "fireAndForget": false,
-                    "exitOnError": true,
-                    "errorCondition": "{#calloutResponse.status >= 400}",
-                    "errorStatusCode": "500",
-                    "errorContent": "{\"error\":\"callout failed\"}",
-                    "variables": [
-                      {
-                        "name": "backend3Response",
-                        "value": "{#calloutResponse.content}"
-                      }
-                    ]
+                    "scope": "REQUEST",
+                    "script": "// Plugin fallback for SC-Villian-3\n// Reason: http-callout plugin unavailable\n// targetUrl: https://swapi.dev/api\n// responseVariable: backend3Response"
                   },
                   "condition": "{(request.queryparam.universe == \"sw\")}"
                 }
@@ -8006,6 +7671,9 @@
             "sourceRevision": "1",
             "securityScheme": "KEYLESS",
             "needsReviewSteps": [
+              "SC-Villian-1",
+              "SC-Villian-2",
+              "SC-Villian-3",
               "createJsonResponse"
             ],
             "llmSteps": [

@@ -5,77 +5,49 @@
     "KVM-Reader": null,
     "KVM-Update": null,
     "admin-kvm-export": null,
-    "apigee-hello-api-1": "2a186de1-fee7-474a-986d-e1fee7b74ad8",
-    "apigee-hello": "0b871aed-7a73-4a46-871a-ed7a73ca463a",
-    "car-makes-api-3": "eda94554-d01d-4db2-a945-54d01dcdb2a5",
-    "cat-fact-api-2": "04a961a5-9ab5-470b-a961-a59ab5a70b87",
-    "cats-api-7": "e75119af-323c-4544-9119-af323c8544ee",
-    "chuck-norris-api-10": "99f69240-3f32-4ca7-b692-403f324ca774",
-    "dog-breeds-api-6": "1af91ac0-3037-4d9b-b91a-c030373d9b70",
+    "apigee-hello-api-1": null,
+    "apigee-hello": null,
+    "car-makes-api-3": null,
+    "cat-fact-api-2": null,
+    "cats-api-7": null,
+    "chuck-norris-api-10": null,
+    "dog-breeds-api-6": null,
     "get-kvm-proxy": null,
-    "harry-potter-characters": "e12365b9-a2f6-4133-a365-b9a2f61133ba",
-    "hogwarts-houses-api-8": "8ff47997-a83c-4f5f-b479-97a83c6f5fab",
+    "harry-potter-characters": null,
+    "hogwarts-houses-api-8": null,
     "kanye-rest-api-5": null,
     "kvm-test": null,
-    "load-balance-target-servers-api": "72f4634c-b282-4d9a-b463-4cb282fd9aa8",
+    "load-balance-target-servers-api": null,
     "mock-target-api": null,
-    "proxy-sharedflow-api-11": "327d44c3-0b0b-4e38-bd44-c30b0b5e3852",
-    "v1-ships": "18013af2-9e87-4e75-813a-f29e877e7576",
+    "proxy-sharedflow-api-11": null,
+    "v1-ships": null,
     "villian-chain": null,
-    "wizards-api-9": "61b91b5d-e935-4e7d-b91b-5de9358e7d86",
-    "yes-or-no-api-4": "faa9013f-ca50-42a5-a901-3fca5042a5a6"
+    "wizards-api-9": null,
+    "yes-or-no-api-4": null
   },
   "plans": {
     "KVM-Create": {},
     "KVM-Reader": {},
     "KVM-Update": {},
     "admin-kvm-export": {},
-    "apigee-hello-api-1": {
-      "KEYLESS": "200b82f0-e05e-426e-8b82-f0e05e526eb1"
-    },
-    "apigee-hello": {
-      "KEYLESS": "c81bdbca-3229-4ff5-9bdb-ca3229cff50b"
-    },
-    "car-makes-api-3": {
-      "KEYLESS": "d737bbe9-4415-4f2b-b7bb-e944151f2b6b"
-    },
-    "cat-fact-api-2": {
-      "KEYLESS": "98e3ba0c-0918-45d5-a3ba-0c0918b5d5f0"
-    },
-    "cats-api-7": {
-      "API_KEY": "b8ef4a15-763a-47a0-af4a-15763ae7a062"
-    },
-    "chuck-norris-api-10": {
-      "API_KEY": "4349e7c0-6e76-4806-89e7-c06e76880667"
-    },
-    "dog-breeds-api-6": {
-      "API_KEY": "aa7d6350-f7d8-4d4c-bd63-50f7d8cd4c55"
-    },
+    "apigee-hello-api-1": {},
+    "apigee-hello": {},
+    "car-makes-api-3": {},
+    "cat-fact-api-2": {},
+    "cats-api-7": {},
+    "chuck-norris-api-10": {},
+    "dog-breeds-api-6": {},
     "get-kvm-proxy": {},
-    "harry-potter-characters": {
-      "KEYLESS": "fd5dc33c-65a7-470d-9dc3-3c65a7b70d98"
-    },
-    "hogwarts-houses-api-8": {
-      "API_KEY": "422cbaee-57cf-4375-acba-ee57cfa375a4"
-    },
+    "harry-potter-characters": {},
+    "hogwarts-houses-api-8": {},
     "kanye-rest-api-5": {},
     "kvm-test": {},
-    "load-balance-target-servers-api": {
-      "KEYLESS": "a1831ab3-2790-437a-831a-b32790337ad6"
-    },
+    "load-balance-target-servers-api": {},
     "mock-target-api": {},
-    "proxy-sharedflow-api-11": {
-      "KEYLESS": "ba4a0d04-268c-4182-8a0d-04268cc182f2"
-    },
-    "v1-ships": {
-      "KEYLESS": "e76b1731-7249-4a6d-ab17-317249ba6d03"
-    },
+    "proxy-sharedflow-api-11": {},
+    "v1-ships": {},
     "villian-chain": {},
-    "wizards-api-9": {
-      "API_KEY": "25c0c861-0b5a-4808-80c8-610b5af80854"
-    },
-    "yes-or-no-api-4": {
-      "API_KEY": "293f2407-7217-4b52-bf24-0772173b5208"
-    }
+    "wizards-api-9": {},
+    "yes-or-no-api-4": {}
   }
 }
