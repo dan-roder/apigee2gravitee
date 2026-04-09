@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-09T16:01:19.685Z",
+  "generatedAt": "2026-04-09T18:15:54.427Z",
   "kind": "ApisMigrationManifest",
   "source": {
     "irDir": "/Users/daniel.roder/Sites/apigee2gravitee/ir",
@@ -1886,13 +1886,13 @@
                   }
                 },
                 {
-                  "name": "Assign Content (migrated from: AM-Kanye-Rest)",
+                  "name": "Assign Content (migrated from: AM-Kanye-Rest) [PLUGIN FALLBACK]",
                   "description": "Migrated from Apigee AssignMessage: AM-Kanye-Rest",
                   "enabled": true,
-                  "policy": "assign-content",
+                  "policy": "groovy",
                   "configuration": {
-                    "scope": "RESPONSE",
-                    "body": "{super-secret-email}"
+                    "scope": "REQUEST",
+                    "script": "// Plugin fallback for AM-Kanye-Rest\n// Reason: assign-content plugin unavailable\n// scope: RESPONSE\n// payload: {super-secret-email}"
                   }
                 },
                 {
@@ -1933,6 +1933,7 @@
             "needsReviewSteps": [
               "remove-query-param-apikey",
               "GetKVM",
+              "AM-Kanye-Rest",
               "ProcessEncryptedValue"
             ],
             "llmSteps": [
@@ -2018,13 +2019,13 @@
                   }
                 },
                 {
-                  "name": "Assign Content (migrated from: AM-TestResponse)",
+                  "name": "Assign Content (migrated from: AM-TestResponse) [PLUGIN FALLBACK]",
                   "description": "Migrated from Apigee AssignMessage: AM-TestResponse",
                   "enabled": true,
-                  "policy": "assign-content",
+                  "policy": "groovy",
                   "configuration": {
-                    "scope": "RESPONSE",
-                    "body": "{\n  \"kvm_test\": \"success\",\n  \"username_retrieved\": \"{private.username}\",\n  \"password_exists\": \"{private.password}\",\n  \"organization\": \"{organization.name}\",\n  \"environment\": \"{environment.name}\"\n}"
+                    "scope": "REQUEST",
+                    "script": "// Plugin fallback for AM-TestResponse\n// Reason: assign-content plugin unavailable\n// scope: RESPONSE\n// payload: {\n  \"kvm_test\": \"success\",\n  \"username_retrieved\": \"{private.username}\",\n  \"password_exists\": \"{private.password}\",\n  \"organization\": \"{organization.name}\",\n  \"environment\": \"{environment.name}\"\n}"
                   }
                 }
               ],
@@ -2053,7 +2054,8 @@
             "sourceRevision": "2",
             "securityScheme": "KEYLESS",
             "needsReviewSteps": [
-              "KVM-GetCredentials"
+              "KVM-GetCredentials",
+              "AM-TestResponse"
             ],
             "llmSteps": [],
             "manualSteps": [],
@@ -3277,7 +3279,7 @@
         "LLM_POLICY:JS-ProcessCreateKVM"
       ],
       "targetHint": {
-        "apiId": "73b835f0-9600-4810-b835-f09600b81007"
+        "apiId": "ae8517f0-4c1a-462c-8517-f04c1a462c09"
       }
     },
     {
@@ -3316,7 +3318,7 @@
         "LLM_POLICY:JS-ProcessCreateKVM"
       ],
       "targetHint": {
-        "planId": "20164cae-9594-4067-964c-ae95946067a2"
+        "planId": "1748772c-2c16-459f-8877-2c2c16359f6e"
       }
     },
     {
@@ -3559,7 +3561,7 @@
         "LLM_POLICY:processKVMs"
       ],
       "targetHint": {
-        "apiId": "97b0dc38-d200-49b0-b0dc-38d20049b011"
+        "apiId": "a7d289d9-766b-46f1-9289-d9766be6f1fa"
       }
     },
     {
@@ -3597,7 +3599,7 @@
         "LLM_POLICY:processKVMs"
       ],
       "targetHint": {
-        "planId": "e703a675-aa7d-4246-83a6-75aa7d92464d"
+        "planId": "a3aec209-f0ec-4722-aec2-09f0ecc7222e"
       }
     },
     {
@@ -3846,7 +3848,7 @@
         "LLM_POLICY:JS-UpdateEntries"
       ],
       "targetHint": {
-        "apiId": "59018e33-1273-49e5-818e-33127339e51f"
+        "apiId": "eb2c2568-0f94-4567-ac25-680f94c567c9"
       }
     },
     {
@@ -3886,7 +3888,7 @@
         "LLM_POLICY:JS-UpdateEntries"
       ],
       "targetHint": {
-        "planId": "772e94fe-6bc4-4fe9-ae94-fe6bc4cfe9a7"
+        "planId": "0c34e911-25a9-4d93-b4e9-1125a9bd936d"
       }
     },
     {
@@ -4093,7 +4095,7 @@
         "LLM_POLICY:Fetch-KVMs"
       ],
       "targetHint": {
-        "apiId": "71b8d095-5a82-450b-b8d0-955a82e50bda"
+        "apiId": "ced2af9a-fd1d-4c8b-92af-9afd1dec8b24"
       }
     },
     {
@@ -4130,7 +4132,7 @@
         "LLM_POLICY:Fetch-KVMs"
       ],
       "targetHint": {
-        "planId": "05413095-46a4-41f8-8130-9546a491f8b7"
+        "planId": "a8a5e93b-6453-45ac-a5e9-3b645385ac8d"
       }
     },
     {
@@ -4302,7 +4304,7 @@
         "SHARED_FLOW_REFS_PRESENT"
       ],
       "targetHint": {
-        "apiId": "aeeb6cf0-de51-4382-ab6c-f0de51438209"
+        "apiId": "a71428c0-322e-4060-9428-c0322ee0604e"
       }
     },
     {
@@ -4339,7 +4341,7 @@
         "SHARED_FLOW_REFS_PRESENT"
       ],
       "targetHint": {
-        "planId": "01113dd2-c330-46d9-913d-d2c330f6d92f"
+        "planId": "3a7aa1bf-97fd-4fb2-baa1-bf97fd5fb206"
       }
     },
     {
@@ -4480,7 +4482,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "apiId": "fd2f6599-62c2-4c9c-af65-9962c2dc9c25"
+        "apiId": "2d568aa1-a1ee-49ea-968a-a1a1ee29ea11"
       }
     },
     {
@@ -4515,7 +4517,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "planId": "f69d4469-2c18-4bac-9d44-692c183bac02"
+        "planId": "ee6ae119-09e4-4293-aae1-1909e45293cb"
       }
     },
     {
@@ -4652,7 +4654,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "apiId": "95e46f9a-4c64-4b0c-a46f-9a4c648b0c6e"
+        "apiId": "71bad2fc-80ef-4dce-bad2-fc80efddce4e"
       }
     },
     {
@@ -4687,7 +4689,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "planId": "36bb08b8-e391-41e5-bb08-b8e391a1e54f"
+        "planId": "c9ff6b18-4175-4c48-bf6b-1841756c4807"
       }
     },
     {
@@ -4824,7 +4826,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "apiId": "0d2e592f-9da8-4930-ae59-2f9da8f930a5"
+        "apiId": "6b413c68-ff1a-4362-813c-68ff1ac36249"
       }
     },
     {
@@ -4859,7 +4861,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "planId": "d8923a38-87ca-402b-923a-3887ca902bb5"
+        "planId": "a2b1366a-b9dc-4b15-b136-6ab9dc0b150e"
       }
     },
     {
@@ -5035,7 +5037,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "apiId": "48efb5da-fc8c-4abe-afb5-dafc8c3abe93"
+        "apiId": "05a5c056-0848-429e-a5c0-560848929e4d"
       }
     },
     {
@@ -5070,7 +5072,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "planId": "22ee23c7-517e-4d33-ae23-c7517e5d33ec"
+        "planId": "03454fca-5a30-4fff-854f-ca5a308fff1e"
       }
     },
     {
@@ -5263,7 +5265,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "apiId": "2e6c8ae3-4ec8-43b3-ac8a-e34ec8e3b336"
+        "apiId": "bdc40b6a-2084-44c3-840b-6a208474c396"
       }
     },
     {
@@ -5298,7 +5300,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "planId": "746463b3-f031-48d8-a463-b3f031c8d846"
+        "planId": "eade57f3-ce18-4858-9e57-f3ce183858d3"
       }
     },
     {
@@ -6312,13 +6314,13 @@
                   }
                 },
                 {
-                  "name": "Assign Content (migrated from: AM-Kanye-Rest)",
+                  "name": "Assign Content (migrated from: AM-Kanye-Rest) [PLUGIN FALLBACK]",
                   "description": "Migrated from Apigee AssignMessage: AM-Kanye-Rest",
                   "enabled": true,
-                  "policy": "assign-content",
+                  "policy": "groovy",
                   "configuration": {
-                    "scope": "RESPONSE",
-                    "body": "{super-secret-email}"
+                    "scope": "REQUEST",
+                    "script": "// Plugin fallback for AM-Kanye-Rest\n// Reason: assign-content plugin unavailable\n// scope: RESPONSE\n// payload: {super-secret-email}"
                   }
                 },
                 {
@@ -6359,6 +6361,7 @@
             "needsReviewSteps": [
               "remove-query-param-apikey",
               "GetKVM",
+              "AM-Kanye-Rest",
               "ProcessEncryptedValue"
             ],
             "llmSteps": [
@@ -6540,13 +6543,13 @@
                   }
                 },
                 {
-                  "name": "Assign Content (migrated from: AM-TestResponse)",
+                  "name": "Assign Content (migrated from: AM-TestResponse) [PLUGIN FALLBACK]",
                   "description": "Migrated from Apigee AssignMessage: AM-TestResponse",
                   "enabled": true,
-                  "policy": "assign-content",
+                  "policy": "groovy",
                   "configuration": {
-                    "scope": "RESPONSE",
-                    "body": "{\n  \"kvm_test\": \"success\",\n  \"username_retrieved\": \"{private.username}\",\n  \"password_exists\": \"{private.password}\",\n  \"organization\": \"{organization.name}\",\n  \"environment\": \"{environment.name}\"\n}"
+                    "scope": "REQUEST",
+                    "script": "// Plugin fallback for AM-TestResponse\n// Reason: assign-content plugin unavailable\n// scope: RESPONSE\n// payload: {\n  \"kvm_test\": \"success\",\n  \"username_retrieved\": \"{private.username}\",\n  \"password_exists\": \"{private.password}\",\n  \"organization\": \"{organization.name}\",\n  \"environment\": \"{environment.name}\"\n}"
                   }
                 }
               ],
@@ -6575,7 +6578,8 @@
             "sourceRevision": "2",
             "securityScheme": "KEYLESS",
             "needsReviewSteps": [
-              "KVM-GetCredentials"
+              "KVM-GetCredentials",
+              "AM-TestResponse"
             ],
             "llmSteps": [],
             "manualSteps": [],

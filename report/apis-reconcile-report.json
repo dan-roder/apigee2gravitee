@@ -1,22 +1,9 @@
 {
-  "generatedAt": "2026-04-09T16:01:22.315Z",
+  "generatedAt": "2026-04-09T18:15:57.053Z",
   "summary": {
     "checkedApis": 23,
-    "blockers": 2,
+    "blockers": 0,
     "warnings": 0
   },
-  "mismatches": [
-    {
-      "severity": "blocker",
-      "code": "API_MISSING",
-      "sourceId": "kanye-rest-api-5",
-      "message": "API kanye-rest-api-5 is missing"
-    },
-    {
-      "severity": "blocker",
-      "code": "API_MISSING",
-      "sourceId": "kvm-test",
-      "message": "API kvm-test is missing"
-    }
-  ]
+  "mismatches": []
 }
