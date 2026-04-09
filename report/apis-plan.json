@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-09T15:59:25.716Z",
+  "generatedAt": "2026-04-09T16:01:19.685Z",
   "kind": "ApisMigrationManifest",
   "source": {
     "irDir": "/Users/daniel.roder/Sites/apigee2gravitee/ir",
@@ -3091,7 +3091,7 @@
       "sourceId": "KVM-Create",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "UPDATE",
       "lookup": {
         "sourceId": "KVM-Create",
         "name": "KVM-Create"
@@ -3276,7 +3276,9 @@
         "LLM_POLICY:JS-ValidateRequest",
         "LLM_POLICY:JS-ProcessCreateKVM"
       ],
-      "targetHint": {}
+      "targetHint": {
+        "apiId": "73b835f0-9600-4810-b835-f09600b81007"
+      }
     },
     {
       "actionId": "UPSERT_PLAN:KVM-Create:KEYLESS",
@@ -3286,7 +3288,7 @@
         "UPSERT_API:KVM-Create"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "UPDATE",
       "lookup": {
         "sourceId": "KVM-Create",
         "name": "KVM-Create",
@@ -3313,7 +3315,9 @@
         "LLM_POLICY:JS-ValidateRequest",
         "LLM_POLICY:JS-ProcessCreateKVM"
       ],
-      "targetHint": {}
+      "targetHint": {
+        "planId": "20164cae-9594-4067-964c-ae95946067a2"
+      }
     },
     {
       "actionId": "VERIFY_PLAN:KVM-Create:KEYLESS",
@@ -3373,7 +3377,7 @@
       "sourceId": "KVM-Reader",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "UPDATE",
       "lookup": {
         "sourceId": "KVM-Reader",
         "name": "KVM-Reader"
@@ -3554,7 +3558,9 @@
         "LLM_POLICY:JS-CreateAuthHeader",
         "LLM_POLICY:processKVMs"
       ],
-      "targetHint": {}
+      "targetHint": {
+        "apiId": "97b0dc38-d200-49b0-b0dc-38d20049b011"
+      }
     },
     {
       "actionId": "UPSERT_PLAN:KVM-Reader:KEYLESS",
@@ -3564,7 +3570,7 @@
         "UPSERT_API:KVM-Reader"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "UPDATE",
       "lookup": {
         "sourceId": "KVM-Reader",
         "name": "KVM-Reader",
@@ -3590,7 +3596,9 @@
         "LLM_POLICY:JS-CreateAuthHeader",
         "LLM_POLICY:processKVMs"
       ],
-      "targetHint": {}
+      "targetHint": {
+        "planId": "e703a675-aa7d-4246-83a6-75aa7d92464d"
+      }
     },
     {
       "actionId": "VERIFY_PLAN:KVM-Reader:KEYLESS",
@@ -3648,7 +3656,7 @@
       "sourceId": "KVM-Update",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "UPDATE",
       "lookup": {
         "sourceId": "KVM-Update",
         "name": "KVM-Update"
@@ -3837,7 +3845,9 @@
         "LLM_POLICY:JS-CheckFixedKVM",
         "LLM_POLICY:JS-UpdateEntries"
       ],
-      "targetHint": {}
+      "targetHint": {
+        "apiId": "59018e33-1273-49e5-818e-33127339e51f"
+      }
     },
     {
       "actionId": "UPSERT_PLAN:KVM-Update:KEYLESS",
@@ -3847,7 +3857,7 @@
         "UPSERT_API:KVM-Update"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "UPDATE",
       "lookup": {
         "sourceId": "KVM-Update",
         "name": "KVM-Update",
@@ -3875,7 +3885,9 @@
         "LLM_POLICY:JS-CheckFixedKVM",
         "LLM_POLICY:JS-UpdateEntries"
       ],
-      "targetHint": {}
+      "targetHint": {
+        "planId": "772e94fe-6bc4-4fe9-ae94-fe6bc4cfe9a7"
+      }
     },
     {
       "actionId": "VERIFY_PLAN:KVM-Update:KEYLESS",
@@ -3937,7 +3949,7 @@
       "sourceId": "admin-kvm-export",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "UPDATE",
       "lookup": {
         "sourceId": "admin-kvm-export",
         "name": "admin-kvm-export"
@@ -4080,7 +4092,9 @@
       "manualReviewReasons": [
         "LLM_POLICY:Fetch-KVMs"
       ],
-      "targetHint": {}
+      "targetHint": {
+        "apiId": "71b8d095-5a82-450b-b8d0-955a82e50bda"
+      }
     },
     {
       "actionId": "UPSERT_PLAN:admin-kvm-export:KEYLESS",
@@ -4090,7 +4104,7 @@
         "UPSERT_API:admin-kvm-export"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "UPDATE",
       "lookup": {
         "sourceId": "admin-kvm-export",
         "name": "admin-kvm-export",
@@ -4115,7 +4129,9 @@
       "manualReviewReasons": [
         "LLM_POLICY:Fetch-KVMs"
       ],
-      "targetHint": {}
+      "targetHint": {
+        "planId": "05413095-46a4-41f8-8130-9546a491f8b7"
+      }
     },
     {
       "actionId": "VERIFY_PLAN:admin-kvm-export:KEYLESS",
@@ -4286,7 +4302,7 @@
         "SHARED_FLOW_REFS_PRESENT"
       ],
       "targetHint": {
-        "apiId": "2a186de1-fee7-474a-986d-e1fee7b74ad8"
+        "apiId": "aeeb6cf0-de51-4382-ab6c-f0de51438209"
       }
     },
     {
@@ -4323,7 +4339,7 @@
         "SHARED_FLOW_REFS_PRESENT"
       ],
       "targetHint": {
-        "planId": "200b82f0-e05e-426e-8b82-f0e05e526eb1"
+        "planId": "01113dd2-c330-46d9-913d-d2c330f6d92f"
       }
     },
     {
@@ -4464,7 +4480,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "apiId": "0b871aed-7a73-4a46-871a-ed7a73ca463a"
+        "apiId": "fd2f6599-62c2-4c9c-af65-9962c2dc9c25"
       }
     },
     {
@@ -4499,7 +4515,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "planId": "c81bdbca-3229-4ff5-9bdb-ca3229cff50b"
+        "planId": "f69d4469-2c18-4bac-9d44-692c183bac02"
       }
     },
     {
@@ -4636,7 +4652,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "apiId": "eda94554-d01d-4db2-a945-54d01dcdb2a5"
+        "apiId": "95e46f9a-4c64-4b0c-a46f-9a4c648b0c6e"
       }
     },
     {
@@ -4671,7 +4687,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "planId": "d737bbe9-4415-4f2b-b7bb-e944151f2b6b"
+        "planId": "36bb08b8-e391-41e5-bb08-b8e391a1e54f"
       }
     },
     {
@@ -4808,7 +4824,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "apiId": "04a961a5-9ab5-470b-a961-a59ab5a70b87"
+        "apiId": "0d2e592f-9da8-4930-ae59-2f9da8f930a5"
       }
     },
     {
@@ -4843,7 +4859,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "planId": "98e3ba0c-0918-45d5-a3ba-0c0918b5d5f0"
+        "planId": "d8923a38-87ca-402b-923a-3887ca902bb5"
       }
     },
     {
@@ -5019,7 +5035,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "apiId": "e75119af-323c-4544-9119-af323c8544ee"
+        "apiId": "48efb5da-fc8c-4abe-afb5-dafc8c3abe93"
       }
     },
     {
@@ -5054,7 +5070,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "planId": "b8ef4a15-763a-47a0-af4a-15763ae7a062"
+        "planId": "22ee23c7-517e-4d33-ae23-c7517e5d33ec"
       }
     },
     {
@@ -5247,7 +5263,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "apiId": "99f69240-3f32-4ca7-b692-403f324ca774"
+        "apiId": "2e6c8ae3-4ec8-43b3-ac8a-e34ec8e3b336"
       }
     },
     {
@@ -5282,7 +5298,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "planId": "4349e7c0-6e76-4806-89e7-c06e76880667"
+        "planId": "746463b3-f031-48d8-a463-b3f031c8d846"
       }
     },
     {
@@ -5335,7 +5351,7 @@
       "sourceId": "dog-breeds-api-6",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "UPDATE",
+      "operation": "CREATE",
       "lookup": {
         "sourceId": "dog-breeds-api-6",
         "name": "dog-breeds-api-6"
@@ -5457,9 +5473,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "apiId": "1af91ac0-3037-4d9b-b91a-c030373d9b70"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "UPSERT_PLAN:dog-breeds-api-6:API_KEY",
@@ -5469,7 +5483,7 @@
         "UPSERT_API:dog-breeds-api-6"
       ],
       "plannedStatus": "READY",
-      "operation": "UPDATE",
+      "operation": "CREATE",
       "lookup": {
         "sourceId": "dog-breeds-api-6",
         "name": "dog-breeds-api-6",
@@ -5492,9 +5506,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "planId": "aa7d6350-f7d8-4d4c-bd63-50f7d8cd4c55"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_PLAN:dog-breeds-api-6:API_KEY",
@@ -5764,7 +5776,7 @@
       "sourceId": "harry-potter-characters",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "UPDATE",
+      "operation": "CREATE",
       "lookup": {
         "sourceId": "harry-potter-characters",
         "name": "harry-potter-characters"
@@ -5916,9 +5928,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "apiId": "e12365b9-a2f6-4133-a365-b9a2f61133ba"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "UPSERT_PLAN:harry-potter-characters:KEYLESS",
@@ -5928,7 +5938,7 @@
         "UPSERT_API:harry-potter-characters"
       ],
       "plannedStatus": "READY",
-      "operation": "UPDATE",
+      "operation": "CREATE",
       "lookup": {
         "sourceId": "harry-potter-characters",
         "name": "harry-potter-characters",
@@ -5951,9 +5961,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "planId": "fd5dc33c-65a7-470d-9dc3-3c65a7b70d98"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_PLAN:harry-potter-characters:KEYLESS",
@@ -6005,7 +6013,7 @@
       "sourceId": "hogwarts-houses-api-8",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "UPDATE",
+      "operation": "CREATE",
       "lookup": {
         "sourceId": "hogwarts-houses-api-8",
         "name": "hogwarts-houses-api-8"
@@ -6127,9 +6135,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "apiId": "8ff47997-a83c-4f5f-b479-97a83c6f5fab"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "UPSERT_PLAN:hogwarts-houses-api-8:API_KEY",
@@ -6139,7 +6145,7 @@
         "UPSERT_API:hogwarts-houses-api-8"
       ],
       "plannedStatus": "READY",
-      "operation": "UPDATE",
+      "operation": "CREATE",
       "lookup": {
         "sourceId": "hogwarts-houses-api-8",
         "name": "hogwarts-houses-api-8",
@@ -6162,9 +6168,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "planId": "422cbaee-57cf-4375-acba-ee57cfa375a4"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_PLAN:hogwarts-houses-api-8:API_KEY",
@@ -6671,7 +6675,7 @@
       "sourceId": "load-balance-target-servers-api",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "UPDATE",
+      "operation": "CREATE",
       "lookup": {
         "sourceId": "load-balance-target-servers-api",
         "name": "load-balance-target-servers-api"
@@ -6772,9 +6776,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "apiId": "72f4634c-b282-4d9a-b463-4cb282fd9aa8"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "UPSERT_PLAN:load-balance-target-servers-api:KEYLESS",
@@ -6784,7 +6786,7 @@
         "UPSERT_API:load-balance-target-servers-api"
       ],
       "plannedStatus": "READY",
-      "operation": "UPDATE",
+      "operation": "CREATE",
       "lookup": {
         "sourceId": "load-balance-target-servers-api",
         "name": "load-balance-target-servers-api",
@@ -6807,9 +6809,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "planId": "a1831ab3-2790-437a-831a-b32790337ad6"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_PLAN:load-balance-target-servers-api:KEYLESS",
