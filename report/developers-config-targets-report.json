@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-04-09T20:40:31.098Z",
+  "generatedAt": "2026-04-09T20:44:06.602Z",
   "configPath": "/Users/daniel.roder/Sites/apigee2gravitee/config/developers.config.resolved.json",
   "summary": {
     "products": 8,
     "targets": 10,
-    "validTargets": 9,
-    "blockers": 1,
+    "validTargets": 10,
+    "blockers": 0,
     "warnings": 0
   },
   "targets": [
@@ -50,30 +50,18 @@
       "targetIndex": 0,
       "configured": {
         "targetApi": "dog-breeds-api-6",
-        "targetApiId": "f2ac6030-08f6-4257-ac60-3008f66257ef",
+        "targetApiId": "a10d7923-3577-4d42-8d79-2335777d4288",
         "targetPlan": "API Key Plan",
         "targetPlanId": "c3770dde-92cc-4549-b70d-de92cca549f7"
       },
       "resolved": {
-        "apiId": null,
+        "apiId": "a10d7923-3577-4d42-8d79-2335777d4288",
         "apiName": "dog-breeds-api-6",
-        "planId": null,
+        "planId": "c3770dde-92cc-4549-b70d-de92cca549f7",
         "planName": "API Key Plan"
       },
-      "status": "BLOCKED",
-      "findings": [
-        {
-          "severity": "blocker",
-          "code": "TARGET_API_ID_NOT_FOUND",
-          "productName": "dog-breeds-api-product",
-          "targetIndex": 0,
-          "message": "Configured targetApiId f2ac6030-08f6-4257-ac60-3008f66257ef could not be loaded",
-          "details": {
-            "targetApiId": "f2ac6030-08f6-4257-ac60-3008f66257ef",
-            "error": "GET http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis/f2ac6030-08f6-4257-ac60-3008f66257ef → HTTP 404"
-          }
-        }
-      ]
+      "status": "VALID",
+      "findings": []
     },
     {
       "productName": "hogwarts-houses-api-product",
@@ -202,17 +190,5 @@
       "findings": []
     }
   ],
-  "findings": [
-    {
-      "severity": "blocker",
-      "code": "TARGET_API_ID_NOT_FOUND",
-      "productName": "dog-breeds-api-product",
-      "targetIndex": 0,
-      "message": "Configured targetApiId f2ac6030-08f6-4257-ac60-3008f66257ef could not be loaded",
-      "details": {
-        "targetApiId": "f2ac6030-08f6-4257-ac60-3008f66257ef",
-        "error": "GET http://localhost:8083/management/v2/organizations/DEFAULT/environments/DEFAULT/apis/f2ac6030-08f6-4257-ac60-3008f66257ef → HTTP 404"
-      }
-    }
-  ]
+  "findings": []
 }

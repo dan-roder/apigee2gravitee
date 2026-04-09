@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-09T20:41:51.681Z",
+  "generatedAt": "2026-04-09T20:44:16.662Z",
   "kind": "DevelopersMigrationManifest",
   "source": {
     "irDir": "/Users/daniel.roder/Sites/apigee2gravitee/ir",
@@ -761,7 +761,7 @@
         "planMapping": {
           "productName": "dog-breeds-api-product",
           "targetApi": "dog-breeds-api-6",
-          "targetApiId": "f2ac6030-08f6-4257-ac60-3008f66257ef",
+          "targetApiId": "a10d7923-3577-4d42-8d79-2335777d4288",
           "targetPlan": "API Key Plan",
           "targetPlanId": "c3770dde-92cc-4549-b70d-de92cca549f7",
           "targetIndex": 0,
@@ -771,7 +771,7 @@
           {
             "productName": "dog-breeds-api-product",
             "targetApi": "dog-breeds-api-6",
-            "targetApiId": "f2ac6030-08f6-4257-ac60-3008f66257ef",
+            "targetApiId": "a10d7923-3577-4d42-8d79-2335777d4288",
             "targetPlan": "API Key Plan",
             "targetPlanId": "c3770dde-92cc-4549-b70d-de92cca549f7",
             "targetIndex": 0,
@@ -1749,12 +1749,12 @@
         "UPSERT_APPLICATION:dev2@540.co/dog-breeds-dev-app"
       ],
       "plannedStatus": "READY",
-      "operation": "RESOLVE",
+      "operation": "REUSE",
       "desiredState": null,
       "lookup": {
         "productName": "dog-breeds-api-product",
         "targetApi": "dog-breeds-api-6",
-        "targetApiId": "f2ac6030-08f6-4257-ac60-3008f66257ef",
+        "targetApiId": "a10d7923-3577-4d42-8d79-2335777d4288",
         "targetPlan": "API Key Plan",
         "targetPlanId": "c3770dde-92cc-4549-b70d-de92cca549f7",
         "targetIndex": 0,
@@ -1763,7 +1763,7 @@
       "payload": {
         "productName": "dog-breeds-api-product",
         "targetApi": "dog-breeds-api-6",
-        "targetApiId": "f2ac6030-08f6-4257-ac60-3008f66257ef",
+        "targetApiId": "a10d7923-3577-4d42-8d79-2335777d4288",
         "targetPlan": "API Key Plan",
         "targetPlanId": "c3770dde-92cc-4549-b70d-de92cca549f7",
         "targetIndex": 0,
@@ -1775,7 +1775,10 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "planId": "c3770dde-92cc-4549-b70d-de92cca549f7",
+        "apiId": "a10d7923-3577-4d42-8d79-2335777d4288"
+      }
     },
     {
       "actionId": "UPSERT_SUBSCRIPTION:dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan",
@@ -1799,7 +1802,7 @@
         "target": {
           "productName": "dog-breeds-api-product",
           "targetApi": "dog-breeds-api-6",
-          "targetApiId": "f2ac6030-08f6-4257-ac60-3008f66257ef",
+          "targetApiId": "a10d7923-3577-4d42-8d79-2335777d4288",
           "targetPlan": "API Key Plan",
           "targetPlanId": "c3770dde-92cc-4549-b70d-de92cca549f7",
           "targetIndex": 0,
