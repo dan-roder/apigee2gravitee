@@ -30,65 +30,65 @@
   "productPlanMap": {
     "cats-api-product": {
       "targetApi": "cats-api-7",
-      "targetApiId": "REPLACE_WITH_GRAVITEE_API_ID_FOR_CATS_API_7",
-      "targetPlan": "cats-api-product API Key",
-      "targetPlanId": "REPLACE_WITH_GRAVITEE_PLAN_ID_FOR_CATS_API_PRODUCT"
+      "targetApiId": "05a5c056-0848-429e-a5c0-560848929e4d",
+      "targetPlan": "API Key Plan",
+      "targetPlanId": "03454fca-5a30-4fff-854f-ca5a308fff1e"
     },
     "chuck-norris-api-product": {
       "targetApi": "chuck-norris-api-10",
-      "targetApiId": "REPLACE_WITH_GRAVITEE_API_ID_FOR_CHUCK_NORRIS_API_10",
-      "targetPlan": "chuck-norris-api-product API Key",
-      "targetPlanId": "REPLACE_WITH_GRAVITEE_PLAN_ID_FOR_CHUCK_NORRIS_API_PRODUCT"
+      "targetApiId": "bdc40b6a-2084-44c3-840b-6a208474c396",
+      "targetPlan": "API Key Plan",
+      "targetPlanId": "eade57f3-ce18-4858-9e57-f3ce183858d3"
     },
     "dog-breeds-api-product": {
       "targetApi": "dog-breeds-api-6",
-      "targetApiId": "REPLACE_WITH_GRAVITEE_API_ID_FOR_DOG_BREEDS_API_6",
-      "targetPlan": "dog-breeds-api-product API Key",
-      "targetPlanId": "REPLACE_WITH_GRAVITEE_PLAN_ID_FOR_DOG_BREEDS_API_PRODUCT"
+      "targetApiId": "f2ac6030-08f6-4257-ac60-3008f66257ef",
+      "targetPlan": "API Key Plan",
+      "targetPlanId": "c3770dde-92cc-4549-b70d-de92cca549f7"
     },
     "hogwarts-houses-api-product": {
       "targetApi": "hogwarts-houses-api-8",
-      "targetApiId": "REPLACE_WITH_GRAVITEE_API_ID_FOR_HOGWARTS_HOUSES_API_8",
-      "targetPlan": "hogwarts-houses-api-product API Key",
-      "targetPlanId": "REPLACE_WITH_GRAVITEE_PLAN_ID_FOR_HOGWARTS_HOUSES_API_PRODUCT"
+      "targetApiId": "1f6d61b7-26f8-4b6e-ad61-b726f84b6ede",
+      "targetPlan": "API Key Plan",
+      "targetPlanId": "26361641-3e97-4fe0-b616-413e973fe095"
     },
     "kanye-api-product": {
       "targetApi": "kanye-rest-api-5",
-      "targetApiId": "REPLACE_WITH_GRAVITEE_API_ID_FOR_KANYE_REST_API_5",
-      "targetPlan": "kanye-api-product API Key",
-      "targetPlanId": "REPLACE_WITH_GRAVITEE_PLAN_ID_FOR_KANYE_API_PRODUCT"
+      "targetApiId": "fdc2e4bc-b5a2-409f-82e4-bcb5a2909f6c",
+      "targetPlan": "API Key Plan",
+      "targetPlanId": "7c9ae30e-6522-4d0e-9ae3-0e65229d0ea9"
     },
     "misc-api-product": [
       {
         "targetApi": "apigee-hello-api-1",
-        "targetApiId": "REPLACE_WITH_GRAVITEE_API_ID_FOR_APIGEE_HELLO_API_1",
-        "targetPlan": "misc-api-product API Key (apigee-hello-api-1)",
-        "targetPlanId": "REPLACE_WITH_GRAVITEE_PLAN_ID_FOR_MISC_API_PRODUCT_APIGEE_HELLO_API_1"
+        "targetApiId": "a71428c0-322e-4060-9428-c0322ee0604e",
+        "targetPlan": "Keyless Plan",
+        "targetPlanId": "3a7aa1bf-97fd-4fb2-baa1-bf97fd5fb206"
       },
       {
         "targetApi": "cat-fact-api-2",
-        "targetApiId": "REPLACE_WITH_GRAVITEE_API_ID_FOR_CAT_FACT_API_2",
-        "targetPlan": "misc-api-product API Key (cat-fact-api-2)",
-        "targetPlanId": "REPLACE_WITH_GRAVITEE_PLAN_ID_FOR_MISC_API_PRODUCT_CAT_FACT_API_2"
+        "targetApiId": "6b413c68-ff1a-4362-813c-68ff1ac36249",
+        "targetPlan": "Keyless Plan",
+        "targetPlanId": "a2b1366a-b9dc-4b15-b136-6ab9dc0b150e"
       },
       {
         "targetApi": "car-makes-api-3",
-        "targetApiId": "REPLACE_WITH_GRAVITEE_API_ID_FOR_CAR_MAKES_API_3",
-        "targetPlan": "misc-api-product API Key (car-makes-api-3)",
-        "targetPlanId": "REPLACE_WITH_GRAVITEE_PLAN_ID_FOR_MISC_API_PRODUCT_CAR_MAKES_API_3"
+        "targetApiId": "71bad2fc-80ef-4dce-bad2-fc80efddce4e",
+        "targetPlan": "Keyless Plan",
+        "targetPlanId": "c9ff6b18-4175-4c48-bf6b-1841756c4807"
       }
     ],
     "wizards-api-product": {
       "targetApi": "wizards-api-9",
-      "targetApiId": "REPLACE_WITH_GRAVITEE_API_ID_FOR_WIZARDS_API_9",
-      "targetPlan": "wizards-api-product API Key",
-      "targetPlanId": "REPLACE_WITH_GRAVITEE_PLAN_ID_FOR_WIZARDS_API_PRODUCT"
+      "targetApiId": "927e2f2b-5bf0-484b-be2f-2b5bf0f84b95",
+      "targetPlan": "API Key Plan",
+      "targetPlanId": "8462f209-3f79-4137-a2f2-093f7931370c"
     },
     "yes-or-no-api-product": {
       "targetApi": "yes-or-no-api-4",
-      "targetApiId": "REPLACE_WITH_GRAVITEE_API_ID_FOR_YES_OR_NO_API_4",
-      "targetPlan": "yes-or-no-api-product API Key",
-      "targetPlanId": "REPLACE_WITH_GRAVITEE_PLAN_ID_FOR_YES_OR_NO_API_PRODUCT"
+      "targetApiId": "10633c96-086c-466a-a33c-96086c766ae2",
+      "targetPlan": "API Key Plan",
+      "targetPlanId": "af5d6073-fb31-4e6d-9d60-73fb31ee6db6"
     }
   },
   "customFieldMap": {
