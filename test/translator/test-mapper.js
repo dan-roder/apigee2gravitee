@@ -155,6 +155,17 @@ suite('PolicyHandlers — AssignMessage fallback when assign-attributes unavaila
   test('fallback is marked for review', () => assert.strictEqual(mapped._needsReview, true));
 });
 
+suite('PolicyHandlers — AssignMessage fallback when assign-content unavailable', () => {
+  const step = makeStep('set-body', 'AssignMessage', 'auto', {
+    assignTo: { type: 'response', createNew: false },
+    set: { payload: '{"ok":true}' },
+  });
+  const mapped = mapPolicyStep(step, 'request', { fallbackPlugins: new Set(['assign-content']) });
+
+  test('policy slug is groovy', () => assert.strictEqual(mapped.policy, 'groovy'));
+  test('fallback is marked for review', () => assert.strictEqual(mapped._needsReview, true));
+});
+
 suite('PolicyHandlers — AssignMessage (status code) → interrupt', () => {
   const step = makeStep('raise', 'AssignMessage', 'auto', {
     assignTo: { type: 'response', createNew: false },

@@ -192,6 +192,17 @@ const HANDLERS = {
 
     // If it sets body payload → assign-content
     if (c.set?.payload) {
+      if (shouldFallbackPlugin(options, 'assign-content')) {
+        return pluginFallbackStub(
+          `Assign Content (migrated from: ${node.name})`,
+          node.name,
+          'assign-content plugin unavailable',
+          [
+            `// scope: ${c.assignTo?.type === 'response' ? 'RESPONSE' : 'REQUEST'}`,
+            `// payload: ${String(c.set.payload).slice(0, 400)}`,
+          ],
+        );
+      }
       return {
         policy: 'assign-content',
         name:   `Assign Content (migrated from: ${node.name})`,

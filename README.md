@@ -294,7 +294,7 @@ If your local Gravitee does not have certain policy plugins installed, you can d
 
 ```json
 "compatibility": {
-  "fallbackPlugins": ["assign-attributes", "http-callout"]
+  "fallbackPlugins": ["assign-attributes", "http-callout", "assign-content"]
 }
 ```
 

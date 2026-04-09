@@ -9,7 +9,7 @@
     "excludeProxies": []
   },
   "compatibility": {
-    "fallbackPlugins": ["assign-attributes", "http-callout"]
+    "fallbackPlugins": ["assign-attributes", "http-callout", "assign-content"]
   },
   "reporting": {
     "reportDir": "./report",
