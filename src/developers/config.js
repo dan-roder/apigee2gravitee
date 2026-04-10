@@ -140,6 +140,19 @@ function validateCapabilities(capabilities, errors) {
   validateEnum(capabilities.applicationOwnership, 'capabilities.applicationOwnership', ENUMS.ownershipMode, errors);
 }
 
+function validateRoleAssignmentIds(roleAssignmentIds, errors) {
+  if (roleAssignmentIds === undefined) return;
+  if (!roleAssignmentIds || typeof roleAssignmentIds !== 'object' || Array.isArray(roleAssignmentIds)) {
+    errors.push('roleAssignmentIds must be an object');
+    return;
+  }
+  for (const scope of ['organization', 'environment']) {
+    if (roleAssignmentIds[scope] !== undefined) {
+      validateStringArray(roleAssignmentIds[scope], `roleAssignmentIds.${scope}`, errors);
+    }
+  }
+}
+
 function validateDevelopersConfig(config) {
   const errors = [];
   if (!config || typeof config !== 'object' || Array.isArray(config)) {
@@ -166,6 +179,7 @@ function validateDevelopersConfig(config) {
 
   validateProductPlanMap(config.productPlanMap, errors);
   validateCapabilities(config.capabilities, errors);
+  validateRoleAssignmentIds(config.roleAssignmentIds, errors);
 
   if (config.customFieldMap !== undefined && (typeof config.customFieldMap !== 'object' || Array.isArray(config.customFieldMap))) {
     errors.push('customFieldMap must be an object');

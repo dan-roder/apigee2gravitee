@@ -213,6 +213,7 @@ function buildPlan(domain, preflight, config, targetState = {
         userName: user.userName,
         customFields: user.customFields,
         roles: config.roles,
+        roleAssignmentIds: config.roleAssignmentIds || null,
       },
       continuity: {},
       blockers: [...user.blockers, ...(resolution.blockers || [])],

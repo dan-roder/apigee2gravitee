@@ -148,6 +148,35 @@ async function testAssignUserRolesFallsBackAcrossPayloadShapes() {
   assert.strictEqual(response._strategy, 'scoped-object-lowercase');
 }
 
+async function testAssignUserRolesUsesReferencePayloadWhenRoleIdsProvided() {
+  const client = new GraviteeClient({ baseUrl: 'https://gravitee.example.com', orgId: 'DEFAULT', envId: 'DEFAULT', token: 'token' });
+  const calls = [];
+  client.put = async (url, body) => {
+    calls.push({ url, body });
+    return { ok: true };
+  };
+  const response = await client.assignUserRoles('user-1', {
+    organization: ['ORGANIZATION:USER'],
+    environment: ['ENVIRONMENT:API_CONSUMER'],
+    organizationIds: ['role-org-1', 'role-org-2'],
+    environmentIds: ['role-env-1', 'role-env-2'],
+  });
+  assert.strictEqual(calls.length, 2);
+  assert.deepStrictEqual(calls[0].body, {
+    user: 'user-1',
+    referenceId: 'DEFAULT',
+    referenceType: 'ORGANIZATION',
+    roles: ['role-org-1', 'role-org-2'],
+  });
+  assert.deepStrictEqual(calls[1].body, {
+    user: 'user-1',
+    referenceId: 'DEFAULT',
+    referenceType: 'ENVIRONMENT',
+    roles: ['role-env-1', 'role-env-2'],
+  });
+  assert.strictEqual(response._strategy, 'reference-payload');
+}
+
 async function run() {
   await testFindUserByEmailFiltersResults();
   await testCreateSubscriptionUsesV2Endpoint();
@@ -160,6 +189,7 @@ async function run() {
   await testCreateApplicationCustomFieldUsesApplicationsMetadataEndpoint();
   await testDeleteUserUsesExpectedEndpoint();
   await testAssignUserRolesFallsBackAcrossPayloadShapes();
+  await testAssignUserRolesUsesReferencePayloadWhenRoleIdsProvided();
   console.log('test-gravitee-client.js passed');
 }
 

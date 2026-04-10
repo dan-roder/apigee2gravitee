@@ -79,6 +79,10 @@ function makeConfig(baseDir, overrides = {}) {
       oauthClientValuePreservation: 'unknown',
       applicationOwnership: 'direct-member',
     },
+    roleAssignmentIds: {
+      organization: ['role-org-1'],
+      environment: ['role-env-1'],
+    },
     productPlanMap: {
       'orders-product': {
         targetApi: 'orders-api',

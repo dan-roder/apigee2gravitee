@@ -478,6 +478,8 @@ class GraviteeClient {
   async assignUserRoles(userId, roles) {
     const organizationRoles = Array.isArray(roles?.organization) ? roles.organization : [];
     const environmentRoles = Array.isArray(roles?.environment) ? roles.environment : [];
+    const organizationRoleIds = Array.isArray(roles?.organizationIds) ? roles.organizationIds : [];
+    const environmentRoleIds = Array.isArray(roles?.environmentIds) ? roles.environmentIds : [];
     const normalizeRoleName = (value) => {
       if (typeof value !== 'string') return value;
       const parts = value.split(':');
@@ -491,7 +493,29 @@ class GraviteeClient {
     ];
     const endpoint = this.orgUrl(`/users/${userId}/roles`);
     const attempts = [];
-    const strategies = [
+    const referenceStrategies = [
+      {
+        name: 'reference-payload-organization',
+        enabled: organizationRoleIds.length > 0,
+        exec: () => this.put(endpoint, {
+          user: userId,
+          referenceId: this.orgId,
+          referenceType: 'ORGANIZATION',
+          roles: organizationRoleIds,
+        }),
+      },
+      {
+        name: 'reference-payload-environment',
+        enabled: environmentRoleIds.length > 0,
+        exec: () => this.put(endpoint, {
+          user: userId,
+          referenceId: this.envId,
+          referenceType: 'ENVIRONMENT',
+          roles: environmentRoleIds,
+        }),
+      },
+    ];
+    const fallbackStrategies = [
       {
         name: 'scoped-string-lowercase',
         exec: () => this.put(endpoint, {
@@ -529,12 +553,18 @@ class GraviteeClient {
         exec: () => this.put(endpoint, { roles: flattened }),
       },
     ];
+    const useReferencePayloads = organizationRoleIds.length > 0 || environmentRoleIds.length > 0;
+    const strategies = useReferencePayloads ? referenceStrategies : fallbackStrategies;
 
     for (const strategy of strategies) {
+      if (strategy.enabled === false) continue;
       try {
         const response = await strategy.exec();
         if (response && typeof response === 'object' && !Array.isArray(response)) {
           response._strategy = strategy.name;
+        }
+        if (useReferencePayloads) {
+          continue;
         }
         return response;
       } catch (err) {
@@ -545,7 +575,22 @@ class GraviteeClient {
           message: err.message,
           body: err.body,
         });
+        if (useReferencePayloads) {
+          throw (() => {
+            const fallbackError = new Error(
+              `${strategy.name}: ${err.message}${err.body ? `: ${formatErrorBody(err.body)}` : ''}`
+            );
+            fallbackError.name = 'GraviteeUserRoleCompatibilityError';
+            fallbackError.classification = 'compatibility';
+            fallbackError.attempts = attempts;
+            return fallbackError;
+          })();
+        }
       }
+    }
+
+    if (useReferencePayloads) {
+      return { ok: true, _strategy: 'reference-payload' };
     }
 
     const fallbackError = new Error(

@@ -157,6 +157,8 @@ async function ensureUser(action, ctx, client, idMap) {
       await client.assignUserRoles(userId, {
         organization: action.payload.roles.organization,
         environment: action.payload.roles.environment,
+        organizationIds: action.payload.roleAssignmentIds?.organization || [],
+        environmentIds: action.payload.roleAssignmentIds?.environment || [],
       });
     } catch (err) {
       if (createdThisRun && typeof client.deleteUser === 'function') {
