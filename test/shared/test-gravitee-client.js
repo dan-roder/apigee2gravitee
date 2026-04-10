@@ -123,7 +123,7 @@ async function testAssignUserRolesFallsBackAcrossPayloadShapes() {
   const calls = [];
   client.put = async (url, body) => {
     calls.push({ url, body });
-    if (calls.length < 2) {
+    if (calls.length < 3) {
       const err = new Error(`PUT ${url} → HTTP 500`);
       err.status = 500;
       err.body = { message: 'boom' };
@@ -135,13 +135,17 @@ async function testAssignUserRolesFallsBackAcrossPayloadShapes() {
     organization: ['ORGANIZATION:USER'],
     environment: ['ENVIRONMENT:API_CONSUMER'],
   });
-  assert.strictEqual(calls.length, 2);
+  assert.strictEqual(calls.length, 3);
   assert.strictEqual(calls[0].url, 'https://gravitee.example.com/management/organizations/DEFAULT/users/user-1/roles');
-  assert.deepStrictEqual(calls[1].body, {
-    ORGANIZATION: ['ORGANIZATION:USER'],
-    ENVIRONMENT: ['ENVIRONMENT:API_CONSUMER'],
+  assert.deepStrictEqual(calls[0].body, {
+    organization: 'USER',
+    environment: 'API_CONSUMER',
   });
-  assert.strictEqual(response._strategy, 'scoped-object-uppercase');
+  assert.deepStrictEqual(calls[2].body, {
+    organization: ['ORGANIZATION:USER'],
+    environment: ['ENVIRONMENT:API_CONSUMER'],
+  });
+  assert.strictEqual(response._strategy, 'scoped-object-lowercase');
 }
 
 async function run() {

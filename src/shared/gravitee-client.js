@@ -478,13 +478,34 @@ class GraviteeClient {
   async assignUserRoles(userId, roles) {
     const organizationRoles = Array.isArray(roles?.organization) ? roles.organization : [];
     const environmentRoles = Array.isArray(roles?.environment) ? roles.environment : [];
+    const normalizeRoleName = (value) => {
+      if (typeof value !== 'string') return value;
+      const parts = value.split(':');
+      return parts.length > 1 ? parts.slice(1).join(':') : value;
+    };
+    const organizationRoleNames = organizationRoles.map(normalizeRoleName);
+    const environmentRoleNames = environmentRoles.map(normalizeRoleName);
     const flattened = [
-      ...organizationRoles.map((name) => ({ scope: 'ORGANIZATION', name })),
-      ...environmentRoles.map((name) => ({ scope: 'ENVIRONMENT', name })),
+      ...organizationRoleNames.map((name) => ({ scope: 'ORGANIZATION', name })),
+      ...environmentRoleNames.map((name) => ({ scope: 'ENVIRONMENT', name })),
     ];
     const endpoint = this.orgUrl(`/users/${userId}/roles`);
     const attempts = [];
     const strategies = [
+      {
+        name: 'scoped-string-lowercase',
+        exec: () => this.put(endpoint, {
+          organization: organizationRoleNames.length <= 1 ? (organizationRoleNames[0] || null) : organizationRoleNames,
+          environment: environmentRoleNames.length <= 1 ? (environmentRoleNames[0] || null) : environmentRoleNames,
+        }),
+      },
+      {
+        name: 'scoped-string-uppercase',
+        exec: () => this.put(endpoint, {
+          ORGANIZATION: organizationRoleNames.length <= 1 ? (organizationRoleNames[0] || null) : organizationRoleNames,
+          ENVIRONMENT: environmentRoleNames.length <= 1 ? (environmentRoleNames[0] || null) : environmentRoleNames,
+        }),
+      },
       {
         name: 'scoped-object-lowercase',
         exec: () => this.put(endpoint, {
