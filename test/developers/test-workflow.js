@@ -377,6 +377,50 @@ async function testImportCreatesMissingApplicationCustomFields() {
   });
 }
 
+async function testImportRollsBackOrReusesUserAfterRoleAssignmentFailure() {
+  await withTempDir(async (dir) => {
+    const dataDir = path.join(dir, 'data');
+    const irDir = path.join(dir, 'ir');
+    copyDir(FIXTURES_DATA, dataDir);
+    generateIrFromData(dataDir, irDir);
+
+    let failRoleAssignment = true;
+    const client = makeWorkflowClient({
+      overrides: {
+        async assignUserRoles(userId, roles) {
+          if (failRoleAssignment) {
+            const err = new Error('PUT http://localhost:8083/management/organizations/DEFAULT/users/user-1/roles → HTTP 500');
+            err.status = 500;
+            err.body = { message: 'role assignment failed' };
+            throw err;
+          }
+          this._state.roles.set(userId, new Set([...roles.organization, ...roles.environment]));
+          return { ok: true };
+        },
+      },
+    });
+
+    const first = await runDevelopersImport(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json'), 'users-only': true },
+      { config: makeConfig(dir), client },
+    );
+
+    assert.strictEqual(first.exitCode, 4);
+    assert.strictEqual(client._state.users.size, 0);
+    assert.ok(String(first.state.actions['UPSERT_USER:alice@example.com']?.lastError || '').includes('role assignment failed'));
+
+    failRoleAssignment = false;
+
+    const second = await runDevelopersImport(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json'), 'users-only': true, resume: true },
+      { config: makeConfig(dir), client },
+    );
+
+    assert.strictEqual(second.exitCode, 0);
+    assert.strictEqual(client._state.users.size, 1);
+  });
+}
+
 async function testImportReusesExistingResourcesBySourceMarker() {
   await withTempDir(async (dir) => {
     const dataDir = path.join(dir, 'data');
@@ -687,6 +731,7 @@ async function run() {
   await testPlanFailsWhenCapabilityProbeContradictsConfig();
   await testImportCreatesResourcesAndResumeSkipsRework();
   await testImportCreatesMissingApplicationCustomFields();
+  await testImportRollsBackOrReusesUserAfterRoleAssignmentFailure();
   await testImportReusesExistingResourcesBySourceMarker();
   await testImportFailsOnContinuityMismatch();
   await testInactiveDeveloperSkipPolicySkipsActions();

@@ -55,6 +55,35 @@ function persistRuntimeArtifacts(outputPaths, state, idMap, events) {
   writeNdjson(outputPaths.log, events);
 }
 
+function resetStateForResume(state) {
+  for (const actionState of Object.values(state.actions || {})) {
+    if (['FAILED', 'BLOCKED', 'RUNNING'].includes(actionState.status)) {
+      actionState.status = actionState.plannedStatus === 'READY' ? 'PENDING' : actionState.plannedStatus;
+      actionState.lastError = null;
+      actionState.startedAt = null;
+      actionState.completedAt = null;
+      actionState.targetIds = {};
+      actionState.reconcileHints = {};
+    }
+  }
+  state.updatedAt = new Date().toISOString();
+  return state;
+}
+
+function formatRuntimeError(err) {
+  const parts = [];
+  if (err?.message) parts.push(err.message);
+  if (err?.body !== undefined) {
+    parts.push(typeof err.body === 'string' ? err.body : JSON.stringify(err.body));
+  }
+  if (Array.isArray(err?.attempts) && err.attempts.length > 0) {
+    parts.push(err.attempts.map((attempt) => (
+      `${attempt.strategy}: ${attempt.message}${attempt.body !== undefined ? `: ${typeof attempt.body === 'string' ? attempt.body : JSON.stringify(attempt.body)}` : ''}`
+    )).join(' | '));
+  }
+  return parts.filter(Boolean).join(' :: ');
+}
+
 async function ensureRequiredApplicationCustomFields(domain, client, events) {
   const requiredFields = collectRequiredApplicationCustomFields(domain);
   if (requiredFields.length === 0 || typeof client.ensureApplicationCustomFields !== 'function') {
@@ -88,15 +117,30 @@ function inactivePolicySatisfied(target, policy) {
 async function ensureUser(action, ctx, client, idMap) {
   const user = ctx.usersBySourceId.get(action.sourceId);
   let target = null;
-  if (action.operation === 'CREATE') {
+  let createdThisRun = false;
+  const existing = await client.findUserByEmail(user.email);
+
+  if (existing) {
+    target = action.operation === 'UPDATE'
+      ? await client.updateUser(existing.id, {
+        email: user.email,
+        firstname: user.firstName,
+        lastname: user.lastName,
+        displayName: user.userName || user.email,
+      })
+      : existing;
+  } else if (action.operation === 'CREATE') {
     target = await client.createUser({
       email: user.email,
       firstname: user.firstName,
       lastname: user.lastName,
       displayName: user.userName || user.email,
     });
+    createdThisRun = true;
   } else if (action.operation === 'UPDATE') {
-    const existing = await client.findUserByEmail(user.email);
+    if (!existing) {
+      throw new Error(`User ${user.email} could not be updated because it does not exist`);
+    }
     target = await client.updateUser(existing.id, {
       email: user.email,
       firstname: user.firstName,
@@ -104,15 +148,26 @@ async function ensureUser(action, ctx, client, idMap) {
       displayName: user.userName || user.email,
     });
   } else {
-    target = await client.findUserByEmail(user.email);
+    target = existing;
   }
 
   const userId = target?.id || target?.userId || null;
   if (userId) {
-    await client.assignUserRoles(userId, {
-      organization: action.payload.roles.organization,
-      environment: action.payload.roles.environment,
-    });
+    try {
+      await client.assignUserRoles(userId, {
+        organization: action.payload.roles.organization,
+        environment: action.payload.roles.environment,
+      });
+    } catch (err) {
+      if (createdThisRun && typeof client.deleteUser === 'function') {
+        try {
+          await client.deleteUser(userId);
+        } catch (_) {
+          // Leave the user in place if rollback also fails; the next rerun can reuse by email.
+        }
+      }
+      throw err;
+    }
     setIdMapValue(idMap, action.kind, action.sourceId, userId);
   }
   return { userId };
@@ -278,6 +333,9 @@ async function runDevelopersImport(flags, deps = {}) {
   const ctx = buildImportContext(result);
   const savedState = (flags.resume || flags.force) ? readJsonIfExists(result.outputPaths.state) : null;
   const state = mergeSavedActionState(result.state, savedState);
+  if (flags.resume || flags.force) {
+    resetStateForResume(state);
+  }
   const idMap = readJsonIfExists(result.outputPaths.idMap) || result.idMap;
   const events = [...result.events];
   const maxErrors = Number(flags['max-errors'] || 1);
@@ -328,8 +386,9 @@ async function runDevelopersImport(flags, deps = {}) {
       events.push({ ts: new Date().toISOString(), type: 'import.succeeded', actionId: action.actionId, kind: action.kind });
     } catch (err) {
       errorCount += 1;
-      markActionCompleted(state, action.actionId, 'FAILED', { lastError: err.message });
-      events.push({ ts: new Date().toISOString(), type: 'import.failed', actionId: action.actionId, kind: action.kind, error: err.message });
+      const formattedError = formatRuntimeError(err);
+      markActionCompleted(state, action.actionId, 'FAILED', { lastError: formattedError });
+      events.push({ ts: new Date().toISOString(), type: 'import.failed', actionId: action.actionId, kind: action.kind, error: formattedError });
       if (errorCount >= maxErrors || action.kind === 'VERIFY_SUBSCRIPTION') {
         break;
       }
@@ -339,6 +398,9 @@ async function runDevelopersImport(flags, deps = {}) {
   }
 
   for (const action of result.manifest.actions) {
+    if (!shouldIncludeAction(action, flags)) {
+      continue;
+    }
     if (state.actions[action.actionId].status === 'PENDING') {
       markActionCompleted(state, action.actionId, 'BLOCKED', {
         lastError: `Dependencies were not satisfied: ${(action.dependencies || []).join(', ') || 'none'}`,

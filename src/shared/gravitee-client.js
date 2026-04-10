@@ -44,6 +44,11 @@ class GraviteeApiError extends Error {
   }
 }
 
+function formatErrorBody(body) {
+  if (body === undefined || body === null) return '';
+  return typeof body === 'string' ? body : JSON.stringify(body);
+}
+
 function normalizeCollection(body) {
   if (Array.isArray(body?.data)) return body.data;
   if (Array.isArray(body?.items)) return body.items;
@@ -471,7 +476,66 @@ class GraviteeClient {
   }
 
   async assignUserRoles(userId, roles) {
-    return this.put(this.orgUrl(`/users/${userId}/roles`), roles);
+    const organizationRoles = Array.isArray(roles?.organization) ? roles.organization : [];
+    const environmentRoles = Array.isArray(roles?.environment) ? roles.environment : [];
+    const flattened = [
+      ...organizationRoles.map((name) => ({ scope: 'ORGANIZATION', name })),
+      ...environmentRoles.map((name) => ({ scope: 'ENVIRONMENT', name })),
+    ];
+    const endpoint = this.orgUrl(`/users/${userId}/roles`);
+    const attempts = [];
+    const strategies = [
+      {
+        name: 'scoped-object-lowercase',
+        exec: () => this.put(endpoint, {
+          organization: organizationRoles,
+          environment: environmentRoles,
+        }),
+      },
+      {
+        name: 'scoped-object-uppercase',
+        exec: () => this.put(endpoint, {
+          ORGANIZATION: organizationRoles,
+          ENVIRONMENT: environmentRoles,
+        }),
+      },
+      {
+        name: 'flattened-roles-array',
+        exec: () => this.put(endpoint, flattened),
+      },
+      {
+        name: 'roles-wrapper',
+        exec: () => this.put(endpoint, { roles: flattened }),
+      },
+    ];
+
+    for (const strategy of strategies) {
+      try {
+        const response = await strategy.exec();
+        if (response && typeof response === 'object' && !Array.isArray(response)) {
+          response._strategy = strategy.name;
+        }
+        return response;
+      } catch (err) {
+        attempts.push({
+          strategy: strategy.name,
+          status: err.status || null,
+          classification: classifyApiError(err),
+          message: err.message,
+          body: err.body,
+        });
+      }
+    }
+
+    const fallbackError = new Error(
+      attempts
+        .map((attempt) => `${attempt.strategy}: ${attempt.message}${attempt.body ? `: ${formatErrorBody(attempt.body)}` : ''}`)
+        .join(' | ')
+    );
+    fallbackError.name = 'GraviteeUserRoleCompatibilityError';
+    fallbackError.classification = 'compatibility';
+    fallbackError.attempts = attempts;
+    throw fallbackError;
   }
 
   async findApplicationByNameAndOwnerHint({ name, ownerHint, sourceId }) {
