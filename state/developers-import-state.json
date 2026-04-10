@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-04-10T14:59:14.497Z",
-  "updatedAt": "2026-04-10T14:59:21.899Z",
+  "generatedAt": "2026-04-10T15:55:59.292Z",
+  "updatedAt": "2026-04-10T15:56:14.239Z",
   "mode": "plan",
   "summary": {
     "users": 4,
@@ -51,9 +51,9 @@
       "dependencies": [],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "PUT http://localhost:8083/management/organizations/DEFAULT/users/d4cb7ef7-9679-4c79-8b7e-f796790c79da/roles → HTTP 500",
-      "startedAt": "2026-04-10T14:59:14.502Z",
-      "completedAt": "2026-04-10T14:59:21.898Z"
+      "lastError": "scoped-object-lowercase: PUT http://localhost:8083/management/organizations/DEFAULT/users/62b6c32e-2039-45d9-b6c3-2e203985d990/roles → HTTP 500: {\"http_status\":500} | scoped-object-uppercase: PUT http://localhost:8083/management/organizations/DEFAULT/users/62b6c32e-2039-45d9-b6c3-2e203985d990/roles → HTTP 500: {\"http_status\":500} | flattened-roles-array: PUT http://localhost:8083/management/organizations/DEFAULT/users/62b6c32e-2039-45d9-b6c3-2e203985d990/roles → HTTP 400: {\"message\":\"Cannot deserialize value of type `io.gravitee.rest.api.model.UserReferenceRoleEntity` from Array value (token `JsonToken.START_ARRAY`)\",\"http_status\":400} | roles-wrapper: PUT http://localhost:8083/management/organizations/DEFAULT/users/62b6c32e-2039-45d9-b6c3-2e203985d990/roles → HTTP 400: {\"message\":\"Cannot deserialize value of type `java.lang.String` from Object value (token `JsonToken.START_OBJECT`)\",\"http_status\":400} :: scoped-object-lowercase: PUT http://localhost:8083/management/organizations/DEFAULT/users/62b6c32e-2039-45d9-b6c3-2e203985d990/roles → HTTP 500: {\"http_status\":500} | scoped-object-uppercase: PUT http://localhost:8083/management/organizations/DEFAULT/users/62b6c32e-2039-45d9-b6c3-2e203985d990/roles → HTTP 500: {\"http_status\":500} | flattened-roles-array: PUT http://localhost:8083/management/organizations/DEFAULT/users/62b6c32e-2039-45d9-b6c3-2e203985d990/roles → HTTP 400: {\"message\":\"Cannot deserialize value of type `io.gravitee.rest.api.model.UserReferenceRoleEntity` from Array value (token `JsonToken.START_ARRAY`)\",\"http_status\":400} | roles-wrapper: PUT http://localhost:8083/management/organizations/DEFAULT/users/62b6c32e-2039-45d9-b6c3-2e203985d990/roles → HTTP 400: {\"message\":\"Cannot deserialize value of type `java.lang.String` from Object value (token `JsonToken.START_OBJECT`)\",\"http_status\":400}",
+      "startedAt": "2026-04-10T15:55:59.298Z",
+      "completedAt": "2026-04-10T15:56:14.239Z"
     },
     "VERIFY_USER:danny.rivera@540.co": {
       "actionId": "VERIFY_USER:danny.rivera@540.co",
@@ -68,7 +68,7 @@
       "reconcileHints": {},
       "lastError": "Dependencies were not satisfied: UPSERT_USER:danny.rivera@540.co",
       "startedAt": null,
-      "completedAt": "2026-04-10T14:59:21.898Z"
+      "completedAt": "2026-04-10T15:56:14.239Z"
     },
     "UPSERT_USER:dev1@540.co": {
       "actionId": "UPSERT_USER:dev1@540.co",
@@ -81,7 +81,7 @@
       "reconcileHints": {},
       "lastError": "Dependencies were not satisfied: none",
       "startedAt": null,
-      "completedAt": "2026-04-10T14:59:21.898Z"
+      "completedAt": "2026-04-10T15:56:14.239Z"
     },
     "VERIFY_USER:dev1@540.co": {
       "actionId": "VERIFY_USER:dev1@540.co",
@@ -96,7 +96,7 @@
       "reconcileHints": {},
       "lastError": "Dependencies were not satisfied: UPSERT_USER:dev1@540.co",
       "startedAt": null,
-      "completedAt": "2026-04-10T14:59:21.898Z"
+      "completedAt": "2026-04-10T15:56:14.239Z"
     },
     "UPSERT_USER:dev2@540.co": {
       "actionId": "UPSERT_USER:dev2@540.co",
@@ -109,7 +109,7 @@
       "reconcileHints": {},
       "lastError": "Dependencies were not satisfied: none",
       "startedAt": null,
-      "completedAt": "2026-04-10T14:59:21.898Z"
+      "completedAt": "2026-04-10T15:56:14.239Z"
     },
     "VERIFY_USER:dev2@540.co": {
       "actionId": "VERIFY_USER:dev2@540.co",
@@ -124,7 +124,7 @@
       "reconcileHints": {},
       "lastError": "Dependencies were not satisfied: UPSERT_USER:dev2@540.co",
       "startedAt": null,
-      "completedAt": "2026-04-10T14:59:21.898Z"
+      "completedAt": "2026-04-10T15:56:14.239Z"
     },
     "UPSERT_USER:erik.severson@540.co": {
       "actionId": "UPSERT_USER:erik.severson@540.co",
@@ -137,7 +137,7 @@
       "reconcileHints": {},
       "lastError": "Dependencies were not satisfied: none",
       "startedAt": null,
-      "completedAt": "2026-04-10T14:59:21.898Z"
+      "completedAt": "2026-04-10T15:56:14.239Z"
     },
     "VERIFY_USER:erik.severson@540.co": {
       "actionId": "VERIFY_USER:erik.severson@540.co",
@@ -152,311 +152,311 @@
       "reconcileHints": {},
       "lastError": "Dependencies were not satisfied: UPSERT_USER:erik.severson@540.co",
       "startedAt": null,
-      "completedAt": "2026-04-10T14:59:21.898Z"
+      "completedAt": "2026-04-10T15:56:14.239Z"
     },
     "UPSERT_APPLICATION:dev1@540.co/kanye-dev-app": {
       "actionId": "UPSERT_APPLICATION:dev1@540.co/kanye-dev-app",
       "kind": "UPSERT_APPLICATION",
       "sourceId": "dev1@540.co/kanye-dev-app",
       "plannedStatus": "READY",
-      "status": "BLOCKED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_USER:dev1@540.co"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "Dependencies were not satisfied: UPSERT_USER:dev1@540.co",
+      "lastError": null,
       "startedAt": null,
-      "completedAt": "2026-04-10T14:59:21.898Z"
+      "completedAt": null
     },
     "VERIFY_APPLICATION:dev1@540.co/kanye-dev-app": {
       "actionId": "VERIFY_APPLICATION:dev1@540.co/kanye-dev-app",
       "kind": "VERIFY_APPLICATION",
       "sourceId": "dev1@540.co/kanye-dev-app",
       "plannedStatus": "READY",
-      "status": "BLOCKED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_APPLICATION:dev1@540.co/kanye-dev-app"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "Dependencies were not satisfied: UPSERT_APPLICATION:dev1@540.co/kanye-dev-app",
+      "lastError": null,
       "startedAt": null,
-      "completedAt": "2026-04-10T14:59:21.899Z"
+      "completedAt": null
     },
     "UPSERT_APPLICATION:dev1@540.co/wizards-dev-app": {
       "actionId": "UPSERT_APPLICATION:dev1@540.co/wizards-dev-app",
       "kind": "UPSERT_APPLICATION",
       "sourceId": "dev1@540.co/wizards-dev-app",
       "plannedStatus": "READY",
-      "status": "BLOCKED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_USER:dev1@540.co"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "Dependencies were not satisfied: UPSERT_USER:dev1@540.co",
+      "lastError": null,
       "startedAt": null,
-      "completedAt": "2026-04-10T14:59:21.899Z"
+      "completedAt": null
     },
     "VERIFY_APPLICATION:dev1@540.co/wizards-dev-app": {
       "actionId": "VERIFY_APPLICATION:dev1@540.co/wizards-dev-app",
       "kind": "VERIFY_APPLICATION",
       "sourceId": "dev1@540.co/wizards-dev-app",
       "plannedStatus": "READY",
-      "status": "BLOCKED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_APPLICATION:dev1@540.co/wizards-dev-app"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "Dependencies were not satisfied: UPSERT_APPLICATION:dev1@540.co/wizards-dev-app",
+      "lastError": null,
       "startedAt": null,
-      "completedAt": "2026-04-10T14:59:21.899Z"
+      "completedAt": null
     },
     "UPSERT_APPLICATION:dev2@540.co/chuck-norris-dev-app": {
       "actionId": "UPSERT_APPLICATION:dev2@540.co/chuck-norris-dev-app",
       "kind": "UPSERT_APPLICATION",
       "sourceId": "dev2@540.co/chuck-norris-dev-app",
       "plannedStatus": "READY",
-      "status": "BLOCKED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_USER:dev2@540.co"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "Dependencies were not satisfied: UPSERT_USER:dev2@540.co",
+      "lastError": null,
       "startedAt": null,
-      "completedAt": "2026-04-10T14:59:21.899Z"
+      "completedAt": null
     },
     "VERIFY_APPLICATION:dev2@540.co/chuck-norris-dev-app": {
       "actionId": "VERIFY_APPLICATION:dev2@540.co/chuck-norris-dev-app",
       "kind": "VERIFY_APPLICATION",
       "sourceId": "dev2@540.co/chuck-norris-dev-app",
       "plannedStatus": "READY",
-      "status": "BLOCKED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_APPLICATION:dev2@540.co/chuck-norris-dev-app"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "Dependencies were not satisfied: UPSERT_APPLICATION:dev2@540.co/chuck-norris-dev-app",
+      "lastError": null,
       "startedAt": null,
-      "completedAt": "2026-04-10T14:59:21.899Z"
+      "completedAt": null
     },
     "UPSERT_APPLICATION:dev2@540.co/dog-breeds-dev-app": {
       "actionId": "UPSERT_APPLICATION:dev2@540.co/dog-breeds-dev-app",
       "kind": "UPSERT_APPLICATION",
       "sourceId": "dev2@540.co/dog-breeds-dev-app",
       "plannedStatus": "READY",
-      "status": "BLOCKED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_USER:dev2@540.co"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "Dependencies were not satisfied: UPSERT_USER:dev2@540.co",
+      "lastError": null,
       "startedAt": null,
-      "completedAt": "2026-04-10T14:59:21.899Z"
+      "completedAt": null
     },
     "VERIFY_APPLICATION:dev2@540.co/dog-breeds-dev-app": {
       "actionId": "VERIFY_APPLICATION:dev2@540.co/dog-breeds-dev-app",
       "kind": "VERIFY_APPLICATION",
       "sourceId": "dev2@540.co/dog-breeds-dev-app",
       "plannedStatus": "READY",
-      "status": "BLOCKED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_APPLICATION:dev2@540.co/dog-breeds-dev-app"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "Dependencies were not satisfied: UPSERT_APPLICATION:dev2@540.co/dog-breeds-dev-app",
+      "lastError": null,
       "startedAt": null,
-      "completedAt": "2026-04-10T14:59:21.899Z"
+      "completedAt": null
     },
     "RESOLVE_PLAN:dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan": {
       "actionId": "RESOLVE_PLAN:dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan",
       "kind": "RESOLVE_PLAN",
       "sourceId": "dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan",
       "plannedStatus": "READY",
-      "status": "BLOCKED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_APPLICATION:dev1@540.co/kanye-dev-app"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "Dependencies were not satisfied: UPSERT_APPLICATION:dev1@540.co/kanye-dev-app",
+      "lastError": null,
       "startedAt": null,
-      "completedAt": "2026-04-10T14:59:21.899Z"
+      "completedAt": null
     },
     "UPSERT_SUBSCRIPTION:dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan": {
       "actionId": "UPSERT_SUBSCRIPTION:dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan",
       "kind": "UPSERT_SUBSCRIPTION",
       "sourceId": "dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan",
       "plannedStatus": "READY",
-      "status": "BLOCKED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_APPLICATION:dev1@540.co/kanye-dev-app",
         "RESOLVE_PLAN:dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "Dependencies were not satisfied: UPSERT_APPLICATION:dev1@540.co/kanye-dev-app, RESOLVE_PLAN:dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan",
+      "lastError": null,
       "startedAt": null,
-      "completedAt": "2026-04-10T14:59:21.899Z"
+      "completedAt": null
     },
     "VERIFY_SUBSCRIPTION:dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan": {
       "actionId": "VERIFY_SUBSCRIPTION:dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan",
       "kind": "VERIFY_SUBSCRIPTION",
       "sourceId": "dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan",
       "plannedStatus": "READY",
-      "status": "BLOCKED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_SUBSCRIPTION:dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "Dependencies were not satisfied: UPSERT_SUBSCRIPTION:dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan",
+      "lastError": null,
       "startedAt": null,
-      "completedAt": "2026-04-10T14:59:21.899Z"
+      "completedAt": null
     },
     "RESOLVE_PLAN:dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan": {
       "actionId": "RESOLVE_PLAN:dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan",
       "kind": "RESOLVE_PLAN",
       "sourceId": "dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan",
       "plannedStatus": "READY",
-      "status": "BLOCKED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_APPLICATION:dev1@540.co/wizards-dev-app"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "Dependencies were not satisfied: UPSERT_APPLICATION:dev1@540.co/wizards-dev-app",
+      "lastError": null,
       "startedAt": null,
-      "completedAt": "2026-04-10T14:59:21.899Z"
+      "completedAt": null
     },
     "UPSERT_SUBSCRIPTION:dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan": {
       "actionId": "UPSERT_SUBSCRIPTION:dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan",
       "kind": "UPSERT_SUBSCRIPTION",
       "sourceId": "dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan",
       "plannedStatus": "READY",
-      "status": "BLOCKED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_APPLICATION:dev1@540.co/wizards-dev-app",
         "RESOLVE_PLAN:dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "Dependencies were not satisfied: UPSERT_APPLICATION:dev1@540.co/wizards-dev-app, RESOLVE_PLAN:dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan",
+      "lastError": null,
       "startedAt": null,
-      "completedAt": "2026-04-10T14:59:21.899Z"
+      "completedAt": null
     },
     "VERIFY_SUBSCRIPTION:dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan": {
       "actionId": "VERIFY_SUBSCRIPTION:dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan",
       "kind": "VERIFY_SUBSCRIPTION",
       "sourceId": "dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan",
       "plannedStatus": "READY",
-      "status": "BLOCKED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_SUBSCRIPTION:dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "Dependencies were not satisfied: UPSERT_SUBSCRIPTION:dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan",
+      "lastError": null,
       "startedAt": null,
-      "completedAt": "2026-04-10T14:59:21.899Z"
+      "completedAt": null
     },
     "RESOLVE_PLAN:dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan": {
       "actionId": "RESOLVE_PLAN:dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan",
       "kind": "RESOLVE_PLAN",
       "sourceId": "dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan",
       "plannedStatus": "READY",
-      "status": "BLOCKED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_APPLICATION:dev2@540.co/chuck-norris-dev-app"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "Dependencies were not satisfied: UPSERT_APPLICATION:dev2@540.co/chuck-norris-dev-app",
+      "lastError": null,
       "startedAt": null,
-      "completedAt": "2026-04-10T14:59:21.899Z"
+      "completedAt": null
     },
     "UPSERT_SUBSCRIPTION:dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan": {
       "actionId": "UPSERT_SUBSCRIPTION:dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan",
       "kind": "UPSERT_SUBSCRIPTION",
       "sourceId": "dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan",
       "plannedStatus": "READY",
-      "status": "BLOCKED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_APPLICATION:dev2@540.co/chuck-norris-dev-app",
         "RESOLVE_PLAN:dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "Dependencies were not satisfied: UPSERT_APPLICATION:dev2@540.co/chuck-norris-dev-app, RESOLVE_PLAN:dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan",
+      "lastError": null,
       "startedAt": null,
-      "completedAt": "2026-04-10T14:59:21.899Z"
+      "completedAt": null
     },
     "VERIFY_SUBSCRIPTION:dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan": {
       "actionId": "VERIFY_SUBSCRIPTION:dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan",
       "kind": "VERIFY_SUBSCRIPTION",
       "sourceId": "dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan",
       "plannedStatus": "READY",
-      "status": "BLOCKED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_SUBSCRIPTION:dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "Dependencies were not satisfied: UPSERT_SUBSCRIPTION:dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan",
+      "lastError": null,
       "startedAt": null,
-      "completedAt": "2026-04-10T14:59:21.899Z"
+      "completedAt": null
     },
     "RESOLVE_PLAN:dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan": {
       "actionId": "RESOLVE_PLAN:dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan",
       "kind": "RESOLVE_PLAN",
       "sourceId": "dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan",
       "plannedStatus": "READY",
-      "status": "BLOCKED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_APPLICATION:dev2@540.co/dog-breeds-dev-app"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "Dependencies were not satisfied: UPSERT_APPLICATION:dev2@540.co/dog-breeds-dev-app",
+      "lastError": null,
       "startedAt": null,
-      "completedAt": "2026-04-10T14:59:21.899Z"
+      "completedAt": null
     },
     "UPSERT_SUBSCRIPTION:dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan": {
       "actionId": "UPSERT_SUBSCRIPTION:dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan",
       "kind": "UPSERT_SUBSCRIPTION",
       "sourceId": "dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan",
       "plannedStatus": "READY",
-      "status": "BLOCKED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_APPLICATION:dev2@540.co/dog-breeds-dev-app",
         "RESOLVE_PLAN:dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "Dependencies were not satisfied: UPSERT_APPLICATION:dev2@540.co/dog-breeds-dev-app, RESOLVE_PLAN:dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan",
+      "lastError": null,
       "startedAt": null,
-      "completedAt": "2026-04-10T14:59:21.899Z"
+      "completedAt": null
     },
     "VERIFY_SUBSCRIPTION:dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan": {
       "actionId": "VERIFY_SUBSCRIPTION:dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan",
       "kind": "VERIFY_SUBSCRIPTION",
       "sourceId": "dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan",
       "plannedStatus": "READY",
-      "status": "BLOCKED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_SUBSCRIPTION:dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "Dependencies were not satisfied: UPSERT_SUBSCRIPTION:dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan",
+      "lastError": null,
       "startedAt": null,
-      "completedAt": "2026-04-10T14:59:21.899Z"
+      "completedAt": null
     }
   }
 }
