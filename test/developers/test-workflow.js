@@ -9,6 +9,7 @@ const { spawnSync } = require('child_process');
 const { runDevelopersPlan } = require('../../src/developers/plan');
 const { runDevelopersImport } = require('../../src/developers/import');
 const { runDevelopersReconcile } = require('../../src/developers/reconcile');
+const { runDevelopersDeleteImported } = require('../../src/developers/delete-imported');
 
 const PROJECT_ROOT = path.resolve(__dirname, '..', '..');
 const FIXTURES_DATA = path.join(PROJECT_ROOT, 'test', 'extractor', 'fixtures', 'data');
@@ -110,6 +111,7 @@ function makeWorkflowClient(options = {}) {
     roles: new Map(),
     applications: new Map(),
     members: new Map(),
+    customFields: new Set(['team', 'environment']),
     plans: new Map([
       ['plan-orders-1', { id: 'plan-orders-1', apiId: 'api-orders-1', name: 'Orders API Key' }],
       ['plan-orders-audit-1', { id: 'plan-orders-audit-1', apiId: 'api-orders-audit-1', name: 'Orders Audit API Key' }],
@@ -121,6 +123,10 @@ function makeWorkflowClient(options = {}) {
       createUser: 0,
       createApplication: 0,
       createSubscription: 0,
+      createCustomField: 0,
+      deleteSubscription: 0,
+      deleteApplication: 0,
+      deleteUser: 0,
     },
   };
 
@@ -129,7 +135,21 @@ function makeWorkflowClient(options = {}) {
     async healthCheck() { return { ok: true }; },
     async verifyEnvironmentAccess() { return { ok: true }; },
     async listRoles() { return new Set(['ORGANIZATION:USER', 'ENVIRONMENT:API_CONSUMER']); },
-    async listCustomFields() { return new Set(['team', 'environment']); },
+    async listCustomFields() { return new Set(state.customFields); },
+    async ensureApplicationCustomFields(fieldNames) {
+      const created = [];
+      const skipped = [];
+      for (const fieldName of fieldNames) {
+        if (state.customFields.has(fieldName)) {
+          skipped.push(fieldName);
+          continue;
+        }
+        state.customFields.add(fieldName);
+        state.counts.createCustomField += 1;
+        created.push(fieldName);
+      }
+      return { created, skipped, failed: [] };
+    },
     async findUserByEmail(email) { return state.users.get(email) || null; },
     async getUserRoles(userId) { return state.roles.get(userId) || new Set(); },
     async createUser(payload) {
@@ -191,6 +211,28 @@ function makeWorkflowClient(options = {}) {
       return state.apiKeys.get(subscriptionId) || [];
     },
     async closeOrPauseSubscription() { return { ok: true }; },
+    async deleteSubscription({ subscriptionId }) {
+      state.counts.deleteSubscription += 1;
+      for (const [key, value] of state.subscriptions.entries()) {
+        if (value.id === subscriptionId) state.subscriptions.delete(key);
+      }
+      state.apiKeys.delete(subscriptionId);
+      return { ok: true };
+    },
+    async deleteApplication(applicationId) {
+      state.counts.deleteApplication += 1;
+      state.applications.delete(applicationId);
+      state.members.delete(applicationId);
+      return { ok: true };
+    },
+    async deleteUser(userId) {
+      state.counts.deleteUser += 1;
+      for (const [email, user] of state.users.entries()) {
+        if (user.id === userId) state.users.delete(email);
+      }
+      state.roles.delete(userId);
+      return { ok: true };
+    },
     ...options.overrides,
   };
 }
@@ -307,6 +349,31 @@ async function testImportCreatesResourcesAndResumeSkipsRework() {
     assert.strictEqual(client._state.counts.createUser, 1);
     assert.strictEqual(client._state.counts.createApplication, 1);
     assert.strictEqual(client._state.counts.createSubscription, 1);
+  });
+}
+
+async function testImportCreatesMissingApplicationCustomFields() {
+  await withTempDir(async (dir) => {
+    const dataDir = path.join(dir, 'data');
+    const irDir = path.join(dir, 'ir');
+    copyDir(FIXTURES_DATA, dataDir);
+    generateIrFromData(dataDir, irDir);
+
+    const client = makeWorkflowClient({
+      overrides: {
+        async listCustomFields() { return new Set(); },
+      },
+    });
+    client._state.customFields.clear();
+
+    const result = await runDevelopersImport(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json') },
+      { config: makeConfig(dir), client },
+    );
+
+    assert.strictEqual(result.exitCode, 0);
+    assert.ok(result.customFieldProvisioning.created.includes('environment'));
+    assert.strictEqual(client._state.counts.createCustomField, 1);
   });
 }
 
@@ -459,6 +526,38 @@ async function testReconcileDetectsMismatches() {
   });
 }
 
+async function testDeleteImportedRemovesSubscriptionsApplicationsAndUsers() {
+  await withTempDir(async (dir) => {
+    const dataDir = path.join(dir, 'data');
+    const irDir = path.join(dir, 'ir');
+    copyDir(FIXTURES_DATA, dataDir);
+    generateIrFromData(dataDir, irDir);
+
+    const client = makeWorkflowClient();
+    const config = makeConfig(dir);
+
+    const imported = await runDevelopersImport(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json') },
+      { config, client },
+    );
+
+    assert.strictEqual(imported.exitCode, 0);
+
+    const cleaned = await runDevelopersDeleteImported(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json') },
+      { config, client },
+    );
+
+    assert.strictEqual(cleaned.exitCode, 0);
+    assert.strictEqual(client._state.counts.deleteSubscription, 1);
+    assert.strictEqual(client._state.counts.deleteApplication, 1);
+    assert.strictEqual(client._state.counts.deleteUser, 1);
+    assert.strictEqual(cleaned.idMap.subscriptions['alice@example.com/orders-consumer/abc123def456/orders-product/orders-api::Orders API Key'], null);
+    assert.strictEqual(cleaned.idMap.applications['alice@example.com/orders-consumer'], null);
+    assert.strictEqual(cleaned.idMap.users['alice@example.com'], null);
+  });
+}
+
 async function testMultiProductImportAndReconcile() {
   await withTempDir(async (dir) => {
     const dataDir = path.join(dir, 'data');
@@ -587,10 +686,12 @@ async function run() {
   await testPlanBuildsExecutableManifest();
   await testPlanFailsWhenCapabilityProbeContradictsConfig();
   await testImportCreatesResourcesAndResumeSkipsRework();
+  await testImportCreatesMissingApplicationCustomFields();
   await testImportReusesExistingResourcesBySourceMarker();
   await testImportFailsOnContinuityMismatch();
   await testInactiveDeveloperSkipPolicySkipsActions();
   await testReconcileDetectsMismatches();
+  await testDeleteImportedRemovesSubscriptionsApplicationsAndUsers();
   await testMultiProductImportAndReconcile();
   await testMultiTargetProductImportAndReconcile();
   await testImportAndReconcileSupportMetadataOnlyOwnership();

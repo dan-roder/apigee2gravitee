@@ -374,6 +374,68 @@ class GraviteeClient {
     return names;
   }
 
+  async createApplicationCustomField(fieldName) {
+    const attempts = [];
+    const payloads = [
+      { key: fieldName, name: fieldName, format: 'STRING' },
+      { key: fieldName, format: 'STRING' },
+      { name: fieldName, format: 'STRING' },
+    ];
+
+    for (const payload of payloads) {
+      try {
+        const response = await this.postOrIgnoreConflict(this.envUrl('/applications/metadata'), payload);
+        return response || { key: fieldName, name: fieldName, _strategy: 'conflict-existing' };
+      } catch (err) {
+        attempts.push({
+          status: err.status || null,
+          classification: classifyApiError(err),
+          message: err.message,
+          body: err.body,
+        });
+      }
+    }
+
+    const fallbackError = new Error(
+      attempts
+        .map((attempt) => `${attempt.message}${attempt.body ? `: ${typeof attempt.body === 'string' ? attempt.body : JSON.stringify(attempt.body)}` : ''}`)
+        .join(' | ')
+    );
+    fallbackError.name = 'GraviteeCustomFieldCompatibilityError';
+    fallbackError.classification = 'compatibility';
+    fallbackError.attempts = attempts;
+    throw fallbackError;
+  }
+
+  async ensureApplicationCustomFields(fieldNames) {
+    const existing = await this.listCustomFields();
+    const created = [];
+    const skipped = [];
+    const failed = [];
+
+    for (const fieldName of fieldNames) {
+      if (!fieldName || existing.has(fieldName)) {
+        skipped.push(fieldName);
+        continue;
+      }
+      try {
+        await this.createApplicationCustomField(fieldName);
+        existing.add(fieldName);
+        created.push(fieldName);
+      } catch (err) {
+        failed.push({
+          fieldName,
+          message: err.body !== undefined
+            ? `${err.message}: ${typeof err.body === 'string' ? err.body : JSON.stringify(err.body)}`
+            : err.message,
+          classification: err.classification || classifyApiError(err),
+        });
+      }
+    }
+
+    return { created, skipped, failed };
+  }
+
   async findUserByEmail(email) {
     const body = await this.get(this.orgUrl(`/users?query=${encodeURIComponent(email)}`));
     const items = normalizeCollection(body);
@@ -402,6 +464,10 @@ class GraviteeClient {
 
   async updateUser(userId, payload) {
     return this.put(this.orgUrl(`/users/${userId}`), payload);
+  }
+
+  async deleteUser(userId) {
+    return this.delete(this.orgUrl(`/users/${userId}`));
   }
 
   async assignUserRoles(userId, roles) {
@@ -435,6 +501,10 @@ class GraviteeClient {
 
   async updateApplication(applicationId, payload) {
     return this.put(this.envUrl(`/applications/${applicationId}`), payload);
+  }
+
+  async deleteApplication(applicationId) {
+    return this.delete(this.envUrl(`/applications/${applicationId}`));
   }
 
   async addApplicationMember(applicationId, payload) {
@@ -621,6 +691,10 @@ class GraviteeClient {
 
   async createSubscription({ apiId, applicationId, planId }) {
     return this.post(this.v2Url(`/apis/${apiId}/subscriptions`), { applicationId, planId });
+  }
+
+  async deleteSubscription({ apiId, subscriptionId }) {
+    return this.delete(this.v2Url(`/apis/${apiId}/subscriptions/${subscriptionId}`));
   }
 
   async closeOrPauseSubscription({ apiId, subscriptionId, status }) {

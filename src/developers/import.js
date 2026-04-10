@@ -39,10 +39,38 @@ function buildImportContext(result) {
   };
 }
 
+function collectRequiredApplicationCustomFields(domain) {
+  const names = new Set();
+  for (const application of domain.applications) {
+    for (const field of application.customFields || []) {
+      if (field?.targetName) names.add(field.targetName);
+    }
+  }
+  return Array.from(names).sort();
+}
+
 function persistRuntimeArtifacts(outputPaths, state, idMap, events) {
   writeJson(outputPaths.state, state);
   writeJson(outputPaths.idMap, idMap);
   writeNdjson(outputPaths.log, events);
+}
+
+async function ensureRequiredApplicationCustomFields(domain, client, events) {
+  const requiredFields = collectRequiredApplicationCustomFields(domain);
+  if (requiredFields.length === 0 || typeof client.ensureApplicationCustomFields !== 'function') {
+    return { requiredFields, created: [], skipped: [], failed: [] };
+  }
+
+  const outcome = await client.ensureApplicationCustomFields(requiredFields);
+  events.push({
+    ts: new Date().toISOString(),
+    type: 'import.custom_fields',
+    requiredFields,
+    created: outcome.created,
+    skipped: outcome.skipped,
+    failed: outcome.failed,
+  });
+  return { requiredFields, ...outcome };
 }
 
 function inactivePolicySatisfied(target, policy) {
@@ -255,6 +283,20 @@ async function runDevelopersImport(flags, deps = {}) {
   const maxErrors = Number(flags['max-errors'] || 1);
   let errorCount = 0;
 
+  const customFieldProvisioning = flags['users-only']
+    ? { requiredFields: [], created: [], skipped: [], failed: [] }
+    : await ensureRequiredApplicationCustomFields(result.domain, result.client, events);
+  persistRuntimeArtifacts(result.outputPaths, state, idMap, events);
+  if (customFieldProvisioning.failed.length > 0 && !flags.force) {
+    return {
+      ...result,
+      state,
+      idMap,
+      customFieldProvisioning,
+      exitCode: 4,
+    };
+  }
+
   for (const action of result.manifest.actions) {
     if (!shouldIncludeAction(action, flags)) continue;
     if (!dependenciesSatisfied(action, state)) continue;
@@ -314,6 +356,7 @@ async function runDevelopersImport(flags, deps = {}) {
     ...result,
     state,
     idMap,
+    customFieldProvisioning,
     exitCode,
   };
 }

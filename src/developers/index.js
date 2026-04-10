@@ -4,6 +4,7 @@ const { runDevelopersAnalyze } = require('./analyze');
 const { runDevelopersPlan } = require('./plan');
 const { runDevelopersImport } = require('./import');
 const { runDevelopersReconcile } = require('./reconcile');
+const { runDevelopersDeleteImported } = require('./delete-imported');
 const { runResolveDevelopersConfigIds } = require('./resolve-config-ids');
 const { runValidateDevelopersConfigTargets } = require('./validate-config-targets');
 
@@ -211,6 +212,30 @@ async function runDevelopersCommand(subcommand, flags, fmt) {
     printOperatorHints(result.preflight, fmt);
     console.log('');
     console.log(`  Report:     ${fmt.dim(result.outputPaths.reconcileReport)}`);
+    console.log(`  Log:        ${fmt.dim(result.outputPaths.log)}`);
+    return result.exitCode;
+  }
+
+  if (subcommand === 'delete-imported') {
+    const result = await runDevelopersDeleteImported(flags);
+    if (result.validationErrors) {
+      console.log(fmt.err('Developers config validation failed'));
+      for (const err of result.validationErrors) console.log(`  - ${err}`);
+      return result.exitCode;
+    }
+    console.log(fmt.header('Developers delete-imported'));
+    console.log('');
+    console.log(`[cleanup] ${result.cleanup.summary.deleted} deleted, ${result.cleanup.summary.skipped} skipped, ${result.cleanup.summary.failed} failed`);
+    if (result.cleanup.failures.length > 0) {
+      console.log('');
+      console.log('  Failures:');
+      for (const failure of result.cleanup.failures.slice(0, 5)) {
+        console.log(fmt.err(`${failure.sourceId}: ${failure.error}`));
+      }
+    }
+    console.log('');
+    console.log(`  State:      ${fmt.dim(result.outputPaths.state)}`);
+    console.log(`  Id map:     ${fmt.dim(result.outputPaths.idMap)}`);
     console.log(`  Log:        ${fmt.dim(result.outputPaths.log)}`);
     return result.exitCode;
   }

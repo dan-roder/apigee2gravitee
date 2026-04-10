@@ -554,6 +554,7 @@ node bin/migrator.js developers analyze   --ir-dir ./ir --config ./config/develo
 node bin/migrator.js developers plan      --ir-dir ./ir --config ./config/developers.config.json --gravitee-token "$GRAVITEE_TOKEN"
 node bin/migrator.js developers import    --ir-dir ./ir --config ./config/developers.config.json --gravitee-token "$GRAVITEE_TOKEN" --resume
 node bin/migrator.js developers reconcile --ir-dir ./ir --config ./config/developers.config.json --gravitee-token "$GRAVITEE_TOKEN"
+node bin/migrator.js developers delete-imported --ir-dir ./ir --config ./config/developers.config.json --gravitee-token "$GRAVITEE_TOKEN"
 ```
 
 `developers import` also supports scoped execution flags:
@@ -588,6 +589,7 @@ node bin/migrator.js developers reconcile --ir-dir ./ir --config ./config/develo
 `developers import` will:
 
 - execute user, application, plan-resolution, subscription, and verification actions in dependency order
+- create any missing Gravitee application custom-field definitions required by source app attributes before app import starts
 - persist action status after each step for resume support
 - persist deterministic source markers on migrated applications so reruns do not depend only on name matching
 - stop on continuity-critical failures and continue through non-critical failures until `--max-errors` is reached
@@ -597,6 +599,13 @@ node bin/migrator.js developers reconcile --ir-dir ./ir --config ./config/develo
 - compare expected users, apps, subscriptions, source markers, and continuity-sensitive fields against live Gravitee state
 - write a structured mismatch report
 - exit non-zero when blocking mismatches remain
+
+`developers delete-imported` will:
+
+- remove subscriptions, then applications, then users for resources this tool can positively identify as imported
+- prefer the saved `state/developers-id-map.json`
+- fall back to conservative source-marker and email lookups when ids are missing
+- leave unrelated Gravitee users and applications untouched
 
 ### Recommended smoke test
 

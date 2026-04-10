@@ -94,6 +94,30 @@ async function testCreateApiPlanNormalizesPlanPayload() {
   assert.deepStrictEqual(called.body.flows, []);
 }
 
+async function testCreateApplicationCustomFieldUsesApplicationsMetadataEndpoint() {
+  const client = new GraviteeClient({ baseUrl: 'https://gravitee.example.com', orgId: 'DEFAULT', envId: 'DEFAULT', token: 'token' });
+  let called = null;
+  client.postOrIgnoreConflict = async (url, body) => {
+    called = { url, body };
+    return { key: body.key || body.name };
+  };
+  await client.createApplicationCustomField('DisplayName');
+  assert.strictEqual(called.url, 'https://gravitee.example.com/management/organizations/DEFAULT/environments/DEFAULT/applications/metadata');
+  assert.strictEqual(called.body.key, 'DisplayName');
+  assert.strictEqual(called.body.format, 'STRING');
+}
+
+async function testDeleteUserUsesExpectedEndpoint() {
+  const client = new GraviteeClient({ baseUrl: 'https://gravitee.example.com', orgId: 'DEFAULT', envId: 'DEFAULT', token: 'token' });
+  let called = null;
+  client.delete = async (url) => {
+    called = url;
+    return { ok: true };
+  };
+  await client.deleteUser('user-1');
+  assert.strictEqual(called, 'https://gravitee.example.com/management/organizations/DEFAULT/users/user-1');
+}
+
 async function run() {
   await testFindUserByEmailFiltersResults();
   await testCreateSubscriptionUsesV2Endpoint();
@@ -103,6 +127,8 @@ async function run() {
   await testFindApiByNameFiltersExactName();
   await testFindPlanResolvesApiByNameWhenIdMissing();
   await testCreateApiPlanNormalizesPlanPayload();
+  await testCreateApplicationCustomFieldUsesApplicationsMetadataEndpoint();
+  await testDeleteUserUsesExpectedEndpoint();
   console.log('test-gravitee-client.js passed');
 }
 
