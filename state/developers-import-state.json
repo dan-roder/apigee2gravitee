@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-04-10T15:55:59.292Z",
-  "updatedAt": "2026-04-10T15:56:14.239Z",
+  "generatedAt": "2026-04-10T16:04:19.391Z",
+  "updatedAt": "2026-04-10T16:04:49.005Z",
   "mode": "plan",
   "summary": {
     "users": 4,
@@ -51,9 +51,9 @@
       "dependencies": [],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "scoped-object-lowercase: PUT http://localhost:8083/management/organizations/DEFAULT/users/62b6c32e-2039-45d9-b6c3-2e203985d990/roles → HTTP 500: {\"http_status\":500} | scoped-object-uppercase: PUT http://localhost:8083/management/organizations/DEFAULT/users/62b6c32e-2039-45d9-b6c3-2e203985d990/roles → HTTP 500: {\"http_status\":500} | flattened-roles-array: PUT http://localhost:8083/management/organizations/DEFAULT/users/62b6c32e-2039-45d9-b6c3-2e203985d990/roles → HTTP 400: {\"message\":\"Cannot deserialize value of type `io.gravitee.rest.api.model.UserReferenceRoleEntity` from Array value (token `JsonToken.START_ARRAY`)\",\"http_status\":400} | roles-wrapper: PUT http://localhost:8083/management/organizations/DEFAULT/users/62b6c32e-2039-45d9-b6c3-2e203985d990/roles → HTTP 400: {\"message\":\"Cannot deserialize value of type `java.lang.String` from Object value (token `JsonToken.START_OBJECT`)\",\"http_status\":400} :: scoped-object-lowercase: PUT http://localhost:8083/management/organizations/DEFAULT/users/62b6c32e-2039-45d9-b6c3-2e203985d990/roles → HTTP 500: {\"http_status\":500} | scoped-object-uppercase: PUT http://localhost:8083/management/organizations/DEFAULT/users/62b6c32e-2039-45d9-b6c3-2e203985d990/roles → HTTP 500: {\"http_status\":500} | flattened-roles-array: PUT http://localhost:8083/management/organizations/DEFAULT/users/62b6c32e-2039-45d9-b6c3-2e203985d990/roles → HTTP 400: {\"message\":\"Cannot deserialize value of type `io.gravitee.rest.api.model.UserReferenceRoleEntity` from Array value (token `JsonToken.START_ARRAY`)\",\"http_status\":400} | roles-wrapper: PUT http://localhost:8083/management/organizations/DEFAULT/users/62b6c32e-2039-45d9-b6c3-2e203985d990/roles → HTTP 400: {\"message\":\"Cannot deserialize value of type `java.lang.String` from Object value (token `JsonToken.START_OBJECT`)\",\"http_status\":400}",
-      "startedAt": "2026-04-10T15:55:59.298Z",
-      "completedAt": "2026-04-10T15:56:14.239Z"
+      "lastError": "scoped-string-lowercase: PUT http://localhost:8083/management/organizations/DEFAULT/users/03b2bb9c-d473-4d5f-b2bb-9cd473ed5f31/roles → HTTP 500: {\"http_status\":500} | scoped-string-uppercase: PUT http://localhost:8083/management/organizations/DEFAULT/users/03b2bb9c-d473-4d5f-b2bb-9cd473ed5f31/roles → HTTP 500: {\"http_status\":500} | scoped-object-lowercase: PUT http://localhost:8083/management/organizations/DEFAULT/users/03b2bb9c-d473-4d5f-b2bb-9cd473ed5f31/roles → HTTP 500: {\"http_status\":500} | scoped-object-uppercase: PUT http://localhost:8083/management/organizations/DEFAULT/users/03b2bb9c-d473-4d5f-b2bb-9cd473ed5f31/roles → HTTP 500: {\"http_status\":500} | flattened-roles-array: PUT http://localhost:8083/management/organizations/DEFAULT/users/03b2bb9c-d473-4d5f-b2bb-9cd473ed5f31/roles → HTTP 400: {\"message\":\"Cannot deserialize value of type `io.gravitee.rest.api.model.UserReferenceRoleEntity` from Array value (token `JsonToken.START_ARRAY`)\",\"http_status\":400} | roles-wrapper: PUT http://localhost:8083/management/organizations/DEFAULT/users/03b2bb9c-d473-4d5f-b2bb-9cd473ed5f31/roles → HTTP 400: {\"message\":\"Cannot deserialize value of type `java.lang.String` from Object value (token `JsonToken.START_OBJECT`)\",\"http_status\":400} :: scoped-string-lowercase: PUT http://localhost:8083/management/organizations/DEFAULT/users/03b2bb9c-d473-4d5f-b2bb-9cd473ed5f31/roles → HTTP 500: {\"http_status\":500} | scoped-string-uppercase: PUT http://localhost:8083/management/organizations/DEFAULT/users/03b2bb9c-d473-4d5f-b2bb-9cd473ed5f31/roles → HTTP 500: {\"http_status\":500} | scoped-object-lowercase: PUT http://localhost:8083/management/organizations/DEFAULT/users/03b2bb9c-d473-4d5f-b2bb-9cd473ed5f31/roles → HTTP 500: {\"http_status\":500} | scoped-object-uppercase: PUT http://localhost:8083/management/organizations/DEFAULT/users/03b2bb9c-d473-4d5f-b2bb-9cd473ed5f31/roles → HTTP 500: {\"http_status\":500} | flattened-roles-array: PUT http://localhost:8083/management/organizations/DEFAULT/users/03b2bb9c-d473-4d5f-b2bb-9cd473ed5f31/roles → HTTP 400: {\"message\":\"Cannot deserialize value of type `io.gravitee.rest.api.model.UserReferenceRoleEntity` from Array value (token `JsonToken.START_ARRAY`)\",\"http_status\":400} | roles-wrapper: PUT http://localhost:8083/management/organizations/DEFAULT/users/03b2bb9c-d473-4d5f-b2bb-9cd473ed5f31/roles → HTTP 400: {\"message\":\"Cannot deserialize value of type `java.lang.String` from Object value (token `JsonToken.START_OBJECT`)\",\"http_status\":400}",
+      "startedAt": "2026-04-10T16:04:19.395Z",
+      "completedAt": "2026-04-10T16:04:49.005Z"
     },
     "VERIFY_USER:danny.rivera@540.co": {
       "actionId": "VERIFY_USER:danny.rivera@540.co",
@@ -68,7 +68,7 @@
       "reconcileHints": {},
       "lastError": "Dependencies were not satisfied: UPSERT_USER:danny.rivera@540.co",
       "startedAt": null,
-      "completedAt": "2026-04-10T15:56:14.239Z"
+      "completedAt": "2026-04-10T16:04:49.005Z"
     },
     "UPSERT_USER:dev1@540.co": {
       "actionId": "UPSERT_USER:dev1@540.co",
@@ -81,7 +81,7 @@
       "reconcileHints": {},
       "lastError": "Dependencies were not satisfied: none",
       "startedAt": null,
-      "completedAt": "2026-04-10T15:56:14.239Z"
+      "completedAt": "2026-04-10T16:04:49.005Z"
     },
     "VERIFY_USER:dev1@540.co": {
       "actionId": "VERIFY_USER:dev1@540.co",
@@ -96,7 +96,7 @@
       "reconcileHints": {},
       "lastError": "Dependencies were not satisfied: UPSERT_USER:dev1@540.co",
       "startedAt": null,
-      "completedAt": "2026-04-10T15:56:14.239Z"
+      "completedAt": "2026-04-10T16:04:49.005Z"
     },
     "UPSERT_USER:dev2@540.co": {
       "actionId": "UPSERT_USER:dev2@540.co",
@@ -109,7 +109,7 @@
       "reconcileHints": {},
       "lastError": "Dependencies were not satisfied: none",
       "startedAt": null,
-      "completedAt": "2026-04-10T15:56:14.239Z"
+      "completedAt": "2026-04-10T16:04:49.005Z"
     },
     "VERIFY_USER:dev2@540.co": {
       "actionId": "VERIFY_USER:dev2@540.co",
@@ -124,7 +124,7 @@
       "reconcileHints": {},
       "lastError": "Dependencies were not satisfied: UPSERT_USER:dev2@540.co",
       "startedAt": null,
-      "completedAt": "2026-04-10T15:56:14.239Z"
+      "completedAt": "2026-04-10T16:04:49.005Z"
     },
     "UPSERT_USER:erik.severson@540.co": {
       "actionId": "UPSERT_USER:erik.severson@540.co",
@@ -137,7 +137,7 @@
       "reconcileHints": {},
       "lastError": "Dependencies were not satisfied: none",
       "startedAt": null,
-      "completedAt": "2026-04-10T15:56:14.239Z"
+      "completedAt": "2026-04-10T16:04:49.005Z"
     },
     "VERIFY_USER:erik.severson@540.co": {
       "actionId": "VERIFY_USER:erik.severson@540.co",
@@ -152,7 +152,7 @@
       "reconcileHints": {},
       "lastError": "Dependencies were not satisfied: UPSERT_USER:erik.severson@540.co",
       "startedAt": null,
-      "completedAt": "2026-04-10T15:56:14.239Z"
+      "completedAt": "2026-04-10T16:04:49.005Z"
     },
     "UPSERT_APPLICATION:dev1@540.co/kanye-dev-app": {
       "actionId": "UPSERT_APPLICATION:dev1@540.co/kanye-dev-app",
