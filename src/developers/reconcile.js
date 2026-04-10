@@ -41,11 +41,15 @@ async function runDevelopersReconcile(flags, deps = {}) {
     if (expectedUserId && target.id !== expectedUserId) {
       mismatches.push({ severity: 'blocker', code: 'USER_ID_MAP_MISMATCH', sourceId: user.sourceId, message: `User ${user.email} resolved to ${target.id} instead of ${expectedUserId}` });
     }
-    const roles = await result.client.getUserRoles(target.id);
-    for (const role of [...result.config.roles.organization, ...result.config.roles.environment]) {
-      if (!roles.has(role)) {
-        mismatches.push({ severity: 'blocker', code: 'USER_ROLE_MISMATCH', sourceId: user.sourceId, message: `User ${user.email} is missing role ${role}` });
+    const roles = await result.client.getUserRoles(target.id, { allowUnsupported: true });
+    if (roles) {
+      for (const role of [...result.config.roles.organization, ...result.config.roles.environment]) {
+        if (!roles.has(role)) {
+          mismatches.push({ severity: 'blocker', code: 'USER_ROLE_MISMATCH', sourceId: user.sourceId, message: `User ${user.email} is missing role ${role}` });
+        }
       }
+    } else {
+      mismatches.push({ severity: 'warning', code: 'USER_ROLE_LOOKUP_UNSUPPORTED', sourceId: user.sourceId, message: `User ${user.email} roles could not be read from this Gravitee deployment` });
     }
     if (user.status !== 'active' && !inactivePolicySatisfied(target, result.config.policies.inactiveDeveloper)) {
       mismatches.push({ severity: 'blocker', code: 'INACTIVE_USER_POLICY_MISMATCH', sourceId: user.sourceId, message: `User ${user.email} does not satisfy inactive policy ${result.config.policies.inactiveDeveloper}` });

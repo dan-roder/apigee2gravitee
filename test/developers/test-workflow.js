@@ -425,6 +425,37 @@ async function testImportRollsBackOrReusesUserAfterRoleAssignmentFailure() {
   });
 }
 
+async function testImportSucceedsWhenUserRoleReadIsUnsupported() {
+  await withTempDir(async (dir) => {
+    const dataDir = path.join(dir, 'data');
+    const irDir = path.join(dir, 'ir');
+    copyDir(FIXTURES_DATA, dataDir);
+    generateIrFromData(dataDir, irDir);
+
+    const client = makeWorkflowClient({
+      overrides: {
+        async getUserRoles(_userId, options = {}) {
+          if (options.allowUnsupported) return null;
+          const err = new Error('GET http://localhost:8083/management/organizations/DEFAULT/users/user-1/roles → HTTP 405');
+          err.status = 405;
+          err.body = { message: 'HTTP 405 Method Not Allowed' };
+          throw err;
+        },
+      },
+    });
+
+    const result = await runDevelopersImport(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json'), 'users-only': true },
+      { config: makeConfig(dir), client },
+    );
+
+    assert.strictEqual(result.exitCode, 0);
+    assert.strictEqual(result.state.actions['UPSERT_USER:alice@example.com'].status, 'SUCCEEDED');
+    assert.strictEqual(result.state.actions['VERIFY_USER:alice@example.com'].status, 'SUCCEEDED');
+    assert.strictEqual(result.state.actions['VERIFY_USER:alice@example.com'].reconcileHints.roleVerification, 'unverified');
+  });
+}
+
 async function testImportReusesExistingResourcesBySourceMarker() {
   await withTempDir(async (dir) => {
     const dataDir = path.join(dir, 'data');
@@ -463,6 +494,39 @@ async function testImportReusesExistingResourcesBySourceMarker() {
       result.idMap.subscriptions['alice@example.com/orders-consumer/abc123def456/orders-product/orders-api::Orders API Key'],
       'sub-existing',
     );
+  });
+}
+
+async function testReconcileWarnsWhenUserRoleReadIsUnsupported() {
+  await withTempDir(async (dir) => {
+    const dataDir = path.join(dir, 'data');
+    const irDir = path.join(dir, 'ir');
+    copyDir(FIXTURES_DATA, dataDir);
+    generateIrFromData(dataDir, irDir);
+
+    const client = makeWorkflowClient({
+      overrides: {
+        async getUserRoles(_userId, options = {}) {
+          if (options.allowUnsupported) return null;
+          const err = new Error('GET http://localhost:8083/management/organizations/DEFAULT/users/user-1/roles → HTTP 405');
+          err.status = 405;
+          err.body = { message: 'HTTP 405 Method Not Allowed' };
+          throw err;
+        },
+      },
+    });
+
+    await runDevelopersImport(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json'), 'users-only': true },
+      { config: makeConfig(dir), client },
+    );
+
+    const reconcile = await runDevelopersReconcile(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json') },
+      { config: makeConfig(dir), client },
+    );
+
+    assert.ok(reconcile.report.mismatches.some((item) => item.code === 'USER_ROLE_LOOKUP_UNSUPPORTED' && item.severity === 'warning'));
   });
 }
 
@@ -736,7 +800,9 @@ async function run() {
   await testImportCreatesResourcesAndResumeSkipsRework();
   await testImportCreatesMissingApplicationCustomFields();
   await testImportRollsBackOrReusesUserAfterRoleAssignmentFailure();
+  await testImportSucceedsWhenUserRoleReadIsUnsupported();
   await testImportReusesExistingResourcesBySourceMarker();
+  await testReconcileWarnsWhenUserRoleReadIsUnsupported();
   await testImportFailsOnContinuityMismatch();
   await testInactiveDeveloperSkipPolicySkipsActions();
   await testReconcileDetectsMismatches();

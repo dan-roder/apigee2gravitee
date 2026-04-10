@@ -107,6 +107,39 @@ async function testCreateApplicationCustomFieldUsesApplicationsMetadataEndpoint(
   assert.strictEqual(called.body.format, 'STRING');
 }
 
+async function testListRolesUsesScopedConfigurationEndpoints() {
+  const client = new GraviteeClient({ baseUrl: 'https://gravitee.example.com', orgId: 'DEFAULT', envId: 'DEFAULT', token: 'token' });
+  const calls = [];
+  client.get = async (url) => {
+    calls.push(url);
+    if (url.endsWith('/configuration/rolescopes/ORGANIZATION/roles')) {
+      return [{ id: 'role-org-1', name: 'USER' }];
+    }
+    if (url.endsWith('/configuration/rolescopes/ENVIRONMENT/roles')) {
+      return [{ id: 'role-env-1', name: 'API_CONSUMER' }];
+    }
+    throw new Error(`Unexpected URL ${url}`);
+  };
+  const roles = await client.listRoles();
+  assert.deepStrictEqual(Array.from(roles).sort(), ['ENVIRONMENT:API_CONSUMER', 'ORGANIZATION:USER']);
+  assert.deepStrictEqual(calls, [
+    'https://gravitee.example.com/management/organizations/DEFAULT/configuration/rolescopes/ORGANIZATION/roles',
+    'https://gravitee.example.com/management/organizations/DEFAULT/configuration/rolescopes/ENVIRONMENT/roles',
+  ]);
+}
+
+async function testGetUserRolesReturnsNullWhenUnsupportedLookupAllowed() {
+  const client = new GraviteeClient({ baseUrl: 'https://gravitee.example.com', orgId: 'DEFAULT', envId: 'DEFAULT', token: 'token' });
+  client.get = async () => {
+    const err = new Error('GET roles → HTTP 405');
+    err.status = 405;
+    err.body = { message: 'Method not allowed' };
+    throw err;
+  };
+  const roles = await client.getUserRoles('user-1', { allowUnsupported: true });
+  assert.strictEqual(roles, null);
+}
+
 async function testDeleteUserUsesExpectedEndpoint() {
   const client = new GraviteeClient({ baseUrl: 'https://gravitee.example.com', orgId: 'DEFAULT', envId: 'DEFAULT', token: 'token' });
   let called = null;
@@ -187,6 +220,8 @@ async function run() {
   await testFindPlanResolvesApiByNameWhenIdMissing();
   await testCreateApiPlanNormalizesPlanPayload();
   await testCreateApplicationCustomFieldUsesApplicationsMetadataEndpoint();
+  await testListRolesUsesScopedConfigurationEndpoints();
+  await testGetUserRolesReturnsNullWhenUnsupportedLookupAllowed();
   await testDeleteUserUsesExpectedEndpoint();
   await testAssignUserRolesFallsBackAcrossPayloadShapes();
   await testAssignUserRolesUsesReferencePayloadWhenRoleIdsProvided();

@@ -347,19 +347,74 @@ class GraviteeClient {
   }
 
   async listRoles() {
-    const body = await this.get(this.orgUrl('/rolescopes'));
     const roles = new Set();
+    const scopeNames = ['ORGANIZATION', 'ENVIRONMENT'];
 
+    for (const scopeName of scopeNames) {
+      try {
+        const items = await this.listRolesByScope(scopeName);
+        for (const role of items) {
+          if (role?.name) roles.add(`${scopeName}:${role.name}`);
+        }
+      } catch (_) {
+        // Fall through to legacy endpoint below if the newer scoped endpoint is unavailable.
+      }
+    }
+
+    if (roles.size > 0) return roles;
+
+    const body = await this.get(this.orgUrl('/rolescopes'));
     const scopes = normalizeCollection(body);
     for (const scope of scopes) {
       for (const role of (scope.roles || [])) {
-        if (role?.scope && role?.name) {
-          roles.add(`${role.scope}:${role.name}`);
-        }
+        if (role?.scope && role?.name) roles.add(`${role.scope}:${role.name}`);
       }
     }
 
     return roles;
+  }
+
+  async listRolesByScope(scope) {
+    const normalizedScope = String(scope || '').toUpperCase();
+    const body = await this.get(this.orgUrl(`/configuration/rolescopes/${normalizedScope}/roles`));
+    return normalizeCollection(body).map((item) => ({
+      ...item,
+      scope: item?.scope || normalizedScope,
+    }));
+  }
+
+  async resolveRoleAssignmentIds(roles = {}, options = {}) {
+    const normalizeRoleName = (value) => {
+      if (typeof value !== 'string') return null;
+      const parts = value.split(':');
+      return (parts.length > 1 ? parts.slice(1).join(':') : value).trim().toUpperCase();
+    };
+    const fallbackRoleName = normalizeRoleName(options.fallbackRoleName || 'USER');
+    const catalogs = {
+      ORGANIZATION: await this.listRolesByScope('ORGANIZATION'),
+      ENVIRONMENT: await this.listRolesByScope('ENVIRONMENT'),
+    };
+
+    const resolveScopeIds = (scopeName, requestedRoles) => {
+      const catalog = catalogs[scopeName] || [];
+      const requestedNames = Array.from(new Set((requestedRoles || []).map(normalizeRoleName).filter(Boolean)));
+      const resolved = [];
+
+      for (const roleName of requestedNames) {
+        const match = catalog.find((item) => String(item?.name || '').toUpperCase() === roleName);
+        if (match?.id) resolved.push(match.id);
+      }
+
+      if (resolved.length > 0) return resolved;
+
+      const fallback = catalog.find((item) => String(item?.name || '').toUpperCase() === fallbackRoleName);
+      return fallback?.id ? [fallback.id] : [];
+    };
+
+    return {
+      organization: resolveScopeIds('ORGANIZATION', roles.organization),
+      environment: resolveScopeIds('ENVIRONMENT', roles.environment),
+    };
   }
 
   async listCustomFields() {
@@ -447,20 +502,27 @@ class GraviteeClient {
     return items.find((item) => item.email === email) || null;
   }
 
-  async getUserRoles(userId) {
-    const body = await this.get(this.orgUrl(`/users/${userId}/roles`));
-    const roles = new Set();
-    const items = normalizeCollection(body);
-    for (const scope of items) {
-      if (scope?.scope && Array.isArray(scope.roles)) {
-        for (const role of scope.roles) {
-          if (role?.name) roles.add(`${scope.scope}:${role.name}`);
+  async getUserRoles(userId, options = {}) {
+    try {
+      const body = await this.get(this.orgUrl(`/users/${userId}/roles`));
+      const roles = new Set();
+      const items = normalizeCollection(body);
+      for (const scope of items) {
+        if (scope?.scope && Array.isArray(scope.roles)) {
+          for (const role of scope.roles) {
+            if (role?.name) roles.add(`${scope.scope}:${role.name}`);
+          }
+        } else if (scope?.scope && scope?.name) {
+          roles.add(`${scope.scope}:${scope.name}`);
         }
-      } else if (scope?.scope && scope?.name) {
-        roles.add(`${scope.scope}:${scope.name}`);
       }
+      return roles;
+    } catch (err) {
+      if (options.allowUnsupported && (err?.status === 404 || err?.status === 405)) {
+        return null;
+      }
+      throw err;
     }
-    return roles;
   }
 
   async createUser(payload) {

@@ -119,6 +119,10 @@ async function ensureUser(action, ctx, client, idMap) {
   let target = null;
   let createdThisRun = false;
   const existing = await client.findUserByEmail(user.email);
+  let resolvedRoleAssignmentIds = {
+    organization: action.payload.roleAssignmentIds?.organization || [],
+    environment: action.payload.roleAssignmentIds?.environment || [],
+  };
 
   if (existing) {
     target = action.operation === 'UPDATE'
@@ -154,11 +158,29 @@ async function ensureUser(action, ctx, client, idMap) {
   const userId = target?.id || target?.userId || null;
   if (userId) {
     try {
+      if (
+        typeof client.resolveRoleAssignmentIds === 'function'
+        && (resolvedRoleAssignmentIds.organization.length === 0 || resolvedRoleAssignmentIds.environment.length === 0)
+      ) {
+        const discoveredRoleIds = await client.resolveRoleAssignmentIds({
+          organization: action.payload.roles.organization,
+          environment: action.payload.roles.environment,
+        }, { fallbackRoleName: 'USER' });
+        resolvedRoleAssignmentIds = {
+          organization: resolvedRoleAssignmentIds.organization.length > 0
+            ? resolvedRoleAssignmentIds.organization
+            : discoveredRoleIds.organization,
+          environment: resolvedRoleAssignmentIds.environment.length > 0
+            ? resolvedRoleAssignmentIds.environment
+            : discoveredRoleIds.environment,
+        };
+      }
+
       await client.assignUserRoles(userId, {
         organization: action.payload.roles.organization,
         environment: action.payload.roles.environment,
-        organizationIds: action.payload.roleAssignmentIds?.organization || [],
-        environmentIds: action.payload.roleAssignmentIds?.environment || [],
+        organizationIds: resolvedRoleAssignmentIds.organization,
+        environmentIds: resolvedRoleAssignmentIds.environment,
       });
     } catch (err) {
       if (createdThisRun && typeof client.deleteUser === 'function') {
@@ -172,7 +194,11 @@ async function ensureUser(action, ctx, client, idMap) {
     }
     setIdMapValue(idMap, action.kind, action.sourceId, userId);
   }
-  return { userId };
+  return {
+    userId,
+    organizationRoleIds: resolvedRoleAssignmentIds.organization,
+    environmentRoleIds: resolvedRoleAssignmentIds.environment,
+  };
 }
 
 async function verifyUser(action, ctx, client, idMap) {
@@ -181,15 +207,18 @@ async function verifyUser(action, ctx, client, idMap) {
   if (!target) {
     throw new Error(`User ${user.email} was not found`);
   }
-  const roles = await client.getUserRoles(target.id);
-  for (const role of [...action.payload.expectedRoles.organization, ...action.payload.expectedRoles.environment]) {
-    if (!roles.has(role)) throw new Error(`User ${user.email} is missing role ${role}`);
+  const roles = await client.getUserRoles(target.id, { allowUnsupported: true });
+  const verification = { roleVerification: roles ? 'verified' : 'unverified' };
+  if (roles) {
+    for (const role of [...action.payload.expectedRoles.organization, ...action.payload.expectedRoles.environment]) {
+      if (!roles.has(role)) throw new Error(`User ${user.email} is missing role ${role}`);
+    }
   }
   if (user.status !== 'active' && !inactivePolicySatisfied(target, action.payload.inactivePolicy)) {
     throw new Error(`User ${user.email} does not satisfy inactive policy ${action.payload.inactivePolicy}`);
   }
   setIdMapValue(idMap, action.kind, action.sourceId, target.id);
-  return { userId: target.id };
+  return { userId: target.id, ...verification };
 }
 
 async function ensureApplication(action, ctx, client, idMap) {
