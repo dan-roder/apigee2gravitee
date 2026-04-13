@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-04-10T17:15:48.466Z",
+  "generatedAt": "2026-04-13T18:43:43.051Z",
   "summary": {
     "users": 4,
     "applications": 4,
     "credentials": 4,
     "subscriptions": 4,
     "actions": 28,
-    "blockers": 0,
-    "warnings": 5,
-    "manualReview": 5,
+    "blockers": 1,
+    "warnings": 3,
+    "manualReview": 3,
     "inactiveDevelopers": 0,
     "continuityRiskCount": 4
   },
@@ -22,16 +22,12 @@
       }
     },
     {
-      "severity": "warning",
-      "code": "ROLE_LOOKUP_FAILED",
-      "message": "Unable to verify roles via Gravitee API: GET http://localhost:8083/management/organizations/DEFAULT/rolescopes → HTTP 404",
-      "details": {}
-    },
-    {
-      "severity": "warning",
-      "code": "ROLE_LOOKUP_UNVERIFIED",
-      "message": "Role configuration could not be auto-verified",
-      "details": {}
+      "severity": "blocker",
+      "code": "ROLE_CONFIGURATION_MISSING",
+      "message": "Configured role ENVIRONMENT:API_CONSUMER was not found in Gravitee",
+      "details": {
+        "roleName": "ENVIRONMENT:API_CONSUMER"
+      }
     },
     {
       "severity": "warning",
@@ -58,18 +54,6 @@
       "details": {
         "actual": "unknown"
       }
-    },
-    {
-      "severity": "warning",
-      "code": "ROLE_LOOKUP_FAILED",
-      "message": "Unable to verify roles via Gravitee API: GET http://localhost:8083/management/organizations/DEFAULT/rolescopes → HTTP 404",
-      "details": {}
-    },
-    {
-      "severity": "warning",
-      "code": "ROLE_LOOKUP_UNVERIFIED",
-      "message": "Role configuration could not be auto-verified",
-      "details": {}
     },
     {
       "severity": "warning",
@@ -141,9 +125,9 @@
     "applications": 4,
     "credentials": 4,
     "subscriptions": 4,
-    "blockers": 0,
-    "warnings": 5,
-    "manualReview": 5,
+    "blockers": 1,
+    "warnings": 3,
+    "manualReview": 3,
     "actions": 28,
     "actionsByKind": {
       "UPSERT_USER": 4,
@@ -176,8 +160,10 @@
     }
   },
   "operatorGuidance": {
-    "nextSuggestedScope": "--users-only",
-    "resumeSafe": true,
-    "blockerCategories": {}
+    "nextSuggestedScope": null,
+    "resumeSafe": false,
+    "blockerCategories": {
+      "ROLE_CONFIGURATION_MISSING": 1
+    }
   }
 }

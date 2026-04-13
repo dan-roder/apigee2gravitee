@@ -1,15 +1,15 @@
 {
-  "generatedAt": "2026-04-10T17:15:48.467Z",
-  "updatedAt": "2026-04-10T17:15:48.849Z",
+  "generatedAt": "2026-04-13T18:43:43.052Z",
+  "updatedAt": "2026-04-13T18:43:43.052Z",
   "mode": "plan",
   "summary": {
     "users": 4,
     "applications": 4,
     "credentials": 4,
     "subscriptions": 4,
-    "blockers": 0,
-    "warnings": 5,
-    "manualReview": 5,
+    "blockers": 1,
+    "warnings": 3,
+    "manualReview": 3,
     "actions": 28,
     "actionsByKind": {
       "UPSERT_USER": 4,
@@ -47,116 +47,112 @@
       "kind": "UPSERT_USER",
       "sourceId": "danny.rivera@540.co",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [],
-      "targetIds": {
-        "userId": "49ce547e-84e5-4b8c-8e54-7e84e50b8c44"
-      },
-      "reconcileHints": {
-        "userId": "49ce547e-84e5-4b8c-8e54-7e84e50b8c44"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-10T17:15:48.472Z",
-      "completedAt": "2026-04-10T17:15:48.730Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "VERIFY_USER:danny.rivera@540.co": {
       "actionId": "VERIFY_USER:danny.rivera@540.co",
       "kind": "VERIFY_USER",
       "sourceId": "danny.rivera@540.co",
       "plannedStatus": "READY",
-      "status": "FAILED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_USER:danny.rivera@540.co"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "GET http://localhost:8083/management/organizations/DEFAULT/users/49ce547e-84e5-4b8c-8e54-7e84e50b8c44/roles → HTTP 405 :: {\"message\":\"HTTP 405 Method Not Allowed\",\"http_status\":405}",
-      "startedAt": "2026-04-10T17:15:48.733Z",
-      "completedAt": "2026-04-10T17:15:48.848Z"
+      "lastError": null,
+      "startedAt": null,
+      "completedAt": null
     },
     "UPSERT_USER:dev1@540.co": {
       "actionId": "UPSERT_USER:dev1@540.co",
       "kind": "UPSERT_USER",
       "sourceId": "dev1@540.co",
       "plannedStatus": "READY",
-      "status": "BLOCKED",
+      "status": "PENDING",
       "dependencies": [],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "Dependencies were not satisfied: none",
+      "lastError": null,
       "startedAt": null,
-      "completedAt": "2026-04-10T17:15:48.849Z"
+      "completedAt": null
     },
     "VERIFY_USER:dev1@540.co": {
       "actionId": "VERIFY_USER:dev1@540.co",
       "kind": "VERIFY_USER",
       "sourceId": "dev1@540.co",
       "plannedStatus": "READY",
-      "status": "BLOCKED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_USER:dev1@540.co"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "Dependencies were not satisfied: UPSERT_USER:dev1@540.co",
+      "lastError": null,
       "startedAt": null,
-      "completedAt": "2026-04-10T17:15:48.849Z"
+      "completedAt": null
     },
     "UPSERT_USER:dev2@540.co": {
       "actionId": "UPSERT_USER:dev2@540.co",
       "kind": "UPSERT_USER",
       "sourceId": "dev2@540.co",
       "plannedStatus": "READY",
-      "status": "BLOCKED",
+      "status": "PENDING",
       "dependencies": [],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "Dependencies were not satisfied: none",
+      "lastError": null,
       "startedAt": null,
-      "completedAt": "2026-04-10T17:15:48.849Z"
+      "completedAt": null
     },
     "VERIFY_USER:dev2@540.co": {
       "actionId": "VERIFY_USER:dev2@540.co",
       "kind": "VERIFY_USER",
       "sourceId": "dev2@540.co",
       "plannedStatus": "READY",
-      "status": "BLOCKED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_USER:dev2@540.co"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "Dependencies were not satisfied: UPSERT_USER:dev2@540.co",
+      "lastError": null,
       "startedAt": null,
-      "completedAt": "2026-04-10T17:15:48.849Z"
+      "completedAt": null
     },
     "UPSERT_USER:erik.severson@540.co": {
       "actionId": "UPSERT_USER:erik.severson@540.co",
       "kind": "UPSERT_USER",
       "sourceId": "erik.severson@540.co",
       "plannedStatus": "READY",
-      "status": "BLOCKED",
+      "status": "PENDING",
       "dependencies": [],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "Dependencies were not satisfied: none",
+      "lastError": null,
       "startedAt": null,
-      "completedAt": "2026-04-10T17:15:48.849Z"
+      "completedAt": null
     },
     "VERIFY_USER:erik.severson@540.co": {
       "actionId": "VERIFY_USER:erik.severson@540.co",
       "kind": "VERIFY_USER",
       "sourceId": "erik.severson@540.co",
       "plannedStatus": "READY",
-      "status": "BLOCKED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_USER:erik.severson@540.co"
       ],
       "targetIds": {},
       "reconcileHints": {},
-      "lastError": "Dependencies were not satisfied: UPSERT_USER:erik.severson@540.co",
+      "lastError": null,
       "startedAt": null,
-      "completedAt": "2026-04-10T17:15:48.849Z"
+      "completedAt": null
     },
     "UPSERT_APPLICATION:dev1@540.co/kanye-dev-app": {
       "actionId": "UPSERT_APPLICATION:dev1@540.co/kanye-dev-app",

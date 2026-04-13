@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-10T17:15:48.464Z",
+  "generatedAt": "2026-04-13T18:43:43.050Z",
   "kind": "DevelopersMigrationManifest",
   "source": {
     "irDir": "/Users/daniel.roder/Sites/apigee2gravitee/ir",
@@ -25,9 +25,9 @@
     "applications": 4,
     "credentials": 4,
     "subscriptions": 4,
-    "blockers": 0,
-    "warnings": 5,
-    "manualReview": 5,
+    "blockers": 1,
+    "warnings": 3,
+    "manualReview": 3,
     "actions": 28,
     "actionsByKind": {
       "UPSERT_USER": 4,
@@ -801,16 +801,12 @@
       }
     },
     {
-      "severity": "warning",
-      "code": "ROLE_LOOKUP_FAILED",
-      "message": "Unable to verify roles via Gravitee API: GET http://localhost:8083/management/organizations/DEFAULT/rolescopes → HTTP 404",
-      "details": {}
-    },
-    {
-      "severity": "warning",
-      "code": "ROLE_LOOKUP_UNVERIFIED",
-      "message": "Role configuration could not be auto-verified",
-      "details": {}
+      "severity": "blocker",
+      "code": "ROLE_CONFIGURATION_MISSING",
+      "message": "Configured role ENVIRONMENT:API_CONSUMER was not found in Gravitee",
+      "details": {
+        "roleName": "ENVIRONMENT:API_CONSUMER"
+      }
     },
     {
       "severity": "warning",
