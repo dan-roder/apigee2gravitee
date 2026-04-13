@@ -225,6 +225,32 @@ async function testAnalyzeFlagsMissingCustomFields() {
   });
 }
 
+async function testAnalyzeFallsBackToUserRoleWhenConfiguredScopeRoleIsMissing() {
+  await withTempDir(async (dir) => {
+    const dataDir = path.join(dir, 'data');
+    const irDir = path.join(dir, 'ir');
+    copyDir(FIXTURES_DATA, dataDir);
+    generateIrFromData(dataDir, irDir);
+
+    const config = makeConfig(dir);
+    const result = await runDevelopersAnalyze(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json') },
+      {
+        config,
+        client: makeClient({
+          async listRoles() {
+            return new Set(['ORGANIZATION:USER', 'ENVIRONMENT:USER']);
+          },
+        }),
+      },
+    );
+
+    assert.strictEqual(result.exitCode, 0);
+    assert.ok(result.preflight.warnings.some((item) => item.code === 'ROLE_CONFIGURATION_FALLBACK'));
+    assert.ok(!result.preflight.blockers.some((item) => item.code === 'ROLE_CONFIGURATION_MISSING'));
+  });
+}
+
 async function testAnalyzeSurfacesAmbiguousProbeAsManualReview() {
   await withTempDir(async (dir) => {
     const dataDir = path.join(dir, 'data');
@@ -358,6 +384,7 @@ async function run() {
   await testAnalyzeFailsWhenSilentUserCreationUnsupported();
   await testAnalyzeFailsWhenTargetIdsAreUnresolved();
   await testAnalyzeFlagsMissingCustomFields();
+  await testAnalyzeFallsBackToUserRoleWhenConfiguredScopeRoleIsMissing();
   await testAnalyzeSurfacesAmbiguousProbeAsManualReview();
   await testMultiProductCredentialCreatesMultipleSubscriptions();
   await testSingleProductCanMapToMultipleTargets();

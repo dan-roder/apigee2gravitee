@@ -7,6 +7,7 @@ const { runDevelopersReconcile } = require('./reconcile');
 const { runDevelopersDeleteImported } = require('./delete-imported');
 const { runResolveDevelopersConfigIds } = require('./resolve-config-ids');
 const { runValidateDevelopersConfigTargets } = require('./validate-config-targets');
+const { runConfigureDevelopersRoles } = require('./configure-roles');
 
 function printFindings(findings, fmt, label) {
   if (findings.length === 0) return;
@@ -41,6 +42,27 @@ function printOperatorHints(preflight, fmt) {
 }
 
 async function runDevelopersCommand(subcommand, flags, fmt) {
+  if (subcommand === 'configure-roles') {
+    const result = await runConfigureDevelopersRoles(flags);
+    if (result.validationErrors) {
+      console.log(fmt.err('Developers config validation failed'));
+      for (const err of result.validationErrors) console.log(`  - ${err}`);
+      return 1;
+    }
+    if (result.error) {
+      console.log(fmt.err(result.error));
+      return result.exitCode;
+    }
+
+    console.log(fmt.header('Developers configure-roles'));
+    console.log('');
+    console.log(`[roles] organization default: ${result.selections.organization.scopedName}`);
+    console.log(`[roles] environment default: ${result.selections.environment.scopedName}`);
+    console.log('');
+    console.log(`  Output:     ${fmt.dim(result.outputPath)}`);
+    return result.exitCode;
+  }
+
   if (subcommand === 'resolve-config-ids') {
     const result = await runResolveDevelopersConfigIds(flags);
     if (result.validationErrors) {

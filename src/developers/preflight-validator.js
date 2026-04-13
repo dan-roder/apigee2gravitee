@@ -182,10 +182,10 @@ async function checkTargetAccess(config, client) {
 
 async function checkRolesAndFields(config, domain, client) {
   const findings = [];
-  const roleSet = new Set([
-    ...(config.roles?.organization || []),
-    ...(config.roles?.environment || []),
-  ]);
+  const configuredRoles = {
+    organization: config.roles?.organization || [],
+    environment: config.roles?.environment || [],
+  };
 
   let targetRoles = null;
   if (typeof client.listRoles === 'function') {
@@ -197,8 +197,21 @@ async function checkRolesAndFields(config, domain, client) {
   }
 
   if (targetRoles) {
-    for (const roleName of Array.from(roleSet).sort()) {
-      if (!targetRoles.has(roleName)) {
+    for (const [scopeKey, roles] of Object.entries(configuredRoles)) {
+      const scopeName = scopeKey.toUpperCase();
+      const fallbackRoleName = `${scopeName}:USER`;
+      const fallbackAvailable = targetRoles.has(fallbackRoleName);
+      for (const roleName of Array.from(new Set(roles)).sort()) {
+        if (targetRoles.has(roleName)) continue;
+        if (fallbackAvailable) {
+          findings.push(issue(
+            'warning',
+            'ROLE_CONFIGURATION_FALLBACK',
+            `Configured role ${roleName} was not found in Gravitee; falling back to ${fallbackRoleName}`,
+            { roleName, fallbackRoleName, scope: scopeName },
+          ));
+          continue;
+        }
         findings.push(issue(
           'blocker',
           'ROLE_CONFIGURATION_MISSING',

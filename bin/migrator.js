@@ -311,6 +311,7 @@ ${fmt.bold('Usage:')}
   migrator developers <subcommand> [options]
 
 ${fmt.bold('Subcommands:')}
+  configure-roles          Fetch live Gravitee roles and write the chosen defaults into config
   resolve-config-ids       Resolve API/plan ids in productPlanMap by name
   validate-config-targets  Check productPlanMap targets against live Gravitee
   analyze                  Validate IR + target compatibility and build a migration manifest
@@ -332,6 +333,7 @@ ${fmt.bold('Common options:')}
   --force                 Continue past blockers where supported
 
 ${fmt.bold('Examples:')}
+  migrator developers configure-roles --config ./config/developers.config.resolved.json --gravitee-token "$GRAVITEE_TOKEN"
   migrator developers resolve-config-ids --config ./config/developers.config.json --gravitee-token "$GRAVITEE_TOKEN"
   migrator developers validate-config-targets --config ./config/developers.config.resolved.json --gravitee-token "$GRAVITEE_TOKEN"
   migrator developers analyze --ir-dir ./ir --config ./config/developers.config.resolved.json --gravitee-token "$GRAVITEE_TOKEN"
