@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-13T18:43:43.050Z",
+  "generatedAt": "2026-04-13T19:15:28.760Z",
   "kind": "DevelopersMigrationManifest",
   "source": {
     "irDir": "/Users/daniel.roder/Sites/apigee2gravitee/ir",
@@ -25,8 +25,8 @@
     "applications": 4,
     "credentials": 4,
     "subscriptions": 4,
-    "blockers": 1,
-    "warnings": 3,
+    "blockers": 0,
+    "warnings": 4,
     "manualReview": 3,
     "actions": 28,
     "actionsByKind": {
@@ -801,11 +801,13 @@
       }
     },
     {
-      "severity": "blocker",
-      "code": "ROLE_CONFIGURATION_MISSING",
-      "message": "Configured role ENVIRONMENT:API_CONSUMER was not found in Gravitee",
+      "severity": "warning",
+      "code": "ROLE_CONFIGURATION_FALLBACK",
+      "message": "Configured role ENVIRONMENT:API_CONSUMER was not found in Gravitee; falling back to ENVIRONMENT:USER",
       "details": {
-        "roleName": "ENVIRONMENT:API_CONSUMER"
+        "roleName": "ENVIRONMENT:API_CONSUMER",
+        "fallbackRoleName": "ENVIRONMENT:USER",
+        "scope": "ENVIRONMENT"
       }
     },
     {

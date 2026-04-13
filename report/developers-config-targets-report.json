@@ -1,132 +1,194 @@
 {
-  "generatedAt": "2026-04-13T19:13:10.445Z",
-  "configPath": "/var/folders/d6/gps0jnn52j7cb_wz9r3p9j7w0000gn/T/developers-validate-config-YBL9vC/developers.config.json",
+  "generatedAt": "2026-04-13T19:15:38.284Z",
+  "configPath": "/Users/daniel.roder/Sites/apigee2gravitee/config/developers.config.resolved.json",
   "summary": {
-    "products": 2,
-    "targets": 3,
-    "validTargets": 0,
-    "blockers": 3,
+    "products": 8,
+    "targets": 10,
+    "validTargets": 10,
+    "blockers": 0,
     "warnings": 0
   },
   "targets": [
     {
-      "productName": "orders-product",
+      "productName": "cats-api-product",
       "targetIndex": 0,
       "configured": {
-        "targetApi": "Orders API",
-        "targetApiId": "api-orders-1",
-        "targetPlan": "Orders API Key",
-        "targetPlanId": "plan-orders-1"
+        "targetApi": "cats-api-7",
+        "targetApiId": "05a5c056-0848-429e-a5c0-560848929e4d",
+        "targetPlan": "API Key Plan",
+        "targetPlanId": "03454fca-5a30-4fff-854f-ca5a308fff1e"
       },
       "resolved": {
-        "apiId": null,
-        "apiName": "Orders API",
-        "planId": null,
-        "planName": "Orders API Key"
+        "apiId": "05a5c056-0848-429e-a5c0-560848929e4d",
+        "apiName": "cats-api-7",
+        "planId": "03454fca-5a30-4fff-854f-ca5a308fff1e",
+        "planName": "API Key Plan"
       },
-      "status": "BLOCKED",
-      "findings": [
-        {
-          "severity": "blocker",
-          "code": "TARGET_API_ID_NOT_FOUND",
-          "productName": "orders-product",
-          "targetIndex": 0,
-          "message": "Configured targetApiId api-orders-1 could not be loaded",
-          "details": {
-            "targetApiId": "api-orders-1",
-            "error": "not found"
-          }
-        }
-      ]
+      "status": "VALID",
+      "findings": []
     },
     {
-      "productName": "misc-product",
+      "productName": "chuck-norris-api-product",
       "targetIndex": 0,
       "configured": {
-        "targetApi": "Hello API",
-        "targetPlan": "Hello API Key"
+        "targetApi": "chuck-norris-api-10",
+        "targetApiId": "bdc40b6a-2084-44c3-840b-6a208474c396",
+        "targetPlan": "API Key Plan",
+        "targetPlanId": "eade57f3-ce18-4858-9e57-f3ce183858d3"
       },
       "resolved": {
-        "apiId": null,
-        "apiName": "Hello API",
-        "planId": null,
-        "planName": "Hello API Key"
+        "apiId": "bdc40b6a-2084-44c3-840b-6a208474c396",
+        "apiName": "chuck-norris-api-10",
+        "planId": "eade57f3-ce18-4858-9e57-f3ce183858d3",
+        "planName": "API Key Plan"
       },
-      "status": "BLOCKED",
-      "findings": [
-        {
-          "severity": "blocker",
-          "code": "TARGET_API_NAME_AMBIGUOUS",
-          "productName": "misc-product",
-          "targetIndex": 0,
-          "message": "API lookup for Hello API was ambiguous",
-          "details": {
-            "targetApi": "Hello API",
-            "error": "Ambiguous Gravitee API match for Hello API"
-          }
-        }
-      ]
+      "status": "VALID",
+      "findings": []
     },
     {
-      "productName": "misc-product",
+      "productName": "dog-breeds-api-product",
+      "targetIndex": 0,
+      "configured": {
+        "targetApi": "dog-breeds-api-6",
+        "targetApiId": "a10d7923-3577-4d42-8d79-2335777d4288",
+        "targetPlan": "API Key Plan",
+        "targetPlanId": "c3770dde-92cc-4549-b70d-de92cca549f7"
+      },
+      "resolved": {
+        "apiId": "a10d7923-3577-4d42-8d79-2335777d4288",
+        "apiName": "dog-breeds-api-6",
+        "planId": "c3770dde-92cc-4549-b70d-de92cca549f7",
+        "planName": "API Key Plan"
+      },
+      "status": "VALID",
+      "findings": []
+    },
+    {
+      "productName": "hogwarts-houses-api-product",
+      "targetIndex": 0,
+      "configured": {
+        "targetApi": "hogwarts-houses-api-8",
+        "targetApiId": "1f6d61b7-26f8-4b6e-ad61-b726f84b6ede",
+        "targetPlan": "API Key Plan",
+        "targetPlanId": "26361641-3e97-4fe0-b616-413e973fe095"
+      },
+      "resolved": {
+        "apiId": "1f6d61b7-26f8-4b6e-ad61-b726f84b6ede",
+        "apiName": "hogwarts-houses-api-8",
+        "planId": "26361641-3e97-4fe0-b616-413e973fe095",
+        "planName": "API Key Plan"
+      },
+      "status": "VALID",
+      "findings": []
+    },
+    {
+      "productName": "kanye-api-product",
+      "targetIndex": 0,
+      "configured": {
+        "targetApi": "kanye-rest-api-5",
+        "targetApiId": "fdc2e4bc-b5a2-409f-82e4-bcb5a2909f6c",
+        "targetPlan": "API Key Plan",
+        "targetPlanId": "7c9ae30e-6522-4d0e-9ae3-0e65229d0ea9"
+      },
+      "resolved": {
+        "apiId": "fdc2e4bc-b5a2-409f-82e4-bcb5a2909f6c",
+        "apiName": "kanye-rest-api-5",
+        "planId": "7c9ae30e-6522-4d0e-9ae3-0e65229d0ea9",
+        "planName": "API Key Plan"
+      },
+      "status": "VALID",
+      "findings": []
+    },
+    {
+      "productName": "misc-api-product",
+      "targetIndex": 0,
+      "configured": {
+        "targetApi": "apigee-hello-api-1",
+        "targetApiId": "a71428c0-322e-4060-9428-c0322ee0604e",
+        "targetPlan": "Keyless Plan",
+        "targetPlanId": "3a7aa1bf-97fd-4fb2-baa1-bf97fd5fb206"
+      },
+      "resolved": {
+        "apiId": "a71428c0-322e-4060-9428-c0322ee0604e",
+        "apiName": "apigee-hello-api-1",
+        "planId": "3a7aa1bf-97fd-4fb2-baa1-bf97fd5fb206",
+        "planName": "Keyless Plan"
+      },
+      "status": "VALID",
+      "findings": []
+    },
+    {
+      "productName": "misc-api-product",
       "targetIndex": 1,
       "configured": {
-        "targetApi": "Facts API",
-        "targetPlan": "Facts API Key"
+        "targetApi": "cat-fact-api-2",
+        "targetApiId": "6b413c68-ff1a-4362-813c-68ff1ac36249",
+        "targetPlan": "Keyless Plan",
+        "targetPlanId": "a2b1366a-b9dc-4b15-b136-6ab9dc0b150e"
       },
       "resolved": {
-        "apiId": null,
-        "apiName": "Facts API",
-        "planId": null,
-        "planName": "Facts API Key"
+        "apiId": "6b413c68-ff1a-4362-813c-68ff1ac36249",
+        "apiName": "cat-fact-api-2",
+        "planId": "a2b1366a-b9dc-4b15-b136-6ab9dc0b150e",
+        "planName": "Keyless Plan"
       },
-      "status": "BLOCKED",
-      "findings": [
-        {
-          "severity": "blocker",
-          "code": "TARGET_API_NAME_NOT_FOUND",
-          "productName": "misc-product",
-          "targetIndex": 1,
-          "message": "No Gravitee API found with name Facts API",
-          "details": {
-            "targetApi": "Facts API"
-          }
-        }
-      ]
+      "status": "VALID",
+      "findings": []
+    },
+    {
+      "productName": "misc-api-product",
+      "targetIndex": 2,
+      "configured": {
+        "targetApi": "car-makes-api-3",
+        "targetApiId": "71bad2fc-80ef-4dce-bad2-fc80efddce4e",
+        "targetPlan": "Keyless Plan",
+        "targetPlanId": "c9ff6b18-4175-4c48-bf6b-1841756c4807"
+      },
+      "resolved": {
+        "apiId": "71bad2fc-80ef-4dce-bad2-fc80efddce4e",
+        "apiName": "car-makes-api-3",
+        "planId": "c9ff6b18-4175-4c48-bf6b-1841756c4807",
+        "planName": "Keyless Plan"
+      },
+      "status": "VALID",
+      "findings": []
+    },
+    {
+      "productName": "wizards-api-product",
+      "targetIndex": 0,
+      "configured": {
+        "targetApi": "wizards-api-9",
+        "targetApiId": "927e2f2b-5bf0-484b-be2f-2b5bf0f84b95",
+        "targetPlan": "API Key Plan",
+        "targetPlanId": "8462f209-3f79-4137-a2f2-093f7931370c"
+      },
+      "resolved": {
+        "apiId": "927e2f2b-5bf0-484b-be2f-2b5bf0f84b95",
+        "apiName": "wizards-api-9",
+        "planId": "8462f209-3f79-4137-a2f2-093f7931370c",
+        "planName": "API Key Plan"
+      },
+      "status": "VALID",
+      "findings": []
+    },
+    {
+      "productName": "yes-or-no-api-product",
+      "targetIndex": 0,
+      "configured": {
+        "targetApi": "yes-or-no-api-4",
+        "targetApiId": "10633c96-086c-466a-a33c-96086c766ae2",
+        "targetPlan": "API Key Plan",
+        "targetPlanId": "af5d6073-fb31-4e6d-9d60-73fb31ee6db6"
+      },
+      "resolved": {
+        "apiId": "10633c96-086c-466a-a33c-96086c766ae2",
+        "apiName": "yes-or-no-api-4",
+        "planId": "af5d6073-fb31-4e6d-9d60-73fb31ee6db6",
+        "planName": "API Key Plan"
+      },
+      "status": "VALID",
+      "findings": []
     }
   ],
-  "findings": [
-    {
-      "severity": "blocker",
-      "code": "TARGET_API_ID_NOT_FOUND",
-      "productName": "orders-product",
-      "targetIndex": 0,
-      "message": "Configured targetApiId api-orders-1 could not be loaded",
-      "details": {
-        "targetApiId": "api-orders-1",
-        "error": "not found"
-      }
-    },
-    {
-      "severity": "blocker",
-      "code": "TARGET_API_NAME_AMBIGUOUS",
-      "productName": "misc-product",
-      "targetIndex": 0,
-      "message": "API lookup for Hello API was ambiguous",
-      "details": {
-        "targetApi": "Hello API",
-        "error": "Ambiguous Gravitee API match for Hello API"
-      }
-    },
-    {
-      "severity": "blocker",
-      "code": "TARGET_API_NAME_NOT_FOUND",
-      "productName": "misc-product",
-      "targetIndex": 1,
-      "message": "No Gravitee API found with name Facts API",
-      "details": {
-        "targetApi": "Facts API"
-      }
-    }
-  ]
+  "findings": []
 }

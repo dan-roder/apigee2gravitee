@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-04-13T18:43:43.051Z",
+  "generatedAt": "2026-04-13T19:15:28.762Z",
   "summary": {
     "users": 4,
     "applications": 4,
     "credentials": 4,
     "subscriptions": 4,
     "actions": 28,
-    "blockers": 1,
-    "warnings": 3,
+    "blockers": 0,
+    "warnings": 4,
     "manualReview": 3,
     "inactiveDevelopers": 0,
     "continuityRiskCount": 4
@@ -22,11 +22,13 @@
       }
     },
     {
-      "severity": "blocker",
-      "code": "ROLE_CONFIGURATION_MISSING",
-      "message": "Configured role ENVIRONMENT:API_CONSUMER was not found in Gravitee",
+      "severity": "warning",
+      "code": "ROLE_CONFIGURATION_FALLBACK",
+      "message": "Configured role ENVIRONMENT:API_CONSUMER was not found in Gravitee; falling back to ENVIRONMENT:USER",
       "details": {
-        "roleName": "ENVIRONMENT:API_CONSUMER"
+        "roleName": "ENVIRONMENT:API_CONSUMER",
+        "fallbackRoleName": "ENVIRONMENT:USER",
+        "scope": "ENVIRONMENT"
       }
     },
     {
@@ -125,8 +127,8 @@
     "applications": 4,
     "credentials": 4,
     "subscriptions": 4,
-    "blockers": 1,
-    "warnings": 3,
+    "blockers": 0,
+    "warnings": 4,
     "manualReview": 3,
     "actions": 28,
     "actionsByKind": {
@@ -160,10 +162,8 @@
     }
   },
   "operatorGuidance": {
-    "nextSuggestedScope": null,
-    "resumeSafe": false,
-    "blockerCategories": {
-      "ROLE_CONFIGURATION_MISSING": 1
-    }
+    "nextSuggestedScope": "--users-only",
+    "resumeSafe": true,
+    "blockerCategories": {}
   }
 }

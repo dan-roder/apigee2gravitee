@@ -9,7 +9,7 @@
       "ORGANIZATION:USER"
     ],
     "environment": [
-      "ENVIRONMENT:API_CONSUMER"
+      "ENVIRONMENT:USER"
     ]
   },
   "policies": {
@@ -29,12 +29,10 @@
   },
   "roleAssignmentIds": {
     "organization": [
-      "976ea151-c24a-4e99-aea1-51c24a5e994b",
       "7d48e98b-c389-449c-88e9-8bc389f49c5c"
     ],
     "environment": [
-      "976ea151-c24a-4e99-aea1-51c24a5e994b",
-      "7d48e98b-c389-449c-88e9-8bc389f49c5c"
+      "703d7d91-a208-45b1-bd7d-91a208f5b1fc"
     ]
   },
   "productPlanMap": {
