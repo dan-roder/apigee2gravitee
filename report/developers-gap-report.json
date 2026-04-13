@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-13T19:15:28.762Z",
+  "generatedAt": "2026-04-13T19:32:17.571Z",
   "summary": {
     "users": 4,
     "applications": 4,
@@ -7,7 +7,7 @@
     "subscriptions": 4,
     "actions": 28,
     "blockers": 0,
-    "warnings": 4,
+    "warnings": 3,
     "manualReview": 3,
     "inactiveDevelopers": 0,
     "continuityRiskCount": 4
@@ -19,16 +19,6 @@
       "message": "OAuth client value preservation is not confirmed as supported",
       "details": {
         "actual": "unknown"
-      }
-    },
-    {
-      "severity": "warning",
-      "code": "ROLE_CONFIGURATION_FALLBACK",
-      "message": "Configured role ENVIRONMENT:API_CONSUMER was not found in Gravitee; falling back to ENVIRONMENT:USER",
-      "details": {
-        "roleName": "ENVIRONMENT:API_CONSUMER",
-        "fallbackRoleName": "ENVIRONMENT:USER",
-        "scope": "ENVIRONMENT"
       }
     },
     {
@@ -128,7 +118,7 @@
     "credentials": 4,
     "subscriptions": 4,
     "blockers": 0,
-    "warnings": 4,
+    "warnings": 3,
     "manualReview": 3,
     "actions": 28,
     "actionsByKind": {

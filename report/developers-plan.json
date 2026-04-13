@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-13T19:15:28.760Z",
+  "generatedAt": "2026-04-13T19:32:17.568Z",
   "kind": "DevelopersMigrationManifest",
   "source": {
     "irDir": "/Users/daniel.roder/Sites/apigee2gravitee/ir",
@@ -26,7 +26,7 @@
     "credentials": 4,
     "subscriptions": 4,
     "blockers": 0,
-    "warnings": 4,
+    "warnings": 3,
     "manualReview": 3,
     "actions": 28,
     "actionsByKind": {
@@ -802,16 +802,6 @@
     },
     {
       "severity": "warning",
-      "code": "ROLE_CONFIGURATION_FALLBACK",
-      "message": "Configured role ENVIRONMENT:API_CONSUMER was not found in Gravitee; falling back to ENVIRONMENT:USER",
-      "details": {
-        "roleName": "ENVIRONMENT:API_CONSUMER",
-        "fallbackRoleName": "ENVIRONMENT:USER",
-        "scope": "ENVIRONMENT"
-      }
-    },
-    {
-      "severity": "warning",
       "code": "CUSTOM_FIELD_MISSING",
       "message": "Required custom field DisplayName was not found in Gravitee",
       "details": {
@@ -850,17 +840,15 @@
             "ORGANIZATION:USER"
           ],
           "environment": [
-            "ENVIRONMENT:API_CONSUMER"
+            "ENVIRONMENT:USER"
           ]
         },
         "roleAssignmentIds": {
           "organization": [
-            "976ea151-c24a-4e99-aea1-51c24a5e994b",
             "7d48e98b-c389-449c-88e9-8bc389f49c5c"
           ],
           "environment": [
-            "976ea151-c24a-4e99-aea1-51c24a5e994b",
-            "7d48e98b-c389-449c-88e9-8bc389f49c5c"
+            "703d7d91-a208-45b1-bd7d-91a208f5b1fc"
           ]
         }
       },
@@ -891,7 +879,7 @@
             "ORGANIZATION:USER"
           ],
           "environment": [
-            "ENVIRONMENT:API_CONSUMER"
+            "ENVIRONMENT:USER"
           ]
         },
         "inactivePolicy": "import-and-revoke"
@@ -925,17 +913,15 @@
             "ORGANIZATION:USER"
           ],
           "environment": [
-            "ENVIRONMENT:API_CONSUMER"
+            "ENVIRONMENT:USER"
           ]
         },
         "roleAssignmentIds": {
           "organization": [
-            "976ea151-c24a-4e99-aea1-51c24a5e994b",
             "7d48e98b-c389-449c-88e9-8bc389f49c5c"
           ],
           "environment": [
-            "976ea151-c24a-4e99-aea1-51c24a5e994b",
-            "7d48e98b-c389-449c-88e9-8bc389f49c5c"
+            "703d7d91-a208-45b1-bd7d-91a208f5b1fc"
           ]
         }
       },
@@ -966,7 +952,7 @@
             "ORGANIZATION:USER"
           ],
           "environment": [
-            "ENVIRONMENT:API_CONSUMER"
+            "ENVIRONMENT:USER"
           ]
         },
         "inactivePolicy": "import-and-revoke"
@@ -1000,17 +986,15 @@
             "ORGANIZATION:USER"
           ],
           "environment": [
-            "ENVIRONMENT:API_CONSUMER"
+            "ENVIRONMENT:USER"
           ]
         },
         "roleAssignmentIds": {
           "organization": [
-            "976ea151-c24a-4e99-aea1-51c24a5e994b",
             "7d48e98b-c389-449c-88e9-8bc389f49c5c"
           ],
           "environment": [
-            "976ea151-c24a-4e99-aea1-51c24a5e994b",
-            "7d48e98b-c389-449c-88e9-8bc389f49c5c"
+            "703d7d91-a208-45b1-bd7d-91a208f5b1fc"
           ]
         }
       },
@@ -1041,7 +1025,7 @@
             "ORGANIZATION:USER"
           ],
           "environment": [
-            "ENVIRONMENT:API_CONSUMER"
+            "ENVIRONMENT:USER"
           ]
         },
         "inactivePolicy": "import-and-revoke"
@@ -1075,17 +1059,15 @@
             "ORGANIZATION:USER"
           ],
           "environment": [
-            "ENVIRONMENT:API_CONSUMER"
+            "ENVIRONMENT:USER"
           ]
         },
         "roleAssignmentIds": {
           "organization": [
-            "976ea151-c24a-4e99-aea1-51c24a5e994b",
             "7d48e98b-c389-449c-88e9-8bc389f49c5c"
           ],
           "environment": [
-            "976ea151-c24a-4e99-aea1-51c24a5e994b",
-            "7d48e98b-c389-449c-88e9-8bc389f49c5c"
+            "703d7d91-a208-45b1-bd7d-91a208f5b1fc"
           ]
         }
       },
@@ -1116,7 +1098,7 @@
             "ORGANIZATION:USER"
           ],
           "environment": [
-            "ENVIRONMENT:API_CONSUMER"
+            "ENVIRONMENT:USER"
           ]
         },
         "inactivePolicy": "import-and-revoke"

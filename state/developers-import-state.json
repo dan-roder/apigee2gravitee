@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-04-13T18:43:43.052Z",
-  "updatedAt": "2026-04-13T18:43:43.052Z",
+  "generatedAt": "2026-04-13T19:32:17.571Z",
+  "updatedAt": "2026-04-13T19:32:17.571Z",
   "mode": "plan",
   "summary": {
     "users": 4,
     "applications": 4,
     "credentials": 4,
     "subscriptions": 4,
-    "blockers": 1,
+    "blockers": 0,
     "warnings": 3,
     "manualReview": 3,
     "actions": 28,
