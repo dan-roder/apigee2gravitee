@@ -20,6 +20,7 @@
     "developers:validate":  "node bin/migrator.js developers validate-config-targets --ir-dir ./ir --config ./config/developers.config.resolved.json --gravitee-token $GRAVITEE_TOKEN",
     "developers:analyze":  "node bin/migrator.js developers analyze --ir-dir ./ir --config ./config/developers.config.resolved.json --gravitee-token $GRAVITEE_TOKEN",
     "developers:import": "node bin/migrator.js developers import --ir-dir ./ir --config ./config/developers.config.resolved.json --gravitee-token $GRAVITEE_TOKEN",
+    "developers:reconcile": "node bin/migrator.js developers reconcile --ir-dir ./ir --config ./config/developers.config.resolved.json --gravitee-token $GRAVITEE_TOKEN",
     "developers:delete":  "node bin/migrator.js developers delete-imported --ir-dir ./ir --config ./config/developers.config.resolved.json --gravitee-token $GRAVITEE_TOKEN",
     "test:developers":  "node test/developers/test-analyze.js && node test/developers/test-workflow.js && node test/developers/test-resolve-config-ids.js && node test/developers/test-validate-config-targets.js && node test/developers/test-configure-roles.js && node test/developers/test-index.js",
     "test:apis":        "node test/apis/test-workflow.js",

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-14T14:42:07.595Z",
+  "generatedAt": "2026-04-14T15:00:38.832Z",
   "kind": "DevelopersMigrationManifest",
   "source": {
     "irDir": "/Users/daniel.roder/Sites/apigee2gravitee/ir",
@@ -44,17 +44,17 @@
     "operatorActions": {
       "byKind": {
         "UPSERT_USER": {
-          "CREATE": 2
+          "REUSE": 2
         },
         "UPSERT_APPLICATION": {
-          "CREATE": 4
+          "REUSE": 4
         },
         "UPSERT_SUBSCRIPTION": {
-          "CREATE": 4
+          "REUSE": 4
         }
       },
       "byOperation": {
-        "CREATE": 10
+        "REUSE": 10
       },
       "blockedReasons": {}
     }
@@ -710,7 +710,7 @@
       "sourceId": "dev1@540.co",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "active",
       "lookup": {
         "email": "dev1@540.co"
@@ -744,7 +744,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "userId": "656d9bbb-9248-4469-ad9b-bb9248a46914"
+      }
     },
     {
       "actionId": "VERIFY_USER:dev1@540.co",
@@ -783,7 +785,7 @@
       "sourceId": "dev2@540.co",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "active",
       "lookup": {
         "email": "dev2@540.co"
@@ -817,7 +819,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "userId": "b8e76258-7cec-44cc-a762-587cecd4ccf9"
+      }
     },
     {
       "actionId": "VERIFY_USER:dev2@540.co",
@@ -858,7 +862,7 @@
         "UPSERT_USER:dev1@540.co"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "approved",
       "lookup": {
         "name": "kanye-dev-app",
@@ -889,7 +893,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "applicationId": "de8769cc-ed4a-47eb-8769-cced4a67ebd3"
+      }
     },
     {
       "actionId": "VERIFY_APPLICATION:dev1@540.co/kanye-dev-app",
@@ -925,7 +931,7 @@
         "UPSERT_USER:dev1@540.co"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "approved",
       "lookup": {
         "name": "wizards-dev-app",
@@ -956,7 +962,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "applicationId": "3aa34dcb-2e79-45f4-a34d-cb2e7975f408"
+      }
     },
     {
       "actionId": "VERIFY_APPLICATION:dev1@540.co/wizards-dev-app",
@@ -992,7 +1000,7 @@
         "UPSERT_USER:dev2@540.co"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "approved",
       "lookup": {
         "name": "chuck-norris-dev-app",
@@ -1023,7 +1031,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "applicationId": "1eaff63f-2872-4932-aff6-3f28720932d7"
+      }
     },
     {
       "actionId": "VERIFY_APPLICATION:dev2@540.co/chuck-norris-dev-app",
@@ -1059,7 +1069,7 @@
         "UPSERT_USER:dev2@540.co"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "approved",
       "lookup": {
         "name": "dog-breeds-dev-app",
@@ -1090,7 +1100,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "applicationId": "3623a370-c3f8-4b81-a3a3-70c3f87b81c6"
+      }
     },
     {
       "actionId": "VERIFY_APPLICATION:dev2@540.co/dog-breeds-dev-app",
@@ -1166,7 +1178,7 @@
         "RESOLVE_PLAN:dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "ACCEPTED",
       "lookup": {
         "applicationSourceId": "dev1@540.co/kanye-dev-app",
@@ -1197,7 +1209,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "subscriptionId": "36116c3f-b408-4362-916c-3fb408e362aa"
+      }
     },
     {
       "actionId": "VERIFY_SUBSCRIPTION:dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan",
@@ -1279,7 +1293,7 @@
         "RESOLVE_PLAN:dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "ACCEPTED",
       "lookup": {
         "applicationSourceId": "dev1@540.co/wizards-dev-app",
@@ -1310,7 +1324,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "subscriptionId": "c9835e65-f638-4552-835e-65f638e5521e"
+      }
     },
     {
       "actionId": "VERIFY_SUBSCRIPTION:dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan",
@@ -1392,7 +1408,7 @@
         "RESOLVE_PLAN:dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "ACCEPTED",
       "lookup": {
         "applicationSourceId": "dev2@540.co/chuck-norris-dev-app",
@@ -1423,7 +1439,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "subscriptionId": "c7b9b99b-4c09-4593-b9b9-9b4c093593ff"
+      }
     },
     {
       "actionId": "VERIFY_SUBSCRIPTION:dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan",
@@ -1505,7 +1523,7 @@
         "RESOLVE_PLAN:dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "ACCEPTED",
       "lookup": {
         "applicationSourceId": "dev2@540.co/dog-breeds-dev-app",
@@ -1536,7 +1554,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "subscriptionId": "c8818b05-d0ac-4b0c-818b-05d0acbb0cb3"
+      }
     },
     {
       "actionId": "VERIFY_SUBSCRIPTION:dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan",

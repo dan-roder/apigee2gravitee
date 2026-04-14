@@ -1,0 +1,24 @@
+{
+  "generatedAt": "2026-04-14T15:00:39.735Z",
+  "summary": {
+    "checkedUsers": 2,
+    "checkedApplications": 4,
+    "checkedSubscriptions": 4,
+    "blockers": 0,
+    "warnings": 2
+  },
+  "mismatches": [
+    {
+      "severity": "warning",
+      "code": "USER_ROLE_LOOKUP_UNSUPPORTED",
+      "sourceId": "dev1@540.co",
+      "message": "User dev1@540.co roles could not be read from this Gravitee deployment"
+    },
+    {
+      "severity": "warning",
+      "code": "USER_ROLE_LOOKUP_UNSUPPORTED",
+      "sourceId": "dev2@540.co",
+      "message": "User dev2@540.co roles could not be read from this Gravitee deployment"
+    }
+  ]
+}
