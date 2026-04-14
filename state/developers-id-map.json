@@ -1,21 +1,19 @@
 {
-  "generatedAt": "2026-04-13T19:32:17.571Z",
+  "generatedAt": "2026-04-14T14:42:07.597Z",
   "users": {
-    "danny.rivera@540.co": null,
-    "dev1@540.co": null,
-    "dev2@540.co": null,
-    "erik.severson@540.co": null
+    "dev1@540.co": "656d9bbb-9248-4469-ad9b-bb9248a46914",
+    "dev2@540.co": "b8e76258-7cec-44cc-a762-587cecd4ccf9"
   },
   "applications": {
-    "dev1@540.co/kanye-dev-app": null,
-    "dev1@540.co/wizards-dev-app": null,
-    "dev2@540.co/chuck-norris-dev-app": null,
-    "dev2@540.co/dog-breeds-dev-app": null
+    "dev1@540.co/kanye-dev-app": "de8769cc-ed4a-47eb-8769-cced4a67ebd3",
+    "dev1@540.co/wizards-dev-app": "3aa34dcb-2e79-45f4-a34d-cb2e7975f408",
+    "dev2@540.co/chuck-norris-dev-app": "1eaff63f-2872-4932-aff6-3f28720932d7",
+    "dev2@540.co/dog-breeds-dev-app": "3623a370-c3f8-4b81-a3a3-70c3f87b81c6"
   },
   "subscriptions": {
-    "dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan": null,
-    "dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan": null,
-    "dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan": null,
-    "dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan": null
+    "dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan": "36116c3f-b408-4362-916c-3fb408e362aa",
+    "dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan": "c9835e65-f638-4552-835e-65f638e5521e",
+    "dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan": "c7b9b99b-4c09-4593-b9b9-9b4c093593ff",
+    "dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan": "c8818b05-d0ac-4b0c-818b-05d0acbb0cb3"
   }
 }

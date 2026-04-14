@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-13T19:32:17.568Z",
+  "generatedAt": "2026-04-14T14:42:07.595Z",
   "kind": "DevelopersMigrationManifest",
   "source": {
     "irDir": "/Users/daniel.roder/Sites/apigee2gravitee/ir",
@@ -21,17 +21,17 @@
     "applicationOwnership": "metadata-only"
   },
   "summary": {
-    "users": 4,
+    "users": 2,
     "applications": 4,
     "credentials": 4,
     "subscriptions": 4,
     "blockers": 0,
-    "warnings": 3,
-    "manualReview": 3,
-    "actions": 28,
+    "warnings": 1,
+    "manualReview": 1,
+    "actions": 24,
     "actionsByKind": {
-      "UPSERT_USER": 4,
-      "VERIFY_USER": 4,
+      "UPSERT_USER": 2,
+      "VERIFY_USER": 2,
       "UPSERT_APPLICATION": 4,
       "VERIFY_APPLICATION": 4,
       "RESOLVE_PLAN": 4,
@@ -39,12 +39,12 @@
       "VERIFY_SUBSCRIPTION": 4
     },
     "actionsByStatus": {
-      "READY": 28
+      "READY": 24
     },
     "operatorActions": {
       "byKind": {
         "UPSERT_USER": {
-          "CREATE": 4
+          "CREATE": 2
         },
         "UPSERT_APPLICATION": {
           "CREATE": 4
@@ -54,34 +54,13 @@
         }
       },
       "byOperation": {
-        "CREATE": 12
+        "CREATE": 10
       },
       "blockedReasons": {}
     }
   },
   "records": {
     "users": [
-      {
-        "sourceId": "danny.rivera@540.co",
-        "kind": "MigratedUser",
-        "developerEmail": "danny.rivera@540.co",
-        "email": "danny.rivera@540.co",
-        "firstName": "Danny",
-        "lastName": "Rivera",
-        "userName": "danny.rivera@540.co",
-        "status": "active",
-        "attributes": [],
-        "customFields": [],
-        "appNames": [],
-        "inactiveImpact": null,
-        "customFieldCandidates": [],
-        "lookupHints": {
-          "email": "danny.rivera@540.co"
-        },
-        "blockers": [],
-        "warnings": [],
-        "manualReviewReasons": []
-      },
       {
         "sourceId": "dev1@540.co",
         "kind": "MigratedUser",
@@ -118,34 +97,13 @@
         "attributes": [],
         "customFields": [],
         "appNames": [
-          "dog-breeds-dev-app",
-          "chuck-norris-dev-app"
+          "chuck-norris-dev-app",
+          "dog-breeds-dev-app"
         ],
         "inactiveImpact": null,
         "customFieldCandidates": [],
         "lookupHints": {
           "email": "dev2@540.co"
-        },
-        "blockers": [],
-        "warnings": [],
-        "manualReviewReasons": []
-      },
-      {
-        "sourceId": "erik.severson@540.co",
-        "kind": "MigratedUser",
-        "developerEmail": "erik.severson@540.co",
-        "email": "erik.severson@540.co",
-        "firstName": "Erik",
-        "lastName": "Severson",
-        "userName": "erik.severson@540.co",
-        "status": "active",
-        "attributes": [],
-        "customFields": [],
-        "appNames": [],
-        "inactiveImpact": null,
-        "customFieldCandidates": [],
-        "lookupHints": {
-          "email": "erik.severson@540.co"
         },
         "blockers": [],
         "warnings": [],
@@ -172,25 +130,11 @@
             "value": ""
           }
         ],
-        "customFields": [
-          {
-            "sourceName": "DisplayName",
-            "targetName": "DisplayName",
-            "value": "kanye-dev-app"
-          },
-          {
-            "sourceName": "Notes",
-            "targetName": "Notes",
-            "value": ""
-          }
-        ],
+        "customFields": [],
         "credentialIds": [
           "dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1"
         ],
-        "customFieldCandidates": [
-          "DisplayName",
-          "Notes"
-        ],
+        "customFieldCandidates": [],
         "ownershipStrategy": "metadata-only",
         "lookupHints": {
           "name": "kanye-dev-app",
@@ -220,25 +164,11 @@
             "value": ""
           }
         ],
-        "customFields": [
-          {
-            "sourceName": "DisplayName",
-            "targetName": "DisplayName",
-            "value": "wizards-dev-app"
-          },
-          {
-            "sourceName": "Notes",
-            "targetName": "Notes",
-            "value": ""
-          }
-        ],
+        "customFields": [],
         "credentialIds": [
           "dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK"
         ],
-        "customFieldCandidates": [
-          "DisplayName",
-          "Notes"
-        ],
+        "customFieldCandidates": [],
         "ownershipStrategy": "metadata-only",
         "lookupHints": {
           "name": "wizards-dev-app",
@@ -268,25 +198,11 @@
             "value": ""
           }
         ],
-        "customFields": [
-          {
-            "sourceName": "DisplayName",
-            "targetName": "DisplayName",
-            "value": "chuck-norris-dev-app"
-          },
-          {
-            "sourceName": "Notes",
-            "targetName": "Notes",
-            "value": ""
-          }
-        ],
+        "customFields": [],
         "credentialIds": [
           "dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3"
         ],
-        "customFieldCandidates": [
-          "DisplayName",
-          "Notes"
-        ],
+        "customFieldCandidates": [],
         "ownershipStrategy": "metadata-only",
         "lookupHints": {
           "name": "chuck-norris-dev-app",
@@ -316,25 +232,11 @@
             "value": ""
           }
         ],
-        "customFields": [
-          {
-            "sourceName": "DisplayName",
-            "targetName": "DisplayName",
-            "value": "dog-breeds-dev-app"
-          },
-          {
-            "sourceName": "Notes",
-            "targetName": "Notes",
-            "value": ""
-          }
-        ],
+        "customFields": [],
         "credentialIds": [
           "dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8"
         ],
-        "customFieldCandidates": [
-          "DisplayName",
-          "Notes"
-        ],
+        "customFieldCandidates": [],
         "ownershipStrategy": "metadata-only",
         "lookupHints": {
           "name": "dog-breeds-dev-app",
@@ -799,98 +701,9 @@
       "details": {
         "actual": "unknown"
       }
-    },
-    {
-      "severity": "warning",
-      "code": "CUSTOM_FIELD_MISSING",
-      "message": "Required custom field DisplayName was not found in Gravitee",
-      "details": {
-        "fieldName": "DisplayName"
-      }
-    },
-    {
-      "severity": "warning",
-      "code": "CUSTOM_FIELD_MISSING",
-      "message": "Required custom field Notes was not found in Gravitee",
-      "details": {
-        "fieldName": "Notes"
-      }
     }
   ],
   "actions": [
-    {
-      "actionId": "UPSERT_USER:danny.rivera@540.co",
-      "kind": "UPSERT_USER",
-      "sourceId": "danny.rivera@540.co",
-      "dependencies": [],
-      "plannedStatus": "READY",
-      "operation": "CREATE",
-      "desiredState": "active",
-      "lookup": {
-        "email": "danny.rivera@540.co"
-      },
-      "payload": {
-        "email": "danny.rivera@540.co",
-        "firstName": "Danny",
-        "lastName": "Rivera",
-        "userName": "danny.rivera@540.co",
-        "customFields": [],
-        "roles": {
-          "organization": [
-            "ORGANIZATION:USER"
-          ],
-          "environment": [
-            "ENVIRONMENT:USER"
-          ]
-        },
-        "roleAssignmentIds": {
-          "organization": [
-            "7d48e98b-c389-449c-88e9-8bc389f49c5c"
-          ],
-          "environment": [
-            "703d7d91-a208-45b1-bd7d-91a208f5b1fc"
-          ]
-        }
-      },
-      "continuity": {},
-      "skipConditions": [],
-      "failConditions": [],
-      "blockers": [],
-      "warnings": [],
-      "manualReviewReasons": [],
-      "targetHint": {}
-    },
-    {
-      "actionId": "VERIFY_USER:danny.rivera@540.co",
-      "kind": "VERIFY_USER",
-      "sourceId": "danny.rivera@540.co",
-      "dependencies": [
-        "UPSERT_USER:danny.rivera@540.co"
-      ],
-      "plannedStatus": "READY",
-      "operation": "VERIFY",
-      "desiredState": null,
-      "lookup": {
-        "email": "danny.rivera@540.co"
-      },
-      "payload": {
-        "expectedRoles": {
-          "organization": [
-            "ORGANIZATION:USER"
-          ],
-          "environment": [
-            "ENVIRONMENT:USER"
-          ]
-        },
-        "inactivePolicy": "import-and-revoke"
-      },
-      "continuity": {},
-      "skipConditions": [],
-      "failConditions": [],
-      "blockers": [],
-      "warnings": [],
-      "manualReviewReasons": []
-    },
     {
       "actionId": "UPSERT_USER:dev1@540.co",
       "kind": "UPSERT_USER",
@@ -1038,79 +851,6 @@
       "manualReviewReasons": []
     },
     {
-      "actionId": "UPSERT_USER:erik.severson@540.co",
-      "kind": "UPSERT_USER",
-      "sourceId": "erik.severson@540.co",
-      "dependencies": [],
-      "plannedStatus": "READY",
-      "operation": "CREATE",
-      "desiredState": "active",
-      "lookup": {
-        "email": "erik.severson@540.co"
-      },
-      "payload": {
-        "email": "erik.severson@540.co",
-        "firstName": "Erik",
-        "lastName": "Severson",
-        "userName": "erik.severson@540.co",
-        "customFields": [],
-        "roles": {
-          "organization": [
-            "ORGANIZATION:USER"
-          ],
-          "environment": [
-            "ENVIRONMENT:USER"
-          ]
-        },
-        "roleAssignmentIds": {
-          "organization": [
-            "7d48e98b-c389-449c-88e9-8bc389f49c5c"
-          ],
-          "environment": [
-            "703d7d91-a208-45b1-bd7d-91a208f5b1fc"
-          ]
-        }
-      },
-      "continuity": {},
-      "skipConditions": [],
-      "failConditions": [],
-      "blockers": [],
-      "warnings": [],
-      "manualReviewReasons": [],
-      "targetHint": {}
-    },
-    {
-      "actionId": "VERIFY_USER:erik.severson@540.co",
-      "kind": "VERIFY_USER",
-      "sourceId": "erik.severson@540.co",
-      "dependencies": [
-        "UPSERT_USER:erik.severson@540.co"
-      ],
-      "plannedStatus": "READY",
-      "operation": "VERIFY",
-      "desiredState": null,
-      "lookup": {
-        "email": "erik.severson@540.co"
-      },
-      "payload": {
-        "expectedRoles": {
-          "organization": [
-            "ORGANIZATION:USER"
-          ],
-          "environment": [
-            "ENVIRONMENT:USER"
-          ]
-        },
-        "inactivePolicy": "import-and-revoke"
-      },
-      "continuity": {},
-      "skipConditions": [],
-      "failConditions": [],
-      "blockers": [],
-      "warnings": [],
-      "manualReviewReasons": []
-    },
-    {
       "actionId": "UPSERT_APPLICATION:dev1@540.co/kanye-dev-app",
       "kind": "UPSERT_APPLICATION",
       "sourceId": "dev1@540.co/kanye-dev-app",
@@ -1139,18 +879,7 @@
             "value": ""
           }
         ],
-        "customFields": [
-          {
-            "sourceName": "DisplayName",
-            "targetName": "DisplayName",
-            "value": "kanye-dev-app"
-          },
-          {
-            "sourceName": "Notes",
-            "targetName": "Notes",
-            "value": ""
-          }
-        ],
+        "customFields": [],
         "ownershipStrategy": "metadata-only",
         "apiKeyMode": "must-be-disabled"
       },
@@ -1217,18 +946,7 @@
             "value": ""
           }
         ],
-        "customFields": [
-          {
-            "sourceName": "DisplayName",
-            "targetName": "DisplayName",
-            "value": "wizards-dev-app"
-          },
-          {
-            "sourceName": "Notes",
-            "targetName": "Notes",
-            "value": ""
-          }
-        ],
+        "customFields": [],
         "ownershipStrategy": "metadata-only",
         "apiKeyMode": "must-be-disabled"
       },
@@ -1295,18 +1013,7 @@
             "value": ""
           }
         ],
-        "customFields": [
-          {
-            "sourceName": "DisplayName",
-            "targetName": "DisplayName",
-            "value": "chuck-norris-dev-app"
-          },
-          {
-            "sourceName": "Notes",
-            "targetName": "Notes",
-            "value": ""
-          }
-        ],
+        "customFields": [],
         "ownershipStrategy": "metadata-only",
         "apiKeyMode": "must-be-disabled"
       },
@@ -1373,18 +1080,7 @@
             "value": ""
           }
         ],
-        "customFields": [
-          {
-            "sourceName": "DisplayName",
-            "targetName": "DisplayName",
-            "value": "dog-breeds-dev-app"
-          },
-          {
-            "sourceName": "Notes",
-            "targetName": "Notes",
-            "value": ""
-          }
-        ],
+        "customFields": [],
         "ownershipStrategy": "metadata-only",
         "apiKeyMode": "must-be-disabled"
       },

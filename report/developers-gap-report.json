@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-04-13T19:32:17.571Z",
+  "generatedAt": "2026-04-14T14:42:07.597Z",
   "summary": {
-    "users": 4,
+    "users": 2,
     "applications": 4,
     "credentials": 4,
     "subscriptions": 4,
-    "actions": 28,
+    "actions": 24,
     "blockers": 0,
-    "warnings": 3,
-    "manualReview": 3,
+    "warnings": 1,
+    "manualReview": 1,
     "inactiveDevelopers": 0,
     "continuityRiskCount": 4
   },
@@ -20,22 +20,6 @@
       "details": {
         "actual": "unknown"
       }
-    },
-    {
-      "severity": "warning",
-      "code": "CUSTOM_FIELD_MISSING",
-      "message": "Required custom field DisplayName was not found in Gravitee",
-      "details": {
-        "fieldName": "DisplayName"
-      }
-    },
-    {
-      "severity": "warning",
-      "code": "CUSTOM_FIELD_MISSING",
-      "message": "Required custom field Notes was not found in Gravitee",
-      "details": {
-        "fieldName": "Notes"
-      }
     }
   ],
   "manualReviewFindings": [
@@ -45,22 +29,6 @@
       "message": "OAuth client value preservation is not confirmed as supported",
       "details": {
         "actual": "unknown"
-      }
-    },
-    {
-      "severity": "warning",
-      "code": "CUSTOM_FIELD_MISSING",
-      "message": "Required custom field DisplayName was not found in Gravitee",
-      "details": {
-        "fieldName": "DisplayName"
-      }
-    },
-    {
-      "severity": "warning",
-      "code": "CUSTOM_FIELD_MISSING",
-      "message": "Required custom field Notes was not found in Gravitee",
-      "details": {
-        "fieldName": "Notes"
       }
     }
   ],
@@ -113,17 +81,17 @@
     "applicationOwnership": "metadata-only"
   },
   "manifestSummary": {
-    "users": 4,
+    "users": 2,
     "applications": 4,
     "credentials": 4,
     "subscriptions": 4,
     "blockers": 0,
-    "warnings": 3,
-    "manualReview": 3,
-    "actions": 28,
+    "warnings": 1,
+    "manualReview": 1,
+    "actions": 24,
     "actionsByKind": {
-      "UPSERT_USER": 4,
-      "VERIFY_USER": 4,
+      "UPSERT_USER": 2,
+      "VERIFY_USER": 2,
       "UPSERT_APPLICATION": 4,
       "VERIFY_APPLICATION": 4,
       "RESOLVE_PLAN": 4,
@@ -131,12 +99,12 @@
       "VERIFY_SUBSCRIPTION": 4
     },
     "actionsByStatus": {
-      "READY": 28
+      "READY": 24
     },
     "operatorActions": {
       "byKind": {
         "UPSERT_USER": {
-          "CREATE": 4
+          "CREATE": 2
         },
         "UPSERT_APPLICATION": {
           "CREATE": 4
@@ -146,7 +114,7 @@
         }
       },
       "byOperation": {
-        "CREATE": 12
+        "CREATE": 10
       },
       "blockedReasons": {}
     }
