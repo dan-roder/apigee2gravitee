@@ -140,6 +140,34 @@ async function testGetUserRolesReturnsNullWhenUnsupportedLookupAllowed() {
   assert.strictEqual(roles, null);
 }
 
+async function testGetUserRolesFallsBackToEnvironmentUserEndpoint() {
+  const client = new GraviteeClient({ baseUrl: 'https://gravitee.example.com', orgId: 'DEFAULT', envId: 'DEFAULT', token: 'token' });
+  const calls = [];
+  client.get = async (url) => {
+    calls.push(url);
+    if (url.endsWith('/management/organizations/DEFAULT/users/user-1/roles')) {
+      const err = new Error('GET roles → HTTP 405');
+      err.status = 405;
+      err.body = { message: 'Method not allowed' };
+      throw err;
+    }
+    if (url.endsWith('/management/organizations/DEFAULT/environments/DEFAULT/users/user-1')) {
+      return {
+        id: 'user-1',
+        organizationRoles: ['USER'],
+        environmentRoles: [{ name: 'API_CONSUMER' }],
+      };
+    }
+    throw new Error(`Unexpected URL ${url}`);
+  };
+  const roles = await client.getUserRoles('user-1', { allowUnsupported: true });
+  assert.deepStrictEqual(Array.from(roles).sort(), ['ENVIRONMENT:API_CONSUMER', 'ORGANIZATION:USER']);
+  assert.deepStrictEqual(calls, [
+    'https://gravitee.example.com/management/organizations/DEFAULT/users/user-1/roles',
+    'https://gravitee.example.com/management/organizations/DEFAULT/environments/DEFAULT/users/user-1',
+  ]);
+}
+
 async function testDeleteUserUsesExpectedEndpoint() {
   const client = new GraviteeClient({ baseUrl: 'https://gravitee.example.com', orgId: 'DEFAULT', envId: 'DEFAULT', token: 'token' });
   let called = null;
@@ -272,6 +300,7 @@ async function run() {
   await testCreateApplicationCustomFieldUsesApplicationsMetadataEndpoint();
   await testListRolesUsesScopedConfigurationEndpoints();
   await testGetUserRolesReturnsNullWhenUnsupportedLookupAllowed();
+  await testGetUserRolesFallsBackToEnvironmentUserEndpoint();
   await testDeleteUserUsesExpectedEndpoint();
   await testAssignUserRolesFallsBackAcrossPayloadShapes();
   await testAssignUserRolesUsesReferencePayloadWhenRoleIdsProvided();

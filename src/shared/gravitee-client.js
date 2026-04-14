@@ -56,6 +56,82 @@ function normalizeCollection(body) {
   return [];
 }
 
+function addScopedRole(roles, scope, roleValue) {
+  const normalizedScope = String(scope || '').trim().toUpperCase();
+  if (!normalizedScope || !['ORGANIZATION', 'ENVIRONMENT', 'API', 'APPLICATION'].includes(normalizedScope)) {
+    return;
+  }
+
+  const addName = (name) => {
+    const normalizedName = String(name || '').trim();
+    if (!normalizedName) return;
+    roles.add(`${normalizedScope}:${normalizedName}`);
+  };
+
+  if (typeof roleValue === 'string') {
+    addName(roleValue.includes(':') ? roleValue.split(':').slice(1).join(':') : roleValue);
+    return;
+  }
+
+  if (roleValue && typeof roleValue === 'object') {
+    if (typeof roleValue.name === 'string') addName(roleValue.name);
+    if (Array.isArray(roleValue.roles)) {
+      for (const item of roleValue.roles) addScopedRole(roles, normalizedScope, item);
+    }
+  }
+}
+
+function collectScopedRolesFromUserPayload(payload, roles = new Set()) {
+  const keyToScope = {
+    organization: 'ORGANIZATION',
+    organizations: 'ORGANIZATION',
+    organizationroles: 'ORGANIZATION',
+    environment: 'ENVIRONMENT',
+    environments: 'ENVIRONMENT',
+    environmentroles: 'ENVIRONMENT',
+    api: 'API',
+    apis: 'API',
+    apiroles: 'API',
+    application: 'APPLICATION',
+    applications: 'APPLICATION',
+    applicationroles: 'APPLICATION',
+  };
+
+  const visit = (value, inheritedScope = null) => {
+    if (!value) return;
+
+    if (Array.isArray(value)) {
+      for (const item of value) visit(item, inheritedScope);
+      return;
+    }
+
+    if (typeof value === 'string') {
+      if (inheritedScope) addScopedRole(roles, inheritedScope, value);
+      return;
+    }
+
+    if (typeof value !== 'object') return;
+
+    const explicitScope = value.scope || value.referenceType || inheritedScope;
+    if (explicitScope && (value.name || value.roles)) {
+      addScopedRole(roles, explicitScope, value);
+    }
+
+    for (const [key, child] of Object.entries(value)) {
+      const normalizedKey = key.replace(/[_-]/g, '').toLowerCase();
+      const scopedKey = keyToScope[normalizedKey] || inheritedScope;
+      if (normalizedKey === 'roles' && explicitScope) {
+        visit(child, explicitScope);
+      } else {
+        visit(child, scopedKey);
+      }
+    }
+  };
+
+  visit(payload, null);
+  return roles;
+}
+
 function classifyApiError(err) {
   if (!err) return 'unknown';
   if (typeof err.status === 'number') {
@@ -518,8 +594,19 @@ class GraviteeClient {
       }
       return roles;
     } catch (err) {
-      if (options.allowUnsupported && (err?.status === 404 || err?.status === 405)) {
-        return null;
+      if (err?.status === 404 || err?.status === 405) {
+        try {
+          const user = await this.get(this.envUrl(`/users/${userId}`));
+          const roles = collectScopedRolesFromUserPayload(user);
+          if (roles.size > 0) return roles;
+        } catch (fallbackErr) {
+          if (!options.allowUnsupported || ![404, 405].includes(fallbackErr?.status)) {
+            throw fallbackErr;
+          }
+        }
+        if (options.allowUnsupported) {
+          return null;
+        }
       }
       throw err;
     }
