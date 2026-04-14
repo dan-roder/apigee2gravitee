@@ -512,13 +512,16 @@ In that sample, `misc-api-product` fronts three Apigee proxies. The config now s
 ### Commands
 
 ```bash
+node bin/migrator.js developers configure-roles --config ./config/developers.config.resolved.json --gravitee-token "$GRAVITEE_TOKEN"
 node bin/migrator.js developers resolve-config-ids --config ./config/developers.config.json --gravitee-token "$GRAVITEE_TOKEN"
 node bin/migrator.js developers validate-config-targets --config ./config/developers.config.resolved.json --gravitee-token "$GRAVITEE_TOKEN"
-node bin/migrator.js developers analyze   --ir-dir ./ir --config ./config/developers.config.json
-node bin/migrator.js developers plan      --ir-dir ./ir --config ./config/developers.config.json
-node bin/migrator.js developers import    --ir-dir ./ir --config ./config/developers.config.json
-node bin/migrator.js developers reconcile --ir-dir ./ir --config ./config/developers.config.json
+node bin/migrator.js developers analyze   --ir-dir ./ir --config ./config/developers.config.resolved.json --gravitee-token "$GRAVITEE_TOKEN"
+node bin/migrator.js developers plan      --ir-dir ./ir --config ./config/developers.config.resolved.json --gravitee-token "$GRAVITEE_TOKEN"
+node bin/migrator.js developers import    --ir-dir ./ir --config ./config/developers.config.resolved.json --gravitee-token "$GRAVITEE_TOKEN"
+node bin/migrator.js developers reconcile --ir-dir ./ir --config ./config/developers.config.resolved.json --gravitee-token "$GRAVITEE_TOKEN"
 ```
+
+Use `developers configure-roles` before a real run to fetch live Gravitee role choices, pick the default organization and environment role for this deployment, and write both the scoped role names and role IDs back into the config.
 
 Use `developers resolve-config-ids` before `developers analyze` when your config still contains placeholder `targetApiId` and `targetPlanId` values. It resolves Gravitee API ids by `targetApi` name and plan ids by `targetPlan` name, then writes a sibling file such as `config/developers.config.resolved.json`.
 
@@ -532,29 +535,48 @@ node bin/migrator.js developers validate-config-targets --config ./config/develo
 node bin/migrator.js developers analyze --ir-dir ./ir --config ./config/developers.config.resolved.json --gravitee-token "$GRAVITEE_TOKEN"
 ```
 
-Recommended first pass:
+Validated execution sequence:
 
 ```bash
+node bin/migrator.js developers configure-roles \
+  --config ./config/developers.config.resolved.json \
+  --gravitee-token "$GRAVITEE_TOKEN"
+
+node bin/migrator.js developers validate-config-targets \
+  --config ./config/developers.config.resolved.json \
+  --gravitee-token "$GRAVITEE_TOKEN"
+
 node bin/migrator.js developers analyze \
   --ir-dir ./ir \
-  --config ./config/developers.config.json \
-  --gravitee-url https://gravitee.example.com \
+  --config ./config/developers.config.resolved.json \
+  --gravitee-token "$GRAVITEE_TOKEN"
+
+node bin/migrator.js developers import \
+  --ir-dir ./ir \
+  --config ./config/developers.config.resolved.json \
   --gravitee-token "$GRAVITEE_TOKEN" \
-  --org DEFAULT \
-  --env DEFAULT \
-  --report-dir ./report \
-  --state-file ./state/developers-import-state.json \
-  --dry-run
-```
+  --users-only
 
-Recommended execution sequence:
+node bin/migrator.js developers import \
+  --ir-dir ./ir \
+  --config ./config/developers.config.resolved.json \
+  --gravitee-token "$GRAVITEE_TOKEN" \
+  --apps-only
 
-```bash
-node bin/migrator.js developers analyze   --ir-dir ./ir --config ./config/developers.config.json --gravitee-token "$GRAVITEE_TOKEN"
-node bin/migrator.js developers plan      --ir-dir ./ir --config ./config/developers.config.json --gravitee-token "$GRAVITEE_TOKEN"
-node bin/migrator.js developers import    --ir-dir ./ir --config ./config/developers.config.json --gravitee-token "$GRAVITEE_TOKEN" --resume
-node bin/migrator.js developers reconcile --ir-dir ./ir --config ./config/developers.config.json --gravitee-token "$GRAVITEE_TOKEN"
-node bin/migrator.js developers delete-imported --ir-dir ./ir --config ./config/developers.config.json --gravitee-token "$GRAVITEE_TOKEN"
+node bin/migrator.js developers import \
+  --ir-dir ./ir \
+  --config ./config/developers.config.resolved.json \
+  --gravitee-token "$GRAVITEE_TOKEN"
+
+node bin/migrator.js developers reconcile \
+  --ir-dir ./ir \
+  --config ./config/developers.config.resolved.json \
+  --gravitee-token "$GRAVITEE_TOKEN"
+
+node bin/migrator.js developers delete-imported \
+  --ir-dir ./ir \
+  --config ./config/developers.config.resolved.json \
+  --gravitee-token "$GRAVITEE_TOKEN"
 ```
 
 `developers import` also supports scoped execution flags:
@@ -589,7 +611,7 @@ node bin/migrator.js developers delete-imported --ir-dir ./ir --config ./config/
 `developers import` will:
 
 - execute user, application, plan-resolution, subscription, and verification actions in dependency order
-- create any missing Gravitee application custom-field definitions required by source app attributes before app import starts
+- skip Apigee developers that do not own any imported applications
 - persist action status after each step for resume support
 - persist deterministic source markers on migrated applications so reruns do not depend only on name matching
 - stop on continuity-critical failures and continue through non-critical failures until `--max-errors` is reached
@@ -612,30 +634,52 @@ node bin/migrator.js developers delete-imported --ir-dir ./ir --config ./config/
 Run the first live pass in a non-production Gravitee environment with a small filtered dataset:
 
 ```bash
-node bin/migrator.js developers analyze \
-  --ir-dir ./ir \
-  --config ./config/developers.config.json \
+node bin/migrator.js developers configure-roles \
+  --config ./config/developers.config.resolved.json \
   --gravitee-token "$GRAVITEE_TOKEN"
 
-node bin/migrator.js developers plan \
+node bin/migrator.js developers validate-config-targets \
+  --config ./config/developers.config.resolved.json \
+  --gravitee-token "$GRAVITEE_TOKEN"
+
+node bin/migrator.js developers analyze \
   --ir-dir ./ir \
-  --config ./config/developers.config.json \
+  --config ./config/developers.config.resolved.json \
   --gravitee-token "$GRAVITEE_TOKEN"
 
 node bin/migrator.js developers import \
   --ir-dir ./ir \
-  --config ./config/developers.config.json \
+  --config ./config/developers.config.resolved.json \
   --gravitee-token "$GRAVITEE_TOKEN" \
-  --resume \
   --users-only
+
+node bin/migrator.js developers import \
+  --ir-dir ./ir \
+  --config ./config/developers.config.resolved.json \
+  --gravitee-token "$GRAVITEE_TOKEN" \
+  --apps-only
+
+node bin/migrator.js developers import \
+  --ir-dir ./ir \
+  --config ./config/developers.config.resolved.json \
+  --gravitee-token "$GRAVITEE_TOKEN"
 
 node bin/migrator.js developers reconcile \
   --ir-dir ./ir \
-  --config ./config/developers.config.json \
+  --config ./config/developers.config.resolved.json \
   --gravitee-token "$GRAVITEE_TOKEN"
 ```
 
-After the user-only pass is clean, repeat with application and subscription scope enabled for the same small sample before attempting a broader import.
+This workflow has now been validated against a local Gravitee instance with:
+
+- `2` imported users
+- `4` imported applications
+- `4` imported subscriptions
+- `0` reconcile blockers
+
+Expected caveat from that run:
+
+- reconcile warns with `USER_ROLE_LOOKUP_UNSUPPORTED` because this Gravitee deployment accepts role assignment writes but does not allow direct user-role reads on the endpoint the tool probes
 
 For a full step-by-step controlled pilot, see [`docs/developers-pilot-runbook.md`](/Users/danielroder/Sites/apigee2gravitee/docs/developers-pilot-runbook.md).
 

@@ -157,6 +157,23 @@ async function runDevelopersDeleteImported(flags, deps = {}) {
       summary.deleted += 1;
       events.push(makeEvent('cleanup.subscription.deleted', target));
     } catch (err) {
+      if (err.status === 405 && typeof result.client.closeOrPauseSubscription === 'function') {
+        try {
+          await result.client.closeOrPauseSubscription({ apiId: target.apiId, subscriptionId: target.subscriptionId, status: 'CLOSED' });
+          idMap.subscriptions[target.sourceId] = null;
+          summary.deleted += 1;
+          events.push(makeEvent('cleanup.subscription.closed', target));
+          continue;
+        } catch (closeErr) {
+          const message = closeErr.body !== undefined
+            ? `${closeErr.message}: ${typeof closeErr.body === 'string' ? closeErr.body : JSON.stringify(closeErr.body)}`
+            : closeErr.message;
+          summary.failed += 1;
+          failures.push({ ...target, error: message });
+          events.push(makeEvent('cleanup.subscription.failed', { ...target, error: message }));
+          continue;
+        }
+      }
       if (err.status === 404) {
         idMap.subscriptions[target.sourceId] = null;
         summary.skipped += 1;
