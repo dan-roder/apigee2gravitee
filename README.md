@@ -12,7 +12,7 @@ Consumes the export produced by [apigee-migrate-tool](https://github.com/apigeec
 |------|--------|-------------|
 | **Tool 1 — Extractor** | ✅ Complete | Reads apigee-migrate-tool `data/` output → writes IR to `ir/` |
 | **Tool 2 — Parser + Mapper** | ✅ Complete | Reads IR → parses proxy AST → emits Gravitee v4 API definition JSON |
-| Developers Migration Tool | 🟡 In active implementation | Migrates Apigee developers, apps, and product approvals into Gravitee users, applications, and subscriptions |
+| Developers Migration Tool | ✅ Validated locally | Migrates Apigee developers, apps, and product approvals into Gravitee users, applications, and subscriptions |
 | Tool 3 — LLM Fallback | 🔲 Planned | Translates JavaScript/JavaCallout policies via Claude API |
 | API Migration Tool | 🟡 In active implementation | Analyzes, imports, and reconciles Gravitee APIs/plans from proxy IR |
 | Tool 5 — Gap Reporter | 🔲 Planned | Generates HTML report of all migration gaps and review items |
@@ -676,12 +676,60 @@ This workflow has now been validated against a local Gravitee instance with:
 - `4` imported applications
 - `4` imported subscriptions
 - `0` reconcile blockers
-
-Expected caveat from that run:
-
-- reconcile warns with `USER_ROLE_LOOKUP_UNSUPPORTED` because this Gravitee deployment accepts role assignment writes but does not allow direct user-role reads on the endpoint the tool probes
+- `0` reconcile warnings
+- successful `developers delete-imported` cleanup for subscriptions, applications, and users
 
 For a full step-by-step controlled pilot, see [`docs/developers-pilot-runbook.md`](/Users/danielroder/Sites/apigee2gravitee/docs/developers-pilot-runbook.md).
+
+### Recommended production sequence
+
+For a production run, treat `configure-roles`, `validate-config-targets`, and `analyze` as required pre-import gates.
+
+```bash
+node bin/migrator.js developers configure-roles \
+  --config ./config/developers.config.resolved.json \
+  --gravitee-token "$GRAVITEE_TOKEN"
+
+node bin/migrator.js developers validate-config-targets \
+  --config ./config/developers.config.resolved.json \
+  --gravitee-token "$GRAVITEE_TOKEN"
+
+node bin/migrator.js developers analyze \
+  --ir-dir ./ir \
+  --config ./config/developers.config.resolved.json \
+  --gravitee-token "$GRAVITEE_TOKEN"
+
+node bin/migrator.js developers import \
+  --ir-dir ./ir \
+  --config ./config/developers.config.resolved.json \
+  --gravitee-token "$GRAVITEE_TOKEN" \
+  --users-only
+
+node bin/migrator.js developers import \
+  --ir-dir ./ir \
+  --config ./config/developers.config.resolved.json \
+  --gravitee-token "$GRAVITEE_TOKEN" \
+  --apps-only
+
+node bin/migrator.js developers import \
+  --ir-dir ./ir \
+  --config ./config/developers.config.resolved.json \
+  --gravitee-token "$GRAVITEE_TOKEN"
+
+node bin/migrator.js developers reconcile \
+  --ir-dir ./ir \
+  --config ./config/developers.config.resolved.json \
+  --gravitee-token "$GRAVITEE_TOKEN"
+```
+
+### Production hardening checklist
+
+- Run the full developers workflow against a non-production Gravitee environment first.
+- Re-run `developers configure-roles` against the target deployment instead of copying local role ids between environments.
+- Re-run `developers validate-config-targets` after any API re-import, because API and plan ids can change across cleanup/recreate cycles.
+- Re-run `developers analyze` immediately before import so the manifest and state reflect the current target.
+- Use `developers delete-imported` to reset a pilot environment between test runs.
+- Treat API-key continuity as verified only when the target deployment and policy require it; the current sample run still reports `OAUTH_CLIENT_CONTINUITY_UNKNOWN`, which is acceptable for this API-key-only dataset but should be revisited for OAuth-heavy migrations.
 
 ### Expected outputs
 
