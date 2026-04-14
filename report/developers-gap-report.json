@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-14T15:00:38.834Z",
+  "generatedAt": "2026-04-14T20:20:36.360Z",
   "summary": {
     "users": 2,
     "applications": 4,
@@ -104,17 +104,17 @@
     "operatorActions": {
       "byKind": {
         "UPSERT_USER": {
-          "REUSE": 2
+          "CREATE": 2
         },
         "UPSERT_APPLICATION": {
-          "REUSE": 4
+          "CREATE": 4
         },
         "UPSERT_SUBSCRIPTION": {
-          "REUSE": 4
+          "CREATE": 4
         }
       },
       "byOperation": {
-        "REUSE": 10
+        "CREATE": 10
       },
       "blockedReasons": {}
     }
