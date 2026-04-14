@@ -741,6 +741,54 @@ async function testDeleteImportedFallsBackToClosingSubscriptionsWhenDeleteUnsupp
   });
 }
 
+async function testDeleteImportedRecoversTargetsFromSavedStateWhenIdMapWasPartiallyCleared() {
+  await withTempDir(async (dir) => {
+    const dataDir = path.join(dir, 'data');
+    const irDir = path.join(dir, 'ir');
+    copyDir(FIXTURES_DATA, dataDir);
+    generateIrFromData(dataDir, irDir);
+
+    const client = makeWorkflowClient({
+      overrides: {
+        async deleteSubscription({ subscriptionId }) {
+          const err = new Error(`DELETE subscription ${subscriptionId} → HTTP 405`);
+          err.status = 405;
+          err.body = { message: 'HTTP 405 Method Not Allowed' };
+          throw err;
+        },
+      },
+    });
+    const config = makeConfig(dir);
+    const configPath = path.join(dir, 'config.json');
+    writeJson(configPath, config);
+
+    const imported = await runDevelopersImport(
+      { 'ir-dir': irDir, 'config': configPath },
+      { config, client },
+    );
+
+    assert.strictEqual(imported.exitCode, 0);
+
+    const idMapPath = path.join(dir, 'state', 'developers-id-map.json');
+    const savedIdMap = readJson(idMapPath);
+    savedIdMap.users['alice@example.com'] = null;
+    savedIdMap.applications['alice@example.com/orders-consumer'] = null;
+    writeJson(idMapPath, savedIdMap);
+
+    const cleaned = await runDevelopersDeleteImported(
+      { 'ir-dir': irDir, 'config': configPath },
+      { config, client },
+    );
+
+    assert.strictEqual(cleaned.exitCode, 0);
+    assert.strictEqual(client._state.counts.deleteApplication, 1);
+    assert.strictEqual(client._state.counts.deleteUser, 1);
+    assert.strictEqual(cleaned.idMap.subscriptions['alice@example.com/orders-consumer/abc123def456/orders-product/orders-api::Orders API Key'], null);
+    assert.strictEqual(cleaned.idMap.applications['alice@example.com/orders-consumer'], null);
+    assert.strictEqual(cleaned.idMap.users['alice@example.com'], null);
+  });
+}
+
 async function testMultiProductImportAndReconcile() {
   await withTempDir(async (dir) => {
     const dataDir = path.join(dir, 'data');
@@ -880,6 +928,7 @@ async function run() {
   await testReconcileDetectsMismatches();
   await testDeleteImportedRemovesSubscriptionsApplicationsAndUsers();
   await testDeleteImportedFallsBackToClosingSubscriptionsWhenDeleteUnsupported();
+  await testDeleteImportedRecoversTargetsFromSavedStateWhenIdMapWasPartiallyCleared();
   await testMultiProductImportAndReconcile();
   await testMultiTargetProductImportAndReconcile();
   await testImportAndReconcileSupportMetadataOnlyOwnership();

@@ -890,7 +890,55 @@ class GraviteeClient {
   }
 
   async closeOrPauseSubscription({ apiId, subscriptionId, status }) {
-    return this.patch(this.v2Url(`/apis/${apiId}/subscriptions/${subscriptionId}`), { status });
+    const attempts = [];
+    const strategies = [
+      {
+        name: 'v4-subscription-patch-status',
+        exec: () => this.patch(this.v2Url(`/apis/${apiId}/subscriptions/${subscriptionId}`), { status }),
+      },
+      {
+        name: 'v4-subscription-put-status',
+        exec: () => this.put(this.v2Url(`/apis/${apiId}/subscriptions/${subscriptionId}`), { status }),
+      },
+      {
+        name: 'v4-subscription-close-endpoint',
+        exec: () => this.post(this.v2Url(`/apis/${apiId}/subscriptions/${subscriptionId}/_close`), {}),
+      },
+      {
+        name: 'v1-subscription-close-endpoint',
+        exec: () => this.post(this.envUrl(`/apis/${apiId}/subscriptions/${subscriptionId}/_close`), {}),
+      },
+      {
+        name: 'v1-subscription-pause-endpoint',
+        exec: () => this.post(this.envUrl(`/apis/${apiId}/subscriptions/${subscriptionId}/_pause`), {}),
+      },
+    ];
+    for (const strategy of strategies) {
+      try {
+        const response = await strategy.exec();
+        if (response && typeof response === 'object' && !Array.isArray(response)) {
+          response._strategy = strategy.name;
+        }
+        return response;
+      } catch (err) {
+        attempts.push({
+          strategy: strategy.name,
+          status: err.status || null,
+          classification: classifyApiError(err),
+          message: err.message,
+          body: err.body,
+        });
+      }
+    }
+    const fallbackError = new Error(
+      attempts
+        .map((attempt) => `${attempt.strategy}: ${attempt.message}${attempt.body ? `: ${typeof attempt.body === 'string' ? attempt.body : JSON.stringify(attempt.body)}` : ''}`)
+        .join(' | ')
+    );
+    fallbackError.name = 'GraviteeSubscriptionCloseCompatibilityError';
+    fallbackError.classification = 'compatibility';
+    fallbackError.attempts = attempts;
+    throw fallbackError;
   }
 
   async probeEndpoint(method, urlStr, body = null, acceptableStatuses = [200, 400, 401, 403, 404, 405, 409, 415, 422]) {

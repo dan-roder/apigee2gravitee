@@ -210,6 +210,56 @@ async function testAssignUserRolesUsesReferencePayloadWhenRoleIdsProvided() {
   assert.strictEqual(response._strategy, 'reference-payload');
 }
 
+async function testCloseOrPauseSubscriptionFallsBackAcrossCompatibilityStrategies() {
+  const client = new GraviteeClient({ baseUrl: 'https://gravitee.example.com', orgId: 'DEFAULT', envId: 'DEFAULT', token: 'token' });
+  const calls = [];
+  client.patch = async (url, body) => {
+    calls.push({ method: 'PATCH', url, body });
+    const err = new Error(`PATCH ${url} → HTTP 405`);
+    err.status = 405;
+    err.body = { message: 'Method not allowed' };
+    throw err;
+  };
+  client.put = async (url, body) => {
+    calls.push({ method: 'PUT', url, body });
+    const err = new Error(`PUT ${url} → HTTP 405`);
+    err.status = 405;
+    err.body = { message: 'Method not allowed' };
+    throw err;
+  };
+  client.post = async (url, body) => {
+    calls.push({ method: 'POST', url, body });
+    if (url.endsWith('/_close')) return { ok: true };
+    const err = new Error(`POST ${url} → HTTP 404`);
+    err.status = 404;
+    err.body = { message: 'Not found' };
+    throw err;
+  };
+  const response = await client.closeOrPauseSubscription({
+    apiId: 'api-1',
+    subscriptionId: 'sub-1',
+    status: 'CLOSED',
+  });
+  assert.deepStrictEqual(calls.slice(0, 3), [
+    {
+      method: 'PATCH',
+      url: 'https://gravitee.example.com/management/v2/organizations/DEFAULT/environments/DEFAULT/apis/api-1/subscriptions/sub-1',
+      body: { status: 'CLOSED' },
+    },
+    {
+      method: 'PUT',
+      url: 'https://gravitee.example.com/management/v2/organizations/DEFAULT/environments/DEFAULT/apis/api-1/subscriptions/sub-1',
+      body: { status: 'CLOSED' },
+    },
+    {
+      method: 'POST',
+      url: 'https://gravitee.example.com/management/v2/organizations/DEFAULT/environments/DEFAULT/apis/api-1/subscriptions/sub-1/_close',
+      body: {},
+    },
+  ]);
+  assert.strictEqual(response._strategy, 'v4-subscription-close-endpoint');
+}
+
 async function run() {
   await testFindUserByEmailFiltersResults();
   await testCreateSubscriptionUsesV2Endpoint();
@@ -225,6 +275,7 @@ async function run() {
   await testDeleteUserUsesExpectedEndpoint();
   await testAssignUserRolesFallsBackAcrossPayloadShapes();
   await testAssignUserRolesUsesReferencePayloadWhenRoleIdsProvided();
+  await testCloseOrPauseSubscriptionFallsBackAcrossCompatibilityStrategies();
   console.log('test-gravitee-client.js passed');
 }
 

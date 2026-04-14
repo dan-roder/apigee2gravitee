@@ -11,7 +11,13 @@ function makeEvent(type, payload = {}) {
   return { ts: new Date().toISOString(), type, ...payload };
 }
 
-async function resolveDeleteTargets(result, idMap) {
+function readActionTargetId(state, actionId, key) {
+  return state?.actions?.[actionId]?.targetIds?.[key]
+    || state?.actions?.[actionId]?.reconcileHints?.[key]
+    || null;
+}
+
+async function resolveDeleteTargets(result, idMap, state) {
   const targets = {
     subscriptions: [],
     applications: [],
@@ -19,12 +25,24 @@ async function resolveDeleteTargets(result, idMap) {
   };
 
   for (const subscription of result.domain.subscriptions) {
-    const subscriptionId = idMap?.subscriptions?.[subscription.sourceId] || null;
-    const applicationId = idMap?.applications?.[`${subscription.developerEmail}/${subscription.appName}`] || null;
+    const subscriptionId = idMap?.subscriptions?.[subscription.sourceId]
+      || readActionTargetId(state, `UPSERT_SUBSCRIPTION:${subscription.sourceId}`, 'subscriptionId')
+      || readActionTargetId(state, `VERIFY_SUBSCRIPTION:${subscription.sourceId}`, 'subscriptionId')
+      || null;
+    const applicationSourceId = `${subscription.developerEmail}/${subscription.appName}`;
+    const applicationId = idMap?.applications?.[applicationSourceId]
+      || readActionTargetId(state, `UPSERT_APPLICATION:${applicationSourceId}`, 'applicationId')
+      || readActionTargetId(state, `VERIFY_APPLICATION:${applicationSourceId}`, 'applicationId')
+      || null;
     const plan = subscription.planMapping && typeof result.client.findPlan === 'function'
       ? await result.client.findPlan(subscription.planMapping).catch(() => null)
       : null;
-    const apiId = plan?.apiId || subscription.planMapping?.targetApiId || null;
+    const apiId = plan?.apiId
+      || readActionTargetId(state, `UPSERT_SUBSCRIPTION:${subscription.sourceId}`, 'apiId')
+      || readActionTargetId(state, `VERIFY_SUBSCRIPTION:${subscription.sourceId}`, 'apiId')
+      || readActionTargetId(state, `RESOLVE_PLAN:${subscription.sourceId}`, 'apiId')
+      || subscription.planMapping?.targetApiId
+      || null;
 
     if (subscriptionId && apiId) {
       targets.subscriptions.push({
@@ -59,7 +77,10 @@ async function resolveDeleteTargets(result, idMap) {
   }
 
   for (const application of result.domain.applications) {
-    const applicationId = idMap?.applications?.[application.sourceId] || null;
+    const applicationId = idMap?.applications?.[application.sourceId]
+      || readActionTargetId(state, `UPSERT_APPLICATION:${application.sourceId}`, 'applicationId')
+      || readActionTargetId(state, `VERIFY_APPLICATION:${application.sourceId}`, 'applicationId')
+      || null;
     if (applicationId) {
       targets.applications.push({
         sourceId: application.sourceId,
@@ -89,7 +110,10 @@ async function resolveDeleteTargets(result, idMap) {
   }
 
   for (const user of result.domain.users) {
-    const userId = idMap?.users?.[user.sourceId] || null;
+    const userId = idMap?.users?.[user.sourceId]
+      || readActionTargetId(state, `UPSERT_USER:${user.sourceId}`, 'userId')
+      || readActionTargetId(state, `VERIFY_USER:${user.sourceId}`, 'userId')
+      || null;
     if (userId) {
       targets.users.push({
         sourceId: user.sourceId,
@@ -131,7 +155,7 @@ async function runDevelopersDeleteImported(flags, deps = {}) {
   const idMap = readJsonIfExists(result.outputPaths.idMap) || result.idMap;
   const state = readJsonIfExists(result.outputPaths.state) || result.state;
   const events = [...result.events];
-  const targets = await resolveDeleteTargets(result, idMap);
+  const targets = await resolveDeleteTargets(result, idMap, state);
 
   const summary = {
     requested: countTargets(targets),
