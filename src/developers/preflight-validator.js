@@ -5,20 +5,7 @@ function issue(severity, code, message, details = {}) {
 }
 
 function collectRequiredCustomFieldNames(domain, config) {
-  const mapped = config.customFieldMap || {};
-  const names = new Set();
-
-  for (const user of domain.users) {
-    for (const attr of user.attributes) {
-      names.add(mapped[attr.name] || attr.name);
-    }
-  }
-  for (const application of domain.applications) {
-    for (const attr of application.attributes) {
-      names.add(mapped[attr.name] || attr.name);
-    }
-  }
-  return Array.from(names).sort();
+  return [];
 }
 
 function checkCompleteness(domain) {

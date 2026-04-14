@@ -248,6 +248,18 @@ function setDeveloperStatus(dataDir, email, status) {
   writeJson(filePath, payload);
 }
 
+function addDeveloperWithoutApps(dataDir, email = 'noapps@example.com') {
+  writeJson(path.join(dataDir, 'devs', email, `${email}.json`), {
+    email,
+    firstName: 'No',
+    lastName: 'Apps',
+    userName: email,
+    status: 'active',
+    apps: [],
+    attributes: [],
+  });
+}
+
 function addBillingProductToData(dataDir) {
   writeJson(path.join(dataDir, 'products', 'billing-product.json'), {
     name: 'billing-product',
@@ -356,7 +368,7 @@ async function testImportCreatesResourcesAndResumeSkipsRework() {
   });
 }
 
-async function testImportCreatesMissingApplicationCustomFields() {
+async function testImportDoesNotRequireApplicationCustomFields() {
   await withTempDir(async (dir) => {
     const dataDir = path.join(dir, 'data');
     const irDir = path.join(dir, 'ir');
@@ -376,8 +388,29 @@ async function testImportCreatesMissingApplicationCustomFields() {
     );
 
     assert.strictEqual(result.exitCode, 0);
-    assert.ok(result.customFieldProvisioning.created.includes('environment'));
-    assert.strictEqual(client._state.counts.createCustomField, 1);
+    assert.deepStrictEqual(result.customFieldProvisioning.requiredFields, []);
+    assert.strictEqual(client._state.counts.createCustomField, 0);
+  });
+}
+
+async function testImportSkipsDevelopersWithoutApps() {
+  await withTempDir(async (dir) => {
+    const dataDir = path.join(dir, 'data');
+    const irDir = path.join(dir, 'ir');
+    copyDir(FIXTURES_DATA, dataDir);
+    addDeveloperWithoutApps(dataDir);
+    generateIrFromData(dataDir, irDir);
+
+    const client = makeWorkflowClient();
+    const result = await runDevelopersImport(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json'), 'users-only': true },
+      { config: makeConfig(dir), client },
+    );
+
+    assert.strictEqual(result.exitCode, 0);
+    assert.ok(!result.manifest.records.users.some((item) => item.email === 'noapps@example.com'));
+    assert.strictEqual(client._state.users.has('noapps@example.com'), false);
+    assert.strictEqual(client._state.counts.createUser, 1);
   });
 }
 
@@ -798,7 +831,8 @@ async function run() {
   await testPlanBuildsExecutableManifest();
   await testPlanFailsWhenCapabilityProbeContradictsConfig();
   await testImportCreatesResourcesAndResumeSkipsRework();
-  await testImportCreatesMissingApplicationCustomFields();
+  await testImportDoesNotRequireApplicationCustomFields();
+  await testImportSkipsDevelopersWithoutApps();
   await testImportRollsBackOrReusesUserAfterRoleAssignmentFailure();
   await testImportSucceedsWhenUserRoleReadIsUnsupported();
   await testImportReusesExistingResourcesBySourceMarker();

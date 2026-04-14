@@ -48,6 +48,18 @@ function generateIrFromData(dataDir, irDir) {
   }
 }
 
+function addDeveloperWithoutApps(dataDir, email = 'noapps@example.com') {
+  writeJson(path.join(dataDir, 'devs', email, `${email}.json`), {
+    email,
+    firstName: 'No',
+    lastName: 'Apps',
+    userName: email,
+    status: 'active',
+    apps: [],
+    attributes: [],
+  });
+}
+
 function makeConfig(baseDir, overrides = {}) {
   const reportDir = path.join(baseDir, 'report');
   const stateFile = path.join(baseDir, 'state', 'developers-import-state.json');
@@ -207,7 +219,7 @@ async function testAnalyzeFailsWhenTargetIdsAreUnresolved() {
   });
 }
 
-async function testAnalyzeFlagsMissingCustomFields() {
+async function testAnalyzeDoesNotRequireCustomFields() {
   await withTempDir(async (dir) => {
     const dataDir = path.join(dir, 'data');
     const irDir = path.join(dir, 'ir');
@@ -221,7 +233,27 @@ async function testAnalyzeFlagsMissingCustomFields() {
     );
 
     assert.strictEqual(result.exitCode, 0);
-    assert.ok(result.preflight.warnings.some((item) => item.code === 'CUSTOM_FIELD_MISSING'));
+    assert.ok(!result.preflight.warnings.some((item) => item.code === 'CUSTOM_FIELD_MISSING'));
+  });
+}
+
+async function testAnalyzeSkipsDevelopersWithoutApps() {
+  await withTempDir(async (dir) => {
+    const dataDir = path.join(dir, 'data');
+    const irDir = path.join(dir, 'ir');
+    copyDir(FIXTURES_DATA, dataDir);
+    addDeveloperWithoutApps(dataDir);
+    generateIrFromData(dataDir, irDir);
+
+    const config = makeConfig(dir);
+    const result = await runDevelopersAnalyze(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json') },
+      { config, client: makeClient() },
+    );
+
+    assert.strictEqual(result.exitCode, 0);
+    assert.strictEqual(result.plan.summary.users, 1);
+    assert.ok(!result.plan.records.users.some((item) => item.email === 'noapps@example.com'));
   });
 }
 
@@ -383,7 +415,8 @@ async function run() {
   await testAnalyzeFailsWhenProductMappingMissing();
   await testAnalyzeFailsWhenSilentUserCreationUnsupported();
   await testAnalyzeFailsWhenTargetIdsAreUnresolved();
-  await testAnalyzeFlagsMissingCustomFields();
+  await testAnalyzeDoesNotRequireCustomFields();
+  await testAnalyzeSkipsDevelopersWithoutApps();
   await testAnalyzeFallsBackToUserRoleWhenConfiguredScopeRoleIsMissing();
   await testAnalyzeSurfacesAmbiguousProbeAsManualReview();
   await testMultiProductCredentialCreatesMultipleSubscriptions();

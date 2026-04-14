@@ -40,13 +40,7 @@ function buildImportContext(result) {
 }
 
 function collectRequiredApplicationCustomFields(domain) {
-  const names = new Set();
-  for (const application of domain.applications) {
-    for (const field of application.customFields || []) {
-      if (field?.targetName) names.add(field.targetName);
-    }
-  }
-  return Array.from(names).sort();
+  return [];
 }
 
 function persistRuntimeArtifacts(outputPaths, state, idMap, events) {

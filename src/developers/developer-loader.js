@@ -62,16 +62,25 @@ function loadDeveloperDomain(irDir, config) {
   const includeApps = new Set(config.filters?.includeApps || []);
   const excludeApps = new Set(config.filters?.excludeApps || []);
 
-  const developers = filterByRules(loader.developers(), includeDevelopers, excludeDevelopers, (developer) => developer.email);
-  const developerEmails = new Set(developers.map((developer) => developer.email));
-  const developerByEmail = new Map(developers.map((developer) => [developer.email, developer]));
+  const candidateDevelopers = filterByRules(loader.developers(), includeDevelopers, excludeDevelopers, (developer) => developer.email);
+  const candidateDeveloperEmails = new Set(candidateDevelopers.map((developer) => developer.email));
 
   const apps = filterByRules(
-    loader.apps().filter((app) => developerEmails.size === 0 || developerEmails.has(app.developer_email)),
+    loader.apps().filter((app) => candidateDeveloperEmails.size === 0 || candidateDeveloperEmails.has(app.developer_email)),
     includeApps,
     excludeApps,
     (app) => `${app.developer_email}/${app.name}`,
   );
+
+  const importedDeveloperEmails = new Set(apps.map((app) => app.developer_email));
+  const developers = candidateDevelopers.filter((developer) => importedDeveloperEmails.has(developer.email));
+  const developerByEmail = new Map(developers.map((developer) => [developer.email, developer]));
+  const appNamesByDeveloper = new Map();
+  for (const app of apps) {
+    const names = appNamesByDeveloper.get(app.developer_email) || [];
+    names.push(app.name);
+    appNamesByDeveloper.set(app.developer_email, names);
+  }
 
   const appIds = new Set(apps.map((app) => `${app.developer_email}/${app.name}`));
 
@@ -100,10 +109,10 @@ function loadDeveloperDomain(irDir, config) {
     userName: developer.user_name || '',
     status: developer.status || 'active',
     attributes: normalizeAttributes(developer.attributes),
-    customFields: mapCustomFields(developer.attributes, config.customFieldMap),
-    appNames: developer.apps || [],
+    customFields: [],
+    appNames: (appNamesByDeveloper.get(developer.email) || []).sort(),
     inactiveImpact: inactiveImpactByDeveloper.get(developer.email) || null,
-    customFieldCandidates: normalizeAttributes(developer.attributes).map((attr) => attr.name),
+    customFieldCandidates: [],
     lookupHints: {
       email: developer.email,
     },
@@ -124,9 +133,9 @@ function loadDeveloperDomain(irDir, config) {
       status: app.status || 'approved',
       callbackUrl: app.callback_url || '',
       attributes: normalizeAttributes(app.attributes),
-      customFields: mapCustomFields(app.attributes, config.customFieldMap),
+      customFields: [],
       credentialIds: (app.credentials || []).map((credential) => `${app.developer_email}/${app.name}/${credential.consumer_key}`),
-      customFieldCandidates: normalizeAttributes(app.attributes).map((attr) => attr.name),
+      customFieldCandidates: [],
       ownershipStrategy: config.capabilities?.applicationOwnership || 'unknown',
       lookupHints: {
         name: app.name,
