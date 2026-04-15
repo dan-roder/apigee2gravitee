@@ -58,6 +58,15 @@ function inferOAuthContinuityRelevant(credential) {
   ));
 }
 
+function inferProtectedSecretMaterial(secretMeta, secretValue, secretRef) {
+  return {
+    protectedSecretMetaPresent: !!secretMeta,
+    protectedSecretValuePresent: typeof secretValue === 'string' && secretValue.length > 0,
+    protectedSecretMaterialPresent: !!secretMeta || (typeof secretValue === 'string' && secretValue.length > 0),
+    protectedSecretRef: secretRef || null,
+  };
+}
+
 function loadDeveloperDomain(irDir, config) {
   const loader = new IrLoader(irDir);
   const manifest = loader.manifest();
@@ -165,6 +174,18 @@ function loadDeveloperDomain(irDir, config) {
       credential.app_name,
       credential.consumer_key,
     );
+    const secretValue = loader.credentialSecret(
+      credential.developer_email,
+      credential.app_name,
+      credential.consumer_key,
+    );
+    const protectedSecret = inferProtectedSecretMaterial(
+      secretMeta,
+      secretValue,
+      credential.consumer_secret_ref
+        ? path.join(irDir, credential.consumer_secret_ref)
+        : null,
+    );
 
     return {
       sourceId: credentialId,
@@ -184,10 +205,10 @@ function loadDeveloperDomain(irDir, config) {
       oauthContinuityRelevant: inferOAuthContinuityRelevant(credential),
       continuity: continuity || null,
       subscriptionIntent: subscriptionIntent || null,
-      protectedSecretMetaPresent: !!secretMeta,
-      protectedSecretRef: credential.consumer_secret_ref
-        ? path.join(irDir, credential.consumer_secret_ref)
-        : null,
+      protectedSecretMetaPresent: protectedSecret.protectedSecretMetaPresent,
+      protectedSecretValuePresent: protectedSecret.protectedSecretValuePresent,
+      protectedSecretMaterialPresent: protectedSecret.protectedSecretMaterialPresent,
+      protectedSecretRef: protectedSecret.protectedSecretRef,
       continuityPolicy: config.policies?.apiKeyContinuity || 'preserve-if-supported',
       oauthContinuityPolicy: config.policies?.oauthClientContinuity || 'preserve-if-supported',
       blockers: [],

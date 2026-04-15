@@ -740,6 +740,8 @@ node bin/migrator.js developers reconcile \
 - Use `developers delete-imported` to reset a pilot environment between test runs.
 - Treat API-key continuity as verified only when the target deployment and policy require it.
 - Use `policies.oauthClientContinuity` only when the extracted credentials actually imply OAuth continuity requirements; API-key-only datasets should no longer emit generic OAuth continuity warnings.
+- Review `report/developers-gap-report.json` for `consumerSecretCount`, `protectedSecretMaterialCount`, and `missingProtectedSecretCount` before production imports when client-secret continuity matters.
+- Treat `OAUTH_CLIENT_SECRET_MANUAL_REVIEW_REQUIRED` as an intentional gate: if OAuth-relevant credentials include protected secret material, this tool will not assume that client-secret continuity is automatically satisfied.
 
 ### Expected outputs
 

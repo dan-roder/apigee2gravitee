@@ -388,13 +388,42 @@ function buildPlan(domain, preflight, config, targetState = {
 
 function buildGapReport(domain, preflight, config, manifest = null) {
   const continuityRisks = domain.credentials
-    .filter((credential) => (credential.continuity?.riskFlags || []).length > 0)
+    .filter((credential) => (
+      (credential.continuity?.riskFlags || []).length > 0
+      || credential.consumerSecretPresent
+      || credential.protectedSecretMaterialPresent
+    ))
     .map((credential) => ({
       credentialId: credential.credentialId,
-      riskFlags: credential.continuity.riskFlags,
+      riskFlags: credential.continuity?.riskFlags || [],
       authHints: credential.authHints,
+      oauthContinuityRelevant: credential.oauthContinuityRelevant,
       consumerSecretPresent: credential.consumerSecretPresent,
+      protectedSecretMetaPresent: credential.protectedSecretMetaPresent,
+      protectedSecretValuePresent: credential.protectedSecretValuePresent,
+      protectedSecretMaterialPresent: credential.protectedSecretMaterialPresent,
+      protectedSecretRef: credential.protectedSecretRef,
+      continuityClass: credential.oauthContinuityRelevant ? 'oauth-client' : 'api-key',
     }));
+
+  const consumerSecretCount = domain.credentials.filter((credential) => credential.consumerSecretPresent).length;
+  const protectedSecretMaterialCount = domain.credentials.filter((credential) => credential.protectedSecretMaterialPresent).length;
+  const oauthRelevantSecretCount = domain.credentials.filter((credential) => (
+    credential.oauthContinuityRelevant && credential.consumerSecretPresent
+  )).length;
+  const missingProtectedSecretCount = domain.credentials.filter((credential) => (
+    credential.consumerSecretPresent && !credential.protectedSecretMaterialPresent
+  )).length;
+  const apiKeyContinuityRiskCount = domain.credentials.filter((credential) => (
+    !credential.oauthContinuityRelevant
+    && ((credential.continuity?.riskFlags || []).includes('API_KEY_CONTINUITY_RISK') || credential.consumerSecretPresent)
+  )).length;
+  const oauthContinuityRiskCount = domain.credentials.filter((credential) => (
+    credential.oauthContinuityRelevant
+  )).length;
+  const oauthSecretManualReviewCount = preflight.findings.filter((finding) => (
+    finding.code === 'OAUTH_CLIENT_SECRET_MANUAL_REVIEW_REQUIRED'
+  )).length;
 
   const manualReviewFindings = preflight.findings.filter(isManualReviewFinding);
 
@@ -411,6 +440,13 @@ function buildGapReport(domain, preflight, config, manifest = null) {
       manualReview: manualReviewFindings.length,
       inactiveDevelopers: domain.users.filter((user) => user.status !== 'active').length,
       continuityRiskCount: continuityRisks.length,
+      apiKeyContinuityRiskCount,
+      oauthContinuityRiskCount,
+      consumerSecretCount,
+      protectedSecretMaterialCount,
+      oauthRelevantSecretCount,
+      missingProtectedSecretCount,
+      oauthSecretManualReviewCount,
     },
     findings: preflight.findings,
     manualReviewFindings,

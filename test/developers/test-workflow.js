@@ -632,6 +632,78 @@ async function testInactiveDeveloperSkipPolicySkipsActions() {
   });
 }
 
+async function testInactiveDeveloperImportDisabledReusesDisabledUser() {
+  await withTempDir(async (dir) => {
+    const dataDir = path.join(dir, 'data');
+    const irDir = path.join(dir, 'ir');
+    copyDir(FIXTURES_DATA, dataDir);
+    setDeveloperStatus(dataDir, 'alice@example.com', 'inactive');
+    generateIrFromData(dataDir, irDir);
+
+    const client = makeWorkflowClient();
+    client._state.users.set('alice@example.com', {
+      id: 'user-disabled',
+      email: 'alice@example.com',
+      enabled: false,
+      status: 'inactive',
+    });
+    client._state.roles.set('user-disabled', new Set(['ORGANIZATION:USER', 'ENVIRONMENT:API_CONSUMER']));
+
+    const config = makeConfig(dir, {
+      policies: {
+        inactiveDeveloper: 'import-disabled',
+        smtp: 'acknowledged',
+        defaultApplication: 'must-be-disabled',
+        apiKeyContinuity: 'preserve-if-supported',
+        existingUser: 'match-and-reuse',
+        existingApplication: 'match-and-reuse',
+        userProvisioning: 'reuse-or-create-silently',
+      },
+    });
+
+    const result = await runDevelopersImport(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json'), 'users-only': true },
+      { config, client },
+    );
+
+    assert.strictEqual(result.exitCode, 0);
+    assert.strictEqual(client._state.counts.createUser, 0);
+    assert.strictEqual(result.idMap.users['alice@example.com'], 'user-disabled');
+    assert.strictEqual(result.state.actions['VERIFY_USER:alice@example.com'].status, 'SUCCEEDED');
+  });
+}
+
+async function testImportFailsWhenApplicationReuseMatchesWrongSourceMarker() {
+  await withTempDir(async (dir) => {
+    const dataDir = path.join(dir, 'data');
+    const irDir = path.join(dir, 'ir');
+    copyDir(FIXTURES_DATA, dataDir);
+    generateIrFromData(dataDir, irDir);
+
+    const client = makeWorkflowClient();
+    client._state.users.set('alice@example.com', { id: 'user-existing', email: 'alice@example.com' });
+    client._state.roles.set('user-existing', new Set(['ORGANIZATION:USER', 'ENVIRONMENT:API_CONSUMER']));
+    client._state.applications.set('app-wrong-source', {
+      id: 'app-wrong-source',
+      name: 'orders-consumer',
+      metadata: { developerEmail: 'alice@example.com', sourceId: 'alice@example.com/some-other-app' },
+    });
+
+    const result = await runDevelopersImport(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json') },
+      { config: makeConfig(dir), client },
+    );
+
+    assert.strictEqual(result.exitCode, 4);
+    assert.strictEqual(result.state.actions['UPSERT_USER:alice@example.com'].status, 'SUCCEEDED');
+    assert.strictEqual(result.state.actions['UPSERT_APPLICATION:alice@example.com/orders-consumer'].status, 'SUCCEEDED');
+    assert.strictEqual(result.state.actions['VERIFY_APPLICATION:alice@example.com/orders-consumer'].status, 'FAILED');
+    assert.ok(
+      String(result.state.actions['VERIFY_APPLICATION:alice@example.com/orders-consumer'].lastError || '').includes('unexpected source marker'),
+    );
+  });
+}
+
 async function testReconcileDetectsMismatches() {
   await withTempDir(async (dir) => {
     const dataDir = path.join(dir, 'data');
@@ -668,6 +740,53 @@ async function testReconcileDetectsMismatches() {
     assert.strictEqual(result.exitCode, 6);
     assert.ok(result.report.mismatches.some((item) => item.code === 'USER_ROLE_MISMATCH'));
     assert.ok(result.report.mismatches.some((item) => item.code === 'SUBSCRIPTION_MISSING'));
+  });
+}
+
+async function testFullDeleteAndReimportCycleRemainsDeterministic() {
+  await withTempDir(async (dir) => {
+    const dataDir = path.join(dir, 'data');
+    const irDir = path.join(dir, 'ir');
+    copyDir(FIXTURES_DATA, dataDir);
+    generateIrFromData(dataDir, irDir);
+
+    const client = makeWorkflowClient();
+    const config = makeConfig(dir);
+
+    const firstImport = await runDevelopersImport(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json') },
+      { config, client },
+    );
+    assert.strictEqual(firstImport.exitCode, 0);
+
+    const firstReconcile = await runDevelopersReconcile(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json') },
+      { config, client },
+    );
+    assert.strictEqual(firstReconcile.exitCode, 0);
+
+    const cleaned = await runDevelopersDeleteImported(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json') },
+      { config, client },
+    );
+    assert.strictEqual(cleaned.exitCode, 0);
+    assert.strictEqual(cleaned.cleanup.report.summary.failed, 0);
+
+    const secondImport = await runDevelopersImport(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json') },
+      { config, client },
+    );
+    assert.strictEqual(secondImport.exitCode, 0);
+    assert.strictEqual(client._state.counts.createUser, 2);
+    assert.strictEqual(client._state.counts.createApplication, 2);
+    assert.strictEqual(client._state.counts.createSubscription, 2);
+
+    const secondReconcile = await runDevelopersReconcile(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json') },
+      { config, client },
+    );
+    assert.strictEqual(secondReconcile.exitCode, 0);
+    assert.strictEqual(secondReconcile.report.summary.blockers, 0);
   });
 }
 
@@ -929,10 +1048,13 @@ async function run() {
   await testReconcileWarnsWhenUserRoleReadIsUnsupported();
   await testImportFailsOnContinuityMismatch();
   await testInactiveDeveloperSkipPolicySkipsActions();
+  await testInactiveDeveloperImportDisabledReusesDisabledUser();
+  await testImportFailsWhenApplicationReuseMatchesWrongSourceMarker();
   await testReconcileDetectsMismatches();
   await testDeleteImportedRemovesSubscriptionsApplicationsAndUsers();
   await testDeleteImportedFallsBackToClosingSubscriptionsWhenDeleteUnsupported();
   await testDeleteImportedRecoversTargetsFromSavedStateWhenIdMapWasPartiallyCleared();
+  await testFullDeleteAndReimportCycleRemainsDeterministic();
   await testMultiProductImportAndReconcile();
   await testMultiTargetProductImportAndReconcile();
   await testImportAndReconcileSupportMetadataOnlyOwnership();

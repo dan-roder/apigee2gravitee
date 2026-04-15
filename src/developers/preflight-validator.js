@@ -96,6 +96,12 @@ function checkCapabilities(config, domain) {
     credential.oauthContinuityRelevant
     || (credential.continuity?.riskFlags || []).some((flag) => String(flag).includes('OAUTH'))
   ));
+  const oauthCredentialsWithProtectedSecret = oauthContinuityCredentials.filter((credential) => (
+    credential.consumerSecretPresent && credential.protectedSecretMaterialPresent
+  ));
+  const oauthCredentialsMissingProtectedSecret = oauthContinuityCredentials.filter((credential) => (
+    credential.consumerSecretPresent && !credential.protectedSecretMaterialPresent
+  ));
 
   if (policies.userProvisioning === 'reuse-or-create-silently' && capabilities.silentUserCreation !== 'supported') {
     findings.push(issue(
@@ -129,6 +135,61 @@ function checkCapabilities(config, domain) {
 
   if (
     policies.oauthClientContinuity === 'fail-if-not-preservable'
+    && oauthCredentialsWithProtectedSecret.length > 0
+  ) {
+    findings.push(issue(
+      'blocker',
+      'OAUTH_CLIENT_SECRET_MANUAL_REVIEW_REQUIRED',
+      'OAuth-relevant credentials include protected client-secret material, but this tool cannot automatically import or verify OAuth client secrets; manual target entry or verification is required',
+      {
+        affectedCredentials: oauthCredentialsWithProtectedSecret.map((credential) => credential.credentialId),
+        protectedSecretRefs: oauthCredentialsWithProtectedSecret
+          .map((credential) => credential.protectedSecretRef)
+          .filter(Boolean),
+      },
+    ));
+  } else if (
+    policies.oauthClientContinuity !== 'accept-regenerated'
+    && oauthCredentialsWithProtectedSecret.length > 0
+  ) {
+    findings.push(issue(
+      'warning',
+      'OAUTH_CLIENT_SECRET_MANUAL_REVIEW_REQUIRED',
+      'OAuth-relevant credentials include protected client-secret material; manual target entry or verification is still required for client-secret continuity',
+      {
+        affectedCredentials: oauthCredentialsWithProtectedSecret.map((credential) => credential.credentialId),
+        protectedSecretRefs: oauthCredentialsWithProtectedSecret
+          .map((credential) => credential.protectedSecretRef)
+          .filter(Boolean),
+      },
+    ));
+  }
+
+  if (
+    policies.oauthClientContinuity === 'fail-if-not-preservable'
+    && oauthCredentialsMissingProtectedSecret.length > 0
+  ) {
+    findings.push(issue(
+      'blocker',
+      'OAUTH_CLIENT_SECRET_MATERIAL_MISSING',
+      'Config requires exact OAuth continuity, but protected client-secret material is missing from the IR for one or more credentials',
+      {
+        affectedCredentials: oauthCredentialsMissingProtectedSecret.map((credential) => credential.credentialId),
+      },
+    ));
+  } else if (oauthCredentialsMissingProtectedSecret.length > 0) {
+    findings.push(issue(
+      'warning',
+      'OAUTH_CLIENT_SECRET_MATERIAL_MISSING',
+      'Some OAuth-relevant credentials indicate a client secret, but protected secret material is missing from the IR',
+      {
+        affectedCredentials: oauthCredentialsMissingProtectedSecret.map((credential) => credential.credentialId),
+      },
+    ));
+  }
+
+  if (
+    policies.oauthClientContinuity === 'fail-if-not-preservable'
     && capabilities.oauthClientValuePreservation !== 'supported'
     && oauthContinuityCredentials.length > 0
   ) {
@@ -139,6 +200,9 @@ function checkCapabilities(config, domain) {
       {
         actual: capabilities.oauthClientValuePreservation || 'unknown',
         affectedCredentials: oauthContinuityCredentials.map((credential) => credential.credentialId),
+        credentialsWithProtectedSecretMaterial: oauthContinuityCredentials
+          .filter((credential) => credential.protectedSecretMaterialPresent)
+          .map((credential) => credential.credentialId),
       },
     ));
   } else if (capabilities.oauthClientValuePreservation !== 'supported' && oauthContinuityCredentials.length > 0) {
@@ -149,6 +213,9 @@ function checkCapabilities(config, domain) {
       {
         actual: capabilities.oauthClientValuePreservation || 'unknown',
         affectedCredentials: oauthContinuityCredentials.map((credential) => credential.credentialId),
+        credentialsWithProtectedSecretMaterial: oauthContinuityCredentials
+          .filter((credential) => credential.protectedSecretMaterialPresent)
+          .map((credential) => credential.credentialId),
       },
     ));
   }

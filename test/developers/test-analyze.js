@@ -60,6 +60,13 @@ function addDeveloperWithoutApps(dataDir, email = 'noapps@example.com') {
   });
 }
 
+function setCredentialAuthHints(irDir, developerEmail, appName, consumerKey, authHints) {
+  const credentialPath = path.join(irDir, 'credentials', developerEmail, appName, `${consumerKey}.json`);
+  const credential = readJson(credentialPath);
+  credential.auth_hints = authHints;
+  writeJson(credentialPath, credential);
+}
+
 function makeConfig(baseDir, overrides = {}) {
   const reportDir = path.join(baseDir, 'report');
   const stateFile = path.join(baseDir, 'state', 'developers-import-state.json');
@@ -281,10 +288,7 @@ async function testAnalyzeWarnsAboutOAuthContinuityWhenOAuthHintsExist() {
     const irDir = path.join(dir, 'ir');
     copyDir(FIXTURES_DATA, dataDir);
     generateIrFromData(dataDir, irDir);
-    const credentialPath = path.join(irDir, 'credentials', 'alice@example.com', 'orders-consumer', 'abc123def456.json');
-    const credential = readJson(credentialPath);
-    credential.auth_hints = ['OAUTH2'];
-    writeJson(credentialPath, credential);
+    setCredentialAuthHints(irDir, 'alice@example.com', 'orders-consumer', 'abc123def456', ['OAUTH2']);
 
     const config = makeConfig(dir);
     const result = await runDevelopersAnalyze(
@@ -294,6 +298,153 @@ async function testAnalyzeWarnsAboutOAuthContinuityWhenOAuthHintsExist() {
 
     assert.strictEqual(result.exitCode, 0);
     assert.ok(result.preflight.warnings.some((item) => item.code === 'OAUTH_CLIENT_CONTINUITY_UNKNOWN'));
+    assert.ok(result.preflight.warnings.some((item) => item.code === 'OAUTH_CLIENT_SECRET_MANUAL_REVIEW_REQUIRED'));
+  });
+}
+
+async function testAnalyzeBlocksWhenOAuthSecretMaterialIsMissingAndExactContinuityIsRequired() {
+  await withTempDir(async (dir) => {
+    const dataDir = path.join(dir, 'data');
+    const irDir = path.join(dir, 'ir');
+    copyDir(FIXTURES_DATA, dataDir);
+    generateIrFromData(dataDir, irDir);
+    setCredentialAuthHints(irDir, 'alice@example.com', 'orders-consumer', 'abc123def456', ['OAUTH2']);
+
+    fs.rmSync(path.join(
+      irDir,
+      '_protected',
+      'credentials',
+      'alice@example.com',
+      'orders-consumer',
+      'abc123def456',
+      'consumer-secret.txt',
+    ));
+    fs.rmSync(path.join(
+      irDir,
+      '_protected',
+      'credentials',
+      'alice@example.com',
+      'orders-consumer',
+      'abc123def456',
+      'secret-meta.json',
+    ));
+
+    const config = makeConfig(dir, {
+      policies: {
+        inactiveDeveloper: 'import-and-revoke',
+        smtp: 'acknowledged',
+        defaultApplication: 'must-be-disabled',
+        apiKeyContinuity: 'preserve-if-supported',
+        oauthClientContinuity: 'fail-if-not-preservable',
+        existingUser: 'match-and-reuse',
+        existingApplication: 'match-and-reuse',
+        userProvisioning: 'reuse-or-create-silently',
+      },
+      capabilities: {
+        silentUserCreation: 'supported',
+        apiKeyValuePreservation: 'unknown',
+        oauthClientValuePreservation: 'supported',
+        applicationOwnership: 'metadata-only',
+      },
+    });
+    const result = await runDevelopersAnalyze(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json') },
+      { config, client: makeClient() },
+    );
+
+    assert.strictEqual(result.exitCode, 3);
+    assert.ok(result.preflight.blockers.some((item) => item.code === 'OAUTH_CLIENT_SECRET_MATERIAL_MISSING'));
+  });
+}
+
+async function testAnalyzeBlocksWhenOAuthSecretManualReviewWouldBeRequiredUnderExactContinuityPolicy() {
+  await withTempDir(async (dir) => {
+    const dataDir = path.join(dir, 'data');
+    const irDir = path.join(dir, 'ir');
+    copyDir(FIXTURES_DATA, dataDir);
+    generateIrFromData(dataDir, irDir);
+    setCredentialAuthHints(irDir, 'alice@example.com', 'orders-consumer', 'abc123def456', ['OAUTH2']);
+
+    const config = makeConfig(dir, {
+      policies: {
+        inactiveDeveloper: 'import-and-revoke',
+        smtp: 'acknowledged',
+        defaultApplication: 'must-be-disabled',
+        apiKeyContinuity: 'preserve-if-supported',
+        oauthClientContinuity: 'fail-if-not-preservable',
+        existingUser: 'match-and-reuse',
+        existingApplication: 'match-and-reuse',
+        userProvisioning: 'reuse-or-create-silently',
+      },
+      capabilities: {
+        silentUserCreation: 'supported',
+        apiKeyValuePreservation: 'unknown',
+        oauthClientValuePreservation: 'supported',
+        applicationOwnership: 'metadata-only',
+      },
+    });
+    const result = await runDevelopersAnalyze(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json') },
+      { config, client: makeClient() },
+    );
+
+    assert.strictEqual(result.exitCode, 3);
+    assert.ok(result.preflight.blockers.some((item) => item.code === 'OAUTH_CLIENT_SECRET_MANUAL_REVIEW_REQUIRED'));
+  });
+}
+
+async function testAnalyzeGapReportSummarizesProtectedSecretMaterial() {
+  await withTempDir(async (dir) => {
+    const dataDir = path.join(dir, 'data');
+    const irDir = path.join(dir, 'ir');
+    copyDir(FIXTURES_DATA, dataDir);
+    generateIrFromData(dataDir, irDir);
+
+    const config = makeConfig(dir);
+    const result = await runDevelopersAnalyze(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json') },
+      { config, client: makeClient() },
+    );
+
+    assert.strictEqual(result.exitCode, 0);
+    assert.strictEqual(result.gapReport.summary.consumerSecretCount, 1);
+    assert.strictEqual(result.gapReport.summary.protectedSecretMaterialCount, 1);
+    assert.strictEqual(result.gapReport.summary.missingProtectedSecretCount, 0);
+    assert.strictEqual(result.gapReport.summary.apiKeyContinuityRiskCount, 1);
+    assert.strictEqual(result.gapReport.summary.oauthContinuityRiskCount, 0);
+    assert.strictEqual(result.gapReport.summary.oauthSecretManualReviewCount, 0);
+    assert.ok(result.gapReport.continuityRisks.some((item) => (
+      item.credentialId === 'alice@example.com/orders-consumer/abc123def456'
+      && item.consumerSecretPresent === true
+      && item.protectedSecretMaterialPresent === true
+      && item.continuityClass === 'api-key'
+    )));
+  });
+}
+
+async function testAnalyzeGapReportDistinguishesOAuthContinuityRisks() {
+  await withTempDir(async (dir) => {
+    const dataDir = path.join(dir, 'data');
+    const irDir = path.join(dir, 'ir');
+    copyDir(FIXTURES_DATA, dataDir);
+    generateIrFromData(dataDir, irDir);
+    setCredentialAuthHints(irDir, 'alice@example.com', 'orders-consumer', 'abc123def456', ['CLIENT_CREDENTIALS']);
+
+    const config = makeConfig(dir);
+    const result = await runDevelopersAnalyze(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json') },
+      { config, client: makeClient() },
+    );
+
+    assert.strictEqual(result.exitCode, 0);
+    assert.strictEqual(result.gapReport.summary.apiKeyContinuityRiskCount, 0);
+    assert.strictEqual(result.gapReport.summary.oauthContinuityRiskCount, 1);
+    assert.strictEqual(result.gapReport.summary.oauthSecretManualReviewCount, 1);
+    assert.ok(result.gapReport.continuityRisks.some((item) => (
+      item.credentialId === 'alice@example.com/orders-consumer/abc123def456'
+      && item.continuityClass === 'oauth-client'
+      && item.protectedSecretMaterialPresent === true
+    )));
   });
 }
 
@@ -459,6 +610,10 @@ async function run() {
   await testAnalyzeSkipsDevelopersWithoutApps();
   await testAnalyzeDoesNotWarnAboutOAuthContinuityWhenNoOAuthCredentialsExist();
   await testAnalyzeWarnsAboutOAuthContinuityWhenOAuthHintsExist();
+  await testAnalyzeBlocksWhenOAuthSecretMaterialIsMissingAndExactContinuityIsRequired();
+  await testAnalyzeBlocksWhenOAuthSecretManualReviewWouldBeRequiredUnderExactContinuityPolicy();
+  await testAnalyzeGapReportSummarizesProtectedSecretMaterial();
+  await testAnalyzeGapReportDistinguishesOAuthContinuityRisks();
   await testAnalyzeFallsBackToUserRoleWhenConfiguredScopeRoleIsMissing();
   await testAnalyzeSurfacesAmbiguousProbeAsManualReview();
   await testMultiProductCredentialCreatesMultipleSubscriptions();
