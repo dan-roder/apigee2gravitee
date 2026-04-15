@@ -380,6 +380,7 @@ node bin/migrator.js developers analyze --ir-dir ./ir --config ./config/develope
 - prefer the saved `state/apis-id-map.json`
 - fall back to live source markers like `definitionContext.origin.sourceId` when available
 - leave unrelated Gravitee APIs untouched
+- write `report/apis-cleanup-report.json` with cleanup counts, targets, and failures
 
 ### Expected outputs
 
@@ -387,6 +388,7 @@ node bin/migrator.js developers analyze --ir-dir ./ir --config ./config/develope
 report/apis-plan.json
 report/apis-gap-report.json
 report/apis-reconcile-report.json
+report/apis-cleanup-report.json
 state/apis-import-state.json
 state/apis-id-map.json
 logs/apis.ndjson
@@ -523,6 +525,8 @@ node bin/migrator.js developers reconcile --ir-dir ./ir --config ./config/develo
 
 Use `developers configure-roles` before a real run to fetch live Gravitee role choices, pick the default organization and environment role for this deployment, and write both the scoped role names and role IDs back into the config.
 
+Use `developers sync-api-targets` after an API import or reimport cycle to refresh `productPlanMap` API and plan ids from `state/apis-id-map.json` before validating or analyzing the developers workflow again.
+
 Use `developers resolve-config-ids` before `developers analyze` when your config still contains placeholder `targetApiId` and `targetPlanId` values. It resolves Gravitee API ids by `targetApi` name and plan ids by `targetPlan` name, then writes a sibling file such as `config/developers.config.resolved.json`.
 
 Use `developers validate-config-targets` after that to confirm every `productPlanMap` target matches a live Gravitee API and plan exactly. It writes `report/developers-config-targets-report.json` by default and treats missing or ambiguous API/plan matches as blockers.
@@ -541,6 +545,9 @@ Validated execution sequence:
 node bin/migrator.js developers configure-roles \
   --config ./config/developers.config.resolved.json \
   --gravitee-token "$GRAVITEE_TOKEN"
+
+node bin/migrator.js developers sync-api-targets \
+  --config ./config/developers.config.resolved.json
 
 node bin/migrator.js developers validate-config-targets \
   --config ./config/developers.config.resolved.json \
@@ -628,6 +635,7 @@ node bin/migrator.js developers delete-imported \
 - prefer the saved `state/developers-id-map.json`
 - fall back to conservative source-marker and email lookups when ids are missing
 - leave unrelated Gravitee users and applications untouched
+- write `report/developers-cleanup-report.json` with cleanup counts, targets, and failures
 
 ### Recommended smoke test
 
@@ -726,16 +734,19 @@ node bin/migrator.js developers reconcile \
 
 - Run the full developers workflow against a non-production Gravitee environment first.
 - Re-run `developers configure-roles` against the target deployment instead of copying local role ids between environments.
+- Re-run `developers sync-api-targets` after API cleanup/reimport cycles so `productPlanMap` ids stay aligned with `state/apis-id-map.json`.
 - Re-run `developers validate-config-targets` after any API re-import, because API and plan ids can change across cleanup/recreate cycles.
 - Re-run `developers analyze` immediately before import so the manifest and state reflect the current target.
 - Use `developers delete-imported` to reset a pilot environment between test runs.
-- Treat API-key continuity as verified only when the target deployment and policy require it; the current sample run still reports `OAUTH_CLIENT_CONTINUITY_UNKNOWN`, which is acceptable for this API-key-only dataset but should be revisited for OAuth-heavy migrations.
+- Treat API-key continuity as verified only when the target deployment and policy require it.
+- Use `policies.oauthClientContinuity` only when the extracted credentials actually imply OAuth continuity requirements; API-key-only datasets should no longer emit generic OAuth continuity warnings.
 
 ### Expected outputs
 
 ```text
 report/developers-plan.json
 report/developers-gap-report.json
+report/developers-cleanup-report.json
 state/developers-import-state.json
 state/developers-id-map.json
 logs/developers.ndjson

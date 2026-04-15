@@ -50,6 +50,14 @@ function normalizePlanTargets(productName, mapping) {
   }));
 }
 
+function inferOAuthContinuityRelevant(credential) {
+  const authHints = Array.isArray(credential.auth_hints) ? credential.auth_hints : [];
+  const normalizedHints = authHints.map((hint) => String(hint || '').toUpperCase());
+  return normalizedHints.some((hint) => (
+    hint.includes('OAUTH') || hint.includes('JWT') || hint.includes('CLIENT')
+  ));
+}
+
 function loadDeveloperDomain(irDir, config) {
   const loader = new IrLoader(irDir);
   const manifest = loader.manifest();
@@ -173,6 +181,7 @@ function loadDeveloperDomain(irDir, config) {
         status: product.status || null,
       })),
       authHints: credential.auth_hints || [],
+      oauthContinuityRelevant: inferOAuthContinuityRelevant(credential),
       continuity: continuity || null,
       subscriptionIntent: subscriptionIntent || null,
       protectedSecretMetaPresent: !!secretMeta,
@@ -180,6 +189,7 @@ function loadDeveloperDomain(irDir, config) {
         ? path.join(irDir, credential.consumer_secret_ref)
         : null,
       continuityPolicy: config.policies?.apiKeyContinuity || 'preserve-if-supported',
+      oauthContinuityPolicy: config.policies?.oauthClientContinuity || 'preserve-if-supported',
       blockers: [],
       warnings: [],
       manualReviewReasons: [],

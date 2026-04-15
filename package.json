@@ -22,7 +22,7 @@
     "developers:import": "node bin/migrator.js developers import --ir-dir ./ir --config ./config/developers.config.resolved.json --gravitee-token $GRAVITEE_TOKEN",
     "developers:reconcile": "node bin/migrator.js developers reconcile --ir-dir ./ir --config ./config/developers.config.resolved.json --gravitee-token $GRAVITEE_TOKEN",
     "developers:delete":  "node bin/migrator.js developers delete-imported --ir-dir ./ir --config ./config/developers.config.resolved.json --gravitee-token $GRAVITEE_TOKEN",
-    "test:developers":  "node test/developers/test-analyze.js && node test/developers/test-workflow.js && node test/developers/test-resolve-config-ids.js && node test/developers/test-validate-config-targets.js && node test/developers/test-configure-roles.js && node test/developers/test-index.js",
+    "test:developers":  "node test/developers/test-analyze.js && node test/developers/test-workflow.js && node test/developers/test-resolve-config-ids.js && node test/developers/test-validate-config-targets.js && node test/developers/test-configure-roles.js && node test/developers/test-sync-api-targets.js && node test/developers/test-index.js",
     "test:apis":        "node test/apis/test-workflow.js",
     "test:shared":      "node test/shared/test-ir-loader.js && node test/shared/test-gravitee-client.js",
     "test:extractor":   "python3 -m unittest test.extractor.test_extractor -v",

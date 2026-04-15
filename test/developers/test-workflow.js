@@ -700,6 +700,8 @@ async function testDeleteImportedRemovesSubscriptionsApplicationsAndUsers() {
     assert.strictEqual(cleaned.idMap.subscriptions['alice@example.com/orders-consumer/abc123def456/orders-product/orders-api::Orders API Key'], null);
     assert.strictEqual(cleaned.idMap.applications['alice@example.com/orders-consumer'], null);
     assert.strictEqual(cleaned.idMap.users['alice@example.com'], null);
+    assert.strictEqual(cleaned.cleanup.report.summary.deleted, 3);
+    assert.strictEqual(readJson(path.join(dir, 'report', 'developers-cleanup-report.json')).summary.deleted, 3);
   });
 }
 
@@ -738,6 +740,7 @@ async function testDeleteImportedFallsBackToClosingSubscriptionsWhenDeleteUnsupp
     assert.strictEqual(client._state.counts.deleteApplication, 1);
     assert.strictEqual(client._state.counts.deleteUser, 1);
     assert.strictEqual(cleaned.idMap.subscriptions['alice@example.com/orders-consumer/abc123def456/orders-product/orders-api::Orders API Key'], null);
+    assert.strictEqual(readJson(path.join(dir, 'report', 'developers-cleanup-report.json')).summary.failed, 0);
   });
 }
 
@@ -786,6 +789,7 @@ async function testDeleteImportedRecoversTargetsFromSavedStateWhenIdMapWasPartia
     assert.strictEqual(cleaned.idMap.subscriptions['alice@example.com/orders-consumer/abc123def456/orders-product/orders-api::Orders API Key'], null);
     assert.strictEqual(cleaned.idMap.applications['alice@example.com/orders-consumer'], null);
     assert.strictEqual(cleaned.idMap.users['alice@example.com'], null);
+    assert.strictEqual(readJson(path.join(dir, 'report', 'developers-cleanup-report.json')).summary.deleted, 3);
   });
 }
 

@@ -92,6 +92,13 @@
             "fail-if-not-preservable"
           ]
         },
+        "oauthClientContinuity": {
+          "enum": [
+            "preserve-if-supported",
+            "accept-regenerated",
+            "fail-if-not-preservable"
+          ]
+        },
         "existingUser": {
           "enum": [
             "match-and-reuse",

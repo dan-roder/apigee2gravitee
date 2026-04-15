@@ -27,6 +27,10 @@ function copyDir(src, dest) {
   fs.cpSync(src, dest, { recursive: true });
 }
 
+function readJson(filePath) {
+  return JSON.parse(fs.readFileSync(filePath, 'utf8'));
+}
+
 function generateIrFromData(dataDir, irDir) {
   const result = spawnSync(
     'python3',
@@ -281,6 +285,7 @@ async function testApisDeleteImportedDeletesKnownApis() {
     assert.strictEqual(client._state.closePlan, 1);
     assert.strictEqual(cleanupResult.idMap.apis['orders-api'], null);
     assert.deepStrictEqual(cleanupResult.idMap.plans['orders-api'], {});
+    assert.strictEqual(readJson(path.join(dir, 'report', 'apis-cleanup-report.json')).summary.deleted, 1);
   });
 }
 

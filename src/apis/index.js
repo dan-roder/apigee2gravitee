@@ -91,6 +91,7 @@ async function runApisCommand(subcommand, flags, fmt) {
       }
     }
     console.log(`  Id map:     ${fmt.dim(result.outputPaths.idMap)}`);
+    console.log(`  Report:     ${fmt.dim(result.outputPaths.cleanupReport)}`);
     console.log(`  Log:        ${fmt.dim(result.outputPaths.log)}`);
     return result.exitCode;
   }

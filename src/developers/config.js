@@ -8,6 +8,7 @@ const ENUMS = {
   smtp: new Set(['acknowledged', 'suppressed', 'live']),
   defaultApplication: new Set(['must-be-disabled', 'allowed']),
   apiKeyContinuity: new Set(['preserve-if-supported', 'accept-regenerated', 'fail-if-not-preservable']),
+  oauthClientContinuity: new Set(['preserve-if-supported', 'accept-regenerated', 'fail-if-not-preservable']),
   existingUser: new Set(['match-and-reuse', 'match-and-update', 'fail-on-existing']),
   existingApplication: new Set(['match-and-reuse', 'match-and-update', 'fail-on-existing']),
   userProvisioning: new Set(['reuse-only', 'reuse-or-create-silently', 'allow-invites']),
@@ -54,6 +55,7 @@ function loadDevelopersConfig(configPath, flags = {}) {
   overrideIfPresent(config.policies, 'smtp', flags['smtp-policy']);
   overrideIfPresent(config.policies, 'defaultApplication', flags['default-app-policy']);
   overrideIfPresent(config.policies, 'apiKeyContinuity', flags['api-key-policy']);
+  overrideIfPresent(config.policies, 'oauthClientContinuity', flags['oauth-client-policy']);
   overrideIfPresent(config.policies, 'existingUser', flags['existing-user-policy']);
   overrideIfPresent(config.policies, 'existingApplication', flags['existing-app-policy']);
 
@@ -173,6 +175,9 @@ function validateDevelopersConfig(config) {
   validateEnum(policies.smtp, 'policies.smtp', ENUMS.smtp, errors);
   validateEnum(policies.defaultApplication, 'policies.defaultApplication', ENUMS.defaultApplication, errors);
   validateEnum(policies.apiKeyContinuity, 'policies.apiKeyContinuity', ENUMS.apiKeyContinuity, errors);
+  if (policies.oauthClientContinuity !== undefined) {
+    validateEnum(policies.oauthClientContinuity, 'policies.oauthClientContinuity', ENUMS.oauthClientContinuity, errors);
+  }
   validateEnum(policies.existingUser, 'policies.existingUser', ENUMS.existingUser, errors);
   validateEnum(policies.existingApplication, 'policies.existingApplication', ENUMS.existingApplication, errors);
   validateEnum(policies.userProvisioning, 'policies.userProvisioning', ENUMS.userProvisioning, errors);

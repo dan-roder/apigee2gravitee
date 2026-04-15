@@ -8,6 +8,7 @@ const { runDevelopersDeleteImported } = require('./delete-imported');
 const { runResolveDevelopersConfigIds } = require('./resolve-config-ids');
 const { runValidateDevelopersConfigTargets } = require('./validate-config-targets');
 const { runConfigureDevelopersRoles } = require('./configure-roles');
+const { runSyncDevelopersApiTargets } = require('./sync-api-targets');
 
 function printFindings(findings, fmt, label) {
   if (findings.length === 0) return;
@@ -91,6 +92,38 @@ async function runDevelopersCommand(subcommand, flags, fmt) {
     }
     console.log('');
     console.log(`  Output:     ${fmt.dim(result.outputPath)}`);
+    return result.exitCode;
+  }
+
+  if (subcommand === 'sync-api-targets') {
+    const result = await runSyncDevelopersApiTargets(flags);
+    if (result.validationErrors) {
+      console.log(fmt.err('Developers config validation failed'));
+      for (const err of result.validationErrors) console.log(`  - ${err}`);
+      return 1;
+    }
+    if (result.error) {
+      console.log(fmt.err(result.error));
+      return result.exitCode;
+    }
+
+    console.log(fmt.header('Developers sync-api-targets'));
+    console.log('');
+    console.log(`[sync] ${result.summary.products} products, ${result.summary.targets} target mapping(s) checked`);
+    console.log(`[sync] ${result.summary.apiIdsUpdated} API id(s) updated, ${result.summary.planIdsUpdated} plan id(s) updated, ${result.summary.warnings} warning set(s)`);
+    if (result.findings.length > 0) {
+      console.log('');
+      console.log('  Warnings:');
+      for (const finding of result.findings) {
+        console.log(`   - ${finding.productName}[${finding.targetIndex}] ${finding.targetApi} / ${finding.targetPlan}`);
+        for (const issue of finding.issues) {
+          console.log(`     ${fmt.dim(issue)}`);
+        }
+      }
+    }
+    console.log('');
+    console.log(`  API id map:  ${fmt.dim(result.apisIdMapPath)}`);
+    console.log(`  Output:      ${fmt.dim(result.outputPath)}`);
     return result.exitCode;
   }
 
@@ -258,6 +291,7 @@ async function runDevelopersCommand(subcommand, flags, fmt) {
     console.log('');
     console.log(`  State:      ${fmt.dim(result.outputPaths.state)}`);
     console.log(`  Id map:     ${fmt.dim(result.outputPaths.idMap)}`);
+    console.log(`  Report:     ${fmt.dim(result.outputPaths.cleanupReport)}`);
     console.log(`  Log:        ${fmt.dim(result.outputPaths.log)}`);
     return result.exitCode;
   }

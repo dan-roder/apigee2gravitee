@@ -92,6 +92,10 @@ function checkCapabilities(config, domain) {
   const findings = [];
   const capabilities = config.capabilities || {};
   const policies = config.policies || {};
+  const oauthContinuityCredentials = domain.credentials.filter((credential) => (
+    credential.oauthContinuityRelevant
+    || (credential.continuity?.riskFlags || []).some((flag) => String(flag).includes('OAUTH'))
+  ));
 
   if (policies.userProvisioning === 'reuse-or-create-silently' && capabilities.silentUserCreation !== 'supported') {
     findings.push(issue(
@@ -123,12 +127,29 @@ function checkCapabilities(config, domain) {
     ));
   }
 
-  if (capabilities.oauthClientValuePreservation !== 'supported') {
+  if (
+    policies.oauthClientContinuity === 'fail-if-not-preservable'
+    && capabilities.oauthClientValuePreservation !== 'supported'
+    && oauthContinuityCredentials.length > 0
+  ) {
+    findings.push(issue(
+      'blocker',
+      'OAUTH_CLIENT_CONTINUITY_UNSUPPORTED',
+      'Config requires exact OAuth client continuity, but capabilities.oauthClientValuePreservation is not supported',
+      {
+        actual: capabilities.oauthClientValuePreservation || 'unknown',
+        affectedCredentials: oauthContinuityCredentials.map((credential) => credential.credentialId),
+      },
+    ));
+  } else if (capabilities.oauthClientValuePreservation !== 'supported' && oauthContinuityCredentials.length > 0) {
     findings.push(issue(
       'warning',
       'OAUTH_CLIENT_CONTINUITY_UNKNOWN',
       'OAuth client value preservation is not confirmed as supported',
-      { actual: capabilities.oauthClientValuePreservation || 'unknown' },
+      {
+        actual: capabilities.oauthClientValuePreservation || 'unknown',
+        affectedCredentials: oauthContinuityCredentials.map((credential) => credential.credentialId),
+      },
     ));
   }
 

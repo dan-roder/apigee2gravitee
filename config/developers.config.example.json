@@ -17,6 +17,7 @@
     "smtp": "acknowledged",
     "defaultApplication": "must-be-disabled",
     "apiKeyContinuity": "preserve-if-supported",
+    "oauthClientContinuity": "preserve-if-supported",
     "existingUser": "match-and-reuse",
     "existingApplication": "match-and-reuse",
     "userProvisioning": "reuse-or-create-silently"

@@ -48,6 +48,20 @@ async function resolveDeleteTargets(result, idMap) {
   return targets;
 }
 
+function buildCleanupReport(summary, failures, targets) {
+  return {
+    generatedAt: new Date().toISOString(),
+    summary,
+    targets: targets.map((item) => ({
+      sourceId: item.sourceId,
+      proxyName: item.proxyName,
+      apiId: item.apiId,
+      strategy: item.strategy,
+    })),
+    failures,
+  };
+}
+
 async function runApisDeleteImported(flags, deps = {}) {
   const result = await prepareApisWorkflow(flags, deps);
   if (result.validationErrors) return result;
@@ -121,6 +135,9 @@ async function runApisDeleteImported(flags, deps = {}) {
     }
   }
 
+  const cleanupReport = buildCleanupReport(summary, failures, targets);
+
+  writeJson(result.outputPaths.cleanupReport, cleanupReport);
   writeJson(result.outputPaths.idMap, idMap);
   writeJson(result.outputPaths.state, state);
   writeNdjson(result.outputPaths.log, events);
@@ -133,6 +150,7 @@ async function runApisDeleteImported(flags, deps = {}) {
       summary,
       failures,
       targets,
+      report: cleanupReport,
     },
     exitCode: summary.failed > 0 ? 4 : 0,
   };

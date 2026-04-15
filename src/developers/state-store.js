@@ -30,6 +30,7 @@ function resolveOutputPaths(config) {
     plan: path.join(reportDir, 'developers-plan.json'),
     gapReport: path.join(reportDir, 'developers-gap-report.json'),
     reconcileReport: path.join(reportDir, 'developers-reconcile-report.json'),
+    cleanupReport: path.join(reportDir, 'developers-cleanup-report.json'),
     state: stateFile,
     idMap: path.join(path.dirname(stateFile), 'developers-id-map.json'),
     log: path.resolve(path.join(path.dirname(reportDir), 'logs', 'developers.ndjson')),

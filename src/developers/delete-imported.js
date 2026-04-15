@@ -147,6 +147,36 @@ function countTargets(targets) {
   return targets.subscriptions.length + targets.applications.length + targets.users.length;
 }
 
+function buildCleanupReport(summary, failures, targets) {
+  return {
+    generatedAt: new Date().toISOString(),
+    summary,
+    targets: {
+      subscriptions: targets.subscriptions.map((item) => ({
+        sourceId: item.sourceId,
+        subscriptionId: item.subscriptionId,
+        apiId: item.apiId,
+        applicationId: item.applicationId,
+        strategy: item.strategy,
+      })),
+      applications: targets.applications.map((item) => ({
+        sourceId: item.sourceId,
+        applicationId: item.applicationId,
+        developerEmail: item.developerEmail,
+        appName: item.appName,
+        strategy: item.strategy,
+      })),
+      users: targets.users.map((item) => ({
+        sourceId: item.sourceId,
+        userId: item.userId,
+        email: item.email,
+        strategy: item.strategy,
+      })),
+    },
+    failures,
+  };
+}
+
 async function runDevelopersDeleteImported(flags, deps = {}) {
   const result = await prepareDevelopersWorkflow(flags, deps);
   if (result.validationErrors) return result;
@@ -267,6 +297,9 @@ async function runDevelopersDeleteImported(flags, deps = {}) {
     }
   }
 
+  const cleanupReport = buildCleanupReport(summary, failures, targets);
+
+  writeJson(result.outputPaths.cleanupReport, cleanupReport);
   writeJson(result.outputPaths.idMap, idMap);
   writeJson(result.outputPaths.state, state);
   writeNdjson(result.outputPaths.log, events);
@@ -279,6 +312,7 @@ async function runDevelopersDeleteImported(flags, deps = {}) {
       summary,
       failures,
       targets,
+      report: cleanupReport,
     },
     exitCode: summary.failed > 0 ? 4 : 0,
   };

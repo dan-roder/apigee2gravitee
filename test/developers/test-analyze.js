@@ -257,6 +257,46 @@ async function testAnalyzeSkipsDevelopersWithoutApps() {
   });
 }
 
+async function testAnalyzeDoesNotWarnAboutOAuthContinuityWhenNoOAuthCredentialsExist() {
+  await withTempDir(async (dir) => {
+    const dataDir = path.join(dir, 'data');
+    const irDir = path.join(dir, 'ir');
+    copyDir(FIXTURES_DATA, dataDir);
+    generateIrFromData(dataDir, irDir);
+
+    const config = makeConfig(dir);
+    const result = await runDevelopersAnalyze(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json') },
+      { config, client: makeClient() },
+    );
+
+    assert.strictEqual(result.exitCode, 0);
+    assert.ok(!result.preflight.warnings.some((item) => item.code === 'OAUTH_CLIENT_CONTINUITY_UNKNOWN'));
+  });
+}
+
+async function testAnalyzeWarnsAboutOAuthContinuityWhenOAuthHintsExist() {
+  await withTempDir(async (dir) => {
+    const dataDir = path.join(dir, 'data');
+    const irDir = path.join(dir, 'ir');
+    copyDir(FIXTURES_DATA, dataDir);
+    generateIrFromData(dataDir, irDir);
+    const credentialPath = path.join(irDir, 'credentials', 'alice@example.com', 'orders-consumer', 'abc123def456.json');
+    const credential = readJson(credentialPath);
+    credential.auth_hints = ['OAUTH2'];
+    writeJson(credentialPath, credential);
+
+    const config = makeConfig(dir);
+    const result = await runDevelopersAnalyze(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json') },
+      { config, client: makeClient() },
+    );
+
+    assert.strictEqual(result.exitCode, 0);
+    assert.ok(result.preflight.warnings.some((item) => item.code === 'OAUTH_CLIENT_CONTINUITY_UNKNOWN'));
+  });
+}
+
 async function testAnalyzeFallsBackToUserRoleWhenConfiguredScopeRoleIsMissing() {
   await withTempDir(async (dir) => {
     const dataDir = path.join(dir, 'data');
@@ -417,6 +457,8 @@ async function run() {
   await testAnalyzeFailsWhenTargetIdsAreUnresolved();
   await testAnalyzeDoesNotRequireCustomFields();
   await testAnalyzeSkipsDevelopersWithoutApps();
+  await testAnalyzeDoesNotWarnAboutOAuthContinuityWhenNoOAuthCredentialsExist();
+  await testAnalyzeWarnsAboutOAuthContinuityWhenOAuthHintsExist();
   await testAnalyzeFallsBackToUserRoleWhenConfiguredScopeRoleIsMissing();
   await testAnalyzeSurfacesAmbiguousProbeAsManualReview();
   await testMultiProductCredentialCreatesMultipleSubscriptions();
