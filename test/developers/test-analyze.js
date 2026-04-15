@@ -60,6 +60,20 @@ function addDeveloperWithoutApps(dataDir, email = 'noapps@example.com') {
   });
 }
 
+function addSecondCredentialToOrdersConsumer(dataDir, consumerKey = 'oauth789xyz999', consumerSecret = 'oauth-secret-value') {
+  const appPath = path.join(dataDir, 'apps', 'alice@example.com', 'orders-consumer.json');
+  const app = readJson(appPath);
+  app.credentials.push({
+    consumerKey,
+    consumerSecret,
+    status: 'approved',
+    expiresAt: -1,
+    scopes: [],
+    apiProducts: [{ apiproduct: 'orders-product', status: 'approved' }],
+  });
+  writeJson(appPath, app);
+}
+
 function setCredentialAuthHints(irDir, developerEmail, appName, consumerKey, authHints) {
   const credentialPath = path.join(irDir, 'credentials', developerEmail, appName, `${consumerKey}.json`);
   const credential = readJson(credentialPath);
@@ -448,6 +462,33 @@ async function testAnalyzeGapReportDistinguishesOAuthContinuityRisks() {
   });
 }
 
+async function testAnalyzeGapReportHandlesMixedApiKeyAndOAuthCredentialDataset() {
+  await withTempDir(async (dir) => {
+    const dataDir = path.join(dir, 'data');
+    const irDir = path.join(dir, 'ir');
+    copyDir(FIXTURES_DATA, dataDir);
+    addSecondCredentialToOrdersConsumer(dataDir);
+    generateIrFromData(dataDir, irDir);
+    setCredentialAuthHints(irDir, 'alice@example.com', 'orders-consumer', 'oauth789xyz999', ['CLIENT_CREDENTIALS']);
+
+    const config = makeConfig(dir);
+    const result = await runDevelopersAnalyze(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json') },
+      { config, client: makeClient() },
+    );
+
+    assert.strictEqual(result.exitCode, 0);
+    assert.strictEqual(result.plan.summary.credentials, 2);
+    assert.strictEqual(result.gapReport.summary.consumerSecretCount, 2);
+    assert.strictEqual(result.gapReport.summary.protectedSecretMaterialCount, 2);
+    assert.strictEqual(result.gapReport.summary.apiKeyContinuityRiskCount, 1);
+    assert.strictEqual(result.gapReport.summary.oauthContinuityRiskCount, 1);
+    assert.strictEqual(result.gapReport.summary.oauthSecretManualReviewCount, 1);
+    assert.ok(result.gapReport.continuityRisks.some((item) => item.credentialId === 'alice@example.com/orders-consumer/abc123def456' && item.continuityClass === 'api-key'));
+    assert.ok(result.gapReport.continuityRisks.some((item) => item.credentialId === 'alice@example.com/orders-consumer/oauth789xyz999' && item.continuityClass === 'oauth-client'));
+  });
+}
+
 async function testAnalyzeFallsBackToUserRoleWhenConfiguredScopeRoleIsMissing() {
   await withTempDir(async (dir) => {
     const dataDir = path.join(dir, 'data');
@@ -614,6 +655,7 @@ async function run() {
   await testAnalyzeBlocksWhenOAuthSecretManualReviewWouldBeRequiredUnderExactContinuityPolicy();
   await testAnalyzeGapReportSummarizesProtectedSecretMaterial();
   await testAnalyzeGapReportDistinguishesOAuthContinuityRisks();
+  await testAnalyzeGapReportHandlesMixedApiKeyAndOAuthCredentialDataset();
   await testAnalyzeFallsBackToUserRoleWhenConfiguredScopeRoleIsMissing();
   await testAnalyzeSurfacesAmbiguousProbeAsManualReview();
   await testMultiProductCredentialCreatesMultipleSubscriptions();

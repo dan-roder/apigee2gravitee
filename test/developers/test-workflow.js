@@ -743,6 +743,57 @@ async function testReconcileDetectsMismatches() {
   });
 }
 
+async function testReconcileDetectsPartiallyDriftedTargetResources() {
+  await withTempDir(async (dir) => {
+    const dataDir = path.join(dir, 'data');
+    const irDir = path.join(dir, 'ir');
+    copyDir(FIXTURES_DATA, dataDir);
+    generateIrFromData(dataDir, irDir);
+
+    const client = makeWorkflowClient();
+    const config = makeConfig(dir, {
+      policies: {
+        inactiveDeveloper: 'import-and-revoke',
+        smtp: 'acknowledged',
+        defaultApplication: 'must-be-disabled',
+        apiKeyContinuity: 'preserve-if-supported',
+        existingUser: 'match-and-reuse',
+        existingApplication: 'match-and-reuse',
+        userProvisioning: 'reuse-or-create-silently',
+      },
+    });
+
+    const imported = await runDevelopersImport(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json') },
+      { config, client },
+    );
+    assert.strictEqual(imported.exitCode, 0);
+
+    const application = Array.from(client._state.applications.values())[0];
+    application.metadata.sourceId = 'alice@example.com/drifted-app';
+
+    const subscription = Array.from(client._state.subscriptions.values())[0];
+    subscription.plan.id = 'plan-drifted';
+    subscription.apiId = 'api-drifted';
+
+    const idMapPath = path.join(dir, 'state', 'developers-id-map.json');
+    const driftedIdMap = readJson(idMapPath);
+    driftedIdMap.users['alice@example.com'] = 'user-drifted';
+    writeJson(idMapPath, driftedIdMap);
+
+    const result = await runDevelopersReconcile(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json') },
+      { config, client },
+    );
+
+    assert.strictEqual(result.exitCode, 6);
+    assert.ok(result.report.mismatches.some((item) => item.code === 'USER_ID_MAP_MISMATCH'));
+    assert.ok(result.report.mismatches.some((item) => item.code === 'APPLICATION_SOURCE_MARKER_MISMATCH'));
+    assert.ok(result.report.mismatches.some((item) => item.code === 'SUBSCRIPTION_PLAN_MISMATCH'));
+    assert.ok(result.report.mismatches.some((item) => item.code === 'SUBSCRIPTION_API_MISMATCH'));
+  });
+}
+
 async function testFullDeleteAndReimportCycleRemainsDeterministic() {
   await withTempDir(async (dir) => {
     const dataDir = path.join(dir, 'data');
@@ -1051,6 +1102,7 @@ async function run() {
   await testInactiveDeveloperImportDisabledReusesDisabledUser();
   await testImportFailsWhenApplicationReuseMatchesWrongSourceMarker();
   await testReconcileDetectsMismatches();
+  await testReconcileDetectsPartiallyDriftedTargetResources();
   await testDeleteImportedRemovesSubscriptionsApplicationsAndUsers();
   await testDeleteImportedFallsBackToClosingSubscriptionsWhenDeleteUnsupported();
   await testDeleteImportedRecoversTargetsFromSavedStateWhenIdMapWasPartiallyCleared();

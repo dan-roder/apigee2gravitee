@@ -23,11 +23,13 @@
   - multi-target product mappings during live-style plan/import/reconcile flows
   - ambiguous ownership/source-marker reuse scenarios
   - repeated cleanup/import/reconcile cycles
+  - partially drifted target resources detected during reconcile
+  - mixed API-key and OAuth credential datasets in analyze/gap reporting
 - Keep expanding coverage for additional production-like edge cases:
   - inactive developers under revoke-style target behavior
   - ambiguous ownership or membership scenarios across multiple candidate applications
   - reuse against partially drifted target resources
-  - mixed API-key and OAuth credential datasets
+  - mixed API-key and OAuth credential datasets during import/reconcile, not just analyze
 
 ## 4. API-to-Developers Config Sync Automation
 
