@@ -525,7 +525,7 @@ node bin/migrator.js developers reconcile --ir-dir ./ir --config ./config/develo
 
 Use `developers configure-roles` before a real run to fetch live Gravitee role choices, pick the default organization and environment role for this deployment, and write both the scoped role names and role IDs back into the config.
 
-Use `developers sync-api-targets` after an API import or reimport cycle to refresh `productPlanMap` API and plan ids from `state/apis-id-map.json` before validating or analyzing the developers workflow again.
+Use `developers sync-api-targets` after an API import or reimport cycle to refresh `productPlanMap` API and plan ids from `state/apis-id-map.json` before validating or analyzing the developers workflow again. It writes `report/developers-sync-api-targets-report.json` by default so operators can review exactly which targets were updated and which still need manual attention. When you run it against `developers.config.resolved.json`, it now refreshes that same resolved config path by default instead of creating a growing chain of extra synced files.
 
 Use `developers resolve-config-ids` before `developers analyze` when your config still contains placeholder `targetApiId` and `targetPlanId` values. It resolves Gravitee API ids by `targetApi` name and plan ids by `targetPlan` name, then writes a sibling file such as `config/developers.config.resolved.json`.
 
@@ -748,6 +748,7 @@ node bin/migrator.js developers reconcile \
 ```text
 report/developers-plan.json
 report/developers-gap-report.json
+report/developers-sync-api-targets-report.json
 report/developers-cleanup-report.json
 state/developers-import-state.json
 state/developers-id-map.json

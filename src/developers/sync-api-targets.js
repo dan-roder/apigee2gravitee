@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 
 const { loadDevelopersConfig, validateDevelopersConfig } = require('./config');
-const { readJsonIfExists } = require('./state-store');
+const { readJsonIfExists, resolveOutputPaths, writeJson } = require('./state-store');
 
 function clone(value) {
   return JSON.parse(JSON.stringify(value));
@@ -20,10 +20,13 @@ function denormalizeTargets(targets, originalEntry) {
 
 function defaultOutputPath(configPath) {
   const absolutePath = path.resolve(configPath);
-  if (absolutePath.endsWith('.json')) {
-    return absolutePath.replace(/\.json$/, '.synced.json');
+  if (absolutePath.endsWith('.resolved.json')) {
+    return absolutePath;
   }
-  return `${absolutePath}.synced.json`;
+  if (absolutePath.endsWith('.json')) {
+    return absolutePath.replace(/\.json$/, '.resolved.json');
+  }
+  return `${absolutePath}.resolved.json`;
 }
 
 function defaultApisIdMapPath(config) {
@@ -131,14 +134,50 @@ async function runSyncDevelopersApiTargets(flags, deps = {}) {
   const outputPath = flags['in-place']
     ? path.resolve(configPath)
     : path.resolve(flags['output-config'] || defaultOutputPath(configPath));
+  const outputPaths = resolveOutputPaths(config);
+  const reportPath = path.resolve(flags['output-report'] || outputPaths.syncReport);
+
+  syncedConfig._meta = {
+    ...(config._meta || {}),
+    syncApiTargets: {
+      syncedAt: new Date().toISOString(),
+      sourceConfigPath: path.resolve(configPath),
+      apisIdMapPath,
+      outputPath,
+      summary,
+      warnings: findings.length,
+    },
+  };
   fs.writeFileSync(outputPath, `${JSON.stringify(syncedConfig, null, 2)}\n`);
+
+  const report = {
+    generatedAt: new Date().toISOString(),
+    configPath: path.resolve(configPath),
+    apisIdMapPath,
+    outputPath,
+    summary,
+    findings,
+    nextSteps: findings.length > 0
+      ? [
+        'Review unresolved API/plan target mappings in the sync report.',
+        'Fix ambiguous target names or missing API/plan imports, then rerun developers sync-api-targets.',
+        'Run developers validate-config-targets against the synced config before analyze/import.',
+      ]
+      : [
+        'Run developers validate-config-targets against the synced config.',
+        'Then run developers analyze to refresh the manifest and preflight output.',
+      ],
+  };
+  writeJson(reportPath, report);
 
   return {
     exitCode: findings.length > 0 ? 2 : 0,
     outputPath,
+    reportPath,
     apisIdMapPath,
     summary,
     findings,
+    report,
     config: syncedConfig,
   };
 }

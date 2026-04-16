@@ -34,5 +34,5 @@
 ## 4. API-to-Developers Config Sync Automation
 
 - Done: added `developers sync-api-targets` to refresh `productPlanMap` from `state/apis-id-map.json`.
-- Reduce manual developers config drift after API cleanup/recreate operations further, especially around resolved outputs and operator guidance.
-- Prefer deterministic refresh commands over hand-editing resolved config files.
+- Done: added sync reporting and CLI guidance so stale API/plan ids now point operators back to `developers sync-api-targets`.
+- Done: made `developers sync-api-targets` refresh the stable resolved-config path by default, so operators can keep using `developers.config.resolved.json` instead of hand-editing or chasing extra synced files.

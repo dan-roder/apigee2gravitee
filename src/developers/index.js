@@ -42,6 +42,22 @@ function printOperatorHints(preflight, fmt) {
   }
 }
 
+function printValidateTargetHints(report, fmt) {
+  if (!report?.findings?.length) return;
+  const hasStaleIds = report.findings.some((item) => (
+    item.code === 'TARGET_API_ID_NOT_FOUND'
+    || item.code === 'TARGET_PLAN_ID_NOT_FOUND'
+    || item.code === 'TARGET_PLAN_NAME_MISMATCH'
+  ));
+  if (!hasStaleIds) return;
+
+  console.log('');
+  console.log(fmt.info('Target ids may be stale after an API cleanup/reimport cycle:'));
+  console.log(`  ${fmt.dim('1. node bin/migrator.js developers sync-api-targets --config ./config/developers.config.resolved.json')}`);
+  console.log(`  ${fmt.dim('2. node bin/migrator.js developers validate-config-targets --config ./config/developers.config.resolved.json --gravitee-token "$GRAVITEE_TOKEN"')}`);
+  console.log(`  ${fmt.dim('3. rerun analyze/import with the refreshed resolved config')}`);
+}
+
 async function runDevelopersCommand(subcommand, flags, fmt) {
   if (subcommand === 'configure-roles') {
     const result = await runConfigureDevelopersRoles(flags);
@@ -124,6 +140,7 @@ async function runDevelopersCommand(subcommand, flags, fmt) {
     console.log('');
     console.log(`  API id map:  ${fmt.dim(result.apisIdMapPath)}`);
     console.log(`  Output:      ${fmt.dim(result.outputPath)}`);
+    console.log(`  Report:      ${fmt.dim(result.reportPath)}`);
     return result.exitCode;
   }
 
@@ -151,6 +168,7 @@ async function runDevelopersCommand(subcommand, flags, fmt) {
         console.log(printer(`${finding.code}: ${finding.productName}[${finding.targetIndex}] ${finding.message}`));
       }
     }
+    printValidateTargetHints(result.report, fmt);
     console.log('');
     console.log(`  Report:     ${fmt.dim(result.outputPath)}`);
     return result.exitCode;
