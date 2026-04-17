@@ -963,6 +963,55 @@ async function testDeleteImportedRecoversTargetsFromSavedStateWhenIdMapWasPartia
   });
 }
 
+async function testDeleteImportedSurfacesGraviteeUnavailableErrors() {
+  await withTempDir(async (dir) => {
+    const dataDir = path.join(dir, 'data');
+    const irDir = path.join(dir, 'ir');
+    copyDir(FIXTURES_DATA, dataDir);
+    generateIrFromData(dataDir, irDir);
+
+    const client = makeWorkflowClient({
+      overrides: {
+        async deleteSubscription() {
+          const err = new Error('');
+          err.code = 'ECONNREFUSED';
+          throw err;
+        },
+        async deleteApplication() {
+          const err = new Error('');
+          err.code = 'ECONNREFUSED';
+          throw err;
+        },
+        async deleteUser() {
+          const err = new Error('');
+          err.code = 'ECONNREFUSED';
+          throw err;
+        },
+      },
+    });
+    const config = makeConfig(dir);
+
+    const imported = await runDevelopersImport(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json') },
+      { config, client },
+    );
+
+    assert.strictEqual(imported.exitCode, 0);
+
+    const cleaned = await runDevelopersDeleteImported(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json') },
+      { config, client },
+    );
+
+    assert.strictEqual(cleaned.exitCode, 4);
+    assert.strictEqual(cleaned.cleanup.report.summary.failed, 3);
+    for (const failure of cleaned.cleanup.report.failures) {
+      assert.match(failure.error, /Unable to reach Gravitee while cleaning up/);
+      assert.match(failure.error, /ECONNREFUSED/);
+    }
+  });
+}
+
 async function testMultiProductImportAndReconcile() {
   await withTempDir(async (dir) => {
     const dataDir = path.join(dir, 'data');
@@ -1106,6 +1155,7 @@ async function run() {
   await testDeleteImportedRemovesSubscriptionsApplicationsAndUsers();
   await testDeleteImportedFallsBackToClosingSubscriptionsWhenDeleteUnsupported();
   await testDeleteImportedRecoversTargetsFromSavedStateWhenIdMapWasPartiallyCleared();
+  await testDeleteImportedSurfacesGraviteeUnavailableErrors();
   await testFullDeleteAndReimportCycleRemainsDeterministic();
   await testMultiProductImportAndReconcile();
   await testMultiTargetProductImportAndReconcile();

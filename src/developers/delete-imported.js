@@ -11,6 +11,39 @@ function makeEvent(type, payload = {}) {
   return { ts: new Date().toISOString(), type, ...payload };
 }
 
+function formatCleanupError(err, resourceLabel = 'resource') {
+  if (!err) {
+    return `Unknown ${resourceLabel} cleanup error`;
+  }
+
+  const code = typeof err.code === 'string' ? err.code : null;
+  const message = typeof err.message === 'string' ? err.message.trim() : '';
+  const hasBody = err.body !== undefined;
+  const bodyText = hasBody
+    ? (typeof err.body === 'string' ? err.body : JSON.stringify(err.body))
+    : '';
+
+  if (hasBody && message) {
+    return `${message}: ${bodyText}`;
+  }
+  if (hasBody && bodyText) {
+    return bodyText;
+  }
+  if (message) {
+    return message;
+  }
+
+  if (code && ['ECONNREFUSED', 'ECONNRESET', 'ENOTFOUND', 'EHOSTUNREACH', 'ETIMEDOUT'].includes(code)) {
+    return `Unable to reach Gravitee while cleaning up ${resourceLabel} (${code}). Verify the management API is running and reachable.`;
+  }
+
+  if (code) {
+    return `Cleanup failed for ${resourceLabel} (${code}).`;
+  }
+
+  return `Unknown ${resourceLabel} cleanup error`;
+}
+
 function readActionTargetId(state, actionId, key) {
   return state?.actions?.[actionId]?.targetIds?.[key]
     || state?.actions?.[actionId]?.reconcileHints?.[key]
@@ -219,9 +252,7 @@ async function runDevelopersDeleteImported(flags, deps = {}) {
           events.push(makeEvent('cleanup.subscription.closed', target));
           continue;
         } catch (closeErr) {
-          const message = closeErr.body !== undefined
-            ? `${closeErr.message}: ${typeof closeErr.body === 'string' ? closeErr.body : JSON.stringify(closeErr.body)}`
-            : closeErr.message;
+          const message = formatCleanupError(closeErr, 'subscription');
           summary.failed += 1;
           failures.push({ ...target, error: message });
           events.push(makeEvent('cleanup.subscription.failed', { ...target, error: message }));
@@ -235,9 +266,7 @@ async function runDevelopersDeleteImported(flags, deps = {}) {
         continue;
       }
       summary.failed += 1;
-      const message = err.body !== undefined
-        ? `${err.message}: ${typeof err.body === 'string' ? err.body : JSON.stringify(err.body)}`
-        : err.message;
+      const message = formatCleanupError(err, 'subscription');
       failures.push({ ...target, error: message });
       events.push(makeEvent('cleanup.subscription.failed', { ...target, error: message }));
     }
@@ -262,9 +291,7 @@ async function runDevelopersDeleteImported(flags, deps = {}) {
         continue;
       }
       summary.failed += 1;
-      const message = err.body !== undefined
-        ? `${err.message}: ${typeof err.body === 'string' ? err.body : JSON.stringify(err.body)}`
-        : err.message;
+      const message = formatCleanupError(err, 'application');
       failures.push({ ...target, error: message });
       events.push(makeEvent('cleanup.application.failed', { ...target, error: message }));
     }
@@ -289,9 +316,7 @@ async function runDevelopersDeleteImported(flags, deps = {}) {
         continue;
       }
       summary.failed += 1;
-      const message = err.body !== undefined
-        ? `${err.message}: ${typeof err.body === 'string' ? err.body : JSON.stringify(err.body)}`
-        : err.message;
+      const message = formatCleanupError(err, 'user');
       failures.push({ ...target, error: message });
       events.push(makeEvent('cleanup.user.failed', { ...target, error: message }));
     }
@@ -318,4 +343,4 @@ async function runDevelopersDeleteImported(flags, deps = {}) {
   };
 }
 
-module.exports = { runDevelopersDeleteImported };
+module.exports = { runDevelopersDeleteImported, formatCleanupError };
