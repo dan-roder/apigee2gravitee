@@ -1,19 +1,19 @@
 {
   "generatedAt": "2026-04-14T20:30:30.317Z",
   "users": {
-    "dev1@540.co": "bb27cb45-4ce7-4d14-a7cb-454ce77d14ae",
-    "dev2@540.co": "09428cad-2cfa-4ddd-828c-ad2cfa8ddd2f"
+    "dev1@540.co": null,
+    "dev2@540.co": null
   },
   "applications": {
-    "dev1@540.co/kanye-dev-app": "0ee475ac-eabb-4ce2-a475-aceabb3ce211",
-    "dev1@540.co/wizards-dev-app": "6ae0c034-4783-4369-a0c0-3447836369cc",
-    "dev2@540.co/chuck-norris-dev-app": "45b22d88-9eb8-4c54-b22d-889eb85c54d0",
-    "dev2@540.co/dog-breeds-dev-app": "2eca68a1-438b-42a9-8a68-a1438b02a913"
+    "dev1@540.co/kanye-dev-app": null,
+    "dev1@540.co/wizards-dev-app": null,
+    "dev2@540.co/chuck-norris-dev-app": null,
+    "dev2@540.co/dog-breeds-dev-app": null
   },
   "subscriptions": {
-    "dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan": "5fbab353-7a70-4276-bab3-537a70027606",
-    "dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan": "a65fe712-e20f-440f-9fe7-12e20f040f34",
-    "dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan": "85cc3c11-9e97-4b88-8c3c-119e974b88f5",
-    "dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan": "fb8badce-b8fe-4a33-8bad-ceb8fe9a338e"
+    "dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan": null,
+    "dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan": null,
+    "dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan": null,
+    "dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan": null
   }
 }

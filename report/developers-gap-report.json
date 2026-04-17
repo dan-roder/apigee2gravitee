@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-04-17T16:34:11.565Z",
+  "generatedAt": "2026-04-17T16:42:09.585Z",
   "summary": {
     "users": 2,
     "applications": 4,
     "credentials": 4,
     "subscriptions": 4,
     "actions": 24,
-    "blockers": 6,
-    "warnings": 9,
-    "manualReview": 2,
+    "blockers": 0,
+    "warnings": 0,
+    "manualReview": 0,
     "inactiveDevelopers": 0,
     "continuityRiskCount": 4,
     "apiKeyContinuityRiskCount": 4,
@@ -19,158 +19,8 @@
     "missingProtectedSecretCount": 0,
     "oauthSecretManualReviewCount": 0
   },
-  "findings": [
-    {
-      "severity": "blocker",
-      "code": "GRAVITEE_AUTH_FAILED",
-      "message": "Gravitee health check failed: unknown error",
-      "details": {
-        "status": null
-      }
-    },
-    {
-      "severity": "blocker",
-      "code": "USER_PROVISIONING_LOOKUP_UNSUPPORTED",
-      "message": "User provisioning probe failed for lookup",
-      "details": {
-        "status": null,
-        "classification": "network",
-        "error": null
-      }
-    },
-    {
-      "severity": "blocker",
-      "code": "USER_PROVISIONING_CREATE_UNSUPPORTED",
-      "message": "User provisioning probe failed for create",
-      "details": {
-        "status": null,
-        "classification": "network",
-        "error": null
-      }
-    },
-    {
-      "severity": "warning",
-      "code": "USER_PROVISIONING_UPDATE_UNSUPPORTED",
-      "message": "User provisioning probe failed for update",
-      "details": {
-        "status": null,
-        "classification": "network",
-        "error": null
-      }
-    },
-    {
-      "severity": "warning",
-      "code": "USER_PROVISIONING_ROLEASSIGN_UNSUPPORTED",
-      "message": "User provisioning probe failed for roleAssign",
-      "details": {
-        "status": null,
-        "classification": "network",
-        "error": null
-      }
-    },
-    {
-      "severity": "blocker",
-      "code": "APPLICATION_OWNERSHIP_LIST_UNSUPPORTED",
-      "message": "Application ownership probe failed for list",
-      "details": {
-        "status": null,
-        "classification": "network",
-        "error": null
-      }
-    },
-    {
-      "severity": "blocker",
-      "code": "APPLICATION_OWNERSHIP_CREATE_UNSUPPORTED",
-      "message": "Application ownership probe failed for create",
-      "details": {
-        "status": null,
-        "classification": "network",
-        "error": null
-      }
-    },
-    {
-      "severity": "warning",
-      "code": "APPLICATION_OWNERSHIP_MEMBERS_UNSUPPORTED",
-      "message": "Application ownership probe failed for members",
-      "details": {
-        "status": null,
-        "classification": "network",
-        "error": null
-      }
-    },
-    {
-      "severity": "warning",
-      "code": "APPLICATION_OWNERSHIP_ADDMEMBER_UNSUPPORTED",
-      "message": "Application ownership probe failed for addMember",
-      "details": {
-        "status": null,
-        "classification": "network",
-        "error": null
-      }
-    },
-    {
-      "severity": "warning",
-      "code": "API_KEY_CONTINUITY_SUBSCRIPTIONS_UNSUPPORTED",
-      "message": "API key continuity probe failed for subscriptions",
-      "details": {
-        "status": null,
-        "classification": "network",
-        "error": null
-      }
-    },
-    {
-      "severity": "warning",
-      "code": "API_KEY_CONTINUITY_CREATE_UNSUPPORTED",
-      "message": "API key continuity probe failed for create",
-      "details": {
-        "status": null,
-        "classification": "network",
-        "error": null
-      }
-    },
-    {
-      "severity": "warning",
-      "code": "API_KEY_CONTINUITY_APIKEYS_UNSUPPORTED",
-      "message": "API key continuity probe failed for apiKeys",
-      "details": {
-        "status": null,
-        "classification": "network",
-        "error": null
-      }
-    },
-    {
-      "severity": "blocker",
-      "code": "SILENT_USER_CREATION_PROBE_FAILED",
-      "message": "Live Gravitee probes did not confirm silent user provisioning support",
-      "details": {}
-    },
-    {
-      "severity": "warning",
-      "code": "ROLE_LOOKUP_FAILED",
-      "message": "Unable to verify roles via Gravitee API: ",
-      "details": {}
-    },
-    {
-      "severity": "warning",
-      "code": "ROLE_LOOKUP_UNVERIFIED",
-      "message": "Role configuration could not be auto-verified",
-      "details": {}
-    }
-  ],
-  "manualReviewFindings": [
-    {
-      "severity": "warning",
-      "code": "ROLE_LOOKUP_FAILED",
-      "message": "Unable to verify roles via Gravitee API: ",
-      "details": {}
-    },
-    {
-      "severity": "warning",
-      "code": "ROLE_LOOKUP_UNVERIFIED",
-      "message": "Role configuration could not be auto-verified",
-      "details": {}
-    }
-  ],
+  "findings": [],
+  "manualReviewFindings": [],
   "continuityRisks": [
     {
       "credentialId": "dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1",
@@ -248,9 +98,9 @@
     "applications": 4,
     "credentials": 4,
     "subscriptions": 4,
-    "blockers": 6,
-    "warnings": 9,
-    "manualReview": 2,
+    "blockers": 0,
+    "warnings": 0,
+    "manualReview": 0,
     "actions": 24,
     "actionsByKind": {
       "UPSERT_USER": 2,
@@ -267,31 +117,24 @@
     "operatorActions": {
       "byKind": {
         "UPSERT_USER": {
-          "CREATE": 2
+          "REUSE": 2
         },
         "UPSERT_APPLICATION": {
-          "CREATE": 4
+          "REUSE": 4
         },
         "UPSERT_SUBSCRIPTION": {
-          "CREATE": 4
+          "REUSE": 4
         }
       },
       "byOperation": {
-        "CREATE": 10
+        "REUSE": 10
       },
       "blockedReasons": {}
     }
   },
   "operatorGuidance": {
-    "nextSuggestedScope": null,
-    "resumeSafe": false,
-    "blockerCategories": {
-      "GRAVITEE_AUTH_FAILED": 1,
-      "USER_PROVISIONING_LOOKUP_UNSUPPORTED": 1,
-      "USER_PROVISIONING_CREATE_UNSUPPORTED": 1,
-      "APPLICATION_OWNERSHIP_LIST_UNSUPPORTED": 1,
-      "APPLICATION_OWNERSHIP_CREATE_UNSUPPORTED": 1,
-      "SILENT_USER_CREATION_PROBE_FAILED": 1
-    }
+    "nextSuggestedScope": "--users-only",
+    "resumeSafe": true,
+    "blockerCategories": {}
   }
 }
