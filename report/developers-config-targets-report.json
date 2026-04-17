@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-17T18:11:50.286Z",
+  "generatedAt": "2026-04-17T18:43:10.760Z",
   "configPath": "/Users/daniel.roder/Sites/apigee2gravitee/config/developers.config.resolved.json",
   "apisIdMapPresent": true,
   "summary": {
@@ -7,7 +7,7 @@
     "targets": 10,
     "validTargets": 10,
     "blockers": 0,
-    "warnings": 6,
+    "warnings": 3,
     "productsWithSingleValidTarget": [
       "cats-api-product",
       "chuck-norris-api-product",
@@ -29,9 +29,10 @@
       "activeProduct": false,
       "configured": {
         "targetApi": "cats-api-7",
-        "targetApiId": "05a5c056-0848-429e-a5c0-560848929e4d",
+        "targetApiId": "63a370e7-7d6e-4ddb-a370-e77d6e3ddbc3",
         "targetPlan": "API Key Plan",
-        "targetPlanId": "03454fca-5a30-4fff-854f-ca5a308fff1e"
+        "targetPlanId": "8243bcf4-377a-421b-83bc-f4377a321b1d",
+        "matchMode": "exact"
       },
       "credentialProfile": {
         "productName": "cats-api-product",
@@ -41,30 +42,31 @@
         "sourceCredentials": []
       },
       "resolved": {
-        "apiId": null,
+        "apiId": "63a370e7-7d6e-4ddb-a370-e77d6e3ddbc3",
         "apiName": "cats-api-7",
-        "planId": null,
+        "planId": "8243bcf4-377a-421b-83bc-f4377a321b1d",
         "planName": "API Key Plan",
-        "planSecurityType": null,
-        "planStatus": null
+        "planSecurityType": "api-key",
+        "planStatus": "PUBLISHED"
       },
       "candidates": {
-        "apis": [],
-        "plans": []
-      },
-      "status": "VALID_WITH_WARNINGS",
-      "findings": [
-        {
-          "severity": "warning",
-          "code": "TARGET_API_ID_NOT_FOUND_INACTIVE_PRODUCT",
-          "productName": "cats-api-product",
-          "targetIndex": 0,
-          "message": "Configured targetApiId 05a5c056-0848-429e-a5c0-560848929e4d could not be loaded (product is not used by the current developer dataset)",
-          "details": {
-            "targetApiId": "05a5c056-0848-429e-a5c0-560848929e4d"
+        "apis": [
+          {
+            "id": "63a370e7-7d6e-4ddb-a370-e77d6e3ddbc3",
+            "name": "cats-api-7",
+            "matchMode": "id"
           }
-        }
-      ]
+        ],
+        "plans": [
+          {
+            "id": "8243bcf4-377a-421b-83bc-f4377a321b1d",
+            "name": "API Key Plan",
+            "matchMode": "id"
+          }
+        ]
+      },
+      "status": "VALID",
+      "findings": []
     },
     {
       "productName": "chuck-norris-api-product",
@@ -170,9 +172,10 @@
       "activeProduct": false,
       "configured": {
         "targetApi": "hogwarts-houses-api-8",
-        "targetApiId": "1f6d61b7-26f8-4b6e-ad61-b726f84b6ede",
+        "targetApiId": "59dab35e-953a-4960-9ab3-5e953ae960df",
         "targetPlan": "API Key Plan",
-        "targetPlanId": "26361641-3e97-4fe0-b616-413e973fe095"
+        "targetPlanId": "7c03dde1-a653-48b3-83dd-e1a65368b345",
+        "matchMode": "exact"
       },
       "credentialProfile": {
         "productName": "hogwarts-houses-api-product",
@@ -182,30 +185,31 @@
         "sourceCredentials": []
       },
       "resolved": {
-        "apiId": null,
+        "apiId": "59dab35e-953a-4960-9ab3-5e953ae960df",
         "apiName": "hogwarts-houses-api-8",
-        "planId": null,
+        "planId": "7c03dde1-a653-48b3-83dd-e1a65368b345",
         "planName": "API Key Plan",
-        "planSecurityType": null,
-        "planStatus": null
+        "planSecurityType": "api-key",
+        "planStatus": "PUBLISHED"
       },
       "candidates": {
-        "apis": [],
-        "plans": []
-      },
-      "status": "VALID_WITH_WARNINGS",
-      "findings": [
-        {
-          "severity": "warning",
-          "code": "TARGET_API_ID_NOT_FOUND_INACTIVE_PRODUCT",
-          "productName": "hogwarts-houses-api-product",
-          "targetIndex": 0,
-          "message": "Configured targetApiId 1f6d61b7-26f8-4b6e-ad61-b726f84b6ede could not be loaded (product is not used by the current developer dataset)",
-          "details": {
-            "targetApiId": "1f6d61b7-26f8-4b6e-ad61-b726f84b6ede"
+        "apis": [
+          {
+            "id": "59dab35e-953a-4960-9ab3-5e953ae960df",
+            "name": "hogwarts-houses-api-8",
+            "matchMode": "id"
           }
-        }
-      ]
+        ],
+        "plans": [
+          {
+            "id": "7c03dde1-a653-48b3-83dd-e1a65368b345",
+            "name": "API Key Plan",
+            "matchMode": "id"
+          }
+        ]
+      },
+      "status": "VALID",
+      "findings": []
     },
     {
       "productName": "kanye-api-product",
@@ -440,9 +444,10 @@
       "activeProduct": false,
       "configured": {
         "targetApi": "yes-or-no-api-4",
-        "targetApiId": "10633c96-086c-466a-a33c-96086c766ae2",
+        "targetApiId": "bf68aeeb-d4db-4656-a8ae-ebd4db4656a5",
         "targetPlan": "API Key Plan",
-        "targetPlanId": "af5d6073-fb31-4e6d-9d60-73fb31ee6db6"
+        "targetPlanId": "9ae81624-fbd6-415f-a816-24fbd6a15fc9",
+        "matchMode": "exact"
       },
       "credentialProfile": {
         "productName": "yes-or-no-api-product",
@@ -452,53 +457,34 @@
         "sourceCredentials": []
       },
       "resolved": {
-        "apiId": null,
+        "apiId": "bf68aeeb-d4db-4656-a8ae-ebd4db4656a5",
         "apiName": "yes-or-no-api-4",
-        "planId": null,
+        "planId": "9ae81624-fbd6-415f-a816-24fbd6a15fc9",
         "planName": "API Key Plan",
-        "planSecurityType": null,
-        "planStatus": null
+        "planSecurityType": "api-key",
+        "planStatus": "PUBLISHED"
       },
       "candidates": {
-        "apis": [],
-        "plans": []
-      },
-      "status": "VALID_WITH_WARNINGS",
-      "findings": [
-        {
-          "severity": "warning",
-          "code": "TARGET_API_ID_NOT_FOUND_INACTIVE_PRODUCT",
-          "productName": "yes-or-no-api-product",
-          "targetIndex": 0,
-          "message": "Configured targetApiId 10633c96-086c-466a-a33c-96086c766ae2 could not be loaded (product is not used by the current developer dataset)",
-          "details": {
-            "targetApiId": "10633c96-086c-466a-a33c-96086c766ae2"
+        "apis": [
+          {
+            "id": "bf68aeeb-d4db-4656-a8ae-ebd4db4656a5",
+            "name": "yes-or-no-api-4",
+            "matchMode": "id"
           }
-        }
-      ]
+        ],
+        "plans": [
+          {
+            "id": "9ae81624-fbd6-415f-a816-24fbd6a15fc9",
+            "name": "API Key Plan",
+            "matchMode": "id"
+          }
+        ]
+      },
+      "status": "VALID",
+      "findings": []
     }
   ],
   "findings": [
-    {
-      "severity": "warning",
-      "code": "TARGET_API_ID_NOT_FOUND_INACTIVE_PRODUCT",
-      "productName": "cats-api-product",
-      "targetIndex": 0,
-      "message": "Configured targetApiId 05a5c056-0848-429e-a5c0-560848929e4d could not be loaded (product is not used by the current developer dataset)",
-      "details": {
-        "targetApiId": "05a5c056-0848-429e-a5c0-560848929e4d"
-      }
-    },
-    {
-      "severity": "warning",
-      "code": "TARGET_API_ID_NOT_FOUND_INACTIVE_PRODUCT",
-      "productName": "hogwarts-houses-api-product",
-      "targetIndex": 0,
-      "message": "Configured targetApiId 1f6d61b7-26f8-4b6e-ad61-b726f84b6ede could not be loaded (product is not used by the current developer dataset)",
-      "details": {
-        "targetApiId": "1f6d61b7-26f8-4b6e-ad61-b726f84b6ede"
-      }
-    },
     {
       "severity": "warning",
       "code": "TARGET_API_ID_NOT_FOUND_INACTIVE_PRODUCT",
@@ -527,16 +513,6 @@
       "message": "Configured targetApiId 71bad2fc-80ef-4dce-bad2-fc80efddce4e could not be loaded (product is not used by the current developer dataset)",
       "details": {
         "targetApiId": "71bad2fc-80ef-4dce-bad2-fc80efddce4e"
-      }
-    },
-    {
-      "severity": "warning",
-      "code": "TARGET_API_ID_NOT_FOUND_INACTIVE_PRODUCT",
-      "productName": "yes-or-no-api-product",
-      "targetIndex": 0,
-      "message": "Configured targetApiId 10633c96-086c-466a-a33c-96086c766ae2 could not be loaded (product is not used by the current developer dataset)",
-      "details": {
-        "targetApiId": "10633c96-086c-466a-a33c-96086c766ae2"
       }
     }
   ]

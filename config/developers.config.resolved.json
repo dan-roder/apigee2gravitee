@@ -38,9 +38,10 @@
   "productPlanMap": {
     "cats-api-product": {
       "targetApi": "cats-api-7",
-      "targetApiId": "05a5c056-0848-429e-a5c0-560848929e4d",
+      "targetApiId": "63a370e7-7d6e-4ddb-a370-e77d6e3ddbc3",
       "targetPlan": "API Key Plan",
-      "targetPlanId": "03454fca-5a30-4fff-854f-ca5a308fff1e"
+      "targetPlanId": "8243bcf4-377a-421b-83bc-f4377a321b1d",
+      "matchMode": "exact"
     },
     "chuck-norris-api-product": {
       "targetApi": "chuck-norris-api-10",
@@ -58,9 +59,10 @@
     },
     "hogwarts-houses-api-product": {
       "targetApi": "hogwarts-houses-api-8",
-      "targetApiId": "1f6d61b7-26f8-4b6e-ad61-b726f84b6ede",
+      "targetApiId": "59dab35e-953a-4960-9ab3-5e953ae960df",
       "targetPlan": "API Key Plan",
-      "targetPlanId": "26361641-3e97-4fe0-b616-413e973fe095"
+      "targetPlanId": "7c03dde1-a653-48b3-83dd-e1a65368b345",
+      "matchMode": "exact"
     },
     "kanye-api-product": {
       "targetApi": "kanye-rest-api-5",
@@ -98,9 +100,10 @@
     },
     "yes-or-no-api-product": {
       "targetApi": "yes-or-no-api-4",
-      "targetApiId": "10633c96-086c-466a-a33c-96086c766ae2",
+      "targetApiId": "bf68aeeb-d4db-4656-a8ae-ebd4db4656a5",
       "targetPlan": "API Key Plan",
-      "targetPlanId": "af5d6073-fb31-4e6d-9d60-73fb31ee6db6"
+      "targetPlanId": "9ae81624-fbd6-415f-a816-24fbd6a15fc9",
+      "matchMode": "exact"
     }
   },
   "customFieldMap": {
