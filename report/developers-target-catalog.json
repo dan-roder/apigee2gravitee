@@ -1,18 +1,17 @@
 {
-  "generatedAt": "2026-04-17T17:42:13.361Z",
+  "generatedAt": "2026-04-17T18:11:14.988Z",
   "configPath": "/Users/daniel.roder/Sites/apigee2gravitee/config/developers.config.resolved.json",
   "summary": {
     "products": 4,
     "productsWithSingleValidTarget": [
-      "chuck-norris-api-product"
-    ],
-    "productsNeedingSelection": [],
-    "blockedProducts": [
+      "chuck-norris-api-product",
       "dog-breeds-api-product",
       "kanye-api-product",
       "wizards-api-product"
     ],
-    "blockers": 3,
+    "productsNeedingSelection": [],
+    "blockedProducts": [],
+    "blockers": 0,
     "warnings": 0
   },
   "entries": [
@@ -36,9 +35,9 @@
       "exactCandidates": [
         {
           "targetApi": "chuck-norris-api-10",
-          "targetApiId": "bdc40b6a-2084-44c3-840b-6a208474c396",
+          "targetApiId": "25c78c81-954e-455d-878c-81954e255d73",
           "targetPlan": "API Key Plan",
-          "targetPlanId": "eade57f3-ce18-4858-9e57-f3ce183858d3",
+          "targetPlanId": "6d3b4998-cee4-412a-bb49-98cee4f12ad5",
           "matchMode": "exact",
           "score": 125,
           "securityType": "api-key",
@@ -50,9 +49,9 @@
       "candidates": [
         {
           "targetApi": "chuck-norris-api-10",
-          "targetApiId": "bdc40b6a-2084-44c3-840b-6a208474c396",
+          "targetApiId": "25c78c81-954e-455d-878c-81954e255d73",
           "targetPlan": "API Key Plan",
-          "targetPlanId": "eade57f3-ce18-4858-9e57-f3ce183858d3",
+          "targetPlanId": "6d3b4998-cee4-412a-bb49-98cee4f12ad5",
           "matchMode": "exact",
           "score": 125,
           "securityType": "api-key",
@@ -78,9 +77,35 @@
           "dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8"
         ]
       },
-      "status": "BLOCKED",
-      "exactCandidates": [],
-      "candidates": []
+      "status": "EXACT_MATCH",
+      "exactCandidates": [
+        {
+          "targetApi": "dog-breeds-api-6",
+          "targetApiId": "53b1d618-59d2-4a3a-b1d6-1859d2da3a89",
+          "targetPlan": "API Key Plan",
+          "targetPlanId": "e7af7151-7eb1-43a4-af71-517eb143a4a2",
+          "matchMode": "exact",
+          "score": 125,
+          "securityType": "api-key",
+          "planStatus": "PUBLISHED",
+          "suitable": true,
+          "suitabilityCode": null
+        }
+      ],
+      "candidates": [
+        {
+          "targetApi": "dog-breeds-api-6",
+          "targetApiId": "53b1d618-59d2-4a3a-b1d6-1859d2da3a89",
+          "targetPlan": "API Key Plan",
+          "targetPlanId": "e7af7151-7eb1-43a4-af71-517eb143a4a2",
+          "matchMode": "exact",
+          "score": 125,
+          "securityType": "api-key",
+          "planStatus": "PUBLISHED",
+          "suitable": true,
+          "suitabilityCode": null
+        }
+      ]
     },
     {
       "productName": "kanye-api-product",
@@ -98,9 +123,35 @@
           "dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1"
         ]
       },
-      "status": "BLOCKED",
-      "exactCandidates": [],
-      "candidates": []
+      "status": "EXACT_MATCH",
+      "exactCandidates": [
+        {
+          "targetApi": "kanye-rest-api-5",
+          "targetApiId": "d40cba62-2887-461e-8cba-622887161ea9",
+          "targetPlan": "API Key Plan",
+          "targetPlanId": "7ac7160f-b292-4f9e-8716-0fb292af9e80",
+          "matchMode": "exact",
+          "score": 125,
+          "securityType": "api-key",
+          "planStatus": "PUBLISHED",
+          "suitable": true,
+          "suitabilityCode": null
+        }
+      ],
+      "candidates": [
+        {
+          "targetApi": "kanye-rest-api-5",
+          "targetApiId": "d40cba62-2887-461e-8cba-622887161ea9",
+          "targetPlan": "API Key Plan",
+          "targetPlanId": "7ac7160f-b292-4f9e-8716-0fb292af9e80",
+          "matchMode": "exact",
+          "score": 125,
+          "securityType": "api-key",
+          "planStatus": "PUBLISHED",
+          "suitable": true,
+          "suitabilityCode": null
+        }
+      ]
     },
     {
       "productName": "wizards-api-product",
@@ -118,47 +169,37 @@
           "dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK"
         ]
       },
-      "status": "BLOCKED",
-      "exactCandidates": [],
-      "candidates": []
+      "status": "EXACT_MATCH",
+      "exactCandidates": [
+        {
+          "targetApi": "wizards-api-9",
+          "targetApiId": "07dfa49e-dc23-4048-9fa4-9edc236048a6",
+          "targetPlan": "API Key Plan",
+          "targetPlanId": "589c71e0-0770-4580-9c71-e0077015806b",
+          "matchMode": "exact",
+          "score": 125,
+          "securityType": "api-key",
+          "planStatus": "PUBLISHED",
+          "suitable": true,
+          "suitabilityCode": null
+        }
+      ],
+      "candidates": [
+        {
+          "targetApi": "wizards-api-9",
+          "targetApiId": "07dfa49e-dc23-4048-9fa4-9edc236048a6",
+          "targetPlan": "API Key Plan",
+          "targetPlanId": "589c71e0-0770-4580-9c71-e0077015806b",
+          "matchMode": "exact",
+          "score": 125,
+          "securityType": "api-key",
+          "planStatus": "PUBLISHED",
+          "suitable": true,
+          "suitabilityCode": null
+        }
+      ]
     }
   ],
-  "findings": [
-    {
-      "severity": "blocker",
-      "code": "DISCOVER_TARGET_NO_SUITABLE_PLAN",
-      "productName": "dog-breeds-api-product",
-      "message": "No suitable API/plan candidate was found for dog-breeds-api-product",
-      "details": {
-        "credentialType": "api-key",
-        "sourceProxyNames": [
-          "dog-breeds-api-6"
-        ]
-      }
-    },
-    {
-      "severity": "blocker",
-      "code": "DISCOVER_TARGET_NO_SUITABLE_PLAN",
-      "productName": "kanye-api-product",
-      "message": "No suitable API/plan candidate was found for kanye-api-product",
-      "details": {
-        "credentialType": "api-key",
-        "sourceProxyNames": [
-          "kanye-rest-api-5"
-        ]
-      }
-    },
-    {
-      "severity": "blocker",
-      "code": "DISCOVER_TARGET_NO_SUITABLE_PLAN",
-      "productName": "wizards-api-product",
-      "message": "No suitable API/plan candidate was found for wizards-api-product",
-      "details": {
-        "credentialType": "api-key",
-        "sourceProxyNames": [
-          "wizards-api-9"
-        ]
-      }
-    }
-  ]
+  "findings": [],
+  "promptedSelections": []
 }

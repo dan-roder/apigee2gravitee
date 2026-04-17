@@ -1,0 +1,150 @@
+{
+  "generatedAt": "2026-04-17T17:47:02.373Z",
+  "summary": {
+    "requested": 23,
+    "deleted": 23,
+    "skipped": 0,
+    "failed": 0
+  },
+  "targets": [
+    {
+      "sourceId": "KVM-Create",
+      "proxyName": "KVM-Create",
+      "apiId": "ae8517f0-4c1a-462c-8517-f04c1a462c09",
+      "strategy": "id-map"
+    },
+    {
+      "sourceId": "KVM-Reader",
+      "proxyName": "KVM-Reader",
+      "apiId": "a7d289d9-766b-46f1-9289-d9766be6f1fa",
+      "strategy": "id-map"
+    },
+    {
+      "sourceId": "KVM-Update",
+      "proxyName": "KVM-Update",
+      "apiId": "eb2c2568-0f94-4567-ac25-680f94c567c9",
+      "strategy": "id-map"
+    },
+    {
+      "sourceId": "admin-kvm-export",
+      "proxyName": "admin-kvm-export",
+      "apiId": "ced2af9a-fd1d-4c8b-92af-9afd1dec8b24",
+      "strategy": "id-map"
+    },
+    {
+      "sourceId": "apigee-hello-api-1",
+      "proxyName": "apigee-hello-api-1",
+      "apiId": "a71428c0-322e-4060-9428-c0322ee0604e",
+      "strategy": "id-map"
+    },
+    {
+      "sourceId": "apigee-hello",
+      "proxyName": "apigee-hello",
+      "apiId": "2d568aa1-a1ee-49ea-968a-a1a1ee29ea11",
+      "strategy": "id-map"
+    },
+    {
+      "sourceId": "car-makes-api-3",
+      "proxyName": "car-makes-api-3",
+      "apiId": "71bad2fc-80ef-4dce-bad2-fc80efddce4e",
+      "strategy": "id-map"
+    },
+    {
+      "sourceId": "cat-fact-api-2",
+      "proxyName": "cat-fact-api-2",
+      "apiId": "6b413c68-ff1a-4362-813c-68ff1ac36249",
+      "strategy": "id-map"
+    },
+    {
+      "sourceId": "cats-api-7",
+      "proxyName": "cats-api-7",
+      "apiId": "05a5c056-0848-429e-a5c0-560848929e4d",
+      "strategy": "id-map"
+    },
+    {
+      "sourceId": "chuck-norris-api-10",
+      "proxyName": "chuck-norris-api-10",
+      "apiId": "bdc40b6a-2084-44c3-840b-6a208474c396",
+      "strategy": "id-map"
+    },
+    {
+      "sourceId": "dog-breeds-api-6",
+      "proxyName": "dog-breeds-api-6",
+      "apiId": "a10d7923-3577-4d42-8d79-2335777d4288",
+      "strategy": "id-map"
+    },
+    {
+      "sourceId": "get-kvm-proxy",
+      "proxyName": "get-kvm-proxy",
+      "apiId": "95d33c43-00d3-46e3-933c-4300d336e39b",
+      "strategy": "id-map"
+    },
+    {
+      "sourceId": "harry-potter-characters",
+      "proxyName": "harry-potter-characters",
+      "apiId": "70144bf7-5b8c-44f6-944b-f75b8c04f6d7",
+      "strategy": "id-map"
+    },
+    {
+      "sourceId": "hogwarts-houses-api-8",
+      "proxyName": "hogwarts-houses-api-8",
+      "apiId": "1f6d61b7-26f8-4b6e-ad61-b726f84b6ede",
+      "strategy": "id-map"
+    },
+    {
+      "sourceId": "kanye-rest-api-5",
+      "proxyName": "kanye-rest-api-5",
+      "apiId": "fdc2e4bc-b5a2-409f-82e4-bcb5a2909f6c",
+      "strategy": "id-map"
+    },
+    {
+      "sourceId": "kvm-test",
+      "proxyName": "kvm-test",
+      "apiId": "138325eb-639f-41c6-8325-eb639fb1c691",
+      "strategy": "id-map"
+    },
+    {
+      "sourceId": "load-balance-target-servers-api",
+      "proxyName": "load-balance-target-servers-api",
+      "apiId": "44ca08ad-496b-455e-8a08-ad496b355ed0",
+      "strategy": "id-map"
+    },
+    {
+      "sourceId": "mock-target-api",
+      "proxyName": "mock-target-api",
+      "apiId": "28ac420b-122e-429c-ac42-0b122ec29c78",
+      "strategy": "id-map"
+    },
+    {
+      "sourceId": "proxy-sharedflow-api-11",
+      "proxyName": "proxy-sharedflow-api-11",
+      "apiId": "c81e9bcd-5473-4e37-9e9b-cd54738e37c0",
+      "strategy": "id-map"
+    },
+    {
+      "sourceId": "v1-ships",
+      "proxyName": "v1-ships",
+      "apiId": "f336db49-de57-406f-b6db-49de57506fef",
+      "strategy": "id-map"
+    },
+    {
+      "sourceId": "villian-chain",
+      "proxyName": "villian-chain",
+      "apiId": "30c2c79f-18a7-4456-82c7-9f18a7645628",
+      "strategy": "id-map"
+    },
+    {
+      "sourceId": "wizards-api-9",
+      "proxyName": "wizards-api-9",
+      "apiId": "927e2f2b-5bf0-484b-be2f-2b5bf0f84b95",
+      "strategy": "id-map"
+    },
+    {
+      "sourceId": "yes-or-no-api-4",
+      "proxyName": "yes-or-no-api-4",
+      "apiId": "10633c96-086c-466a-a33c-96086c766ae2",
+      "strategy": "id-map"
+    }
+  ],
+  "failures": []
+}
