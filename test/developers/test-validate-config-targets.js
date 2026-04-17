@@ -215,11 +215,42 @@ async function testValidateConfigTargetsBlocksOnAmbiguousAndUnsuitablePlans() {
   });
 }
 
+async function testValidateConfigTargetsDowngradesInactiveProductBlockersToWarnings() {
+  await withTempDir(async (dir) => {
+    const dataDir = path.join(dir, 'data');
+    const irDir = path.join(dir, 'ir');
+    const configPath = path.join(dir, 'developers.config.json');
+    copyDir(FIXTURES_DATA, dataDir);
+    generateIrFromData(dataDir, irDir);
+
+    const config = makeConfig();
+    config.productPlanMap['unused-product'] = {
+      targetApi: 'Missing API',
+      targetApiId: 'missing-api-id',
+      targetPlan: 'Missing Plan',
+      targetPlanId: 'missing-plan-id',
+    };
+    fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
+
+    const result = await runValidateDevelopersConfigTargets(
+      { config: configPath, 'ir-dir': irDir },
+      { client: makeClient() },
+    );
+
+    assert.strictEqual(result.exitCode, 0);
+    const unusedTarget = result.report.targets.find((item) => item.productName === 'unused-product');
+    assert.strictEqual(unusedTarget.activeProduct, false);
+    assert.strictEqual(unusedTarget.status, 'VALID_WITH_WARNINGS');
+    assert.ok(unusedTarget.findings.some((item) => item.code === 'TARGET_API_ID_NOT_FOUND_INACTIVE_PRODUCT'));
+  });
+}
+
 async function run() {
   await testValidateConfigTargetsSucceedsWithExactMatches();
   await testValidateConfigTargetsSupportsAliasMatching();
   await testValidateConfigTargetsWarnsOnSecurityMismatchForOAuthCredentials();
   await testValidateConfigTargetsBlocksOnAmbiguousAndUnsuitablePlans();
+  await testValidateConfigTargetsDowngradesInactiveProductBlockersToWarnings();
   console.log('test-validate-config-targets.js passed');
 }
 

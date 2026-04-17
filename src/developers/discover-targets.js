@@ -2,6 +2,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const readline = require('readline/promises');
 
 const { loadDevelopersConfig, validateDevelopersConfig } = require('./config');
 const { loadDeveloperDomain } = require('./developer-loader');
@@ -34,6 +35,21 @@ function defaultOutputPath(configPath) {
   return `${absolutePath}.resolved.json`;
 }
 
+async function withPrompt(flags, handler) {
+  if (typeof flags.__prompt === 'function') {
+    return handler(flags.__prompt);
+  }
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+  });
+  try {
+    return await handler((question) => rl.question(question));
+  } finally {
+    rl.close();
+  }
+}
+
 function summarizeProductProxies(domain, productName) {
   const product = (domain.products || []).find((item) => item.name === productName);
   return Array.isArray(product?.proxies) ? product.proxies : [];
@@ -56,6 +72,104 @@ function scorePlanCandidate(plan, credentialProfile, apiScore) {
   if (security === credentialProfile.primaryCredentialType) score += 20;
   if (isPlanStatusSuitable(plan)) score += 5;
   return { score, suitability };
+}
+
+function buildCandidateTarget(candidate) {
+  return {
+    targetApi: candidate.targetApi,
+    targetApiId: candidate.targetApiId,
+    targetPlan: candidate.targetPlan,
+    targetPlanId: candidate.targetPlanId,
+    matchMode: 'exact',
+  };
+}
+
+function buildManualApiChoices(liveApis, sourceProxyNames) {
+  const scored = liveApis.map((api) => ({
+    api,
+    score: scoreApiCandidate(api, sourceProxyNames),
+  }));
+  scored.sort((a, b) => b.score - a.score || String(a.api?.name || '').localeCompare(String(b.api?.name || '')));
+  return scored.map((entry, index) => ({
+    index: index + 1,
+    api: entry.api,
+    score: entry.score,
+  }));
+}
+
+function buildManualPlanChoices(plans, credentialProfile) {
+  return plans
+    .map((plan, index) => {
+      const suitability = evaluatePlanSuitability(plan, credentialProfile);
+      return {
+        index: index + 1,
+        plan,
+        suitability,
+        securityType: classifyPlanSecurity(plan),
+        suitable: suitability.suitable && isPlanStatusSuitable(plan),
+      };
+    })
+    .sort((a, b) => Number(b.suitable) - Number(a.suitable) || String(a.plan?.name || '').localeCompare(String(b.plan?.name || '')));
+}
+
+function findChoiceByAnswer(choices, answer, valueGetter) {
+  const normalized = String(answer || '').trim();
+  if (!normalized) return null;
+  const asNumber = Number(normalized);
+  if (Number.isInteger(asNumber) && asNumber >= 1 && asNumber <= choices.length) {
+    return choices[asNumber - 1];
+  }
+  const lowered = normalized.toLowerCase();
+  return choices.find((choice) => String(valueGetter(choice) || '').toLowerCase() === lowered) || null;
+}
+
+async function promptToSelectTarget(productName, sourceProxyNames, credentialProfile, liveApis, plansByApiId, promptImpl) {
+  const apiChoices = buildManualApiChoices(liveApis, sourceProxyNames);
+  if (apiChoices.length === 0) return null;
+
+  const apiLines = [
+    `${productName} source proxies: ${sourceProxyNames.join(', ') || '(none)'}`,
+    `${productName} credential type: ${credentialProfile.primaryCredentialType}`,
+    'Select the target API:',
+    ...apiChoices.map((choice) => `  ${choice.index}. ${choice.api.name} (${choice.api.id})${choice.score > 0 ? ` [score ${choice.score}]` : ''}`),
+    '  s. Skip this product for now',
+  ];
+  const apiAnswer = await promptImpl(`${apiLines.join('\n')}\nChoose API by number or exact name: `);
+  if (String(apiAnswer || '').trim().toLowerCase() === 's') return null;
+  const selectedApiChoice = findChoiceByAnswer(apiChoices, apiAnswer, (choice) => choice.api.name);
+  if (!selectedApiChoice) {
+    throw new Error(`Invalid API selection for ${productName}: ${apiAnswer}`);
+  }
+
+  const plans = plansByApiId.get(selectedApiChoice.api.id) || [];
+  const planChoices = buildManualPlanChoices(plans, credentialProfile);
+  if (planChoices.length === 0) {
+    throw new Error(`API ${selectedApiChoice.api.name} has no plans to choose from for ${productName}`);
+  }
+
+  const planLines = [
+    `Plans for ${selectedApiChoice.api.name}:`,
+    ...planChoices.map((choice) => {
+      const status = choice.plan.status || choice.plan.state || 'UNKNOWN';
+      const suitability = choice.suitable ? '[suitable]' : `[${choice.suitability.advisoryCode || 'unsuitable'}]`;
+      return `  ${choice.index}. ${choice.plan.name} (${choice.plan.id}) [${choice.securityType}] [${status}] ${suitability}`;
+    }),
+    '  s. Skip this product for now',
+  ];
+  const planAnswer = await promptImpl(`${planLines.join('\n')}\nChoose plan by number or exact name: `);
+  if (String(planAnswer || '').trim().toLowerCase() === 's') return null;
+  const selectedPlanChoice = findChoiceByAnswer(planChoices, planAnswer, (choice) => choice.plan.name);
+  if (!selectedPlanChoice) {
+    throw new Error(`Invalid plan selection for ${productName}: ${planAnswer}`);
+  }
+
+  return {
+    targetApi: selectedApiChoice.api.name,
+    targetApiId: selectedApiChoice.api.id,
+    targetPlan: selectedPlanChoice.plan.name,
+    targetPlanId: selectedPlanChoice.plan.id,
+    matchMode: 'exact',
+  };
 }
 
 async function runDiscoverDevelopersTargets(flags, deps = {}) {
@@ -88,6 +202,7 @@ async function runDiscoverDevelopersTargets(flags, deps = {}) {
   const findings = [];
   const proposedConfig = clone(config);
   proposedConfig.productPlanMap = proposedConfig.productPlanMap || {};
+  const promptedSelections = [];
 
   for (const productName of uniqueProducts) {
     const credentialProfile = summarizeProductCredentialType(domain, productName);
@@ -154,13 +269,7 @@ async function runDiscoverDevelopersTargets(flags, deps = {}) {
     }
 
     if (flags['write-config'] && exactCandidates.length === 1) {
-      const resolved = {
-        targetApi: exactCandidates[0].targetApi,
-        targetApiId: exactCandidates[0].targetApiId,
-        targetPlan: exactCandidates[0].targetPlan,
-        targetPlanId: exactCandidates[0].targetPlanId,
-        matchMode: 'exact',
-      };
+      const resolved = buildCandidateTarget(exactCandidates[0]);
       proposedConfig.productPlanMap[productName] = denormalizeTargets(
         [resolved],
         proposedConfig.productPlanMap[productName] || resolved,
@@ -177,6 +286,32 @@ async function runDiscoverDevelopersTargets(flags, deps = {}) {
     });
   }
 
+  const shouldPrompt = Boolean(flags['prompt-matches'] || flags['interactive']);
+  if (shouldPrompt) {
+    await withPrompt(flags, async (promptImpl) => {
+      for (const entry of entries) {
+        if (entry.status === 'EXACT_MATCH') continue;
+        const selected = await promptToSelectTarget(
+          entry.productName,
+          entry.sourceProxyNames,
+          entry.credentialProfile,
+          liveApis,
+          plansByApiId,
+          promptImpl,
+        );
+        if (!selected) continue;
+        proposedConfig.productPlanMap[entry.productName] = denormalizeTargets(
+          [selected],
+          proposedConfig.productPlanMap[entry.productName] || selected,
+        );
+        promptedSelections.push({
+          productName: entry.productName,
+          selected,
+        });
+      }
+    });
+  }
+
   const report = {
     generatedAt: new Date().toISOString(),
     configPath: path.resolve(configPath),
@@ -190,6 +325,7 @@ async function runDiscoverDevelopersTargets(flags, deps = {}) {
     },
     entries,
     findings,
+    promptedSelections,
   };
 
   const reportPath = path.resolve(flags['output-report'] || outputPaths.targetCatalog);

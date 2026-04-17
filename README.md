@@ -541,7 +541,7 @@ Use `developers configure-roles` before a real run to fetch live Gravitee role c
 
 Use `developers sync-api-targets` after an API import or reimport cycle to refresh `productPlanMap` API and plan ids from `state/apis-id-map.json` before validating or analyzing the developers workflow again. It writes `report/developers-sync-api-targets-report.json` by default so operators can review exactly which targets were updated and which still need manual attention. When you run it against `developers.config.resolved.json`, it now refreshes that same resolved config path by default instead of creating a growing chain of extra synced files.
 
-Use `developers discover-targets` when APIs and plans were imported manually rather than by this repo's `apis` workflow. It inspects live Gravitee APIs and plans, generates `report/developers-target-catalog.json`, and can optionally write exact-match `productPlanMap` entries back into `developers.config.resolved.json`.
+Use `developers discover-targets` when APIs and plans were imported manually rather than by this repo's `apis` workflow. It inspects live Gravitee APIs and plans, generates `report/developers-target-catalog.json`, and can optionally write exact-match `productPlanMap` entries back into `developers.config.resolved.json`. If exact matching is not enough, add `--prompt-matches --write-config` to select an existing live API and plan interactively for each unresolved product.
 
 Use `developers resolve-config-ids` before `developers analyze` when your config still contains placeholder `targetApiId` and `targetPlanId` values. It resolves Gravitee API ids by `targetApi` name and plan ids by `targetPlan` name, then writes a sibling file such as `config/developers.config.resolved.json`.
 

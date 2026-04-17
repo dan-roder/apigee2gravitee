@@ -18,6 +18,7 @@
     "apis:delete":  "node bin/migrator.js apis delete-imported --ir-dir ./ir --config ./config/apis.config.example.json --gravitee-token $GRAVITEE_TOKEN",
     "developers:configure-roles": "node bin/migrator.js developers configure-roles --config ./config/developers.config.resolved.json --gravitee-token $GRAVITEE_TOKEN",
     "developers:discover-targets": "node bin/migrator.js developers discover-targets --ir-dir ./ir --config ./config/developers.config.resolved.json --gravitee-token $GRAVITEE_TOKEN",
+    "developers:discover-targets:with-prompt": "node bin/migrator.js developers discover-targets --ir-dir ./ir --config ./config/developers.config.resolved.json --gravitee-token \"$GRAVITEE_TOKEN\" --write-config --prompt-matches",
     "developers:validate":  "node bin/migrator.js developers validate-config-targets --ir-dir ./ir --config ./config/developers.config.resolved.json --gravitee-token $GRAVITEE_TOKEN",
     "developers:analyze":  "node bin/migrator.js developers analyze --ir-dir ./ir --config ./config/developers.config.resolved.json --gravitee-token $GRAVITEE_TOKEN",
     "developers:import": "node bin/migrator.js developers import --ir-dir ./ir --config ./config/developers.config.resolved.json --gravitee-token $GRAVITEE_TOKEN",

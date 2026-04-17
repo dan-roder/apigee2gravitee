@@ -157,9 +157,54 @@ async function testDiscoverTargetsEmitsAmbiguityAndSecurityBlocking() {
   });
 }
 
+async function testDiscoverTargetsCanPromptForManualSelectionAndWriteConfig() {
+  await withTempDir(async (dir) => {
+    const dataDir = path.join(dir, 'data');
+    const irDir = path.join(dir, 'ir');
+    const configPath = path.join(dir, 'developers.config.json');
+    copyDir(FIXTURES_DATA, dataDir);
+    generateIrFromData(dataDir, irDir);
+    fs.writeFileSync(configPath, JSON.stringify(makeConfig(dir), null, 2));
+
+    const client = {
+      async listApis() {
+        return [
+          { id: 'api-orders-manual-1', name: 'Orders Manual API' },
+          { id: 'api-other-1', name: 'Other API' },
+        ];
+      },
+      async listApiPlans(apiId) {
+        if (apiId === 'api-orders-manual-1') {
+          return [{ id: 'plan-orders-manual-1', name: 'Orders API Key', security: { type: 'API_KEY' }, status: 'PUBLISHED' }];
+        }
+        return [{ id: 'plan-other-1', name: 'Other Keyless', security: { type: 'KEY_LESS' }, status: 'PUBLISHED' }];
+      },
+    };
+
+    const answers = ['1', '1'];
+    const result = await runDiscoverDevelopersTargets(
+      {
+        config: configPath,
+        'ir-dir': irDir,
+        'write-config': true,
+        'prompt-matches': true,
+        __prompt: async () => answers.shift(),
+      },
+      { client },
+    );
+
+    assert.strictEqual(result.outputPath, path.resolve(configPath.replace(/\.json$/, '.resolved.json')));
+    const written = JSON.parse(fs.readFileSync(result.outputPath, 'utf8'));
+    assert.strictEqual(written.productPlanMap['orders-product'].targetApiId, 'api-orders-manual-1');
+    assert.strictEqual(written.productPlanMap['orders-product'].targetPlanId, 'plan-orders-manual-1');
+    assert.strictEqual(result.report.promptedSelections.length, 1);
+  });
+}
+
 async function run() {
   await testDiscoverTargetsFindsExactMatchesAndCanWriteConfig();
   await testDiscoverTargetsEmitsAmbiguityAndSecurityBlocking();
+  await testDiscoverTargetsCanPromptForManualSelectionAndWriteConfig();
   console.log('test-discover-targets.js passed');
 }
 

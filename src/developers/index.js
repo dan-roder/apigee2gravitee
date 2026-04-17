@@ -177,6 +177,13 @@ async function runDevelopersCommand(subcommand, flags, fmt) {
         console.log(printer(`${finding.code}: ${finding.productName} ${finding.message}`));
       }
     }
+    if (Array.isArray(result.report.promptedSelections) && result.report.promptedSelections.length > 0) {
+      console.log('');
+      console.log('  Selected Targets:');
+      for (const selection of result.report.promptedSelections.slice(0, 10)) {
+        console.log(`   - ${selection.productName}: ${selection.selected.targetApi} / ${selection.selected.targetPlan}`);
+      }
+    }
     console.log('');
     console.log(`  Report:      ${fmt.dim(result.reportPath)}`);
     if (result.outputPath) {

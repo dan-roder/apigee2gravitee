@@ -40,6 +40,13 @@ function defaultApisIdMapPath(config) {
   return path.resolve(path.join(path.dirname(reportDir), 'state', 'apis-id-map.json'));
 }
 
+function isProductActive(domain, productName) {
+  if (!domain) return true;
+  return Array.isArray(domain.subscriptions)
+    ? domain.subscriptions.some((subscription) => subscription.productName === productName)
+    : true;
+}
+
 async function resolveApiTarget(target, client, productName, targetIndex) {
   const liveApis = await client.listApis();
   const candidates = resolveApiCandidates(target, liveApis);
@@ -216,6 +223,7 @@ async function runValidateDevelopersConfigTargets(flags, deps = {}) {
 
   for (const [productName, entry] of Object.entries(config.productPlanMap || {})) {
     report.summary.products += 1;
+    const activeProduct = isProductActive(domain, productName);
     const credentialProfile = domain ? summarizeProductCredentialType(domain, productName) : {
       productName,
       credentialTypes: [],
@@ -242,17 +250,31 @@ async function runValidateDevelopersConfigTargets(flags, deps = {}) {
         planCandidates = planResolution.candidates;
       }
 
-      const status = findings.some((item) => item.severity === 'blocker')
+      const effectiveFindings = activeProduct
+        ? findings
+        : findings.map((item) => (
+          item.severity === 'blocker'
+            ? {
+              ...item,
+              severity: 'warning',
+              code: `${item.code}_INACTIVE_PRODUCT`,
+              message: `${item.message} (product is not used by the current developer dataset)`,
+            }
+            : item
+        ));
+      const status = effectiveFindings.some((item) => item.severity === 'blocker')
         ? 'BLOCKED'
-        : findings.some((item) => item.severity === 'warning')
+        : effectiveFindings.some((item) => item.severity === 'warning')
           ? 'VALID_WITH_WARNINGS'
           : 'VALID';
-      if (!findings.some((item) => item.severity === 'blocker')) validTargetCount += 1;
 
-      report.findings.push(...findings);
+      if (!effectiveFindings.some((item) => item.severity === 'blocker')) validTargetCount += 1;
+
+      report.findings.push(...effectiveFindings);
       report.targets.push({
         productName,
         targetIndex: index,
+        activeProduct,
         configured: target,
         credentialProfile,
         resolved: {
@@ -268,7 +290,7 @@ async function runValidateDevelopersConfigTargets(flags, deps = {}) {
           plans: planCandidates.map((candidate) => ({ id: candidate.plan.id, name: candidate.plan.name, matchMode: candidate.matchMode })),
         },
         status,
-        findings,
+        findings: effectiveFindings,
       });
     }
 
