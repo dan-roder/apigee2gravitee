@@ -1,35 +1,174 @@
 {
-  "generatedAt": "2026-04-14T20:45:03.047Z",
+  "generatedAt": "2026-04-17T16:34:11.565Z",
   "summary": {
     "users": 2,
     "applications": 4,
     "credentials": 4,
     "subscriptions": 4,
     "actions": 24,
-    "blockers": 0,
-    "warnings": 1,
-    "manualReview": 1,
+    "blockers": 6,
+    "warnings": 9,
+    "manualReview": 2,
     "inactiveDevelopers": 0,
-    "continuityRiskCount": 4
+    "continuityRiskCount": 4,
+    "apiKeyContinuityRiskCount": 4,
+    "oauthContinuityRiskCount": 0,
+    "consumerSecretCount": 4,
+    "protectedSecretMaterialCount": 4,
+    "oauthRelevantSecretCount": 0,
+    "missingProtectedSecretCount": 0,
+    "oauthSecretManualReviewCount": 0
   },
   "findings": [
     {
-      "severity": "warning",
-      "code": "OAUTH_CLIENT_CONTINUITY_UNKNOWN",
-      "message": "OAuth client value preservation is not confirmed as supported",
+      "severity": "blocker",
+      "code": "GRAVITEE_AUTH_FAILED",
+      "message": "Gravitee health check failed: unknown error",
       "details": {
-        "actual": "unknown"
+        "status": null
       }
+    },
+    {
+      "severity": "blocker",
+      "code": "USER_PROVISIONING_LOOKUP_UNSUPPORTED",
+      "message": "User provisioning probe failed for lookup",
+      "details": {
+        "status": null,
+        "classification": "network",
+        "error": null
+      }
+    },
+    {
+      "severity": "blocker",
+      "code": "USER_PROVISIONING_CREATE_UNSUPPORTED",
+      "message": "User provisioning probe failed for create",
+      "details": {
+        "status": null,
+        "classification": "network",
+        "error": null
+      }
+    },
+    {
+      "severity": "warning",
+      "code": "USER_PROVISIONING_UPDATE_UNSUPPORTED",
+      "message": "User provisioning probe failed for update",
+      "details": {
+        "status": null,
+        "classification": "network",
+        "error": null
+      }
+    },
+    {
+      "severity": "warning",
+      "code": "USER_PROVISIONING_ROLEASSIGN_UNSUPPORTED",
+      "message": "User provisioning probe failed for roleAssign",
+      "details": {
+        "status": null,
+        "classification": "network",
+        "error": null
+      }
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_OWNERSHIP_LIST_UNSUPPORTED",
+      "message": "Application ownership probe failed for list",
+      "details": {
+        "status": null,
+        "classification": "network",
+        "error": null
+      }
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_OWNERSHIP_CREATE_UNSUPPORTED",
+      "message": "Application ownership probe failed for create",
+      "details": {
+        "status": null,
+        "classification": "network",
+        "error": null
+      }
+    },
+    {
+      "severity": "warning",
+      "code": "APPLICATION_OWNERSHIP_MEMBERS_UNSUPPORTED",
+      "message": "Application ownership probe failed for members",
+      "details": {
+        "status": null,
+        "classification": "network",
+        "error": null
+      }
+    },
+    {
+      "severity": "warning",
+      "code": "APPLICATION_OWNERSHIP_ADDMEMBER_UNSUPPORTED",
+      "message": "Application ownership probe failed for addMember",
+      "details": {
+        "status": null,
+        "classification": "network",
+        "error": null
+      }
+    },
+    {
+      "severity": "warning",
+      "code": "API_KEY_CONTINUITY_SUBSCRIPTIONS_UNSUPPORTED",
+      "message": "API key continuity probe failed for subscriptions",
+      "details": {
+        "status": null,
+        "classification": "network",
+        "error": null
+      }
+    },
+    {
+      "severity": "warning",
+      "code": "API_KEY_CONTINUITY_CREATE_UNSUPPORTED",
+      "message": "API key continuity probe failed for create",
+      "details": {
+        "status": null,
+        "classification": "network",
+        "error": null
+      }
+    },
+    {
+      "severity": "warning",
+      "code": "API_KEY_CONTINUITY_APIKEYS_UNSUPPORTED",
+      "message": "API key continuity probe failed for apiKeys",
+      "details": {
+        "status": null,
+        "classification": "network",
+        "error": null
+      }
+    },
+    {
+      "severity": "blocker",
+      "code": "SILENT_USER_CREATION_PROBE_FAILED",
+      "message": "Live Gravitee probes did not confirm silent user provisioning support",
+      "details": {}
+    },
+    {
+      "severity": "warning",
+      "code": "ROLE_LOOKUP_FAILED",
+      "message": "Unable to verify roles via Gravitee API: ",
+      "details": {}
+    },
+    {
+      "severity": "warning",
+      "code": "ROLE_LOOKUP_UNVERIFIED",
+      "message": "Role configuration could not be auto-verified",
+      "details": {}
     }
   ],
   "manualReviewFindings": [
     {
       "severity": "warning",
-      "code": "OAUTH_CLIENT_CONTINUITY_UNKNOWN",
-      "message": "OAuth client value preservation is not confirmed as supported",
-      "details": {
-        "actual": "unknown"
-      }
+      "code": "ROLE_LOOKUP_FAILED",
+      "message": "Unable to verify roles via Gravitee API: ",
+      "details": {}
+    },
+    {
+      "severity": "warning",
+      "code": "ROLE_LOOKUP_UNVERIFIED",
+      "message": "Role configuration could not be auto-verified",
+      "details": {}
     }
   ],
   "continuityRisks": [
@@ -41,7 +180,13 @@
       "authHints": [
         "API_KEY"
       ],
-      "consumerSecretPresent": true
+      "oauthContinuityRelevant": false,
+      "consumerSecretPresent": true,
+      "protectedSecretMetaPresent": true,
+      "protectedSecretValuePresent": true,
+      "protectedSecretMaterialPresent": true,
+      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/consumer-secret.txt",
+      "continuityClass": "api-key"
     },
     {
       "credentialId": "dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK",
@@ -51,7 +196,13 @@
       "authHints": [
         "API_KEY"
       ],
-      "consumerSecretPresent": true
+      "oauthContinuityRelevant": false,
+      "consumerSecretPresent": true,
+      "protectedSecretMetaPresent": true,
+      "protectedSecretValuePresent": true,
+      "protectedSecretMaterialPresent": true,
+      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/consumer-secret.txt",
+      "continuityClass": "api-key"
     },
     {
       "credentialId": "dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3",
@@ -61,7 +212,13 @@
       "authHints": [
         "API_KEY"
       ],
-      "consumerSecretPresent": true
+      "oauthContinuityRelevant": false,
+      "consumerSecretPresent": true,
+      "protectedSecretMetaPresent": true,
+      "protectedSecretValuePresent": true,
+      "protectedSecretMaterialPresent": true,
+      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/consumer-secret.txt",
+      "continuityClass": "api-key"
     },
     {
       "credentialId": "dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8",
@@ -71,7 +228,13 @@
       "authHints": [
         "API_KEY"
       ],
-      "consumerSecretPresent": true
+      "oauthContinuityRelevant": false,
+      "consumerSecretPresent": true,
+      "protectedSecretMetaPresent": true,
+      "protectedSecretValuePresent": true,
+      "protectedSecretMaterialPresent": true,
+      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/consumer-secret.txt",
+      "continuityClass": "api-key"
     }
   ],
   "capabilitySnapshot": {
@@ -85,9 +248,9 @@
     "applications": 4,
     "credentials": 4,
     "subscriptions": 4,
-    "blockers": 0,
-    "warnings": 1,
-    "manualReview": 1,
+    "blockers": 6,
+    "warnings": 9,
+    "manualReview": 2,
     "actions": 24,
     "actionsByKind": {
       "UPSERT_USER": 2,
@@ -104,24 +267,31 @@
     "operatorActions": {
       "byKind": {
         "UPSERT_USER": {
-          "REUSE": 2
+          "CREATE": 2
         },
         "UPSERT_APPLICATION": {
-          "REUSE": 4
+          "CREATE": 4
         },
         "UPSERT_SUBSCRIPTION": {
-          "REUSE": 4
+          "CREATE": 4
         }
       },
       "byOperation": {
-        "REUSE": 10
+        "CREATE": 10
       },
       "blockedReasons": {}
     }
   },
   "operatorGuidance": {
-    "nextSuggestedScope": "--users-only",
-    "resumeSafe": true,
-    "blockerCategories": {}
+    "nextSuggestedScope": null,
+    "resumeSafe": false,
+    "blockerCategories": {
+      "GRAVITEE_AUTH_FAILED": 1,
+      "USER_PROVISIONING_LOOKUP_UNSUPPORTED": 1,
+      "USER_PROVISIONING_CREATE_UNSUPPORTED": 1,
+      "APPLICATION_OWNERSHIP_LIST_UNSUPPORTED": 1,
+      "APPLICATION_OWNERSHIP_CREATE_UNSUPPORTED": 1,
+      "SILENT_USER_CREATION_PROBE_FAILED": 1
+    }
   }
 }

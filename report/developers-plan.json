@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-14T20:45:03.045Z",
+  "generatedAt": "2026-04-17T16:34:11.563Z",
   "kind": "DevelopersMigrationManifest",
   "source": {
     "irDir": "/Users/daniel.roder/Sites/apigee2gravitee/ir",
@@ -25,9 +25,9 @@
     "applications": 4,
     "credentials": 4,
     "subscriptions": 4,
-    "blockers": 0,
-    "warnings": 1,
-    "manualReview": 1,
+    "blockers": 6,
+    "warnings": 9,
+    "manualReview": 2,
     "actions": 24,
     "actionsByKind": {
       "UPSERT_USER": 2,
@@ -44,17 +44,17 @@
     "operatorActions": {
       "byKind": {
         "UPSERT_USER": {
-          "REUSE": 2
+          "CREATE": 2
         },
         "UPSERT_APPLICATION": {
-          "REUSE": 4
+          "CREATE": 4
         },
         "UPSERT_SUBSCRIPTION": {
-          "REUSE": 4
+          "CREATE": 4
         }
       },
       "byOperation": {
-        "REUSE": 10
+        "CREATE": 10
       },
       "blockedReasons": {}
     }
@@ -268,6 +268,7 @@
         "authHints": [
           "API_KEY"
         ],
+        "oauthContinuityRelevant": false,
         "continuity": {
           "appName": "kanye-dev-app",
           "approvedProducts": [
@@ -307,8 +308,11 @@
           ]
         },
         "protectedSecretMetaPresent": true,
+        "protectedSecretValuePresent": true,
+        "protectedSecretMaterialPresent": true,
         "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/consumer-secret.txt",
         "continuityPolicy": "preserve-if-supported",
+        "oauthContinuityPolicy": "preserve-if-supported",
         "blockers": [],
         "warnings": [],
         "manualReviewReasons": []
@@ -332,6 +336,7 @@
         "authHints": [
           "API_KEY"
         ],
+        "oauthContinuityRelevant": false,
         "continuity": {
           "appName": "wizards-dev-app",
           "approvedProducts": [
@@ -371,8 +376,11 @@
           ]
         },
         "protectedSecretMetaPresent": true,
+        "protectedSecretValuePresent": true,
+        "protectedSecretMaterialPresent": true,
         "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/consumer-secret.txt",
         "continuityPolicy": "preserve-if-supported",
+        "oauthContinuityPolicy": "preserve-if-supported",
         "blockers": [],
         "warnings": [],
         "manualReviewReasons": []
@@ -396,6 +404,7 @@
         "authHints": [
           "API_KEY"
         ],
+        "oauthContinuityRelevant": false,
         "continuity": {
           "appName": "chuck-norris-dev-app",
           "approvedProducts": [
@@ -435,8 +444,11 @@
           ]
         },
         "protectedSecretMetaPresent": true,
+        "protectedSecretValuePresent": true,
+        "protectedSecretMaterialPresent": true,
         "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/consumer-secret.txt",
         "continuityPolicy": "preserve-if-supported",
+        "oauthContinuityPolicy": "preserve-if-supported",
         "blockers": [],
         "warnings": [],
         "manualReviewReasons": []
@@ -460,6 +472,7 @@
         "authHints": [
           "API_KEY"
         ],
+        "oauthContinuityRelevant": false,
         "continuity": {
           "appName": "dog-breeds-dev-app",
           "approvedProducts": [
@@ -499,8 +512,11 @@
           ]
         },
         "protectedSecretMetaPresent": true,
+        "protectedSecretValuePresent": true,
+        "protectedSecretMaterialPresent": true,
         "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/consumer-secret.txt",
         "continuityPolicy": "preserve-if-supported",
+        "oauthContinuityPolicy": "preserve-if-supported",
         "blockers": [],
         "warnings": [],
         "manualReviewReasons": []
@@ -695,12 +711,140 @@
   },
   "findings": [
     {
-      "severity": "warning",
-      "code": "OAUTH_CLIENT_CONTINUITY_UNKNOWN",
-      "message": "OAuth client value preservation is not confirmed as supported",
+      "severity": "blocker",
+      "code": "GRAVITEE_AUTH_FAILED",
+      "message": "Gravitee health check failed: unknown error",
       "details": {
-        "actual": "unknown"
+        "status": null
       }
+    },
+    {
+      "severity": "blocker",
+      "code": "USER_PROVISIONING_LOOKUP_UNSUPPORTED",
+      "message": "User provisioning probe failed for lookup",
+      "details": {
+        "status": null,
+        "classification": "network",
+        "error": null
+      }
+    },
+    {
+      "severity": "blocker",
+      "code": "USER_PROVISIONING_CREATE_UNSUPPORTED",
+      "message": "User provisioning probe failed for create",
+      "details": {
+        "status": null,
+        "classification": "network",
+        "error": null
+      }
+    },
+    {
+      "severity": "warning",
+      "code": "USER_PROVISIONING_UPDATE_UNSUPPORTED",
+      "message": "User provisioning probe failed for update",
+      "details": {
+        "status": null,
+        "classification": "network",
+        "error": null
+      }
+    },
+    {
+      "severity": "warning",
+      "code": "USER_PROVISIONING_ROLEASSIGN_UNSUPPORTED",
+      "message": "User provisioning probe failed for roleAssign",
+      "details": {
+        "status": null,
+        "classification": "network",
+        "error": null
+      }
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_OWNERSHIP_LIST_UNSUPPORTED",
+      "message": "Application ownership probe failed for list",
+      "details": {
+        "status": null,
+        "classification": "network",
+        "error": null
+      }
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_OWNERSHIP_CREATE_UNSUPPORTED",
+      "message": "Application ownership probe failed for create",
+      "details": {
+        "status": null,
+        "classification": "network",
+        "error": null
+      }
+    },
+    {
+      "severity": "warning",
+      "code": "APPLICATION_OWNERSHIP_MEMBERS_UNSUPPORTED",
+      "message": "Application ownership probe failed for members",
+      "details": {
+        "status": null,
+        "classification": "network",
+        "error": null
+      }
+    },
+    {
+      "severity": "warning",
+      "code": "APPLICATION_OWNERSHIP_ADDMEMBER_UNSUPPORTED",
+      "message": "Application ownership probe failed for addMember",
+      "details": {
+        "status": null,
+        "classification": "network",
+        "error": null
+      }
+    },
+    {
+      "severity": "warning",
+      "code": "API_KEY_CONTINUITY_SUBSCRIPTIONS_UNSUPPORTED",
+      "message": "API key continuity probe failed for subscriptions",
+      "details": {
+        "status": null,
+        "classification": "network",
+        "error": null
+      }
+    },
+    {
+      "severity": "warning",
+      "code": "API_KEY_CONTINUITY_CREATE_UNSUPPORTED",
+      "message": "API key continuity probe failed for create",
+      "details": {
+        "status": null,
+        "classification": "network",
+        "error": null
+      }
+    },
+    {
+      "severity": "warning",
+      "code": "API_KEY_CONTINUITY_APIKEYS_UNSUPPORTED",
+      "message": "API key continuity probe failed for apiKeys",
+      "details": {
+        "status": null,
+        "classification": "network",
+        "error": null
+      }
+    },
+    {
+      "severity": "blocker",
+      "code": "SILENT_USER_CREATION_PROBE_FAILED",
+      "message": "Live Gravitee probes did not confirm silent user provisioning support",
+      "details": {}
+    },
+    {
+      "severity": "warning",
+      "code": "ROLE_LOOKUP_FAILED",
+      "message": "Unable to verify roles via Gravitee API: ",
+      "details": {}
+    },
+    {
+      "severity": "warning",
+      "code": "ROLE_LOOKUP_UNVERIFIED",
+      "message": "Role configuration could not be auto-verified",
+      "details": {}
     }
   ],
   "actions": [
@@ -710,7 +854,7 @@
       "sourceId": "dev1@540.co",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "active",
       "lookup": {
         "email": "dev1@540.co"
@@ -744,9 +888,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "userId": "bb27cb45-4ce7-4d14-a7cb-454ce77d14ae"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_USER:dev1@540.co",
@@ -785,7 +927,7 @@
       "sourceId": "dev2@540.co",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "active",
       "lookup": {
         "email": "dev2@540.co"
@@ -819,9 +961,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "userId": "09428cad-2cfa-4ddd-828c-ad2cfa8ddd2f"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_USER:dev2@540.co",
@@ -862,7 +1002,7 @@
         "UPSERT_USER:dev1@540.co"
       ],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "approved",
       "lookup": {
         "name": "kanye-dev-app",
@@ -893,9 +1033,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "applicationId": "0ee475ac-eabb-4ce2-a475-aceabb3ce211"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_APPLICATION:dev1@540.co/kanye-dev-app",
@@ -931,7 +1069,7 @@
         "UPSERT_USER:dev1@540.co"
       ],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "approved",
       "lookup": {
         "name": "wizards-dev-app",
@@ -962,9 +1100,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "applicationId": "6ae0c034-4783-4369-a0c0-3447836369cc"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_APPLICATION:dev1@540.co/wizards-dev-app",
@@ -1000,7 +1136,7 @@
         "UPSERT_USER:dev2@540.co"
       ],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "approved",
       "lookup": {
         "name": "chuck-norris-dev-app",
@@ -1031,9 +1167,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "applicationId": "45b22d88-9eb8-4c54-b22d-889eb85c54d0"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_APPLICATION:dev2@540.co/chuck-norris-dev-app",
@@ -1069,7 +1203,7 @@
         "UPSERT_USER:dev2@540.co"
       ],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "approved",
       "lookup": {
         "name": "dog-breeds-dev-app",
@@ -1100,9 +1234,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "applicationId": "2eca68a1-438b-42a9-8a68-a1438b02a913"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_APPLICATION:dev2@540.co/dog-breeds-dev-app",
@@ -1138,7 +1270,7 @@
         "UPSERT_APPLICATION:dev1@540.co/kanye-dev-app"
       ],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "RESOLVE",
       "desiredState": null,
       "lookup": {
         "productName": "kanye-api-product",
@@ -1164,10 +1296,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "planId": "7c9ae30e-6522-4d0e-9ae3-0e65229d0ea9",
-        "apiId": "fdc2e4bc-b5a2-409f-82e4-bcb5a2909f6c"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "UPSERT_SUBSCRIPTION:dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan",
@@ -1178,7 +1307,7 @@
         "RESOLVE_PLAN:dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan"
       ],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "ACCEPTED",
       "lookup": {
         "applicationSourceId": "dev1@540.co/kanye-dev-app",
@@ -1209,9 +1338,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "subscriptionId": "5fbab353-7a70-4276-bab3-537a70027606"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_SUBSCRIPTION:dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan",
@@ -1253,7 +1380,7 @@
         "UPSERT_APPLICATION:dev1@540.co/wizards-dev-app"
       ],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "RESOLVE",
       "desiredState": null,
       "lookup": {
         "productName": "wizards-api-product",
@@ -1279,10 +1406,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "planId": "8462f209-3f79-4137-a2f2-093f7931370c",
-        "apiId": "927e2f2b-5bf0-484b-be2f-2b5bf0f84b95"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "UPSERT_SUBSCRIPTION:dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan",
@@ -1293,7 +1417,7 @@
         "RESOLVE_PLAN:dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan"
       ],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "ACCEPTED",
       "lookup": {
         "applicationSourceId": "dev1@540.co/wizards-dev-app",
@@ -1324,9 +1448,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "subscriptionId": "a65fe712-e20f-440f-9fe7-12e20f040f34"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_SUBSCRIPTION:dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan",
@@ -1368,7 +1490,7 @@
         "UPSERT_APPLICATION:dev2@540.co/chuck-norris-dev-app"
       ],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "RESOLVE",
       "desiredState": null,
       "lookup": {
         "productName": "chuck-norris-api-product",
@@ -1394,10 +1516,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "planId": "eade57f3-ce18-4858-9e57-f3ce183858d3",
-        "apiId": "bdc40b6a-2084-44c3-840b-6a208474c396"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "UPSERT_SUBSCRIPTION:dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan",
@@ -1408,7 +1527,7 @@
         "RESOLVE_PLAN:dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan"
       ],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "ACCEPTED",
       "lookup": {
         "applicationSourceId": "dev2@540.co/chuck-norris-dev-app",
@@ -1439,9 +1558,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "subscriptionId": "85cc3c11-9e97-4b88-8c3c-119e974b88f5"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_SUBSCRIPTION:dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan",
@@ -1483,7 +1600,7 @@
         "UPSERT_APPLICATION:dev2@540.co/dog-breeds-dev-app"
       ],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "RESOLVE",
       "desiredState": null,
       "lookup": {
         "productName": "dog-breeds-api-product",
@@ -1509,10 +1626,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "planId": "c3770dde-92cc-4549-b70d-de92cca549f7",
-        "apiId": "a10d7923-3577-4d42-8d79-2335777d4288"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "UPSERT_SUBSCRIPTION:dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan",
@@ -1523,7 +1637,7 @@
         "RESOLVE_PLAN:dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan"
       ],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "ACCEPTED",
       "lookup": {
         "applicationSourceId": "dev2@540.co/dog-breeds-dev-app",
@@ -1554,9 +1668,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "subscriptionId": "fb8badce-b8fe-4a33-8bad-ceb8fe9a338e"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_SUBSCRIPTION:dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan",
