@@ -32,8 +32,15 @@
     "orders-product": {
       "targetApi": "orders-api",
       "targetApiId": "api_orders_123",
+      "targetApiAliases": [
+        "Orders API"
+      ],
       "targetPlan": "Orders API Key",
-      "targetPlanId": "plan_orders_key_123"
+      "targetPlanId": "plan_orders_key_123",
+      "targetPlanAliases": [
+        "API Key Plan"
+      ],
+      "matchMode": "alias"
     },
     "misc-product": [
       {

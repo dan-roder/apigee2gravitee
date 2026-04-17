@@ -124,7 +124,6 @@
     },
     "productPlanMap": {
       "type": "object",
-      "minProperties": 1,
       "additionalProperties": {
         "oneOf": [
           {
@@ -256,6 +255,9 @@
           "type": "string",
           "minLength": 1
         },
+        "targetApiAliases": {
+          "$ref": "#/$defs/stringArray"
+        },
         "targetPlan": {
           "type": "string",
           "minLength": 1
@@ -263,6 +265,16 @@
         "targetPlanId": {
           "type": "string",
           "minLength": 1
+        },
+        "targetPlanAliases": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "matchMode": {
+          "enum": [
+            "id-only",
+            "exact",
+            "alias"
+          ]
         }
       }
     }

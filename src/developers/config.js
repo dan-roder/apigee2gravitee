@@ -14,6 +14,7 @@ const ENUMS = {
   userProvisioning: new Set(['reuse-only', 'reuse-or-create-silently', 'allow-invites']),
   supportState: new Set(['supported', 'unsupported', 'unknown']),
   ownershipMode: new Set(['direct-member', 'metadata-only', 'unknown']),
+  matchMode: new Set(['id-only', 'exact', 'alias']),
 };
 
 function readJson(filePath) {
@@ -104,15 +105,24 @@ function validatePlanTarget(entry, field, errors) {
   if (entry.targetPlanId !== undefined) {
     validateString(entry.targetPlanId, `${field}.targetPlanId`, errors);
   }
+  if (entry.targetApiAliases !== undefined) {
+    validateStringArray(entry.targetApiAliases, `${field}.targetApiAliases`, errors);
+  }
+  if (entry.targetPlanAliases !== undefined) {
+    validateStringArray(entry.targetPlanAliases, `${field}.targetPlanAliases`, errors);
+  }
+  if (entry.matchMode !== undefined) {
+    validateEnum(entry.matchMode, `${field}.matchMode`, ENUMS.matchMode, errors);
+  }
 }
 
-function validateProductPlanMap(map, errors) {
+function validateProductPlanMap(map, errors, options = {}) {
   if (!map || typeof map !== 'object' || Array.isArray(map)) {
     errors.push('productPlanMap must be an object');
     return;
   }
   const entries = Object.entries(map);
-  if (entries.length === 0) {
+  if (entries.length === 0 && !options.allowEmpty) {
     errors.push('productPlanMap must contain at least one product mapping');
     return;
   }
@@ -155,7 +165,7 @@ function validateRoleAssignmentIds(roleAssignmentIds, errors) {
   }
 }
 
-function validateDevelopersConfig(config) {
+function validateDevelopersConfig(config, options = {}) {
   const errors = [];
   if (!config || typeof config !== 'object' || Array.isArray(config)) {
     return { valid: false, errors: ['config must be a JSON object'] };
@@ -182,7 +192,7 @@ function validateDevelopersConfig(config) {
   validateEnum(policies.existingApplication, 'policies.existingApplication', ENUMS.existingApplication, errors);
   validateEnum(policies.userProvisioning, 'policies.userProvisioning', ENUMS.userProvisioning, errors);
 
-  validateProductPlanMap(config.productPlanMap, errors);
+  validateProductPlanMap(config.productPlanMap, errors, options);
   validateCapabilities(config.capabilities, errors);
   validateRoleAssignmentIds(config.roleAssignmentIds, errors);
 

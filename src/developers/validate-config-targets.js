@@ -1,10 +1,20 @@
 'use strict';
 
+const fs = require('fs');
 const path = require('path');
 
 const { loadDevelopersConfig, validateDevelopersConfig } = require('./config');
+const { loadDeveloperDomain } = require('./developer-loader');
 const { GraviteeClient } = require('../shared/gravitee-client');
-const { writeJson } = require('./state-store');
+const { writeJson, resolveOutputPaths } = require('./state-store');
+const {
+  summarizeProductCredentialType,
+  resolveApiCandidates,
+  resolvePlanCandidates,
+  evaluatePlanSuitability,
+  isPlanStatusSuitable,
+  classifyPlanSecurity,
+} = require('./target-matching');
 
 function normalizeTargets(entry) {
   return Array.isArray(entry) ? entry : [entry];
@@ -25,154 +35,143 @@ function makeFinding(severity, code, productName, targetIndex, message, details 
   };
 }
 
-async function resolveApiTarget(target, client) {
+function defaultApisIdMapPath(config) {
+  const reportDir = path.resolve(config.reporting.reportDir);
+  return path.resolve(path.join(path.dirname(reportDir), 'state', 'apis-id-map.json'));
+}
+
+async function resolveApiTarget(target, client, productName, targetIndex) {
+  const liveApis = await client.listApis();
+  const candidates = resolveApiCandidates(target, liveApis);
+
   if (!isPlaceholder(target.targetApiId)) {
-    try {
-      const api = await client.getApi(target.targetApiId);
-      return { api, findings: [] };
-    } catch (err) {
+    if (candidates.length === 0) {
       return {
         api: null,
         findings: [
-          makeFinding(
-            'blocker',
-            'TARGET_API_ID_NOT_FOUND',
-            null,
-            null,
-            `Configured targetApiId ${target.targetApiId} could not be loaded`,
-            { targetApiId: target.targetApiId, error: err.message },
-          ),
+          makeFinding('blocker', 'TARGET_API_ID_NOT_FOUND', productName, targetIndex, `Configured targetApiId ${target.targetApiId} could not be loaded`, {
+            targetApiId: target.targetApiId,
+          }),
         ],
+        candidates,
       };
     }
+    return { api: candidates[0].api, findings: [], candidates };
   }
 
-  try {
-    const api = await client.findApiByName(target.targetApi);
-    if (!api) {
-      return {
-        api: null,
-        findings: [
-          makeFinding(
-            'blocker',
-            'TARGET_API_NAME_NOT_FOUND',
-            null,
-            null,
-            `No Gravitee API found with name ${target.targetApi}`,
-            { targetApi: target.targetApi },
-          ),
-        ],
-      };
-    }
-    return { api, findings: [] };
-  } catch (err) {
+  if (candidates.length === 0) {
     return {
       api: null,
       findings: [
-        makeFinding(
-          'blocker',
-          'TARGET_API_NAME_AMBIGUOUS',
-          null,
-          null,
-          `API lookup for ${target.targetApi} was ambiguous`,
-          { targetApi: target.targetApi, error: err.message },
-        ),
+        makeFinding('blocker', 'TARGET_API_NAME_NOT_FOUND', productName, targetIndex, `No Gravitee API found for ${target.targetApi}`, {
+          targetApi: target.targetApi,
+          targetApiAliases: target.targetApiAliases || [],
+          matchMode: target.matchMode || 'exact',
+        }),
       ],
+      candidates,
     };
   }
+
+  if (candidates.length > 1) {
+    return {
+      api: null,
+      findings: [
+        makeFinding('blocker', 'TARGET_API_NAME_AMBIGUOUS', productName, targetIndex, `API lookup for ${target.targetApi} was ambiguous`, {
+          targetApi: target.targetApi,
+          matches: candidates.map((candidate) => ({ apiId: candidate.api.id, apiName: candidate.api.name, matchMode: candidate.matchMode })),
+        }),
+      ],
+      candidates,
+    };
+  }
+
+  return { api: candidates[0].api, findings: [], candidates };
 }
 
-async function resolvePlanTarget(target, api, client) {
-  try {
-    const plans = await client.listApiPlans(api.id);
-    const exactId = !isPlaceholder(target.targetPlanId)
-      ? plans.filter((item) => item.id === target.targetPlanId)
-      : [];
-    const exactName = plans.filter((item) => item.name === target.targetPlan);
+async function resolvePlanTarget(target, api, client, productName, targetIndex, credentialProfile) {
+  const plans = await client.listApiPlans(api.id);
+  const candidates = resolvePlanCandidates(target, plans);
+  const findings = [];
 
-    if (!isPlaceholder(target.targetPlanId)) {
-      if (exactId.length === 0) {
-        return {
-          plan: null,
-          findings: [
-            makeFinding(
-              'blocker',
-              'TARGET_PLAN_ID_NOT_FOUND',
-              null,
-              null,
-              `Configured targetPlanId ${target.targetPlanId} was not found under API ${api.id}`,
-              { targetPlanId: target.targetPlanId, apiId: api.id },
-            ),
-          ],
-        };
-      }
-      const plan = exactId[0];
-      if (target.targetPlan && plan.name !== target.targetPlan) {
-        return {
-          plan,
-          findings: [
-            makeFinding(
-              'blocker',
-              'TARGET_PLAN_NAME_MISMATCH',
-              null,
-              null,
-              `Configured targetPlan ${target.targetPlan} does not match plan id ${target.targetPlanId} name ${plan.name}`,
-              { targetPlan: target.targetPlan, targetPlanId: target.targetPlanId, actualPlanName: plan.name, apiId: api.id },
-            ),
-          ],
-        };
-      }
-      return { plan, findings: [] };
-    }
-
-    if (exactName.length === 0) {
+  if (!isPlaceholder(target.targetPlanId)) {
+    if (candidates.length === 0) {
       return {
         plan: null,
         findings: [
-          makeFinding(
-            'blocker',
-            'TARGET_PLAN_NAME_NOT_FOUND',
-            null,
-            null,
-            `No Gravitee plan named ${target.targetPlan} was found under API ${api.id}`,
-            { targetPlan: target.targetPlan, apiId: api.id },
-          ),
+          makeFinding('blocker', 'TARGET_PLAN_ID_NOT_FOUND', productName, targetIndex, `Configured targetPlanId ${target.targetPlanId} was not found under API ${api.id}`, {
+            targetPlanId: target.targetPlanId,
+            apiId: api.id,
+          }),
         ],
+        candidates,
       };
     }
 
-    if (exactName.length > 1) {
-      return {
-        plan: null,
-        findings: [
-          makeFinding(
-            'blocker',
-            'TARGET_PLAN_NAME_AMBIGUOUS',
-            null,
-            null,
-            `Plan lookup for ${target.targetPlan} under API ${api.id} was ambiguous`,
-            { targetPlan: target.targetPlan, apiId: api.id, planIds: exactName.map((item) => item.id) },
-          ),
-        ],
-      };
+    const plan = candidates[0].plan;
+    if (target.targetPlan && plan.name !== target.targetPlan) {
+      findings.push(makeFinding('blocker', 'TARGET_PLAN_NAME_MISMATCH', productName, targetIndex, `Configured targetPlan ${target.targetPlan} does not match plan id ${target.targetPlanId} name ${plan.name}`, {
+        targetPlan: target.targetPlan,
+        targetPlanId: target.targetPlanId,
+        actualPlanName: plan.name,
+        apiId: api.id,
+      }));
     }
+    return { plan, findings, candidates };
+  }
 
-    return { plan: exactName[0], findings: [] };
-  } catch (err) {
+  if (candidates.length === 0) {
     return {
       plan: null,
       findings: [
-        makeFinding(
-          'blocker',
-          'TARGET_PLAN_LOOKUP_FAILED',
-          null,
-          null,
-          `Plan lookup failed for ${target.targetPlan}`,
-          { targetPlan: target.targetPlan, apiId: api.id, error: err.message },
-        ),
+        makeFinding('blocker', 'TARGET_PLAN_NAME_NOT_FOUND', productName, targetIndex, `No Gravitee plan found for ${target.targetPlan} under API ${api.id}`, {
+          targetPlan: target.targetPlan,
+          targetPlanAliases: target.targetPlanAliases || [],
+          matchMode: target.matchMode || 'exact',
+          apiId: api.id,
+        }),
       ],
+      candidates,
     };
   }
+
+  if (candidates.length > 1) {
+    return {
+      plan: null,
+      findings: [
+        makeFinding('blocker', 'TARGET_PLAN_NAME_AMBIGUOUS', productName, targetIndex, `Plan lookup for ${target.targetPlan} under API ${api.id} was ambiguous`, {
+          targetPlan: target.targetPlan,
+          apiId: api.id,
+          matches: candidates.map((candidate) => ({ planId: candidate.plan.id, planName: candidate.plan.name, matchMode: candidate.matchMode })),
+        }),
+      ],
+      candidates,
+    };
+  }
+
+  const plan = candidates[0].plan;
+  if (!isPlanStatusSuitable(plan)) {
+    findings.push(makeFinding('blocker', 'TARGET_PLAN_STATUS_UNSUITABLE', productName, targetIndex, `Plan ${plan.name} is not in a usable status for subscriptions`, {
+      planId: plan.id,
+      planName: plan.name,
+      status: plan.status || plan.state || null,
+      apiId: api.id,
+    }));
+  }
+
+  const suitability = evaluatePlanSuitability(plan, credentialProfile);
+  if (!suitability.suitable) {
+    findings.push(makeFinding('warning', 'TARGET_PLAN_SECURITY_MISMATCH', productName, targetIndex, `Plan ${plan.name} security ${classifyPlanSecurity(plan)} is not suitable for ${credentialProfile.primaryCredentialType} credentials`, {
+      planId: plan.id,
+      planName: plan.name,
+      planSecurityType: classifyPlanSecurity(plan),
+      credentialType: credentialProfile.primaryCredentialType,
+      sourceCredentials: credentialProfile.sourceCredentials,
+      apiId: api.id,
+    }));
+  }
+
+  return { plan, findings, candidates };
 }
 
 async function runValidateDevelopersConfigTargets(flags, deps = {}) {
@@ -187,6 +186,8 @@ async function runValidateDevelopersConfigTargets(flags, deps = {}) {
     return { exitCode: 1, validationErrors: validation.errors };
   }
 
+  const irDir = flags['ir-dir'] ? path.resolve(flags['ir-dir']) : null;
+  const domain = deps.domain || (irDir && fs.existsSync(irDir) ? loadDeveloperDomain(irDir, config) : null);
   const client = deps.client || new GraviteeClient({
     baseUrl: config.gravitee.url,
     orgId: config.gravitee.orgId,
@@ -198,12 +199,16 @@ async function runValidateDevelopersConfigTargets(flags, deps = {}) {
   const report = {
     generatedAt: new Date().toISOString(),
     configPath: path.resolve(configPath),
+    apisIdMapPresent: fs.existsSync(defaultApisIdMapPath(config)),
     summary: {
       products: 0,
       targets: 0,
       validTargets: 0,
       blockers: 0,
       warnings: 0,
+      productsWithSingleValidTarget: [],
+      productsNeedingSelection: [],
+      blockedProducts: [],
     },
     targets: [],
     findings: [],
@@ -211,53 +216,72 @@ async function runValidateDevelopersConfigTargets(flags, deps = {}) {
 
   for (const [productName, entry] of Object.entries(config.productPlanMap || {})) {
     report.summary.products += 1;
+    const credentialProfile = domain ? summarizeProductCredentialType(domain, productName) : {
+      productName,
+      credentialTypes: [],
+      primaryCredentialType: 'api-key',
+      hasMixedCredentialTypes: false,
+      sourceCredentials: [],
+    };
     const targets = normalizeTargets(entry);
+    let validTargetCount = 0;
 
     for (let index = 0; index < targets.length; index += 1) {
       const target = targets[index];
       report.summary.targets += 1;
 
-      const apiResolution = await resolveApiTarget(target, client);
-      const apiFindings = apiResolution.findings.map((finding) => ({
-        ...finding,
-        productName,
-        targetIndex: index,
-      }));
+      const apiResolution = await resolveApiTarget(target, client, productName, index);
+      let findings = [...apiResolution.findings];
+      let resolvedPlan = null;
+      let planCandidates = [];
 
-      let plan = null;
-      let planFindings = [];
       if (apiResolution.api) {
-        const planResolution = await resolvePlanTarget(target, apiResolution.api, client);
-        plan = planResolution.plan;
-        planFindings = planResolution.findings.map((finding) => ({
-          ...finding,
-          productName,
-          targetIndex: index,
-        }));
+        const planResolution = await resolvePlanTarget(target, apiResolution.api, client, productName, index, credentialProfile);
+        findings = findings.concat(planResolution.findings);
+        resolvedPlan = planResolution.plan;
+        planCandidates = planResolution.candidates;
       }
 
-      const findings = [...apiFindings, ...planFindings];
+      const status = findings.some((item) => item.severity === 'blocker')
+        ? 'BLOCKED'
+        : findings.some((item) => item.severity === 'warning')
+          ? 'VALID_WITH_WARNINGS'
+          : 'VALID';
+      if (!findings.some((item) => item.severity === 'blocker')) validTargetCount += 1;
+
       report.findings.push(...findings);
       report.targets.push({
         productName,
         targetIndex: index,
         configured: target,
+        credentialProfile,
         resolved: {
           apiId: apiResolution.api?.id || null,
           apiName: apiResolution.api?.name || target.targetApi || null,
-          planId: plan?.id || null,
-          planName: plan?.name || target.targetPlan || null,
+          planId: resolvedPlan?.id || null,
+          planName: resolvedPlan?.name || target.targetPlan || null,
+          planSecurityType: resolvedPlan ? classifyPlanSecurity(resolvedPlan) : null,
+          planStatus: resolvedPlan?.status || resolvedPlan?.state || null,
         },
-        status: findings.length === 0 ? 'VALID' : 'BLOCKED',
+        candidates: {
+          apis: apiResolution.candidates.map((candidate) => ({ id: candidate.api.id, name: candidate.api.name, matchMode: candidate.matchMode })),
+          plans: planCandidates.map((candidate) => ({ id: candidate.plan.id, name: candidate.plan.name, matchMode: candidate.matchMode })),
+        },
+        status,
         findings,
       });
+    }
 
-      if (findings.length === 0) {
-        report.summary.validTargets += 1;
-      }
+    if (validTargetCount === 1) {
+      report.summary.productsWithSingleValidTarget.push(productName);
+    } else if (validTargetCount > 1) {
+      report.summary.productsNeedingSelection.push(productName);
+    } else {
+      report.summary.blockedProducts.push(productName);
     }
   }
 
+  report.summary.validTargets = report.targets.filter((item) => item.status !== 'BLOCKED').length;
   report.summary.blockers = report.findings.filter((item) => item.severity === 'blocker').length;
   report.summary.warnings = report.findings.filter((item) => item.severity === 'warning').length;
 

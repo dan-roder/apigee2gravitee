@@ -3,6 +3,7 @@
 const { prepareDevelopersWorkflow, persistPlanningArtifacts } = require('./workflow');
 const { buildReconcileReport } = require('./report-builder');
 const { readJsonIfExists, writeJson, writeNdjson } = require('./state-store');
+const { summarizeProductCredentialType, evaluatePlanSuitability, classifyPlanSecurity } = require('./target-matching');
 
 function inactivePolicySatisfied(target, policy) {
   if (!target || !policy || policy === 'skip') return true;
@@ -97,6 +98,17 @@ async function runDevelopersReconcile(flags, deps = {}) {
     if (!plan) {
       mismatches.push({ severity: 'blocker', code: 'PLAN_UNRESOLVED', sourceId: subscription.sourceId, message: `Target plan could not be resolved for ${subscription.productName}` });
       continue;
+    }
+    const credentialProfile = summarizeProductCredentialType(result.domain, subscription.productName);
+    const planSecurityType = classifyPlanSecurity(plan);
+    const planSuitability = evaluatePlanSuitability(plan, credentialProfile);
+    if (planSecurityType !== 'unknown' && !planSuitability.suitable) {
+      mismatches.push({
+        severity: 'blocker',
+        code: 'TARGET_PLAN_SECURITY_MISMATCH',
+        sourceId: subscription.sourceId,
+        message: `Subscription ${subscription.sourceId} resolved to plan security ${planSecurityType} instead of ${credentialProfile.primaryCredentialType}`,
+      });
     }
     const applicationId = idMap.applications[`${subscription.developerEmail}/${subscription.appName}`];
     const target = await result.client.findSubscription({

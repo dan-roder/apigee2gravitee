@@ -9,6 +9,7 @@ const { runResolveDevelopersConfigIds } = require('./resolve-config-ids');
 const { runValidateDevelopersConfigTargets } = require('./validate-config-targets');
 const { runConfigureDevelopersRoles } = require('./configure-roles');
 const { runSyncDevelopersApiTargets } = require('./sync-api-targets');
+const { runDiscoverDevelopersTargets } = require('./discover-targets');
 
 function printFindings(findings, fmt, label) {
   if (findings.length === 0) return;
@@ -44,6 +45,14 @@ function printOperatorHints(preflight, fmt) {
 
 function printValidateTargetHints(report, fmt) {
   if (!report?.findings?.length) return;
+  if (report.apisIdMapPresent === false) {
+    console.log('');
+    console.log(fmt.info('No apis-id-map.json was found for this developers config; use manual target discovery first:'));
+    console.log(`  ${fmt.dim('1. node bin/migrator.js developers discover-targets --ir-dir ./ir --config ./config/developers.config.resolved.json')}`);
+    console.log(`  ${fmt.dim('2. node bin/migrator.js developers validate-config-targets --ir-dir ./ir --config ./config/developers.config.resolved.json --gravitee-token "$GRAVITEE_TOKEN"')}`);
+    console.log(`  ${fmt.dim('3. rerun analyze/import after target validation is clean')}`);
+    return;
+  }
   const hasStaleIds = report.findings.some((item) => (
     item.code === 'TARGET_API_ID_NOT_FOUND'
     || item.code === 'TARGET_PLAN_ID_NOT_FOUND'
@@ -141,6 +150,38 @@ async function runDevelopersCommand(subcommand, flags, fmt) {
     console.log(`  API id map:  ${fmt.dim(result.apisIdMapPath)}`);
     console.log(`  Output:      ${fmt.dim(result.outputPath)}`);
     console.log(`  Report:      ${fmt.dim(result.reportPath)}`);
+    return result.exitCode;
+  }
+
+  if (subcommand === 'discover-targets') {
+    const result = await runDiscoverDevelopersTargets(flags);
+    if (result.validationErrors) {
+      console.log(fmt.err('Developers config validation failed'));
+      for (const err of result.validationErrors) console.log(`  - ${err}`);
+      return 1;
+    }
+    if (result.error) {
+      console.log(fmt.err(result.error));
+      return result.exitCode;
+    }
+
+    console.log(fmt.header('Developers discover-targets'));
+    console.log('');
+    console.log(`[discover] ${result.report.summary.products} products scanned`);
+    console.log(`[discover] ${result.report.summary.productsWithSingleValidTarget.length} exact match, ${result.report.summary.productsNeedingSelection.length} need selection, ${result.report.summary.blockedProducts.length} blocked`);
+    if (result.report.findings.length > 0) {
+      console.log('');
+      console.log('  Findings:');
+      for (const finding of result.report.findings.slice(0, 10)) {
+        const printer = finding.severity === 'blocker' ? fmt.err : fmt.warn;
+        console.log(printer(`${finding.code}: ${finding.productName} ${finding.message}`));
+      }
+    }
+    console.log('');
+    console.log(`  Report:      ${fmt.dim(result.reportPath)}`);
+    if (result.outputPath) {
+      console.log(`  Output:      ${fmt.dim(result.outputPath)}`);
+    }
     return result.exitCode;
   }
 

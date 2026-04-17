@@ -261,6 +261,7 @@ ${fmt.bold('Examples:')}
   migrator extract --data-dir ./data --ir-dir ./ir
   migrator extract --data-dir ./data --ir-dir ./ir --org advana --env dev -v
   migrator apis analyze --ir-dir ./ir --config ./config/apis.config.example.json
+  migrator developers discover-targets --ir-dir ./ir --config ./config/developers.config.resolved.json
   migrator developers resolve-config-ids --config ./config/developers.config.json
   migrator developers validate-config-targets --config ./config/developers.config.resolved.json
   migrator developers analyze --ir-dir ./ir --config ./config/developers.config.json
@@ -312,6 +313,7 @@ ${fmt.bold('Usage:')}
 
 ${fmt.bold('Subcommands:')}
   configure-roles          Fetch live Gravitee roles and write the chosen defaults into config
+  discover-targets         Inspect live Gravitee APIs/plans and propose productPlanMap candidates
   sync-api-targets         Refresh productPlanMap API/plan ids from state/apis-id-map.json
   resolve-config-ids       Resolve API/plan ids in productPlanMap by name
   validate-config-targets  Check productPlanMap targets against live Gravitee
@@ -335,6 +337,7 @@ ${fmt.bold('Common options:')}
 
 ${fmt.bold('Examples:')}
   migrator developers configure-roles --config ./config/developers.config.resolved.json --gravitee-token "$GRAVITEE_TOKEN"
+  migrator developers discover-targets --ir-dir ./ir --config ./config/developers.config.resolved.json --gravitee-token "$GRAVITEE_TOKEN"
   migrator developers sync-api-targets --config ./config/developers.config.resolved.json
   migrator developers resolve-config-ids --config ./config/developers.config.json --gravitee-token "$GRAVITEE_TOKEN"
   migrator developers validate-config-targets --config ./config/developers.config.resolved.json --gravitee-token "$GRAVITEE_TOKEN"

@@ -478,8 +478,11 @@ Example `productPlanMap` entry:
     "orders-product": {
       "targetApi": "orders-api",
       "targetApiId": "api_orders_123",
+      "targetApiAliases": ["Orders API"],
       "targetPlan": "Orders API Key",
-      "targetPlanId": "plan_orders_key_123"
+      "targetPlanId": "plan_orders_key_123",
+      "targetPlanAliases": ["API Key Plan"],
+      "matchMode": "alias"
     },
     "misc-product": [
       {
@@ -505,6 +508,16 @@ Example `productPlanMap` entry:
 
 Each target entry becomes its own planned subscription during developers migration.
 
+Each target entry may also include:
+- `targetApiAliases`
+- `targetPlanAliases`
+- `matchMode`
+
+`matchMode` controls how `validate-config-targets` matches manually imported APIs and plans:
+- `id-only` uses only configured ids
+- `exact` uses ids plus primary names and normalized-name matching
+- `alias` also allows the configured alias lists
+
 If a source product is missing from `productPlanMap`, `developers analyze` should fail preflight.
 
 For the current sample Apigee export in [`data/`](/Users/danielroder/Sites/apigee2gravitee/data), a starter mapping stub is available at [`config/developers.product-plan-map.from-data.example.json`](/Users/danielroder/Sites/apigee2gravitee/config/developers.product-plan-map.from-data.example.json), and a full local starter config is available at [`config/developers.config.json`](/Users/danielroder/Sites/apigee2gravitee/config/developers.config.json). Both mirror the extracted Apigee product-to-proxy relationships and use placeholder Gravitee API and plan ids to fill in.
@@ -515,8 +528,9 @@ In that sample, `misc-api-product` fronts three Apigee proxies. The config now s
 
 ```bash
 node bin/migrator.js developers configure-roles --config ./config/developers.config.resolved.json --gravitee-token "$GRAVITEE_TOKEN"
+node bin/migrator.js developers discover-targets --ir-dir ./ir --config ./config/developers.config.resolved.json --gravitee-token "$GRAVITEE_TOKEN"
 node bin/migrator.js developers resolve-config-ids --config ./config/developers.config.json --gravitee-token "$GRAVITEE_TOKEN"
-node bin/migrator.js developers validate-config-targets --config ./config/developers.config.resolved.json --gravitee-token "$GRAVITEE_TOKEN"
+node bin/migrator.js developers validate-config-targets --ir-dir ./ir --config ./config/developers.config.resolved.json --gravitee-token "$GRAVITEE_TOKEN"
 node bin/migrator.js developers analyze   --ir-dir ./ir --config ./config/developers.config.resolved.json --gravitee-token "$GRAVITEE_TOKEN"
 node bin/migrator.js developers plan      --ir-dir ./ir --config ./config/developers.config.resolved.json --gravitee-token "$GRAVITEE_TOKEN"
 node bin/migrator.js developers import    --ir-dir ./ir --config ./config/developers.config.resolved.json --gravitee-token "$GRAVITEE_TOKEN"
@@ -527,9 +541,11 @@ Use `developers configure-roles` before a real run to fetch live Gravitee role c
 
 Use `developers sync-api-targets` after an API import or reimport cycle to refresh `productPlanMap` API and plan ids from `state/apis-id-map.json` before validating or analyzing the developers workflow again. It writes `report/developers-sync-api-targets-report.json` by default so operators can review exactly which targets were updated and which still need manual attention. When you run it against `developers.config.resolved.json`, it now refreshes that same resolved config path by default instead of creating a growing chain of extra synced files.
 
+Use `developers discover-targets` when APIs and plans were imported manually rather than by this repo's `apis` workflow. It inspects live Gravitee APIs and plans, generates `report/developers-target-catalog.json`, and can optionally write exact-match `productPlanMap` entries back into `developers.config.resolved.json`.
+
 Use `developers resolve-config-ids` before `developers analyze` when your config still contains placeholder `targetApiId` and `targetPlanId` values. It resolves Gravitee API ids by `targetApi` name and plan ids by `targetPlan` name, then writes a sibling file such as `config/developers.config.resolved.json`.
 
-Use `developers validate-config-targets` after that to confirm every `productPlanMap` target matches a live Gravitee API and plan exactly. It writes `report/developers-config-targets-report.json` by default and treats missing or ambiguous API/plan matches as blockers.
+Use `developers validate-config-targets` after that to confirm every `productPlanMap` target matches a live Gravitee API and plan exactly. It accepts id-based matches, exact/normalized name matches, and alias matches when `matchMode: "alias"` is configured. It writes `report/developers-config-targets-report.json` by default and treats missing or ambiguous API/plan matches as blockers.
 
 `developers analyze` now fails fast when any `productPlanMap` target still has placeholder or missing `targetApiId` or `targetPlanId` values. The intended operator sequence is:
 
@@ -539,7 +555,7 @@ node bin/migrator.js developers validate-config-targets --config ./config/develo
 node bin/migrator.js developers analyze --ir-dir ./ir --config ./config/developers.config.resolved.json --gravitee-token "$GRAVITEE_TOKEN"
 ```
 
-Validated execution sequence:
+Validated execution sequence for tool-imported APIs:
 
 ```bash
 node bin/migrator.js developers configure-roles \
@@ -550,6 +566,7 @@ node bin/migrator.js developers sync-api-targets \
   --config ./config/developers.config.resolved.json
 
 node bin/migrator.js developers validate-config-targets \
+  --ir-dir ./ir \
   --config ./config/developers.config.resolved.json \
   --gravitee-token "$GRAVITEE_TOKEN"
 
@@ -678,6 +695,40 @@ node bin/migrator.js developers reconcile \
   --gravitee-token "$GRAVITEE_TOKEN"
 ```
 
+Recommended execution sequence for manually imported APIs:
+
+```bash
+node bin/migrator.js developers configure-roles \
+  --config ./config/developers.config.resolved.json \
+  --gravitee-token "$GRAVITEE_TOKEN"
+
+node bin/migrator.js developers discover-targets \
+  --ir-dir ./ir \
+  --config ./config/developers.config.resolved.json \
+  --gravitee-token "$GRAVITEE_TOKEN" \
+  --write-config
+
+node bin/migrator.js developers validate-config-targets \
+  --ir-dir ./ir \
+  --config ./config/developers.config.resolved.json \
+  --gravitee-token "$GRAVITEE_TOKEN"
+
+node bin/migrator.js developers analyze \
+  --ir-dir ./ir \
+  --config ./config/developers.config.resolved.json \
+  --gravitee-token "$GRAVITEE_TOKEN"
+
+node bin/migrator.js developers import \
+  --ir-dir ./ir \
+  --config ./config/developers.config.resolved.json \
+  --gravitee-token "$GRAVITEE_TOKEN"
+
+node bin/migrator.js developers reconcile \
+  --ir-dir ./ir \
+  --config ./config/developers.config.resolved.json \
+  --gravitee-token "$GRAVITEE_TOKEN"
+```
+
 This workflow has now been validated against a local Gravitee instance with:
 
 - `2` imported users
@@ -699,6 +750,7 @@ node bin/migrator.js developers configure-roles \
   --gravitee-token "$GRAVITEE_TOKEN"
 
 node bin/migrator.js developers validate-config-targets \
+  --ir-dir ./ir \
   --config ./config/developers.config.resolved.json \
   --gravitee-token "$GRAVITEE_TOKEN"
 
@@ -734,6 +786,7 @@ node bin/migrator.js developers reconcile \
 
 - Run the full developers workflow against a non-production Gravitee environment first.
 - Re-run `developers configure-roles` against the target deployment instead of copying local role ids between environments.
+- Use `developers discover-targets` when APIs/plans were imported manually and there is no `state/apis-id-map.json`.
 - Re-run `developers sync-api-targets` after API cleanup/reimport cycles so `productPlanMap` ids stay aligned with `state/apis-id-map.json`.
 - Re-run `developers validate-config-targets` after any API re-import, because API and plan ids can change across cleanup/recreate cycles.
 - Re-run `developers analyze` immediately before import so the manifest and state reflect the current target.
@@ -749,6 +802,7 @@ node bin/migrator.js developers reconcile \
 report/developers-plan.json
 report/developers-gap-report.json
 report/developers-sync-api-targets-report.json
+report/developers-target-catalog.json
 report/developers-cleanup-report.json
 state/developers-import-state.json
 state/developers-id-map.json

@@ -1,12 +1,18 @@
 {
-  "generatedAt": "2026-04-16T14:10:53.738Z",
-  "configPath": "/var/folders/d6/gps0jnn52j7cb_wz9r3p9j7w0000gn/T/developers-validate-config-MzdWcT/developers.config.json",
+  "generatedAt": "2026-04-16T19:22:20.605Z",
+  "configPath": "/var/folders/d6/gps0jnn52j7cb_wz9r3p9j7w0000gn/T/developers-validate-config-aB6vyq/developers.config.json",
+  "apisIdMapPresent": true,
   "summary": {
-    "products": 2,
-    "targets": 3,
+    "products": 1,
+    "targets": 1,
     "validTargets": 0,
-    "blockers": 3,
-    "warnings": 0
+    "blockers": 1,
+    "warnings": 0,
+    "productsWithSingleValidTarget": [],
+    "productsNeedingSelection": [],
+    "blockedProducts": [
+      "orders-product"
+    ]
   },
   "targets": [
     {
@@ -14,82 +20,76 @@
       "targetIndex": 0,
       "configured": {
         "targetApi": "Orders API",
-        "targetApiId": "api-orders-1",
-        "targetPlan": "Orders API Key",
-        "targetPlanId": "plan-orders-1"
+        "targetPlan": "Orders",
+        "targetPlanAliases": [
+          "Orders API Key",
+          "Orders Keyless"
+        ],
+        "matchMode": "alias"
+      },
+      "credentialProfile": {
+        "productName": "orders-product",
+        "credentialTypes": [
+          "api-key"
+        ],
+        "primaryCredentialType": "api-key",
+        "hasMixedCredentialTypes": false,
+        "sourceCredentials": [
+          "alice@example.com/orders-consumer/abc123def456"
+        ]
       },
       "resolved": {
-        "apiId": null,
+        "apiId": "api-orders-1",
         "apiName": "Orders API",
         "planId": null,
-        "planName": "Orders API Key"
+        "planName": "Orders",
+        "planSecurityType": null,
+        "planStatus": null
+      },
+      "candidates": {
+        "apis": [
+          {
+            "id": "api-orders-1",
+            "name": "Orders API",
+            "matchMode": "exact-name"
+          }
+        ],
+        "plans": [
+          {
+            "id": "plan-orders-1",
+            "name": "Orders API Key",
+            "matchMode": "exact-name"
+          },
+          {
+            "id": "plan-orders-2",
+            "name": "Orders Keyless",
+            "matchMode": "exact-name"
+          }
+        ]
       },
       "status": "BLOCKED",
       "findings": [
         {
           "severity": "blocker",
-          "code": "TARGET_API_ID_NOT_FOUND",
+          "code": "TARGET_PLAN_NAME_AMBIGUOUS",
           "productName": "orders-product",
           "targetIndex": 0,
-          "message": "Configured targetApiId api-orders-1 could not be loaded",
+          "message": "Plan lookup for Orders under API api-orders-1 was ambiguous",
           "details": {
-            "targetApiId": "api-orders-1",
-            "error": "not found"
-          }
-        }
-      ]
-    },
-    {
-      "productName": "misc-product",
-      "targetIndex": 0,
-      "configured": {
-        "targetApi": "Hello API",
-        "targetPlan": "Hello API Key"
-      },
-      "resolved": {
-        "apiId": null,
-        "apiName": "Hello API",
-        "planId": null,
-        "planName": "Hello API Key"
-      },
-      "status": "BLOCKED",
-      "findings": [
-        {
-          "severity": "blocker",
-          "code": "TARGET_API_NAME_AMBIGUOUS",
-          "productName": "misc-product",
-          "targetIndex": 0,
-          "message": "API lookup for Hello API was ambiguous",
-          "details": {
-            "targetApi": "Hello API",
-            "error": "Ambiguous Gravitee API match for Hello API"
-          }
-        }
-      ]
-    },
-    {
-      "productName": "misc-product",
-      "targetIndex": 1,
-      "configured": {
-        "targetApi": "Facts API",
-        "targetPlan": "Facts API Key"
-      },
-      "resolved": {
-        "apiId": null,
-        "apiName": "Facts API",
-        "planId": null,
-        "planName": "Facts API Key"
-      },
-      "status": "BLOCKED",
-      "findings": [
-        {
-          "severity": "blocker",
-          "code": "TARGET_API_NAME_NOT_FOUND",
-          "productName": "misc-product",
-          "targetIndex": 1,
-          "message": "No Gravitee API found with name Facts API",
-          "details": {
-            "targetApi": "Facts API"
+            "targetPlan": "Orders",
+            "apiId": "api-orders-1",
+            "matches": [
+              {
+                "planId": "plan-orders-1",
+                "planName": "Orders API Key",
+                "matchMode": "exact-name"
+              },
+              {
+                "planId": "plan-orders-2",
+                "planName": "Orders Keyless",
+                "matchMode": "exact-name"
+              }
+            ]
           }
         }
       ]
@@ -98,34 +98,25 @@
   "findings": [
     {
       "severity": "blocker",
-      "code": "TARGET_API_ID_NOT_FOUND",
+      "code": "TARGET_PLAN_NAME_AMBIGUOUS",
       "productName": "orders-product",
       "targetIndex": 0,
-      "message": "Configured targetApiId api-orders-1 could not be loaded",
+      "message": "Plan lookup for Orders under API api-orders-1 was ambiguous",
       "details": {
-        "targetApiId": "api-orders-1",
-        "error": "not found"
-      }
-    },
-    {
-      "severity": "blocker",
-      "code": "TARGET_API_NAME_AMBIGUOUS",
-      "productName": "misc-product",
-      "targetIndex": 0,
-      "message": "API lookup for Hello API was ambiguous",
-      "details": {
-        "targetApi": "Hello API",
-        "error": "Ambiguous Gravitee API match for Hello API"
-      }
-    },
-    {
-      "severity": "blocker",
-      "code": "TARGET_API_NAME_NOT_FOUND",
-      "productName": "misc-product",
-      "targetIndex": 1,
-      "message": "No Gravitee API found with name Facts API",
-      "details": {
-        "targetApi": "Facts API"
+        "targetPlan": "Orders",
+        "apiId": "api-orders-1",
+        "matches": [
+          {
+            "planId": "plan-orders-1",
+            "planName": "Orders API Key",
+            "matchMode": "exact-name"
+          },
+          {
+            "planId": "plan-orders-2",
+            "planName": "Orders Keyless",
+            "matchMode": "exact-name"
+          }
+        ]
       }
     }
   ]
