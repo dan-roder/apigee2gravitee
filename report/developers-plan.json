@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-17T16:42:09.585Z",
+  "generatedAt": "2026-04-17T18:59:41.153Z",
   "kind": "DevelopersMigrationManifest",
   "source": {
     "irDir": "/Users/daniel.roder/Sites/apigee2gravitee/ir",
@@ -541,9 +541,9 @@
         "planMapping": {
           "productName": "kanye-api-product",
           "targetApi": "kanye-rest-api-5",
-          "targetApiId": "fdc2e4bc-b5a2-409f-82e4-bcb5a2909f6c",
+          "targetApiId": "d40cba62-2887-461e-8cba-622887161ea9",
           "targetPlan": "API Key Plan",
-          "targetPlanId": "7c9ae30e-6522-4d0e-9ae3-0e65229d0ea9",
+          "targetPlanId": "7ac7160f-b292-4f9e-8716-0fb292af9e80",
           "targetIndex": 0,
           "targetKey": "kanye-rest-api-5::API Key Plan"
         },
@@ -551,9 +551,9 @@
           {
             "productName": "kanye-api-product",
             "targetApi": "kanye-rest-api-5",
-            "targetApiId": "fdc2e4bc-b5a2-409f-82e4-bcb5a2909f6c",
+            "targetApiId": "d40cba62-2887-461e-8cba-622887161ea9",
             "targetPlan": "API Key Plan",
-            "targetPlanId": "7c9ae30e-6522-4d0e-9ae3-0e65229d0ea9",
+            "targetPlanId": "7ac7160f-b292-4f9e-8716-0fb292af9e80",
             "targetIndex": 0,
             "targetKey": "kanye-rest-api-5::API Key Plan"
           }
@@ -587,9 +587,9 @@
         "planMapping": {
           "productName": "wizards-api-product",
           "targetApi": "wizards-api-9",
-          "targetApiId": "927e2f2b-5bf0-484b-be2f-2b5bf0f84b95",
+          "targetApiId": "07dfa49e-dc23-4048-9fa4-9edc236048a6",
           "targetPlan": "API Key Plan",
-          "targetPlanId": "8462f209-3f79-4137-a2f2-093f7931370c",
+          "targetPlanId": "589c71e0-0770-4580-9c71-e0077015806b",
           "targetIndex": 0,
           "targetKey": "wizards-api-9::API Key Plan"
         },
@@ -597,9 +597,9 @@
           {
             "productName": "wizards-api-product",
             "targetApi": "wizards-api-9",
-            "targetApiId": "927e2f2b-5bf0-484b-be2f-2b5bf0f84b95",
+            "targetApiId": "07dfa49e-dc23-4048-9fa4-9edc236048a6",
             "targetPlan": "API Key Plan",
-            "targetPlanId": "8462f209-3f79-4137-a2f2-093f7931370c",
+            "targetPlanId": "589c71e0-0770-4580-9c71-e0077015806b",
             "targetIndex": 0,
             "targetKey": "wizards-api-9::API Key Plan"
           }
@@ -633,9 +633,9 @@
         "planMapping": {
           "productName": "chuck-norris-api-product",
           "targetApi": "chuck-norris-api-10",
-          "targetApiId": "bdc40b6a-2084-44c3-840b-6a208474c396",
+          "targetApiId": "25c78c81-954e-455d-878c-81954e255d73",
           "targetPlan": "API Key Plan",
-          "targetPlanId": "eade57f3-ce18-4858-9e57-f3ce183858d3",
+          "targetPlanId": "6d3b4998-cee4-412a-bb49-98cee4f12ad5",
           "targetIndex": 0,
           "targetKey": "chuck-norris-api-10::API Key Plan"
         },
@@ -643,9 +643,9 @@
           {
             "productName": "chuck-norris-api-product",
             "targetApi": "chuck-norris-api-10",
-            "targetApiId": "bdc40b6a-2084-44c3-840b-6a208474c396",
+            "targetApiId": "25c78c81-954e-455d-878c-81954e255d73",
             "targetPlan": "API Key Plan",
-            "targetPlanId": "eade57f3-ce18-4858-9e57-f3ce183858d3",
+            "targetPlanId": "6d3b4998-cee4-412a-bb49-98cee4f12ad5",
             "targetIndex": 0,
             "targetKey": "chuck-norris-api-10::API Key Plan"
           }
@@ -679,9 +679,9 @@
         "planMapping": {
           "productName": "dog-breeds-api-product",
           "targetApi": "dog-breeds-api-6",
-          "targetApiId": "a10d7923-3577-4d42-8d79-2335777d4288",
+          "targetApiId": "53b1d618-59d2-4a3a-b1d6-1859d2da3a89",
           "targetPlan": "API Key Plan",
-          "targetPlanId": "c3770dde-92cc-4549-b70d-de92cca549f7",
+          "targetPlanId": "e7af7151-7eb1-43a4-af71-517eb143a4a2",
           "targetIndex": 0,
           "targetKey": "dog-breeds-api-6::API Key Plan"
         },
@@ -689,9 +689,9 @@
           {
             "productName": "dog-breeds-api-product",
             "targetApi": "dog-breeds-api-6",
-            "targetApiId": "a10d7923-3577-4d42-8d79-2335777d4288",
+            "targetApiId": "53b1d618-59d2-4a3a-b1d6-1859d2da3a89",
             "targetPlan": "API Key Plan",
-            "targetPlanId": "c3770dde-92cc-4549-b70d-de92cca549f7",
+            "targetPlanId": "e7af7151-7eb1-43a4-af71-517eb143a4a2",
             "targetIndex": 0,
             "targetKey": "dog-breeds-api-6::API Key Plan"
           }
@@ -752,7 +752,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "userId": "bb27cb45-4ce7-4d14-a7cb-454ce77d14ae"
+        "userId": "fbbded13-9b26-4d06-bded-139b26fd0685"
       }
     },
     {
@@ -827,7 +827,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "userId": "09428cad-2cfa-4ddd-828c-ad2cfa8ddd2f"
+        "userId": "b50513ba-aff6-4cba-8513-baaff61cbac8"
       }
     },
     {
@@ -901,7 +901,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "applicationId": "0ee475ac-eabb-4ce2-a475-aceabb3ce211"
+        "applicationId": "19d7124c-a394-4070-9712-4ca39480706f"
       }
     },
     {
@@ -970,7 +970,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "applicationId": "6ae0c034-4783-4369-a0c0-3447836369cc"
+        "applicationId": "99931b3e-b4e4-488a-931b-3eb4e4488a05"
       }
     },
     {
@@ -1039,7 +1039,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "applicationId": "45b22d88-9eb8-4c54-b22d-889eb85c54d0"
+        "applicationId": "65b9c95e-60e8-48a6-b9c9-5e60e8c8a683"
       }
     },
     {
@@ -1108,7 +1108,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "applicationId": "2eca68a1-438b-42a9-8a68-a1438b02a913"
+        "applicationId": "f3340333-0622-4f2b-b403-330622af2bdc"
       }
     },
     {
@@ -1150,18 +1150,18 @@
       "lookup": {
         "productName": "kanye-api-product",
         "targetApi": "kanye-rest-api-5",
-        "targetApiId": "fdc2e4bc-b5a2-409f-82e4-bcb5a2909f6c",
+        "targetApiId": "d40cba62-2887-461e-8cba-622887161ea9",
         "targetPlan": "API Key Plan",
-        "targetPlanId": "7c9ae30e-6522-4d0e-9ae3-0e65229d0ea9",
+        "targetPlanId": "7ac7160f-b292-4f9e-8716-0fb292af9e80",
         "targetIndex": 0,
         "targetKey": "kanye-rest-api-5::API Key Plan"
       },
       "payload": {
         "productName": "kanye-api-product",
         "targetApi": "kanye-rest-api-5",
-        "targetApiId": "fdc2e4bc-b5a2-409f-82e4-bcb5a2909f6c",
+        "targetApiId": "d40cba62-2887-461e-8cba-622887161ea9",
         "targetPlan": "API Key Plan",
-        "targetPlanId": "7c9ae30e-6522-4d0e-9ae3-0e65229d0ea9",
+        "targetPlanId": "7ac7160f-b292-4f9e-8716-0fb292af9e80",
         "targetIndex": 0,
         "targetKey": "kanye-rest-api-5::API Key Plan"
       },
@@ -1172,8 +1172,8 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "planId": "7c9ae30e-6522-4d0e-9ae3-0e65229d0ea9",
-        "apiId": "fdc2e4bc-b5a2-409f-82e4-bcb5a2909f6c"
+        "planId": "7ac7160f-b292-4f9e-8716-0fb292af9e80",
+        "apiId": "d40cba62-2887-461e-8cba-622887161ea9"
       }
     },
     {
@@ -1198,9 +1198,9 @@
         "target": {
           "productName": "kanye-api-product",
           "targetApi": "kanye-rest-api-5",
-          "targetApiId": "fdc2e4bc-b5a2-409f-82e4-bcb5a2909f6c",
+          "targetApiId": "d40cba62-2887-461e-8cba-622887161ea9",
           "targetPlan": "API Key Plan",
-          "targetPlanId": "7c9ae30e-6522-4d0e-9ae3-0e65229d0ea9",
+          "targetPlanId": "7ac7160f-b292-4f9e-8716-0fb292af9e80",
           "targetIndex": 0,
           "targetKey": "kanye-rest-api-5::API Key Plan"
         },
@@ -1217,7 +1217,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "subscriptionId": "5fbab353-7a70-4276-bab3-537a70027606"
+        "subscriptionId": "553080e8-cc18-4dfc-b080-e8cc18adfc9a"
       }
     },
     {
@@ -1265,18 +1265,18 @@
       "lookup": {
         "productName": "wizards-api-product",
         "targetApi": "wizards-api-9",
-        "targetApiId": "927e2f2b-5bf0-484b-be2f-2b5bf0f84b95",
+        "targetApiId": "07dfa49e-dc23-4048-9fa4-9edc236048a6",
         "targetPlan": "API Key Plan",
-        "targetPlanId": "8462f209-3f79-4137-a2f2-093f7931370c",
+        "targetPlanId": "589c71e0-0770-4580-9c71-e0077015806b",
         "targetIndex": 0,
         "targetKey": "wizards-api-9::API Key Plan"
       },
       "payload": {
         "productName": "wizards-api-product",
         "targetApi": "wizards-api-9",
-        "targetApiId": "927e2f2b-5bf0-484b-be2f-2b5bf0f84b95",
+        "targetApiId": "07dfa49e-dc23-4048-9fa4-9edc236048a6",
         "targetPlan": "API Key Plan",
-        "targetPlanId": "8462f209-3f79-4137-a2f2-093f7931370c",
+        "targetPlanId": "589c71e0-0770-4580-9c71-e0077015806b",
         "targetIndex": 0,
         "targetKey": "wizards-api-9::API Key Plan"
       },
@@ -1287,8 +1287,8 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "planId": "8462f209-3f79-4137-a2f2-093f7931370c",
-        "apiId": "927e2f2b-5bf0-484b-be2f-2b5bf0f84b95"
+        "planId": "589c71e0-0770-4580-9c71-e0077015806b",
+        "apiId": "07dfa49e-dc23-4048-9fa4-9edc236048a6"
       }
     },
     {
@@ -1313,9 +1313,9 @@
         "target": {
           "productName": "wizards-api-product",
           "targetApi": "wizards-api-9",
-          "targetApiId": "927e2f2b-5bf0-484b-be2f-2b5bf0f84b95",
+          "targetApiId": "07dfa49e-dc23-4048-9fa4-9edc236048a6",
           "targetPlan": "API Key Plan",
-          "targetPlanId": "8462f209-3f79-4137-a2f2-093f7931370c",
+          "targetPlanId": "589c71e0-0770-4580-9c71-e0077015806b",
           "targetIndex": 0,
           "targetKey": "wizards-api-9::API Key Plan"
         },
@@ -1332,7 +1332,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "subscriptionId": "a65fe712-e20f-440f-9fe7-12e20f040f34"
+        "subscriptionId": "4482a55f-261b-4278-82a5-5f261bf278d7"
       }
     },
     {
@@ -1380,18 +1380,18 @@
       "lookup": {
         "productName": "chuck-norris-api-product",
         "targetApi": "chuck-norris-api-10",
-        "targetApiId": "bdc40b6a-2084-44c3-840b-6a208474c396",
+        "targetApiId": "25c78c81-954e-455d-878c-81954e255d73",
         "targetPlan": "API Key Plan",
-        "targetPlanId": "eade57f3-ce18-4858-9e57-f3ce183858d3",
+        "targetPlanId": "6d3b4998-cee4-412a-bb49-98cee4f12ad5",
         "targetIndex": 0,
         "targetKey": "chuck-norris-api-10::API Key Plan"
       },
       "payload": {
         "productName": "chuck-norris-api-product",
         "targetApi": "chuck-norris-api-10",
-        "targetApiId": "bdc40b6a-2084-44c3-840b-6a208474c396",
+        "targetApiId": "25c78c81-954e-455d-878c-81954e255d73",
         "targetPlan": "API Key Plan",
-        "targetPlanId": "eade57f3-ce18-4858-9e57-f3ce183858d3",
+        "targetPlanId": "6d3b4998-cee4-412a-bb49-98cee4f12ad5",
         "targetIndex": 0,
         "targetKey": "chuck-norris-api-10::API Key Plan"
       },
@@ -1402,8 +1402,8 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "planId": "eade57f3-ce18-4858-9e57-f3ce183858d3",
-        "apiId": "bdc40b6a-2084-44c3-840b-6a208474c396"
+        "planId": "6d3b4998-cee4-412a-bb49-98cee4f12ad5",
+        "apiId": "25c78c81-954e-455d-878c-81954e255d73"
       }
     },
     {
@@ -1428,9 +1428,9 @@
         "target": {
           "productName": "chuck-norris-api-product",
           "targetApi": "chuck-norris-api-10",
-          "targetApiId": "bdc40b6a-2084-44c3-840b-6a208474c396",
+          "targetApiId": "25c78c81-954e-455d-878c-81954e255d73",
           "targetPlan": "API Key Plan",
-          "targetPlanId": "eade57f3-ce18-4858-9e57-f3ce183858d3",
+          "targetPlanId": "6d3b4998-cee4-412a-bb49-98cee4f12ad5",
           "targetIndex": 0,
           "targetKey": "chuck-norris-api-10::API Key Plan"
         },
@@ -1447,7 +1447,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "subscriptionId": "85cc3c11-9e97-4b88-8c3c-119e974b88f5"
+        "subscriptionId": "1d02b20f-53dd-49e7-82b2-0f53dd29e752"
       }
     },
     {
@@ -1495,18 +1495,18 @@
       "lookup": {
         "productName": "dog-breeds-api-product",
         "targetApi": "dog-breeds-api-6",
-        "targetApiId": "a10d7923-3577-4d42-8d79-2335777d4288",
+        "targetApiId": "53b1d618-59d2-4a3a-b1d6-1859d2da3a89",
         "targetPlan": "API Key Plan",
-        "targetPlanId": "c3770dde-92cc-4549-b70d-de92cca549f7",
+        "targetPlanId": "e7af7151-7eb1-43a4-af71-517eb143a4a2",
         "targetIndex": 0,
         "targetKey": "dog-breeds-api-6::API Key Plan"
       },
       "payload": {
         "productName": "dog-breeds-api-product",
         "targetApi": "dog-breeds-api-6",
-        "targetApiId": "a10d7923-3577-4d42-8d79-2335777d4288",
+        "targetApiId": "53b1d618-59d2-4a3a-b1d6-1859d2da3a89",
         "targetPlan": "API Key Plan",
-        "targetPlanId": "c3770dde-92cc-4549-b70d-de92cca549f7",
+        "targetPlanId": "e7af7151-7eb1-43a4-af71-517eb143a4a2",
         "targetIndex": 0,
         "targetKey": "dog-breeds-api-6::API Key Plan"
       },
@@ -1517,8 +1517,8 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "planId": "c3770dde-92cc-4549-b70d-de92cca549f7",
-        "apiId": "a10d7923-3577-4d42-8d79-2335777d4288"
+        "planId": "e7af7151-7eb1-43a4-af71-517eb143a4a2",
+        "apiId": "53b1d618-59d2-4a3a-b1d6-1859d2da3a89"
       }
     },
     {
@@ -1543,9 +1543,9 @@
         "target": {
           "productName": "dog-breeds-api-product",
           "targetApi": "dog-breeds-api-6",
-          "targetApiId": "a10d7923-3577-4d42-8d79-2335777d4288",
+          "targetApiId": "53b1d618-59d2-4a3a-b1d6-1859d2da3a89",
           "targetPlan": "API Key Plan",
-          "targetPlanId": "c3770dde-92cc-4549-b70d-de92cca549f7",
+          "targetPlanId": "e7af7151-7eb1-43a4-af71-517eb143a4a2",
           "targetIndex": 0,
           "targetKey": "dog-breeds-api-6::API Key Plan"
         },
@@ -1562,7 +1562,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "subscriptionId": "fb8badce-b8fe-4a33-8bad-ceb8fe9a338e"
+        "subscriptionId": "451fd40d-16b4-4a0f-9fd4-0d16b49a0f6c"
       }
     },
     {
