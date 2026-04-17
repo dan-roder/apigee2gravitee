@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-17T17:38:11.954Z",
+  "generatedAt": "2026-04-17T17:42:30.529Z",
   "configPath": "/Users/daniel.roder/Sites/apigee2gravitee/config/developers.config.resolved.json",
   "apisIdMapPresent": true,
   "summary": {
@@ -74,7 +74,8 @@
         "targetApi": "chuck-norris-api-10",
         "targetApiId": "bdc40b6a-2084-44c3-840b-6a208474c396",
         "targetPlan": "API Key Plan",
-        "targetPlanId": "eade57f3-ce18-4858-9e57-f3ce183858d3"
+        "targetPlanId": "eade57f3-ce18-4858-9e57-f3ce183858d3",
+        "matchMode": "exact"
       },
       "credentialProfile": {
         "productName": "chuck-norris-api-product",

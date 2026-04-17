@@ -46,7 +46,8 @@
       "targetApi": "chuck-norris-api-10",
       "targetApiId": "bdc40b6a-2084-44c3-840b-6a208474c396",
       "targetPlan": "API Key Plan",
-      "targetPlanId": "eade57f3-ce18-4858-9e57-f3ce183858d3"
+      "targetPlanId": "eade57f3-ce18-4858-9e57-f3ce183858d3",
+      "matchMode": "exact"
     },
     "dog-breeds-api-product": {
       "targetApi": "dog-breeds-api-6",
@@ -113,5 +114,8 @@
   "reporting": {
     "reportDir": "./report",
     "stateFile": "./state/developers-import-state.json"
+  },
+  "_meta": {
+    "path": "/Users/daniel.roder/Sites/apigee2gravitee/config/developers.config.resolved.json"
   }
 }
