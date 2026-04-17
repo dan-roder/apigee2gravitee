@@ -197,7 +197,10 @@ async function runDiscoverDevelopersTargets(flags, deps = {}) {
     plansByApiId.set(api.id, deps.plansByApiId?.get(api.id) || await client.listApiPlans(api.id).catch(() => []));
   }
 
-  const uniqueProducts = Array.from(new Set(domain.subscriptions.map((subscription) => subscription.productName))).sort();
+  const uniqueProducts = Array.from(new Set([
+    ...domain.subscriptions.map((subscription) => subscription.productName),
+    ...Object.keys(config.productPlanMap || {}),
+  ])).sort();
   const entries = [];
   const findings = [];
   const proposedConfig = clone(config);
@@ -206,7 +209,10 @@ async function runDiscoverDevelopersTargets(flags, deps = {}) {
 
   for (const productName of uniqueProducts) {
     const credentialProfile = summarizeProductCredentialType(domain, productName);
-    const sourceProxyNames = summarizeProductProxies(domain, productName);
+    const configuredTargets = normalizeTargets(proposedConfig.productPlanMap?.[productName] || []);
+    const sourceProxyNames = summarizeProductProxies(domain, productName).length > 0
+      ? summarizeProductProxies(domain, productName)
+      : configuredTargets.map((target) => target.targetApi).filter(Boolean);
     const candidates = [];
 
     for (const api of liveApis) {
