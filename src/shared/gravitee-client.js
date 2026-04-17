@@ -56,6 +56,18 @@ function normalizeCollection(body) {
   return [];
 }
 
+function extractPagination(body) {
+  const pagination = body?.pagination && typeof body.pagination === 'object' ? body.pagination : {};
+  const page = body?.page ?? body?.currentPage ?? body?.pageNumber ?? pagination.page ?? pagination.currentPage ?? pagination.pageNumber;
+  const size = body?.size ?? body?.pageSize ?? pagination.size ?? pagination.pageSize;
+  const total = body?.total ?? body?.totalCount ?? body?.totalElements ?? pagination.total ?? pagination.totalCount ?? pagination.totalElements;
+  return {
+    page: Number.isFinite(Number(page)) ? Number(page) : null,
+    size: Number.isFinite(Number(size)) ? Number(size) : null,
+    total: Number.isFinite(Number(total)) ? Number(total) : null,
+  };
+}
+
 function addScopedRole(roles, scope, roleValue) {
   const normalizedScope = String(scope || '').trim().toUpperCase();
   if (!normalizedScope || !['ORGANIZATION', 'ENVIRONMENT', 'API', 'APPLICATION'].includes(normalizedScope)) {
@@ -375,8 +387,44 @@ class GraviteeClient {
   }
 
   async listApis() {
-    const body = await this.get(this.v2Url('/apis'));
-    return normalizeCollection(body);
+    const firstUrl = this.v2Url('/apis');
+    const firstBody = await this.get(firstUrl);
+    const firstItems = normalizeCollection(firstBody);
+    const pageInfo = extractPagination(firstBody);
+
+    if (!pageInfo.total || firstItems.length >= pageInfo.total) {
+      return firstItems;
+    }
+
+    const allItems = [...firstItems];
+    let nextPage = pageInfo.page !== null ? pageInfo.page + 1 : 2;
+    const pageSize = pageInfo.size || 100;
+    const seenIds = new Set(firstItems.map((item) => item?.id).filter(Boolean));
+
+    while (allItems.length < pageInfo.total) {
+      const nextUrl = new URL(firstUrl);
+      nextUrl.searchParams.set('page', String(nextPage));
+      nextUrl.searchParams.set('size', String(pageSize));
+      const pageBody = await this.get(nextUrl.toString());
+      const pageItems = normalizeCollection(pageBody);
+      if (pageItems.length === 0) break;
+
+      for (const item of pageItems) {
+        const itemId = item?.id || null;
+        if (itemId && seenIds.has(itemId)) continue;
+        if (itemId) seenIds.add(itemId);
+        allItems.push(item);
+      }
+
+      const nextInfo = extractPagination(pageBody);
+      if (nextInfo.page !== null) {
+        nextPage = nextInfo.page + 1;
+      } else {
+        nextPage += 1;
+      }
+    }
+
+    return allItems;
   }
 
   async getApi(apiId) {

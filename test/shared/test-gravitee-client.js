@@ -64,6 +64,42 @@ async function testFindApiByNameFiltersExactName() {
   assert.strictEqual(api.id, 'api-2');
 }
 
+async function testListApisFollowsPaginatedResponses() {
+  const client = new GraviteeClient({ baseUrl: 'https://gravitee.example.com', orgId: 'DEFAULT', envId: 'DEFAULT', token: 'token' });
+  const calls = [];
+  client.get = async (url) => {
+    calls.push(url);
+    if (url === 'https://gravitee.example.com/management/v2/organizations/DEFAULT/environments/DEFAULT/apis') {
+      return {
+        data: Array.from({ length: 10 }, (_, index) => ({ id: `api-${index + 1}`, name: `API ${index + 1}` })),
+        page: 1,
+        size: 10,
+        total: 12,
+      };
+    }
+    if (url === 'https://gravitee.example.com/management/v2/organizations/DEFAULT/environments/DEFAULT/apis?page=2&size=10') {
+      return {
+        data: [
+          { id: 'api-11', name: 'API 11' },
+          { id: 'api-12', name: 'API 12' },
+        ],
+        page: 2,
+        size: 10,
+        total: 12,
+      };
+    }
+    throw new Error(`Unexpected URL ${url}`);
+  };
+
+  const apis = await client.listApis();
+  assert.strictEqual(apis.length, 12);
+  assert.strictEqual(apis[10].id, 'api-11');
+  assert.deepStrictEqual(calls, [
+    'https://gravitee.example.com/management/v2/organizations/DEFAULT/environments/DEFAULT/apis',
+    'https://gravitee.example.com/management/v2/organizations/DEFAULT/environments/DEFAULT/apis?page=2&size=10',
+  ]);
+}
+
 async function testFindPlanResolvesApiByNameWhenIdMissing() {
   const client = new GraviteeClient({ baseUrl: 'https://gravitee.example.com', orgId: 'DEFAULT', envId: 'DEFAULT', token: 'token' });
   client.findApiByName = async (name) => ({ id: 'api-1', name });
@@ -295,6 +331,7 @@ async function run() {
   await testFindApplicationPrefersSourceMarker();
   await testNormalizeCollectionSupportsItemsShape();
   await testFindApiByNameFiltersExactName();
+  await testListApisFollowsPaginatedResponses();
   await testFindPlanResolvesApiByNameWhenIdMissing();
   await testCreateApiPlanNormalizesPlanPayload();
   await testCreateApplicationCustomFieldUsesApplicationsMetadataEndpoint();
