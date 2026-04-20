@@ -585,7 +585,7 @@ Create a config file like:
     "silentUserCreation": "supported",
     "apiKeyValuePreservation": "unknown",
     "oauthClientValuePreservation": "unknown",
-    "applicationOwnership": "metadata-only"
+    "applicationOwnership": "direct-member"
   },
   "productPlanMap": {
     "orders-product": {
