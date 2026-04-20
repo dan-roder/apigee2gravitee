@@ -267,7 +267,7 @@ Creates or updates Gravitee APIs and plans from extracted Apigee proxy IR. This 
 
 ### Config
 
-Start from [`config/apis.config.example.json`](/Users/danielroder/Sites/apigee2gravitee/config/apis.config.example.json):
+Start from [`config/apis.config.example.json`](./config/apis.config.example.json):
 
 ```json
 {
@@ -420,7 +420,7 @@ Before running this part of the migration:
 
 1. Run Tool 1 and generate `./ir`.
 2. Ensure target Gravitee APIs and plans already exist.
-3. Create a config file from [`config/developers.config.example.json`](/Users/danielroder/Sites/apigee2gravitee/config/developers.config.example.json).
+3. Create a config file from [`config/developers.config.example.json`](./config/developers.config.example.json).
 4. Fill in `productPlanMap` for every Apigee product that should become a Gravitee subscription.
 5. Set Gravitee URL, org, env, roles, and policies in that config.
 6. Set capability attestations for silent user creation, application ownership, and credential preservation.
@@ -520,7 +520,7 @@ Each target entry may also include:
 
 If a source product is missing from `productPlanMap`, `developers analyze` should fail preflight.
 
-For the current sample Apigee export in [`data/`](/Users/danielroder/Sites/apigee2gravitee/data), a starter mapping stub is available at [`config/developers.product-plan-map.from-data.example.json`](/Users/danielroder/Sites/apigee2gravitee/config/developers.product-plan-map.from-data.example.json), and a full local starter config is available at [`config/developers.config.json`](/Users/danielroder/Sites/apigee2gravitee/config/developers.config.json). Both mirror the extracted Apigee product-to-proxy relationships and use placeholder Gravitee API and plan ids to fill in.
+For the current sample Apigee export in [`data/`](./data), a starter mapping stub is available at [`config/developers.product-plan-map.from-data.example.json`](./config/developers.product-plan-map.from-data.example.json), and a full local starter config is available at [`config/developers.config.json`](./config/developers.config.json). Both mirror the extracted Apigee product-to-proxy relationships and use placeholder Gravitee API and plan ids to fill in.
 
 In that sample, `misc-api-product` fronts three Apigee proxies. The config now supports that directly by allowing one source product to map to an array of Gravitee API/plan targets.
 
@@ -738,7 +738,7 @@ This workflow has now been validated against a local Gravitee instance with:
 - `0` reconcile warnings
 - successful `developers delete-imported` cleanup for subscriptions, applications, and users
 
-For a full step-by-step controlled pilot, see [`docs/developers-pilot-runbook.md`](/Users/danielroder/Sites/apigee2gravitee/docs/developers-pilot-runbook.md).
+For a full step-by-step controlled pilot, see [`docs/developers-pilot-runbook.md`](./docs/developers-pilot-runbook.md).
 
 ### Recommended production sequence
 
@@ -809,8 +809,8 @@ state/developers-id-map.json
 logs/developers.ndjson
 ```
 
-For the detailed design and policy rules, see [`docs/developers-migration-context.md`](/Users/danielroder/Sites/apigee2gravitee/docs/developers-migration-context.md).
-For the first non-production pilot workflow, see [`docs/developers-pilot-runbook.md`](/Users/danielroder/Sites/apigee2gravitee/docs/developers-pilot-runbook.md).
+For the detailed design and policy rules, see [`docs/developers-migration-context.md`](./docs/developers-migration-context.md).
+For the first non-production pilot workflow, see [`docs/developers-pilot-runbook.md`](./docs/developers-pilot-runbook.md).
 
 | Field | Description |
 |---|---|
