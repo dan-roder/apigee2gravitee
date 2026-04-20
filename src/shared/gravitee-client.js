@@ -838,6 +838,70 @@ class GraviteeClient {
     return this.post(this.envUrl(`/applications/${applicationId}/members`), payload);
   }
 
+  async transferApplicationOwnership(applicationId, payload) {
+    const userId = payload?.userId || payload?.id || payload?.user || null;
+    const role = payload?.role || 'OWNER';
+    const attempts = [];
+    const strategies = [
+      {
+        name: 'v1-transfer-userId-referenceType',
+        exec: () => this.post(
+          this.url(`/management/v1/organizations/${this.orgId}/environments/${this.envId}/applications/${applicationId}/members/transfer_ownership`),
+          { id: userId, referenceType: 'USER', role },
+        ),
+      },
+      {
+        name: 'v1-transfer-id-reference',
+        exec: () => this.post(
+          this.url(`/management/v1/organizations/${this.orgId}/environments/${this.envId}/applications/${applicationId}/members/transfer_ownership`),
+          { id: userId, reference: 'USER', role },
+        ),
+      },
+      {
+        name: 'v1-transfer-user',
+        exec: () => this.post(
+          this.url(`/management/v1/organizations/${this.orgId}/environments/${this.envId}/applications/${applicationId}/members/transfer_ownership`),
+          { user: userId, role },
+        ),
+      },
+      {
+        name: 'env-transfer-userId-referenceType',
+        exec: () => this.post(
+          this.envUrl(`/applications/${applicationId}/members/transfer_ownership`),
+          { id: userId, referenceType: 'USER', role },
+        ),
+      },
+    ];
+
+    for (const strategy of strategies) {
+      try {
+        const response = await strategy.exec();
+        if (response && typeof response === 'object' && !Array.isArray(response)) {
+          response._strategy = strategy.name;
+        }
+        return response;
+      } catch (err) {
+        attempts.push({
+          strategy: strategy.name,
+          status: err.status || null,
+          classification: classifyApiError(err),
+          message: err.message,
+          body: err.body,
+        });
+      }
+    }
+
+    const fallbackError = new Error(
+      attempts
+        .map((attempt) => `${attempt.strategy}: ${attempt.message}${attempt.body ? `: ${formatErrorBody(attempt.body)}` : ''}`)
+        .join(' | ')
+    );
+    fallbackError.name = 'GraviteeApplicationOwnershipCompatibilityError';
+    fallbackError.classification = 'compatibility';
+    fallbackError.attempts = attempts;
+    throw fallbackError;
+  }
+
   async listApiPlans(apiId) {
     const body = await this.get(this.v2Url(`/apis/${apiId}/plans`));
     return normalizeCollection(body);

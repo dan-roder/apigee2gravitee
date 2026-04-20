@@ -239,11 +239,27 @@ async function ensureApplication(action, ctx, client, idMap) {
   if (applicationId && action.payload.ownershipStrategy === 'direct-member') {
     const ownerUserId = idMap.users[application.developerEmail];
     if (ownerUserId) {
-      await client.addApplicationMember(applicationId, { user: ownerUserId, role: 'OWNER' });
+      if (typeof client.transferApplicationOwnership === 'function') {
+        await client.transferApplicationOwnership(applicationId, { userId: ownerUserId, role: 'OWNER' });
+      } else {
+        await client.addApplicationMember(applicationId, { user: ownerUserId, role: 'OWNER' });
+      }
     }
   }
   if (applicationId) setIdMapValue(idMap, action.kind, action.sourceId, applicationId);
   return { applicationId };
+}
+
+function applicationHasExpectedOwner(target, members, ownerUserId, developerEmail) {
+  const owner = target?.owner || target?.primaryOwner || null;
+  const ownerMatches = !!owner && (
+    owner.id === ownerUserId
+      || owner.userId === ownerUserId
+      || owner.email === developerEmail
+      || owner.displayName === developerEmail
+  );
+  if (ownerMatches) return true;
+  return members.some((item) => item.id === ownerUserId || item.userId === ownerUserId || item.email === developerEmail);
 }
 
 async function verifyApplication(action, ctx, client, idMap) {
@@ -256,7 +272,7 @@ async function verifyApplication(action, ctx, client, idMap) {
   if (action.payload.ownershipStrategy === 'direct-member') {
     const members = await client.listApplicationMembers(target.id);
     const ownerUserId = idMap.users[application.developerEmail];
-    const found = members.some((item) => item.id === ownerUserId || item.userId === ownerUserId || item.email === application.developerEmail);
+    const found = applicationHasExpectedOwner(target, members, ownerUserId, application.developerEmail);
     if (!found) throw new Error(`Application ${application.appName} is missing expected owner membership`);
   }
   setIdMapValue(idMap, action.kind, action.sourceId, target.id);

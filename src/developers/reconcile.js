@@ -17,6 +17,18 @@ function inactivePolicySatisfied(target, policy) {
   return true;
 }
 
+function applicationHasExpectedOwner(target, members, ownerUserId, developerEmail) {
+  const owner = target?.owner || target?.primaryOwner || null;
+  const ownerMatches = !!owner && (
+    owner.id === ownerUserId
+      || owner.userId === ownerUserId
+      || owner.email === developerEmail
+      || owner.displayName === developerEmail
+  );
+  if (ownerMatches) return true;
+  return members.some((item) => item.id === ownerUserId || item.userId === ownerUserId || item.email === developerEmail);
+}
+
 async function runDevelopersReconcile(flags, deps = {}) {
   const result = await prepareDevelopersWorkflow(flags, deps);
   if (result.validationErrors) return result;
@@ -79,7 +91,7 @@ async function runDevelopersReconcile(flags, deps = {}) {
     if (application.ownershipStrategy === 'direct-member') {
       const members = await result.client.listApplicationMembers(target.id);
       const ownerUserId = idMap.users[application.developerEmail];
-      const found = members.some((item) => item.id === ownerUserId || item.userId === ownerUserId || item.email === application.developerEmail);
+      const found = applicationHasExpectedOwner(target, members, ownerUserId, application.developerEmail);
       if (!found) {
         mismatches.push({ severity: 'blocker', code: 'APPLICATION_OWNER_MISMATCH', sourceId: application.sourceId, message: `Application ${application.appName} is missing expected owner membership` });
       }

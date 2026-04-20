@@ -274,6 +274,35 @@ async function testAssignUserRolesUsesReferencePayloadWhenRoleIdsProvided() {
   assert.strictEqual(response._strategy, 'reference-payload');
 }
 
+async function testTransferApplicationOwnershipFallsBackAcrossPayloadShapes() {
+  const client = new GraviteeClient({ baseUrl: 'https://gravitee.example.com', orgId: 'DEFAULT', envId: 'DEFAULT', token: 'token' });
+  const calls = [];
+  client.post = async (url, body) => {
+    calls.push({ url, body });
+    if (calls.length < 3) {
+      const err = new Error(`POST ${url} → HTTP 400`);
+      err.status = 400;
+      err.body = { message: 'bad payload' };
+      throw err;
+    }
+    return { ok: true };
+  };
+
+  const response = await client.transferApplicationOwnership('app-1', { userId: 'user-1', role: 'OWNER' });
+  assert.strictEqual(calls.length, 3);
+  assert.strictEqual(calls[0].url, 'https://gravitee.example.com/management/v1/organizations/DEFAULT/environments/DEFAULT/applications/app-1/members/transfer_ownership');
+  assert.deepStrictEqual(calls[0].body, {
+    id: 'user-1',
+    referenceType: 'USER',
+    role: 'OWNER',
+  });
+  assert.deepStrictEqual(calls[2].body, {
+    user: 'user-1',
+    role: 'OWNER',
+  });
+  assert.strictEqual(response._strategy, 'v1-transfer-user');
+}
+
 async function testCloseOrPauseSubscriptionFallsBackAcrossCompatibilityStrategies() {
   const client = new GraviteeClient({ baseUrl: 'https://gravitee.example.com', orgId: 'DEFAULT', envId: 'DEFAULT', token: 'token' });
   const calls = [];
@@ -341,6 +370,7 @@ async function run() {
   await testDeleteUserUsesExpectedEndpoint();
   await testAssignUserRolesFallsBackAcrossPayloadShapes();
   await testAssignUserRolesUsesReferencePayloadWhenRoleIdsProvided();
+  await testTransferApplicationOwnershipFallsBackAcrossPayloadShapes();
   await testCloseOrPauseSubscriptionFallsBackAcrossCompatibilityStrategies();
   console.log('test-gravitee-client.js passed');
 }

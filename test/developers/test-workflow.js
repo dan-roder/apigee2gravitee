@@ -194,6 +194,20 @@ function makeWorkflowClient(options = {}) {
       state.members.set(applicationId, members);
       return { ok: true };
     },
+    async transferApplicationOwnership(applicationId, payload) {
+      const app = state.applications.get(applicationId);
+      if (app) {
+        app.owner = { id: payload.userId || payload.id || payload.user || null, email: null };
+        state.applications.set(applicationId, app);
+      }
+      const members = state.members.get(applicationId) || [];
+      const userId = payload.userId || payload.id || payload.user || null;
+      if (userId && !members.some((item) => item.userId === userId || item.id === userId)) {
+        members.push({ userId });
+      }
+      state.members.set(applicationId, members);
+      return { ok: true };
+    },
     async listApplicationMembers(applicationId) { return state.members.get(applicationId) || []; },
     async findPlan(mapping) {
       return state.plans.get(mapping.targetPlanId) || null;
