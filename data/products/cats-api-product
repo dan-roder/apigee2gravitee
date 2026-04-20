@@ -6,12 +6,12 @@
     "value" : "123"
   } ],
   "createdAt" : 1758733212777,
-  "createdBy" : "devops@540.co",
+  "createdBy" : "devops@example.com",
   "description" : "",
   "displayName" : "cats-api-product",
   "environments" : [ "dev" ],
   "lastModifiedAt" : 1773333655006,
-  "lastModifiedBy" : "devops@540.co",
+  "lastModifiedBy" : "devops@example.com",
   "name" : "cats-api-product",
   "proxies" : [ "cats-api-7" ],
   "scopes" : [ "" ]

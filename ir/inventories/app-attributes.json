@@ -3,10 +3,10 @@
     {
       "appCount": 4,
       "apps": [
-        "dev1@540.co/kanye-dev-app",
-        "dev1@540.co/wizards-dev-app",
-        "dev2@540.co/chuck-norris-dev-app",
-        "dev2@540.co/dog-breeds-dev-app"
+        "dev1@example.com/kanye-dev-app",
+        "dev1@example.com/wizards-dev-app",
+        "dev2@example.com/chuck-norris-dev-app",
+        "dev2@example.com/dog-breeds-dev-app"
       ],
       "emptyValueCount": 0,
       "name": "DisplayName",
@@ -26,10 +26,10 @@
     {
       "appCount": 4,
       "apps": [
-        "dev1@540.co/kanye-dev-app",
-        "dev1@540.co/wizards-dev-app",
-        "dev2@540.co/chuck-norris-dev-app",
-        "dev2@540.co/dog-breeds-dev-app"
+        "dev1@example.com/kanye-dev-app",
+        "dev1@example.com/wizards-dev-app",
+        "dev2@example.com/chuck-norris-dev-app",
+        "dev2@example.com/dog-breeds-dev-app"
       ],
       "emptyValueCount": 4,
       "name": "Notes",

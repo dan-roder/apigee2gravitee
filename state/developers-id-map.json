@@ -1,19 +1,19 @@
 {
   "generatedAt": "2026-04-20T19:00:50.592Z",
   "users": {
-    "dev1@540.co": "2708cc80-9de2-4c8f-88cc-809de22c8fce",
-    "dev2@540.co": "814aa32f-1eea-4edf-8aa3-2f1eeabedf68"
+    "dev1@example.com": "2708cc80-9de2-4c8f-88cc-809de22c8fce",
+    "dev2@example.com": "814aa32f-1eea-4edf-8aa3-2f1eeabedf68"
   },
   "applications": {
-    "dev1@540.co/kanye-dev-app": "a76d868d-7021-4cc2-ad86-8d70211cc2f9",
-    "dev1@540.co/wizards-dev-app": "a5b3b7f2-6b5f-4307-b3b7-f26b5fa30760",
-    "dev2@540.co/chuck-norris-dev-app": "a5f3ad98-9173-4bf1-b3ad-9891736bf1ee",
-    "dev2@540.co/dog-breeds-dev-app": "5c655773-5a4f-4a8b-a557-735a4f0a8bbc"
+    "dev1@example.com/kanye-dev-app": "a76d868d-7021-4cc2-ad86-8d70211cc2f9",
+    "dev1@example.com/wizards-dev-app": "a5b3b7f2-6b5f-4307-b3b7-f26b5fa30760",
+    "dev2@example.com/chuck-norris-dev-app": "a5f3ad98-9173-4bf1-b3ad-9891736bf1ee",
+    "dev2@example.com/dog-breeds-dev-app": "5c655773-5a4f-4a8b-a557-735a4f0a8bbc"
   },
   "subscriptions": {
-    "dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan": "76619045-7f95-4a4c-a190-457f958a4c0f",
-    "dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan": "bee6869f-cc03-4985-a686-9fcc03498599",
-    "dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan": "31c2bd67-7c63-43e5-82bd-677c6313e511",
-    "dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan": "fd5959c2-4598-45f9-9959-c2459865f93d"
+    "dev1@example.com/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan": "76619045-7f95-4a4c-a190-457f958a4c0f",
+    "dev1@example.com/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan": "bee6869f-cc03-4985-a686-9fcc03498599",
+    "dev2@example.com/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan": "31c2bd67-7c63-43e5-82bd-677c6313e511",
+    "dev2@example.com/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan": "fd5959c2-4598-45f9-9959-c2459865f93d"
   }
 }

@@ -2,34 +2,34 @@
   "items": [
     {
       "blockers": [],
-      "id": "danny.rivera@540.co",
-      "name": "danny.rivera@540.co",
+      "id": "danny.rivera@example.com",
+      "name": "danny.rivera@example.com",
       "riskFlags": [],
-      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/devs/danny.rivera@540.co",
+      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/devs/danny.rivera@example.com",
       "warnings": []
     },
     {
       "blockers": [],
-      "id": "dev1@540.co",
-      "name": "dev1@540.co",
+      "id": "dev1@example.com",
+      "name": "dev1@example.com",
       "riskFlags": [],
-      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/devs/dev1@540.co",
+      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/devs/dev1@example.com",
       "warnings": []
     },
     {
       "blockers": [],
-      "id": "dev2@540.co",
-      "name": "dev2@540.co",
+      "id": "dev2@example.com",
+      "name": "dev2@example.com",
       "riskFlags": [],
-      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/devs/dev2@540.co",
+      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/devs/dev2@example.com",
       "warnings": []
     },
     {
       "blockers": [],
-      "id": "erik.severson@540.co",
-      "name": "erik.severson@540.co",
+      "id": "erik.severson@example.com",
+      "name": "erik.severson@example.com",
       "riskFlags": [],
-      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/devs/erik.severson@540.co",
+      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/devs/erik.severson@example.com",
       "warnings": []
     }
   ]

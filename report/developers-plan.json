@@ -62,13 +62,13 @@
   "records": {
     "users": [
       {
-        "sourceId": "dev1@540.co",
+        "sourceId": "dev1@example.com",
         "kind": "MigratedUser",
-        "developerEmail": "dev1@540.co",
-        "email": "dev1@540.co",
+        "developerEmail": "dev1@example.com",
+        "email": "dev1@example.com",
         "firstName": "Developer",
         "lastName": "One",
-        "userName": "dev1@540.co",
+        "userName": "dev1@example.com",
         "status": "active",
         "attributes": [],
         "customFields": [],
@@ -79,20 +79,20 @@
         "inactiveImpact": null,
         "customFieldCandidates": [],
         "lookupHints": {
-          "email": "dev1@540.co"
+          "email": "dev1@example.com"
         },
         "blockers": [],
         "warnings": [],
         "manualReviewReasons": []
       },
       {
-        "sourceId": "dev2@540.co",
+        "sourceId": "dev2@example.com",
         "kind": "MigratedUser",
-        "developerEmail": "dev2@540.co",
-        "email": "dev2@540.co",
+        "developerEmail": "dev2@example.com",
+        "email": "dev2@example.com",
         "firstName": "Developer",
         "lastName": "Two",
-        "userName": "dev2@540.co",
+        "userName": "dev2@example.com",
         "status": "active",
         "attributes": [],
         "customFields": [],
@@ -103,7 +103,7 @@
         "inactiveImpact": null,
         "customFieldCandidates": [],
         "lookupHints": {
-          "email": "dev2@540.co"
+          "email": "dev2@example.com"
         },
         "blockers": [],
         "warnings": [],
@@ -112,9 +112,9 @@
     ],
     "applications": [
       {
-        "sourceId": "dev1@540.co/kanye-dev-app",
+        "sourceId": "dev1@example.com/kanye-dev-app",
         "kind": "MigratedApplication",
-        "developerEmail": "dev1@540.co",
+        "developerEmail": "dev1@example.com",
         "developerStatus": "active",
         "appName": "kanye-dev-app",
         "appId": "18180382-349a-4c59-ac46-deca701e2b3c",
@@ -132,23 +132,23 @@
         ],
         "customFields": [],
         "credentialIds": [
-          "dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1"
+          "dev1@example.com/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1"
         ],
         "customFieldCandidates": [],
         "ownershipStrategy": "direct-member",
         "lookupHints": {
           "name": "kanye-dev-app",
-          "ownerHint": "dev1@540.co",
-          "sourceId": "dev1@540.co/kanye-dev-app"
+          "ownerHint": "dev1@example.com",
+          "sourceId": "dev1@example.com/kanye-dev-app"
         },
         "blockers": [],
         "warnings": [],
         "manualReviewReasons": []
       },
       {
-        "sourceId": "dev1@540.co/wizards-dev-app",
+        "sourceId": "dev1@example.com/wizards-dev-app",
         "kind": "MigratedApplication",
-        "developerEmail": "dev1@540.co",
+        "developerEmail": "dev1@example.com",
         "developerStatus": "active",
         "appName": "wizards-dev-app",
         "appId": "13035a86-47da-4ce3-aed7-6a42c329319a",
@@ -166,23 +166,23 @@
         ],
         "customFields": [],
         "credentialIds": [
-          "dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK"
+          "dev1@example.com/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK"
         ],
         "customFieldCandidates": [],
         "ownershipStrategy": "direct-member",
         "lookupHints": {
           "name": "wizards-dev-app",
-          "ownerHint": "dev1@540.co",
-          "sourceId": "dev1@540.co/wizards-dev-app"
+          "ownerHint": "dev1@example.com",
+          "sourceId": "dev1@example.com/wizards-dev-app"
         },
         "blockers": [],
         "warnings": [],
         "manualReviewReasons": []
       },
       {
-        "sourceId": "dev2@540.co/chuck-norris-dev-app",
+        "sourceId": "dev2@example.com/chuck-norris-dev-app",
         "kind": "MigratedApplication",
-        "developerEmail": "dev2@540.co",
+        "developerEmail": "dev2@example.com",
         "developerStatus": "active",
         "appName": "chuck-norris-dev-app",
         "appId": "a6a9d756-2851-4a04-9b4f-40e4f7dc3e59",
@@ -200,23 +200,23 @@
         ],
         "customFields": [],
         "credentialIds": [
-          "dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3"
+          "dev2@example.com/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3"
         ],
         "customFieldCandidates": [],
         "ownershipStrategy": "direct-member",
         "lookupHints": {
           "name": "chuck-norris-dev-app",
-          "ownerHint": "dev2@540.co",
-          "sourceId": "dev2@540.co/chuck-norris-dev-app"
+          "ownerHint": "dev2@example.com",
+          "sourceId": "dev2@example.com/chuck-norris-dev-app"
         },
         "blockers": [],
         "warnings": [],
         "manualReviewReasons": []
       },
       {
-        "sourceId": "dev2@540.co/dog-breeds-dev-app",
+        "sourceId": "dev2@example.com/dog-breeds-dev-app",
         "kind": "MigratedApplication",
-        "developerEmail": "dev2@540.co",
+        "developerEmail": "dev2@example.com",
         "developerStatus": "active",
         "appName": "dog-breeds-dev-app",
         "appId": "1c8744c4-5897-4df9-89b8-515c7133f997",
@@ -234,14 +234,14 @@
         ],
         "customFields": [],
         "credentialIds": [
-          "dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8"
+          "dev2@example.com/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8"
         ],
         "customFieldCandidates": [],
         "ownershipStrategy": "direct-member",
         "lookupHints": {
           "name": "dog-breeds-dev-app",
-          "ownerHint": "dev2@540.co",
-          "sourceId": "dev2@540.co/dog-breeds-dev-app"
+          "ownerHint": "dev2@example.com",
+          "sourceId": "dev2@example.com/dog-breeds-dev-app"
         },
         "blockers": [],
         "warnings": [],
@@ -250,14 +250,14 @@
     ],
     "credentials": [
       {
-        "sourceId": "dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1",
+        "sourceId": "dev1@example.com/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1",
         "kind": "MigratedCredential",
-        "credentialId": "dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1",
-        "developerEmail": "dev1@540.co",
+        "credentialId": "dev1@example.com/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1",
+        "developerEmail": "dev1@example.com",
         "appName": "kanye-dev-app",
         "consumerKey": "om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1",
         "consumerSecretPresent": true,
-        "consumerSecretRef": "_protected/credentials/dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/consumer-secret.txt",
+        "consumerSecretRef": "_protected/credentials/dev1@example.com/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/consumer-secret.txt",
         "status": "approved",
         "apiProducts": [
           {
@@ -279,8 +279,8 @@
           ],
           "consumerKey": "om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1",
           "consumerSecretPresent": true,
-          "credentialId": "dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1",
-          "developerEmail": "dev1@540.co",
+          "credentialId": "dev1@example.com/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1",
+          "developerEmail": "dev1@example.com",
           "riskFlags": [
             "API_KEY_CONTINUITY_RISK"
           ]
@@ -296,8 +296,8 @@
           "apiKeyModeHint": "EXCLUSIVE",
           "appName": "kanye-dev-app",
           "consumerKey": "om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1",
-          "credentialId": "dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1",
-          "developerEmail": "dev1@540.co",
+          "credentialId": "dev1@example.com/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1",
+          "developerEmail": "dev1@example.com",
           "productAssociations": [
             {
               "productName": "kanye-api-product",
@@ -310,7 +310,7 @@
         "protectedSecretMetaPresent": true,
         "protectedSecretValuePresent": true,
         "protectedSecretMaterialPresent": true,
-        "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/consumer-secret.txt",
+        "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/dev1@example.com/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/consumer-secret.txt",
         "continuityPolicy": "preserve-if-supported",
         "oauthContinuityPolicy": "preserve-if-supported",
         "blockers": [],
@@ -318,14 +318,14 @@
         "manualReviewReasons": []
       },
       {
-        "sourceId": "dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK",
+        "sourceId": "dev1@example.com/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK",
         "kind": "MigratedCredential",
-        "credentialId": "dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK",
-        "developerEmail": "dev1@540.co",
+        "credentialId": "dev1@example.com/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK",
+        "developerEmail": "dev1@example.com",
         "appName": "wizards-dev-app",
         "consumerKey": "deYGA5oSqN1OnrE0nW61CWn3ydBEevoK",
         "consumerSecretPresent": true,
-        "consumerSecretRef": "_protected/credentials/dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/consumer-secret.txt",
+        "consumerSecretRef": "_protected/credentials/dev1@example.com/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/consumer-secret.txt",
         "status": "approved",
         "apiProducts": [
           {
@@ -347,8 +347,8 @@
           ],
           "consumerKey": "deYGA5oSqN1OnrE0nW61CWn3ydBEevoK",
           "consumerSecretPresent": true,
-          "credentialId": "dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK",
-          "developerEmail": "dev1@540.co",
+          "credentialId": "dev1@example.com/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK",
+          "developerEmail": "dev1@example.com",
           "riskFlags": [
             "API_KEY_CONTINUITY_RISK"
           ]
@@ -364,8 +364,8 @@
           "apiKeyModeHint": "EXCLUSIVE",
           "appName": "wizards-dev-app",
           "consumerKey": "deYGA5oSqN1OnrE0nW61CWn3ydBEevoK",
-          "credentialId": "dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK",
-          "developerEmail": "dev1@540.co",
+          "credentialId": "dev1@example.com/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK",
+          "developerEmail": "dev1@example.com",
           "productAssociations": [
             {
               "productName": "wizards-api-product",
@@ -378,7 +378,7 @@
         "protectedSecretMetaPresent": true,
         "protectedSecretValuePresent": true,
         "protectedSecretMaterialPresent": true,
-        "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/consumer-secret.txt",
+        "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/dev1@example.com/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/consumer-secret.txt",
         "continuityPolicy": "preserve-if-supported",
         "oauthContinuityPolicy": "preserve-if-supported",
         "blockers": [],
@@ -386,14 +386,14 @@
         "manualReviewReasons": []
       },
       {
-        "sourceId": "dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3",
+        "sourceId": "dev2@example.com/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3",
         "kind": "MigratedCredential",
-        "credentialId": "dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3",
-        "developerEmail": "dev2@540.co",
+        "credentialId": "dev2@example.com/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3",
+        "developerEmail": "dev2@example.com",
         "appName": "chuck-norris-dev-app",
         "consumerKey": "3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3",
         "consumerSecretPresent": true,
-        "consumerSecretRef": "_protected/credentials/dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/consumer-secret.txt",
+        "consumerSecretRef": "_protected/credentials/dev2@example.com/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/consumer-secret.txt",
         "status": "approved",
         "apiProducts": [
           {
@@ -415,8 +415,8 @@
           ],
           "consumerKey": "3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3",
           "consumerSecretPresent": true,
-          "credentialId": "dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3",
-          "developerEmail": "dev2@540.co",
+          "credentialId": "dev2@example.com/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3",
+          "developerEmail": "dev2@example.com",
           "riskFlags": [
             "API_KEY_CONTINUITY_RISK"
           ]
@@ -432,8 +432,8 @@
           "apiKeyModeHint": "EXCLUSIVE",
           "appName": "chuck-norris-dev-app",
           "consumerKey": "3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3",
-          "credentialId": "dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3",
-          "developerEmail": "dev2@540.co",
+          "credentialId": "dev2@example.com/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3",
+          "developerEmail": "dev2@example.com",
           "productAssociations": [
             {
               "productName": "chuck-norris-api-product",
@@ -446,7 +446,7 @@
         "protectedSecretMetaPresent": true,
         "protectedSecretValuePresent": true,
         "protectedSecretMaterialPresent": true,
-        "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/consumer-secret.txt",
+        "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/dev2@example.com/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/consumer-secret.txt",
         "continuityPolicy": "preserve-if-supported",
         "oauthContinuityPolicy": "preserve-if-supported",
         "blockers": [],
@@ -454,14 +454,14 @@
         "manualReviewReasons": []
       },
       {
-        "sourceId": "dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8",
+        "sourceId": "dev2@example.com/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8",
         "kind": "MigratedCredential",
-        "credentialId": "dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8",
-        "developerEmail": "dev2@540.co",
+        "credentialId": "dev2@example.com/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8",
+        "developerEmail": "dev2@example.com",
         "appName": "dog-breeds-dev-app",
         "consumerKey": "jJXAiWGvXIwB5PFsumALglFbCeLJPvD8",
         "consumerSecretPresent": true,
-        "consumerSecretRef": "_protected/credentials/dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/consumer-secret.txt",
+        "consumerSecretRef": "_protected/credentials/dev2@example.com/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/consumer-secret.txt",
         "status": "approved",
         "apiProducts": [
           {
@@ -483,8 +483,8 @@
           ],
           "consumerKey": "jJXAiWGvXIwB5PFsumALglFbCeLJPvD8",
           "consumerSecretPresent": true,
-          "credentialId": "dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8",
-          "developerEmail": "dev2@540.co",
+          "credentialId": "dev2@example.com/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8",
+          "developerEmail": "dev2@example.com",
           "riskFlags": [
             "API_KEY_CONTINUITY_RISK"
           ]
@@ -500,8 +500,8 @@
           "apiKeyModeHint": "EXCLUSIVE",
           "appName": "dog-breeds-dev-app",
           "consumerKey": "jJXAiWGvXIwB5PFsumALglFbCeLJPvD8",
-          "credentialId": "dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8",
-          "developerEmail": "dev2@540.co",
+          "credentialId": "dev2@example.com/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8",
+          "developerEmail": "dev2@example.com",
           "productAssociations": [
             {
               "productName": "dog-breeds-api-product",
@@ -514,7 +514,7 @@
         "protectedSecretMetaPresent": true,
         "protectedSecretValuePresent": true,
         "protectedSecretMaterialPresent": true,
-        "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/consumer-secret.txt",
+        "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/dev2@example.com/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/consumer-secret.txt",
         "continuityPolicy": "preserve-if-supported",
         "oauthContinuityPolicy": "preserve-if-supported",
         "blockers": [],
@@ -524,11 +524,11 @@
     ],
     "subscriptions": [
       {
-        "sourceId": "dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan",
-        "baseSourceId": "dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product",
+        "sourceId": "dev1@example.com/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan",
+        "baseSourceId": "dev1@example.com/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product",
         "kind": "MigratedSubscription",
-        "credentialId": "dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1",
-        "developerEmail": "dev1@540.co",
+        "credentialId": "dev1@example.com/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1",
+        "developerEmail": "dev1@example.com",
         "developerStatus": "active",
         "appName": "kanye-dev-app",
         "consumerKey": "om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1",
@@ -560,7 +560,7 @@
         ],
         "lookupHints": {
           "productName": "kanye-api-product",
-          "applicationSourceId": "dev1@540.co/kanye-dev-app",
+          "applicationSourceId": "dev1@example.com/kanye-dev-app",
           "targetApi": "kanye-rest-api-5",
           "targetPlan": "API Key Plan",
           "targetKey": "kanye-rest-api-5::API Key Plan"
@@ -570,11 +570,11 @@
         "manualReviewReasons": []
       },
       {
-        "sourceId": "dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan",
-        "baseSourceId": "dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product",
+        "sourceId": "dev1@example.com/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan",
+        "baseSourceId": "dev1@example.com/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product",
         "kind": "MigratedSubscription",
-        "credentialId": "dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK",
-        "developerEmail": "dev1@540.co",
+        "credentialId": "dev1@example.com/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK",
+        "developerEmail": "dev1@example.com",
         "developerStatus": "active",
         "appName": "wizards-dev-app",
         "consumerKey": "deYGA5oSqN1OnrE0nW61CWn3ydBEevoK",
@@ -606,7 +606,7 @@
         ],
         "lookupHints": {
           "productName": "wizards-api-product",
-          "applicationSourceId": "dev1@540.co/wizards-dev-app",
+          "applicationSourceId": "dev1@example.com/wizards-dev-app",
           "targetApi": "wizards-api-9",
           "targetPlan": "API Key Plan",
           "targetKey": "wizards-api-9::API Key Plan"
@@ -616,11 +616,11 @@
         "manualReviewReasons": []
       },
       {
-        "sourceId": "dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan",
-        "baseSourceId": "dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product",
+        "sourceId": "dev2@example.com/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan",
+        "baseSourceId": "dev2@example.com/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product",
         "kind": "MigratedSubscription",
-        "credentialId": "dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3",
-        "developerEmail": "dev2@540.co",
+        "credentialId": "dev2@example.com/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3",
+        "developerEmail": "dev2@example.com",
         "developerStatus": "active",
         "appName": "chuck-norris-dev-app",
         "consumerKey": "3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3",
@@ -652,7 +652,7 @@
         ],
         "lookupHints": {
           "productName": "chuck-norris-api-product",
-          "applicationSourceId": "dev2@540.co/chuck-norris-dev-app",
+          "applicationSourceId": "dev2@example.com/chuck-norris-dev-app",
           "targetApi": "chuck-norris-api-10",
           "targetPlan": "API Key Plan",
           "targetKey": "chuck-norris-api-10::API Key Plan"
@@ -662,11 +662,11 @@
         "manualReviewReasons": []
       },
       {
-        "sourceId": "dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan",
-        "baseSourceId": "dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product",
+        "sourceId": "dev2@example.com/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan",
+        "baseSourceId": "dev2@example.com/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product",
         "kind": "MigratedSubscription",
-        "credentialId": "dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8",
-        "developerEmail": "dev2@540.co",
+        "credentialId": "dev2@example.com/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8",
+        "developerEmail": "dev2@example.com",
         "developerStatus": "active",
         "appName": "dog-breeds-dev-app",
         "consumerKey": "jJXAiWGvXIwB5PFsumALglFbCeLJPvD8",
@@ -698,7 +698,7 @@
         ],
         "lookupHints": {
           "productName": "dog-breeds-api-product",
-          "applicationSourceId": "dev2@540.co/dog-breeds-dev-app",
+          "applicationSourceId": "dev2@example.com/dog-breeds-dev-app",
           "targetApi": "dog-breeds-api-6",
           "targetPlan": "API Key Plan",
           "targetKey": "dog-breeds-api-6::API Key Plan"
@@ -712,21 +712,21 @@
   "findings": [],
   "actions": [
     {
-      "actionId": "UPSERT_USER:dev1@540.co",
+      "actionId": "UPSERT_USER:dev1@example.com",
       "kind": "UPSERT_USER",
-      "sourceId": "dev1@540.co",
+      "sourceId": "dev1@example.com",
       "dependencies": [],
       "plannedStatus": "READY",
       "operation": "REUSE",
       "desiredState": "active",
       "lookup": {
-        "email": "dev1@540.co"
+        "email": "dev1@example.com"
       },
       "payload": {
-        "email": "dev1@540.co",
+        "email": "dev1@example.com",
         "firstName": "Developer",
         "lastName": "One",
-        "userName": "dev1@540.co",
+        "userName": "dev1@example.com",
         "customFields": [],
         "roles": {
           "organization": [
@@ -756,17 +756,17 @@
       }
     },
     {
-      "actionId": "VERIFY_USER:dev1@540.co",
+      "actionId": "VERIFY_USER:dev1@example.com",
       "kind": "VERIFY_USER",
-      "sourceId": "dev1@540.co",
+      "sourceId": "dev1@example.com",
       "dependencies": [
-        "UPSERT_USER:dev1@540.co"
+        "UPSERT_USER:dev1@example.com"
       ],
       "plannedStatus": "READY",
       "operation": "VERIFY",
       "desiredState": null,
       "lookup": {
-        "email": "dev1@540.co"
+        "email": "dev1@example.com"
       },
       "payload": {
         "expectedRoles": {
@@ -787,21 +787,21 @@
       "manualReviewReasons": []
     },
     {
-      "actionId": "UPSERT_USER:dev2@540.co",
+      "actionId": "UPSERT_USER:dev2@example.com",
       "kind": "UPSERT_USER",
-      "sourceId": "dev2@540.co",
+      "sourceId": "dev2@example.com",
       "dependencies": [],
       "plannedStatus": "READY",
       "operation": "REUSE",
       "desiredState": "active",
       "lookup": {
-        "email": "dev2@540.co"
+        "email": "dev2@example.com"
       },
       "payload": {
-        "email": "dev2@540.co",
+        "email": "dev2@example.com",
         "firstName": "Developer",
         "lastName": "Two",
-        "userName": "dev2@540.co",
+        "userName": "dev2@example.com",
         "customFields": [],
         "roles": {
           "organization": [
@@ -831,17 +831,17 @@
       }
     },
     {
-      "actionId": "VERIFY_USER:dev2@540.co",
+      "actionId": "VERIFY_USER:dev2@example.com",
       "kind": "VERIFY_USER",
-      "sourceId": "dev2@540.co",
+      "sourceId": "dev2@example.com",
       "dependencies": [
-        "UPSERT_USER:dev2@540.co"
+        "UPSERT_USER:dev2@example.com"
       ],
       "plannedStatus": "READY",
       "operation": "VERIFY",
       "desiredState": null,
       "lookup": {
-        "email": "dev2@540.co"
+        "email": "dev2@example.com"
       },
       "payload": {
         "expectedRoles": {
@@ -862,23 +862,23 @@
       "manualReviewReasons": []
     },
     {
-      "actionId": "UPSERT_APPLICATION:dev1@540.co/kanye-dev-app",
+      "actionId": "UPSERT_APPLICATION:dev1@example.com/kanye-dev-app",
       "kind": "UPSERT_APPLICATION",
-      "sourceId": "dev1@540.co/kanye-dev-app",
+      "sourceId": "dev1@example.com/kanye-dev-app",
       "dependencies": [
-        "UPSERT_USER:dev1@540.co"
+        "UPSERT_USER:dev1@example.com"
       ],
       "plannedStatus": "READY",
       "operation": "REUSE",
       "desiredState": "approved",
       "lookup": {
         "name": "kanye-dev-app",
-        "ownerHint": "dev1@540.co",
-        "sourceId": "dev1@540.co/kanye-dev-app"
+        "ownerHint": "dev1@example.com",
+        "sourceId": "dev1@example.com/kanye-dev-app"
       },
       "payload": {
         "name": "kanye-dev-app",
-        "ownerEmail": "dev1@540.co",
+        "ownerEmail": "dev1@example.com",
         "callbackUrl": "",
         "attributes": [
           {
@@ -905,23 +905,23 @@
       }
     },
     {
-      "actionId": "VERIFY_APPLICATION:dev1@540.co/kanye-dev-app",
+      "actionId": "VERIFY_APPLICATION:dev1@example.com/kanye-dev-app",
       "kind": "VERIFY_APPLICATION",
-      "sourceId": "dev1@540.co/kanye-dev-app",
+      "sourceId": "dev1@example.com/kanye-dev-app",
       "dependencies": [
-        "UPSERT_APPLICATION:dev1@540.co/kanye-dev-app"
+        "UPSERT_APPLICATION:dev1@example.com/kanye-dev-app"
       ],
       "plannedStatus": "READY",
       "operation": "VERIFY",
       "desiredState": null,
       "lookup": {
         "name": "kanye-dev-app",
-        "ownerHint": "dev1@540.co",
-        "sourceId": "dev1@540.co/kanye-dev-app"
+        "ownerHint": "dev1@example.com",
+        "sourceId": "dev1@example.com/kanye-dev-app"
       },
       "payload": {
         "ownershipStrategy": "direct-member",
-        "ownerEmail": "dev1@540.co"
+        "ownerEmail": "dev1@example.com"
       },
       "continuity": {},
       "skipConditions": [],
@@ -931,23 +931,23 @@
       "manualReviewReasons": []
     },
     {
-      "actionId": "UPSERT_APPLICATION:dev1@540.co/wizards-dev-app",
+      "actionId": "UPSERT_APPLICATION:dev1@example.com/wizards-dev-app",
       "kind": "UPSERT_APPLICATION",
-      "sourceId": "dev1@540.co/wizards-dev-app",
+      "sourceId": "dev1@example.com/wizards-dev-app",
       "dependencies": [
-        "UPSERT_USER:dev1@540.co"
+        "UPSERT_USER:dev1@example.com"
       ],
       "plannedStatus": "READY",
       "operation": "REUSE",
       "desiredState": "approved",
       "lookup": {
         "name": "wizards-dev-app",
-        "ownerHint": "dev1@540.co",
-        "sourceId": "dev1@540.co/wizards-dev-app"
+        "ownerHint": "dev1@example.com",
+        "sourceId": "dev1@example.com/wizards-dev-app"
       },
       "payload": {
         "name": "wizards-dev-app",
-        "ownerEmail": "dev1@540.co",
+        "ownerEmail": "dev1@example.com",
         "callbackUrl": "",
         "attributes": [
           {
@@ -974,23 +974,23 @@
       }
     },
     {
-      "actionId": "VERIFY_APPLICATION:dev1@540.co/wizards-dev-app",
+      "actionId": "VERIFY_APPLICATION:dev1@example.com/wizards-dev-app",
       "kind": "VERIFY_APPLICATION",
-      "sourceId": "dev1@540.co/wizards-dev-app",
+      "sourceId": "dev1@example.com/wizards-dev-app",
       "dependencies": [
-        "UPSERT_APPLICATION:dev1@540.co/wizards-dev-app"
+        "UPSERT_APPLICATION:dev1@example.com/wizards-dev-app"
       ],
       "plannedStatus": "READY",
       "operation": "VERIFY",
       "desiredState": null,
       "lookup": {
         "name": "wizards-dev-app",
-        "ownerHint": "dev1@540.co",
-        "sourceId": "dev1@540.co/wizards-dev-app"
+        "ownerHint": "dev1@example.com",
+        "sourceId": "dev1@example.com/wizards-dev-app"
       },
       "payload": {
         "ownershipStrategy": "direct-member",
-        "ownerEmail": "dev1@540.co"
+        "ownerEmail": "dev1@example.com"
       },
       "continuity": {},
       "skipConditions": [],
@@ -1000,23 +1000,23 @@
       "manualReviewReasons": []
     },
     {
-      "actionId": "UPSERT_APPLICATION:dev2@540.co/chuck-norris-dev-app",
+      "actionId": "UPSERT_APPLICATION:dev2@example.com/chuck-norris-dev-app",
       "kind": "UPSERT_APPLICATION",
-      "sourceId": "dev2@540.co/chuck-norris-dev-app",
+      "sourceId": "dev2@example.com/chuck-norris-dev-app",
       "dependencies": [
-        "UPSERT_USER:dev2@540.co"
+        "UPSERT_USER:dev2@example.com"
       ],
       "plannedStatus": "READY",
       "operation": "REUSE",
       "desiredState": "approved",
       "lookup": {
         "name": "chuck-norris-dev-app",
-        "ownerHint": "dev2@540.co",
-        "sourceId": "dev2@540.co/chuck-norris-dev-app"
+        "ownerHint": "dev2@example.com",
+        "sourceId": "dev2@example.com/chuck-norris-dev-app"
       },
       "payload": {
         "name": "chuck-norris-dev-app",
-        "ownerEmail": "dev2@540.co",
+        "ownerEmail": "dev2@example.com",
         "callbackUrl": "",
         "attributes": [
           {
@@ -1043,23 +1043,23 @@
       }
     },
     {
-      "actionId": "VERIFY_APPLICATION:dev2@540.co/chuck-norris-dev-app",
+      "actionId": "VERIFY_APPLICATION:dev2@example.com/chuck-norris-dev-app",
       "kind": "VERIFY_APPLICATION",
-      "sourceId": "dev2@540.co/chuck-norris-dev-app",
+      "sourceId": "dev2@example.com/chuck-norris-dev-app",
       "dependencies": [
-        "UPSERT_APPLICATION:dev2@540.co/chuck-norris-dev-app"
+        "UPSERT_APPLICATION:dev2@example.com/chuck-norris-dev-app"
       ],
       "plannedStatus": "READY",
       "operation": "VERIFY",
       "desiredState": null,
       "lookup": {
         "name": "chuck-norris-dev-app",
-        "ownerHint": "dev2@540.co",
-        "sourceId": "dev2@540.co/chuck-norris-dev-app"
+        "ownerHint": "dev2@example.com",
+        "sourceId": "dev2@example.com/chuck-norris-dev-app"
       },
       "payload": {
         "ownershipStrategy": "direct-member",
-        "ownerEmail": "dev2@540.co"
+        "ownerEmail": "dev2@example.com"
       },
       "continuity": {},
       "skipConditions": [],
@@ -1069,23 +1069,23 @@
       "manualReviewReasons": []
     },
     {
-      "actionId": "UPSERT_APPLICATION:dev2@540.co/dog-breeds-dev-app",
+      "actionId": "UPSERT_APPLICATION:dev2@example.com/dog-breeds-dev-app",
       "kind": "UPSERT_APPLICATION",
-      "sourceId": "dev2@540.co/dog-breeds-dev-app",
+      "sourceId": "dev2@example.com/dog-breeds-dev-app",
       "dependencies": [
-        "UPSERT_USER:dev2@540.co"
+        "UPSERT_USER:dev2@example.com"
       ],
       "plannedStatus": "READY",
       "operation": "REUSE",
       "desiredState": "approved",
       "lookup": {
         "name": "dog-breeds-dev-app",
-        "ownerHint": "dev2@540.co",
-        "sourceId": "dev2@540.co/dog-breeds-dev-app"
+        "ownerHint": "dev2@example.com",
+        "sourceId": "dev2@example.com/dog-breeds-dev-app"
       },
       "payload": {
         "name": "dog-breeds-dev-app",
-        "ownerEmail": "dev2@540.co",
+        "ownerEmail": "dev2@example.com",
         "callbackUrl": "",
         "attributes": [
           {
@@ -1112,23 +1112,23 @@
       }
     },
     {
-      "actionId": "VERIFY_APPLICATION:dev2@540.co/dog-breeds-dev-app",
+      "actionId": "VERIFY_APPLICATION:dev2@example.com/dog-breeds-dev-app",
       "kind": "VERIFY_APPLICATION",
-      "sourceId": "dev2@540.co/dog-breeds-dev-app",
+      "sourceId": "dev2@example.com/dog-breeds-dev-app",
       "dependencies": [
-        "UPSERT_APPLICATION:dev2@540.co/dog-breeds-dev-app"
+        "UPSERT_APPLICATION:dev2@example.com/dog-breeds-dev-app"
       ],
       "plannedStatus": "READY",
       "operation": "VERIFY",
       "desiredState": null,
       "lookup": {
         "name": "dog-breeds-dev-app",
-        "ownerHint": "dev2@540.co",
-        "sourceId": "dev2@540.co/dog-breeds-dev-app"
+        "ownerHint": "dev2@example.com",
+        "sourceId": "dev2@example.com/dog-breeds-dev-app"
       },
       "payload": {
         "ownershipStrategy": "direct-member",
-        "ownerEmail": "dev2@540.co"
+        "ownerEmail": "dev2@example.com"
       },
       "continuity": {},
       "skipConditions": [],
@@ -1138,11 +1138,11 @@
       "manualReviewReasons": []
     },
     {
-      "actionId": "RESOLVE_PLAN:dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan",
+      "actionId": "RESOLVE_PLAN:dev1@example.com/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan",
       "kind": "RESOLVE_PLAN",
-      "sourceId": "dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan",
+      "sourceId": "dev1@example.com/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan",
       "dependencies": [
-        "UPSERT_APPLICATION:dev1@540.co/kanye-dev-app"
+        "UPSERT_APPLICATION:dev1@example.com/kanye-dev-app"
       ],
       "plannedStatus": "READY",
       "operation": "REUSE",
@@ -1177,20 +1177,20 @@
       }
     },
     {
-      "actionId": "UPSERT_SUBSCRIPTION:dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan",
+      "actionId": "UPSERT_SUBSCRIPTION:dev1@example.com/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan",
       "kind": "UPSERT_SUBSCRIPTION",
-      "sourceId": "dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan",
+      "sourceId": "dev1@example.com/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan",
       "dependencies": [
-        "UPSERT_APPLICATION:dev1@540.co/kanye-dev-app",
-        "RESOLVE_PLAN:dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan"
+        "UPSERT_APPLICATION:dev1@example.com/kanye-dev-app",
+        "RESOLVE_PLAN:dev1@example.com/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan"
       ],
       "plannedStatus": "READY",
       "operation": "REUSE",
       "desiredState": "ACCEPTED",
       "lookup": {
-        "applicationSourceId": "dev1@540.co/kanye-dev-app",
+        "applicationSourceId": "dev1@example.com/kanye-dev-app",
         "productName": "kanye-api-product",
-        "credentialId": "dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1",
+        "credentialId": "dev1@example.com/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1",
         "targetKey": "kanye-rest-api-5::API Key Plan"
       },
       "payload": {
@@ -1209,7 +1209,7 @@
       "continuity": {
         "apiKeyPolicy": "preserve-if-supported",
         "sourceConsumerKey": "om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1",
-        "sourceCredentialId": "dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1"
+        "sourceCredentialId": "dev1@example.com/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1"
       },
       "skipConditions": [],
       "failConditions": [],
@@ -1221,19 +1221,19 @@
       }
     },
     {
-      "actionId": "VERIFY_SUBSCRIPTION:dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan",
+      "actionId": "VERIFY_SUBSCRIPTION:dev1@example.com/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan",
       "kind": "VERIFY_SUBSCRIPTION",
-      "sourceId": "dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan",
+      "sourceId": "dev1@example.com/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan",
       "dependencies": [
-        "UPSERT_SUBSCRIPTION:dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan"
+        "UPSERT_SUBSCRIPTION:dev1@example.com/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan"
       ],
       "plannedStatus": "READY",
       "operation": "VERIFY",
       "desiredState": null,
       "lookup": {
-        "applicationSourceId": "dev1@540.co/kanye-dev-app",
+        "applicationSourceId": "dev1@example.com/kanye-dev-app",
         "productName": "kanye-api-product",
-        "credentialId": "dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1",
+        "credentialId": "dev1@example.com/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1",
         "targetKey": "kanye-rest-api-5::API Key Plan"
       },
       "payload": {
@@ -1244,7 +1244,7 @@
       "continuity": {
         "apiKeyPolicy": "preserve-if-supported",
         "sourceConsumerKey": "om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1",
-        "sourceCredentialId": "dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1"
+        "sourceCredentialId": "dev1@example.com/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1"
       },
       "skipConditions": [],
       "failConditions": [],
@@ -1253,11 +1253,11 @@
       "manualReviewReasons": []
     },
     {
-      "actionId": "RESOLVE_PLAN:dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan",
+      "actionId": "RESOLVE_PLAN:dev1@example.com/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan",
       "kind": "RESOLVE_PLAN",
-      "sourceId": "dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan",
+      "sourceId": "dev1@example.com/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan",
       "dependencies": [
-        "UPSERT_APPLICATION:dev1@540.co/wizards-dev-app"
+        "UPSERT_APPLICATION:dev1@example.com/wizards-dev-app"
       ],
       "plannedStatus": "READY",
       "operation": "REUSE",
@@ -1292,20 +1292,20 @@
       }
     },
     {
-      "actionId": "UPSERT_SUBSCRIPTION:dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan",
+      "actionId": "UPSERT_SUBSCRIPTION:dev1@example.com/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan",
       "kind": "UPSERT_SUBSCRIPTION",
-      "sourceId": "dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan",
+      "sourceId": "dev1@example.com/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan",
       "dependencies": [
-        "UPSERT_APPLICATION:dev1@540.co/wizards-dev-app",
-        "RESOLVE_PLAN:dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan"
+        "UPSERT_APPLICATION:dev1@example.com/wizards-dev-app",
+        "RESOLVE_PLAN:dev1@example.com/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan"
       ],
       "plannedStatus": "READY",
       "operation": "REUSE",
       "desiredState": "ACCEPTED",
       "lookup": {
-        "applicationSourceId": "dev1@540.co/wizards-dev-app",
+        "applicationSourceId": "dev1@example.com/wizards-dev-app",
         "productName": "wizards-api-product",
-        "credentialId": "dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK",
+        "credentialId": "dev1@example.com/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK",
         "targetKey": "wizards-api-9::API Key Plan"
       },
       "payload": {
@@ -1324,7 +1324,7 @@
       "continuity": {
         "apiKeyPolicy": "preserve-if-supported",
         "sourceConsumerKey": "deYGA5oSqN1OnrE0nW61CWn3ydBEevoK",
-        "sourceCredentialId": "dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK"
+        "sourceCredentialId": "dev1@example.com/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK"
       },
       "skipConditions": [],
       "failConditions": [],
@@ -1336,19 +1336,19 @@
       }
     },
     {
-      "actionId": "VERIFY_SUBSCRIPTION:dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan",
+      "actionId": "VERIFY_SUBSCRIPTION:dev1@example.com/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan",
       "kind": "VERIFY_SUBSCRIPTION",
-      "sourceId": "dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan",
+      "sourceId": "dev1@example.com/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan",
       "dependencies": [
-        "UPSERT_SUBSCRIPTION:dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan"
+        "UPSERT_SUBSCRIPTION:dev1@example.com/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan"
       ],
       "plannedStatus": "READY",
       "operation": "VERIFY",
       "desiredState": null,
       "lookup": {
-        "applicationSourceId": "dev1@540.co/wizards-dev-app",
+        "applicationSourceId": "dev1@example.com/wizards-dev-app",
         "productName": "wizards-api-product",
-        "credentialId": "dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK",
+        "credentialId": "dev1@example.com/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK",
         "targetKey": "wizards-api-9::API Key Plan"
       },
       "payload": {
@@ -1359,7 +1359,7 @@
       "continuity": {
         "apiKeyPolicy": "preserve-if-supported",
         "sourceConsumerKey": "deYGA5oSqN1OnrE0nW61CWn3ydBEevoK",
-        "sourceCredentialId": "dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK"
+        "sourceCredentialId": "dev1@example.com/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK"
       },
       "skipConditions": [],
       "failConditions": [],
@@ -1368,11 +1368,11 @@
       "manualReviewReasons": []
     },
     {
-      "actionId": "RESOLVE_PLAN:dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan",
+      "actionId": "RESOLVE_PLAN:dev2@example.com/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan",
       "kind": "RESOLVE_PLAN",
-      "sourceId": "dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan",
+      "sourceId": "dev2@example.com/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan",
       "dependencies": [
-        "UPSERT_APPLICATION:dev2@540.co/chuck-norris-dev-app"
+        "UPSERT_APPLICATION:dev2@example.com/chuck-norris-dev-app"
       ],
       "plannedStatus": "READY",
       "operation": "REUSE",
@@ -1407,20 +1407,20 @@
       }
     },
     {
-      "actionId": "UPSERT_SUBSCRIPTION:dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan",
+      "actionId": "UPSERT_SUBSCRIPTION:dev2@example.com/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan",
       "kind": "UPSERT_SUBSCRIPTION",
-      "sourceId": "dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan",
+      "sourceId": "dev2@example.com/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan",
       "dependencies": [
-        "UPSERT_APPLICATION:dev2@540.co/chuck-norris-dev-app",
-        "RESOLVE_PLAN:dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan"
+        "UPSERT_APPLICATION:dev2@example.com/chuck-norris-dev-app",
+        "RESOLVE_PLAN:dev2@example.com/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan"
       ],
       "plannedStatus": "READY",
       "operation": "REUSE",
       "desiredState": "ACCEPTED",
       "lookup": {
-        "applicationSourceId": "dev2@540.co/chuck-norris-dev-app",
+        "applicationSourceId": "dev2@example.com/chuck-norris-dev-app",
         "productName": "chuck-norris-api-product",
-        "credentialId": "dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3",
+        "credentialId": "dev2@example.com/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3",
         "targetKey": "chuck-norris-api-10::API Key Plan"
       },
       "payload": {
@@ -1439,7 +1439,7 @@
       "continuity": {
         "apiKeyPolicy": "preserve-if-supported",
         "sourceConsumerKey": "3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3",
-        "sourceCredentialId": "dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3"
+        "sourceCredentialId": "dev2@example.com/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3"
       },
       "skipConditions": [],
       "failConditions": [],
@@ -1451,19 +1451,19 @@
       }
     },
     {
-      "actionId": "VERIFY_SUBSCRIPTION:dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan",
+      "actionId": "VERIFY_SUBSCRIPTION:dev2@example.com/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan",
       "kind": "VERIFY_SUBSCRIPTION",
-      "sourceId": "dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan",
+      "sourceId": "dev2@example.com/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan",
       "dependencies": [
-        "UPSERT_SUBSCRIPTION:dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan"
+        "UPSERT_SUBSCRIPTION:dev2@example.com/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan"
       ],
       "plannedStatus": "READY",
       "operation": "VERIFY",
       "desiredState": null,
       "lookup": {
-        "applicationSourceId": "dev2@540.co/chuck-norris-dev-app",
+        "applicationSourceId": "dev2@example.com/chuck-norris-dev-app",
         "productName": "chuck-norris-api-product",
-        "credentialId": "dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3",
+        "credentialId": "dev2@example.com/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3",
         "targetKey": "chuck-norris-api-10::API Key Plan"
       },
       "payload": {
@@ -1474,7 +1474,7 @@
       "continuity": {
         "apiKeyPolicy": "preserve-if-supported",
         "sourceConsumerKey": "3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3",
-        "sourceCredentialId": "dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3"
+        "sourceCredentialId": "dev2@example.com/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3"
       },
       "skipConditions": [],
       "failConditions": [],
@@ -1483,11 +1483,11 @@
       "manualReviewReasons": []
     },
     {
-      "actionId": "RESOLVE_PLAN:dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan",
+      "actionId": "RESOLVE_PLAN:dev2@example.com/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan",
       "kind": "RESOLVE_PLAN",
-      "sourceId": "dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan",
+      "sourceId": "dev2@example.com/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan",
       "dependencies": [
-        "UPSERT_APPLICATION:dev2@540.co/dog-breeds-dev-app"
+        "UPSERT_APPLICATION:dev2@example.com/dog-breeds-dev-app"
       ],
       "plannedStatus": "READY",
       "operation": "REUSE",
@@ -1522,20 +1522,20 @@
       }
     },
     {
-      "actionId": "UPSERT_SUBSCRIPTION:dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan",
+      "actionId": "UPSERT_SUBSCRIPTION:dev2@example.com/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan",
       "kind": "UPSERT_SUBSCRIPTION",
-      "sourceId": "dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan",
+      "sourceId": "dev2@example.com/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan",
       "dependencies": [
-        "UPSERT_APPLICATION:dev2@540.co/dog-breeds-dev-app",
-        "RESOLVE_PLAN:dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan"
+        "UPSERT_APPLICATION:dev2@example.com/dog-breeds-dev-app",
+        "RESOLVE_PLAN:dev2@example.com/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan"
       ],
       "plannedStatus": "READY",
       "operation": "REUSE",
       "desiredState": "ACCEPTED",
       "lookup": {
-        "applicationSourceId": "dev2@540.co/dog-breeds-dev-app",
+        "applicationSourceId": "dev2@example.com/dog-breeds-dev-app",
         "productName": "dog-breeds-api-product",
-        "credentialId": "dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8",
+        "credentialId": "dev2@example.com/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8",
         "targetKey": "dog-breeds-api-6::API Key Plan"
       },
       "payload": {
@@ -1554,7 +1554,7 @@
       "continuity": {
         "apiKeyPolicy": "preserve-if-supported",
         "sourceConsumerKey": "jJXAiWGvXIwB5PFsumALglFbCeLJPvD8",
-        "sourceCredentialId": "dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8"
+        "sourceCredentialId": "dev2@example.com/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8"
       },
       "skipConditions": [],
       "failConditions": [],
@@ -1566,19 +1566,19 @@
       }
     },
     {
-      "actionId": "VERIFY_SUBSCRIPTION:dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan",
+      "actionId": "VERIFY_SUBSCRIPTION:dev2@example.com/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan",
       "kind": "VERIFY_SUBSCRIPTION",
-      "sourceId": "dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan",
+      "sourceId": "dev2@example.com/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan",
       "dependencies": [
-        "UPSERT_SUBSCRIPTION:dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan"
+        "UPSERT_SUBSCRIPTION:dev2@example.com/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan"
       ],
       "plannedStatus": "READY",
       "operation": "VERIFY",
       "desiredState": null,
       "lookup": {
-        "applicationSourceId": "dev2@540.co/dog-breeds-dev-app",
+        "applicationSourceId": "dev2@example.com/dog-breeds-dev-app",
         "productName": "dog-breeds-api-product",
-        "credentialId": "dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8",
+        "credentialId": "dev2@example.com/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8",
         "targetKey": "dog-breeds-api-6::API Key Plan"
       },
       "payload": {
@@ -1589,7 +1589,7 @@
       "continuity": {
         "apiKeyPolicy": "preserve-if-supported",
         "sourceConsumerKey": "jJXAiWGvXIwB5PFsumALglFbCeLJPvD8",
-        "sourceCredentialId": "dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8"
+        "sourceCredentialId": "dev2@example.com/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8"
       },
       "skipConditions": [],
       "failConditions": [],

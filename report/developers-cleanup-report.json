@@ -10,24 +10,24 @@
     "subscriptions": [],
     "applications": [
       {
-        "sourceId": "dev1@540.co/kanye-dev-app",
+        "sourceId": "dev1@example.com/kanye-dev-app",
         "applicationId": "c74a277a-58f9-4277-8a27-7a58f9327718",
-        "developerEmail": "dev1@540.co",
+        "developerEmail": "dev1@example.com",
         "appName": "kanye-dev-app",
         "strategy": "lookup"
       }
     ],
     "users": [
       {
-        "sourceId": "dev1@540.co",
+        "sourceId": "dev1@example.com",
         "userId": "c7ace387-26ab-40d1-ace3-8726ab50d134",
-        "email": "dev1@540.co",
+        "email": "dev1@example.com",
         "strategy": "id-map"
       },
       {
-        "sourceId": "dev2@540.co",
+        "sourceId": "dev2@example.com",
         "userId": "938bbe9d-82d2-4052-8bbe-9d82d2d052ff",
-        "email": "dev2@540.co",
+        "email": "dev2@example.com",
         "strategy": "id-map"
       }
     ]

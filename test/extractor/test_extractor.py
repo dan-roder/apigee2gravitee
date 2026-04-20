@@ -886,8 +886,8 @@ class TestExtendedOutputs(unittest.TestCase):
             self.assertEqual(manifest['target_server_count'], 2)
             self.assertEqual(manifest['flow_hook_count'], 0)
 
-            self.assertTrue(os.path.isfile(os.path.join(ir_dir, 'developers', 'dev1@540.co.json')))
-            self.assertTrue(os.path.isfile(os.path.join(ir_dir, 'apps', 'dev1@540.co', 'kanye-dev-app.json')))
+            self.assertTrue(os.path.isfile(os.path.join(ir_dir, 'developers', 'dev1@example.com.json')))
+            self.assertTrue(os.path.isfile(os.path.join(ir_dir, 'apps', 'dev1@example.com', 'kanye-dev-app.json')))
             self.assertTrue(os.path.isfile(os.path.join(ir_dir, 'products', 'kanye-api-product.json')))
             self.assertTrue(os.path.isfile(os.path.join(ir_dir, 'targetservers', 'lb1-mock.json')))
             self.assertTrue(os.path.isfile(os.path.join(ir_dir, 'kvms', 'env', 'dev', 'kvm-1-unencrypted.json')))

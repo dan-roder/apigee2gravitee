@@ -24,12 +24,12 @@
     "value" : "advana"
   } ],
   "createdAt" : 1758733212776,
-  "createdBy" : "devops@540.co",
+  "createdBy" : "devops@example.com",
   "description" : "",
   "displayName" : "misc-api-product",
   "environments" : [ "dev" ],
   "lastModifiedAt" : 1758733212776,
-  "lastModifiedBy" : "devops@540.co",
+  "lastModifiedBy" : "devops@example.com",
   "name" : "misc-api-product",
   "proxies" : [ "apigee-hello-api-1", "cat-fact-api-2", "car-makes-api-3" ],
   "scopes" : [ "" ]

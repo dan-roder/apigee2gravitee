@@ -2,34 +2,34 @@
   "items": [
     {
       "blockers": [],
-      "id": "dev1@540.co/kanye-dev-app",
+      "id": "dev1@example.com/kanye-dev-app",
       "name": "kanye-dev-app",
       "riskFlags": [],
-      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/apps/dev1@540.co/kanye-dev-app",
+      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/apps/dev1@example.com/kanye-dev-app",
       "warnings": []
     },
     {
       "blockers": [],
-      "id": "dev1@540.co/wizards-dev-app",
+      "id": "dev1@example.com/wizards-dev-app",
       "name": "wizards-dev-app",
       "riskFlags": [],
-      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/apps/dev1@540.co/wizards-dev-app",
+      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/apps/dev1@example.com/wizards-dev-app",
       "warnings": []
     },
     {
       "blockers": [],
-      "id": "dev2@540.co/chuck-norris-dev-app",
+      "id": "dev2@example.com/chuck-norris-dev-app",
       "name": "chuck-norris-dev-app",
       "riskFlags": [],
-      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/apps/dev2@540.co/chuck-norris-dev-app",
+      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/apps/dev2@example.com/chuck-norris-dev-app",
       "warnings": []
     },
     {
       "blockers": [],
-      "id": "dev2@540.co/dog-breeds-dev-app",
+      "id": "dev2@example.com/dog-breeds-dev-app",
       "name": "dog-breeds-dev-app",
       "riskFlags": [],
-      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/apps/dev2@540.co/dog-breeds-dev-app",
+      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/apps/dev2@example.com/dog-breeds-dev-app",
       "warnings": []
     }
   ]

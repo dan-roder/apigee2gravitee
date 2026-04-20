@@ -11,8 +11,8 @@
       "apiKeyModeHint": "EXCLUSIVE",
       "appName": "kanye-dev-app",
       "consumerKey": "om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1",
-      "credentialId": "dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1",
-      "developerEmail": "dev1@540.co",
+      "credentialId": "dev1@example.com/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1",
+      "developerEmail": "dev1@example.com",
       "productAssociations": [
         {
           "productName": "kanye-api-product",
@@ -33,8 +33,8 @@
       "apiKeyModeHint": "EXCLUSIVE",
       "appName": "wizards-dev-app",
       "consumerKey": "deYGA5oSqN1OnrE0nW61CWn3ydBEevoK",
-      "credentialId": "dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK",
-      "developerEmail": "dev1@540.co",
+      "credentialId": "dev1@example.com/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK",
+      "developerEmail": "dev1@example.com",
       "productAssociations": [
         {
           "productName": "wizards-api-product",
@@ -55,8 +55,8 @@
       "apiKeyModeHint": "EXCLUSIVE",
       "appName": "chuck-norris-dev-app",
       "consumerKey": "3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3",
-      "credentialId": "dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3",
-      "developerEmail": "dev2@540.co",
+      "credentialId": "dev2@example.com/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3",
+      "developerEmail": "dev2@example.com",
       "productAssociations": [
         {
           "productName": "chuck-norris-api-product",
@@ -77,8 +77,8 @@
       "apiKeyModeHint": "EXCLUSIVE",
       "appName": "dog-breeds-dev-app",
       "consumerKey": "jJXAiWGvXIwB5PFsumALglFbCeLJPvD8",
-      "credentialId": "dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8",
-      "developerEmail": "dev2@540.co",
+      "credentialId": "dev2@example.com/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8",
+      "developerEmail": "dev2@example.com",
       "productAssociations": [
         {
           "productName": "dog-breeds-api-product",
