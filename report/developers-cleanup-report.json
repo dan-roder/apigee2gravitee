@@ -1,32 +1,82 @@
 {
-  "generatedAt": "2026-04-20T18:58:23.508Z",
+  "generatedAt": "2026-04-20T19:32:06.590Z",
   "summary": {
-    "requested": 3,
-    "deleted": 3,
+    "requested": 10,
+    "deleted": 10,
     "skipped": 0,
     "failed": 0
   },
   "targets": {
-    "subscriptions": [],
+    "subscriptions": [
+      {
+        "sourceId": "dev1@example.com/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan",
+        "subscriptionId": "76619045-7f95-4a4c-a190-457f958a4c0f",
+        "apiId": "d40cba62-2887-461e-8cba-622887161ea9",
+        "applicationId": "a76d868d-7021-4cc2-ad86-8d70211cc2f9",
+        "strategy": "id-map"
+      },
+      {
+        "sourceId": "dev1@example.com/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan",
+        "subscriptionId": "bee6869f-cc03-4985-a686-9fcc03498599",
+        "apiId": "07dfa49e-dc23-4048-9fa4-9edc236048a6",
+        "applicationId": "a5b3b7f2-6b5f-4307-b3b7-f26b5fa30760",
+        "strategy": "id-map"
+      },
+      {
+        "sourceId": "dev2@example.com/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan",
+        "subscriptionId": "31c2bd67-7c63-43e5-82bd-677c6313e511",
+        "apiId": "25c78c81-954e-455d-878c-81954e255d73",
+        "applicationId": "a5f3ad98-9173-4bf1-b3ad-9891736bf1ee",
+        "strategy": "id-map"
+      },
+      {
+        "sourceId": "dev2@example.com/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan",
+        "subscriptionId": "fd5959c2-4598-45f9-9959-c2459865f93d",
+        "apiId": "53b1d618-59d2-4a3a-b1d6-1859d2da3a89",
+        "applicationId": "5c655773-5a4f-4a8b-a557-735a4f0a8bbc",
+        "strategy": "id-map"
+      }
+    ],
     "applications": [
       {
         "sourceId": "dev1@example.com/kanye-dev-app",
-        "applicationId": "c74a277a-58f9-4277-8a27-7a58f9327718",
+        "applicationId": "a76d868d-7021-4cc2-ad86-8d70211cc2f9",
         "developerEmail": "dev1@example.com",
         "appName": "kanye-dev-app",
-        "strategy": "lookup"
+        "strategy": "id-map"
+      },
+      {
+        "sourceId": "dev1@example.com/wizards-dev-app",
+        "applicationId": "a5b3b7f2-6b5f-4307-b3b7-f26b5fa30760",
+        "developerEmail": "dev1@example.com",
+        "appName": "wizards-dev-app",
+        "strategy": "id-map"
+      },
+      {
+        "sourceId": "dev2@example.com/chuck-norris-dev-app",
+        "applicationId": "a5f3ad98-9173-4bf1-b3ad-9891736bf1ee",
+        "developerEmail": "dev2@example.com",
+        "appName": "chuck-norris-dev-app",
+        "strategy": "id-map"
+      },
+      {
+        "sourceId": "dev2@example.com/dog-breeds-dev-app",
+        "applicationId": "5c655773-5a4f-4a8b-a557-735a4f0a8bbc",
+        "developerEmail": "dev2@example.com",
+        "appName": "dog-breeds-dev-app",
+        "strategy": "id-map"
       }
     ],
     "users": [
       {
         "sourceId": "dev1@example.com",
-        "userId": "c7ace387-26ab-40d1-ace3-8726ab50d134",
+        "userId": "2708cc80-9de2-4c8f-88cc-809de22c8fce",
         "email": "dev1@example.com",
         "strategy": "id-map"
       },
       {
         "sourceId": "dev2@example.com",
-        "userId": "938bbe9d-82d2-4052-8bbe-9d82d2d052ff",
+        "userId": "814aa32f-1eea-4edf-8aa3-2f1eeabedf68",
         "email": "dev2@example.com",
         "strategy": "id-map"
       }

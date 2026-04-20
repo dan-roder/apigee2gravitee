@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-20T19:01:00.977Z",
+  "generatedAt": "2026-04-20T19:35:19.912Z",
   "kind": "DevelopersMigrationManifest",
   "source": {
     "irDir": "/Users/daniel.roder/Sites/apigee2gravitee/ir",
@@ -752,7 +752,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "userId": "2708cc80-9de2-4c8f-88cc-809de22c8fce"
+        "userId": "00a7ca45-3087-472a-a7ca-453087f72a1b"
       }
     },
     {
@@ -827,7 +827,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "userId": "814aa32f-1eea-4edf-8aa3-2f1eeabedf68"
+        "userId": "482c447e-fe9b-4de9-ac44-7efe9b6de9f5"
       }
     },
     {
@@ -901,7 +901,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "applicationId": "a76d868d-7021-4cc2-ad86-8d70211cc2f9"
+        "applicationId": "fe41c79f-f39f-4a5e-81c7-9ff39f6a5ec4"
       }
     },
     {
@@ -970,7 +970,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "applicationId": "a5b3b7f2-6b5f-4307-b3b7-f26b5fa30760"
+        "applicationId": "9de7a4fa-abac-4e19-a7a4-faabac6e19c0"
       }
     },
     {
@@ -1039,7 +1039,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "applicationId": "a5f3ad98-9173-4bf1-b3ad-9891736bf1ee"
+        "applicationId": "381acf58-d573-4195-9acf-58d573b19512"
       }
     },
     {
@@ -1108,7 +1108,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "applicationId": "5c655773-5a4f-4a8b-a557-735a4f0a8bbc"
+        "applicationId": "6b802850-7987-4a25-8028-507987fa25f5"
       }
     },
     {
@@ -1217,7 +1217,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "subscriptionId": "76619045-7f95-4a4c-a190-457f958a4c0f"
+        "subscriptionId": "bf0cd116-be93-4899-8cd1-16be93589994"
       }
     },
     {
@@ -1332,7 +1332,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "subscriptionId": "bee6869f-cc03-4985-a686-9fcc03498599"
+        "subscriptionId": "9ad445ab-059f-476d-9445-ab059fe76da8"
       }
     },
     {
@@ -1447,7 +1447,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "subscriptionId": "31c2bd67-7c63-43e5-82bd-677c6313e511"
+        "subscriptionId": "f112f04f-df9e-4ad8-92f0-4fdf9e1ad84e"
       }
     },
     {
@@ -1562,7 +1562,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "subscriptionId": "fd5959c2-4598-45f9-9959-c2459865f93d"
+        "subscriptionId": "d658b554-b698-48de-98b5-54b698f8de66"
       }
     },
     {
