@@ -1,60 +1,11 @@
 {
-  "generatedAt": "2026-04-20T18:27:41.184Z",
+  "generatedAt": "2026-04-20T19:01:02.232Z",
   "summary": {
     "checkedUsers": 2,
     "checkedApplications": 4,
     "checkedSubscriptions": 4,
-    "blockers": 8,
+    "blockers": 0,
     "warnings": 0
   },
-  "mismatches": [
-    {
-      "severity": "blocker",
-      "code": "APPLICATION_OWNER_MISMATCH",
-      "sourceId": "dev1@540.co/kanye-dev-app",
-      "message": "Application kanye-dev-app is missing expected owner membership"
-    },
-    {
-      "severity": "blocker",
-      "code": "APPLICATION_MISSING",
-      "sourceId": "dev1@540.co/wizards-dev-app",
-      "message": "Application wizards-dev-app is missing"
-    },
-    {
-      "severity": "blocker",
-      "code": "APPLICATION_MISSING",
-      "sourceId": "dev2@540.co/chuck-norris-dev-app",
-      "message": "Application chuck-norris-dev-app is missing"
-    },
-    {
-      "severity": "blocker",
-      "code": "APPLICATION_MISSING",
-      "sourceId": "dev2@540.co/dog-breeds-dev-app",
-      "message": "Application dog-breeds-dev-app is missing"
-    },
-    {
-      "severity": "blocker",
-      "code": "SUBSCRIPTION_MISSING",
-      "sourceId": "dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan",
-      "message": "Subscription dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan is missing"
-    },
-    {
-      "severity": "blocker",
-      "code": "SUBSCRIPTION_MISSING",
-      "sourceId": "dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan",
-      "message": "Subscription dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan is missing"
-    },
-    {
-      "severity": "blocker",
-      "code": "SUBSCRIPTION_MISSING",
-      "sourceId": "dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan",
-      "message": "Subscription dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan is missing"
-    },
-    {
-      "severity": "blocker",
-      "code": "SUBSCRIPTION_MISSING",
-      "sourceId": "dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan",
-      "message": "Subscription dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan is missing"
-    }
-  ]
+  "mismatches": []
 }
