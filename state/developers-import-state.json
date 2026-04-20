@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-04-17T18:59:26.808Z",
-  "updatedAt": "2026-04-17T18:59:28.919Z",
+  "generatedAt": "2026-04-20T18:27:28.679Z",
+  "updatedAt": "2026-04-20T18:27:29.653Z",
   "mode": "plan",
   "summary": {
     "users": 2,
@@ -50,7 +50,7 @@
       "status": "SUCCEEDED",
       "dependencies": [],
       "targetIds": {
-        "userId": "fbbded13-9b26-4d06-bded-139b26fd0685",
+        "userId": "c7ace387-26ab-40d1-ace3-8726ab50d134",
         "organizationRoleIds": [
           "7d48e98b-c389-449c-88e9-8bc389f49c5c"
         ],
@@ -59,7 +59,7 @@
         ]
       },
       "reconcileHints": {
-        "userId": "fbbded13-9b26-4d06-bded-139b26fd0685",
+        "userId": "c7ace387-26ab-40d1-ace3-8726ab50d134",
         "organizationRoleIds": [
           "7d48e98b-c389-449c-88e9-8bc389f49c5c"
         ],
@@ -68,8 +68,8 @@
         ]
       },
       "lastError": null,
-      "startedAt": "2026-04-17T18:59:26.812Z",
-      "completedAt": "2026-04-17T18:59:27.068Z"
+      "startedAt": "2026-04-20T18:27:28.683Z",
+      "completedAt": "2026-04-20T18:27:28.933Z"
     },
     "VERIFY_USER:dev1@540.co": {
       "actionId": "VERIFY_USER:dev1@540.co",
@@ -81,16 +81,16 @@
         "UPSERT_USER:dev1@540.co"
       ],
       "targetIds": {
-        "userId": "fbbded13-9b26-4d06-bded-139b26fd0685",
+        "userId": "c7ace387-26ab-40d1-ace3-8726ab50d134",
         "roleVerification": "verified"
       },
       "reconcileHints": {
-        "userId": "fbbded13-9b26-4d06-bded-139b26fd0685",
+        "userId": "c7ace387-26ab-40d1-ace3-8726ab50d134",
         "roleVerification": "verified"
       },
       "lastError": null,
-      "startedAt": "2026-04-17T18:59:27.071Z",
-      "completedAt": "2026-04-17T18:59:27.247Z"
+      "startedAt": "2026-04-20T18:27:28.933Z",
+      "completedAt": "2026-04-20T18:27:29.115Z"
     },
     "UPSERT_USER:dev2@540.co": {
       "actionId": "UPSERT_USER:dev2@540.co",
@@ -100,7 +100,7 @@
       "status": "SUCCEEDED",
       "dependencies": [],
       "targetIds": {
-        "userId": "b50513ba-aff6-4cba-8513-baaff61cbac8",
+        "userId": "938bbe9d-82d2-4052-8bbe-9d82d2d052ff",
         "organizationRoleIds": [
           "7d48e98b-c389-449c-88e9-8bc389f49c5c"
         ],
@@ -109,7 +109,7 @@
         ]
       },
       "reconcileHints": {
-        "userId": "b50513ba-aff6-4cba-8513-baaff61cbac8",
+        "userId": "938bbe9d-82d2-4052-8bbe-9d82d2d052ff",
         "organizationRoleIds": [
           "7d48e98b-c389-449c-88e9-8bc389f49c5c"
         ],
@@ -118,8 +118,8 @@
         ]
       },
       "lastError": null,
-      "startedAt": "2026-04-17T18:59:27.249Z",
-      "completedAt": "2026-04-17T18:59:27.483Z"
+      "startedAt": "2026-04-20T18:27:29.116Z",
+      "completedAt": "2026-04-20T18:27:29.354Z"
     },
     "VERIFY_USER:dev2@540.co": {
       "actionId": "VERIFY_USER:dev2@540.co",
@@ -131,432 +131,320 @@
         "UPSERT_USER:dev2@540.co"
       ],
       "targetIds": {
-        "userId": "b50513ba-aff6-4cba-8513-baaff61cbac8",
+        "userId": "938bbe9d-82d2-4052-8bbe-9d82d2d052ff",
         "roleVerification": "verified"
       },
       "reconcileHints": {
-        "userId": "b50513ba-aff6-4cba-8513-baaff61cbac8",
+        "userId": "938bbe9d-82d2-4052-8bbe-9d82d2d052ff",
         "roleVerification": "verified"
       },
       "lastError": null,
-      "startedAt": "2026-04-17T18:59:27.485Z",
-      "completedAt": "2026-04-17T18:59:27.658Z"
+      "startedAt": "2026-04-20T18:27:29.356Z",
+      "completedAt": "2026-04-20T18:27:29.528Z"
     },
     "UPSERT_APPLICATION:dev1@540.co/kanye-dev-app": {
       "actionId": "UPSERT_APPLICATION:dev1@540.co/kanye-dev-app",
       "kind": "UPSERT_APPLICATION",
       "sourceId": "dev1@540.co/kanye-dev-app",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "FAILED",
       "dependencies": [
         "UPSERT_USER:dev1@540.co"
       ],
-      "targetIds": {
-        "applicationId": "19d7124c-a394-4070-9712-4ca39480706f"
-      },
-      "reconcileHints": {
-        "applicationId": "19d7124c-a394-4070-9712-4ca39480706f"
-      },
-      "lastError": null,
-      "startedAt": "2026-04-17T18:59:27.660Z",
-      "completedAt": "2026-04-17T18:59:27.723Z"
+      "targetIds": {},
+      "reconcileHints": {},
+      "lastError": "POST http://localhost:8083/management/organizations/DEFAULT/environments/DEFAULT/applications/c74a277a-58f9-4277-8a27-7a58f9327718/members → HTTP 404 :: {\"message\":\"User [null] cannot be found.\",\"parameters\":{},\"technicalCode\":\"user.notFound\",\"http_status\":404}",
+      "startedAt": "2026-04-20T18:27:29.530Z",
+      "completedAt": "2026-04-20T18:27:29.653Z"
     },
     "VERIFY_APPLICATION:dev1@540.co/kanye-dev-app": {
       "actionId": "VERIFY_APPLICATION:dev1@540.co/kanye-dev-app",
       "kind": "VERIFY_APPLICATION",
       "sourceId": "dev1@540.co/kanye-dev-app",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "BLOCKED",
       "dependencies": [
         "UPSERT_APPLICATION:dev1@540.co/kanye-dev-app"
       ],
-      "targetIds": {
-        "applicationId": "19d7124c-a394-4070-9712-4ca39480706f"
-      },
-      "reconcileHints": {
-        "applicationId": "19d7124c-a394-4070-9712-4ca39480706f"
-      },
-      "lastError": null,
-      "startedAt": "2026-04-17T18:59:27.725Z",
-      "completedAt": "2026-04-17T18:59:27.782Z"
+      "targetIds": {},
+      "reconcileHints": {},
+      "lastError": "Dependencies were not satisfied: UPSERT_APPLICATION:dev1@540.co/kanye-dev-app",
+      "startedAt": null,
+      "completedAt": "2026-04-20T18:27:29.653Z"
     },
     "UPSERT_APPLICATION:dev1@540.co/wizards-dev-app": {
       "actionId": "UPSERT_APPLICATION:dev1@540.co/wizards-dev-app",
       "kind": "UPSERT_APPLICATION",
       "sourceId": "dev1@540.co/wizards-dev-app",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "BLOCKED",
       "dependencies": [
         "UPSERT_USER:dev1@540.co"
       ],
-      "targetIds": {
-        "applicationId": "99931b3e-b4e4-488a-931b-3eb4e4488a05"
-      },
-      "reconcileHints": {
-        "applicationId": "99931b3e-b4e4-488a-931b-3eb4e4488a05"
-      },
-      "lastError": null,
-      "startedAt": "2026-04-17T18:59:27.784Z",
-      "completedAt": "2026-04-17T18:59:27.845Z"
+      "targetIds": {},
+      "reconcileHints": {},
+      "lastError": "Dependencies were not satisfied: UPSERT_USER:dev1@540.co",
+      "startedAt": null,
+      "completedAt": "2026-04-20T18:27:29.653Z"
     },
     "VERIFY_APPLICATION:dev1@540.co/wizards-dev-app": {
       "actionId": "VERIFY_APPLICATION:dev1@540.co/wizards-dev-app",
       "kind": "VERIFY_APPLICATION",
       "sourceId": "dev1@540.co/wizards-dev-app",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "BLOCKED",
       "dependencies": [
         "UPSERT_APPLICATION:dev1@540.co/wizards-dev-app"
       ],
-      "targetIds": {
-        "applicationId": "99931b3e-b4e4-488a-931b-3eb4e4488a05"
-      },
-      "reconcileHints": {
-        "applicationId": "99931b3e-b4e4-488a-931b-3eb4e4488a05"
-      },
-      "lastError": null,
-      "startedAt": "2026-04-17T18:59:27.846Z",
-      "completedAt": "2026-04-17T18:59:27.903Z"
+      "targetIds": {},
+      "reconcileHints": {},
+      "lastError": "Dependencies were not satisfied: UPSERT_APPLICATION:dev1@540.co/wizards-dev-app",
+      "startedAt": null,
+      "completedAt": "2026-04-20T18:27:29.653Z"
     },
     "UPSERT_APPLICATION:dev2@540.co/chuck-norris-dev-app": {
       "actionId": "UPSERT_APPLICATION:dev2@540.co/chuck-norris-dev-app",
       "kind": "UPSERT_APPLICATION",
       "sourceId": "dev2@540.co/chuck-norris-dev-app",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "BLOCKED",
       "dependencies": [
         "UPSERT_USER:dev2@540.co"
       ],
-      "targetIds": {
-        "applicationId": "65b9c95e-60e8-48a6-b9c9-5e60e8c8a683"
-      },
-      "reconcileHints": {
-        "applicationId": "65b9c95e-60e8-48a6-b9c9-5e60e8c8a683"
-      },
-      "lastError": null,
-      "startedAt": "2026-04-17T18:59:27.906Z",
-      "completedAt": "2026-04-17T18:59:27.969Z"
+      "targetIds": {},
+      "reconcileHints": {},
+      "lastError": "Dependencies were not satisfied: UPSERT_USER:dev2@540.co",
+      "startedAt": null,
+      "completedAt": "2026-04-20T18:27:29.653Z"
     },
     "VERIFY_APPLICATION:dev2@540.co/chuck-norris-dev-app": {
       "actionId": "VERIFY_APPLICATION:dev2@540.co/chuck-norris-dev-app",
       "kind": "VERIFY_APPLICATION",
       "sourceId": "dev2@540.co/chuck-norris-dev-app",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "BLOCKED",
       "dependencies": [
         "UPSERT_APPLICATION:dev2@540.co/chuck-norris-dev-app"
       ],
-      "targetIds": {
-        "applicationId": "65b9c95e-60e8-48a6-b9c9-5e60e8c8a683"
-      },
-      "reconcileHints": {
-        "applicationId": "65b9c95e-60e8-48a6-b9c9-5e60e8c8a683"
-      },
-      "lastError": null,
-      "startedAt": "2026-04-17T18:59:27.971Z",
-      "completedAt": "2026-04-17T18:59:28.034Z"
+      "targetIds": {},
+      "reconcileHints": {},
+      "lastError": "Dependencies were not satisfied: UPSERT_APPLICATION:dev2@540.co/chuck-norris-dev-app",
+      "startedAt": null,
+      "completedAt": "2026-04-20T18:27:29.653Z"
     },
     "UPSERT_APPLICATION:dev2@540.co/dog-breeds-dev-app": {
       "actionId": "UPSERT_APPLICATION:dev2@540.co/dog-breeds-dev-app",
       "kind": "UPSERT_APPLICATION",
       "sourceId": "dev2@540.co/dog-breeds-dev-app",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "BLOCKED",
       "dependencies": [
         "UPSERT_USER:dev2@540.co"
       ],
-      "targetIds": {
-        "applicationId": "f3340333-0622-4f2b-b403-330622af2bdc"
-      },
-      "reconcileHints": {
-        "applicationId": "f3340333-0622-4f2b-b403-330622af2bdc"
-      },
-      "lastError": null,
-      "startedAt": "2026-04-17T18:59:28.037Z",
-      "completedAt": "2026-04-17T18:59:28.096Z"
+      "targetIds": {},
+      "reconcileHints": {},
+      "lastError": "Dependencies were not satisfied: UPSERT_USER:dev2@540.co",
+      "startedAt": null,
+      "completedAt": "2026-04-20T18:27:29.653Z"
     },
     "VERIFY_APPLICATION:dev2@540.co/dog-breeds-dev-app": {
       "actionId": "VERIFY_APPLICATION:dev2@540.co/dog-breeds-dev-app",
       "kind": "VERIFY_APPLICATION",
       "sourceId": "dev2@540.co/dog-breeds-dev-app",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "BLOCKED",
       "dependencies": [
         "UPSERT_APPLICATION:dev2@540.co/dog-breeds-dev-app"
       ],
-      "targetIds": {
-        "applicationId": "f3340333-0622-4f2b-b403-330622af2bdc"
-      },
-      "reconcileHints": {
-        "applicationId": "f3340333-0622-4f2b-b403-330622af2bdc"
-      },
-      "lastError": null,
-      "startedAt": "2026-04-17T18:59:28.098Z",
-      "completedAt": "2026-04-17T18:59:28.155Z"
+      "targetIds": {},
+      "reconcileHints": {},
+      "lastError": "Dependencies were not satisfied: UPSERT_APPLICATION:dev2@540.co/dog-breeds-dev-app",
+      "startedAt": null,
+      "completedAt": "2026-04-20T18:27:29.653Z"
     },
     "RESOLVE_PLAN:dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan": {
       "actionId": "RESOLVE_PLAN:dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan",
       "kind": "RESOLVE_PLAN",
       "sourceId": "dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "BLOCKED",
       "dependencies": [
         "UPSERT_APPLICATION:dev1@540.co/kanye-dev-app"
       ],
-      "targetIds": {
-        "planId": "7ac7160f-b292-4f9e-8716-0fb292af9e80",
-        "apiId": "d40cba62-2887-461e-8cba-622887161ea9"
-      },
-      "reconcileHints": {
-        "planId": "7ac7160f-b292-4f9e-8716-0fb292af9e80",
-        "apiId": "d40cba62-2887-461e-8cba-622887161ea9"
-      },
-      "lastError": null,
-      "startedAt": "2026-04-17T18:59:28.157Z",
-      "completedAt": "2026-04-17T18:59:28.213Z"
+      "targetIds": {},
+      "reconcileHints": {},
+      "lastError": "Dependencies were not satisfied: UPSERT_APPLICATION:dev1@540.co/kanye-dev-app",
+      "startedAt": null,
+      "completedAt": "2026-04-20T18:27:29.653Z"
     },
     "UPSERT_SUBSCRIPTION:dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan": {
       "actionId": "UPSERT_SUBSCRIPTION:dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan",
       "kind": "UPSERT_SUBSCRIPTION",
       "sourceId": "dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "BLOCKED",
       "dependencies": [
         "UPSERT_APPLICATION:dev1@540.co/kanye-dev-app",
         "RESOLVE_PLAN:dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan"
       ],
-      "targetIds": {
-        "subscriptionId": "553080e8-cc18-4dfc-b080-e8cc18adfc9a",
-        "apiId": "d40cba62-2887-461e-8cba-622887161ea9",
-        "planId": "7ac7160f-b292-4f9e-8716-0fb292af9e80"
-      },
-      "reconcileHints": {
-        "subscriptionId": "553080e8-cc18-4dfc-b080-e8cc18adfc9a",
-        "apiId": "d40cba62-2887-461e-8cba-622887161ea9",
-        "planId": "7ac7160f-b292-4f9e-8716-0fb292af9e80"
-      },
-      "lastError": null,
-      "startedAt": "2026-04-17T18:59:28.215Z",
-      "completedAt": "2026-04-17T18:59:28.296Z"
+      "targetIds": {},
+      "reconcileHints": {},
+      "lastError": "Dependencies were not satisfied: UPSERT_APPLICATION:dev1@540.co/kanye-dev-app, RESOLVE_PLAN:dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan",
+      "startedAt": null,
+      "completedAt": "2026-04-20T18:27:29.653Z"
     },
     "VERIFY_SUBSCRIPTION:dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan": {
       "actionId": "VERIFY_SUBSCRIPTION:dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan",
       "kind": "VERIFY_SUBSCRIPTION",
       "sourceId": "dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "BLOCKED",
       "dependencies": [
         "UPSERT_SUBSCRIPTION:dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan"
       ],
-      "targetIds": {
-        "subscriptionId": "553080e8-cc18-4dfc-b080-e8cc18adfc9a",
-        "apiId": "d40cba62-2887-461e-8cba-622887161ea9"
-      },
-      "reconcileHints": {
-        "subscriptionId": "553080e8-cc18-4dfc-b080-e8cc18adfc9a",
-        "apiId": "d40cba62-2887-461e-8cba-622887161ea9"
-      },
-      "lastError": null,
-      "startedAt": "2026-04-17T18:59:28.298Z",
-      "completedAt": "2026-04-17T18:59:28.356Z"
+      "targetIds": {},
+      "reconcileHints": {},
+      "lastError": "Dependencies were not satisfied: UPSERT_SUBSCRIPTION:dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan",
+      "startedAt": null,
+      "completedAt": "2026-04-20T18:27:29.653Z"
     },
     "RESOLVE_PLAN:dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan": {
       "actionId": "RESOLVE_PLAN:dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan",
       "kind": "RESOLVE_PLAN",
       "sourceId": "dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "BLOCKED",
       "dependencies": [
         "UPSERT_APPLICATION:dev1@540.co/wizards-dev-app"
       ],
-      "targetIds": {
-        "planId": "589c71e0-0770-4580-9c71-e0077015806b",
-        "apiId": "07dfa49e-dc23-4048-9fa4-9edc236048a6"
-      },
-      "reconcileHints": {
-        "planId": "589c71e0-0770-4580-9c71-e0077015806b",
-        "apiId": "07dfa49e-dc23-4048-9fa4-9edc236048a6"
-      },
-      "lastError": null,
-      "startedAt": "2026-04-17T18:59:28.358Z",
-      "completedAt": "2026-04-17T18:59:28.414Z"
+      "targetIds": {},
+      "reconcileHints": {},
+      "lastError": "Dependencies were not satisfied: UPSERT_APPLICATION:dev1@540.co/wizards-dev-app",
+      "startedAt": null,
+      "completedAt": "2026-04-20T18:27:29.653Z"
     },
     "UPSERT_SUBSCRIPTION:dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan": {
       "actionId": "UPSERT_SUBSCRIPTION:dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan",
       "kind": "UPSERT_SUBSCRIPTION",
       "sourceId": "dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "BLOCKED",
       "dependencies": [
         "UPSERT_APPLICATION:dev1@540.co/wizards-dev-app",
         "RESOLVE_PLAN:dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan"
       ],
-      "targetIds": {
-        "subscriptionId": "4482a55f-261b-4278-82a5-5f261bf278d7",
-        "apiId": "07dfa49e-dc23-4048-9fa4-9edc236048a6",
-        "planId": "589c71e0-0770-4580-9c71-e0077015806b"
-      },
-      "reconcileHints": {
-        "subscriptionId": "4482a55f-261b-4278-82a5-5f261bf278d7",
-        "apiId": "07dfa49e-dc23-4048-9fa4-9edc236048a6",
-        "planId": "589c71e0-0770-4580-9c71-e0077015806b"
-      },
-      "lastError": null,
-      "startedAt": "2026-04-17T18:59:28.416Z",
-      "completedAt": "2026-04-17T18:59:28.485Z"
+      "targetIds": {},
+      "reconcileHints": {},
+      "lastError": "Dependencies were not satisfied: UPSERT_APPLICATION:dev1@540.co/wizards-dev-app, RESOLVE_PLAN:dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan",
+      "startedAt": null,
+      "completedAt": "2026-04-20T18:27:29.653Z"
     },
     "VERIFY_SUBSCRIPTION:dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan": {
       "actionId": "VERIFY_SUBSCRIPTION:dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan",
       "kind": "VERIFY_SUBSCRIPTION",
       "sourceId": "dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "BLOCKED",
       "dependencies": [
         "UPSERT_SUBSCRIPTION:dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan"
       ],
-      "targetIds": {
-        "subscriptionId": "4482a55f-261b-4278-82a5-5f261bf278d7",
-        "apiId": "07dfa49e-dc23-4048-9fa4-9edc236048a6"
-      },
-      "reconcileHints": {
-        "subscriptionId": "4482a55f-261b-4278-82a5-5f261bf278d7",
-        "apiId": "07dfa49e-dc23-4048-9fa4-9edc236048a6"
-      },
-      "lastError": null,
-      "startedAt": "2026-04-17T18:59:28.487Z",
-      "completedAt": "2026-04-17T18:59:28.544Z"
+      "targetIds": {},
+      "reconcileHints": {},
+      "lastError": "Dependencies were not satisfied: UPSERT_SUBSCRIPTION:dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan",
+      "startedAt": null,
+      "completedAt": "2026-04-20T18:27:29.653Z"
     },
     "RESOLVE_PLAN:dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan": {
       "actionId": "RESOLVE_PLAN:dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan",
       "kind": "RESOLVE_PLAN",
       "sourceId": "dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "BLOCKED",
       "dependencies": [
         "UPSERT_APPLICATION:dev2@540.co/chuck-norris-dev-app"
       ],
-      "targetIds": {
-        "planId": "6d3b4998-cee4-412a-bb49-98cee4f12ad5",
-        "apiId": "25c78c81-954e-455d-878c-81954e255d73"
-      },
-      "reconcileHints": {
-        "planId": "6d3b4998-cee4-412a-bb49-98cee4f12ad5",
-        "apiId": "25c78c81-954e-455d-878c-81954e255d73"
-      },
-      "lastError": null,
-      "startedAt": "2026-04-17T18:59:28.546Z",
-      "completedAt": "2026-04-17T18:59:28.602Z"
+      "targetIds": {},
+      "reconcileHints": {},
+      "lastError": "Dependencies were not satisfied: UPSERT_APPLICATION:dev2@540.co/chuck-norris-dev-app",
+      "startedAt": null,
+      "completedAt": "2026-04-20T18:27:29.653Z"
     },
     "UPSERT_SUBSCRIPTION:dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan": {
       "actionId": "UPSERT_SUBSCRIPTION:dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan",
       "kind": "UPSERT_SUBSCRIPTION",
       "sourceId": "dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "BLOCKED",
       "dependencies": [
         "UPSERT_APPLICATION:dev2@540.co/chuck-norris-dev-app",
         "RESOLVE_PLAN:dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan"
       ],
-      "targetIds": {
-        "subscriptionId": "1d02b20f-53dd-49e7-82b2-0f53dd29e752",
-        "apiId": "25c78c81-954e-455d-878c-81954e255d73",
-        "planId": "6d3b4998-cee4-412a-bb49-98cee4f12ad5"
-      },
-      "reconcileHints": {
-        "subscriptionId": "1d02b20f-53dd-49e7-82b2-0f53dd29e752",
-        "apiId": "25c78c81-954e-455d-878c-81954e255d73",
-        "planId": "6d3b4998-cee4-412a-bb49-98cee4f12ad5"
-      },
-      "lastError": null,
-      "startedAt": "2026-04-17T18:59:28.604Z",
-      "completedAt": "2026-04-17T18:59:28.672Z"
+      "targetIds": {},
+      "reconcileHints": {},
+      "lastError": "Dependencies were not satisfied: UPSERT_APPLICATION:dev2@540.co/chuck-norris-dev-app, RESOLVE_PLAN:dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan",
+      "startedAt": null,
+      "completedAt": "2026-04-20T18:27:29.653Z"
     },
     "VERIFY_SUBSCRIPTION:dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan": {
       "actionId": "VERIFY_SUBSCRIPTION:dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan",
       "kind": "VERIFY_SUBSCRIPTION",
       "sourceId": "dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "BLOCKED",
       "dependencies": [
         "UPSERT_SUBSCRIPTION:dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan"
       ],
-      "targetIds": {
-        "subscriptionId": "1d02b20f-53dd-49e7-82b2-0f53dd29e752",
-        "apiId": "25c78c81-954e-455d-878c-81954e255d73"
-      },
-      "reconcileHints": {
-        "subscriptionId": "1d02b20f-53dd-49e7-82b2-0f53dd29e752",
-        "apiId": "25c78c81-954e-455d-878c-81954e255d73"
-      },
-      "lastError": null,
-      "startedAt": "2026-04-17T18:59:28.674Z",
-      "completedAt": "2026-04-17T18:59:28.730Z"
+      "targetIds": {},
+      "reconcileHints": {},
+      "lastError": "Dependencies were not satisfied: UPSERT_SUBSCRIPTION:dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan",
+      "startedAt": null,
+      "completedAt": "2026-04-20T18:27:29.653Z"
     },
     "RESOLVE_PLAN:dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan": {
       "actionId": "RESOLVE_PLAN:dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan",
       "kind": "RESOLVE_PLAN",
       "sourceId": "dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "BLOCKED",
       "dependencies": [
         "UPSERT_APPLICATION:dev2@540.co/dog-breeds-dev-app"
       ],
-      "targetIds": {
-        "planId": "e7af7151-7eb1-43a4-af71-517eb143a4a2",
-        "apiId": "53b1d618-59d2-4a3a-b1d6-1859d2da3a89"
-      },
-      "reconcileHints": {
-        "planId": "e7af7151-7eb1-43a4-af71-517eb143a4a2",
-        "apiId": "53b1d618-59d2-4a3a-b1d6-1859d2da3a89"
-      },
-      "lastError": null,
-      "startedAt": "2026-04-17T18:59:28.733Z",
-      "completedAt": "2026-04-17T18:59:28.788Z"
+      "targetIds": {},
+      "reconcileHints": {},
+      "lastError": "Dependencies were not satisfied: UPSERT_APPLICATION:dev2@540.co/dog-breeds-dev-app",
+      "startedAt": null,
+      "completedAt": "2026-04-20T18:27:29.653Z"
     },
     "UPSERT_SUBSCRIPTION:dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan": {
       "actionId": "UPSERT_SUBSCRIPTION:dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan",
       "kind": "UPSERT_SUBSCRIPTION",
       "sourceId": "dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "BLOCKED",
       "dependencies": [
         "UPSERT_APPLICATION:dev2@540.co/dog-breeds-dev-app",
         "RESOLVE_PLAN:dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan"
       ],
-      "targetIds": {
-        "subscriptionId": "451fd40d-16b4-4a0f-9fd4-0d16b49a0f6c",
-        "apiId": "53b1d618-59d2-4a3a-b1d6-1859d2da3a89",
-        "planId": "e7af7151-7eb1-43a4-af71-517eb143a4a2"
-      },
-      "reconcileHints": {
-        "subscriptionId": "451fd40d-16b4-4a0f-9fd4-0d16b49a0f6c",
-        "apiId": "53b1d618-59d2-4a3a-b1d6-1859d2da3a89",
-        "planId": "e7af7151-7eb1-43a4-af71-517eb143a4a2"
-      },
-      "lastError": null,
-      "startedAt": "2026-04-17T18:59:28.791Z",
-      "completedAt": "2026-04-17T18:59:28.859Z"
+      "targetIds": {},
+      "reconcileHints": {},
+      "lastError": "Dependencies were not satisfied: UPSERT_APPLICATION:dev2@540.co/dog-breeds-dev-app, RESOLVE_PLAN:dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan",
+      "startedAt": null,
+      "completedAt": "2026-04-20T18:27:29.653Z"
     },
     "VERIFY_SUBSCRIPTION:dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan": {
       "actionId": "VERIFY_SUBSCRIPTION:dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan",
       "kind": "VERIFY_SUBSCRIPTION",
       "sourceId": "dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "BLOCKED",
       "dependencies": [
         "UPSERT_SUBSCRIPTION:dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan"
       ],
-      "targetIds": {
-        "subscriptionId": "451fd40d-16b4-4a0f-9fd4-0d16b49a0f6c",
-        "apiId": "53b1d618-59d2-4a3a-b1d6-1859d2da3a89"
-      },
-      "reconcileHints": {
-        "subscriptionId": "451fd40d-16b4-4a0f-9fd4-0d16b49a0f6c",
-        "apiId": "53b1d618-59d2-4a3a-b1d6-1859d2da3a89"
-      },
-      "lastError": null,
-      "startedAt": "2026-04-17T18:59:28.860Z",
-      "completedAt": "2026-04-17T18:59:28.919Z"
+      "targetIds": {},
+      "reconcileHints": {},
+      "lastError": "Dependencies were not satisfied: UPSERT_SUBSCRIPTION:dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan",
+      "startedAt": null,
+      "completedAt": "2026-04-20T18:27:29.653Z"
     }
   }
 }
