@@ -13,9 +13,8 @@ Consumes the export produced by [apigee-migrate-tool](https://github.com/apigeec
 | **Tool 1 — Extractor** | ✅ Complete | Reads apigee-migrate-tool `data/` output → writes IR to `ir/` |
 | **Tool 2 — Parser + Mapper** | ✅ Complete | Reads IR → parses proxy AST → emits Gravitee v4 API definition JSON |
 | Developers Migration Tool | ✅ Validated locally | Migrates Apigee developers, apps, and product approvals into Gravitee users, applications, and subscriptions |
-| Tool 3 — LLM Fallback | 🔲 Planned | Translates JavaScript/JavaCallout policies via Claude API |
 | API Migration Tool | 🟡 In active implementation | Analyzes, imports, and reconciles Gravitee APIs/plans from proxy IR |
-| Tool 5 — Gap Reporter | 🔲 Planned | Generates HTML report of all migration gaps and review items |
+| Tool 4 — Gap Reporter | 🔲 Planned | Generates HTML report of all migration gaps and review items |
 
 ---
 
