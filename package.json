@@ -10,6 +10,7 @@
     "node": ">=18.0.0"
   },
   "scripts": {
+    "init": "node bin/migrator.js init",
     "extractor":    "node bin/migrator.js extract --data-dir ./data --ir-dir ./ir",
     "apis:analyze": "node bin/migrator.js apis analyze --ir-dir ./ir --config ./config/apis.config.example.json --gravitee-token $GRAVITEE_TOKEN",
     "apis:plan":    "node bin/migrator.js apis plan --ir-dir ./ir --config ./config/apis.config.example.json --gravitee-token $GRAVITEE_TOKEN",
@@ -26,13 +27,14 @@
     "developers:delete":  "node bin/migrator.js developers delete-imported --ir-dir ./ir --config ./config/developers.config.resolved.json --gravitee-token $GRAVITEE_TOKEN",
     "developers:sync-api-targets": "node bin/migrator.js developers sync-api-targets --ir-dir ./ir --config ./config/developers.config.resolved.json --gravitee-token $GRAVITEE_TOKEN",
     "test:developers":  "node test/developers/test-analyze.js && node test/developers/test-workflow.js && node test/developers/test-resolve-config-ids.js && node test/developers/test-validate-config-targets.js && node test/developers/test-configure-roles.js && node test/developers/test-sync-api-targets.js && node test/developers/test-discover-targets.js && node test/developers/test-index.js",
+    "test:init":        "node test/init/test-init.js",
     "test:apis":        "node test/apis/test-workflow.js",
     "test:shared":      "node test/shared/test-ir-loader.js && node test/shared/test-gravitee-client.js",
     "test:extractor":   "python3 -m unittest test.extractor.test_extractor -v",
     "test:translator":  "node test/translator/test-parser.js && node test/translator/test-mapper.js",
     "test:parser":      "node test/translator/test-parser.js",
     "test:mapper":      "node test/translator/test-mapper.js",
-    "test":             "npm run test:extractor && npm run test:translator && npm run test:shared && npm run test:apis && npm run test:developers"
+    "test":             "npm run test:extractor && npm run test:translator && npm run test:shared && npm run test:init && npm run test:apis && npm run test:developers"
   },
   "dependencies": {
     "sax": "^1.4.1"

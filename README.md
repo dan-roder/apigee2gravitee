@@ -35,11 +35,18 @@ Consumes the export produced by [apigee-migrate-tool](https://github.com/apigeec
 git clone <this-repo>
 cd apigee2gravitee
 npm install
+node bin/migrator.js init
 ```
 
 `npm install` installs the single Node.js dependency: `sax` (the XML parser used by the mapper).
 
 The Python extractor has **no third-party dependencies** — it uses only Python stdlib (`zipfile`, `xml.etree.ElementTree`, `json`, `os`, `pathlib`).
+
+`migrator init` prompts for the shared Gravitee endpoint settings and writes starter config files to:
+
+- `config/apis.config.json`
+- `config/developers.config.json`
+- `config/developers.config.resolved.json`
 
 ---
 

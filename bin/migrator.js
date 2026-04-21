@@ -22,6 +22,7 @@ const path = require('path');
 const fs = require('fs');
 const { runDevelopersCommand } = require('../src/developers');
 const { runApisCommand } = require('../src/apis');
+const { runInitCommand } = require('../src/init');
 
 // ─── Colours (no dependencies) ───────────────────────────────────────────────
 const c = {
@@ -246,9 +247,19 @@ ${fmt.bold('Usage:')}
   migrator <command> [options]
 
 ${fmt.bold('Commands:')}
+  init       Create starter config files for the full migration workflow
   extract    Parse apigee-migrate-tool data/ output into the IR
   apis       Analyze or migrate APIs/plans
   developers Analyze or migrate developers/apps/subscriptions
+
+${fmt.bold('init options:')}
+  --gravitee-url <url>           Gravitee base URL for generated config files
+  --org <id>                     Gravitee organization ID
+  --env <id>                     Gravitee environment ID
+  --apis-config <path>           Output path for API config            (default: ./config/apis.config.json)
+  --developers-config <path>     Output path for developers config     (default: ./config/developers.config.json)
+  --developers-resolved-config <path>  Output path for resolved developers config
+  --force                        Overwrite existing generated files without prompting
 
 ${fmt.bold('extract options:')}
   --data-dir <path>   Path to apigee-migrate-tool data/ directory  (required)
@@ -258,6 +269,8 @@ ${fmt.bold('extract options:')}
   -v, --verbose       Enable debug output
 
 ${fmt.bold('Examples:')}
+  migrator init
+  migrator init --gravitee-url http://localhost:8083 --org DEFAULT --env DEFAULT --force
   migrator extract --data-dir ./data --ir-dir ./ir
   migrator extract --data-dir ./data --ir-dir ./ir --org advana --env dev -v
   migrator apis analyze --ir-dir ./ir --config ./config/apis.config.example.json
@@ -265,6 +278,32 @@ ${fmt.bold('Examples:')}
   migrator developers resolve-config-ids --config ./config/developers.config.json
   migrator developers validate-config-targets --config ./config/developers.config.resolved.json
   migrator developers analyze --ir-dir ./ir --config ./config/developers.config.json
+`);
+}
+
+function printInitHelp() {
+  console.log(`
+${fmt.bold('init')}
+
+${fmt.bold('Usage:')}
+  migrator init [options]
+
+${fmt.bold('Purpose:')}
+  Prompt for shared Gravitee endpoint settings and write starter config files for
+  the API and developers workflows.
+
+${fmt.bold('Options:')}
+  --gravitee-url <url>           Gravitee base URL for generated config files
+  --org <id>                     Gravitee organization ID
+  --env <id>                     Gravitee environment ID
+  --apis-config <path>           Output path for API config            (default: ./config/apis.config.json)
+  --developers-config <path>     Output path for developers config     (default: ./config/developers.config.json)
+  --developers-resolved-config <path>  Output path for resolved developers config
+  --force                        Overwrite existing generated files without prompting
+
+${fmt.bold('Examples:')}
+  migrator init
+  migrator init --gravitee-url http://localhost:8083 --org DEFAULT --env DEFAULT --force
 `);
 }
 
@@ -360,6 +399,29 @@ async function main() {
   if (command === 'extract') {
     cmdExtract(args.flags);
     return;
+  }
+
+  if (command === 'init') {
+    if (args.flags.help || args.flags.h) {
+      printInitHelp();
+      process.exit(0);
+    }
+    const result = await runInitCommand(args.flags, fmt);
+    console.log(fmt.header('apigee2gravitee — init'));
+    console.log('');
+    console.log(`  ${fmt.bold('Gravitee URL')}  ${result.gravitee.url}`);
+    console.log(`  ${fmt.bold('Org ID')}        ${result.gravitee.orgId}`);
+    console.log(`  ${fmt.bold('Env ID')}        ${result.gravitee.envId}`);
+    console.log('');
+    for (const item of result.writes) {
+      const label = item.status === 'written' ? fmt.ok('Wrote') : fmt.warn('Skipped');
+      console.log(`  ${label} ${fmt.dim(item.path)}`);
+    }
+    console.log('');
+    for (const hint of result.hints) {
+      console.log(`  ${fmt.info(hint)}`);
+    }
+    process.exit(result.exitCode);
   }
 
   if (command === 'developers') {
