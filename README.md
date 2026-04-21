@@ -10,9 +10,9 @@ Consumes the export produced by [apigee-migrate-tool](https://github.com/apigeec
 
 | Tool | Status | Description |
 |------|--------|-------------|
-| **Tool 1 — Extractor** | ✅ Complete | Reads apigee-migrate-tool `data/` output → writes IR to `ir/` |
-| **Tool 2 — Parser + Mapper** | ✅ Complete | Reads IR → parses proxy AST → emits Gravitee v4 API definition JSON |
-| Developers Migration Tool | ✅ Validated locally | Migrates Apigee developers, apps, and product approvals into Gravitee users, applications, and subscriptions |
+| **Tool 1 — Extractor** | Reads apigee-migrate-tool `data/` output → writes IR to `ir/` |
+| **Tool 2 — Parser + Mapper** | Internal translation layer used by the API migration workflow to map proxy IR into Gravitee API definitions |
+| Developers Migration Tool | Migrates Apigee developers, apps, and product approvals into Gravitee users, applications, and subscriptions |
 | API Migration Tool | 🟡 In active implementation | Analyzes, imports, and reconciles Gravitee APIs/plans from proxy IR |
 | Tool 4 — Gap Reporter | 🔲 Planned | Generates HTML report of all migration gaps and review items |
 
@@ -23,7 +23,7 @@ Consumes the export produced by [apigee-migrate-tool](https://github.com/apigeec
 | Requirement | Version | Used by |
 |-------------|---------|---------|
 | Python | 3.9+ | Tool 1 (extractor) |
-| Node.js | 18+ | Tools 2–5 |
+| Node.js | 18+ | API and developers migration workflows (including the built-in translator) |
 | npm | 8+ | Dependency install |
 | apigee-migrate-tool | latest | Must be run first to produce `data/` |
 
@@ -105,6 +105,8 @@ ir/
 
 Reads a proxy IR JSON from `./ir/proxies/`, parses it into a fully annotated AST, and maps it to a Gravitee v4 API definition JSON.
 
+This is an internal translation layer used by the `apis` workflow. You do not need to run Tool 2 as a separate prerequisite before `apis analyze`, `apis plan`, `apis import`, or `apis reconcile`.
+
 ### Architecture
 
 ```
@@ -120,7 +122,7 @@ src/mapper/policy-mapper.js      ← walks AST flowGraph → Gravitee v4 API def
   └── src/mapper/policy-handlers.js   ← per-policy-type translation handlers
 ```
 
-### Run (programmatic — CLI command coming in Tool 4)
+### Programmatic example
 
 ```javascript
 const { parseProxyFile } = require('./src/parser/proxy-ast');
@@ -150,6 +152,8 @@ console.log('Security scheme:', apiDefinition._migrationMeta.securityScheme);
 console.log('LLM review needed:', apiDefinition._migrationMeta.llmSteps.map(s => s.name));
 console.log('Manual redesign needed:', apiDefinition._migrationMeta.manualSteps);
 ```
+
+There is not currently a standalone CLI subcommand that writes these mapped definitions to `./ir/gravitee-apis/`. The existing `apis` commands call the parser/mapper internally during analyze, plan, import, and reconcile.
 
 ### What the mapper produces
 
@@ -263,6 +267,8 @@ Every API definition output includes a `_migrationMeta` block. **Strip this befo
 ## API Migration Tool
 
 Creates or updates Gravitee APIs and plans from extracted Apigee proxy IR. This is the missing upstream stage that should run before the developers migration tool, because developers migration expects the target APIs and plans to already exist.
+
+The API commands invoke the parser/mapper internally from `ir/proxies/*.json`; they do not require a separate Tool 2 output directory or a standalone Tool 2 run first.
 
 ### Config
 
