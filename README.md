@@ -2,7 +2,7 @@
 
 Automated migration pipeline for moving from **Apigee Edge OPDK** to **Gravitee API Management**.
 
-Consumes the export produced by [apigee-migrate-tool](https://github.com/apigeecs/apigee-migrate-tool) and produces Gravitee v4 API definition JSON files ready to import via the Gravitee Management API.
+Translates the export produced by [apigee-migrate-tool](https://github.com/apigeecs/apigee-migrate-tool) into Gravitee v4 API definition JSON files ready to import via the Gravitee Management API.
 
 ---
 
