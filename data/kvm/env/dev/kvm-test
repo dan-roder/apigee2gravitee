@@ -1,8 +1,0 @@
-{
-  "encrypted" : true,
-  "entry" : [ {
-    "name" : "encrypted-test",
-    "value" : "*****"
-  } ],
-  "name" : "kvm-test"
-}

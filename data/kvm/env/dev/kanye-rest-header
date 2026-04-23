@@ -1,8 +1,0 @@
-{
-  "encrypted" : true,
-  "entry" : [ {
-    "name" : "fake-header",
-    "value" : "*****"
-  } ],
-  "name" : "kanye-rest-header"
-}

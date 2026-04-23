@@ -1,8 +1,0 @@
-{
-  "encrypted" : false,
-  "entry" : [ {
-    "name" : "23c04d89-5ac2-43db-8f91-af2bd41c9cb8",
-    "value" : "{\"createdBy\":\"3.30.235.29\",\"lastModifiedBy\":\"3.30.235.29\",\"displayName\":\"traffic by proxy\",\"sortbyCols\":[],\"timeUnit\":\"hour\",\"dimensions\":[\"apiproxy\"],\"chartType\":\"column\",\"tags\":[],\"comments\":[],\"metrics\":[{\"function\":\"sum\",\"name\":\"message_count\"}],\"properties\":{\"__ui__\":[{\"name\":\"description\",\"value\":\"identify unused proxies\"},{\"name\":\"accuracy\"}]},\"org\":\"advana\",\"env\":\"dev\",\"createdAt\":1772718642599,\"lastViewedAt\":1773336976668,\"lastModifiedAt\":1772718642599,\"name\":\"23c04d89-5ac2-43db-8f91-af2bd41c9cb8\"}"
-  } ],
-  "name" : "CustomReportsadvana#23c04d89-5ac2-43db-8f91-af2bd41c9cb8"
-}
