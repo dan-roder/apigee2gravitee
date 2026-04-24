@@ -1,0 +1,45 @@
+{
+  "_meta": {
+    "artifactId": "erik.severson@540.co/yes-or-no-dev-app",
+    "artifactType": "app",
+    "blockers": [],
+    "extractedAt": "2026-04-24T17:03:45.563792Z",
+    "riskFlags": [],
+    "sourcePath": "/home/ec2-user/apigee2gravitee/data/apps/erik.severson@540.co/yes-or-no-dev-app",
+    "warnings": []
+  },
+  "app_id": "9940f284-eff6-4115-99ec-6aabfdfe3c6a",
+  "attributes": [
+    {
+      "name": "DisplayName",
+      "value": "yes-or-no-dev-app"
+    },
+    {
+      "name": "Notes",
+      "value": ""
+    }
+  ],
+  "callback_url": "",
+  "credentials": [
+    {
+      "api_products": [
+        {
+          "apiproduct": "yes-or-no-api-product",
+          "status": "approved"
+        }
+      ],
+      "consumer_key": "QSRznbGGCwoLG1Dh7wan20huCGKbDn5W",
+      "consumer_secret_present": true,
+      "consumer_secret_ref": "_protected/credentials/erik.severson@540.co/yes-or-no-dev-app/QSRznbGGCwoLG1Dh7wan20huCGKbDn5W/consumer-secret.txt",
+      "expires_at": -1,
+      "scopes": [],
+      "status": "approved"
+    }
+  ],
+  "developer_email": "erik.severson@540.co",
+  "meta": {
+    "source_path": "./data/apps/erik.severson@540.co/yes-or-no-dev-app"
+  },
+  "name": "yes-or-no-dev-app",
+  "status": "approved"
+}

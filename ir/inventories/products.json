@@ -5,7 +5,7 @@
       "id": "cats-api-product",
       "name": "cats-api-product",
       "riskFlags": [],
-      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/products/cats-api-product",
+      "sourcePath": "/home/ec2-user/apigee2gravitee/data/products/cats-api-product",
       "warnings": []
     },
     {
@@ -13,7 +13,7 @@
       "id": "chuck-norris-api-product",
       "name": "chuck-norris-api-product",
       "riskFlags": [],
-      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/products/chuck-norris-api-product",
+      "sourcePath": "/home/ec2-user/apigee2gravitee/data/products/chuck-norris-api-product",
       "warnings": []
     },
     {
@@ -21,7 +21,7 @@
       "id": "dog-breeds-api-product",
       "name": "dog-breeds-api-product",
       "riskFlags": [],
-      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/products/dog-breeds-api-product",
+      "sourcePath": "/home/ec2-user/apigee2gravitee/data/products/dog-breeds-api-product",
       "warnings": []
     },
     {
@@ -29,7 +29,7 @@
       "id": "hogwarts-houses-api-product",
       "name": "hogwarts-houses-api-product",
       "riskFlags": [],
-      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/products/hogwarts-houses-api-product",
+      "sourcePath": "/home/ec2-user/apigee2gravitee/data/products/hogwarts-houses-api-product",
       "warnings": []
     },
     {
@@ -37,7 +37,7 @@
       "id": "kanye-api-product",
       "name": "kanye-api-product",
       "riskFlags": [],
-      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/products/kanye-api-product",
+      "sourcePath": "/home/ec2-user/apigee2gravitee/data/products/kanye-api-product",
       "warnings": []
     },
     {
@@ -45,7 +45,7 @@
       "id": "misc-api-product",
       "name": "misc-api-product",
       "riskFlags": [],
-      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/products/misc-api-product",
+      "sourcePath": "/home/ec2-user/apigee2gravitee/data/products/misc-api-product",
       "warnings": [
         "MULTI_API_PRODUCT",
         "PLAN_SPLIT_REQUIRED"
@@ -56,7 +56,7 @@
       "id": "wizards-api-product",
       "name": "wizards-api-product",
       "riskFlags": [],
-      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/products/wizards-api-product",
+      "sourcePath": "/home/ec2-user/apigee2gravitee/data/products/wizards-api-product",
       "warnings": []
     },
     {
@@ -64,7 +64,7 @@
       "id": "yes-or-no-api-product",
       "name": "yes-or-no-api-product",
       "riskFlags": [],
-      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/products/yes-or-no-api-product",
+      "sourcePath": "/home/ec2-user/apigee2gravitee/data/products/yes-or-no-api-product",
       "warnings": []
     }
   ]

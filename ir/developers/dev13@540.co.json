@@ -1,0 +1,23 @@
+{
+  "_meta": {
+    "artifactId": "dev13@540.co",
+    "artifactType": "developer",
+    "blockers": [],
+    "extractedAt": "2026-04-24T17:03:45.563792Z",
+    "riskFlags": [],
+    "sourcePath": "/home/ec2-user/apigee2gravitee/data/devs/dev13@540.co",
+    "warnings": []
+  },
+  "apps": [
+    "dev13-app"
+  ],
+  "attributes": [],
+  "email": "dev13@540.co",
+  "first_name": "Developer",
+  "last_name": "Thirteen",
+  "meta": {
+    "source_path": "./data/devs/dev13@540.co"
+  },
+  "status": "active",
+  "user_name": "dev13@540.co"
+}

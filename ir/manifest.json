@@ -1,7 +1,7 @@
 {
-  "app_count": 4,
-  "credential_count": 4,
-  "developer_count": 4,
+  "app_count": 25,
+  "credential_count": 25,
+  "developer_count": 22,
   "encrypted_kvm_names": [
     "env:devops-credentials",
     "env:kanye-rest-header",
@@ -14,13 +14,13 @@
     "env:updateable-kvm-test",
     "env:working-kvm-encrypted"
   ],
-  "environment": "dev",
+  "environment": "",
   "errors": [],
-  "extracted_at": "2026-04-06T21:03:44.645925Z",
+  "extracted_at": "2026-04-24T17:03:45.563792Z",
   "failed_artifact_count": 0,
   "flow_hook_count": 0,
   "kvm_count": 19,
-  "org": "advana",
+  "org": "",
   "product_count": 8,
   "proxy_count": 23,
   "proxy_names": [
@@ -69,7 +69,7 @@
     "sf-commonValidations_rev1_2025_01_08",
     "test_colum_transform_and_ism_1_rev2_2025_01_08"
   ],
-  "source_data_dir": "/Users/daniel.roder/Sites/apigee2gravitee/data",
+  "source_data_dir": "/home/ec2-user/apigee2gravitee/data",
   "target_server_count": 2,
   "warnings": [
     "KVM 'devops-credentials' (scope: env) is encrypted. Values are not accessible via the Apigee management API and must be re-entered manually in Gravitee.",

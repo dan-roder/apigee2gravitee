@@ -3,9 +3,9 @@
     "artifactId": "lb2-mock",
     "artifactType": "targetserver",
     "blockers": [],
-    "extractedAt": "2026-04-06T21:03:44.645925Z",
+    "extractedAt": "2026-04-24T17:03:45.563792Z",
     "riskFlags": [],
-    "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/targetservers/lb2-mock",
+    "sourcePath": "/home/ec2-user/apigee2gravitee/data/targetservers/lb2-mock",
     "warnings": []
   },
   "host": "httpbin.org",

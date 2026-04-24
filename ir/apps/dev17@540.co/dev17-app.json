@@ -1,0 +1,45 @@
+{
+  "_meta": {
+    "artifactId": "dev17@540.co/dev17-app",
+    "artifactType": "app",
+    "blockers": [],
+    "extractedAt": "2026-04-24T17:03:45.563792Z",
+    "riskFlags": [],
+    "sourcePath": "/home/ec2-user/apigee2gravitee/data/apps/dev17@540.co/dev17-app",
+    "warnings": []
+  },
+  "app_id": "88269fe4-3d6c-445b-834b-478b61ad8914",
+  "attributes": [
+    {
+      "name": "DisplayName",
+      "value": "dev17-app"
+    },
+    {
+      "name": "Notes",
+      "value": ""
+    }
+  ],
+  "callback_url": "",
+  "credentials": [
+    {
+      "api_products": [
+        {
+          "apiproduct": "misc-api-product",
+          "status": "approved"
+        }
+      ],
+      "consumer_key": "pMqT6e7teG8l4rdrwA63e37N5A8HKW2h",
+      "consumer_secret_present": true,
+      "consumer_secret_ref": "_protected/credentials/dev17@540.co/dev17-app/pMqT6e7teG8l4rdrwA63e37N5A8HKW2h/consumer-secret.txt",
+      "expires_at": -1,
+      "scopes": [],
+      "status": "approved"
+    }
+  ],
+  "developer_email": "dev17@540.co",
+  "meta": {
+    "source_path": "./data/apps/dev17@540.co/dev17-app"
+  },
+  "name": "dev17-app",
+  "status": "approved"
+}

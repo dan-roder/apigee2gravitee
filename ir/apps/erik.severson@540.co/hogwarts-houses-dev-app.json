@@ -1,0 +1,45 @@
+{
+  "_meta": {
+    "artifactId": "erik.severson@540.co/hogwarts-houses-dev-app",
+    "artifactType": "app",
+    "blockers": [],
+    "extractedAt": "2026-04-24T17:03:45.563792Z",
+    "riskFlags": [],
+    "sourcePath": "/home/ec2-user/apigee2gravitee/data/apps/erik.severson@540.co/hogwarts-houses-dev-app",
+    "warnings": []
+  },
+  "app_id": "0f8b34b5-5eb2-44ff-9db1-04a616b951ae",
+  "attributes": [
+    {
+      "name": "DisplayName",
+      "value": "hogwarts-houses-dev-app"
+    },
+    {
+      "name": "Notes",
+      "value": ""
+    }
+  ],
+  "callback_url": "",
+  "credentials": [
+    {
+      "api_products": [
+        {
+          "apiproduct": "hogwarts-houses-api-product",
+          "status": "approved"
+        }
+      ],
+      "consumer_key": "7ShONGlRpUY1M69dgXQju7dxWE0sj7Xp",
+      "consumer_secret_present": true,
+      "consumer_secret_ref": "_protected/credentials/erik.severson@540.co/hogwarts-houses-dev-app/7ShONGlRpUY1M69dgXQju7dxWE0sj7Xp/consumer-secret.txt",
+      "expires_at": -1,
+      "scopes": [],
+      "status": "approved"
+    }
+  ],
+  "developer_email": "erik.severson@540.co",
+  "meta": {
+    "source_path": "./data/apps/erik.severson@540.co/hogwarts-houses-dev-app"
+  },
+  "name": "hogwarts-houses-dev-app",
+  "status": "approved"
+}

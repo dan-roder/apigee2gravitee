@@ -1,0 +1,25 @@
+{
+  "_meta": {
+    "artifactId": "erik.severson@540.co",
+    "artifactType": "developer",
+    "blockers": [],
+    "extractedAt": "2026-04-24T17:03:45.563792Z",
+    "riskFlags": [],
+    "sourcePath": "/home/ec2-user/apigee2gravitee/data/devs/erik.severson@540.co",
+    "warnings": []
+  },
+  "apps": [
+    "hogwarts-houses-dev-app",
+    "yes-or-no-dev-app",
+    "misc-dev-app"
+  ],
+  "attributes": [],
+  "email": "erik.severson@540.co",
+  "first_name": "Erik",
+  "last_name": "Severson",
+  "meta": {
+    "source_path": "./data/devs/erik.severson@540.co"
+  },
+  "status": "active",
+  "user_name": "erik.severson@540.co"
+}

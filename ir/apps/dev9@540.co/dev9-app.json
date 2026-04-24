@@ -1,0 +1,45 @@
+{
+  "_meta": {
+    "artifactId": "dev9@540.co/dev9-app",
+    "artifactType": "app",
+    "blockers": [],
+    "extractedAt": "2026-04-24T17:03:45.563792Z",
+    "riskFlags": [],
+    "sourcePath": "/home/ec2-user/apigee2gravitee/data/apps/dev9@540.co/dev9-app",
+    "warnings": []
+  },
+  "app_id": "93caba54-fc79-4e56-80eb-e65b63197198",
+  "attributes": [
+    {
+      "name": "DisplayName",
+      "value": "dev9-app"
+    },
+    {
+      "name": "Notes",
+      "value": ""
+    }
+  ],
+  "callback_url": "",
+  "credentials": [
+    {
+      "api_products": [
+        {
+          "apiproduct": "misc-api-product",
+          "status": "approved"
+        }
+      ],
+      "consumer_key": "YfxmmAlPSTTgXurgxHmztR8WQmV7GeGv",
+      "consumer_secret_present": true,
+      "consumer_secret_ref": "_protected/credentials/dev9@540.co/dev9-app/YfxmmAlPSTTgXurgxHmztR8WQmV7GeGv/consumer-secret.txt",
+      "expires_at": -1,
+      "scopes": [],
+      "status": "approved"
+    }
+  ],
+  "developer_email": "dev9@540.co",
+  "meta": {
+    "source_path": "./data/apps/dev9@540.co/dev9-app"
+  },
+  "name": "dev9-app",
+  "status": "approved"
+}

@@ -1,0 +1,45 @@
+{
+  "_meta": {
+    "artifactId": "dev19@540.co/dev19-app",
+    "artifactType": "app",
+    "blockers": [],
+    "extractedAt": "2026-04-24T17:03:45.563792Z",
+    "riskFlags": [],
+    "sourcePath": "/home/ec2-user/apigee2gravitee/data/apps/dev19@540.co/dev19-app",
+    "warnings": []
+  },
+  "app_id": "cd08d790-b701-4865-bfef-ee3437fd9cb6",
+  "attributes": [
+    {
+      "name": "DisplayName",
+      "value": "dev19-app"
+    },
+    {
+      "name": "Notes",
+      "value": ""
+    }
+  ],
+  "callback_url": "",
+  "credentials": [
+    {
+      "api_products": [
+        {
+          "apiproduct": "yes-or-no-api-product",
+          "status": "approved"
+        }
+      ],
+      "consumer_key": "ISYpfIK2eWM6yW8GCG4EpLUARgxZuBHJ",
+      "consumer_secret_present": true,
+      "consumer_secret_ref": "_protected/credentials/dev19@540.co/dev19-app/ISYpfIK2eWM6yW8GCG4EpLUARgxZuBHJ/consumer-secret.txt",
+      "expires_at": -1,
+      "scopes": [],
+      "status": "approved"
+    }
+  ],
+  "developer_email": "dev19@540.co",
+  "meta": {
+    "source_path": "./data/apps/dev19@540.co/dev19-app"
+  },
+  "name": "dev19-app",
+  "status": "approved"
+}

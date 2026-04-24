@@ -1,0 +1,45 @@
+{
+  "_meta": {
+    "artifactId": "danny.rivera@540.co/cats-dev-app",
+    "artifactType": "app",
+    "blockers": [],
+    "extractedAt": "2026-04-24T17:03:45.563792Z",
+    "riskFlags": [],
+    "sourcePath": "/home/ec2-user/apigee2gravitee/data/apps/danny.rivera@540.co/cats-dev-app",
+    "warnings": []
+  },
+  "app_id": "7bbea5c7-c95a-494c-adcd-25c1e32edd3e",
+  "attributes": [
+    {
+      "name": "DisplayName",
+      "value": "cats-dev-app"
+    },
+    {
+      "name": "Notes",
+      "value": ""
+    }
+  ],
+  "callback_url": "",
+  "credentials": [
+    {
+      "api_products": [
+        {
+          "apiproduct": "cats-api-product",
+          "status": "approved"
+        }
+      ],
+      "consumer_key": "idWhL2ATXfup5AyPWo9Z3Oakj1exc0KY",
+      "consumer_secret_present": true,
+      "consumer_secret_ref": "_protected/credentials/danny.rivera@540.co/cats-dev-app/idWhL2ATXfup5AyPWo9Z3Oakj1exc0KY/consumer-secret.txt",
+      "expires_at": -1,
+      "scopes": [],
+      "status": "approved"
+    }
+  ],
+  "developer_email": "danny.rivera@540.co",
+  "meta": {
+    "source_path": "./data/apps/danny.rivera@540.co/cats-dev-app"
+  },
+  "name": "cats-dev-app",
+  "status": "approved"
+}

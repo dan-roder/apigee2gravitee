@@ -3,9 +3,9 @@
     "artifactId": "cat-fact-api-2",
     "artifactType": "proxy",
     "blockers": [],
-    "extractedAt": "2026-04-06T21:03:44.645925Z",
+    "extractedAt": "2026-04-24T17:03:45.563792Z",
     "riskFlags": [],
-    "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/proxies/cat-fact-api-2.zip",
+    "sourcePath": "/home/ec2-user/apigee2gravitee/data/proxies/cat-fact-api-2.zip",
     "warnings": []
   },
   "base_path": "",
@@ -13,8 +13,8 @@
   "display_name": "cat-fact-api-2",
   "kvm_refs": [],
   "meta": {
-    "parsed_at": "2026-04-06T21:03:44.648610Z",
-    "source_zip": "/Users/daniel.roder/Sites/apigee2gravitee/data/proxies/cat-fact-api-2.zip"
+    "parsed_at": "2026-04-24T17:03:45.571644Z",
+    "source_zip": "/home/ec2-user/apigee2gravitee/data/proxies/cat-fact-api-2.zip"
   },
   "name": "cat-fact-api-2",
   "policies": {},
@@ -23,7 +23,7 @@
       "connection": {
         "base_path": "/v1/cat-fact-api-2",
         "virtual_hosts": [
-          "default"
+          "api-grover"
         ]
       },
       "flows": [],

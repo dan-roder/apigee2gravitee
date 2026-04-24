@@ -5,7 +5,7 @@
       "id": "KVM-Create",
       "name": "KVM-Create",
       "riskFlags": [],
-      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/proxies/KVM-Create.zip",
+      "sourcePath": "/home/ec2-user/apigee2gravitee/data/proxies/KVM-Create.zip",
       "warnings": []
     },
     {
@@ -13,7 +13,7 @@
       "id": "KVM-Reader",
       "name": "KVM-Reader",
       "riskFlags": [],
-      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/proxies/KVM-Reader.zip",
+      "sourcePath": "/home/ec2-user/apigee2gravitee/data/proxies/KVM-Reader.zip",
       "warnings": []
     },
     {
@@ -21,7 +21,7 @@
       "id": "KVM-Update",
       "name": "KVM-Update",
       "riskFlags": [],
-      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/proxies/KVM-Update.zip",
+      "sourcePath": "/home/ec2-user/apigee2gravitee/data/proxies/KVM-Update.zip",
       "warnings": []
     },
     {
@@ -29,7 +29,7 @@
       "id": "admin-kvm-export",
       "name": "admin-kvm-export",
       "riskFlags": [],
-      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/proxies/admin-kvm-export.zip",
+      "sourcePath": "/home/ec2-user/apigee2gravitee/data/proxies/admin-kvm-export.zip",
       "warnings": []
     },
     {
@@ -37,7 +37,7 @@
       "id": "apigee-hello",
       "name": "apigee-hello",
       "riskFlags": [],
-      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/proxies/apigee-hello.zip",
+      "sourcePath": "/home/ec2-user/apigee2gravitee/data/proxies/apigee-hello.zip",
       "warnings": []
     },
     {
@@ -45,7 +45,7 @@
       "id": "apigee-hello-api-1",
       "name": "apigee-hello-api-1",
       "riskFlags": [],
-      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/proxies/apigee-hello-api-1.zip",
+      "sourcePath": "/home/ec2-user/apigee2gravitee/data/proxies/apigee-hello-api-1.zip",
       "warnings": [
         "MANUAL_SHARED_POLICY_GROUP_MAPPING_REQUIRED",
         "SHAREDFLOW_REFERENCE"
@@ -56,7 +56,7 @@
       "id": "car-makes-api-3",
       "name": "car-makes-api-3",
       "riskFlags": [],
-      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/proxies/car-makes-api-3.zip",
+      "sourcePath": "/home/ec2-user/apigee2gravitee/data/proxies/car-makes-api-3.zip",
       "warnings": []
     },
     {
@@ -64,7 +64,7 @@
       "id": "cat-fact-api-2",
       "name": "cat-fact-api-2",
       "riskFlags": [],
-      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/proxies/cat-fact-api-2.zip",
+      "sourcePath": "/home/ec2-user/apigee2gravitee/data/proxies/cat-fact-api-2.zip",
       "warnings": []
     },
     {
@@ -72,7 +72,7 @@
       "id": "cats-api-7",
       "name": "cats-api-7",
       "riskFlags": [],
-      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/proxies/cats-api-7.zip",
+      "sourcePath": "/home/ec2-user/apigee2gravitee/data/proxies/cats-api-7.zip",
       "warnings": []
     },
     {
@@ -80,7 +80,7 @@
       "id": "chuck-norris-api-10",
       "name": "chuck-norris-api-10",
       "riskFlags": [],
-      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/proxies/chuck-norris-api-10.zip",
+      "sourcePath": "/home/ec2-user/apigee2gravitee/data/proxies/chuck-norris-api-10.zip",
       "warnings": []
     },
     {
@@ -88,7 +88,7 @@
       "id": "dog-breeds-api-6",
       "name": "dog-breeds-api-6",
       "riskFlags": [],
-      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/proxies/dog-breeds-api-6.zip",
+      "sourcePath": "/home/ec2-user/apigee2gravitee/data/proxies/dog-breeds-api-6.zip",
       "warnings": []
     },
     {
@@ -96,7 +96,7 @@
       "id": "get-kvm-proxy",
       "name": "get-kvm-proxy",
       "riskFlags": [],
-      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/proxies/get-kvm-proxy.zip",
+      "sourcePath": "/home/ec2-user/apigee2gravitee/data/proxies/get-kvm-proxy.zip",
       "warnings": []
     },
     {
@@ -104,7 +104,7 @@
       "id": "harry-potter-characters",
       "name": "harry-potter-characters",
       "riskFlags": [],
-      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/proxies/harry-potter-characters.zip",
+      "sourcePath": "/home/ec2-user/apigee2gravitee/data/proxies/harry-potter-characters.zip",
       "warnings": []
     },
     {
@@ -112,7 +112,7 @@
       "id": "hogwarts-houses-api-8",
       "name": "hogwarts-houses-api-8",
       "riskFlags": [],
-      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/proxies/hogwarts-houses-api-8.zip",
+      "sourcePath": "/home/ec2-user/apigee2gravitee/data/proxies/hogwarts-houses-api-8.zip",
       "warnings": []
     },
     {
@@ -120,7 +120,7 @@
       "id": "kanye-rest-api-5",
       "name": "kanye-rest-api-5",
       "riskFlags": [],
-      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/proxies/kanye-rest-api-5.zip",
+      "sourcePath": "/home/ec2-user/apigee2gravitee/data/proxies/kanye-rest-api-5.zip",
       "warnings": []
     },
     {
@@ -128,7 +128,7 @@
       "id": "kvm-test",
       "name": "kvm-test",
       "riskFlags": [],
-      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/proxies/kvm-test.zip",
+      "sourcePath": "/home/ec2-user/apigee2gravitee/data/proxies/kvm-test.zip",
       "warnings": []
     },
     {
@@ -136,7 +136,7 @@
       "id": "load-balance-target-servers-api",
       "name": "load-balance-target-servers-api",
       "riskFlags": [],
-      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/proxies/load-balance-target-servers-api.zip",
+      "sourcePath": "/home/ec2-user/apigee2gravitee/data/proxies/load-balance-target-servers-api.zip",
       "warnings": [
         "MULTIPLE_TARGETSERVER_REFERENCES",
         "TARGETSERVER_REFERENCE"
@@ -147,7 +147,7 @@
       "id": "mock-target-api",
       "name": "mock-target-api",
       "riskFlags": [],
-      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/proxies/mock-target-api.zip",
+      "sourcePath": "/home/ec2-user/apigee2gravitee/data/proxies/mock-target-api.zip",
       "warnings": []
     },
     {
@@ -155,7 +155,7 @@
       "id": "proxy-sharedflow-api-11",
       "name": "proxy-sharedflow-api-11",
       "riskFlags": [],
-      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/proxies/proxy-sharedflow-api-11.zip",
+      "sourcePath": "/home/ec2-user/apigee2gravitee/data/proxies/proxy-sharedflow-api-11.zip",
       "warnings": [
         "MANUAL_SHARED_POLICY_GROUP_MAPPING_REQUIRED",
         "SHAREDFLOW_REFERENCE"
@@ -166,7 +166,7 @@
       "id": "v1-ships",
       "name": "v1-ships",
       "riskFlags": [],
-      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/proxies/v1-ships.zip",
+      "sourcePath": "/home/ec2-user/apigee2gravitee/data/proxies/v1-ships.zip",
       "warnings": []
     },
     {
@@ -174,7 +174,7 @@
       "id": "villian-chain",
       "name": "villian-chain",
       "riskFlags": [],
-      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/proxies/villian-chain.zip",
+      "sourcePath": "/home/ec2-user/apigee2gravitee/data/proxies/villian-chain.zip",
       "warnings": []
     },
     {
@@ -182,7 +182,7 @@
       "id": "wizards-api-9",
       "name": "wizards-api-9",
       "riskFlags": [],
-      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/proxies/wizards-api-9.zip",
+      "sourcePath": "/home/ec2-user/apigee2gravitee/data/proxies/wizards-api-9.zip",
       "warnings": []
     },
     {
@@ -190,7 +190,7 @@
       "id": "yes-or-no-api-4",
       "name": "yes-or-no-api-4",
       "riskFlags": [],
-      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/proxies/yes-or-no-api-4.zip",
+      "sourcePath": "/home/ec2-user/apigee2gravitee/data/proxies/yes-or-no-api-4.zip",
       "warnings": []
     }
   ]

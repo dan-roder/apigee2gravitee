@@ -3,9 +3,9 @@
     "artifactId": "KVM-Create",
     "artifactType": "proxy",
     "blockers": [],
-    "extractedAt": "2026-04-06T21:03:44.645925Z",
+    "extractedAt": "2026-04-24T17:03:45.563792Z",
     "riskFlags": [],
-    "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/proxies/KVM-Create.zip",
+    "sourcePath": "/home/ec2-user/apigee2gravitee/data/proxies/KVM-Create.zip",
     "warnings": []
   },
   "base_path": "",
@@ -23,8 +23,8 @@
     }
   ],
   "meta": {
-    "parsed_at": "2026-04-06T21:03:44.646774Z",
-    "source_zip": "/Users/daniel.roder/Sites/apigee2gravitee/data/proxies/KVM-Create.zip"
+    "parsed_at": "2026-04-24T17:03:45.565926Z",
+    "source_zip": "/home/ec2-user/apigee2gravitee/data/proxies/KVM-Create.zip"
   },
   "name": "KVM-Create",
   "policies": {

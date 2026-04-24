@@ -3,9 +3,9 @@
     "artifactId": "SF02-advana-security-preflow",
     "artifactType": "sharedflow",
     "blockers": [],
-    "extractedAt": "2026-04-06T21:03:44.645925Z",
+    "extractedAt": "2026-04-24T17:03:45.563792Z",
     "riskFlags": [],
-    "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/sharedflows/SF02-advana-security-preflow.zip",
+    "sourcePath": "/home/ec2-user/apigee2gravitee/data/sharedflows/SF02-advana-security-preflow.zip",
     "warnings": []
   },
   "base_path": "",
@@ -13,8 +13,8 @@
   "display_name": "advana-security-preflow",
   "kvm_refs": [],
   "meta": {
-    "parsed_at": "2026-04-06T21:03:44.653583Z",
-    "source_zip": "/Users/daniel.roder/Sites/apigee2gravitee/data/sharedflows/SF02-advana-security-preflow.zip"
+    "parsed_at": "2026-04-24T17:03:45.586998Z",
+    "source_zip": "/home/ec2-user/apigee2gravitee/data/sharedflows/SF02-advana-security-preflow.zip"
   },
   "name": "SF02-advana-security-preflow",
   "policies": {

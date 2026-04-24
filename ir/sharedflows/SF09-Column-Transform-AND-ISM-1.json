@@ -3,9 +3,9 @@
     "artifactId": "SF09-Column-Transform-AND-ISM-1",
     "artifactType": "sharedflow",
     "blockers": [],
-    "extractedAt": "2026-04-06T21:03:44.645925Z",
+    "extractedAt": "2026-04-24T17:03:45.563792Z",
     "riskFlags": [],
-    "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/sharedflows/SF09-Column-Transform-AND-ISM-1.zip",
+    "sourcePath": "/home/ec2-user/apigee2gravitee/data/sharedflows/SF09-Column-Transform-AND-ISM-1.zip",
     "warnings": []
   },
   "base_path": "",
@@ -13,8 +13,8 @@
   "display_name": "Column-Transform-AND-ISM-Callout",
   "kvm_refs": [],
   "meta": {
-    "parsed_at": "2026-04-06T21:03:44.654976Z",
-    "source_zip": "/Users/daniel.roder/Sites/apigee2gravitee/data/sharedflows/SF09-Column-Transform-AND-ISM-1.zip"
+    "parsed_at": "2026-04-24T17:03:45.591470Z",
+    "source_zip": "/home/ec2-user/apigee2gravitee/data/sharedflows/SF09-Column-Transform-AND-ISM-1.zip"
   },
   "name": "SF09-Column-Transform-AND-ISM-1",
   "policies": {

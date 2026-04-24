@@ -5,7 +5,7 @@
       "id": "SF-Shared-Flow-Test-SpikeArrest",
       "name": "SF-Shared-Flow-Test-SpikeArrest",
       "riskFlags": [],
-      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/sharedflows/SF-Shared-Flow-Test-SpikeArrest.zip",
+      "sourcePath": "/home/ec2-user/apigee2gravitee/data/sharedflows/SF-Shared-Flow-Test-SpikeArrest.zip",
       "warnings": []
     },
     {
@@ -13,7 +13,7 @@
       "id": "SF-SharedFlow-Test-Quota",
       "name": "SF-SharedFlow-Test-Quota",
       "riskFlags": [],
-      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/sharedflows/SF-SharedFlow-Test-Quota.zip",
+      "sourcePath": "/home/ec2-user/apigee2gravitee/data/sharedflows/SF-SharedFlow-Test-Quota.zip",
       "warnings": []
     },
     {
@@ -21,7 +21,7 @@
       "id": "SF-columnTransform",
       "name": "SF-columnTransform",
       "riskFlags": [],
-      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/sharedflows/SF-columnTransform.zip",
+      "sourcePath": "/home/ec2-user/apigee2gravitee/data/sharedflows/SF-columnTransform.zip",
       "warnings": []
     },
     {
@@ -29,7 +29,7 @@
       "id": "SF-postTargetValidation",
       "name": "SF-postTargetValidation",
       "riskFlags": [],
-      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/sharedflows/SF-postTargetValidation.zip",
+      "sourcePath": "/home/ec2-user/apigee2gravitee/data/sharedflows/SF-postTargetValidation.zip",
       "warnings": []
     },
     {
@@ -37,7 +37,7 @@
       "id": "SF-preTargetValidation-1",
       "name": "SF-preTargetValidation-1",
       "riskFlags": [],
-      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/sharedflows/SF-preTargetValidation-1.zip",
+      "sourcePath": "/home/ec2-user/apigee2gravitee/data/sharedflows/SF-preTargetValidation-1.zip",
       "warnings": []
     },
     {
@@ -45,7 +45,7 @@
       "id": "SF01-advana-traffic-security",
       "name": "SF01-advana-traffic-security",
       "riskFlags": [],
-      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/sharedflows/SF01-advana-traffic-security.zip",
+      "sourcePath": "/home/ec2-user/apigee2gravitee/data/sharedflows/SF01-advana-traffic-security.zip",
       "warnings": []
     },
     {
@@ -53,7 +53,7 @@
       "id": "SF02-advana-security-preflow",
       "name": "SF02-advana-security-preflow",
       "riskFlags": [],
-      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/sharedflows/SF02-advana-security-preflow.zip",
+      "sourcePath": "/home/ec2-user/apigee2gravitee/data/sharedflows/SF02-advana-security-preflow.zip",
       "warnings": []
     },
     {
@@ -61,7 +61,7 @@
       "id": "SF03-SF-CommonValidations",
       "name": "SF03-SF-CommonValidations",
       "riskFlags": [],
-      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/sharedflows/SF03-SF-CommonValidations.zip",
+      "sourcePath": "/home/ec2-user/apigee2gravitee/data/sharedflows/SF03-SF-CommonValidations.zip",
       "warnings": []
     },
     {
@@ -69,7 +69,7 @@
       "id": "SF04-advana-cors",
       "name": "SF04-advana-cors",
       "riskFlags": [],
-      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/sharedflows/SF04-advana-cors.zip",
+      "sourcePath": "/home/ec2-user/apigee2gravitee/data/sharedflows/SF04-advana-cors.zip",
       "warnings": []
     },
     {
@@ -77,7 +77,7 @@
       "id": "SF05-dbrx-traffic-control",
       "name": "SF05-dbrx-traffic-control",
       "riskFlags": [],
-      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/sharedflows/SF05-dbrx-traffic-control.zip",
+      "sourcePath": "/home/ec2-user/apigee2gravitee/data/sharedflows/SF05-dbrx-traffic-control.zip",
       "warnings": []
     },
     {
@@ -85,7 +85,7 @@
       "id": "SF06-sf-advana-dsu_rev7",
       "name": "SF06-sf-advana-dsu_rev7",
       "riskFlags": [],
-      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/sharedflows/SF06-sf-advana-dsu_rev7.zip",
+      "sourcePath": "/home/ec2-user/apigee2gravitee/data/sharedflows/SF06-sf-advana-dsu_rev7.zip",
       "warnings": []
     },
     {
@@ -93,7 +93,7 @@
       "id": "SF07-sf-backendAuth",
       "name": "SF07-sf-backendAuth",
       "riskFlags": [],
-      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/sharedflows/SF07-sf-backendAuth.zip",
+      "sourcePath": "/home/ec2-user/apigee2gravitee/data/sharedflows/SF07-sf-backendAuth.zip",
       "warnings": []
     },
     {
@@ -101,7 +101,7 @@
       "id": "SF08-sf-commonValidations",
       "name": "SF08-sf-commonValidations",
       "riskFlags": [],
-      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/sharedflows/SF08-sf-commonValidations.zip",
+      "sourcePath": "/home/ec2-user/apigee2gravitee/data/sharedflows/SF08-sf-commonValidations.zip",
       "warnings": []
     },
     {
@@ -109,7 +109,7 @@
       "id": "SF09-Column-Transform-AND-ISM-1",
       "name": "SF09-Column-Transform-AND-ISM-1",
       "riskFlags": [],
-      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/sharedflows/SF09-Column-Transform-AND-ISM-1.zip",
+      "sourcePath": "/home/ec2-user/apigee2gravitee/data/sharedflows/SF09-Column-Transform-AND-ISM-1.zip",
       "warnings": []
     },
     {
@@ -117,7 +117,7 @@
       "id": "SF10-Query-Transform-1",
       "name": "SF10-Query-Transform-1",
       "riskFlags": [],
-      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/sharedflows/SF10-Query-Transform-1.zip",
+      "sourcePath": "/home/ec2-user/apigee2gravitee/data/sharedflows/SF10-Query-Transform-1.zip",
       "warnings": []
     },
     {
@@ -125,7 +125,7 @@
       "id": "sf-backendAuth_rev1_2025_01_08",
       "name": "sf-backendAuth_rev1_2025_01_08",
       "riskFlags": [],
-      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/sharedflows/sf-backendAuth_rev1_2025_01_08.zip",
+      "sourcePath": "/home/ec2-user/apigee2gravitee/data/sharedflows/sf-backendAuth_rev1_2025_01_08.zip",
       "warnings": []
     },
     {
@@ -133,7 +133,7 @@
       "id": "sf-commonValidations_rev1_2025_01_08",
       "name": "sf-commonValidations_rev1_2025_01_08",
       "riskFlags": [],
-      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/sharedflows/sf-commonValidations_rev1_2025_01_08.zip",
+      "sourcePath": "/home/ec2-user/apigee2gravitee/data/sharedflows/sf-commonValidations_rev1_2025_01_08.zip",
       "warnings": []
     },
     {
@@ -141,7 +141,7 @@
       "id": "test_colum_transform_and_ism_1_rev2_2025_01_08",
       "name": "test_colum_transform_and_ism_1_rev2_2025_01_08",
       "riskFlags": [],
-      "sourcePath": "/Users/daniel.roder/Sites/apigee2gravitee/data/sharedflows/test_colum_transform_and_ism_1_rev2_2025_01_08.zip",
+      "sourcePath": "/home/ec2-user/apigee2gravitee/data/sharedflows/test_colum_transform_and_ism_1_rev2_2025_01_08.zip",
       "warnings": []
     }
   ]

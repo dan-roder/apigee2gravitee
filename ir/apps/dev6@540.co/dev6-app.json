@@ -1,0 +1,45 @@
+{
+  "_meta": {
+    "artifactId": "dev6@540.co/dev6-app",
+    "artifactType": "app",
+    "blockers": [],
+    "extractedAt": "2026-04-24T17:03:45.563792Z",
+    "riskFlags": [],
+    "sourcePath": "/home/ec2-user/apigee2gravitee/data/apps/dev6@540.co/dev6-app",
+    "warnings": []
+  },
+  "app_id": "0dbc047f-7b9d-4813-b640-ffdb301089cf",
+  "attributes": [
+    {
+      "name": "DisplayName",
+      "value": "dev6-app"
+    },
+    {
+      "name": "Notes",
+      "value": ""
+    }
+  ],
+  "callback_url": "",
+  "credentials": [
+    {
+      "api_products": [
+        {
+          "apiproduct": "dog-breeds-api-product",
+          "status": "approved"
+        }
+      ],
+      "consumer_key": "fjmSGPKixNkQZnd3YNnQKdA3IRy5L9jS",
+      "consumer_secret_present": true,
+      "consumer_secret_ref": "_protected/credentials/dev6@540.co/dev6-app/fjmSGPKixNkQZnd3YNnQKdA3IRy5L9jS/consumer-secret.txt",
+      "expires_at": -1,
+      "scopes": [],
+      "status": "approved"
+    }
+  ],
+  "developer_email": "dev6@540.co",
+  "meta": {
+    "source_path": "./data/apps/dev6@540.co/dev6-app"
+  },
+  "name": "dev6-app",
+  "status": "approved"
+}

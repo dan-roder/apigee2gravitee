@@ -1,0 +1,45 @@
+{
+  "_meta": {
+    "artifactId": "dev12@540.co/dev12-app",
+    "artifactType": "app",
+    "blockers": [],
+    "extractedAt": "2026-04-24T17:03:45.563792Z",
+    "riskFlags": [],
+    "sourcePath": "/home/ec2-user/apigee2gravitee/data/apps/dev12@540.co/dev12-app",
+    "warnings": []
+  },
+  "app_id": "3c7e0da9-730b-47c4-9bb0-17fcccb90185",
+  "attributes": [
+    {
+      "name": "DisplayName",
+      "value": "dev12-app"
+    },
+    {
+      "name": "Notes",
+      "value": ""
+    }
+  ],
+  "callback_url": "",
+  "credentials": [
+    {
+      "api_products": [
+        {
+          "apiproduct": "wizards-api-product",
+          "status": "approved"
+        }
+      ],
+      "consumer_key": "eySNY5g1UKFxFXMu2OVJKLh08vzHfyQE",
+      "consumer_secret_present": true,
+      "consumer_secret_ref": "_protected/credentials/dev12@540.co/dev12-app/eySNY5g1UKFxFXMu2OVJKLh08vzHfyQE/consumer-secret.txt",
+      "expires_at": -1,
+      "scopes": [],
+      "status": "approved"
+    }
+  ],
+  "developer_email": "dev12@540.co",
+  "meta": {
+    "source_path": "./data/apps/dev12@540.co/dev12-app"
+  },
+  "name": "dev12-app",
+  "status": "approved"
+}

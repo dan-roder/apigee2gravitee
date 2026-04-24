@@ -1,0 +1,45 @@
+{
+  "_meta": {
+    "artifactId": "dev14@540.co/dev14-app",
+    "artifactType": "app",
+    "blockers": [],
+    "extractedAt": "2026-04-24T17:03:45.563792Z",
+    "riskFlags": [],
+    "sourcePath": "/home/ec2-user/apigee2gravitee/data/apps/dev14@540.co/dev14-app",
+    "warnings": []
+  },
+  "app_id": "91a7388d-fc75-49e4-afc7-df21bd0893bd",
+  "attributes": [
+    {
+      "name": "DisplayName",
+      "value": "dev14-app"
+    },
+    {
+      "name": "Notes",
+      "value": ""
+    }
+  ],
+  "callback_url": "",
+  "credentials": [
+    {
+      "api_products": [
+        {
+          "apiproduct": "chuck-norris-api-product",
+          "status": "approved"
+        }
+      ],
+      "consumer_key": "IKVvym1wyxJMI1mpiJT7Mr16AF1R6bxS",
+      "consumer_secret_present": true,
+      "consumer_secret_ref": "_protected/credentials/dev14@540.co/dev14-app/IKVvym1wyxJMI1mpiJT7Mr16AF1R6bxS/consumer-secret.txt",
+      "expires_at": -1,
+      "scopes": [],
+      "status": "approved"
+    }
+  ],
+  "developer_email": "dev14@540.co",
+  "meta": {
+    "source_path": "./data/apps/dev14@540.co/dev14-app"
+  },
+  "name": "dev14-app",
+  "status": "approved"
+}
