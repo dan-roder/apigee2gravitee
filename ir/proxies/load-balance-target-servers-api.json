@@ -3,7 +3,7 @@
     "artifactId": "load-balance-target-servers-api",
     "artifactType": "proxy",
     "blockers": [],
-    "extractedAt": "2026-04-24T17:03:45.563792Z",
+    "extractedAt": "2026-04-24T17:27:31.447716Z",
     "riskFlags": [],
     "sourcePath": "/home/ec2-user/apigee2gravitee/data/proxies/load-balance-target-servers-api.zip",
     "warnings": [
@@ -16,7 +16,7 @@
   "display_name": "load-balance-target-servers-api",
   "kvm_refs": [],
   "meta": {
-    "parsed_at": "2026-04-24T17:03:45.578180Z",
+    "parsed_at": "2026-04-24T17:27:31.462371Z",
     "source_zip": "/home/ec2-user/apigee2gravitee/data/proxies/load-balance-target-servers-api.zip"
   },
   "name": "load-balance-target-servers-api",

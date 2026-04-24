@@ -3,7 +3,7 @@
     "artifactId": "apigee-hello-api-1",
     "artifactType": "proxy",
     "blockers": [],
-    "extractedAt": "2026-04-24T17:03:45.563792Z",
+    "extractedAt": "2026-04-24T17:27:31.447716Z",
     "riskFlags": [],
     "sourcePath": "/home/ec2-user/apigee2gravitee/data/proxies/apigee-hello-api-1.zip",
     "warnings": [
@@ -16,7 +16,7 @@
   "display_name": "apigee-hello-api-1",
   "kvm_refs": [],
   "meta": {
-    "parsed_at": "2026-04-24T17:03:45.569967Z",
+    "parsed_at": "2026-04-24T17:27:31.454116Z",
     "source_zip": "/home/ec2-user/apigee2gravitee/data/proxies/apigee-hello-api-1.zip"
   },
   "name": "apigee-hello-api-1",

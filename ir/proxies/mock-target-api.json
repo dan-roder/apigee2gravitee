@@ -3,7 +3,7 @@
     "artifactId": "mock-target-api",
     "artifactType": "proxy",
     "blockers": [],
-    "extractedAt": "2026-04-24T17:03:45.563792Z",
+    "extractedAt": "2026-04-24T17:27:31.447716Z",
     "riskFlags": [],
     "sourcePath": "/home/ec2-user/apigee2gravitee/data/proxies/mock-target-api.zip",
     "warnings": []
@@ -23,7 +23,7 @@
     }
   ],
   "meta": {
-    "parsed_at": "2026-04-24T17:03:45.579105Z",
+    "parsed_at": "2026-04-24T17:27:31.463311Z",
     "source_zip": "/home/ec2-user/apigee2gravitee/data/proxies/mock-target-api.zip"
   },
   "name": "mock-target-api",

@@ -3,7 +3,7 @@
     "artifactId": "sf-commonValidations_rev1_2025_01_08",
     "artifactType": "sharedflow",
     "blockers": [],
-    "extractedAt": "2026-04-24T17:03:45.563792Z",
+    "extractedAt": "2026-04-24T17:27:31.447716Z",
     "riskFlags": [],
     "sourcePath": "/home/ec2-user/apigee2gravitee/data/sharedflows/sf-commonValidations_rev1_2025_01_08.zip",
     "warnings": []
@@ -13,7 +13,7 @@
   "display_name": "SF-CommonValidations",
   "kvm_refs": [],
   "meta": {
-    "parsed_at": "2026-04-24T17:03:45.593525Z",
+    "parsed_at": "2026-04-24T17:27:31.478067Z",
     "source_zip": "/home/ec2-user/apigee2gravitee/data/sharedflows/sf-commonValidations_rev1_2025_01_08.zip"
   },
   "name": "sf-commonValidations_rev1_2025_01_08",

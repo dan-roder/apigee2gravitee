@@ -3,7 +3,7 @@
     "artifactId": "car-makes-api-3",
     "artifactType": "proxy",
     "blockers": [],
-    "extractedAt": "2026-04-24T17:03:45.563792Z",
+    "extractedAt": "2026-04-24T17:27:31.447716Z",
     "riskFlags": [],
     "sourcePath": "/home/ec2-user/apigee2gravitee/data/proxies/car-makes-api-3.zip",
     "warnings": []
@@ -13,7 +13,7 @@
   "display_name": "car-makes-api-3",
   "kvm_refs": [],
   "meta": {
-    "parsed_at": "2026-04-24T17:03:45.571098Z",
+    "parsed_at": "2026-04-24T17:27:31.455220Z",
     "source_zip": "/home/ec2-user/apigee2gravitee/data/proxies/car-makes-api-3.zip"
   },
   "name": "car-makes-api-3",

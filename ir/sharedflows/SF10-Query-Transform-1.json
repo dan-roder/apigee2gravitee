@@ -3,7 +3,7 @@
     "artifactId": "SF10-Query-Transform-1",
     "artifactType": "sharedflow",
     "blockers": [],
-    "extractedAt": "2026-04-24T17:03:45.563792Z",
+    "extractedAt": "2026-04-24T17:27:31.447716Z",
     "riskFlags": [],
     "sourcePath": "/home/ec2-user/apigee2gravitee/data/sharedflows/SF10-Query-Transform-1.zip",
     "warnings": []
@@ -13,7 +13,7 @@
   "display_name": "Query-Transform",
   "kvm_refs": [],
   "meta": {
-    "parsed_at": "2026-04-24T17:03:45.592398Z",
+    "parsed_at": "2026-04-24T17:27:31.476829Z",
     "source_zip": "/home/ec2-user/apigee2gravitee/data/sharedflows/SF10-Query-Transform-1.zip"
   },
   "name": "SF10-Query-Transform-1",

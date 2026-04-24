@@ -3,7 +3,7 @@
     "artifactId": "KVM-Update",
     "artifactType": "proxy",
     "blockers": [],
-    "extractedAt": "2026-04-24T17:03:45.563792Z",
+    "extractedAt": "2026-04-24T17:27:31.447716Z",
     "riskFlags": [],
     "sourcePath": "/home/ec2-user/apigee2gravitee/data/proxies/KVM-Update.zip",
     "warnings": []
@@ -23,7 +23,7 @@
     }
   ],
   "meta": {
-    "parsed_at": "2026-04-24T17:03:45.568426Z",
+    "parsed_at": "2026-04-24T17:27:31.452549Z",
     "source_zip": "/home/ec2-user/apigee2gravitee/data/proxies/KVM-Update.zip"
   },
   "name": "KVM-Update",

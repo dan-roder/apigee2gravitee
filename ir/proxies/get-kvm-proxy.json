@@ -3,7 +3,7 @@
     "artifactId": "get-kvm-proxy",
     "artifactType": "proxy",
     "blockers": [],
-    "extractedAt": "2026-04-24T17:03:45.563792Z",
+    "extractedAt": "2026-04-24T17:27:31.447716Z",
     "riskFlags": [],
     "sourcePath": "/home/ec2-user/apigee2gravitee/data/proxies/get-kvm-proxy.zip",
     "warnings": []
@@ -23,7 +23,7 @@
     }
   ],
   "meta": {
-    "parsed_at": "2026-04-24T17:03:45.574540Z",
+    "parsed_at": "2026-04-24T17:27:31.458795Z",
     "source_zip": "/home/ec2-user/apigee2gravitee/data/proxies/get-kvm-proxy.zip"
   },
   "name": "get-kvm-proxy",

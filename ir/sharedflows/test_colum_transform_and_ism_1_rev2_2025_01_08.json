@@ -3,7 +3,7 @@
     "artifactId": "test_colum_transform_and_ism_1_rev2_2025_01_08",
     "artifactType": "sharedflow",
     "blockers": [],
-    "extractedAt": "2026-04-24T17:03:45.563792Z",
+    "extractedAt": "2026-04-24T17:27:31.447716Z",
     "riskFlags": [],
     "sourcePath": "/home/ec2-user/apigee2gravitee/data/sharedflows/test_colum_transform_and_ism_1_rev2_2025_01_08.zip",
     "warnings": []
@@ -13,7 +13,7 @@
   "display_name": "test_colum_transform_and_ism_1",
   "kvm_refs": [],
   "meta": {
-    "parsed_at": "2026-04-24T17:03:45.594059Z",
+    "parsed_at": "2026-04-24T17:27:31.478616Z",
     "source_zip": "/home/ec2-user/apigee2gravitee/data/sharedflows/test_colum_transform_and_ism_1_rev2_2025_01_08.zip"
   },
   "name": "test_colum_transform_and_ism_1_rev2_2025_01_08",

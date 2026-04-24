@@ -3,7 +3,7 @@
     "artifactId": "admin-kvm-export",
     "artifactType": "proxy",
     "blockers": [],
-    "extractedAt": "2026-04-24T17:03:45.563792Z",
+    "extractedAt": "2026-04-24T17:27:31.447716Z",
     "riskFlags": [],
     "sourcePath": "/home/ec2-user/apigee2gravitee/data/proxies/admin-kvm-export.zip",
     "warnings": []
@@ -13,7 +13,7 @@
   "display_name": "admin-kvm-export",
   "kvm_refs": [],
   "meta": {
-    "parsed_at": "2026-04-24T17:03:45.569283Z",
+    "parsed_at": "2026-04-24T17:27:31.453396Z",
     "source_zip": "/home/ec2-user/apigee2gravitee/data/proxies/admin-kvm-export.zip"
   },
   "name": "admin-kvm-export",

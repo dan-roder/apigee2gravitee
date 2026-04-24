@@ -3,7 +3,7 @@
     "artifactId": "env:kvm-create-proxy-es",
     "artifactType": "kvm",
     "blockers": [],
-    "extractedAt": "2026-04-24T17:03:45.563792Z",
+    "extractedAt": "2026-04-24T17:27:31.447716Z",
     "riskFlags": [],
     "sourcePath": "/home/ec2-user/apigee2gravitee/data/kvm/env/dev/kvm-create-proxy-es",
     "warnings": []

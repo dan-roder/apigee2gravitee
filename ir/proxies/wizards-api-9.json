@@ -3,7 +3,7 @@
     "artifactId": "wizards-api-9",
     "artifactType": "proxy",
     "blockers": [],
-    "extractedAt": "2026-04-24T17:03:45.563792Z",
+    "extractedAt": "2026-04-24T17:27:31.447716Z",
     "riskFlags": [],
     "sourcePath": "/home/ec2-user/apigee2gravitee/data/proxies/wizards-api-9.zip",
     "warnings": []
@@ -13,7 +13,7 @@
   "display_name": "wizards-api-9",
   "kvm_refs": [],
   "meta": {
-    "parsed_at": "2026-04-24T17:03:45.581869Z",
+    "parsed_at": "2026-04-24T17:27:31.466101Z",
     "source_zip": "/home/ec2-user/apigee2gravitee/data/proxies/wizards-api-9.zip"
   },
   "name": "wizards-api-9",
