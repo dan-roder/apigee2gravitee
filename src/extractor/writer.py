@@ -32,13 +32,13 @@ Output layout:
       {name}.json
 
 All files are UTF-8 JSON with 2-space indentation.
-Existing files are overwritten; the writer never deletes files it didn't create.
 """
 
 from __future__ import annotations
 
 import json
 import os
+import shutil
 from typing import Any
 
 from .schema import (
@@ -57,11 +57,38 @@ def _write(path: str, content: str) -> None:
 
 
 class IrWriter:
+    MANAGED_OUTPUTS = (
+        '_failed-artifacts',
+        '_protected',
+        'apps',
+        'credentials',
+        'developers',
+        'flowhooks',
+        'inventories',
+        'kvms',
+        'products',
+        'proxies',
+        'references',
+        'sharedflows',
+        'targetservers',
+        'extraction-report.json',
+        'manifest.json',
+    )
+
     def __init__(self, ir_dir: str):
         self.ir_dir = os.path.abspath(ir_dir)
 
     def _path(self, *parts: str) -> str:
         return join_safe(self.ir_dir, *parts)
+
+    def clean_managed_outputs(self) -> None:
+        os.makedirs(self.ir_dir, exist_ok=True)
+        for relative_path in self.MANAGED_OUTPUTS:
+            target = self._path(relative_path)
+            if os.path.isdir(target):
+                shutil.rmtree(target)
+            elif os.path.exists(target):
+                os.remove(target)
 
     # ── Bundles ───────────────────────────────────────────────────────────────
 

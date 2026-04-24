@@ -260,6 +260,7 @@ def run_extraction(
         return 2
 
     writer = IrWriter(ir_dir)
+    writer.clean_managed_outputs()
     extracted_at = datetime.datetime.utcnow().isoformat() + 'Z'
     run_context = RunContext(
         config=RunConfig(data_dir=data_dir, ir_dir=ir_dir, org=org, environment=environment, verbose=verbose),

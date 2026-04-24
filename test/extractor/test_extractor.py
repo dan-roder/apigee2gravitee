@@ -681,6 +681,27 @@ class TestEndToEnd(unittest.TestCase):
         with open(path) as f:
             self.assertEqual(f.read(), 'secret-value-here')
 
+    def test_run_extraction_removes_stale_managed_outputs(self):
+        stale_paths = [
+            os.path.join(self.ir_dir, 'developers', 'old@example.com.json'),
+            os.path.join(self.ir_dir, 'apps', 'old@example.com', 'old-app.json'),
+            os.path.join(self.ir_dir, 'credentials', 'old@example.com', 'old-app', 'old-key.json'),
+            os.path.join(
+                self.ir_dir, '_protected', 'credentials', 'old@example.com', 'old-app',
+                'old-key', 'consumer-secret.txt'
+            ),
+        ]
+        for path in stale_paths:
+            os.makedirs(os.path.dirname(path), exist_ok=True)
+            with open(path, 'w') as f:
+                f.write('stale')
+
+        run_extraction(FIXTURES, self.ir_dir)
+
+        for path in stale_paths:
+            self.assertFalse(os.path.exists(path), path)
+        self.assertTrue(os.path.isfile(os.path.join(self.ir_dir, 'developers', 'alice@example.com.json')))
+
     def test_extraction_report_created(self):
         run_extraction(FIXTURES, self.ir_dir)
         self.assertTrue(os.path.isfile(os.path.join(self.ir_dir, 'extraction-report.json')))
