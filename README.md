@@ -567,7 +567,11 @@ node bin/migrator.js developers validate-config-targets --config ./config/develo
 node bin/migrator.js developers analyze --ir-dir ./ir --config ./config/developers.config.resolved.json --gravitee-token "$GRAVITEE_TOKEN"
 ```
 
-Validated execution sequence for tool-imported APIs:
+### Explicit import workflows
+
+Use the workflow that matches how the target APIs got into Gravitee.
+
+Tool-imported API baseline:
 
 ```bash
 node bin/migrator.js developers configure-roles \
@@ -610,6 +614,41 @@ node bin/migrator.js developers reconcile \
   --gravitee-token "$GRAVITEE_TOKEN"
 
 node bin/migrator.js developers delete-imported \
+  --ir-dir ./ir \
+  --config ./config/developers.config.resolved.json \
+  --gravitee-token "$GRAVITEE_TOKEN"
+```
+
+Manual-API baseline:
+
+```bash
+node bin/migrator.js developers configure-roles \
+  --config ./config/developers.config.resolved.json \
+  --gravitee-token "$GRAVITEE_TOKEN"
+
+node bin/migrator.js developers discover-targets \
+  --ir-dir ./ir \
+  --config ./config/developers.config.resolved.json \
+  --gravitee-token "$GRAVITEE_TOKEN" \
+  --write-config \
+  --prompt-matches
+
+node bin/migrator.js developers validate-config-targets \
+  --ir-dir ./ir \
+  --config ./config/developers.config.resolved.json \
+  --gravitee-token "$GRAVITEE_TOKEN"
+
+node bin/migrator.js developers analyze \
+  --ir-dir ./ir \
+  --config ./config/developers.config.resolved.json \
+  --gravitee-token "$GRAVITEE_TOKEN"
+
+node bin/migrator.js developers import \
+  --ir-dir ./ir \
+  --config ./config/developers.config.resolved.json \
+  --gravitee-token "$GRAVITEE_TOKEN"
+
+node bin/migrator.js developers reconcile \
   --ir-dir ./ir \
   --config ./config/developers.config.resolved.json \
   --gravitee-token "$GRAVITEE_TOKEN"

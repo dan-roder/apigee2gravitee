@@ -164,6 +164,34 @@ async function testListRolesUsesScopedConfigurationEndpoints() {
   ]);
 }
 
+async function testListRolesByScopeFallsBackToLegacyRoleScopesEndpoint() {
+  const client = new GraviteeClient({ baseUrl: 'https://gravitee.example.com', orgId: 'DEFAULT', envId: 'DEFAULT', token: 'token' });
+  const calls = [];
+  client.get = async (url) => {
+    calls.push(url);
+    if (url.endsWith('/configuration/rolescopes/ENVIRONMENT/roles')) {
+      const err = new Error('GET roles by scope → HTTP 404');
+      err.status = 404;
+      err.body = { message: 'Not found' };
+      throw err;
+    }
+    if (url.endsWith('/rolescopes')) {
+      return [
+        { scope: 'ORGANIZATION', roles: [{ id: 'role-org-1', name: 'USER' }] },
+        { scope: 'ENVIRONMENT', roles: [{ id: 'role-env-1', name: 'USER' }] },
+      ];
+    }
+    throw new Error(`Unexpected URL ${url}`);
+  };
+
+  const roles = await client.listRolesByScope('ENVIRONMENT');
+  assert.deepStrictEqual(roles, [{ id: 'role-env-1', name: 'USER', scope: 'ENVIRONMENT' }]);
+  assert.deepStrictEqual(calls, [
+    'https://gravitee.example.com/management/organizations/DEFAULT/configuration/rolescopes/ENVIRONMENT/roles',
+    'https://gravitee.example.com/management/organizations/DEFAULT/rolescopes',
+  ]);
+}
+
 async function testGetUserRolesReturnsNullWhenUnsupportedLookupAllowed() {
   const client = new GraviteeClient({ baseUrl: 'https://gravitee.example.com', orgId: 'DEFAULT', envId: 'DEFAULT', token: 'token' });
   client.get = async () => {
@@ -365,6 +393,7 @@ async function run() {
   await testCreateApiPlanNormalizesPlanPayload();
   await testCreateApplicationCustomFieldUsesApplicationsMetadataEndpoint();
   await testListRolesUsesScopedConfigurationEndpoints();
+  await testListRolesByScopeFallsBackToLegacyRoleScopesEndpoint();
   await testGetUserRolesReturnsNullWhenUnsupportedLookupAllowed();
   await testGetUserRolesFallsBackToEnvironmentUserEndpoint();
   await testDeleteUserUsesExpectedEndpoint();

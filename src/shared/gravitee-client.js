@@ -500,11 +500,23 @@ class GraviteeClient {
 
   async listRolesByScope(scope) {
     const normalizedScope = String(scope || '').toUpperCase();
-    const body = await this.get(this.orgUrl(`/configuration/rolescopes/${normalizedScope}/roles`));
-    return normalizeCollection(body).map((item) => ({
-      ...item,
-      scope: item?.scope || normalizedScope,
-    }));
+    try {
+      const body = await this.get(this.orgUrl(`/configuration/rolescopes/${normalizedScope}/roles`));
+      return normalizeCollection(body).map((item) => ({
+        ...item,
+        scope: item?.scope || normalizedScope,
+      }));
+    } catch (err) {
+      if (![404, 405].includes(err?.status)) throw err;
+
+      const legacyBody = await this.get(this.orgUrl('/rolescopes'));
+      const scopes = normalizeCollection(legacyBody);
+      const matchingScope = scopes.find((item) => String(item?.scope || '').toUpperCase() === normalizedScope);
+      return normalizeCollection(matchingScope?.roles || []).map((item) => ({
+        ...item,
+        scope: item?.scope || normalizedScope,
+      }));
+    }
   }
 
   async resolveRoleAssignmentIds(roles = {}, options = {}) {
