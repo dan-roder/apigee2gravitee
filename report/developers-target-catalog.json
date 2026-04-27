@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-27T20:23:34.523Z",
+  "generatedAt": "2026-04-27T20:45:11.315Z",
   "configPath": "/home/ec2-user/apigee2gravitee/config/developers.config.resolved.json",
   "summary": {
     "products": 10,
@@ -15,16 +15,14 @@
     "productsNeedingSelection": [
       "misc-api-product"
     ],
-    "blockedProducts": [
-      "misc-product",
-      "orders-product"
-    ],
-    "blockers": 2,
-    "warnings": 1
+    "blockedProducts": [],
+    "blockers": 0,
+    "warnings": 3
   },
   "entries": [
     {
       "productName": "cats-api-product",
+      "activeProduct": true,
       "sourceProxyNames": [
         "cats-api-7"
       ],
@@ -73,6 +71,7 @@
     },
     {
       "productName": "chuck-norris-api-product",
+      "activeProduct": true,
       "sourceProxyNames": [
         "chuck-norris-api-10"
       ],
@@ -121,6 +120,7 @@
     },
     {
       "productName": "dog-breeds-api-product",
+      "activeProduct": true,
       "sourceProxyNames": [
         "dog-breeds-api-6"
       ],
@@ -170,6 +170,7 @@
     },
     {
       "productName": "hogwarts-houses-api-product",
+      "activeProduct": true,
       "sourceProxyNames": [
         "hogwarts-houses-api-8"
       ],
@@ -218,6 +219,7 @@
     },
     {
       "productName": "kanye-api-product",
+      "activeProduct": true,
       "sourceProxyNames": [
         "kanye-rest-api-5"
       ],
@@ -265,6 +267,7 @@
     },
     {
       "productName": "misc-api-product",
+      "activeProduct": true,
       "sourceProxyNames": [
         "apigee-hello-api-1",
         "cat-fact-api-2",
@@ -363,6 +366,7 @@
     },
     {
       "productName": "misc-product",
+      "activeProduct": false,
       "sourceProxyNames": [
         "hello-api",
         "facts-api"
@@ -380,6 +384,7 @@
     },
     {
       "productName": "orders-product",
+      "activeProduct": false,
       "sourceProxyNames": [
         "orders-api"
       ],
@@ -396,6 +401,7 @@
     },
     {
       "productName": "wizards-api-product",
+      "activeProduct": true,
       "sourceProxyNames": [
         "wizards-api-9"
       ],
@@ -445,6 +451,7 @@
     },
     {
       "productName": "yes-or-no-api-product",
+      "activeProduct": true,
       "sourceProxyNames": [
         "yes-or-no-api-4"
       ],
@@ -507,10 +514,10 @@
       }
     },
     {
-      "severity": "blocker",
-      "code": "DISCOVER_TARGET_NO_SUITABLE_PLAN",
+      "severity": "warning",
+      "code": "DISCOVER_TARGET_NO_SUITABLE_PLAN_INACTIVE_PRODUCT",
       "productName": "misc-product",
-      "message": "No suitable API/plan candidate was found for misc-product",
+      "message": "No suitable API/plan candidate was found for misc-product (product is not used by the current developer dataset)",
       "details": {
         "credentialType": "api-key",
         "sourceProxyNames": [
@@ -520,10 +527,10 @@
       }
     },
     {
-      "severity": "blocker",
-      "code": "DISCOVER_TARGET_NO_SUITABLE_PLAN",
+      "severity": "warning",
+      "code": "DISCOVER_TARGET_NO_SUITABLE_PLAN_INACTIVE_PRODUCT",
       "productName": "orders-product",
-      "message": "No suitable API/plan candidate was found for orders-product",
+      "message": "No suitable API/plan candidate was found for orders-product (product is not used by the current developer dataset)",
       "details": {
         "credentialType": "api-key",
         "sourceProxyNames": [

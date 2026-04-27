@@ -1,14 +1,15 @@
 {
-  "generatedAt": "2026-04-17T18:43:10.760Z",
-  "configPath": "/Users/daniel.roder/Sites/apigee2gravitee/config/developers.config.resolved.json",
+  "generatedAt": "2026-04-27T20:45:21.376Z",
+  "configPath": "/home/ec2-user/apigee2gravitee/config/developers.config.resolved.json",
   "apisIdMapPresent": true,
   "summary": {
-    "products": 8,
+    "products": 9,
     "targets": 10,
     "validTargets": 10,
     "blockers": 0,
     "warnings": 3,
     "productsWithSingleValidTarget": [
+      "orders-product",
       "cats-api-product",
       "chuck-norris-api-product",
       "dog-breeds-api-product",
@@ -18,49 +19,191 @@
       "yes-or-no-api-product"
     ],
     "productsNeedingSelection": [
-      "misc-api-product"
+      "misc-product"
     ],
     "blockedProducts": []
   },
   "targets": [
     {
-      "productName": "cats-api-product",
+      "productName": "orders-product",
       "targetIndex": 0,
       "activeProduct": false,
       "configured": {
-        "targetApi": "cats-api-7",
-        "targetApiId": "63a370e7-7d6e-4ddb-a370-e77d6e3ddbc3",
-        "targetPlan": "API Key Plan",
-        "targetPlanId": "8243bcf4-377a-421b-83bc-f4377a321b1d",
-        "matchMode": "exact"
+        "targetApi": "orders-api",
+        "targetApiId": "api_orders_123",
+        "targetApiAliases": [
+          "Orders API"
+        ],
+        "targetPlan": "Orders API Key",
+        "targetPlanId": "plan_orders_key_123",
+        "targetPlanAliases": [
+          "API Key Plan"
+        ],
+        "matchMode": "alias"
       },
       "credentialProfile": {
-        "productName": "cats-api-product",
+        "productName": "orders-product",
         "credentialTypes": [],
         "primaryCredentialType": "api-key",
         "hasMixedCredentialTypes": false,
         "sourceCredentials": []
       },
       "resolved": {
-        "apiId": "63a370e7-7d6e-4ddb-a370-e77d6e3ddbc3",
+        "apiId": null,
+        "apiName": "orders-api",
+        "planId": null,
+        "planName": "Orders API Key",
+        "planSecurityType": null,
+        "planStatus": null
+      },
+      "candidates": {
+        "apis": [],
+        "plans": []
+      },
+      "status": "VALID_WITH_WARNINGS",
+      "findings": [
+        {
+          "severity": "warning",
+          "code": "TARGET_API_ID_NOT_FOUND_INACTIVE_PRODUCT",
+          "productName": "orders-product",
+          "targetIndex": 0,
+          "message": "Configured targetApiId api_orders_123 could not be loaded (product is not used by the current developer dataset)",
+          "details": {
+            "targetApiId": "api_orders_123"
+          }
+        }
+      ]
+    },
+    {
+      "productName": "misc-product",
+      "targetIndex": 0,
+      "activeProduct": false,
+      "configured": {
+        "targetApi": "hello-api",
+        "targetApiId": "api_hello_123",
+        "targetPlan": "Hello API Key",
+        "targetPlanId": "plan_hello_key_123"
+      },
+      "credentialProfile": {
+        "productName": "misc-product",
+        "credentialTypes": [],
+        "primaryCredentialType": "api-key",
+        "hasMixedCredentialTypes": false,
+        "sourceCredentials": []
+      },
+      "resolved": {
+        "apiId": null,
+        "apiName": "hello-api",
+        "planId": null,
+        "planName": "Hello API Key",
+        "planSecurityType": null,
+        "planStatus": null
+      },
+      "candidates": {
+        "apis": [],
+        "plans": []
+      },
+      "status": "VALID_WITH_WARNINGS",
+      "findings": [
+        {
+          "severity": "warning",
+          "code": "TARGET_API_ID_NOT_FOUND_INACTIVE_PRODUCT",
+          "productName": "misc-product",
+          "targetIndex": 0,
+          "message": "Configured targetApiId api_hello_123 could not be loaded (product is not used by the current developer dataset)",
+          "details": {
+            "targetApiId": "api_hello_123"
+          }
+        }
+      ]
+    },
+    {
+      "productName": "misc-product",
+      "targetIndex": 1,
+      "activeProduct": false,
+      "configured": {
+        "targetApi": "facts-api",
+        "targetApiId": "api_facts_123",
+        "targetPlan": "Facts API Key",
+        "targetPlanId": "plan_facts_key_123"
+      },
+      "credentialProfile": {
+        "productName": "misc-product",
+        "credentialTypes": [],
+        "primaryCredentialType": "api-key",
+        "hasMixedCredentialTypes": false,
+        "sourceCredentials": []
+      },
+      "resolved": {
+        "apiId": null,
+        "apiName": "facts-api",
+        "planId": null,
+        "planName": "Facts API Key",
+        "planSecurityType": null,
+        "planStatus": null
+      },
+      "candidates": {
+        "apis": [],
+        "plans": []
+      },
+      "status": "VALID_WITH_WARNINGS",
+      "findings": [
+        {
+          "severity": "warning",
+          "code": "TARGET_API_ID_NOT_FOUND_INACTIVE_PRODUCT",
+          "productName": "misc-product",
+          "targetIndex": 1,
+          "message": "Configured targetApiId api_facts_123 could not be loaded (product is not used by the current developer dataset)",
+          "details": {
+            "targetApiId": "api_facts_123"
+          }
+        }
+      ]
+    },
+    {
+      "productName": "cats-api-product",
+      "targetIndex": 0,
+      "activeProduct": true,
+      "configured": {
+        "targetApi": "cats-api-7",
+        "targetApiId": "be73ea39-32fd-4ac8-b3ea-3932fd4ac858",
+        "targetPlan": "api-key-plan",
+        "targetPlanId": "3611d76f-c02e-4182-91d7-6fc02e318294",
+        "matchMode": "exact"
+      },
+      "credentialProfile": {
+        "productName": "cats-api-product",
+        "credentialTypes": [
+          "api-key"
+        ],
+        "primaryCredentialType": "api-key",
+        "hasMixedCredentialTypes": false,
+        "sourceCredentials": [
+          "danny.rivera@540.co/cats-dev-app/idWhL2ATXfup5AyPWo9Z3Oakj1exc0KY",
+          "dev13@540.co/dev13-app/f1CsoHJ1RzHpz3anpxN3bGM03TvcKVtL",
+          "dev4@540.co/dev4-app/GPz0xIjF8TzAFFYeH1KWavbrxNDd94ds"
+        ]
+      },
+      "resolved": {
+        "apiId": "be73ea39-32fd-4ac8-b3ea-3932fd4ac858",
         "apiName": "cats-api-7",
-        "planId": "8243bcf4-377a-421b-83bc-f4377a321b1d",
-        "planName": "API Key Plan",
+        "planId": "3611d76f-c02e-4182-91d7-6fc02e318294",
+        "planName": "api-key-plan",
         "planSecurityType": "api-key",
         "planStatus": "PUBLISHED"
       },
       "candidates": {
         "apis": [
           {
-            "id": "63a370e7-7d6e-4ddb-a370-e77d6e3ddbc3",
+            "id": "be73ea39-32fd-4ac8-b3ea-3932fd4ac858",
             "name": "cats-api-7",
             "matchMode": "id"
           }
         ],
         "plans": [
           {
-            "id": "8243bcf4-377a-421b-83bc-f4377a321b1d",
-            "name": "API Key Plan",
+            "id": "3611d76f-c02e-4182-91d7-6fc02e318294",
+            "name": "api-key-plan",
             "matchMode": "id"
           }
         ]
@@ -74,9 +217,9 @@
       "activeProduct": true,
       "configured": {
         "targetApi": "chuck-norris-api-10",
-        "targetApiId": "25c78c81-954e-455d-878c-81954e255d73",
-        "targetPlan": "API Key Plan",
-        "targetPlanId": "6d3b4998-cee4-412a-bb49-98cee4f12ad5",
+        "targetApiId": "927e6ba1-a2e9-4baf-be6b-a1a2e93bafe9",
+        "targetPlan": "api-key-plan",
+        "targetPlanId": "9ff1a423-9700-41a0-b1a4-23970031a07c",
         "matchMode": "exact"
       },
       "credentialProfile": {
@@ -87,29 +230,31 @@
         "primaryCredentialType": "api-key",
         "hasMixedCredentialTypes": false,
         "sourceCredentials": [
-          "dev2@example.com/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3"
+          "dev14@540.co/dev14-app/IKVvym1wyxJMI1mpiJT7Mr16AF1R6bxS",
+          "dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3",
+          "dev5@540.co/dev5-app/1bSPzHDZ6Gh2GJHaJWixroGIgZNAmGqi"
         ]
       },
       "resolved": {
-        "apiId": "25c78c81-954e-455d-878c-81954e255d73",
+        "apiId": "927e6ba1-a2e9-4baf-be6b-a1a2e93bafe9",
         "apiName": "chuck-norris-api-10",
-        "planId": "6d3b4998-cee4-412a-bb49-98cee4f12ad5",
-        "planName": "API Key Plan",
+        "planId": "9ff1a423-9700-41a0-b1a4-23970031a07c",
+        "planName": "api-key-plan",
         "planSecurityType": "api-key",
         "planStatus": "PUBLISHED"
       },
       "candidates": {
         "apis": [
           {
-            "id": "25c78c81-954e-455d-878c-81954e255d73",
+            "id": "927e6ba1-a2e9-4baf-be6b-a1a2e93bafe9",
             "name": "chuck-norris-api-10",
             "matchMode": "id"
           }
         ],
         "plans": [
           {
-            "id": "6d3b4998-cee4-412a-bb49-98cee4f12ad5",
-            "name": "API Key Plan",
+            "id": "9ff1a423-9700-41a0-b1a4-23970031a07c",
+            "name": "api-key-plan",
             "matchMode": "id"
           }
         ]
@@ -123,9 +268,9 @@
       "activeProduct": true,
       "configured": {
         "targetApi": "dog-breeds-api-6",
-        "targetApiId": "53b1d618-59d2-4a3a-b1d6-1859d2da3a89",
-        "targetPlan": "API Key Plan",
-        "targetPlanId": "e7af7151-7eb1-43a4-af71-517eb143a4a2",
+        "targetApiId": "ab671749-e1a6-426a-a717-49e1a6726a5c",
+        "targetPlan": "api-key-plan",
+        "targetPlanId": "d5efd5ec-b283-4d23-afd5-ecb283fd23ac",
         "matchMode": "exact"
       },
       "credentialProfile": {
@@ -136,29 +281,32 @@
         "primaryCredentialType": "api-key",
         "hasMixedCredentialTypes": false,
         "sourceCredentials": [
-          "dev2@example.com/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8"
+          "dev15@540.co/dev15-app/UdYYt10ftgvrhQBGWQMMRkvHQgEylPLI",
+          "dev20@540.co/dev20-app/5GQlGWs2xVnA3khGeRHyL45YrqmHvPOd",
+          "dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8",
+          "dev6@540.co/dev6-app/fjmSGPKixNkQZnd3YNnQKdA3IRy5L9jS"
         ]
       },
       "resolved": {
-        "apiId": "53b1d618-59d2-4a3a-b1d6-1859d2da3a89",
+        "apiId": "ab671749-e1a6-426a-a717-49e1a6726a5c",
         "apiName": "dog-breeds-api-6",
-        "planId": "e7af7151-7eb1-43a4-af71-517eb143a4a2",
-        "planName": "API Key Plan",
+        "planId": "d5efd5ec-b283-4d23-afd5-ecb283fd23ac",
+        "planName": "api-key-plan",
         "planSecurityType": "api-key",
         "planStatus": "PUBLISHED"
       },
       "candidates": {
         "apis": [
           {
-            "id": "53b1d618-59d2-4a3a-b1d6-1859d2da3a89",
+            "id": "ab671749-e1a6-426a-a717-49e1a6726a5c",
             "name": "dog-breeds-api-6",
             "matchMode": "id"
           }
         ],
         "plans": [
           {
-            "id": "e7af7151-7eb1-43a4-af71-517eb143a4a2",
-            "name": "API Key Plan",
+            "id": "d5efd5ec-b283-4d23-afd5-ecb283fd23ac",
+            "name": "api-key-plan",
             "matchMode": "id"
           }
         ]
@@ -169,41 +317,47 @@
     {
       "productName": "hogwarts-houses-api-product",
       "targetIndex": 0,
-      "activeProduct": false,
+      "activeProduct": true,
       "configured": {
         "targetApi": "hogwarts-houses-api-8",
-        "targetApiId": "59dab35e-953a-4960-9ab3-5e953ae960df",
-        "targetPlan": "API Key Plan",
-        "targetPlanId": "7c03dde1-a653-48b3-83dd-e1a65368b345",
+        "targetApiId": "72fea1e5-8e97-45e1-bea1-e58e9725e101",
+        "targetPlan": "api-key-plan",
+        "targetPlanId": "5f3aeb6c-06a6-4635-baeb-6c06a6163519",
         "matchMode": "exact"
       },
       "credentialProfile": {
         "productName": "hogwarts-houses-api-product",
-        "credentialTypes": [],
+        "credentialTypes": [
+          "api-key"
+        ],
         "primaryCredentialType": "api-key",
         "hasMixedCredentialTypes": false,
-        "sourceCredentials": []
+        "sourceCredentials": [
+          "dev16@540.co/dev16-app/m1QTvGvifr92Dh2xLRfB5EDZAH9bm7F3",
+          "dev7@540.co/dev7-app/6A00n8CbKNDMn3aa7nyIrCiOOMdapYBq",
+          "erik.severson@540.co/hogwarts-houses-dev-app/7ShONGlRpUY1M69dgXQju7dxWE0sj7Xp"
+        ]
       },
       "resolved": {
-        "apiId": "59dab35e-953a-4960-9ab3-5e953ae960df",
+        "apiId": "72fea1e5-8e97-45e1-bea1-e58e9725e101",
         "apiName": "hogwarts-houses-api-8",
-        "planId": "7c03dde1-a653-48b3-83dd-e1a65368b345",
-        "planName": "API Key Plan",
+        "planId": "5f3aeb6c-06a6-4635-baeb-6c06a6163519",
+        "planName": "api-key-plan",
         "planSecurityType": "api-key",
         "planStatus": "PUBLISHED"
       },
       "candidates": {
         "apis": [
           {
-            "id": "59dab35e-953a-4960-9ab3-5e953ae960df",
+            "id": "72fea1e5-8e97-45e1-bea1-e58e9725e101",
             "name": "hogwarts-houses-api-8",
             "matchMode": "id"
           }
         ],
         "plans": [
           {
-            "id": "7c03dde1-a653-48b3-83dd-e1a65368b345",
-            "name": "API Key Plan",
+            "id": "5f3aeb6c-06a6-4635-baeb-6c06a6163519",
+            "name": "api-key-plan",
             "matchMode": "id"
           }
         ]
@@ -217,9 +371,9 @@
       "activeProduct": true,
       "configured": {
         "targetApi": "kanye-rest-api-5",
-        "targetApiId": "d40cba62-2887-461e-8cba-622887161ea9",
-        "targetPlan": "API Key Plan",
-        "targetPlanId": "7ac7160f-b292-4f9e-8716-0fb292af9e80",
+        "targetApiId": "41514d92-b3f2-42dd-914d-92b3f2e2ddda",
+        "targetPlan": "api-key-plan",
+        "targetPlanId": "85696198-b379-439a-a961-98b379139a2c",
         "matchMode": "exact"
       },
       "credentialProfile": {
@@ -230,29 +384,30 @@
         "primaryCredentialType": "api-key",
         "hasMixedCredentialTypes": false,
         "sourceCredentials": [
-          "dev1@example.com/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1"
+          "dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1",
+          "dev8@540.co/dev8-app/2EZDhVGA27FH4rGd20Ji74KSxqiGbX4d"
         ]
       },
       "resolved": {
-        "apiId": "d40cba62-2887-461e-8cba-622887161ea9",
+        "apiId": "41514d92-b3f2-42dd-914d-92b3f2e2ddda",
         "apiName": "kanye-rest-api-5",
-        "planId": "7ac7160f-b292-4f9e-8716-0fb292af9e80",
-        "planName": "API Key Plan",
+        "planId": "85696198-b379-439a-a961-98b379139a2c",
+        "planName": "api-key-plan",
         "planSecurityType": "api-key",
         "planStatus": "PUBLISHED"
       },
       "candidates": {
         "apis": [
           {
-            "id": "d40cba62-2887-461e-8cba-622887161ea9",
+            "id": "41514d92-b3f2-42dd-914d-92b3f2e2ddda",
             "name": "kanye-rest-api-5",
             "matchMode": "id"
           }
         ],
         "plans": [
           {
-            "id": "7ac7160f-b292-4f9e-8716-0fb292af9e80",
-            "name": "API Key Plan",
+            "id": "85696198-b379-439a-a961-98b379139a2c",
+            "name": "api-key-plan",
             "matchMode": "id"
           }
         ]
@@ -261,143 +416,14 @@
       "findings": []
     },
     {
-      "productName": "misc-api-product",
-      "targetIndex": 0,
-      "activeProduct": false,
-      "configured": {
-        "targetApi": "apigee-hello-api-1",
-        "targetApiId": "a71428c0-322e-4060-9428-c0322ee0604e",
-        "targetPlan": "Keyless Plan",
-        "targetPlanId": "3a7aa1bf-97fd-4fb2-baa1-bf97fd5fb206"
-      },
-      "credentialProfile": {
-        "productName": "misc-api-product",
-        "credentialTypes": [],
-        "primaryCredentialType": "api-key",
-        "hasMixedCredentialTypes": false,
-        "sourceCredentials": []
-      },
-      "resolved": {
-        "apiId": null,
-        "apiName": "apigee-hello-api-1",
-        "planId": null,
-        "planName": "Keyless Plan",
-        "planSecurityType": null,
-        "planStatus": null
-      },
-      "candidates": {
-        "apis": [],
-        "plans": []
-      },
-      "status": "VALID_WITH_WARNINGS",
-      "findings": [
-        {
-          "severity": "warning",
-          "code": "TARGET_API_ID_NOT_FOUND_INACTIVE_PRODUCT",
-          "productName": "misc-api-product",
-          "targetIndex": 0,
-          "message": "Configured targetApiId a71428c0-322e-4060-9428-c0322ee0604e could not be loaded (product is not used by the current developer dataset)",
-          "details": {
-            "targetApiId": "a71428c0-322e-4060-9428-c0322ee0604e"
-          }
-        }
-      ]
-    },
-    {
-      "productName": "misc-api-product",
-      "targetIndex": 1,
-      "activeProduct": false,
-      "configured": {
-        "targetApi": "cat-fact-api-2",
-        "targetApiId": "6b413c68-ff1a-4362-813c-68ff1ac36249",
-        "targetPlan": "Keyless Plan",
-        "targetPlanId": "a2b1366a-b9dc-4b15-b136-6ab9dc0b150e"
-      },
-      "credentialProfile": {
-        "productName": "misc-api-product",
-        "credentialTypes": [],
-        "primaryCredentialType": "api-key",
-        "hasMixedCredentialTypes": false,
-        "sourceCredentials": []
-      },
-      "resolved": {
-        "apiId": null,
-        "apiName": "cat-fact-api-2",
-        "planId": null,
-        "planName": "Keyless Plan",
-        "planSecurityType": null,
-        "planStatus": null
-      },
-      "candidates": {
-        "apis": [],
-        "plans": []
-      },
-      "status": "VALID_WITH_WARNINGS",
-      "findings": [
-        {
-          "severity": "warning",
-          "code": "TARGET_API_ID_NOT_FOUND_INACTIVE_PRODUCT",
-          "productName": "misc-api-product",
-          "targetIndex": 1,
-          "message": "Configured targetApiId 6b413c68-ff1a-4362-813c-68ff1ac36249 could not be loaded (product is not used by the current developer dataset)",
-          "details": {
-            "targetApiId": "6b413c68-ff1a-4362-813c-68ff1ac36249"
-          }
-        }
-      ]
-    },
-    {
-      "productName": "misc-api-product",
-      "targetIndex": 2,
-      "activeProduct": false,
-      "configured": {
-        "targetApi": "car-makes-api-3",
-        "targetApiId": "71bad2fc-80ef-4dce-bad2-fc80efddce4e",
-        "targetPlan": "Keyless Plan",
-        "targetPlanId": "c9ff6b18-4175-4c48-bf6b-1841756c4807"
-      },
-      "credentialProfile": {
-        "productName": "misc-api-product",
-        "credentialTypes": [],
-        "primaryCredentialType": "api-key",
-        "hasMixedCredentialTypes": false,
-        "sourceCredentials": []
-      },
-      "resolved": {
-        "apiId": null,
-        "apiName": "car-makes-api-3",
-        "planId": null,
-        "planName": "Keyless Plan",
-        "planSecurityType": null,
-        "planStatus": null
-      },
-      "candidates": {
-        "apis": [],
-        "plans": []
-      },
-      "status": "VALID_WITH_WARNINGS",
-      "findings": [
-        {
-          "severity": "warning",
-          "code": "TARGET_API_ID_NOT_FOUND_INACTIVE_PRODUCT",
-          "productName": "misc-api-product",
-          "targetIndex": 2,
-          "message": "Configured targetApiId 71bad2fc-80ef-4dce-bad2-fc80efddce4e could not be loaded (product is not used by the current developer dataset)",
-          "details": {
-            "targetApiId": "71bad2fc-80ef-4dce-bad2-fc80efddce4e"
-          }
-        }
-      ]
-    },
-    {
       "productName": "wizards-api-product",
       "targetIndex": 0,
       "activeProduct": true,
       "configured": {
         "targetApi": "wizards-api-9",
-        "targetApiId": "07dfa49e-dc23-4048-9fa4-9edc236048a6",
-        "targetPlan": "API Key Plan",
-        "targetPlanId": "589c71e0-0770-4580-9c71-e0077015806b",
+        "targetApiId": "5c261880-e37b-4587-a618-80e37be5872a",
+        "targetPlan": "api-key-plan",
+        "targetPlanId": "89936ea3-d484-4fc6-936e-a3d484afc651",
         "matchMode": "exact"
       },
       "credentialProfile": {
@@ -408,29 +434,32 @@
         "primaryCredentialType": "api-key",
         "hasMixedCredentialTypes": false,
         "sourceCredentials": [
-          "dev1@example.com/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK"
+          "dev10@540.co/dev10-app/wKwAhwPsH53KIyYkAh7rdGfdqYDGdEg4",
+          "dev12@540.co/dev12-app/eySNY5g1UKFxFXMu2OVJKLh08vzHfyQE",
+          "dev18@540.co/dev18-app/n99YzKWIIz03KCMYHY6E5a0WzxeAp87m",
+          "dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK"
         ]
       },
       "resolved": {
-        "apiId": "07dfa49e-dc23-4048-9fa4-9edc236048a6",
+        "apiId": "5c261880-e37b-4587-a618-80e37be5872a",
         "apiName": "wizards-api-9",
-        "planId": "589c71e0-0770-4580-9c71-e0077015806b",
-        "planName": "API Key Plan",
+        "planId": "89936ea3-d484-4fc6-936e-a3d484afc651",
+        "planName": "api-key-plan",
         "planSecurityType": "api-key",
         "planStatus": "PUBLISHED"
       },
       "candidates": {
         "apis": [
           {
-            "id": "07dfa49e-dc23-4048-9fa4-9edc236048a6",
+            "id": "5c261880-e37b-4587-a618-80e37be5872a",
             "name": "wizards-api-9",
             "matchMode": "id"
           }
         ],
         "plans": [
           {
-            "id": "589c71e0-0770-4580-9c71-e0077015806b",
-            "name": "API Key Plan",
+            "id": "89936ea3-d484-4fc6-936e-a3d484afc651",
+            "name": "api-key-plan",
             "matchMode": "id"
           }
         ]
@@ -441,41 +470,47 @@
     {
       "productName": "yes-or-no-api-product",
       "targetIndex": 0,
-      "activeProduct": false,
+      "activeProduct": true,
       "configured": {
         "targetApi": "yes-or-no-api-4",
-        "targetApiId": "bf68aeeb-d4db-4656-a8ae-ebd4db4656a5",
-        "targetPlan": "API Key Plan",
-        "targetPlanId": "9ae81624-fbd6-415f-a816-24fbd6a15fc9",
+        "targetApiId": "7f88a006-d361-49e1-88a0-06d361b9e127",
+        "targetPlan": "api-key-plan",
+        "targetPlanId": "5b601457-106f-4e91-a014-57106fce9134",
         "matchMode": "exact"
       },
       "credentialProfile": {
         "productName": "yes-or-no-api-product",
-        "credentialTypes": [],
+        "credentialTypes": [
+          "api-key"
+        ],
         "primaryCredentialType": "api-key",
         "hasMixedCredentialTypes": false,
-        "sourceCredentials": []
+        "sourceCredentials": [
+          "dev11@540.co/dev11-app/dpnogixgA3HA7xW4ltgBsjycZHiYH6AN",
+          "dev19@540.co/dev19-app/ISYpfIK2eWM6yW8GCG4EpLUARgxZuBHJ",
+          "erik.severson@540.co/yes-or-no-dev-app/QSRznbGGCwoLG1Dh7wan20huCGKbDn5W"
+        ]
       },
       "resolved": {
-        "apiId": "bf68aeeb-d4db-4656-a8ae-ebd4db4656a5",
+        "apiId": "7f88a006-d361-49e1-88a0-06d361b9e127",
         "apiName": "yes-or-no-api-4",
-        "planId": "9ae81624-fbd6-415f-a816-24fbd6a15fc9",
-        "planName": "API Key Plan",
+        "planId": "5b601457-106f-4e91-a014-57106fce9134",
+        "planName": "api-key-plan",
         "planSecurityType": "api-key",
         "planStatus": "PUBLISHED"
       },
       "candidates": {
         "apis": [
           {
-            "id": "bf68aeeb-d4db-4656-a8ae-ebd4db4656a5",
+            "id": "7f88a006-d361-49e1-88a0-06d361b9e127",
             "name": "yes-or-no-api-4",
             "matchMode": "id"
           }
         ],
         "plans": [
           {
-            "id": "9ae81624-fbd6-415f-a816-24fbd6a15fc9",
-            "name": "API Key Plan",
+            "id": "5b601457-106f-4e91-a014-57106fce9134",
+            "name": "api-key-plan",
             "matchMode": "id"
           }
         ]
@@ -488,31 +523,31 @@
     {
       "severity": "warning",
       "code": "TARGET_API_ID_NOT_FOUND_INACTIVE_PRODUCT",
-      "productName": "misc-api-product",
+      "productName": "orders-product",
       "targetIndex": 0,
-      "message": "Configured targetApiId a71428c0-322e-4060-9428-c0322ee0604e could not be loaded (product is not used by the current developer dataset)",
+      "message": "Configured targetApiId api_orders_123 could not be loaded (product is not used by the current developer dataset)",
       "details": {
-        "targetApiId": "a71428c0-322e-4060-9428-c0322ee0604e"
+        "targetApiId": "api_orders_123"
       }
     },
     {
       "severity": "warning",
       "code": "TARGET_API_ID_NOT_FOUND_INACTIVE_PRODUCT",
-      "productName": "misc-api-product",
+      "productName": "misc-product",
+      "targetIndex": 0,
+      "message": "Configured targetApiId api_hello_123 could not be loaded (product is not used by the current developer dataset)",
+      "details": {
+        "targetApiId": "api_hello_123"
+      }
+    },
+    {
+      "severity": "warning",
+      "code": "TARGET_API_ID_NOT_FOUND_INACTIVE_PRODUCT",
+      "productName": "misc-product",
       "targetIndex": 1,
-      "message": "Configured targetApiId 6b413c68-ff1a-4362-813c-68ff1ac36249 could not be loaded (product is not used by the current developer dataset)",
+      "message": "Configured targetApiId api_facts_123 could not be loaded (product is not used by the current developer dataset)",
       "details": {
-        "targetApiId": "6b413c68-ff1a-4362-813c-68ff1ac36249"
-      }
-    },
-    {
-      "severity": "warning",
-      "code": "TARGET_API_ID_NOT_FOUND_INACTIVE_PRODUCT",
-      "productName": "misc-api-product",
-      "targetIndex": 2,
-      "message": "Configured targetApiId 71bad2fc-80ef-4dce-bad2-fc80efddce4e could not be loaded (product is not used by the current developer dataset)",
-      "details": {
-        "targetApiId": "71bad2fc-80ef-4dce-bad2-fc80efddce4e"
+        "targetApiId": "api_facts_123"
       }
     }
   ]
