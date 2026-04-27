@@ -55,6 +55,12 @@ function summarizeProductProxies(domain, productName) {
   return Array.isArray(product?.proxies) ? product.proxies : [];
 }
 
+function isProductActive(domain, productName) {
+  return Array.isArray(domain?.subscriptions)
+    ? domain.subscriptions.some((subscription) => subscription.productName === productName)
+    : true;
+}
+
 function scoreApiCandidate(api, sourceProxyNames) {
   const apiName = String(api?.name || '');
   for (const sourceProxyName of sourceProxyNames) {
@@ -208,6 +214,7 @@ async function runDiscoverDevelopersTargets(flags, deps = {}) {
   const promptedSelections = [];
 
   for (const productName of uniqueProducts) {
+    const activeProduct = isProductActive(domain, productName);
     const credentialProfile = summarizeProductCredentialType(domain, productName);
     const configuredTargets = normalizeTargets(proposedConfig.productPlanMap?.[productName] || []);
     const sourceProxyNames = summarizeProductProxies(domain, productName).length > 0
@@ -262,11 +269,14 @@ async function runDiscoverDevelopersTargets(flags, deps = {}) {
       });
     }
     if (status === 'BLOCKED') {
+      const inactiveSuffix = ' (product is not used by the current developer dataset)';
       findings.push({
-        severity: 'blocker',
-        code: 'DISCOVER_TARGET_NO_SUITABLE_PLAN',
+        severity: activeProduct ? 'blocker' : 'warning',
+        code: activeProduct
+          ? 'DISCOVER_TARGET_NO_SUITABLE_PLAN'
+          : 'DISCOVER_TARGET_NO_SUITABLE_PLAN_INACTIVE_PRODUCT',
         productName,
-        message: `No suitable API/plan candidate was found for ${productName}`,
+        message: `No suitable API/plan candidate was found for ${productName}${activeProduct ? '' : inactiveSuffix}`,
         details: {
           credentialType: credentialProfile.primaryCredentialType,
           sourceProxyNames,
@@ -284,6 +294,7 @@ async function runDiscoverDevelopersTargets(flags, deps = {}) {
 
     entries.push({
       productName,
+      activeProduct,
       sourceProxyNames,
       credentialProfile,
       status,
@@ -325,7 +336,7 @@ async function runDiscoverDevelopersTargets(flags, deps = {}) {
       products: entries.length,
       productsWithSingleValidTarget: entries.filter((entry) => entry.status === 'EXACT_MATCH').map((entry) => entry.productName),
       productsNeedingSelection: entries.filter((entry) => entry.status === 'AMBIGUOUS').map((entry) => entry.productName),
-      blockedProducts: entries.filter((entry) => entry.status === 'BLOCKED').map((entry) => entry.productName),
+      blockedProducts: entries.filter((entry) => entry.status === 'BLOCKED' && entry.activeProduct).map((entry) => entry.productName),
       blockers: findings.filter((item) => item.severity === 'blocker').length,
       warnings: findings.filter((item) => item.severity === 'warning').length,
     },

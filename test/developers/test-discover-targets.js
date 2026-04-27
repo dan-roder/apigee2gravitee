@@ -233,11 +233,50 @@ async function testDiscoverTargetsIncludesConfiguredInactiveProducts() {
   });
 }
 
+async function testDiscoverTargetsDowngradesInactiveConfigOnlyProductsToWarnings() {
+  await withTempDir(async (dir) => {
+    const dataDir = path.join(dir, 'data');
+    const irDir = path.join(dir, 'ir');
+    const configPath = path.join(dir, 'developers.config.json');
+    copyDir(FIXTURES_DATA, dataDir);
+    generateIrFromData(dataDir, irDir);
+    const config = makeConfig(dir);
+    config.productPlanMap['unused-product'] = {
+      targetApi: 'Unused Manual API',
+      targetPlan: 'Unused API Key',
+    };
+    fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
+
+    const client = {
+      async listApis() {
+        return [{ id: 'api-orders-1', name: 'orders-api' }];
+      },
+      async listApiPlans() {
+        return [{ id: 'plan-orders-1', name: 'Orders API Key', security: { type: 'API_KEY' }, status: 'PUBLISHED' }];
+      },
+    };
+
+    const result = await runDiscoverDevelopersTargets(
+      { config: configPath, 'ir-dir': irDir },
+      { client },
+    );
+
+    assert.strictEqual(result.exitCode, 0);
+    assert.ok(!result.report.summary.blockedProducts.includes('unused-product'));
+    assert.ok(result.report.findings.some((item) => (
+      item.productName === 'unused-product'
+      && item.code === 'DISCOVER_TARGET_NO_SUITABLE_PLAN_INACTIVE_PRODUCT'
+      && item.severity === 'warning'
+    )));
+  });
+}
+
 async function run() {
   await testDiscoverTargetsFindsExactMatchesAndCanWriteConfig();
   await testDiscoverTargetsEmitsAmbiguityAndSecurityBlocking();
   await testDiscoverTargetsCanPromptForManualSelectionAndWriteConfig();
   await testDiscoverTargetsIncludesConfiguredInactiveProducts();
+  await testDiscoverTargetsDowngradesInactiveConfigOnlyProductsToWarnings();
   console.log('test-discover-targets.js passed');
 }
 

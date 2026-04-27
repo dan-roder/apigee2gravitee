@@ -67,6 +67,18 @@ function printValidateTargetHints(report, fmt) {
   console.log(`  ${fmt.dim('3. rerun analyze/import with the refreshed resolved config')}`);
 }
 
+function printDiscoverTargetHints(report, fmt) {
+  if (!report) return;
+
+  console.log('');
+  console.log(fmt.info('Next step: validate the discovered targets before analyze/import:'));
+  console.log(`  ${fmt.dim('node bin/migrator.js developers validate-config-targets --ir-dir ./ir --config ./config/developers.config.resolved.json --gravitee-token "$GRAVITEE_TOKEN"')}`);
+
+  if ((report.summary?.blockers || 0) > 0) {
+    console.log(`  ${fmt.dim('Only proceed to analyze/import after validate-config-targets reports 0 blockers for the current dataset.')}`);
+  }
+}
+
 async function runDevelopersCommand(subcommand, flags, fmt) {
   if (subcommand === 'configure-roles') {
     const result = await runConfigureDevelopersRoles(flags);
@@ -189,6 +201,7 @@ async function runDevelopersCommand(subcommand, flags, fmt) {
     if (result.outputPath) {
       console.log(`  Output:      ${fmt.dim(result.outputPath)}`);
     }
+    printDiscoverTargetHints(result.report, fmt);
     return result.exitCode;
   }
 
@@ -366,4 +379,4 @@ async function runDevelopersCommand(subcommand, flags, fmt) {
   return 1;
 }
 
-module.exports = { runDevelopersCommand, printOperatorHints };
+module.exports = { runDevelopersCommand, printOperatorHints, printDiscoverTargetHints };

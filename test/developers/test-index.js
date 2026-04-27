@@ -2,7 +2,7 @@
 
 const assert = require('assert');
 
-const { printOperatorHints } = require('../../src/developers');
+const { printOperatorHints, printDiscoverTargetHints } = require('../../src/developers');
 
 function captureLogs(fn) {
   const lines = [];
@@ -51,9 +51,23 @@ function testPrintOperatorHintsSkipsWhenNoRelevantBlocker() {
   assert.deepStrictEqual(lines, []);
 }
 
+function testPrintDiscoverTargetHintsShowsValidationNextStep() {
+  const lines = captureLogs(() => {
+    printDiscoverTargetHints({
+      summary: {
+        blockers: 1,
+      },
+    }, makeFmt());
+  });
+
+  assert.ok(lines.some((line) => line.includes('validate-config-targets')));
+  assert.ok(lines.some((line) => line.includes('Only proceed to analyze/import')));
+}
+
 function run() {
   testPrintOperatorHintsShowsResolvedConfigGuidance();
   testPrintOperatorHintsSkipsWhenNoRelevantBlocker();
+  testPrintDiscoverTargetHintsShowsValidationNextStep();
   console.log('test-index.js passed');
 }
 
