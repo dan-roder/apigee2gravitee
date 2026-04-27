@@ -3,7 +3,7 @@
     "artifactId": "sf-backendAuth_rev1_2025_01_08",
     "artifactType": "sharedflow",
     "blockers": [],
-    "extractedAt": "2026-04-24T17:27:31.447716Z",
+    "extractedAt": "2026-04-27T20:16:05.235583Z",
     "riskFlags": [],
     "sourcePath": "/home/ec2-user/apigee2gravitee/data/sharedflows/sf-backendAuth_rev1_2025_01_08.zip",
     "warnings": []
@@ -23,7 +23,7 @@
     }
   ],
   "meta": {
-    "parsed_at": "2026-04-24T17:27:31.477444Z",
+    "parsed_at": "2026-04-27T20:16:05.296990Z",
     "source_zip": "/home/ec2-user/apigee2gravitee/data/sharedflows/sf-backendAuth_rev1_2025_01_08.zip"
   },
   "name": "sf-backendAuth_rev1_2025_01_08",

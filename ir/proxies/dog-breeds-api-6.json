@@ -3,7 +3,7 @@
     "artifactId": "dog-breeds-api-6",
     "artifactType": "proxy",
     "blockers": [],
-    "extractedAt": "2026-04-24T17:27:31.447716Z",
+    "extractedAt": "2026-04-27T20:16:05.235583Z",
     "riskFlags": [],
     "sourcePath": "/home/ec2-user/apigee2gravitee/data/proxies/dog-breeds-api-6.zip",
     "warnings": []
@@ -13,7 +13,7 @@
   "display_name": "dog-breeds-api-6",
   "kvm_refs": [],
   "meta": {
-    "parsed_at": "2026-04-24T17:27:31.458050Z",
+    "parsed_at": "2026-04-27T20:16:05.255615Z",
     "source_zip": "/home/ec2-user/apigee2gravitee/data/proxies/dog-breeds-api-6.zip"
   },
   "name": "dog-breeds-api-6",

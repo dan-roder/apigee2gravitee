@@ -3,7 +3,7 @@
     "artifactId": "chuck-norris-api-10",
     "artifactType": "proxy",
     "blockers": [],
-    "extractedAt": "2026-04-24T17:27:31.447716Z",
+    "extractedAt": "2026-04-27T20:16:05.235583Z",
     "riskFlags": [],
     "sourcePath": "/home/ec2-user/apigee2gravitee/data/proxies/chuck-norris-api-10.zip",
     "warnings": []
@@ -13,7 +13,7 @@
   "display_name": "chuck-norris-api-10",
   "kvm_refs": [],
   "meta": {
-    "parsed_at": "2026-04-24T17:27:31.457380Z",
+    "parsed_at": "2026-04-27T20:16:05.254385Z",
     "source_zip": "/home/ec2-user/apigee2gravitee/data/proxies/chuck-norris-api-10.zip"
   },
   "name": "chuck-norris-api-10",

@@ -1,6 +1,6 @@
 {
   "gravitee": {
-    "url": "https://gravitee.advana.aws.540.dev",
+    "url": "https://gravitee-api.advana.aws.540.dev",
     "orgId": "DEFAULT",
     "envId": "DEFAULT"
   },

@@ -3,7 +3,7 @@
     "artifactId": "SF-columnTransform",
     "artifactType": "sharedflow",
     "blockers": [],
-    "extractedAt": "2026-04-24T17:27:31.447716Z",
+    "extractedAt": "2026-04-27T20:16:05.235583Z",
     "riskFlags": [],
     "sourcePath": "/home/ec2-user/apigee2gravitee/data/sharedflows/SF-columnTransform.zip",
     "warnings": []
@@ -13,7 +13,7 @@
   "display_name": "test_colum_transform_and_ism_1",
   "kvm_refs": [],
   "meta": {
-    "parsed_at": "2026-04-24T17:27:31.468310Z",
+    "parsed_at": "2026-04-27T20:16:05.277925Z",
     "source_zip": "/home/ec2-user/apigee2gravitee/data/sharedflows/SF-columnTransform.zip"
   },
   "name": "SF-columnTransform",

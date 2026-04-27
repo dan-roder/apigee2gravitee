@@ -3,7 +3,7 @@
     "artifactId": "SF03-SF-CommonValidations",
     "artifactType": "sharedflow",
     "blockers": [],
-    "extractedAt": "2026-04-24T17:27:31.447716Z",
+    "extractedAt": "2026-04-27T20:16:05.235583Z",
     "riskFlags": [],
     "sourcePath": "/home/ec2-user/apigee2gravitee/data/sharedflows/SF03-SF-CommonValidations.zip",
     "warnings": []
@@ -13,7 +13,7 @@
   "display_name": "SF-CommonValidations",
   "kvm_refs": [],
   "meta": {
-    "parsed_at": "2026-04-24T17:27:31.471988Z",
+    "parsed_at": "2026-04-27T20:16:05.285100Z",
     "source_zip": "/home/ec2-user/apigee2gravitee/data/sharedflows/SF03-SF-CommonValidations.zip"
   },
   "name": "SF03-SF-CommonValidations",

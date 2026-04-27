@@ -1,6 +1,6 @@
 {
   "gravitee": {
-    "url": "https://gravitee.advana.aws.540.dev",
+    "url": "https://gravitee-api.advana.aws.540.dev",
     "orgId": "DEFAULT",
     "envId": "DEFAULT"
   },
@@ -9,7 +9,7 @@
       "ORGANIZATION:USER"
     ],
     "environment": [
-      "ENVIRONMENT:API_CONSUMER"
+      "ENVIRONMENT:USER"
     ]
   },
   "policies": {
@@ -55,7 +55,56 @@
         "targetPlan": "Facts API Key",
         "targetPlanId": "plan_facts_key_123"
       }
-    ]
+    ],
+    "cats-api-product": {
+      "targetApi": "cats-api-7",
+      "targetApiId": "be73ea39-32fd-4ac8-b3ea-3932fd4ac858",
+      "targetPlan": "api-key-plan",
+      "targetPlanId": "3611d76f-c02e-4182-91d7-6fc02e318294",
+      "matchMode": "exact"
+    },
+    "chuck-norris-api-product": {
+      "targetApi": "chuck-norris-api-10",
+      "targetApiId": "927e6ba1-a2e9-4baf-be6b-a1a2e93bafe9",
+      "targetPlan": "api-key-plan",
+      "targetPlanId": "9ff1a423-9700-41a0-b1a4-23970031a07c",
+      "matchMode": "exact"
+    },
+    "dog-breeds-api-product": {
+      "targetApi": "dog-breeds-api-6",
+      "targetApiId": "ab671749-e1a6-426a-a717-49e1a6726a5c",
+      "targetPlan": "api-key-plan",
+      "targetPlanId": "d5efd5ec-b283-4d23-afd5-ecb283fd23ac",
+      "matchMode": "exact"
+    },
+    "hogwarts-houses-api-product": {
+      "targetApi": "hogwarts-houses-api-8",
+      "targetApiId": "72fea1e5-8e97-45e1-bea1-e58e9725e101",
+      "targetPlan": "api-key-plan",
+      "targetPlanId": "5f3aeb6c-06a6-4635-baeb-6c06a6163519",
+      "matchMode": "exact"
+    },
+    "kanye-api-product": {
+      "targetApi": "kanye-rest-api-5",
+      "targetApiId": "41514d92-b3f2-42dd-914d-92b3f2e2ddda",
+      "targetPlan": "api-key-plan",
+      "targetPlanId": "85696198-b379-439a-a961-98b379139a2c",
+      "matchMode": "exact"
+    },
+    "wizards-api-product": {
+      "targetApi": "wizards-api-9",
+      "targetApiId": "5c261880-e37b-4587-a618-80e37be5872a",
+      "targetPlan": "api-key-plan",
+      "targetPlanId": "89936ea3-d484-4fc6-936e-a3d484afc651",
+      "matchMode": "exact"
+    },
+    "yes-or-no-api-product": {
+      "targetApi": "yes-or-no-api-4",
+      "targetApiId": "7f88a006-d361-49e1-88a0-06d361b9e127",
+      "targetPlan": "api-key-plan",
+      "targetPlanId": "5b601457-106f-4e91-a014-57106fce9134",
+      "matchMode": "exact"
+    }
   },
   "customFieldMap": {
     "team": "team",
@@ -71,5 +120,16 @@
   "reporting": {
     "reportDir": "./report",
     "stateFile": "./state/developers-import-state.json"
+  },
+  "roleAssignmentIds": {
+    "organization": [
+      "4a6c1536-12f5-4c7c-ac15-3612f56c7cc5"
+    ],
+    "environment": [
+      "b1805b56-b9af-419d-805b-56b9afe19d55"
+    ]
+  },
+  "_meta": {
+    "path": "/home/ec2-user/apigee2gravitee/config/developers.config.resolved.json"
   }
 }
