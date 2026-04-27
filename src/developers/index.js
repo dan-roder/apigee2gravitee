@@ -193,7 +193,8 @@ async function runDevelopersCommand(subcommand, flags, fmt) {
       console.log('');
       console.log('  Selected Targets:');
       for (const selection of result.report.promptedSelections.slice(0, 10)) {
-        console.log(`   - ${selection.productName}: ${selection.selected.targetApi} / ${selection.selected.targetPlan}`);
+        const selectedTargets = Array.isArray(selection.selected) ? selection.selected : [selection.selected];
+        console.log(`   - ${selection.productName}: ${selectedTargets.map((target) => `${target.targetApi} / ${target.targetPlan}`).join('; ')}`);
       }
     }
     console.log('');

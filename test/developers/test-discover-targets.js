@@ -198,6 +198,7 @@ async function testDiscoverTargetsCanPromptForManualSelectionAndWriteConfig() {
     assert.strictEqual(written.productPlanMap['orders-product'].targetApiId, 'api-orders-manual-1');
     assert.strictEqual(written.productPlanMap['orders-product'].targetPlanId, 'plan-orders-manual-1');
     assert.strictEqual(result.report.promptedSelections.length, 1);
+    assert.strictEqual(result.report.promptedSelections[0].selected.length, 1);
   });
 }
 
@@ -271,12 +272,81 @@ async function testDiscoverTargetsDowngradesInactiveConfigOnlyProductsToWarnings
   });
 }
 
+async function testDiscoverTargetsPromptMatchesCanWriteMultiProxyTargets() {
+  await withTempDir(async (dir) => {
+    const configPath = path.join(dir, 'developers.config.json');
+    fs.writeFileSync(configPath, JSON.stringify(makeConfig(dir), null, 2));
+
+    const domain = {
+      products: [
+        {
+          name: 'misc-api-product',
+          proxies: ['apigee-hello-api-1', 'cat-fact-api-2', 'car-makes-api-3'],
+        },
+      ],
+      subscriptions: [
+        { productName: 'misc-api-product' },
+      ],
+      credentials: [
+        {
+          credentialId: 'dev@example.com/misc-app/key-1',
+          oauthContinuityRelevant: false,
+          apiProducts: [
+            { productName: 'misc-api-product' },
+          ],
+        },
+      ],
+    };
+
+    const client = {
+      async listApis() {
+        return [
+          { id: 'api-hello-1', name: 'apigee-hello-api-1' },
+          { id: 'api-cats-1', name: 'cat-fact-api-2' },
+          { id: 'api-cars-1', name: 'car-makes-api-3' },
+        ];
+      },
+      async listApiPlans(apiId) {
+        return [{
+          id: `plan-${apiId}`,
+          name: 'API Key Plan',
+          security: { type: 'API_KEY' },
+          status: 'PUBLISHED',
+        }];
+      },
+    };
+
+    const answers = ['1', '1', '1', '1', '1', '1'];
+    const result = await runDiscoverDevelopersTargets(
+      {
+        config: configPath,
+        'ir-dir': path.join(dir, 'ir'),
+        'write-config': true,
+        'prompt-matches': true,
+        __prompt: async () => answers.shift(),
+      },
+      { client, domain },
+    );
+
+    const written = JSON.parse(fs.readFileSync(result.outputPath, 'utf8'));
+    assert.ok(Array.isArray(written.productPlanMap['misc-api-product']));
+    assert.strictEqual(written.productPlanMap['misc-api-product'].length, 3);
+    assert.deepStrictEqual(
+      written.productPlanMap['misc-api-product'].map((target) => target.targetApi),
+      ['apigee-hello-api-1', 'cat-fact-api-2', 'car-makes-api-3'],
+    );
+    assert.strictEqual(result.report.promptedSelections.length, 1);
+    assert.strictEqual(result.report.promptedSelections[0].selected.length, 3);
+  });
+}
+
 async function run() {
   await testDiscoverTargetsFindsExactMatchesAndCanWriteConfig();
   await testDiscoverTargetsEmitsAmbiguityAndSecurityBlocking();
   await testDiscoverTargetsCanPromptForManualSelectionAndWriteConfig();
   await testDiscoverTargetsIncludesConfiguredInactiveProducts();
   await testDiscoverTargetsDowngradesInactiveConfigOnlyProductsToWarnings();
+  await testDiscoverTargetsPromptMatchesCanWriteMultiProxyTargets();
   console.log('test-discover-targets.js passed');
 }
 

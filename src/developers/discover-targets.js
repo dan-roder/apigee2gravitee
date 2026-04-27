@@ -28,6 +28,11 @@ function denormalizeTargets(targets, originalEntry) {
   return Array.isArray(originalEntry) ? targets : targets[0];
 }
 
+function inferOriginalEntry(originalEntry, targets) {
+  if (originalEntry) return originalEntry;
+  return Array.isArray(targets) && targets.length > 1 ? targets : targets[0];
+}
+
 function defaultOutputPath(configPath) {
   const absolutePath = path.resolve(configPath);
   if (absolutePath.endsWith('.resolved.json')) return absolutePath;
@@ -129,12 +134,12 @@ function findChoiceByAnswer(choices, answer, valueGetter) {
   return choices.find((choice) => String(valueGetter(choice) || '').toLowerCase() === lowered) || null;
 }
 
-async function promptToSelectTarget(productName, sourceProxyNames, credentialProfile, liveApis, plansByApiId, promptImpl) {
-  const apiChoices = buildManualApiChoices(liveApis, sourceProxyNames);
+async function promptForSingleTarget(productName, sourceProxyName, credentialProfile, liveApis, plansByApiId, promptImpl) {
+  const apiChoices = buildManualApiChoices(liveApis, [sourceProxyName]);
   if (apiChoices.length === 0) return null;
 
   const apiLines = [
-    `${productName} source proxies: ${sourceProxyNames.join(', ') || '(none)'}`,
+    `${productName} source proxy: ${sourceProxyName || '(none)'}`,
     `${productName} credential type: ${credentialProfile.primaryCredentialType}`,
     'Select the target API:',
     ...apiChoices.map((choice) => `  ${choice.index}. ${choice.api.name} (${choice.api.id})${choice.score > 0 ? ` [score ${choice.score}]` : ''}`),
@@ -176,6 +181,42 @@ async function promptToSelectTarget(productName, sourceProxyNames, credentialPro
     targetPlanId: selectedPlanChoice.plan.id,
     matchMode: 'exact',
   };
+}
+
+async function promptToSelectTargets(productName, sourceProxyNames, credentialProfile, liveApis, plansByApiId, promptImpl) {
+  const uniqueSourceProxyNames = Array.from(new Set((sourceProxyNames || []).filter(Boolean)));
+  if (uniqueSourceProxyNames.length <= 1) {
+    const selected = await promptForSingleTarget(
+      productName,
+      uniqueSourceProxyNames[0] || '',
+      credentialProfile,
+      liveApis,
+      plansByApiId,
+      promptImpl,
+    );
+    return selected ? [selected] : [];
+  }
+
+  const selectedTargets = [];
+  for (const sourceProxyName of uniqueSourceProxyNames) {
+    const selected = await promptForSingleTarget(
+      productName,
+      sourceProxyName,
+      credentialProfile,
+      liveApis,
+      plansByApiId,
+      promptImpl,
+    );
+    if (!selected) continue;
+    selectedTargets.push(selected);
+  }
+
+  return selectedTargets.filter((target, index, list) => (
+    list.findIndex((candidate) => (
+      candidate.targetApiId === target.targetApiId
+      && candidate.targetPlanId === target.targetPlanId
+    )) === index
+  ));
 }
 
 async function runDiscoverDevelopersTargets(flags, deps = {}) {
@@ -288,7 +329,7 @@ async function runDiscoverDevelopersTargets(flags, deps = {}) {
       const resolved = buildCandidateTarget(exactCandidates[0]);
       proposedConfig.productPlanMap[productName] = denormalizeTargets(
         [resolved],
-        proposedConfig.productPlanMap[productName] || resolved,
+        inferOriginalEntry(proposedConfig.productPlanMap[productName], [resolved]),
       );
     }
 
@@ -308,7 +349,7 @@ async function runDiscoverDevelopersTargets(flags, deps = {}) {
     await withPrompt(flags, async (promptImpl) => {
       for (const entry of entries) {
         if (entry.status === 'EXACT_MATCH') continue;
-        const selected = await promptToSelectTarget(
+        const selectedTargets = await promptToSelectTargets(
           entry.productName,
           entry.sourceProxyNames,
           entry.credentialProfile,
@@ -316,14 +357,14 @@ async function runDiscoverDevelopersTargets(flags, deps = {}) {
           plansByApiId,
           promptImpl,
         );
-        if (!selected) continue;
+        if (selectedTargets.length === 0) continue;
         proposedConfig.productPlanMap[entry.productName] = denormalizeTargets(
-          [selected],
-          proposedConfig.productPlanMap[entry.productName] || selected,
+          selectedTargets,
+          inferOriginalEntry(proposedConfig.productPlanMap[entry.productName], selectedTargets),
         );
         promptedSelections.push({
           productName: entry.productName,
-          selected,
+          selected: selectedTargets,
         });
       }
     });
