@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-27T20:45:11.315Z",
+  "generatedAt": "2026-04-28T16:12:23.998Z",
   "configPath": "/home/ec2-user/apigee2gravitee/config/developers.config.resolved.json",
   "summary": {
     "products": 10,
@@ -539,5 +539,51 @@
       }
     }
   ],
-  "promptedSelections": []
+  "promptedSelections": [
+    {
+      "productName": "misc-api-product",
+      "selected": [
+        {
+          "targetApi": "apigee-hello-api-1",
+          "targetApiId": "2b9f7f53-2dee-4f5c-9f7f-532dee9f5cb1",
+          "targetPlan": "api-key-plan",
+          "targetPlanId": "8f1e49ec-d795-4534-9e49-ecd795053418",
+          "matchMode": "exact"
+        },
+        {
+          "targetApi": "cat-fact-api-2",
+          "targetApiId": "89884594-070e-4a48-8845-94070eea48d4",
+          "targetPlan": "api-key-plan",
+          "targetPlanId": "08f9eee0-3617-4a77-b9ee-e03617da7744",
+          "matchMode": "exact"
+        },
+        {
+          "targetApi": "car-makes-api-3",
+          "targetApiId": "b7767841-e5d1-4bc4-b678-41e5d13bc444",
+          "targetPlan": "api-key-plan",
+          "targetPlanId": "e4d8d493-2de0-4233-98d4-932de0423337",
+          "matchMode": "exact"
+        }
+      ]
+    },
+    {
+      "productName": "misc-product",
+      "selected": [
+        {
+          "targetApi": "apigee-hello-api-1",
+          "targetApiId": "2b9f7f53-2dee-4f5c-9f7f-532dee9f5cb1",
+          "targetPlan": "api-key-plan",
+          "targetPlanId": "8f1e49ec-d795-4534-9e49-ecd795053418",
+          "matchMode": "exact"
+        },
+        {
+          "targetApi": "cat-fact-api-2",
+          "targetApiId": "89884594-070e-4a48-8845-94070eea48d4",
+          "targetPlan": "api-key-plan",
+          "targetPlanId": "08f9eee0-3617-4a77-b9ee-e03617da7744",
+          "matchMode": "exact"
+        }
+      ]
+    }
+  ]
 }
