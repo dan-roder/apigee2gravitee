@@ -245,12 +245,45 @@ async function testValidateConfigTargetsDowngradesInactiveProductBlockersToWarni
   });
 }
 
+async function testValidateConfigTargetsSeparatesIntentionalMultiTargetMappingsFromSelection() {
+  await withTempDir(async (dir) => {
+    const dataDir = path.join(dir, 'data');
+    const irDir = path.join(dir, 'ir');
+    const configPath = path.join(dir, 'developers.config.json');
+    copyDir(FIXTURES_DATA, dataDir);
+    generateIrFromData(dataDir, irDir);
+
+    const config = makeConfig();
+    config.productPlanMap['orders-product'] = [
+      {
+        targetApi: 'Orders API',
+        targetPlan: 'Orders API Key',
+      },
+      {
+        targetApi: 'Hello API',
+        targetPlan: 'Hello API Key',
+      },
+    ];
+    fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
+
+    const result = await runValidateDevelopersConfigTargets(
+      { config: configPath, 'ir-dir': irDir },
+      { client: makeClient() },
+    );
+
+    assert.strictEqual(result.exitCode, 0);
+    assert.deepStrictEqual(result.report.summary.productsNeedingSelection, []);
+    assert.deepStrictEqual(result.report.summary.productsWithMultipleValidTargets, ['orders-product']);
+  });
+}
+
 async function run() {
   await testValidateConfigTargetsSucceedsWithExactMatches();
   await testValidateConfigTargetsSupportsAliasMatching();
   await testValidateConfigTargetsWarnsOnSecurityMismatchForOAuthCredentials();
   await testValidateConfigTargetsBlocksOnAmbiguousAndUnsuitablePlans();
   await testValidateConfigTargetsDowngradesInactiveProductBlockersToWarnings();
+  await testValidateConfigTargetsSeparatesIntentionalMultiTargetMappingsFromSelection();
   console.log('test-validate-config-targets.js passed');
 }
 

@@ -215,6 +215,7 @@ async function runValidateDevelopersConfigTargets(flags, deps = {}) {
       warnings: 0,
       productsWithSingleValidTarget: [],
       productsNeedingSelection: [],
+      productsWithMultipleValidTargets: [],
       blockedProducts: [],
     },
     targets: [],
@@ -297,7 +298,7 @@ async function runValidateDevelopersConfigTargets(flags, deps = {}) {
     if (validTargetCount === 1) {
       report.summary.productsWithSingleValidTarget.push(productName);
     } else if (validTargetCount > 1) {
-      report.summary.productsNeedingSelection.push(productName);
+      report.summary.productsWithMultipleValidTargets.push(productName);
     } else {
       report.summary.blockedProducts.push(productName);
     }

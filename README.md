@@ -557,7 +557,7 @@ Use `developers discover-targets` when APIs and plans were imported manually rat
 
 Use `developers resolve-config-ids` before `developers analyze` when your config still contains placeholder `targetApiId` and `targetPlanId` values. It resolves Gravitee API ids by `targetApi` name and plan ids by `targetPlan` name, then writes a sibling file such as `config/developers.config.resolved.json`.
 
-Use `developers validate-config-targets` after that to confirm every `productPlanMap` target matches a live Gravitee API and plan exactly. It accepts id-based matches, exact/normalized name matches, and alias matches when `matchMode: "alias"` is configured. It writes `report/developers-config-targets-report.json` by default and treats missing or ambiguous API/plan matches as blockers.
+Use `developers validate-config-targets` after that to confirm every `productPlanMap` target matches a live Gravitee API and plan exactly. It accepts id-based matches, exact/normalized name matches, and alias matches when `matchMode: "alias"` is configured. It writes `report/developers-config-targets-report.json` by default, treats missing or ambiguous API/plan matches as blockers, and reports intentional array-based product mappings under `productsWithMultipleValidTargets` rather than implying they still need operator selection.
 
 `developers analyze` now fails fast when any `productPlanMap` target still has placeholder or missing `targetApiId` or `targetPlanId` values. The intended operator sequence is:
 
