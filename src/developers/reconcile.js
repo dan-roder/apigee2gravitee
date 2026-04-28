@@ -40,7 +40,17 @@ async function runDevelopersReconcile(flags, deps = {}) {
 
   for (const user of result.domain.users) {
     const expectedUserId = idMap.users[user.sourceId];
-    const target = await result.client.findUserByEmail(user.email);
+    let target = null;
+    if (expectedUserId && typeof result.client.getUser === 'function') {
+      try {
+        target = await result.client.getUser(expectedUserId);
+      } catch (err) {
+        if (err?.status !== 404) throw err;
+      }
+    }
+    if (!target) {
+      target = await result.client.findUserByEmail(user.email);
+    }
     if (user.status !== 'active' && result.config.policies.inactiveDeveloper === 'skip') {
       if (expectedUserId) {
         mismatches.push({ severity: 'blocker', code: 'INACTIVE_USER_SKIP_POLICY_MISMATCH', sourceId: user.sourceId, message: `Inactive user ${user.email} should have been skipped` });

@@ -11,6 +11,41 @@ async function testFindUserByEmailFiltersResults() {
   assert.strictEqual(user.id, '2');
 }
 
+async function testFindUserByEmailFollowsPaginatedSearchResults() {
+  const client = new GraviteeClient({ baseUrl: 'https://gravitee.example.com', orgId: 'DEFAULT', envId: 'DEFAULT', token: 'token' });
+  const calls = [];
+  client.get = async (url) => {
+    calls.push(url);
+    if (url === 'https://gravitee.example.com/management/organizations/DEFAULT/users?query=dev2%40540.co') {
+      return {
+        data: Array.from({ length: 10 }, (_, index) => ({ id: `user-${index + 1}`, email: `dev2${index}@540.co` })),
+        page: 1,
+        size: 10,
+        total: 12,
+      };
+    }
+    if (url === 'https://gravitee.example.com/management/organizations/DEFAULT/users?query=dev2%40540.co&page=2&size=10') {
+      return {
+        data: [
+          { id: 'user-11', email: 'dev200@540.co' },
+          { id: 'user-12', email: 'dev2@540.co' },
+        ],
+        page: 2,
+        size: 10,
+        total: 12,
+      };
+    }
+    throw new Error(`Unexpected URL ${url}`);
+  };
+
+  const user = await client.findUserByEmail('dev2@540.co');
+  assert.strictEqual(user.id, 'user-12');
+  assert.deepStrictEqual(calls, [
+    'https://gravitee.example.com/management/organizations/DEFAULT/users?query=dev2%40540.co',
+    'https://gravitee.example.com/management/organizations/DEFAULT/users?query=dev2%40540.co&page=2&size=10',
+  ]);
+}
+
 async function testCreateSubscriptionUsesV2Endpoint() {
   const client = new GraviteeClient({ baseUrl: 'https://gravitee.example.com', orgId: 'DEFAULT', envId: 'DEFAULT', token: 'token' });
   let called = null;
@@ -232,6 +267,30 @@ async function testGetUserRolesFallsBackToEnvironmentUserEndpoint() {
   ]);
 }
 
+async function testGetUserFallsBackToEnvironmentUserEndpoint() {
+  const client = new GraviteeClient({ baseUrl: 'https://gravitee.example.com', orgId: 'DEFAULT', envId: 'DEFAULT', token: 'token' });
+  const calls = [];
+  client.get = async (url) => {
+    calls.push(url);
+    if (url.endsWith('/management/organizations/DEFAULT/users/user-1')) {
+      const err = new Error('GET user → HTTP 404');
+      err.status = 404;
+      throw err;
+    }
+    if (url.endsWith('/management/organizations/DEFAULT/environments/DEFAULT/users/user-1')) {
+      return { id: 'user-1', email: 'user@example.com' };
+    }
+    throw new Error(`Unexpected URL ${url}`);
+  };
+
+  const user = await client.getUser('user-1');
+  assert.strictEqual(user.email, 'user@example.com');
+  assert.deepStrictEqual(calls, [
+    'https://gravitee.example.com/management/organizations/DEFAULT/users/user-1',
+    'https://gravitee.example.com/management/organizations/DEFAULT/environments/DEFAULT/users/user-1',
+  ]);
+}
+
 async function testDeleteUserUsesExpectedEndpoint() {
   const client = new GraviteeClient({ baseUrl: 'https://gravitee.example.com', orgId: 'DEFAULT', envId: 'DEFAULT', token: 'token' });
   let called = null;
@@ -383,6 +442,7 @@ async function testCloseOrPauseSubscriptionFallsBackAcrossCompatibilityStrategie
 
 async function run() {
   await testFindUserByEmailFiltersResults();
+  await testFindUserByEmailFollowsPaginatedSearchResults();
   await testCreateSubscriptionUsesV2Endpoint();
   await testFindPlanByIdUsesExpectedEndpoint();
   await testFindApplicationPrefersSourceMarker();
@@ -396,6 +456,7 @@ async function run() {
   await testListRolesByScopeFallsBackToLegacyRoleScopesEndpoint();
   await testGetUserRolesReturnsNullWhenUnsupportedLookupAllowed();
   await testGetUserRolesFallsBackToEnvironmentUserEndpoint();
+  await testGetUserFallsBackToEnvironmentUserEndpoint();
   await testDeleteUserUsesExpectedEndpoint();
   await testAssignUserRolesFallsBackAcrossPayloadShapes();
   await testAssignUserRolesUsesReferencePayloadWhenRoleIdsProvided();

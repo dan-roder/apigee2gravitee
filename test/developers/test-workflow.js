@@ -808,6 +808,51 @@ async function testReconcileDetectsPartiallyDriftedTargetResources() {
   });
 }
 
+async function testReconcileUsesSavedUserIdWhenEmailLookupMissesPaginatedUserSearch() {
+  await withTempDir(async (dir) => {
+    const dataDir = path.join(dir, 'data');
+    const irDir = path.join(dir, 'ir');
+    copyDir(FIXTURES_DATA, dataDir);
+    generateIrFromData(dataDir, irDir);
+
+    const client = makeWorkflowClient();
+    const config = makeConfig(dir, {
+      policies: {
+        inactiveDeveloper: 'import-and-revoke',
+        smtp: 'acknowledged',
+        defaultApplication: 'must-be-disabled',
+        apiKeyContinuity: 'preserve-if-supported',
+        existingUser: 'match-and-reuse',
+        existingApplication: 'match-and-reuse',
+        userProvisioning: 'reuse-or-create-silently',
+      },
+    });
+
+    const imported = await runDevelopersImport(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json') },
+      { config, client },
+    );
+    assert.strictEqual(imported.exitCode, 0);
+
+    const realFindUserByEmail = client.findUserByEmail;
+    client.findUserByEmail = async (email) => {
+      if (email === 'alice@example.com') return null;
+      return realFindUserByEmail.call(client, email);
+    };
+    client.getUser = async (userId) => (
+      Array.from(client._state.users.values()).find((user) => user.id === userId) || null
+    );
+
+    const result = await runDevelopersReconcile(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json') },
+      { config, client },
+    );
+
+    assert.strictEqual(result.exitCode, 0);
+    assert.ok(!result.report.mismatches.some((item) => item.code === 'USER_MISSING'));
+  });
+}
+
 async function testFullDeleteAndReimportCycleRemainsDeterministic() {
   await withTempDir(async (dir) => {
     const dataDir = path.join(dir, 'data');
@@ -1166,6 +1211,7 @@ async function run() {
   await testImportFailsWhenApplicationReuseMatchesWrongSourceMarker();
   await testReconcileDetectsMismatches();
   await testReconcileDetectsPartiallyDriftedTargetResources();
+  await testReconcileUsesSavedUserIdWhenEmailLookupMissesPaginatedUserSearch();
   await testDeleteImportedRemovesSubscriptionsApplicationsAndUsers();
   await testDeleteImportedFallsBackToClosingSubscriptionsWhenDeleteUnsupported();
   await testDeleteImportedRecoversTargetsFromSavedStateWhenIdMapWasPartiallyCleared();

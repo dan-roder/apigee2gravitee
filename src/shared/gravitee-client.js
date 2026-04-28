@@ -633,9 +633,50 @@ class GraviteeClient {
   }
 
   async findUserByEmail(email) {
-    const body = await this.get(this.orgUrl(`/users?query=${encodeURIComponent(email)}`));
-    const items = normalizeCollection(body);
-    return items.find((item) => item.email === email) || null;
+    const firstUrl = new URL(this.orgUrl('/users'));
+    firstUrl.searchParams.set('query', email);
+    const firstBody = await this.get(firstUrl.toString());
+    const firstItems = normalizeCollection(firstBody);
+    const exactFirstMatch = firstItems.find((item) => item.email === email) || null;
+    if (exactFirstMatch) return exactFirstMatch;
+
+    const pageInfo = extractPagination(firstBody);
+    if (!pageInfo.total || firstItems.length >= pageInfo.total) {
+      return null;
+    }
+
+    let nextPage = pageInfo.page !== null ? pageInfo.page + 1 : 2;
+    const pageSize = pageInfo.size || 100;
+    while (pageInfo.total && ((nextPage - 1) * pageSize) < pageInfo.total) {
+      const nextUrl = new URL(firstUrl.toString());
+      nextUrl.searchParams.set('page', String(nextPage));
+      nextUrl.searchParams.set('size', String(pageSize));
+      const pageBody = await this.get(nextUrl.toString());
+      const pageItems = normalizeCollection(pageBody);
+      if (pageItems.length === 0) break;
+      const exactMatch = pageItems.find((item) => item.email === email) || null;
+      if (exactMatch) return exactMatch;
+
+      const nextInfo = extractPagination(pageBody);
+      if (nextInfo.page !== null) {
+        nextPage = nextInfo.page + 1;
+      } else {
+        nextPage += 1;
+      }
+    }
+
+    return null;
+  }
+
+  async getUser(userId) {
+    try {
+      return await this.get(this.orgUrl(`/users/${userId}`));
+    } catch (err) {
+      if (err?.status === 404 || err?.status === 405) {
+        return this.get(this.envUrl(`/users/${userId}`));
+      }
+      throw err;
+    }
   }
 
   async getUserRoles(userId, options = {}) {
