@@ -1,3 +1,1 @@
-{"ts":"2026-04-28T16:18:31.632Z","type":"reconcile.summary","checkedUsers":21,"checkedApplications":25,"checkedSubscriptions":31,"blockers":2,"warnings":0}
-{"ts":"2026-04-28T16:18:31.632Z","type":"reconcile.blocker","severity":"blocker","code":"USER_MISSING","sourceId":"dev20@540.co","message":"User dev20@540.co is missing"}
-{"ts":"2026-04-28T16:18:31.632Z","type":"reconcile.blocker","severity":"blocker","code":"USER_MISSING","sourceId":"dev2@540.co","message":"User dev2@540.co is missing"}
+{"ts":"2026-04-28T16:25:52.728Z","type":"reconcile.summary","checkedUsers":21,"checkedApplications":25,"checkedSubscriptions":31,"blockers":0,"warnings":0}

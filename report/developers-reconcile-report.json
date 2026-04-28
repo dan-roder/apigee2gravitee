@@ -1,24 +1,11 @@
 {
-  "generatedAt": "2026-04-28T16:18:31.632Z",
+  "generatedAt": "2026-04-28T16:25:52.728Z",
   "summary": {
     "checkedUsers": 21,
     "checkedApplications": 25,
     "checkedSubscriptions": 31,
-    "blockers": 2,
+    "blockers": 0,
     "warnings": 0
   },
-  "mismatches": [
-    {
-      "severity": "blocker",
-      "code": "USER_MISSING",
-      "sourceId": "dev20@540.co",
-      "message": "User dev20@540.co is missing"
-    },
-    {
-      "severity": "blocker",
-      "code": "USER_MISSING",
-      "sourceId": "dev2@540.co",
-      "message": "User dev2@540.co is missing"
-    }
-  ]
+  "mismatches": []
 }
