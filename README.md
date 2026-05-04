@@ -12,9 +12,9 @@ Translates the export produced by [apigee-migrate-tool](https://github.com/apige
 |------|-------------|
 | **Tool 1 — Extractor** | Reads apigee-migrate-tool `data/` output → writes IR to `ir/` |
 | **Tool 2 — Parser + Mapper** | Internal translation layer used by the API migration workflow to map proxy IR into Gravitee API definitions |
-| Developers Migration Tool | Migrates Apigee developers, apps, and product approvals into Gravitee users, applications, and subscriptions |
-| API Migration Tool | 🟡 In active implementation: Analyzes, imports, and reconciles Gravitee APIs/plans from proxy IR |
-| Tool 4 — Gap Reporter | 🔲 Planned: Generates HTML report of all migration gaps and review items |
+| Developers Migration Tool | Validated manifest-driven workflow for migrating Apigee developers, apps, and product approvals into Gravitee users, applications, and subscriptions |
+| API Migration Tool | Validated workflow for analyzing, importing, reconciling, and cleaning up Gravitee APIs/plans from proxy IR |
+| Reporting Artifacts | Structured JSON and NDJSON gap, plan, reconcile, sync, target-catalog, and cleanup reports for both API and developers workflows |
 
 ---
 
@@ -57,7 +57,7 @@ Reads the `data/` directory produced by `apigee-migrate-tool exportAll` and writ
 ### Run
 
 ```bash
-# Via Node CLI wrapper (recommended — pretty-prints progress)
+# Via Node CLI wrapper
 node bin/migrator.js extract \
   --data-dir ./data \
   --ir-dir   ./ir \
@@ -100,7 +100,7 @@ ir/
   products/{name}.json        ← API product entities
 ```
 
-### Key facts
+### Note
 
 - **Encrypted KVM entries** — Apigee's management API does not expose encrypted values. These are written with `value: null` and listed in `manifest.json` under `encrypted_kvm_names`. They must be entered manually in Gravitee after bootstrap.
 - **KVM write operations** — Any `KeyValueMapOperations` policy with a `Put` or `Delete` operation is flagged in `manifest.json` under `warnings`. These must be mapped to Gravitee's Data Cache policy.
@@ -156,7 +156,6 @@ fs.writeFileSync(
 );
 
 console.log('Security scheme:', apiDefinition._migrationMeta.securityScheme);
-console.log('LLM review needed:', apiDefinition._migrationMeta.llmSteps.map(s => s.name));
 console.log('Manual redesign needed:', apiDefinition._migrationMeta.manualSteps);
 ```
 
@@ -228,7 +227,6 @@ A complete Gravitee v4 API definition ready for `POST /management/v2/organizatio
   "flowExecution": { "mode": "DEFAULT", "matchRequired": false },
   "_migrationMeta": {
     "securityScheme": "API_KEY",
-    "llmSteps": [{ "name": "validate-order-payload", "rawXml": "..." }],
     "manualSteps": ["log-response"],
     "kvmWriteOps": ["order-cache"]
   }
@@ -260,8 +258,8 @@ A complete Gravitee v4 API definition ready for `POST /management/v2/organizatio
 | `XMLToJSON` / `JSONToXML` | `xml-json` | |
 | `XSLTransform` | `xslt` | ⚠️ Stylesheet must be embedded manually |
 | `FlowCallout` | Disabled groovy stub | ⚠️ Map to Gravitee Shared Policy Group manually |
-| `Javascript` | Groovy stub | 🤖 LLM review required |
-| `JavaCallout` | Disabled groovy stub | 🤖 LLM review required |
+| `Javascript` | Groovy stub | Review required |
+| `JavaCallout` | Disabled groovy stub | Review required |
 | `MessageLogging` | Disabled groovy stub | ❌ No equivalent — manual redesign |
 | `ExtensionCallout` | Disabled groovy stub | ❌ No equivalent — manual redesign |
 
@@ -273,7 +271,7 @@ Every API definition output includes a `_migrationMeta` block. **Strip this befo
 
 ## API Migration Tool
 
-Creates or updates Gravitee APIs and plans from extracted Apigee proxy IR. This is the missing upstream stage that should run before the developers migration tool, because developers migration expects the target APIs and plans to already exist.
+Creates or updates Gravitee APIs and plans from extracted Apigee proxy IR. This workflow should run before the developers migration tool when the target APIs and plans do not already exist in Gravitee.
 
 The API commands invoke the parser/mapper internally from `ir/proxies/*.json`; they do not require a separate Tool 2 output directory or a standalone Tool 2 run first.
 
@@ -410,33 +408,18 @@ logs/apis.ndjson
 
 ## Developers Migration Tool
 
-This repo now includes an **active developers migration workflow** for migrating:
+Translates and migrates Apigee Developers and their applications into Gravitee Users and Applications.
 
 - Apigee developers → Gravitee users
 - Apigee developer apps → Gravitee applications
 - Apigee product approvals on credentials → Gravitee subscriptions
 
-### Current state
-
-- The migration context and config/schema are defined.
-- Shared IR loading support for developers/apps/credentials/references is in place.
-- `developers analyze`, `developers plan`, `developers import`, and `developers reconcile` are implemented as a manifest-driven workflow.
-- The current implementation now performs live compatibility probes during preflight and produces resumable state, id maps, reports, and reconciliation output.
-- The remaining production risk is deployment-specific Gravitee behavior, so a non-production smoke run is strongly recommended before any broad import.
-
-Use this section to prepare inputs and run the current command surface.
-
 ### Prerequisites
 
-Before running this part of the migration:
 
-1. Run Tool 1 and generate `./ir`.
-2. Ensure target Gravitee APIs and plans already exist.
-3. Create a config file from [`config/developers.config.example.json`](./config/developers.config.example.json).
-4. Fill in `productPlanMap` for every Apigee product that should become a Gravitee subscription.
-5. Set Gravitee URL, org, env, roles, and policies in that config.
-6. Set capability attestations for silent user creation, application ownership, and credential preservation.
-
+1. Run Tool 1 (extractor) and generate `./ir`.
+2. Ensure target Gravitee APIs and plans already exist or API migration has been run.
+3. Run `init` command to write config file [`config/developers.config.example.json`](./config/developers.config.example.json).
 ### Required IR inputs
 
 The developers migration flow expects these IR inputs under `./ir`:
@@ -462,19 +445,48 @@ Start with:
 cp ./config/developers.config.example.json ./config/developers.config.json
 ```
 
-Then update at minimum:
+Then review each config block:
+
+| Config block | Required | Default/example value | Description |
+|---|---|---|---|
+| `gravitee.url` | Yes | `https://gravitee.example.com` | Base Gravitee URL such as `https://gravitee.example.com`. Do not append `/management`; the client adds management paths itself. |
+| `gravitee.orgId` | Yes | `DEFAULT` | Gravitee organization id, usually `DEFAULT`. |
+| `gravitee.envId` | Yes | `DEFAULT` | Gravitee environment id, usually `DEFAULT`. |
+| `roles.organization` | Yes | `["ORGANIZATION:USER"]` | Default organization-scoped role names to assign to imported users, for example `["ORGANIZATION:USER"]`. |
+| `roles.environment` | Yes | `["ENVIRONMENT:API_CONSUMER"]` in the example config, but use `developers configure-roles` to set this correctly for the target deployment | Default environment-scoped role names to assign to imported users, for example `["ENVIRONMENT:USER"]`. |
+| `roleAssignmentIds` | Usually tool-managed | Not present by default; written by `developers configure-roles` | Concrete Gravitee role ids matching the selected default roles. These are normally written by `developers configure-roles` and should not usually be hand-edited. |
+| `policies.inactiveDeveloper` | Yes | `import-and-revoke` | What to do with inactive Apigee developers and their apps/subscriptions: `skip`, `import-disabled`, or `import-and-revoke`. |
+| `policies.smtp` | Yes | `acknowledged` | Declares how email/invite side effects are handled in the target deployment: `acknowledged`, `suppressed`, or `live`. This is a policy declaration, not an SMTP config block. |
+| `policies.defaultApplication` | Yes | `must-be-disabled` | Whether the target deployment requires imported applications to be disabled by default: `must-be-disabled` or `allowed`. |
+| `policies.apiKeyContinuity` | Yes | `preserve-if-supported` | How strict to be about preserving API key values: `preserve-if-supported`, `accept-regenerated`, or `fail-if-not-preservable`. |
+| `policies.oauthClientContinuity` | Recommended | `preserve-if-supported` | Same continuity policy for OAuth-relevant credentials. Use this when the source dataset contains OAuth-like credentials or client-secret continuity matters. |
+| `policies.existingUser` | Yes | `match-and-reuse` | How to handle a Gravitee user that already exists: `match-and-reuse`, `match-and-update`, or `fail-on-existing`. |
+| `policies.existingApplication` | Yes | `match-and-reuse` | How to handle a Gravitee application that already exists: `match-and-reuse`, `match-and-update`, or `fail-on-existing`. |
+| `policies.userProvisioning` | Yes | `reuse-or-create-silently` | Whether the tool may create users or only reuse existing ones: `reuse-only`, `reuse-or-create-silently`, or `allow-invites`. |
+| `capabilities.silentUserCreation` | Yes | `supported` | Your attestation of whether this Gravitee environment supports silent user creation: `supported`, `unsupported`, or `unknown`. The preflight probes this and can block if the policy requires it. |
+| `capabilities.apiKeyValuePreservation` | Yes | `unknown` | Your attestation of whether imported subscriptions can preserve existing API key values: `supported`, `unsupported`, or `unknown`. |
+| `capabilities.oauthClientValuePreservation` | Yes | `unknown` | Your attestation of whether OAuth client values/secrets can be preserved: `supported`, `unsupported`, or `unknown`. |
+| `capabilities.applicationOwnership` | Yes | `direct-member` | How the tool should represent app ownership: `direct-member`, `metadata-only`, or `unknown`. Current validated runs use `direct-member` so the developer actually owns the imported application. |
+| `productPlanMap` | Yes | Example entries for `orders-product` and `misc-product` | The source-product to target-API/plan mapping used to build subscriptions. This is the most important operators-managed block in the config. |
+| `customFieldMap` | Optional | `{ "team": "team", "department": "department", "contact": "contact" }` | Reserved mapping for developer/app attributes to Gravitee custom fields. Current workflow no longer requires custom fields for successful import, so this is optional. |
+| `filters.includeDevelopers` | Optional | `[]` | Limit the run to specific developer emails. Useful for pilots and smoke tests. |
+| `filters.excludeDevelopers` | Optional | `[]` | Exclude specific developer emails from the run. |
+| `filters.includeApps` | Optional | `[]` | Limit the run to specific applications using `developerEmail/appName` identifiers. |
+| `filters.excludeApps` | Optional | `[]` | Exclude specific applications using `developerEmail/appName` identifiers. |
+| `reporting.reportDir` | Yes | `./report` | Directory where reports, logs, and auxiliary artifacts are written. |
+| `reporting.stateFile` | Yes | `./state/developers-import-state.json` | Primary developers import state file. The tool derives the adjacent id-map and related artifacts from this reporting root. |
+
+At minimum, you should set or confirm:
 
 - `gravitee.url`
 - `gravitee.orgId`
 - `gravitee.envId`
-- `roles.organization`
-- `roles.environment`
-- `policies.userProvisioning`
-- `capabilities.silentUserCreation`
-- `capabilities.applicationOwnership`
-- `capabilities.apiKeyValuePreservation`
-- `capabilities.oauthClientValuePreservation`
-- `productPlanMap`
+- `policies.*`
+- `capabilities.*`
+
+Then run `developers configure-roles` against the target Gravitee deployment to fill in the right `roles.*` and `roleAssignmentIds.*` for that environment.
+
+After which, run `developers discover-targets` to fill `productPlanMap`
 
 Example `productPlanMap` entry:
 
@@ -530,11 +542,19 @@ Each target entry may also include:
 - `exact` uses ids plus primary names and normalized-name matching
 - `alias` also allows the configured alias lists
 
+Practical notes:
+
+- `targetApiId` and `targetPlanId` may start as placeholders, but `developers analyze` will block until they resolve to live Gravitee ids.
+- Use `developers sync-api-targets` after this repo’s `apis import` workflow. Skip if APIs were manually created.
+- Use `developers discover-targets --prompt-matches --write-config` when APIs/plans were imported manually or naming differs from the Apigee source.
+- Use array targets for products that grant access to multiple proxies; the tool will create one Gravitee subscription per target entry.
+- Current validated runs use `capabilities.applicationOwnership: "direct-member"`, so imported applications are owned by the migrated developer rather than just carrying owner metadata.
+
 If a source product is missing from `productPlanMap`, `developers analyze` should fail preflight.
 
-For the current sample Apigee export in [`data/`](./data), a starter mapping stub is available at [`config/developers.product-plan-map.from-data.example.json`](./config/developers.product-plan-map.from-data.example.json), and a full local starter config is available at [`config/developers.config.json`](./config/developers.config.json). Both mirror the extracted Apigee product-to-proxy relationships and use placeholder Gravitee API and plan ids to fill in.
+A starter mapping stub is available at [`config/developers.product-plan-map.from-data.example.json`](./config/developers.product-plan-map.from-data.example.json), and a full local starter config is available at [`config/developers.config.json`](./config/developers.config.json). Both mirror the extracted Apigee product-to-proxy relationships and use placeholder Gravitee API and plan ids to fill in.
 
-In that sample, `misc-api-product` fronts three Apigee proxies. The config now supports that directly by allowing one source product to map to an array of Gravitee API/plan targets.
+In that sample, `misc-api-product` fronts three Apigee proxies. The config supports that directly by allowing one source product to map to an array of Gravitee API/plan targets.
 
 ### Commands
 
@@ -549,17 +569,19 @@ node bin/migrator.js developers import    --ir-dir ./ir --config ./config/develo
 node bin/migrator.js developers reconcile --ir-dir ./ir --config ./config/developers.config.resolved.json --gravitee-token "$GRAVITEE_TOKEN"
 ```
 
-Use `developers configure-roles` before a real run to fetch live Gravitee role choices, pick the default organization and environment role for this deployment, and write both the scoped role names and role IDs back into the config.
+### Command Descriptions
 
-Use `developers sync-api-targets` after an API import or reimport cycle to refresh `productPlanMap` API and plan ids from `state/apis-id-map.json` before validating or analyzing the developers workflow again. It writes `report/developers-sync-api-targets-report.json` by default so operators can review exactly which targets were updated and which still need manual attention. When you run it against `developers.config.resolved.json`, it now refreshes that same resolved config path by default instead of creating a growing chain of extra synced files.
+`developers configure-roles`: used before a real run to fetch live Gravitee role choices, pick the default organization and environment role for this deployment, and write both the scoped role names and role IDs back into the config.
 
-Use `developers discover-targets` when APIs and plans were imported manually rather than by this repo's `apis` workflow. It inspects live Gravitee APIs and plans, generates `report/developers-target-catalog.json`, and can optionally write exact-match `productPlanMap` entries back into `developers.config.resolved.json`. If exact matching is not enough, add `--prompt-matches --write-config` to select an existing live API and plan interactively for each unresolved product.
+`developers sync-api-targets`: used after an API import or reimport cycle to refresh `productPlanMap` API and plan ids from `state/apis-id-map.json` before validating or analyzing the developers workflow again. It writes `report/developers-sync-api-targets-report.json` by default so operators can review exactly which targets were updated and which still need manual attention. When you run it against `developers.config.resolved.json`, it now refreshes that same resolved config path by default instead of creating a growing chain of extra synced files.
 
-Use `developers resolve-config-ids` before `developers analyze` when your config still contains placeholder `targetApiId` and `targetPlanId` values. It resolves Gravitee API ids by `targetApi` name and plan ids by `targetPlan` name, then writes a sibling file such as `config/developers.config.resolved.json`.
+`developers discover-targets`: used when APIs and plans were imported manually rather than by this repo's `apis` workflow. It inspects live Gravitee APIs and plans, generates `report/developers-target-catalog.json`, and can optionally write exact-match `productPlanMap` entries back into `developers.config.resolved.json`. If exact matching is not enough, add `--prompt-matches --write-config` to select an existing live API and plan interactively for each unresolved product.
 
-Use `developers validate-config-targets` after that to confirm every `productPlanMap` target matches a live Gravitee API and plan exactly. It accepts id-based matches, exact/normalized name matches, and alias matches when `matchMode: "alias"` is configured. It writes `report/developers-config-targets-report.json` by default, treats missing or ambiguous API/plan matches as blockers, and reports intentional array-based product mappings under `productsWithMultipleValidTargets` rather than implying they still need operator selection.
+`developers resolve-config-ids`: before `developers analyze` when your config still contains placeholder `targetApiId` and `targetPlanId` values. It resolves Gravitee API ids by `targetApi` name and plan ids by `targetPlan` name, then writes a sibling file such as `config/developers.config.resolved.json`.
 
-`developers analyze` now fails fast when any `productPlanMap` target still has placeholder or missing `targetApiId` or `targetPlanId` values. The intended operator sequence is:
+`developers validate-config-targets`: used after that to confirm every `productPlanMap` target matches a live Gravitee API and plan exactly. It accepts id-based matches, exact/normalized name matches, and alias matches when `matchMode: "alias"` is configured. It writes `report/developers-config-targets-report.json` by default, treats missing or ambiguous API/plan matches as blockers, and reports intentional array-based product mappings under `productsWithMultipleValidTargets` rather than implying they still need operator selection.
+
+`developers analyze`: fails fast when any `productPlanMap` target still has placeholder or missing `targetApiId` or `targetPlanId` values. The intended operator sequence is:
 
 ```bash
 node bin/migrator.js developers resolve-config-ids --config ./config/developers.config.json --gravitee-token "$GRAVITEE_TOKEN"
@@ -705,147 +727,7 @@ node bin/migrator.js developers reconcile \
 - leave unrelated Gravitee users and applications untouched
 - write `report/developers-cleanup-report.json` with cleanup counts, targets, and failures
 
-### Recommended smoke test
-
-Run the first live pass in a non-production Gravitee environment with a small filtered dataset:
-
-```bash
-node bin/migrator.js developers configure-roles \
-  --config ./config/developers.config.resolved.json \
-  --gravitee-token "$GRAVITEE_TOKEN"
-
-node bin/migrator.js developers validate-config-targets \
-  --config ./config/developers.config.resolved.json \
-  --gravitee-token "$GRAVITEE_TOKEN"
-
-node bin/migrator.js developers analyze \
-  --ir-dir ./ir \
-  --config ./config/developers.config.resolved.json \
-  --gravitee-token "$GRAVITEE_TOKEN"
-
-node bin/migrator.js developers import \
-  --ir-dir ./ir \
-  --config ./config/developers.config.resolved.json \
-  --gravitee-token "$GRAVITEE_TOKEN" \
-  --users-only
-
-node bin/migrator.js developers import \
-  --ir-dir ./ir \
-  --config ./config/developers.config.resolved.json \
-  --gravitee-token "$GRAVITEE_TOKEN" \
-  --apps-only
-
-node bin/migrator.js developers import \
-  --ir-dir ./ir \
-  --config ./config/developers.config.resolved.json \
-  --gravitee-token "$GRAVITEE_TOKEN"
-
-node bin/migrator.js developers reconcile \
-  --ir-dir ./ir \
-  --config ./config/developers.config.resolved.json \
-  --gravitee-token "$GRAVITEE_TOKEN"
-```
-
-Recommended execution sequence for manually imported APIs:
-
-```bash
-node bin/migrator.js developers configure-roles \
-  --config ./config/developers.config.resolved.json \
-  --gravitee-token "$GRAVITEE_TOKEN"
-
-node bin/migrator.js developers discover-targets \
-  --ir-dir ./ir \
-  --config ./config/developers.config.resolved.json \
-  --gravitee-token "$GRAVITEE_TOKEN" \
-  --write-config
-
-node bin/migrator.js developers validate-config-targets \
-  --ir-dir ./ir \
-  --config ./config/developers.config.resolved.json \
-  --gravitee-token "$GRAVITEE_TOKEN"
-
-node bin/migrator.js developers analyze \
-  --ir-dir ./ir \
-  --config ./config/developers.config.resolved.json \
-  --gravitee-token "$GRAVITEE_TOKEN"
-
-node bin/migrator.js developers import \
-  --ir-dir ./ir \
-  --config ./config/developers.config.resolved.json \
-  --gravitee-token "$GRAVITEE_TOKEN"
-
-node bin/migrator.js developers reconcile \
-  --ir-dir ./ir \
-  --config ./config/developers.config.resolved.json \
-  --gravitee-token "$GRAVITEE_TOKEN"
-```
-
-This workflow has now been validated against a local Gravitee instance with:
-
-- `2` imported users
-- `4` imported applications
-- `4` imported subscriptions
-- `0` reconcile blockers
-- `0` reconcile warnings
-- successful `developers delete-imported` cleanup for subscriptions, applications, and users
-
 For a full step-by-step controlled pilot, see [`docs/developers-pilot-runbook.md`](./docs/developers-pilot-runbook.md).
-
-### Recommended production sequence
-
-For a production run, treat `configure-roles`, `validate-config-targets`, and `analyze` as required pre-import gates.
-
-```bash
-node bin/migrator.js developers configure-roles \
-  --config ./config/developers.config.resolved.json \
-  --gravitee-token "$GRAVITEE_TOKEN"
-
-node bin/migrator.js developers validate-config-targets \
-  --ir-dir ./ir \
-  --config ./config/developers.config.resolved.json \
-  --gravitee-token "$GRAVITEE_TOKEN"
-
-node bin/migrator.js developers analyze \
-  --ir-dir ./ir \
-  --config ./config/developers.config.resolved.json \
-  --gravitee-token "$GRAVITEE_TOKEN"
-
-node bin/migrator.js developers import \
-  --ir-dir ./ir \
-  --config ./config/developers.config.resolved.json \
-  --gravitee-token "$GRAVITEE_TOKEN" \
-  --users-only
-
-node bin/migrator.js developers import \
-  --ir-dir ./ir \
-  --config ./config/developers.config.resolved.json \
-  --gravitee-token "$GRAVITEE_TOKEN" \
-  --apps-only
-
-node bin/migrator.js developers import \
-  --ir-dir ./ir \
-  --config ./config/developers.config.resolved.json \
-  --gravitee-token "$GRAVITEE_TOKEN"
-
-node bin/migrator.js developers reconcile \
-  --ir-dir ./ir \
-  --config ./config/developers.config.resolved.json \
-  --gravitee-token "$GRAVITEE_TOKEN"
-```
-
-### Production hardening checklist
-
-- Run the full developers workflow against a non-production Gravitee environment first.
-- Re-run `developers configure-roles` against the target deployment instead of copying local role ids between environments.
-- Use `developers discover-targets` when APIs/plans were imported manually and there is no `state/apis-id-map.json`.
-- Re-run `developers sync-api-targets` after API cleanup/reimport cycles so `productPlanMap` ids stay aligned with `state/apis-id-map.json`.
-- Re-run `developers validate-config-targets` after any API re-import, because API and plan ids can change across cleanup/recreate cycles.
-- Re-run `developers analyze` immediately before import so the manifest and state reflect the current target.
-- Use `developers delete-imported` to reset a pilot environment between test runs.
-- Treat API-key continuity as verified only when the target deployment and policy require it.
-- Use `policies.oauthClientContinuity` only when the extracted credentials actually imply OAuth continuity requirements; API-key-only datasets should no longer emit generic OAuth continuity warnings.
-- Review `report/developers-gap-report.json` for `consumerSecretCount`, `protectedSecretMaterialCount`, and `missingProtectedSecretCount` before production imports when client-secret continuity matters.
-- Treat `OAUTH_CLIENT_SECRET_MANUAL_REVIEW_REQUIRED` as an intentional gate: if OAuth-relevant credentials include protected secret material, this tool will not assume that client-secret continuity is automatically satisfied.
 
 ### Expected outputs
 
@@ -861,12 +743,11 @@ logs/developers.ndjson
 ```
 
 For the detailed design and policy rules, see [`docs/developers-migration-context.md`](./docs/developers-migration-context.md).
-For the first non-production pilot workflow, see [`docs/developers-pilot-runbook.md`](./docs/developers-pilot-runbook.md).
+For the non-production pilot workflow, see [`docs/developers-pilot-runbook.md`](./docs/developers-pilot-runbook.md).
 
 | Field | Description |
 |---|---|
 | `securityScheme` | `API_KEY` / `OAUTH2` / `JWT` / `KEYLESS` |
-| `llmSteps` | Steps needing LLM translation — each has `name` and `rawXml` |
 | `manualSteps` | Step names with no programmatic equivalent |
 | `needsReviewSteps` | Steps flagged with `_needsReview` (e.g. KVM writes → cache) |
 | `unmappedConditions` | Condition strings the translator couldn't handle |
@@ -874,23 +755,6 @@ For the first non-production pilot workflow, see [`docs/developers-pilot-runbook
 | `encryptedProperties` | API property keys where the value is `ENCRYPTED_VALUE_REQUIRED` |
 | `sharedFlowRefs` | Shared flow names referenced by this proxy |
 | `targetServerRefs` | TargetServer names referenced by this proxy |
-
-### Condition translation
-
-Apigee conditions are translated to Gravitee EL (SpEL-based). Common patterns:
-
-| Apigee | Gravitee EL |
-|---|---|
-| `request.verb = "GET"` | `{#request.method == 'GET'}` |
-| `request.verb != "OPTIONS"` | `{#request.method != 'OPTIONS'}` |
-| `request.path MatchesPath "/api/v1/*"` | `{#request.path matches '^/api/v1/[^/]*(/.*)?$'}` |
-| `request.header.x-api-key != null` | `{#request.headers['x-api-key'] != null}` |
-| `request.queryparam.debug = "true"` | `{#request.params['debug'][0] == 'true'}` |
-| `response.status.code >= 400` | `{#response.status >= 400}` |
-
-Conditions that cannot be fully translated are emitted as-is with `needsReview: true` and listed in `_migrationMeta.unmappedConditions`.
-
----
 
 ## Running the Tests
 
@@ -907,19 +771,6 @@ npm run test:mapper       # 75 Node tests   — policy-handlers, policy-mapper
 
 The translator test suites are fully self-contained — they invoke the Python extractor
 against the local fixtures, write a temporary IR cache, and clean it up on exit.
-
----
-
-## No Extractor Changes Required
-
-The Python extractor was **not changed** to support Tool 2. The fix applied was entirely
-on the Node.js side:
-
-- `_el_to_dict()` in `bundle.py` intentionally writes only one level of `raw_dict`
-  children (documented: *"Downstream Node modules receive the raw_xml string for full fidelity"*)
-- `policy-registry.js` was updated to accept and prefer `raw_xml` over `raw_dict`,
-  re-parsing it with `sax` for full depth traversal
-- The IR you already have from Tool 1 is fully compatible with Tool 2 — no re-extraction needed
 
 ---
 
@@ -974,7 +825,7 @@ apigee2gravitee/
 ## Known Limitations
 
 - **Shared Flows** — FlowCallout references emit a disabled groovy stub. Gravitee's Shared Policy Group feature requires creating the shared group separately then updating each API to reference it. This will be handled in a future tool step.
-- **JavaScript / JavaCallout** — Translated to Groovy stubs. The LLM fallback module (Tool 3) will submit the `rawXml` to the Claude API for a suggested translation requiring human review.
+- **JavaScript / JavaCallout** — Translated to Groovy stubs.
 - **MessageLogging / StatisticsCollector** — No Gravitee equivalent. Emitted as disabled stubs; monitoring must be reconfigured using Gravitee's analytics and alert capabilities.
 - **XSLTransform** — The policy is created but the XSLT stylesheet content must be manually embedded, as resource files are not automatically uploaded to Gravitee.
 - **KVM write operations** — Mapped to Gravitee's Data Cache policy as a best-effort translation. The cache resource (Redis) must be pre-configured in the Gravitee environment, and the cache key logic should be reviewed.
