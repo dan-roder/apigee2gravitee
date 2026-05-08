@@ -471,7 +471,7 @@ Then review each config block:
 | `customFieldMap` | Optional | `{ "team": "team", "department": "department", "contact": "contact" }` | Reserved mapping for developer/app attributes to Gravitee custom fields. Current workflow no longer requires custom fields for successful import, so this is optional. |
 | `filters.includeDevelopers` | Optional | `[]` | Limit the run to specific developer emails. Useful for pilots and smoke tests. |
 | `filters.excludeDevelopers` | Optional | `[]` | Exclude specific developer emails from the run. |
-| `filters.includeApps` | Optional | `[]` | Limit the run to specific applications using `developerEmail/appName` identifiers. |
+| `filters.includeApps` | Optional | `[]`; written by `developers select-apps --write-config` when using interactive app selection | Limit the run to specific applications using `developerEmail/appName` identifiers. An empty list means all apps allowed by the other filters are included. |
 | `filters.excludeApps` | Optional | `[]` | Exclude specific applications using `developerEmail/appName` identifiers. |
 | `reporting.reportDir` | Yes | `./report` | Directory where reports, logs, and auxiliary artifacts are written. |
 | `reporting.stateFile` | Yes | `./state/developers-import-state.json` | Primary developers import state file. The tool derives the adjacent id-map and related artifacts from this reporting root. |
@@ -547,6 +547,7 @@ Practical notes:
 - `targetApiId` and `targetPlanId` may start as placeholders, but `developers analyze` will block until they resolve to live Gravitee ids.
 - Use `developers sync-api-targets` after this repo’s `apis import` workflow. Skip if APIs were manually created.
 - Use `developers discover-targets --prompt-matches --write-config` when APIs/plans were imported manually or naming differs from the Apigee source.
+- Use `developers select-apps --write-config` before validation/analyze/import when you want an auditable allow-list of exactly which Apigee applications should be migrated.
 - Use array targets for products that grant access to multiple proxies; the tool will create one Gravitee subscription per target entry.
 - Current validated runs use `capabilities.applicationOwnership: "direct-member"`, so imported applications are owned by the migrated developer rather than just carrying owner metadata.
 
@@ -561,6 +562,7 @@ In that sample, `misc-api-product` fronts three Apigee proxies. The config suppo
 ```bash
 node bin/migrator.js developers configure-roles --config ./config/developers.config.resolved.json --gravitee-token "$GRAVITEE_TOKEN"
 node bin/migrator.js developers discover-targets --ir-dir ./ir --config ./config/developers.config.resolved.json --gravitee-token "$GRAVITEE_TOKEN"
+node bin/migrator.js developers select-apps --ir-dir ./ir --config ./config/developers.config.resolved.json --write-config
 node bin/migrator.js developers resolve-config-ids --config ./config/developers.config.json --gravitee-token "$GRAVITEE_TOKEN"
 node bin/migrator.js developers validate-config-targets --ir-dir ./ir --config ./config/developers.config.resolved.json --gravitee-token "$GRAVITEE_TOKEN"
 node bin/migrator.js developers analyze   --ir-dir ./ir --config ./config/developers.config.resolved.json --gravitee-token "$GRAVITEE_TOKEN"
@@ -576,6 +578,8 @@ node bin/migrator.js developers reconcile --ir-dir ./ir --config ./config/develo
 `developers sync-api-targets`: used after an API import or reimport cycle to refresh `productPlanMap` API and plan ids from `state/apis-id-map.json` before validating or analyzing the developers workflow again. It writes `report/developers-sync-api-targets-report.json` by default so operators can review exactly which targets were updated and which still need manual attention. When you run it against `developers.config.resolved.json`, it now refreshes that same resolved config path by default instead of creating a growing chain of extra synced files.
 
 `developers discover-targets`: used when APIs and plans were imported manually rather than by this repo's `apis` workflow. It inspects live Gravitee APIs and plans, generates `report/developers-target-catalog.json`, and can optionally write exact-match `productPlanMap` entries back into `developers.config.resolved.json`. If exact matching is not enough, add `--prompt-matches --write-config` to select an existing live API and plan interactively for each unresolved product.
+
+`developers select-apps`: used when operators need to choose exactly which Apigee developer applications should be imported. It lists apps as `developerEmail/appName` with developer status, app status, credential count, and referenced API products, then writes the selected identifiers to `filters.includeApps` when `--write-config` is provided. Use `--output-config <path>` to write a separate selected config, or `--clear-selection` to empty `filters.includeApps` and return to importing all apps allowed by other filters.
 
 `developers resolve-config-ids`: before `developers analyze` when your config still contains placeholder `targetApiId` and `targetPlanId` values. It resolves Gravitee API ids by `targetApi` name and plan ids by `targetPlan` name, then writes a sibling file such as `config/developers.config.resolved.json`.
 
@@ -602,6 +606,11 @@ node bin/migrator.js developers configure-roles \
 
 node bin/migrator.js developers sync-api-targets \
   --config ./config/developers.config.resolved.json
+
+node bin/migrator.js developers select-apps \
+  --ir-dir ./ir \
+  --config ./config/developers.config.resolved.json \
+  --write-config
 
 node bin/migrator.js developers validate-config-targets \
   --ir-dir ./ir \
@@ -654,6 +663,11 @@ node bin/migrator.js developers discover-targets \
   --gravitee-token "$GRAVITEE_TOKEN" \
   --write-config \
   --prompt-matches
+
+node bin/migrator.js developers select-apps \
+  --ir-dir ./ir \
+  --config ./config/developers.config.resolved.json \
+  --write-config
 
 node bin/migrator.js developers validate-config-targets \
   --ir-dir ./ir \
@@ -734,6 +748,7 @@ For a full step-by-step controlled pilot, see [`docs/developers-pilot-runbook.md
 ```text
 report/developers-plan.json
 report/developers-gap-report.json
+report/developers-app-selection-report.json
 report/developers-sync-api-targets-report.json
 report/developers-target-catalog.json
 report/developers-cleanup-report.json

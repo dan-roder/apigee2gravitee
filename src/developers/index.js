@@ -10,6 +10,7 @@ const { runValidateDevelopersConfigTargets } = require('./validate-config-target
 const { runConfigureDevelopersRoles } = require('./configure-roles');
 const { runSyncDevelopersApiTargets } = require('./sync-api-targets');
 const { runDiscoverDevelopersTargets } = require('./discover-targets');
+const { runSelectDevelopersApps } = require('./select-apps');
 
 function printFindings(findings, fmt, label) {
   if (findings.length === 0) return;
@@ -203,6 +204,39 @@ async function runDevelopersCommand(subcommand, flags, fmt) {
       console.log(`  Output:      ${fmt.dim(result.outputPath)}`);
     }
     printDiscoverTargetHints(result.report, fmt);
+    return result.exitCode;
+  }
+
+  if (subcommand === 'select-apps') {
+    const result = await runSelectDevelopersApps(flags);
+    if (result.validationErrors) {
+      console.log(fmt.err('Developers config validation failed'));
+      for (const err of result.validationErrors) console.log(`  - ${err}`);
+      return 1;
+    }
+    if (result.error) {
+      console.log(fmt.err(result.error));
+      return result.exitCode;
+    }
+
+    console.log(fmt.header('Developers select-apps'));
+    console.log('');
+    console.log(`[select] ${result.report.summary.selectedApps} selected app(s), ${result.report.summary.excludedApps} excluded app(s)`);
+    console.log(`[select] ${result.report.summary.selectedDevelopers} selected developer(s), ${result.report.summary.productsCovered} product(s) covered`);
+    if (result.report.summary.missingProductPlanMappings > 0) {
+      console.log(fmt.warn(`${result.report.summary.missingProductPlanMappings} selected product(s) are missing from productPlanMap`));
+    }
+    if (result.skipped) {
+      console.log(fmt.warn('Skipped config write at operator request'));
+    }
+    console.log('');
+    console.log(`  Report:      ${fmt.dim(result.reportPath)}`);
+    if (result.outputPath) {
+      console.log(`  Output:      ${fmt.dim(result.outputPath)}`);
+    }
+    console.log('');
+    console.log(fmt.info('Next step: validate selected app product targets before analyze/import:'));
+    console.log(`  ${fmt.dim('node bin/migrator.js developers validate-config-targets --ir-dir ./ir --config ./config/developers.config.resolved.json --gravitee-token "$GRAVITEE_TOKEN"')}`);
     return result.exitCode;
   }
 
