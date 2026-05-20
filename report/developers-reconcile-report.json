@@ -1,13 +1,31 @@
 {
-  "generatedAt": "2026-05-20T19:24:34.310Z",
+  "generatedAt": "2026-05-20T19:29:18.643Z",
   "summary": {
     "checkedUsers": 21,
     "checkedApplications": 25,
     "checkedSubscriptions": 31,
-    "blockers": 67,
+    "blockers": 70,
     "warnings": 0
   },
   "mismatches": [
+    {
+      "severity": "blocker",
+      "code": "USER_MISSING",
+      "sourceId": "dev12@540.co",
+      "message": "User dev12@540.co is missing"
+    },
+    {
+      "severity": "blocker",
+      "code": "USER_MISSING",
+      "sourceId": "dev20@540.co",
+      "message": "User dev20@540.co is missing"
+    },
+    {
+      "severity": "blocker",
+      "code": "USER_MISSING",
+      "sourceId": "dev2@540.co",
+      "message": "User dev2@540.co is missing"
+    },
     {
       "severity": "blocker",
       "code": "APPLICATION_METADATA_MISMATCH",
