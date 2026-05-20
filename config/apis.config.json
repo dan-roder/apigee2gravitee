@@ -1,6 +1,6 @@
 {
   "gravitee": {
-    "url": "https://gravitee-api.advana.aws.540.dev",
+    "url": "http://localhost:8083",
     "orgId": "DEFAULT",
     "envId": "DEFAULT"
   },

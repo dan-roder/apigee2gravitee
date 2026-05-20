@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-04-09T18:15:54.428Z",
+  "generatedAt": "2026-05-20T15:45:41.719Z",
   "summary": {
-    "proxies": 23,
+    "proxies": 24,
     "blockers": 0,
     "warnings": 11,
-    "actions": 92,
+    "actions": 96,
     "manualReview": 16
   },
   "findings": [
@@ -375,6 +375,25 @@
       "migrationMeta": {
         "sourceProxy": "chuck-norris-api-10",
         "sourceRevision": "2",
+        "securityScheme": "API_KEY",
+        "needsReviewSteps": [
+          "remove-query-param-apikey"
+        ],
+        "llmSteps": [],
+        "manualSteps": [],
+        "unmappedConditions": [],
+        "kvmWriteOps": [],
+        "encryptedProperties": [],
+        "sharedFlowRefs": [],
+        "targetServerRefs": []
+      }
+    },
+    {
+      "proxyName": "chuck-norris-api-10_rev2_2026_05_12",
+      "manualReviewReasons": [],
+      "migrationMeta": {
+        "sourceProxy": "chuck-norris-api-10_rev2_2026_05_12",
+        "sourceRevision": "1",
         "securityScheme": "API_KEY",
         "needsReviewSteps": [
           "remove-query-param-apikey"

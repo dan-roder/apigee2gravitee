@@ -1,23 +1,23 @@
 {
-  "generatedAt": "2026-04-09T18:15:54.427Z",
+  "generatedAt": "2026-05-20T15:45:41.717Z",
   "kind": "ApisMigrationManifest",
   "source": {
     "irDir": "/Users/daniel.roder/Sites/apigee2gravitee/ir",
-    "manifestExtractedAt": "2026-04-06T21:03:44.645925Z"
+    "manifestExtractedAt": "2026-05-18T19:30:15.613462Z"
   },
   "summary": {
-    "proxies": 23,
+    "proxies": 24,
     "blockers": 0,
     "warnings": 11,
-    "actions": 92,
+    "actions": 96,
     "actionsByKind": {
-      "UPSERT_API": 23,
-      "UPSERT_PLAN": 23,
-      "VERIFY_PLAN": 23,
-      "VERIFY_API": 23
+      "UPSERT_API": 24,
+      "UPSERT_PLAN": 24,
+      "VERIFY_PLAN": 24,
+      "VERIFY_API": 24
     },
     "actionsByStatus": {
-      "READY": 92
+      "READY": 96
     }
   },
   "records": {
@@ -1279,6 +1279,140 @@
           "_migrationMeta": {
             "sourceProxy": "chuck-norris-api-10",
             "sourceRevision": "2",
+            "securityScheme": "API_KEY",
+            "needsReviewSteps": [
+              "remove-query-param-apikey"
+            ],
+            "llmSteps": [],
+            "manualSteps": [],
+            "unmappedConditions": [],
+            "kvmWriteOps": [],
+            "encryptedProperties": [],
+            "sharedFlowRefs": [],
+            "targetServerRefs": []
+          }
+        },
+        "manualReviewReasons": []
+      },
+      {
+        "sourceId": "chuck-norris-api-10_rev2_2026_05_12",
+        "proxyName": "chuck-norris-api-10_rev2_2026_05_12",
+        "definition": {
+          "definitionVersion": "V4",
+          "type": "PROXY",
+          "name": "chuck-norris-api-10",
+          "apiVersion": "1.0.0",
+          "description": "return one random chuck norris joke",
+          "tags": [],
+          "listeners": [
+            {
+              "type": "HTTP",
+              "paths": [
+                {
+                  "path": "/v1/chuck-norris-api-10"
+                }
+              ],
+              "entrypoints": [
+                {
+                  "type": "http-proxy"
+                }
+              ]
+            }
+          ],
+          "endpointGroups": [
+            {
+              "name": "default-group",
+              "type": "http-proxy",
+              "endpoints": [
+                {
+                  "name": "default",
+                  "type": "http-proxy",
+                  "weight": 1,
+                  "inheritConfiguration": false,
+                  "configuration": {
+                    "target": "https://api.chucknorris.io/jokes/random"
+                  },
+                  "services": {}
+                }
+              ],
+              "services": {}
+            }
+          ],
+          "flows": [
+            {
+              "name": "Common Flow",
+              "enabled": true,
+              "selectors": [
+                {
+                  "type": "HTTP",
+                  "path": "/v1/chuck-norris-api-10",
+                  "pathOperator": "STARTS_WITH"
+                }
+              ],
+              "request": [
+                {
+                  "name": "[SECURITY - handled at Plan level] verify-api-key",
+                  "description": "VerifyAPIKey is implemented as Plan security in Gravitee",
+                  "enabled": false,
+                  "policy": "groovy",
+                  "configuration": {
+                    "scope": "REQUEST",
+                    "script": "// VerifyAPIKey → Gravitee Plan security scheme"
+                  }
+                },
+                {
+                  "name": "Transform Headers (migrated from: remove-query-param-apikey) [REVIEW NEEDED]",
+                  "description": "Migrated from Apigee AssignMessage: remove-query-param-apikey",
+                  "enabled": true,
+                  "policy": "transform-headers",
+                  "configuration": {
+                    "scope": "REQUEST",
+                    "addHeaders": [],
+                    "removeHeaders": [],
+                    "whitelistHeaders": []
+                  }
+                },
+                {
+                  "name": "Rate Limit (migrated from SpikeArrest: Spike-Arrest-ChuckNorris)",
+                  "description": "Migrated from Apigee SpikeArrest: Spike-Arrest-ChuckNorris",
+                  "enabled": true,
+                  "policy": "rate-limit",
+                  "configuration": {
+                    "async": false,
+                    "addHeaders": true,
+                    "rate": {
+                      "useKeyOnly": false,
+                      "periodTime": 12,
+                      "limit": 12,
+                      "periodTimeUnit": "MINUTES",
+                      "key": "{#request.headers['some-header-name'][0]}"
+                    }
+                  }
+                }
+              ],
+              "response": []
+            }
+          ],
+          "properties": [],
+          "plans": {
+            "API_KEY": {
+              "name": "API Key Plan",
+              "description": "Migrated from Apigee VerifyAPIKey — key header: request.queryparam.apikey",
+              "security": {
+                "type": "API_KEY"
+              },
+              "mode": "STANDARD",
+              "status": "STAGING",
+              "flows": []
+            }
+          },
+          "flowExecution": {
+            "mode": "DEFAULT",
+            "matchRequired": false
+          },
+          "_migrationMeta": {
+            "sourceProxy": "chuck-norris-api-10_rev2_2026_05_12",
+            "sourceRevision": "1",
             "securityScheme": "API_KEY",
             "needsReviewSteps": [
               "remove-query-param-apikey"
@@ -3279,7 +3413,7 @@
         "LLM_POLICY:JS-ProcessCreateKVM"
       ],
       "targetHint": {
-        "apiId": "ae8517f0-4c1a-462c-8517-f04c1a462c09"
+        "apiId": "610c97cb-9afd-43e7-8c97-cb9afde3e764"
       }
     },
     {
@@ -3318,7 +3452,7 @@
         "LLM_POLICY:JS-ProcessCreateKVM"
       ],
       "targetHint": {
-        "planId": "1748772c-2c16-459f-8877-2c2c16359f6e"
+        "planId": "31f77289-08a6-4378-b772-8908a65378d6"
       }
     },
     {
@@ -3561,7 +3695,7 @@
         "LLM_POLICY:processKVMs"
       ],
       "targetHint": {
-        "apiId": "a7d289d9-766b-46f1-9289-d9766be6f1fa"
+        "apiId": "325535df-1bf0-476a-9535-df1bf0a76a4f"
       }
     },
     {
@@ -3599,7 +3733,7 @@
         "LLM_POLICY:processKVMs"
       ],
       "targetHint": {
-        "planId": "a3aec209-f0ec-4722-aec2-09f0ecc7222e"
+        "planId": "8ea978e4-57eb-4653-a978-e457ebf65373"
       }
     },
     {
@@ -3848,7 +3982,7 @@
         "LLM_POLICY:JS-UpdateEntries"
       ],
       "targetHint": {
-        "apiId": "eb2c2568-0f94-4567-ac25-680f94c567c9"
+        "apiId": "533c5c2b-fddd-40e2-bc5c-2bfddd30e268"
       }
     },
     {
@@ -3888,7 +4022,7 @@
         "LLM_POLICY:JS-UpdateEntries"
       ],
       "targetHint": {
-        "planId": "0c34e911-25a9-4d93-b4e9-1125a9bd936d"
+        "planId": "26ddf93e-986f-45c9-9df9-3e986ff5c967"
       }
     },
     {
@@ -4095,7 +4229,7 @@
         "LLM_POLICY:Fetch-KVMs"
       ],
       "targetHint": {
-        "apiId": "ced2af9a-fd1d-4c8b-92af-9afd1dec8b24"
+        "apiId": "1625fe84-fa21-4567-a5fe-84fa21256780"
       }
     },
     {
@@ -4132,7 +4266,7 @@
         "LLM_POLICY:Fetch-KVMs"
       ],
       "targetHint": {
-        "planId": "a8a5e93b-6453-45ac-a5e9-3b645385ac8d"
+        "planId": "17fb6f2d-63f9-40b5-bb6f-2d63f970b530"
       }
     },
     {
@@ -4304,7 +4438,7 @@
         "SHARED_FLOW_REFS_PRESENT"
       ],
       "targetHint": {
-        "apiId": "a71428c0-322e-4060-9428-c0322ee0604e"
+        "apiId": "a5b183d1-9327-4a9a-b183-d19327ba9ae1"
       }
     },
     {
@@ -4341,7 +4475,7 @@
         "SHARED_FLOW_REFS_PRESENT"
       ],
       "targetHint": {
-        "planId": "3a7aa1bf-97fd-4fb2-baa1-bf97fd5fb206"
+        "planId": "e470787c-6691-4ef9-b078-7c66910ef98e"
       }
     },
     {
@@ -4482,7 +4616,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "apiId": "2d568aa1-a1ee-49ea-968a-a1a1ee29ea11"
+        "apiId": "c78de823-83c1-4cf9-8de8-2383c14cf9e7"
       }
     },
     {
@@ -4517,7 +4651,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "planId": "ee6ae119-09e4-4293-aae1-1909e45293cb"
+        "planId": "cd6e6125-3c21-4155-ae61-253c21f1559a"
       }
     },
     {
@@ -4654,7 +4788,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "apiId": "71bad2fc-80ef-4dce-bad2-fc80efddce4e"
+        "apiId": "8cf248f0-637a-4ed2-b248-f0637afed2e6"
       }
     },
     {
@@ -4689,7 +4823,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "planId": "c9ff6b18-4175-4c48-bf6b-1841756c4807"
+        "planId": "0b22bc89-5db5-431e-a2bc-895db5f31e95"
       }
     },
     {
@@ -4826,7 +4960,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "apiId": "6b413c68-ff1a-4362-813c-68ff1ac36249"
+        "apiId": "dcc0417f-18ab-4955-8041-7f18abe95537"
       }
     },
     {
@@ -4861,7 +4995,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "planId": "a2b1366a-b9dc-4b15-b136-6ab9dc0b150e"
+        "planId": "597158dd-206f-4630-b158-dd206f763084"
       }
     },
     {
@@ -5037,7 +5171,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "apiId": "05a5c056-0848-429e-a5c0-560848929e4d"
+        "apiId": "63a370e7-7d6e-4ddb-a370-e77d6e3ddbc3"
       }
     },
     {
@@ -5072,7 +5206,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "planId": "03454fca-5a30-4fff-854f-ca5a308fff1e"
+        "planId": "8243bcf4-377a-421b-83bc-f4377a321b1d"
       }
     },
     {
@@ -5265,7 +5399,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "apiId": "bdc40b6a-2084-44c3-840b-6a208474c396"
+        "apiId": "25c78c81-954e-455d-878c-81954e255d73"
       }
     },
     {
@@ -5300,7 +5434,7 @@
       "warnings": [],
       "manualReviewReasons": [],
       "targetHint": {
-        "planId": "eade57f3-ce18-4858-9e57-f3ce183858d3"
+        "planId": "6d3b4998-cee4-412a-bb49-98cee4f12ad5"
       }
     },
     {
@@ -5348,12 +5482,240 @@
       "manualReviewReasons": []
     },
     {
+      "actionId": "UPSERT_API:chuck-norris-api-10_rev2_2026_05_12",
+      "kind": "UPSERT_API",
+      "sourceId": "chuck-norris-api-10_rev2_2026_05_12",
+      "dependencies": [],
+      "plannedStatus": "READY",
+      "operation": "UPDATE",
+      "lookup": {
+        "sourceId": "chuck-norris-api-10_rev2_2026_05_12",
+        "name": "chuck-norris-api-10"
+      },
+      "payload": {
+        "definition": {
+          "definitionVersion": "V4",
+          "type": "PROXY",
+          "name": "chuck-norris-api-10",
+          "apiVersion": "1.0.0",
+          "description": "return one random chuck norris joke",
+          "tags": [],
+          "listeners": [
+            {
+              "type": "HTTP",
+              "paths": [
+                {
+                  "path": "/v1/chuck-norris-api-10"
+                }
+              ],
+              "entrypoints": [
+                {
+                  "type": "http-proxy"
+                }
+              ]
+            }
+          ],
+          "endpointGroups": [
+            {
+              "name": "default-group",
+              "type": "http-proxy",
+              "endpoints": [
+                {
+                  "name": "default",
+                  "type": "http-proxy",
+                  "weight": 1,
+                  "inheritConfiguration": false,
+                  "configuration": {
+                    "target": "https://api.chucknorris.io/jokes/random"
+                  },
+                  "services": {}
+                }
+              ],
+              "services": {}
+            }
+          ],
+          "flows": [
+            {
+              "name": "Common Flow",
+              "enabled": true,
+              "selectors": [
+                {
+                  "type": "HTTP",
+                  "path": "/v1/chuck-norris-api-10",
+                  "pathOperator": "STARTS_WITH"
+                }
+              ],
+              "request": [
+                {
+                  "name": "[SECURITY - handled at Plan level] verify-api-key",
+                  "description": "VerifyAPIKey is implemented as Plan security in Gravitee",
+                  "enabled": false,
+                  "policy": "groovy",
+                  "configuration": {
+                    "scope": "REQUEST",
+                    "script": "// VerifyAPIKey → Gravitee Plan security scheme"
+                  }
+                },
+                {
+                  "name": "Transform Headers (migrated from: remove-query-param-apikey) [REVIEW NEEDED]",
+                  "description": "Migrated from Apigee AssignMessage: remove-query-param-apikey",
+                  "enabled": true,
+                  "policy": "transform-headers",
+                  "configuration": {
+                    "scope": "REQUEST",
+                    "addHeaders": [],
+                    "removeHeaders": [],
+                    "whitelistHeaders": []
+                  }
+                },
+                {
+                  "name": "Rate Limit (migrated from SpikeArrest: Spike-Arrest-ChuckNorris)",
+                  "description": "Migrated from Apigee SpikeArrest: Spike-Arrest-ChuckNorris",
+                  "enabled": true,
+                  "policy": "rate-limit",
+                  "configuration": {
+                    "async": false,
+                    "addHeaders": true,
+                    "rate": {
+                      "useKeyOnly": false,
+                      "periodTime": 12,
+                      "limit": 12,
+                      "periodTimeUnit": "MINUTES",
+                      "key": "{#request.headers['some-header-name'][0]}"
+                    }
+                  }
+                }
+              ],
+              "response": []
+            }
+          ],
+          "properties": [],
+          "plans": {
+            "API_KEY": {
+              "name": "API Key Plan",
+              "description": "Migrated from Apigee VerifyAPIKey — key header: request.queryparam.apikey",
+              "security": {
+                "type": "API_KEY"
+              },
+              "mode": "STANDARD",
+              "status": "STAGING",
+              "flows": []
+            }
+          },
+          "flowExecution": {
+            "mode": "DEFAULT",
+            "matchRequired": false
+          },
+          "_migrationMeta": {
+            "sourceProxy": "chuck-norris-api-10_rev2_2026_05_12",
+            "sourceRevision": "1",
+            "securityScheme": "API_KEY",
+            "needsReviewSteps": [
+              "remove-query-param-apikey"
+            ],
+            "llmSteps": [],
+            "manualSteps": [],
+            "unmappedConditions": [],
+            "kvmWriteOps": [],
+            "encryptedProperties": [],
+            "sharedFlowRefs": [],
+            "targetServerRefs": []
+          }
+        }
+      },
+      "blockers": [],
+      "warnings": [],
+      "manualReviewReasons": [],
+      "targetHint": {
+        "apiId": "25c78c81-954e-455d-878c-81954e255d73"
+      }
+    },
+    {
+      "actionId": "UPSERT_PLAN:chuck-norris-api-10_rev2_2026_05_12:API_KEY",
+      "kind": "UPSERT_PLAN",
+      "sourceId": "chuck-norris-api-10_rev2_2026_05_12",
+      "dependencies": [
+        "UPSERT_API:chuck-norris-api-10_rev2_2026_05_12"
+      ],
+      "plannedStatus": "READY",
+      "operation": "UPDATE",
+      "lookup": {
+        "sourceId": "chuck-norris-api-10_rev2_2026_05_12",
+        "name": "chuck-norris-api-10",
+        "planKey": "API_KEY",
+        "planName": "API Key Plan"
+      },
+      "payload": {
+        "planKey": "API_KEY",
+        "definition": {
+          "name": "API Key Plan",
+          "description": "Migrated from Apigee VerifyAPIKey — key header: request.queryparam.apikey",
+          "security": {
+            "type": "API_KEY"
+          },
+          "mode": "STANDARD",
+          "status": "STAGING",
+          "flows": []
+        }
+      },
+      "blockers": [],
+      "warnings": [],
+      "manualReviewReasons": [],
+      "targetHint": {
+        "planId": "6d3b4998-cee4-412a-bb49-98cee4f12ad5"
+      }
+    },
+    {
+      "actionId": "VERIFY_PLAN:chuck-norris-api-10_rev2_2026_05_12:API_KEY",
+      "kind": "VERIFY_PLAN",
+      "sourceId": "chuck-norris-api-10_rev2_2026_05_12",
+      "dependencies": [
+        "UPSERT_PLAN:chuck-norris-api-10_rev2_2026_05_12:API_KEY"
+      ],
+      "plannedStatus": "READY",
+      "operation": "VERIFY",
+      "lookup": {
+        "sourceId": "chuck-norris-api-10_rev2_2026_05_12",
+        "name": "chuck-norris-api-10",
+        "planKey": "API_KEY",
+        "planName": "API Key Plan"
+      },
+      "payload": {
+        "planKey": "API_KEY",
+        "expectedName": "API Key Plan"
+      },
+      "blockers": [],
+      "warnings": [],
+      "manualReviewReasons": []
+    },
+    {
+      "actionId": "VERIFY_API:chuck-norris-api-10_rev2_2026_05_12",
+      "kind": "VERIFY_API",
+      "sourceId": "chuck-norris-api-10_rev2_2026_05_12",
+      "dependencies": [
+        "UPSERT_API:chuck-norris-api-10_rev2_2026_05_12",
+        "VERIFY_PLAN:chuck-norris-api-10_rev2_2026_05_12:API_KEY"
+      ],
+      "plannedStatus": "READY",
+      "operation": "VERIFY",
+      "lookup": {
+        "sourceId": "chuck-norris-api-10_rev2_2026_05_12",
+        "name": "chuck-norris-api-10"
+      },
+      "payload": {
+        "expectedName": "chuck-norris-api-10"
+      },
+      "blockers": [],
+      "warnings": [],
+      "manualReviewReasons": []
+    },
+    {
       "actionId": "UPSERT_API:dog-breeds-api-6",
       "kind": "UPSERT_API",
       "sourceId": "dog-breeds-api-6",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "UPDATE",
       "lookup": {
         "sourceId": "dog-breeds-api-6",
         "name": "dog-breeds-api-6"
@@ -5475,7 +5837,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "apiId": "53b1d618-59d2-4a3a-b1d6-1859d2da3a89"
+      }
     },
     {
       "actionId": "UPSERT_PLAN:dog-breeds-api-6:API_KEY",
@@ -5485,7 +5849,7 @@
         "UPSERT_API:dog-breeds-api-6"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "UPDATE",
       "lookup": {
         "sourceId": "dog-breeds-api-6",
         "name": "dog-breeds-api-6",
@@ -5508,7 +5872,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "planId": "e7af7151-7eb1-43a4-af71-517eb143a4a2"
+      }
     },
     {
       "actionId": "VERIFY_PLAN:dog-breeds-api-6:API_KEY",
@@ -5560,7 +5926,7 @@
       "sourceId": "get-kvm-proxy",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "UPDATE",
       "lookup": {
         "sourceId": "get-kvm-proxy",
         "name": "get-kvm-proxy"
@@ -5687,7 +6053,9 @@
       "manualReviewReasons": [
         "LLM_POLICY:Process-Encrypted-Value"
       ],
-      "targetHint": {}
+      "targetHint": {
+        "apiId": "d875e7ff-1af0-46b3-b5e7-ff1af056b32a"
+      }
     },
     {
       "actionId": "UPSERT_PLAN:get-kvm-proxy:KEYLESS",
@@ -5697,7 +6065,7 @@
         "UPSERT_API:get-kvm-proxy"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "UPDATE",
       "lookup": {
         "sourceId": "get-kvm-proxy",
         "name": "get-kvm-proxy",
@@ -5722,7 +6090,9 @@
       "manualReviewReasons": [
         "LLM_POLICY:Process-Encrypted-Value"
       ],
-      "targetHint": {}
+      "targetHint": {
+        "planId": "21683f31-bf54-4810-a83f-31bf54f81078"
+      }
     },
     {
       "actionId": "VERIFY_PLAN:get-kvm-proxy:KEYLESS",
@@ -5778,7 +6148,7 @@
       "sourceId": "harry-potter-characters",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "UPDATE",
       "lookup": {
         "sourceId": "harry-potter-characters",
         "name": "harry-potter-characters"
@@ -5930,7 +6300,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "apiId": "72c894fa-f439-4093-8894-faf439f09338"
+      }
     },
     {
       "actionId": "UPSERT_PLAN:harry-potter-characters:KEYLESS",
@@ -5940,7 +6312,7 @@
         "UPSERT_API:harry-potter-characters"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "UPDATE",
       "lookup": {
         "sourceId": "harry-potter-characters",
         "name": "harry-potter-characters",
@@ -5963,7 +6335,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "planId": "2dba96b9-be74-4da2-ba96-b9be746da212"
+      }
     },
     {
       "actionId": "VERIFY_PLAN:harry-potter-characters:KEYLESS",
@@ -6015,7 +6389,7 @@
       "sourceId": "hogwarts-houses-api-8",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "UPDATE",
       "lookup": {
         "sourceId": "hogwarts-houses-api-8",
         "name": "hogwarts-houses-api-8"
@@ -6137,7 +6511,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "apiId": "59dab35e-953a-4960-9ab3-5e953ae960df"
+      }
     },
     {
       "actionId": "UPSERT_PLAN:hogwarts-houses-api-8:API_KEY",
@@ -6147,7 +6523,7 @@
         "UPSERT_API:hogwarts-houses-api-8"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "UPDATE",
       "lookup": {
         "sourceId": "hogwarts-houses-api-8",
         "name": "hogwarts-houses-api-8",
@@ -6170,7 +6546,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "planId": "7c03dde1-a653-48b3-83dd-e1a65368b345"
+      }
     },
     {
       "actionId": "VERIFY_PLAN:hogwarts-houses-api-8:API_KEY",
@@ -6222,7 +6600,7 @@
       "sourceId": "kanye-rest-api-5",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "UPDATE",
       "lookup": {
         "sourceId": "kanye-rest-api-5",
         "name": "kanye-rest-api-5"
@@ -6383,7 +6761,9 @@
       "manualReviewReasons": [
         "LLM_POLICY:ProcessEncryptedValue"
       ],
-      "targetHint": {}
+      "targetHint": {
+        "apiId": "d40cba62-2887-461e-8cba-622887161ea9"
+      }
     },
     {
       "actionId": "UPSERT_PLAN:kanye-rest-api-5:API_KEY",
@@ -6393,7 +6773,7 @@
         "UPSERT_API:kanye-rest-api-5"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "UPDATE",
       "lookup": {
         "sourceId": "kanye-rest-api-5",
         "name": "kanye-rest-api-5",
@@ -6418,7 +6798,9 @@
       "manualReviewReasons": [
         "LLM_POLICY:ProcessEncryptedValue"
       ],
-      "targetHint": {}
+      "targetHint": {
+        "planId": "7ac7160f-b292-4f9e-8716-0fb292af9e80"
+      }
     },
     {
       "actionId": "VERIFY_PLAN:kanye-rest-api-5:API_KEY",
@@ -6474,7 +6856,7 @@
       "sourceId": "kvm-test",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "UPDATE",
       "lookup": {
         "sourceId": "kvm-test",
         "name": "kvm-test"
@@ -6594,7 +6976,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "apiId": "0304fc92-9114-43e8-84fc-929114f3e809"
+      }
     },
     {
       "actionId": "UPSERT_PLAN:kvm-test:KEYLESS",
@@ -6604,7 +6988,7 @@
         "UPSERT_API:kvm-test"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "UPDATE",
       "lookup": {
         "sourceId": "kvm-test",
         "name": "kvm-test",
@@ -6627,7 +7011,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "planId": "00e061ed-d645-491b-a061-edd645291b7a"
+      }
     },
     {
       "actionId": "VERIFY_PLAN:kvm-test:KEYLESS",
@@ -6679,7 +7065,7 @@
       "sourceId": "load-balance-target-servers-api",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "UPDATE",
       "lookup": {
         "sourceId": "load-balance-target-servers-api",
         "name": "load-balance-target-servers-api"
@@ -6780,7 +7166,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "apiId": "b6a1789d-9235-41b3-a178-9d923531b34b"
+      }
     },
     {
       "actionId": "UPSERT_PLAN:load-balance-target-servers-api:KEYLESS",
@@ -6790,7 +7178,7 @@
         "UPSERT_API:load-balance-target-servers-api"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "UPDATE",
       "lookup": {
         "sourceId": "load-balance-target-servers-api",
         "name": "load-balance-target-servers-api",
@@ -6813,7 +7201,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "planId": "60865156-520a-416d-8651-56520ab16dc2"
+      }
     },
     {
       "actionId": "VERIFY_PLAN:load-balance-target-servers-api:KEYLESS",
@@ -6865,7 +7255,7 @@
       "sourceId": "mock-target-api",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "UPDATE",
       "lookup": {
         "sourceId": "mock-target-api",
         "name": "mock-target-api"
@@ -7009,7 +7399,9 @@
       "manualReviewReasons": [
         "LLM_POLICY:Process-Encrypted-Value"
       ],
-      "targetHint": {}
+      "targetHint": {
+        "apiId": "1aa3020a-e74c-4285-a302-0ae74c0285b7"
+      }
     },
     {
       "actionId": "UPSERT_PLAN:mock-target-api:KEYLESS",
@@ -7019,7 +7411,7 @@
         "UPSERT_API:mock-target-api"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "UPDATE",
       "lookup": {
         "sourceId": "mock-target-api",
         "name": "mock-target-api",
@@ -7044,7 +7436,9 @@
       "manualReviewReasons": [
         "LLM_POLICY:Process-Encrypted-Value"
       ],
-      "targetHint": {}
+      "targetHint": {
+        "planId": "efc0c6d5-b3a2-40f6-80c6-d5b3a2c0f643"
+      }
     },
     {
       "actionId": "VERIFY_PLAN:mock-target-api:KEYLESS",
@@ -7100,7 +7494,7 @@
       "sourceId": "proxy-sharedflow-api-11",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "UPDATE",
       "lookup": {
         "sourceId": "proxy-sharedflow-api-11",
         "name": "proxy-sharedflow-api-11"
@@ -7226,7 +7620,9 @@
       "manualReviewReasons": [
         "SHARED_FLOW_REFS_PRESENT"
       ],
-      "targetHint": {}
+      "targetHint": {
+        "apiId": "e6e65e26-df19-4825-a65e-26df19982513"
+      }
     },
     {
       "actionId": "UPSERT_PLAN:proxy-sharedflow-api-11:KEYLESS",
@@ -7236,7 +7632,7 @@
         "UPSERT_API:proxy-sharedflow-api-11"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "UPDATE",
       "lookup": {
         "sourceId": "proxy-sharedflow-api-11",
         "name": "proxy-sharedflow-api-11",
@@ -7261,7 +7657,9 @@
       "manualReviewReasons": [
         "SHARED_FLOW_REFS_PRESENT"
       ],
-      "targetHint": {}
+      "targetHint": {
+        "planId": "e3bc149b-f018-453b-bc14-9bf018953b01"
+      }
     },
     {
       "actionId": "VERIFY_PLAN:proxy-sharedflow-api-11:KEYLESS",
@@ -7317,7 +7715,7 @@
       "sourceId": "v1-ships",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "UPDATE",
       "lookup": {
         "sourceId": "v1-ships",
         "name": "v1-ships"
@@ -7400,7 +7798,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "apiId": "75f001bd-a6fa-4334-b001-bda6fae334ea"
+      }
     },
     {
       "actionId": "UPSERT_PLAN:v1-ships:KEYLESS",
@@ -7410,7 +7810,7 @@
         "UPSERT_API:v1-ships"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "UPDATE",
       "lookup": {
         "sourceId": "v1-ships",
         "name": "v1-ships",
@@ -7433,7 +7833,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "planId": "8d1936b5-d1f1-422b-9936-b5d1f1822b8b"
+      }
     },
     {
       "actionId": "VERIFY_PLAN:v1-ships:KEYLESS",
@@ -7485,7 +7887,7 @@
       "sourceId": "villian-chain",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "UPDATE",
       "lookup": {
         "sourceId": "villian-chain",
         "name": "villian-chain"
@@ -7707,7 +8109,9 @@
       "manualReviewReasons": [
         "LLM_POLICY:createJsonResponse"
       ],
-      "targetHint": {}
+      "targetHint": {
+        "apiId": "5a55a41b-0997-4840-95a4-1b0997784003"
+      }
     },
     {
       "actionId": "UPSERT_PLAN:villian-chain:KEYLESS",
@@ -7717,7 +8121,7 @@
         "UPSERT_API:villian-chain"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "UPDATE",
       "lookup": {
         "sourceId": "villian-chain",
         "name": "villian-chain",
@@ -7742,7 +8146,9 @@
       "manualReviewReasons": [
         "LLM_POLICY:createJsonResponse"
       ],
-      "targetHint": {}
+      "targetHint": {
+        "planId": "b4436b66-8ad4-4c23-836b-668ad4ac23cd"
+      }
     },
     {
       "actionId": "VERIFY_PLAN:villian-chain:KEYLESS",
@@ -7798,7 +8204,7 @@
       "sourceId": "wizards-api-9",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "UPDATE",
       "lookup": {
         "sourceId": "wizards-api-9",
         "name": "wizards-api-9"
@@ -7920,7 +8326,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "apiId": "07dfa49e-dc23-4048-9fa4-9edc236048a6"
+      }
     },
     {
       "actionId": "UPSERT_PLAN:wizards-api-9:API_KEY",
@@ -7930,7 +8338,7 @@
         "UPSERT_API:wizards-api-9"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "UPDATE",
       "lookup": {
         "sourceId": "wizards-api-9",
         "name": "wizards-api-9",
@@ -7953,7 +8361,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "planId": "589c71e0-0770-4580-9c71-e0077015806b"
+      }
     },
     {
       "actionId": "VERIFY_PLAN:wizards-api-9:API_KEY",
@@ -8005,7 +8415,7 @@
       "sourceId": "yes-or-no-api-4",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "UPDATE",
       "lookup": {
         "sourceId": "yes-or-no-api-4",
         "name": "yes-or-no-api-4"
@@ -8127,7 +8537,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "apiId": "bf68aeeb-d4db-4656-a8ae-ebd4db4656a5"
+      }
     },
     {
       "actionId": "UPSERT_PLAN:yes-or-no-api-4:API_KEY",
@@ -8137,7 +8549,7 @@
         "UPSERT_API:yes-or-no-api-4"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "UPDATE",
       "lookup": {
         "sourceId": "yes-or-no-api-4",
         "name": "yes-or-no-api-4",
@@ -8160,7 +8572,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "planId": "9ae81624-fbd6-415f-a816-24fbd6a15fc9"
+      }
     },
     {
       "actionId": "VERIFY_PLAN:yes-or-no-api-4:API_KEY",

@@ -1,0 +1,354 @@
+{
+  "generatedAt": "2026-05-20T16:05:01.652Z",
+  "command": "developers select-apps",
+  "irDir": "/Users/daniel.roder/Sites/apigee2gravitee/ir",
+  "configPath": "/Users/daniel.roder/Sites/apigee2gravitee/config/developers.config.resolved.json",
+  "cleared": false,
+  "skipped": false,
+  "existingIncludeApps": [],
+  "summary": {
+    "totalAppsDiscovered": 25,
+    "selectedApps": 25,
+    "excludedApps": 0,
+    "selectedDevelopers": 21,
+    "productsCovered": 8,
+    "missingProductPlanMappings": 0
+  },
+  "selectedApps": [
+    {
+      "sourceId": "danny.rivera@540.co/cats-dev-app",
+      "developerEmail": "danny.rivera@540.co",
+      "appName": "cats-dev-app",
+      "appStatus": "approved",
+      "developerStatus": "active",
+      "credentialCount": 1,
+      "products": [
+        "cats-api-product"
+      ],
+      "preselected": false
+    },
+    {
+      "sourceId": "dev1@540.co/kanye-dev-app",
+      "developerEmail": "dev1@540.co",
+      "appName": "kanye-dev-app",
+      "appStatus": "approved",
+      "developerStatus": "active",
+      "credentialCount": 1,
+      "products": [
+        "kanye-api-product"
+      ],
+      "preselected": false
+    },
+    {
+      "sourceId": "dev1@540.co/wizards-dev-app",
+      "developerEmail": "dev1@540.co",
+      "appName": "wizards-dev-app",
+      "appStatus": "approved",
+      "developerStatus": "active",
+      "credentialCount": 1,
+      "products": [
+        "wizards-api-product"
+      ],
+      "preselected": false
+    },
+    {
+      "sourceId": "dev10@540.co/dev10-app",
+      "developerEmail": "dev10@540.co",
+      "appName": "dev10-app",
+      "appStatus": "approved",
+      "developerStatus": "active",
+      "credentialCount": 1,
+      "products": [
+        "wizards-api-product"
+      ],
+      "preselected": false
+    },
+    {
+      "sourceId": "dev11@540.co/dev11-app",
+      "developerEmail": "dev11@540.co",
+      "appName": "dev11-app",
+      "appStatus": "approved",
+      "developerStatus": "active",
+      "credentialCount": 1,
+      "products": [
+        "yes-or-no-api-product"
+      ],
+      "preselected": false
+    },
+    {
+      "sourceId": "dev12@540.co/dev12-app",
+      "developerEmail": "dev12@540.co",
+      "appName": "dev12-app",
+      "appStatus": "approved",
+      "developerStatus": "active",
+      "credentialCount": 1,
+      "products": [
+        "wizards-api-product"
+      ],
+      "preselected": false
+    },
+    {
+      "sourceId": "dev13@540.co/dev13-app",
+      "developerEmail": "dev13@540.co",
+      "appName": "dev13-app",
+      "appStatus": "approved",
+      "developerStatus": "active",
+      "credentialCount": 1,
+      "products": [
+        "cats-api-product"
+      ],
+      "preselected": false
+    },
+    {
+      "sourceId": "dev14@540.co/dev14-app",
+      "developerEmail": "dev14@540.co",
+      "appName": "dev14-app",
+      "appStatus": "approved",
+      "developerStatus": "active",
+      "credentialCount": 1,
+      "products": [
+        "chuck-norris-api-product"
+      ],
+      "preselected": false
+    },
+    {
+      "sourceId": "dev15@540.co/dev15-app",
+      "developerEmail": "dev15@540.co",
+      "appName": "dev15-app",
+      "appStatus": "approved",
+      "developerStatus": "active",
+      "credentialCount": 1,
+      "products": [
+        "dog-breeds-api-product"
+      ],
+      "preselected": false
+    },
+    {
+      "sourceId": "dev16@540.co/dev16-app",
+      "developerEmail": "dev16@540.co",
+      "appName": "dev16-app",
+      "appStatus": "approved",
+      "developerStatus": "active",
+      "credentialCount": 1,
+      "products": [
+        "hogwarts-houses-api-product"
+      ],
+      "preselected": false
+    },
+    {
+      "sourceId": "dev17@540.co/dev17-app",
+      "developerEmail": "dev17@540.co",
+      "appName": "dev17-app",
+      "appStatus": "approved",
+      "developerStatus": "active",
+      "credentialCount": 1,
+      "products": [
+        "misc-api-product"
+      ],
+      "preselected": false
+    },
+    {
+      "sourceId": "dev18@540.co/dev18-app",
+      "developerEmail": "dev18@540.co",
+      "appName": "dev18-app",
+      "appStatus": "approved",
+      "developerStatus": "active",
+      "credentialCount": 1,
+      "products": [
+        "wizards-api-product"
+      ],
+      "preselected": false
+    },
+    {
+      "sourceId": "dev19@540.co/dev19-app",
+      "developerEmail": "dev19@540.co",
+      "appName": "dev19-app",
+      "appStatus": "approved",
+      "developerStatus": "active",
+      "credentialCount": 1,
+      "products": [
+        "yes-or-no-api-product"
+      ],
+      "preselected": false
+    },
+    {
+      "sourceId": "dev2@540.co/chuck-norris-dev-app",
+      "developerEmail": "dev2@540.co",
+      "appName": "chuck-norris-dev-app",
+      "appStatus": "approved",
+      "developerStatus": "active",
+      "credentialCount": 1,
+      "products": [
+        "chuck-norris-api-product"
+      ],
+      "preselected": false
+    },
+    {
+      "sourceId": "dev2@540.co/dog-breeds-dev-app",
+      "developerEmail": "dev2@540.co",
+      "appName": "dog-breeds-dev-app",
+      "appStatus": "approved",
+      "developerStatus": "active",
+      "credentialCount": 1,
+      "products": [
+        "dog-breeds-api-product"
+      ],
+      "preselected": false
+    },
+    {
+      "sourceId": "dev20@540.co/dev20-app",
+      "developerEmail": "dev20@540.co",
+      "appName": "dev20-app",
+      "appStatus": "approved",
+      "developerStatus": "active",
+      "credentialCount": 1,
+      "products": [
+        "dog-breeds-api-product"
+      ],
+      "preselected": false
+    },
+    {
+      "sourceId": "dev4@540.co/dev4-app",
+      "developerEmail": "dev4@540.co",
+      "appName": "dev4-app",
+      "appStatus": "approved",
+      "developerStatus": "active",
+      "credentialCount": 1,
+      "products": [
+        "cats-api-product"
+      ],
+      "preselected": false
+    },
+    {
+      "sourceId": "dev5@540.co/dev5-app",
+      "developerEmail": "dev5@540.co",
+      "appName": "dev5-app",
+      "appStatus": "approved",
+      "developerStatus": "active",
+      "credentialCount": 1,
+      "products": [
+        "chuck-norris-api-product"
+      ],
+      "preselected": false
+    },
+    {
+      "sourceId": "dev6@540.co/dev6-app",
+      "developerEmail": "dev6@540.co",
+      "appName": "dev6-app",
+      "appStatus": "approved",
+      "developerStatus": "active",
+      "credentialCount": 1,
+      "products": [
+        "dog-breeds-api-product"
+      ],
+      "preselected": false
+    },
+    {
+      "sourceId": "dev7@540.co/dev7-app",
+      "developerEmail": "dev7@540.co",
+      "appName": "dev7-app",
+      "appStatus": "approved",
+      "developerStatus": "active",
+      "credentialCount": 1,
+      "products": [
+        "hogwarts-houses-api-product"
+      ],
+      "preselected": false
+    },
+    {
+      "sourceId": "dev8@540.co/dev8-app",
+      "developerEmail": "dev8@540.co",
+      "appName": "dev8-app",
+      "appStatus": "approved",
+      "developerStatus": "active",
+      "credentialCount": 1,
+      "products": [
+        "kanye-api-product"
+      ],
+      "preselected": false
+    },
+    {
+      "sourceId": "dev9@540.co/dev9-app",
+      "developerEmail": "dev9@540.co",
+      "appName": "dev9-app",
+      "appStatus": "approved",
+      "developerStatus": "active",
+      "credentialCount": 1,
+      "products": [
+        "misc-api-product"
+      ],
+      "preselected": false
+    },
+    {
+      "sourceId": "erik.severson@540.co/hogwarts-houses-dev-app",
+      "developerEmail": "erik.severson@540.co",
+      "appName": "hogwarts-houses-dev-app",
+      "appStatus": "approved",
+      "developerStatus": "active",
+      "credentialCount": 1,
+      "products": [
+        "hogwarts-houses-api-product"
+      ],
+      "preselected": false
+    },
+    {
+      "sourceId": "erik.severson@540.co/misc-dev-app",
+      "developerEmail": "erik.severson@540.co",
+      "appName": "misc-dev-app",
+      "appStatus": "approved",
+      "developerStatus": "active",
+      "credentialCount": 1,
+      "products": [
+        "misc-api-product"
+      ],
+      "preselected": false
+    },
+    {
+      "sourceId": "erik.severson@540.co/yes-or-no-dev-app",
+      "developerEmail": "erik.severson@540.co",
+      "appName": "yes-or-no-dev-app",
+      "appStatus": "approved",
+      "developerStatus": "active",
+      "credentialCount": 1,
+      "products": [
+        "yes-or-no-api-product"
+      ],
+      "preselected": false
+    }
+  ],
+  "excludedApps": [],
+  "selectedDevelopers": [
+    "danny.rivera@540.co",
+    "dev1@540.co",
+    "dev10@540.co",
+    "dev11@540.co",
+    "dev12@540.co",
+    "dev13@540.co",
+    "dev14@540.co",
+    "dev15@540.co",
+    "dev16@540.co",
+    "dev17@540.co",
+    "dev18@540.co",
+    "dev19@540.co",
+    "dev2@540.co",
+    "dev20@540.co",
+    "dev4@540.co",
+    "dev5@540.co",
+    "dev6@540.co",
+    "dev7@540.co",
+    "dev8@540.co",
+    "dev9@540.co",
+    "erik.severson@540.co"
+  ],
+  "productsCovered": [
+    "cats-api-product",
+    "chuck-norris-api-product",
+    "dog-breeds-api-product",
+    "hogwarts-houses-api-product",
+    "kanye-api-product",
+    "misc-api-product",
+    "wizards-api-product",
+    "yes-or-no-api-product"
+  ],
+  "missingProductPlanMappings": []
+}

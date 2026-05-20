@@ -1,6 +1,6 @@
 {
   "gravitee": {
-    "url": "https://gravitee-api.advana.aws.540.dev",
+    "url": "http://localhost:8083",
     "orgId": "DEFAULT",
     "envId": "DEFAULT"
   },
@@ -44,89 +44,82 @@
     },
     "misc-product": [
       {
-        "targetApi": "apigee-hello-api-1",
-        "targetApiId": "2b9f7f53-2dee-4f5c-9f7f-532dee9f5cb1",
-        "targetPlan": "api-key-plan",
-        "targetPlanId": "8f1e49ec-d795-4534-9e49-ecd795053418",
-        "matchMode": "exact"
-      },
-      {
-        "targetApi": "cat-fact-api-2",
-        "targetApiId": "89884594-070e-4a48-8845-94070eea48d4",
-        "targetPlan": "api-key-plan",
-        "targetPlanId": "08f9eee0-3617-4a77-b9ee-e03617da7744",
+        "targetApi": "apigee-hello",
+        "targetApiId": "c78de823-83c1-4cf9-8de8-2383c14cf9e7",
+        "targetPlan": "Keyless Plan",
+        "targetPlanId": "cd6e6125-3c21-4155-ae61-253c21f1559a",
         "matchMode": "exact"
       }
     ],
     "cats-api-product": {
       "targetApi": "cats-api-7",
-      "targetApiId": "be73ea39-32fd-4ac8-b3ea-3932fd4ac858",
-      "targetPlan": "api-key-plan",
-      "targetPlanId": "3611d76f-c02e-4182-91d7-6fc02e318294",
+      "targetApiId": "63a370e7-7d6e-4ddb-a370-e77d6e3ddbc3",
+      "targetPlan": "API Key Plan",
+      "targetPlanId": "8243bcf4-377a-421b-83bc-f4377a321b1d",
       "matchMode": "exact"
     },
     "chuck-norris-api-product": {
       "targetApi": "chuck-norris-api-10",
-      "targetApiId": "927e6ba1-a2e9-4baf-be6b-a1a2e93bafe9",
-      "targetPlan": "api-key-plan",
-      "targetPlanId": "9ff1a423-9700-41a0-b1a4-23970031a07c",
+      "targetApiId": "25c78c81-954e-455d-878c-81954e255d73",
+      "targetPlan": "API Key Plan",
+      "targetPlanId": "6d3b4998-cee4-412a-bb49-98cee4f12ad5",
       "matchMode": "exact"
     },
     "dog-breeds-api-product": {
       "targetApi": "dog-breeds-api-6",
-      "targetApiId": "ab671749-e1a6-426a-a717-49e1a6726a5c",
-      "targetPlan": "api-key-plan",
-      "targetPlanId": "d5efd5ec-b283-4d23-afd5-ecb283fd23ac",
+      "targetApiId": "53b1d618-59d2-4a3a-b1d6-1859d2da3a89",
+      "targetPlan": "API Key Plan",
+      "targetPlanId": "e7af7151-7eb1-43a4-af71-517eb143a4a2",
       "matchMode": "exact"
     },
     "hogwarts-houses-api-product": {
       "targetApi": "hogwarts-houses-api-8",
-      "targetApiId": "72fea1e5-8e97-45e1-bea1-e58e9725e101",
-      "targetPlan": "api-key-plan",
-      "targetPlanId": "5f3aeb6c-06a6-4635-baeb-6c06a6163519",
+      "targetApiId": "59dab35e-953a-4960-9ab3-5e953ae960df",
+      "targetPlan": "API Key Plan",
+      "targetPlanId": "7c03dde1-a653-48b3-83dd-e1a65368b345",
       "matchMode": "exact"
     },
     "kanye-api-product": {
       "targetApi": "kanye-rest-api-5",
-      "targetApiId": "41514d92-b3f2-42dd-914d-92b3f2e2ddda",
-      "targetPlan": "api-key-plan",
-      "targetPlanId": "85696198-b379-439a-a961-98b379139a2c",
+      "targetApiId": "d40cba62-2887-461e-8cba-622887161ea9",
+      "targetPlan": "API Key Plan",
+      "targetPlanId": "7ac7160f-b292-4f9e-8716-0fb292af9e80",
       "matchMode": "exact"
     },
     "wizards-api-product": {
       "targetApi": "wizards-api-9",
-      "targetApiId": "5c261880-e37b-4587-a618-80e37be5872a",
-      "targetPlan": "api-key-plan",
-      "targetPlanId": "89936ea3-d484-4fc6-936e-a3d484afc651",
+      "targetApiId": "07dfa49e-dc23-4048-9fa4-9edc236048a6",
+      "targetPlan": "API Key Plan",
+      "targetPlanId": "589c71e0-0770-4580-9c71-e0077015806b",
       "matchMode": "exact"
     },
     "yes-or-no-api-product": {
       "targetApi": "yes-or-no-api-4",
-      "targetApiId": "7f88a006-d361-49e1-88a0-06d361b9e127",
-      "targetPlan": "api-key-plan",
-      "targetPlanId": "5b601457-106f-4e91-a014-57106fce9134",
+      "targetApiId": "bf68aeeb-d4db-4656-a8ae-ebd4db4656a5",
+      "targetPlan": "API Key Plan",
+      "targetPlanId": "9ae81624-fbd6-415f-a816-24fbd6a15fc9",
       "matchMode": "exact"
     },
     "misc-api-product": [
       {
         "targetApi": "apigee-hello-api-1",
-        "targetApiId": "2b9f7f53-2dee-4f5c-9f7f-532dee9f5cb1",
-        "targetPlan": "api-key-plan",
-        "targetPlanId": "8f1e49ec-d795-4534-9e49-ecd795053418",
+        "targetApiId": "a5b183d1-9327-4a9a-b183-d19327ba9ae1",
+        "targetPlan": "Keyless Plan",
+        "targetPlanId": "e470787c-6691-4ef9-b078-7c66910ef98e",
         "matchMode": "exact"
       },
       {
         "targetApi": "cat-fact-api-2",
-        "targetApiId": "89884594-070e-4a48-8845-94070eea48d4",
-        "targetPlan": "api-key-plan",
-        "targetPlanId": "08f9eee0-3617-4a77-b9ee-e03617da7744",
+        "targetApiId": "dcc0417f-18ab-4955-8041-7f18abe95537",
+        "targetPlan": "Keyless Plan",
+        "targetPlanId": "597158dd-206f-4630-b158-dd206f763084",
         "matchMode": "exact"
       },
       {
         "targetApi": "car-makes-api-3",
-        "targetApiId": "b7767841-e5d1-4bc4-b678-41e5d13bc444",
-        "targetPlan": "api-key-plan",
-        "targetPlanId": "e4d8d493-2de0-4233-98d4-932de0423337",
+        "targetApiId": "8cf248f0-637a-4ed2-b248-f0637afed2e6",
+        "targetPlan": "Keyless Plan",
+        "targetPlanId": "0b22bc89-5db5-431e-a2bc-895db5f31e95",
         "matchMode": "exact"
       }
     ]
@@ -139,7 +132,33 @@
   "filters": {
     "includeDevelopers": [],
     "excludeDevelopers": [],
-    "includeApps": [],
+    "includeApps": [
+      "danny.rivera@540.co/cats-dev-app",
+      "dev1@540.co/kanye-dev-app",
+      "dev1@540.co/wizards-dev-app",
+      "dev10@540.co/dev10-app",
+      "dev11@540.co/dev11-app",
+      "dev12@540.co/dev12-app",
+      "dev13@540.co/dev13-app",
+      "dev14@540.co/dev14-app",
+      "dev15@540.co/dev15-app",
+      "dev16@540.co/dev16-app",
+      "dev17@540.co/dev17-app",
+      "dev18@540.co/dev18-app",
+      "dev19@540.co/dev19-app",
+      "dev2@540.co/chuck-norris-dev-app",
+      "dev2@540.co/dog-breeds-dev-app",
+      "dev20@540.co/dev20-app",
+      "dev4@540.co/dev4-app",
+      "dev5@540.co/dev5-app",
+      "dev6@540.co/dev6-app",
+      "dev7@540.co/dev7-app",
+      "dev8@540.co/dev8-app",
+      "dev9@540.co/dev9-app",
+      "erik.severson@540.co/hogwarts-houses-dev-app",
+      "erik.severson@540.co/misc-dev-app",
+      "erik.severson@540.co/yes-or-no-dev-app"
+    ],
     "excludeApps": []
   },
   "reporting": {
@@ -148,13 +167,10 @@
   },
   "roleAssignmentIds": {
     "organization": [
-      "4a6c1536-12f5-4c7c-ac15-3612f56c7cc5"
+      "7d48e98b-c389-449c-88e9-8bc389f49c5c"
     ],
     "environment": [
-      "b1805b56-b9af-419d-805b-56b9afe19d55"
+      "703d7d91-a208-45b1-bd7d-91a208f5b1fc"
     ]
-  },
-  "_meta": {
-    "path": "/home/ec2-user/apigee2gravitee/config/developers.config.resolved.json"
   }
 }

@@ -1,20 +1,20 @@
 {
-  "generatedAt": "2026-04-09T18:15:25.065Z",
-  "updatedAt": "2026-04-09T18:15:39.121Z",
+  "generatedAt": "2026-05-20T15:45:41.719Z",
+  "updatedAt": "2026-05-20T15:45:41.719Z",
   "mode": "plan",
   "summary": {
-    "proxies": 23,
+    "proxies": 24,
     "blockers": 0,
     "warnings": 11,
-    "actions": 92,
+    "actions": 96,
     "actionsByKind": {
-      "UPSERT_API": 23,
-      "UPSERT_PLAN": 23,
-      "VERIFY_PLAN": 23,
-      "VERIFY_API": 23
+      "UPSERT_API": 24,
+      "UPSERT_PLAN": 24,
+      "VERIFY_PLAN": 24,
+      "VERIFY_API": 24
     },
     "actionsByStatus": {
-      "READY": 92
+      "READY": 96
     }
   },
   "actions": {
@@ -23,1909 +23,1416 @@
       "kind": "UPSERT_API",
       "sourceId": "KVM-Create",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [],
-      "targetIds": {
-        "apiId": "ae8517f0-4c1a-462c-8517-f04c1a462c09"
-      },
-      "reconcileHints": {
-        "apiId": "ae8517f0-4c1a-462c-8517-f04c1a462c09"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:25.071Z",
-      "completedAt": "2026-04-09T18:15:25.263Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "UPSERT_PLAN:KVM-Create:KEYLESS": {
       "actionId": "UPSERT_PLAN:KVM-Create:KEYLESS",
       "kind": "UPSERT_PLAN",
       "sourceId": "KVM-Create",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_API:KVM-Create"
       ],
-      "targetIds": {
-        "apiId": "ae8517f0-4c1a-462c-8517-f04c1a462c09",
-        "planId": "1748772c-2c16-459f-8877-2c2c16359f6e",
-        "planKey": "KEYLESS"
-      },
-      "reconcileHints": {
-        "apiId": "ae8517f0-4c1a-462c-8517-f04c1a462c09",
-        "planId": "1748772c-2c16-459f-8877-2c2c16359f6e",
-        "planKey": "KEYLESS"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:25.265Z",
-      "completedAt": "2026-04-09T18:15:25.506Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "VERIFY_PLAN:KVM-Create:KEYLESS": {
       "actionId": "VERIFY_PLAN:KVM-Create:KEYLESS",
       "kind": "VERIFY_PLAN",
       "sourceId": "KVM-Create",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_PLAN:KVM-Create:KEYLESS"
       ],
-      "targetIds": {
-        "apiId": "ae8517f0-4c1a-462c-8517-f04c1a462c09",
-        "planId": "1748772c-2c16-459f-8877-2c2c16359f6e",
-        "planKey": "KEYLESS"
-      },
-      "reconcileHints": {
-        "apiId": "ae8517f0-4c1a-462c-8517-f04c1a462c09",
-        "planId": "1748772c-2c16-459f-8877-2c2c16359f6e",
-        "planKey": "KEYLESS"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:25.509Z",
-      "completedAt": "2026-04-09T18:15:25.627Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "VERIFY_API:KVM-Create": {
       "actionId": "VERIFY_API:KVM-Create",
       "kind": "VERIFY_API",
       "sourceId": "KVM-Create",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_API:KVM-Create",
         "VERIFY_PLAN:KVM-Create:KEYLESS"
       ],
-      "targetIds": {
-        "apiId": "ae8517f0-4c1a-462c-8517-f04c1a462c09"
-      },
-      "reconcileHints": {
-        "apiId": "ae8517f0-4c1a-462c-8517-f04c1a462c09"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:25.629Z",
-      "completedAt": "2026-04-09T18:15:25.691Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "UPSERT_API:KVM-Reader": {
       "actionId": "UPSERT_API:KVM-Reader",
       "kind": "UPSERT_API",
       "sourceId": "KVM-Reader",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [],
-      "targetIds": {
-        "apiId": "a7d289d9-766b-46f1-9289-d9766be6f1fa"
-      },
-      "reconcileHints": {
-        "apiId": "a7d289d9-766b-46f1-9289-d9766be6f1fa"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:25.694Z",
-      "completedAt": "2026-04-09T18:15:25.876Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "UPSERT_PLAN:KVM-Reader:KEYLESS": {
       "actionId": "UPSERT_PLAN:KVM-Reader:KEYLESS",
       "kind": "UPSERT_PLAN",
       "sourceId": "KVM-Reader",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_API:KVM-Reader"
       ],
-      "targetIds": {
-        "apiId": "a7d289d9-766b-46f1-9289-d9766be6f1fa",
-        "planId": "a3aec209-f0ec-4722-aec2-09f0ecc7222e",
-        "planKey": "KEYLESS"
-      },
-      "reconcileHints": {
-        "apiId": "a7d289d9-766b-46f1-9289-d9766be6f1fa",
-        "planId": "a3aec209-f0ec-4722-aec2-09f0ecc7222e",
-        "planKey": "KEYLESS"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:25.879Z",
-      "completedAt": "2026-04-09T18:15:26.116Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "VERIFY_PLAN:KVM-Reader:KEYLESS": {
       "actionId": "VERIFY_PLAN:KVM-Reader:KEYLESS",
       "kind": "VERIFY_PLAN",
       "sourceId": "KVM-Reader",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_PLAN:KVM-Reader:KEYLESS"
       ],
-      "targetIds": {
-        "apiId": "a7d289d9-766b-46f1-9289-d9766be6f1fa",
-        "planId": "a3aec209-f0ec-4722-aec2-09f0ecc7222e",
-        "planKey": "KEYLESS"
-      },
-      "reconcileHints": {
-        "apiId": "a7d289d9-766b-46f1-9289-d9766be6f1fa",
-        "planId": "a3aec209-f0ec-4722-aec2-09f0ecc7222e",
-        "planKey": "KEYLESS"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:26.119Z",
-      "completedAt": "2026-04-09T18:15:26.234Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "VERIFY_API:KVM-Reader": {
       "actionId": "VERIFY_API:KVM-Reader",
       "kind": "VERIFY_API",
       "sourceId": "KVM-Reader",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_API:KVM-Reader",
         "VERIFY_PLAN:KVM-Reader:KEYLESS"
       ],
-      "targetIds": {
-        "apiId": "a7d289d9-766b-46f1-9289-d9766be6f1fa"
-      },
-      "reconcileHints": {
-        "apiId": "a7d289d9-766b-46f1-9289-d9766be6f1fa"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:26.236Z",
-      "completedAt": "2026-04-09T18:15:26.297Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "UPSERT_API:KVM-Update": {
       "actionId": "UPSERT_API:KVM-Update",
       "kind": "UPSERT_API",
       "sourceId": "KVM-Update",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [],
-      "targetIds": {
-        "apiId": "eb2c2568-0f94-4567-ac25-680f94c567c9"
-      },
-      "reconcileHints": {
-        "apiId": "eb2c2568-0f94-4567-ac25-680f94c567c9"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:26.299Z",
-      "completedAt": "2026-04-09T18:15:26.485Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "UPSERT_PLAN:KVM-Update:KEYLESS": {
       "actionId": "UPSERT_PLAN:KVM-Update:KEYLESS",
       "kind": "UPSERT_PLAN",
       "sourceId": "KVM-Update",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_API:KVM-Update"
       ],
-      "targetIds": {
-        "apiId": "eb2c2568-0f94-4567-ac25-680f94c567c9",
-        "planId": "0c34e911-25a9-4d93-b4e9-1125a9bd936d",
-        "planKey": "KEYLESS"
-      },
-      "reconcileHints": {
-        "apiId": "eb2c2568-0f94-4567-ac25-680f94c567c9",
-        "planId": "0c34e911-25a9-4d93-b4e9-1125a9bd936d",
-        "planKey": "KEYLESS"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:26.487Z",
-      "completedAt": "2026-04-09T18:15:26.725Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "VERIFY_PLAN:KVM-Update:KEYLESS": {
       "actionId": "VERIFY_PLAN:KVM-Update:KEYLESS",
       "kind": "VERIFY_PLAN",
       "sourceId": "KVM-Update",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_PLAN:KVM-Update:KEYLESS"
       ],
-      "targetIds": {
-        "apiId": "eb2c2568-0f94-4567-ac25-680f94c567c9",
-        "planId": "0c34e911-25a9-4d93-b4e9-1125a9bd936d",
-        "planKey": "KEYLESS"
-      },
-      "reconcileHints": {
-        "apiId": "eb2c2568-0f94-4567-ac25-680f94c567c9",
-        "planId": "0c34e911-25a9-4d93-b4e9-1125a9bd936d",
-        "planKey": "KEYLESS"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:26.728Z",
-      "completedAt": "2026-04-09T18:15:26.845Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "VERIFY_API:KVM-Update": {
       "actionId": "VERIFY_API:KVM-Update",
       "kind": "VERIFY_API",
       "sourceId": "KVM-Update",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_API:KVM-Update",
         "VERIFY_PLAN:KVM-Update:KEYLESS"
       ],
-      "targetIds": {
-        "apiId": "eb2c2568-0f94-4567-ac25-680f94c567c9"
-      },
-      "reconcileHints": {
-        "apiId": "eb2c2568-0f94-4567-ac25-680f94c567c9"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:26.848Z",
-      "completedAt": "2026-04-09T18:15:26.909Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "UPSERT_API:admin-kvm-export": {
       "actionId": "UPSERT_API:admin-kvm-export",
       "kind": "UPSERT_API",
       "sourceId": "admin-kvm-export",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [],
-      "targetIds": {
-        "apiId": "ced2af9a-fd1d-4c8b-92af-9afd1dec8b24"
-      },
-      "reconcileHints": {
-        "apiId": "ced2af9a-fd1d-4c8b-92af-9afd1dec8b24"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:26.912Z",
-      "completedAt": "2026-04-09T18:15:27.094Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "UPSERT_PLAN:admin-kvm-export:KEYLESS": {
       "actionId": "UPSERT_PLAN:admin-kvm-export:KEYLESS",
       "kind": "UPSERT_PLAN",
       "sourceId": "admin-kvm-export",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_API:admin-kvm-export"
       ],
-      "targetIds": {
-        "apiId": "ced2af9a-fd1d-4c8b-92af-9afd1dec8b24",
-        "planId": "a8a5e93b-6453-45ac-a5e9-3b645385ac8d",
-        "planKey": "KEYLESS"
-      },
-      "reconcileHints": {
-        "apiId": "ced2af9a-fd1d-4c8b-92af-9afd1dec8b24",
-        "planId": "a8a5e93b-6453-45ac-a5e9-3b645385ac8d",
-        "planKey": "KEYLESS"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:27.096Z",
-      "completedAt": "2026-04-09T18:15:27.333Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "VERIFY_PLAN:admin-kvm-export:KEYLESS": {
       "actionId": "VERIFY_PLAN:admin-kvm-export:KEYLESS",
       "kind": "VERIFY_PLAN",
       "sourceId": "admin-kvm-export",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_PLAN:admin-kvm-export:KEYLESS"
       ],
-      "targetIds": {
-        "apiId": "ced2af9a-fd1d-4c8b-92af-9afd1dec8b24",
-        "planId": "a8a5e93b-6453-45ac-a5e9-3b645385ac8d",
-        "planKey": "KEYLESS"
-      },
-      "reconcileHints": {
-        "apiId": "ced2af9a-fd1d-4c8b-92af-9afd1dec8b24",
-        "planId": "a8a5e93b-6453-45ac-a5e9-3b645385ac8d",
-        "planKey": "KEYLESS"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:27.335Z",
-      "completedAt": "2026-04-09T18:15:27.453Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "VERIFY_API:admin-kvm-export": {
       "actionId": "VERIFY_API:admin-kvm-export",
       "kind": "VERIFY_API",
       "sourceId": "admin-kvm-export",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_API:admin-kvm-export",
         "VERIFY_PLAN:admin-kvm-export:KEYLESS"
       ],
-      "targetIds": {
-        "apiId": "ced2af9a-fd1d-4c8b-92af-9afd1dec8b24"
-      },
-      "reconcileHints": {
-        "apiId": "ced2af9a-fd1d-4c8b-92af-9afd1dec8b24"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:27.455Z",
-      "completedAt": "2026-04-09T18:15:27.516Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "UPSERT_API:apigee-hello-api-1": {
       "actionId": "UPSERT_API:apigee-hello-api-1",
       "kind": "UPSERT_API",
       "sourceId": "apigee-hello-api-1",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [],
-      "targetIds": {
-        "apiId": "a71428c0-322e-4060-9428-c0322ee0604e"
-      },
-      "reconcileHints": {
-        "apiId": "a71428c0-322e-4060-9428-c0322ee0604e"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:27.518Z",
-      "completedAt": "2026-04-09T18:15:27.700Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "UPSERT_PLAN:apigee-hello-api-1:KEYLESS": {
       "actionId": "UPSERT_PLAN:apigee-hello-api-1:KEYLESS",
       "kind": "UPSERT_PLAN",
       "sourceId": "apigee-hello-api-1",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_API:apigee-hello-api-1"
       ],
-      "targetIds": {
-        "apiId": "a71428c0-322e-4060-9428-c0322ee0604e",
-        "planId": "3a7aa1bf-97fd-4fb2-baa1-bf97fd5fb206",
-        "planKey": "KEYLESS"
-      },
-      "reconcileHints": {
-        "apiId": "a71428c0-322e-4060-9428-c0322ee0604e",
-        "planId": "3a7aa1bf-97fd-4fb2-baa1-bf97fd5fb206",
-        "planKey": "KEYLESS"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:27.702Z",
-      "completedAt": "2026-04-09T18:15:27.941Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "VERIFY_PLAN:apigee-hello-api-1:KEYLESS": {
       "actionId": "VERIFY_PLAN:apigee-hello-api-1:KEYLESS",
       "kind": "VERIFY_PLAN",
       "sourceId": "apigee-hello-api-1",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_PLAN:apigee-hello-api-1:KEYLESS"
       ],
-      "targetIds": {
-        "apiId": "a71428c0-322e-4060-9428-c0322ee0604e",
-        "planId": "3a7aa1bf-97fd-4fb2-baa1-bf97fd5fb206",
-        "planKey": "KEYLESS"
-      },
-      "reconcileHints": {
-        "apiId": "a71428c0-322e-4060-9428-c0322ee0604e",
-        "planId": "3a7aa1bf-97fd-4fb2-baa1-bf97fd5fb206",
-        "planKey": "KEYLESS"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:27.944Z",
-      "completedAt": "2026-04-09T18:15:28.059Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "VERIFY_API:apigee-hello-api-1": {
       "actionId": "VERIFY_API:apigee-hello-api-1",
       "kind": "VERIFY_API",
       "sourceId": "apigee-hello-api-1",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_API:apigee-hello-api-1",
         "VERIFY_PLAN:apigee-hello-api-1:KEYLESS"
       ],
-      "targetIds": {
-        "apiId": "a71428c0-322e-4060-9428-c0322ee0604e"
-      },
-      "reconcileHints": {
-        "apiId": "a71428c0-322e-4060-9428-c0322ee0604e"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:28.061Z",
-      "completedAt": "2026-04-09T18:15:28.121Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "UPSERT_API:apigee-hello": {
       "actionId": "UPSERT_API:apigee-hello",
       "kind": "UPSERT_API",
       "sourceId": "apigee-hello",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [],
-      "targetIds": {
-        "apiId": "2d568aa1-a1ee-49ea-968a-a1a1ee29ea11"
-      },
-      "reconcileHints": {
-        "apiId": "2d568aa1-a1ee-49ea-968a-a1a1ee29ea11"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:28.122Z",
-      "completedAt": "2026-04-09T18:15:28.302Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "UPSERT_PLAN:apigee-hello:KEYLESS": {
       "actionId": "UPSERT_PLAN:apigee-hello:KEYLESS",
       "kind": "UPSERT_PLAN",
       "sourceId": "apigee-hello",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_API:apigee-hello"
       ],
-      "targetIds": {
-        "apiId": "2d568aa1-a1ee-49ea-968a-a1a1ee29ea11",
-        "planId": "ee6ae119-09e4-4293-aae1-1909e45293cb",
-        "planKey": "KEYLESS"
-      },
-      "reconcileHints": {
-        "apiId": "2d568aa1-a1ee-49ea-968a-a1a1ee29ea11",
-        "planId": "ee6ae119-09e4-4293-aae1-1909e45293cb",
-        "planKey": "KEYLESS"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:28.304Z",
-      "completedAt": "2026-04-09T18:15:28.538Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "VERIFY_PLAN:apigee-hello:KEYLESS": {
       "actionId": "VERIFY_PLAN:apigee-hello:KEYLESS",
       "kind": "VERIFY_PLAN",
       "sourceId": "apigee-hello",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_PLAN:apigee-hello:KEYLESS"
       ],
-      "targetIds": {
-        "apiId": "2d568aa1-a1ee-49ea-968a-a1a1ee29ea11",
-        "planId": "ee6ae119-09e4-4293-aae1-1909e45293cb",
-        "planKey": "KEYLESS"
-      },
-      "reconcileHints": {
-        "apiId": "2d568aa1-a1ee-49ea-968a-a1a1ee29ea11",
-        "planId": "ee6ae119-09e4-4293-aae1-1909e45293cb",
-        "planKey": "KEYLESS"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:28.540Z",
-      "completedAt": "2026-04-09T18:15:28.655Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "VERIFY_API:apigee-hello": {
       "actionId": "VERIFY_API:apigee-hello",
       "kind": "VERIFY_API",
       "sourceId": "apigee-hello",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_API:apigee-hello",
         "VERIFY_PLAN:apigee-hello:KEYLESS"
       ],
-      "targetIds": {
-        "apiId": "2d568aa1-a1ee-49ea-968a-a1a1ee29ea11"
-      },
-      "reconcileHints": {
-        "apiId": "2d568aa1-a1ee-49ea-968a-a1a1ee29ea11"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:28.657Z",
-      "completedAt": "2026-04-09T18:15:28.722Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "UPSERT_API:car-makes-api-3": {
       "actionId": "UPSERT_API:car-makes-api-3",
       "kind": "UPSERT_API",
       "sourceId": "car-makes-api-3",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [],
-      "targetIds": {
-        "apiId": "71bad2fc-80ef-4dce-bad2-fc80efddce4e"
-      },
-      "reconcileHints": {
-        "apiId": "71bad2fc-80ef-4dce-bad2-fc80efddce4e"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:28.724Z",
-      "completedAt": "2026-04-09T18:15:28.904Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "UPSERT_PLAN:car-makes-api-3:KEYLESS": {
       "actionId": "UPSERT_PLAN:car-makes-api-3:KEYLESS",
       "kind": "UPSERT_PLAN",
       "sourceId": "car-makes-api-3",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_API:car-makes-api-3"
       ],
-      "targetIds": {
-        "apiId": "71bad2fc-80ef-4dce-bad2-fc80efddce4e",
-        "planId": "c9ff6b18-4175-4c48-bf6b-1841756c4807",
-        "planKey": "KEYLESS"
-      },
-      "reconcileHints": {
-        "apiId": "71bad2fc-80ef-4dce-bad2-fc80efddce4e",
-        "planId": "c9ff6b18-4175-4c48-bf6b-1841756c4807",
-        "planKey": "KEYLESS"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:28.906Z",
-      "completedAt": "2026-04-09T18:15:29.150Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "VERIFY_PLAN:car-makes-api-3:KEYLESS": {
       "actionId": "VERIFY_PLAN:car-makes-api-3:KEYLESS",
       "kind": "VERIFY_PLAN",
       "sourceId": "car-makes-api-3",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_PLAN:car-makes-api-3:KEYLESS"
       ],
-      "targetIds": {
-        "apiId": "71bad2fc-80ef-4dce-bad2-fc80efddce4e",
-        "planId": "c9ff6b18-4175-4c48-bf6b-1841756c4807",
-        "planKey": "KEYLESS"
-      },
-      "reconcileHints": {
-        "apiId": "71bad2fc-80ef-4dce-bad2-fc80efddce4e",
-        "planId": "c9ff6b18-4175-4c48-bf6b-1841756c4807",
-        "planKey": "KEYLESS"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:29.151Z",
-      "completedAt": "2026-04-09T18:15:29.273Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "VERIFY_API:car-makes-api-3": {
       "actionId": "VERIFY_API:car-makes-api-3",
       "kind": "VERIFY_API",
       "sourceId": "car-makes-api-3",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_API:car-makes-api-3",
         "VERIFY_PLAN:car-makes-api-3:KEYLESS"
       ],
-      "targetIds": {
-        "apiId": "71bad2fc-80ef-4dce-bad2-fc80efddce4e"
-      },
-      "reconcileHints": {
-        "apiId": "71bad2fc-80ef-4dce-bad2-fc80efddce4e"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:29.274Z",
-      "completedAt": "2026-04-09T18:15:29.334Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "UPSERT_API:cat-fact-api-2": {
       "actionId": "UPSERT_API:cat-fact-api-2",
       "kind": "UPSERT_API",
       "sourceId": "cat-fact-api-2",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [],
-      "targetIds": {
-        "apiId": "6b413c68-ff1a-4362-813c-68ff1ac36249"
-      },
-      "reconcileHints": {
-        "apiId": "6b413c68-ff1a-4362-813c-68ff1ac36249"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:29.336Z",
-      "completedAt": "2026-04-09T18:15:29.516Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "UPSERT_PLAN:cat-fact-api-2:KEYLESS": {
       "actionId": "UPSERT_PLAN:cat-fact-api-2:KEYLESS",
       "kind": "UPSERT_PLAN",
       "sourceId": "cat-fact-api-2",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_API:cat-fact-api-2"
       ],
-      "targetIds": {
-        "apiId": "6b413c68-ff1a-4362-813c-68ff1ac36249",
-        "planId": "a2b1366a-b9dc-4b15-b136-6ab9dc0b150e",
-        "planKey": "KEYLESS"
-      },
-      "reconcileHints": {
-        "apiId": "6b413c68-ff1a-4362-813c-68ff1ac36249",
-        "planId": "a2b1366a-b9dc-4b15-b136-6ab9dc0b150e",
-        "planKey": "KEYLESS"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:29.518Z",
-      "completedAt": "2026-04-09T18:15:29.752Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "VERIFY_PLAN:cat-fact-api-2:KEYLESS": {
       "actionId": "VERIFY_PLAN:cat-fact-api-2:KEYLESS",
       "kind": "VERIFY_PLAN",
       "sourceId": "cat-fact-api-2",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_PLAN:cat-fact-api-2:KEYLESS"
       ],
-      "targetIds": {
-        "apiId": "6b413c68-ff1a-4362-813c-68ff1ac36249",
-        "planId": "a2b1366a-b9dc-4b15-b136-6ab9dc0b150e",
-        "planKey": "KEYLESS"
-      },
-      "reconcileHints": {
-        "apiId": "6b413c68-ff1a-4362-813c-68ff1ac36249",
-        "planId": "a2b1366a-b9dc-4b15-b136-6ab9dc0b150e",
-        "planKey": "KEYLESS"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:29.755Z",
-      "completedAt": "2026-04-09T18:15:29.870Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "VERIFY_API:cat-fact-api-2": {
       "actionId": "VERIFY_API:cat-fact-api-2",
       "kind": "VERIFY_API",
       "sourceId": "cat-fact-api-2",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_API:cat-fact-api-2",
         "VERIFY_PLAN:cat-fact-api-2:KEYLESS"
       ],
-      "targetIds": {
-        "apiId": "6b413c68-ff1a-4362-813c-68ff1ac36249"
-      },
-      "reconcileHints": {
-        "apiId": "6b413c68-ff1a-4362-813c-68ff1ac36249"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:29.872Z",
-      "completedAt": "2026-04-09T18:15:29.933Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "UPSERT_API:cats-api-7": {
       "actionId": "UPSERT_API:cats-api-7",
       "kind": "UPSERT_API",
       "sourceId": "cats-api-7",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [],
-      "targetIds": {
-        "apiId": "05a5c056-0848-429e-a5c0-560848929e4d"
-      },
-      "reconcileHints": {
-        "apiId": "05a5c056-0848-429e-a5c0-560848929e4d"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:29.935Z",
-      "completedAt": "2026-04-09T18:15:30.127Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "UPSERT_PLAN:cats-api-7:API_KEY": {
       "actionId": "UPSERT_PLAN:cats-api-7:API_KEY",
       "kind": "UPSERT_PLAN",
       "sourceId": "cats-api-7",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_API:cats-api-7"
       ],
-      "targetIds": {
-        "apiId": "05a5c056-0848-429e-a5c0-560848929e4d",
-        "planId": "03454fca-5a30-4fff-854f-ca5a308fff1e",
-        "planKey": "API_KEY"
-      },
-      "reconcileHints": {
-        "apiId": "05a5c056-0848-429e-a5c0-560848929e4d",
-        "planId": "03454fca-5a30-4fff-854f-ca5a308fff1e",
-        "planKey": "API_KEY"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:30.129Z",
-      "completedAt": "2026-04-09T18:15:30.366Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "VERIFY_PLAN:cats-api-7:API_KEY": {
       "actionId": "VERIFY_PLAN:cats-api-7:API_KEY",
       "kind": "VERIFY_PLAN",
       "sourceId": "cats-api-7",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_PLAN:cats-api-7:API_KEY"
       ],
-      "targetIds": {
-        "apiId": "05a5c056-0848-429e-a5c0-560848929e4d",
-        "planId": "03454fca-5a30-4fff-854f-ca5a308fff1e",
-        "planKey": "API_KEY"
-      },
-      "reconcileHints": {
-        "apiId": "05a5c056-0848-429e-a5c0-560848929e4d",
-        "planId": "03454fca-5a30-4fff-854f-ca5a308fff1e",
-        "planKey": "API_KEY"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:30.369Z",
-      "completedAt": "2026-04-09T18:15:30.484Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "VERIFY_API:cats-api-7": {
       "actionId": "VERIFY_API:cats-api-7",
       "kind": "VERIFY_API",
       "sourceId": "cats-api-7",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_API:cats-api-7",
         "VERIFY_PLAN:cats-api-7:API_KEY"
       ],
-      "targetIds": {
-        "apiId": "05a5c056-0848-429e-a5c0-560848929e4d"
-      },
-      "reconcileHints": {
-        "apiId": "05a5c056-0848-429e-a5c0-560848929e4d"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:30.487Z",
-      "completedAt": "2026-04-09T18:15:30.548Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "UPSERT_API:chuck-norris-api-10": {
       "actionId": "UPSERT_API:chuck-norris-api-10",
       "kind": "UPSERT_API",
       "sourceId": "chuck-norris-api-10",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [],
-      "targetIds": {
-        "apiId": "bdc40b6a-2084-44c3-840b-6a208474c396"
-      },
-      "reconcileHints": {
-        "apiId": "bdc40b6a-2084-44c3-840b-6a208474c396"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:30.550Z",
-      "completedAt": "2026-04-09T18:15:30.733Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "UPSERT_PLAN:chuck-norris-api-10:API_KEY": {
       "actionId": "UPSERT_PLAN:chuck-norris-api-10:API_KEY",
       "kind": "UPSERT_PLAN",
       "sourceId": "chuck-norris-api-10",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_API:chuck-norris-api-10"
       ],
-      "targetIds": {
-        "apiId": "bdc40b6a-2084-44c3-840b-6a208474c396",
-        "planId": "eade57f3-ce18-4858-9e57-f3ce183858d3",
-        "planKey": "API_KEY"
-      },
-      "reconcileHints": {
-        "apiId": "bdc40b6a-2084-44c3-840b-6a208474c396",
-        "planId": "eade57f3-ce18-4858-9e57-f3ce183858d3",
-        "planKey": "API_KEY"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:30.734Z",
-      "completedAt": "2026-04-09T18:15:30.973Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "VERIFY_PLAN:chuck-norris-api-10:API_KEY": {
       "actionId": "VERIFY_PLAN:chuck-norris-api-10:API_KEY",
       "kind": "VERIFY_PLAN",
       "sourceId": "chuck-norris-api-10",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_PLAN:chuck-norris-api-10:API_KEY"
       ],
-      "targetIds": {
-        "apiId": "bdc40b6a-2084-44c3-840b-6a208474c396",
-        "planId": "eade57f3-ce18-4858-9e57-f3ce183858d3",
-        "planKey": "API_KEY"
-      },
-      "reconcileHints": {
-        "apiId": "bdc40b6a-2084-44c3-840b-6a208474c396",
-        "planId": "eade57f3-ce18-4858-9e57-f3ce183858d3",
-        "planKey": "API_KEY"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:30.975Z",
-      "completedAt": "2026-04-09T18:15:31.090Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "VERIFY_API:chuck-norris-api-10": {
       "actionId": "VERIFY_API:chuck-norris-api-10",
       "kind": "VERIFY_API",
       "sourceId": "chuck-norris-api-10",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_API:chuck-norris-api-10",
         "VERIFY_PLAN:chuck-norris-api-10:API_KEY"
       ],
-      "targetIds": {
-        "apiId": "bdc40b6a-2084-44c3-840b-6a208474c396"
-      },
-      "reconcileHints": {
-        "apiId": "bdc40b6a-2084-44c3-840b-6a208474c396"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:31.092Z",
-      "completedAt": "2026-04-09T18:15:31.154Z"
+      "startedAt": null,
+      "completedAt": null
+    },
+    "UPSERT_API:chuck-norris-api-10_rev2_2026_05_12": {
+      "actionId": "UPSERT_API:chuck-norris-api-10_rev2_2026_05_12",
+      "kind": "UPSERT_API",
+      "sourceId": "chuck-norris-api-10_rev2_2026_05_12",
+      "plannedStatus": "READY",
+      "status": "PENDING",
+      "dependencies": [],
+      "targetIds": {},
+      "reconcileHints": {},
+      "lastError": null,
+      "startedAt": null,
+      "completedAt": null
+    },
+    "UPSERT_PLAN:chuck-norris-api-10_rev2_2026_05_12:API_KEY": {
+      "actionId": "UPSERT_PLAN:chuck-norris-api-10_rev2_2026_05_12:API_KEY",
+      "kind": "UPSERT_PLAN",
+      "sourceId": "chuck-norris-api-10_rev2_2026_05_12",
+      "plannedStatus": "READY",
+      "status": "PENDING",
+      "dependencies": [
+        "UPSERT_API:chuck-norris-api-10_rev2_2026_05_12"
+      ],
+      "targetIds": {},
+      "reconcileHints": {},
+      "lastError": null,
+      "startedAt": null,
+      "completedAt": null
+    },
+    "VERIFY_PLAN:chuck-norris-api-10_rev2_2026_05_12:API_KEY": {
+      "actionId": "VERIFY_PLAN:chuck-norris-api-10_rev2_2026_05_12:API_KEY",
+      "kind": "VERIFY_PLAN",
+      "sourceId": "chuck-norris-api-10_rev2_2026_05_12",
+      "plannedStatus": "READY",
+      "status": "PENDING",
+      "dependencies": [
+        "UPSERT_PLAN:chuck-norris-api-10_rev2_2026_05_12:API_KEY"
+      ],
+      "targetIds": {},
+      "reconcileHints": {},
+      "lastError": null,
+      "startedAt": null,
+      "completedAt": null
+    },
+    "VERIFY_API:chuck-norris-api-10_rev2_2026_05_12": {
+      "actionId": "VERIFY_API:chuck-norris-api-10_rev2_2026_05_12",
+      "kind": "VERIFY_API",
+      "sourceId": "chuck-norris-api-10_rev2_2026_05_12",
+      "plannedStatus": "READY",
+      "status": "PENDING",
+      "dependencies": [
+        "UPSERT_API:chuck-norris-api-10_rev2_2026_05_12",
+        "VERIFY_PLAN:chuck-norris-api-10_rev2_2026_05_12:API_KEY"
+      ],
+      "targetIds": {},
+      "reconcileHints": {},
+      "lastError": null,
+      "startedAt": null,
+      "completedAt": null
     },
     "UPSERT_API:dog-breeds-api-6": {
       "actionId": "UPSERT_API:dog-breeds-api-6",
       "kind": "UPSERT_API",
       "sourceId": "dog-breeds-api-6",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [],
-      "targetIds": {
-        "apiId": "a10d7923-3577-4d42-8d79-2335777d4288"
-      },
-      "reconcileHints": {
-        "apiId": "a10d7923-3577-4d42-8d79-2335777d4288"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:31.156Z",
-      "completedAt": "2026-04-09T18:15:31.338Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "UPSERT_PLAN:dog-breeds-api-6:API_KEY": {
       "actionId": "UPSERT_PLAN:dog-breeds-api-6:API_KEY",
       "kind": "UPSERT_PLAN",
       "sourceId": "dog-breeds-api-6",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_API:dog-breeds-api-6"
       ],
-      "targetIds": {
-        "apiId": "a10d7923-3577-4d42-8d79-2335777d4288",
-        "planId": "c3770dde-92cc-4549-b70d-de92cca549f7",
-        "planKey": "API_KEY"
-      },
-      "reconcileHints": {
-        "apiId": "a10d7923-3577-4d42-8d79-2335777d4288",
-        "planId": "c3770dde-92cc-4549-b70d-de92cca549f7",
-        "planKey": "API_KEY"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:31.341Z",
-      "completedAt": "2026-04-09T18:15:31.577Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "VERIFY_PLAN:dog-breeds-api-6:API_KEY": {
       "actionId": "VERIFY_PLAN:dog-breeds-api-6:API_KEY",
       "kind": "VERIFY_PLAN",
       "sourceId": "dog-breeds-api-6",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_PLAN:dog-breeds-api-6:API_KEY"
       ],
-      "targetIds": {
-        "apiId": "a10d7923-3577-4d42-8d79-2335777d4288",
-        "planId": "c3770dde-92cc-4549-b70d-de92cca549f7",
-        "planKey": "API_KEY"
-      },
-      "reconcileHints": {
-        "apiId": "a10d7923-3577-4d42-8d79-2335777d4288",
-        "planId": "c3770dde-92cc-4549-b70d-de92cca549f7",
-        "planKey": "API_KEY"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:31.581Z",
-      "completedAt": "2026-04-09T18:15:31.696Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "VERIFY_API:dog-breeds-api-6": {
       "actionId": "VERIFY_API:dog-breeds-api-6",
       "kind": "VERIFY_API",
       "sourceId": "dog-breeds-api-6",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_API:dog-breeds-api-6",
         "VERIFY_PLAN:dog-breeds-api-6:API_KEY"
       ],
-      "targetIds": {
-        "apiId": "a10d7923-3577-4d42-8d79-2335777d4288"
-      },
-      "reconcileHints": {
-        "apiId": "a10d7923-3577-4d42-8d79-2335777d4288"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:31.699Z",
-      "completedAt": "2026-04-09T18:15:31.758Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "UPSERT_API:get-kvm-proxy": {
       "actionId": "UPSERT_API:get-kvm-proxy",
       "kind": "UPSERT_API",
       "sourceId": "get-kvm-proxy",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [],
-      "targetIds": {
-        "apiId": "95d33c43-00d3-46e3-933c-4300d336e39b"
-      },
-      "reconcileHints": {
-        "apiId": "95d33c43-00d3-46e3-933c-4300d336e39b"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:31.761Z",
-      "completedAt": "2026-04-09T18:15:31.942Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "UPSERT_PLAN:get-kvm-proxy:KEYLESS": {
       "actionId": "UPSERT_PLAN:get-kvm-proxy:KEYLESS",
       "kind": "UPSERT_PLAN",
       "sourceId": "get-kvm-proxy",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_API:get-kvm-proxy"
       ],
-      "targetIds": {
-        "apiId": "95d33c43-00d3-46e3-933c-4300d336e39b",
-        "planId": "87dc4065-8237-44c9-9c40-658237e4c9fc",
-        "planKey": "KEYLESS"
-      },
-      "reconcileHints": {
-        "apiId": "95d33c43-00d3-46e3-933c-4300d336e39b",
-        "planId": "87dc4065-8237-44c9-9c40-658237e4c9fc",
-        "planKey": "KEYLESS"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:31.945Z",
-      "completedAt": "2026-04-09T18:15:32.183Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "VERIFY_PLAN:get-kvm-proxy:KEYLESS": {
       "actionId": "VERIFY_PLAN:get-kvm-proxy:KEYLESS",
       "kind": "VERIFY_PLAN",
       "sourceId": "get-kvm-proxy",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_PLAN:get-kvm-proxy:KEYLESS"
       ],
-      "targetIds": {
-        "apiId": "95d33c43-00d3-46e3-933c-4300d336e39b",
-        "planId": "87dc4065-8237-44c9-9c40-658237e4c9fc",
-        "planKey": "KEYLESS"
-      },
-      "reconcileHints": {
-        "apiId": "95d33c43-00d3-46e3-933c-4300d336e39b",
-        "planId": "87dc4065-8237-44c9-9c40-658237e4c9fc",
-        "planKey": "KEYLESS"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:32.186Z",
-      "completedAt": "2026-04-09T18:15:32.300Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "VERIFY_API:get-kvm-proxy": {
       "actionId": "VERIFY_API:get-kvm-proxy",
       "kind": "VERIFY_API",
       "sourceId": "get-kvm-proxy",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_API:get-kvm-proxy",
         "VERIFY_PLAN:get-kvm-proxy:KEYLESS"
       ],
-      "targetIds": {
-        "apiId": "95d33c43-00d3-46e3-933c-4300d336e39b"
-      },
-      "reconcileHints": {
-        "apiId": "95d33c43-00d3-46e3-933c-4300d336e39b"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:32.302Z",
-      "completedAt": "2026-04-09T18:15:32.363Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "UPSERT_API:harry-potter-characters": {
       "actionId": "UPSERT_API:harry-potter-characters",
       "kind": "UPSERT_API",
       "sourceId": "harry-potter-characters",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [],
-      "targetIds": {
-        "apiId": "70144bf7-5b8c-44f6-944b-f75b8c04f6d7"
-      },
-      "reconcileHints": {
-        "apiId": "70144bf7-5b8c-44f6-944b-f75b8c04f6d7"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:32.364Z",
-      "completedAt": "2026-04-09T18:15:32.551Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "UPSERT_PLAN:harry-potter-characters:KEYLESS": {
       "actionId": "UPSERT_PLAN:harry-potter-characters:KEYLESS",
       "kind": "UPSERT_PLAN",
       "sourceId": "harry-potter-characters",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_API:harry-potter-characters"
       ],
-      "targetIds": {
-        "apiId": "70144bf7-5b8c-44f6-944b-f75b8c04f6d7",
-        "planId": "97a33a86-22a5-4e36-a33a-8622a54e36ba",
-        "planKey": "KEYLESS"
-      },
-      "reconcileHints": {
-        "apiId": "70144bf7-5b8c-44f6-944b-f75b8c04f6d7",
-        "planId": "97a33a86-22a5-4e36-a33a-8622a54e36ba",
-        "planKey": "KEYLESS"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:32.552Z",
-      "completedAt": "2026-04-09T18:15:32.811Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "VERIFY_PLAN:harry-potter-characters:KEYLESS": {
       "actionId": "VERIFY_PLAN:harry-potter-characters:KEYLESS",
       "kind": "VERIFY_PLAN",
       "sourceId": "harry-potter-characters",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_PLAN:harry-potter-characters:KEYLESS"
       ],
-      "targetIds": {
-        "apiId": "70144bf7-5b8c-44f6-944b-f75b8c04f6d7",
-        "planId": "97a33a86-22a5-4e36-a33a-8622a54e36ba",
-        "planKey": "KEYLESS"
-      },
-      "reconcileHints": {
-        "apiId": "70144bf7-5b8c-44f6-944b-f75b8c04f6d7",
-        "planId": "97a33a86-22a5-4e36-a33a-8622a54e36ba",
-        "planKey": "KEYLESS"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:32.814Z",
-      "completedAt": "2026-04-09T18:15:32.930Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "VERIFY_API:harry-potter-characters": {
       "actionId": "VERIFY_API:harry-potter-characters",
       "kind": "VERIFY_API",
       "sourceId": "harry-potter-characters",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_API:harry-potter-characters",
         "VERIFY_PLAN:harry-potter-characters:KEYLESS"
       ],
-      "targetIds": {
-        "apiId": "70144bf7-5b8c-44f6-944b-f75b8c04f6d7"
-      },
-      "reconcileHints": {
-        "apiId": "70144bf7-5b8c-44f6-944b-f75b8c04f6d7"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:32.932Z",
-      "completedAt": "2026-04-09T18:15:32.993Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "UPSERT_API:hogwarts-houses-api-8": {
       "actionId": "UPSERT_API:hogwarts-houses-api-8",
       "kind": "UPSERT_API",
       "sourceId": "hogwarts-houses-api-8",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [],
-      "targetIds": {
-        "apiId": "1f6d61b7-26f8-4b6e-ad61-b726f84b6ede"
-      },
-      "reconcileHints": {
-        "apiId": "1f6d61b7-26f8-4b6e-ad61-b726f84b6ede"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:32.995Z",
-      "completedAt": "2026-04-09T18:15:33.178Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "UPSERT_PLAN:hogwarts-houses-api-8:API_KEY": {
       "actionId": "UPSERT_PLAN:hogwarts-houses-api-8:API_KEY",
       "kind": "UPSERT_PLAN",
       "sourceId": "hogwarts-houses-api-8",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_API:hogwarts-houses-api-8"
       ],
-      "targetIds": {
-        "apiId": "1f6d61b7-26f8-4b6e-ad61-b726f84b6ede",
-        "planId": "26361641-3e97-4fe0-b616-413e973fe095",
-        "planKey": "API_KEY"
-      },
-      "reconcileHints": {
-        "apiId": "1f6d61b7-26f8-4b6e-ad61-b726f84b6ede",
-        "planId": "26361641-3e97-4fe0-b616-413e973fe095",
-        "planKey": "API_KEY"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:33.180Z",
-      "completedAt": "2026-04-09T18:15:33.415Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "VERIFY_PLAN:hogwarts-houses-api-8:API_KEY": {
       "actionId": "VERIFY_PLAN:hogwarts-houses-api-8:API_KEY",
       "kind": "VERIFY_PLAN",
       "sourceId": "hogwarts-houses-api-8",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_PLAN:hogwarts-houses-api-8:API_KEY"
       ],
-      "targetIds": {
-        "apiId": "1f6d61b7-26f8-4b6e-ad61-b726f84b6ede",
-        "planId": "26361641-3e97-4fe0-b616-413e973fe095",
-        "planKey": "API_KEY"
-      },
-      "reconcileHints": {
-        "apiId": "1f6d61b7-26f8-4b6e-ad61-b726f84b6ede",
-        "planId": "26361641-3e97-4fe0-b616-413e973fe095",
-        "planKey": "API_KEY"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:33.418Z",
-      "completedAt": "2026-04-09T18:15:33.535Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "VERIFY_API:hogwarts-houses-api-8": {
       "actionId": "VERIFY_API:hogwarts-houses-api-8",
       "kind": "VERIFY_API",
       "sourceId": "hogwarts-houses-api-8",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_API:hogwarts-houses-api-8",
         "VERIFY_PLAN:hogwarts-houses-api-8:API_KEY"
       ],
-      "targetIds": {
-        "apiId": "1f6d61b7-26f8-4b6e-ad61-b726f84b6ede"
-      },
-      "reconcileHints": {
-        "apiId": "1f6d61b7-26f8-4b6e-ad61-b726f84b6ede"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:33.538Z",
-      "completedAt": "2026-04-09T18:15:33.606Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "UPSERT_API:kanye-rest-api-5": {
       "actionId": "UPSERT_API:kanye-rest-api-5",
       "kind": "UPSERT_API",
       "sourceId": "kanye-rest-api-5",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [],
-      "targetIds": {
-        "apiId": "fdc2e4bc-b5a2-409f-82e4-bcb5a2909f6c"
-      },
-      "reconcileHints": {
-        "apiId": "fdc2e4bc-b5a2-409f-82e4-bcb5a2909f6c"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:33.607Z",
-      "completedAt": "2026-04-09T18:15:33.793Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "UPSERT_PLAN:kanye-rest-api-5:API_KEY": {
       "actionId": "UPSERT_PLAN:kanye-rest-api-5:API_KEY",
       "kind": "UPSERT_PLAN",
       "sourceId": "kanye-rest-api-5",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_API:kanye-rest-api-5"
       ],
-      "targetIds": {
-        "apiId": "fdc2e4bc-b5a2-409f-82e4-bcb5a2909f6c",
-        "planId": "7c9ae30e-6522-4d0e-9ae3-0e65229d0ea9",
-        "planKey": "API_KEY"
-      },
-      "reconcileHints": {
-        "apiId": "fdc2e4bc-b5a2-409f-82e4-bcb5a2909f6c",
-        "planId": "7c9ae30e-6522-4d0e-9ae3-0e65229d0ea9",
-        "planKey": "API_KEY"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:33.795Z",
-      "completedAt": "2026-04-09T18:15:34.035Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "VERIFY_PLAN:kanye-rest-api-5:API_KEY": {
       "actionId": "VERIFY_PLAN:kanye-rest-api-5:API_KEY",
       "kind": "VERIFY_PLAN",
       "sourceId": "kanye-rest-api-5",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_PLAN:kanye-rest-api-5:API_KEY"
       ],
-      "targetIds": {
-        "apiId": "fdc2e4bc-b5a2-409f-82e4-bcb5a2909f6c",
-        "planId": "7c9ae30e-6522-4d0e-9ae3-0e65229d0ea9",
-        "planKey": "API_KEY"
-      },
-      "reconcileHints": {
-        "apiId": "fdc2e4bc-b5a2-409f-82e4-bcb5a2909f6c",
-        "planId": "7c9ae30e-6522-4d0e-9ae3-0e65229d0ea9",
-        "planKey": "API_KEY"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:34.037Z",
-      "completedAt": "2026-04-09T18:15:34.166Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "VERIFY_API:kanye-rest-api-5": {
       "actionId": "VERIFY_API:kanye-rest-api-5",
       "kind": "VERIFY_API",
       "sourceId": "kanye-rest-api-5",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_API:kanye-rest-api-5",
         "VERIFY_PLAN:kanye-rest-api-5:API_KEY"
       ],
-      "targetIds": {
-        "apiId": "fdc2e4bc-b5a2-409f-82e4-bcb5a2909f6c"
-      },
-      "reconcileHints": {
-        "apiId": "fdc2e4bc-b5a2-409f-82e4-bcb5a2909f6c"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:34.168Z",
-      "completedAt": "2026-04-09T18:15:34.230Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "UPSERT_API:kvm-test": {
       "actionId": "UPSERT_API:kvm-test",
       "kind": "UPSERT_API",
       "sourceId": "kvm-test",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [],
-      "targetIds": {
-        "apiId": "138325eb-639f-41c6-8325-eb639fb1c691"
-      },
-      "reconcileHints": {
-        "apiId": "138325eb-639f-41c6-8325-eb639fb1c691"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:34.232Z",
-      "completedAt": "2026-04-09T18:15:34.415Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "UPSERT_PLAN:kvm-test:KEYLESS": {
       "actionId": "UPSERT_PLAN:kvm-test:KEYLESS",
       "kind": "UPSERT_PLAN",
       "sourceId": "kvm-test",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_API:kvm-test"
       ],
-      "targetIds": {
-        "apiId": "138325eb-639f-41c6-8325-eb639fb1c691",
-        "planId": "7ccb2691-057d-46c9-8b26-91057d86c939",
-        "planKey": "KEYLESS"
-      },
-      "reconcileHints": {
-        "apiId": "138325eb-639f-41c6-8325-eb639fb1c691",
-        "planId": "7ccb2691-057d-46c9-8b26-91057d86c939",
-        "planKey": "KEYLESS"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:34.417Z",
-      "completedAt": "2026-04-09T18:15:34.655Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "VERIFY_PLAN:kvm-test:KEYLESS": {
       "actionId": "VERIFY_PLAN:kvm-test:KEYLESS",
       "kind": "VERIFY_PLAN",
       "sourceId": "kvm-test",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_PLAN:kvm-test:KEYLESS"
       ],
-      "targetIds": {
-        "apiId": "138325eb-639f-41c6-8325-eb639fb1c691",
-        "planId": "7ccb2691-057d-46c9-8b26-91057d86c939",
-        "planKey": "KEYLESS"
-      },
-      "reconcileHints": {
-        "apiId": "138325eb-639f-41c6-8325-eb639fb1c691",
-        "planId": "7ccb2691-057d-46c9-8b26-91057d86c939",
-        "planKey": "KEYLESS"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:34.658Z",
-      "completedAt": "2026-04-09T18:15:34.773Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "VERIFY_API:kvm-test": {
       "actionId": "VERIFY_API:kvm-test",
       "kind": "VERIFY_API",
       "sourceId": "kvm-test",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_API:kvm-test",
         "VERIFY_PLAN:kvm-test:KEYLESS"
       ],
-      "targetIds": {
-        "apiId": "138325eb-639f-41c6-8325-eb639fb1c691"
-      },
-      "reconcileHints": {
-        "apiId": "138325eb-639f-41c6-8325-eb639fb1c691"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:34.776Z",
-      "completedAt": "2026-04-09T18:15:34.837Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "UPSERT_API:load-balance-target-servers-api": {
       "actionId": "UPSERT_API:load-balance-target-servers-api",
       "kind": "UPSERT_API",
       "sourceId": "load-balance-target-servers-api",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [],
-      "targetIds": {
-        "apiId": "44ca08ad-496b-455e-8a08-ad496b355ed0"
-      },
-      "reconcileHints": {
-        "apiId": "44ca08ad-496b-455e-8a08-ad496b355ed0"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:34.838Z",
-      "completedAt": "2026-04-09T18:15:35.025Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "UPSERT_PLAN:load-balance-target-servers-api:KEYLESS": {
       "actionId": "UPSERT_PLAN:load-balance-target-servers-api:KEYLESS",
       "kind": "UPSERT_PLAN",
       "sourceId": "load-balance-target-servers-api",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_API:load-balance-target-servers-api"
       ],
-      "targetIds": {
-        "apiId": "44ca08ad-496b-455e-8a08-ad496b355ed0",
-        "planId": "ee5bda20-7af1-479c-9bda-207af1579cdf",
-        "planKey": "KEYLESS"
-      },
-      "reconcileHints": {
-        "apiId": "44ca08ad-496b-455e-8a08-ad496b355ed0",
-        "planId": "ee5bda20-7af1-479c-9bda-207af1579cdf",
-        "planKey": "KEYLESS"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:35.028Z",
-      "completedAt": "2026-04-09T18:15:35.270Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "VERIFY_PLAN:load-balance-target-servers-api:KEYLESS": {
       "actionId": "VERIFY_PLAN:load-balance-target-servers-api:KEYLESS",
       "kind": "VERIFY_PLAN",
       "sourceId": "load-balance-target-servers-api",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_PLAN:load-balance-target-servers-api:KEYLESS"
       ],
-      "targetIds": {
-        "apiId": "44ca08ad-496b-455e-8a08-ad496b355ed0",
-        "planId": "ee5bda20-7af1-479c-9bda-207af1579cdf",
-        "planKey": "KEYLESS"
-      },
-      "reconcileHints": {
-        "apiId": "44ca08ad-496b-455e-8a08-ad496b355ed0",
-        "planId": "ee5bda20-7af1-479c-9bda-207af1579cdf",
-        "planKey": "KEYLESS"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:35.271Z",
-      "completedAt": "2026-04-09T18:15:35.389Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "VERIFY_API:load-balance-target-servers-api": {
       "actionId": "VERIFY_API:load-balance-target-servers-api",
       "kind": "VERIFY_API",
       "sourceId": "load-balance-target-servers-api",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_API:load-balance-target-servers-api",
         "VERIFY_PLAN:load-balance-target-servers-api:KEYLESS"
       ],
-      "targetIds": {
-        "apiId": "44ca08ad-496b-455e-8a08-ad496b355ed0"
-      },
-      "reconcileHints": {
-        "apiId": "44ca08ad-496b-455e-8a08-ad496b355ed0"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:35.390Z",
-      "completedAt": "2026-04-09T18:15:35.450Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "UPSERT_API:mock-target-api": {
       "actionId": "UPSERT_API:mock-target-api",
       "kind": "UPSERT_API",
       "sourceId": "mock-target-api",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [],
-      "targetIds": {
-        "apiId": "28ac420b-122e-429c-ac42-0b122ec29c78"
-      },
-      "reconcileHints": {
-        "apiId": "28ac420b-122e-429c-ac42-0b122ec29c78"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:35.452Z",
-      "completedAt": "2026-04-09T18:15:35.636Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "UPSERT_PLAN:mock-target-api:KEYLESS": {
       "actionId": "UPSERT_PLAN:mock-target-api:KEYLESS",
       "kind": "UPSERT_PLAN",
       "sourceId": "mock-target-api",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_API:mock-target-api"
       ],
-      "targetIds": {
-        "apiId": "28ac420b-122e-429c-ac42-0b122ec29c78",
-        "planId": "454cb5dc-2523-4955-8cb5-dc2523c95561",
-        "planKey": "KEYLESS"
-      },
-      "reconcileHints": {
-        "apiId": "28ac420b-122e-429c-ac42-0b122ec29c78",
-        "planId": "454cb5dc-2523-4955-8cb5-dc2523c95561",
-        "planKey": "KEYLESS"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:35.638Z",
-      "completedAt": "2026-04-09T18:15:35.881Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "VERIFY_PLAN:mock-target-api:KEYLESS": {
       "actionId": "VERIFY_PLAN:mock-target-api:KEYLESS",
       "kind": "VERIFY_PLAN",
       "sourceId": "mock-target-api",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_PLAN:mock-target-api:KEYLESS"
       ],
-      "targetIds": {
-        "apiId": "28ac420b-122e-429c-ac42-0b122ec29c78",
-        "planId": "454cb5dc-2523-4955-8cb5-dc2523c95561",
-        "planKey": "KEYLESS"
-      },
-      "reconcileHints": {
-        "apiId": "28ac420b-122e-429c-ac42-0b122ec29c78",
-        "planId": "454cb5dc-2523-4955-8cb5-dc2523c95561",
-        "planKey": "KEYLESS"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:35.884Z",
-      "completedAt": "2026-04-09T18:15:36.000Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "VERIFY_API:mock-target-api": {
       "actionId": "VERIFY_API:mock-target-api",
       "kind": "VERIFY_API",
       "sourceId": "mock-target-api",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_API:mock-target-api",
         "VERIFY_PLAN:mock-target-api:KEYLESS"
       ],
-      "targetIds": {
-        "apiId": "28ac420b-122e-429c-ac42-0b122ec29c78"
-      },
-      "reconcileHints": {
-        "apiId": "28ac420b-122e-429c-ac42-0b122ec29c78"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:36.003Z",
-      "completedAt": "2026-04-09T18:15:36.063Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "UPSERT_API:proxy-sharedflow-api-11": {
       "actionId": "UPSERT_API:proxy-sharedflow-api-11",
       "kind": "UPSERT_API",
       "sourceId": "proxy-sharedflow-api-11",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [],
-      "targetIds": {
-        "apiId": "c81e9bcd-5473-4e37-9e9b-cd54738e37c0"
-      },
-      "reconcileHints": {
-        "apiId": "c81e9bcd-5473-4e37-9e9b-cd54738e37c0"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:36.065Z",
-      "completedAt": "2026-04-09T18:15:36.248Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "UPSERT_PLAN:proxy-sharedflow-api-11:KEYLESS": {
       "actionId": "UPSERT_PLAN:proxy-sharedflow-api-11:KEYLESS",
       "kind": "UPSERT_PLAN",
       "sourceId": "proxy-sharedflow-api-11",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_API:proxy-sharedflow-api-11"
       ],
-      "targetIds": {
-        "apiId": "c81e9bcd-5473-4e37-9e9b-cd54738e37c0",
-        "planId": "3ac0d19a-c2c4-4c91-80d1-9ac2c42c91b1",
-        "planKey": "KEYLESS"
-      },
-      "reconcileHints": {
-        "apiId": "c81e9bcd-5473-4e37-9e9b-cd54738e37c0",
-        "planId": "3ac0d19a-c2c4-4c91-80d1-9ac2c42c91b1",
-        "planKey": "KEYLESS"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:36.250Z",
-      "completedAt": "2026-04-09T18:15:36.487Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "VERIFY_PLAN:proxy-sharedflow-api-11:KEYLESS": {
       "actionId": "VERIFY_PLAN:proxy-sharedflow-api-11:KEYLESS",
       "kind": "VERIFY_PLAN",
       "sourceId": "proxy-sharedflow-api-11",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_PLAN:proxy-sharedflow-api-11:KEYLESS"
       ],
-      "targetIds": {
-        "apiId": "c81e9bcd-5473-4e37-9e9b-cd54738e37c0",
-        "planId": "3ac0d19a-c2c4-4c91-80d1-9ac2c42c91b1",
-        "planKey": "KEYLESS"
-      },
-      "reconcileHints": {
-        "apiId": "c81e9bcd-5473-4e37-9e9b-cd54738e37c0",
-        "planId": "3ac0d19a-c2c4-4c91-80d1-9ac2c42c91b1",
-        "planKey": "KEYLESS"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:36.489Z",
-      "completedAt": "2026-04-09T18:15:36.606Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "VERIFY_API:proxy-sharedflow-api-11": {
       "actionId": "VERIFY_API:proxy-sharedflow-api-11",
       "kind": "VERIFY_API",
       "sourceId": "proxy-sharedflow-api-11",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_API:proxy-sharedflow-api-11",
         "VERIFY_PLAN:proxy-sharedflow-api-11:KEYLESS"
       ],
-      "targetIds": {
-        "apiId": "c81e9bcd-5473-4e37-9e9b-cd54738e37c0"
-      },
-      "reconcileHints": {
-        "apiId": "c81e9bcd-5473-4e37-9e9b-cd54738e37c0"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:36.609Z",
-      "completedAt": "2026-04-09T18:15:36.671Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "UPSERT_API:v1-ships": {
       "actionId": "UPSERT_API:v1-ships",
       "kind": "UPSERT_API",
       "sourceId": "v1-ships",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [],
-      "targetIds": {
-        "apiId": "f336db49-de57-406f-b6db-49de57506fef"
-      },
-      "reconcileHints": {
-        "apiId": "f336db49-de57-406f-b6db-49de57506fef"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:36.673Z",
-      "completedAt": "2026-04-09T18:15:36.857Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "UPSERT_PLAN:v1-ships:KEYLESS": {
       "actionId": "UPSERT_PLAN:v1-ships:KEYLESS",
       "kind": "UPSERT_PLAN",
       "sourceId": "v1-ships",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_API:v1-ships"
       ],
-      "targetIds": {
-        "apiId": "f336db49-de57-406f-b6db-49de57506fef",
-        "planId": "2b3b4a35-f8c2-4327-bb4a-35f8c2f32710",
-        "planKey": "KEYLESS"
-      },
-      "reconcileHints": {
-        "apiId": "f336db49-de57-406f-b6db-49de57506fef",
-        "planId": "2b3b4a35-f8c2-4327-bb4a-35f8c2f32710",
-        "planKey": "KEYLESS"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:36.859Z",
-      "completedAt": "2026-04-09T18:15:37.103Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "VERIFY_PLAN:v1-ships:KEYLESS": {
       "actionId": "VERIFY_PLAN:v1-ships:KEYLESS",
       "kind": "VERIFY_PLAN",
       "sourceId": "v1-ships",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_PLAN:v1-ships:KEYLESS"
       ],
-      "targetIds": {
-        "apiId": "f336db49-de57-406f-b6db-49de57506fef",
-        "planId": "2b3b4a35-f8c2-4327-bb4a-35f8c2f32710",
-        "planKey": "KEYLESS"
-      },
-      "reconcileHints": {
-        "apiId": "f336db49-de57-406f-b6db-49de57506fef",
-        "planId": "2b3b4a35-f8c2-4327-bb4a-35f8c2f32710",
-        "planKey": "KEYLESS"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:37.105Z",
-      "completedAt": "2026-04-09T18:15:37.225Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "VERIFY_API:v1-ships": {
       "actionId": "VERIFY_API:v1-ships",
       "kind": "VERIFY_API",
       "sourceId": "v1-ships",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_API:v1-ships",
         "VERIFY_PLAN:v1-ships:KEYLESS"
       ],
-      "targetIds": {
-        "apiId": "f336db49-de57-406f-b6db-49de57506fef"
-      },
-      "reconcileHints": {
-        "apiId": "f336db49-de57-406f-b6db-49de57506fef"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:37.227Z",
-      "completedAt": "2026-04-09T18:15:37.287Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "UPSERT_API:villian-chain": {
       "actionId": "UPSERT_API:villian-chain",
       "kind": "UPSERT_API",
       "sourceId": "villian-chain",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [],
-      "targetIds": {
-        "apiId": "30c2c79f-18a7-4456-82c7-9f18a7645628"
-      },
-      "reconcileHints": {
-        "apiId": "30c2c79f-18a7-4456-82c7-9f18a7645628"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:37.289Z",
-      "completedAt": "2026-04-09T18:15:37.477Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "UPSERT_PLAN:villian-chain:KEYLESS": {
       "actionId": "UPSERT_PLAN:villian-chain:KEYLESS",
       "kind": "UPSERT_PLAN",
       "sourceId": "villian-chain",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_API:villian-chain"
       ],
-      "targetIds": {
-        "apiId": "30c2c79f-18a7-4456-82c7-9f18a7645628",
-        "planId": "3c858e5a-9a28-4333-858e-5a9a28a33376",
-        "planKey": "KEYLESS"
-      },
-      "reconcileHints": {
-        "apiId": "30c2c79f-18a7-4456-82c7-9f18a7645628",
-        "planId": "3c858e5a-9a28-4333-858e-5a9a28a33376",
-        "planKey": "KEYLESS"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:37.480Z",
-      "completedAt": "2026-04-09T18:15:37.716Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "VERIFY_PLAN:villian-chain:KEYLESS": {
       "actionId": "VERIFY_PLAN:villian-chain:KEYLESS",
       "kind": "VERIFY_PLAN",
       "sourceId": "villian-chain",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_PLAN:villian-chain:KEYLESS"
       ],
-      "targetIds": {
-        "apiId": "30c2c79f-18a7-4456-82c7-9f18a7645628",
-        "planId": "3c858e5a-9a28-4333-858e-5a9a28a33376",
-        "planKey": "KEYLESS"
-      },
-      "reconcileHints": {
-        "apiId": "30c2c79f-18a7-4456-82c7-9f18a7645628",
-        "planId": "3c858e5a-9a28-4333-858e-5a9a28a33376",
-        "planKey": "KEYLESS"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:37.719Z",
-      "completedAt": "2026-04-09T18:15:37.835Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "VERIFY_API:villian-chain": {
       "actionId": "VERIFY_API:villian-chain",
       "kind": "VERIFY_API",
       "sourceId": "villian-chain",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_API:villian-chain",
         "VERIFY_PLAN:villian-chain:KEYLESS"
       ],
-      "targetIds": {
-        "apiId": "30c2c79f-18a7-4456-82c7-9f18a7645628"
-      },
-      "reconcileHints": {
-        "apiId": "30c2c79f-18a7-4456-82c7-9f18a7645628"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:37.838Z",
-      "completedAt": "2026-04-09T18:15:37.901Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "UPSERT_API:wizards-api-9": {
       "actionId": "UPSERT_API:wizards-api-9",
       "kind": "UPSERT_API",
       "sourceId": "wizards-api-9",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [],
-      "targetIds": {
-        "apiId": "927e2f2b-5bf0-484b-be2f-2b5bf0f84b95"
-      },
-      "reconcileHints": {
-        "apiId": "927e2f2b-5bf0-484b-be2f-2b5bf0f84b95"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:37.904Z",
-      "completedAt": "2026-04-09T18:15:38.087Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "UPSERT_PLAN:wizards-api-9:API_KEY": {
       "actionId": "UPSERT_PLAN:wizards-api-9:API_KEY",
       "kind": "UPSERT_PLAN",
       "sourceId": "wizards-api-9",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_API:wizards-api-9"
       ],
-      "targetIds": {
-        "apiId": "927e2f2b-5bf0-484b-be2f-2b5bf0f84b95",
-        "planId": "8462f209-3f79-4137-a2f2-093f7931370c",
-        "planKey": "API_KEY"
-      },
-      "reconcileHints": {
-        "apiId": "927e2f2b-5bf0-484b-be2f-2b5bf0f84b95",
-        "planId": "8462f209-3f79-4137-a2f2-093f7931370c",
-        "planKey": "API_KEY"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:38.089Z",
-      "completedAt": "2026-04-09T18:15:38.326Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "VERIFY_PLAN:wizards-api-9:API_KEY": {
       "actionId": "VERIFY_PLAN:wizards-api-9:API_KEY",
       "kind": "VERIFY_PLAN",
       "sourceId": "wizards-api-9",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_PLAN:wizards-api-9:API_KEY"
       ],
-      "targetIds": {
-        "apiId": "927e2f2b-5bf0-484b-be2f-2b5bf0f84b95",
-        "planId": "8462f209-3f79-4137-a2f2-093f7931370c",
-        "planKey": "API_KEY"
-      },
-      "reconcileHints": {
-        "apiId": "927e2f2b-5bf0-484b-be2f-2b5bf0f84b95",
-        "planId": "8462f209-3f79-4137-a2f2-093f7931370c",
-        "planKey": "API_KEY"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:38.329Z",
-      "completedAt": "2026-04-09T18:15:38.446Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "VERIFY_API:wizards-api-9": {
       "actionId": "VERIFY_API:wizards-api-9",
       "kind": "VERIFY_API",
       "sourceId": "wizards-api-9",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_API:wizards-api-9",
         "VERIFY_PLAN:wizards-api-9:API_KEY"
       ],
-      "targetIds": {
-        "apiId": "927e2f2b-5bf0-484b-be2f-2b5bf0f84b95"
-      },
-      "reconcileHints": {
-        "apiId": "927e2f2b-5bf0-484b-be2f-2b5bf0f84b95"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:38.448Z",
-      "completedAt": "2026-04-09T18:15:38.508Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "UPSERT_API:yes-or-no-api-4": {
       "actionId": "UPSERT_API:yes-or-no-api-4",
       "kind": "UPSERT_API",
       "sourceId": "yes-or-no-api-4",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [],
-      "targetIds": {
-        "apiId": "10633c96-086c-466a-a33c-96086c766ae2"
-      },
-      "reconcileHints": {
-        "apiId": "10633c96-086c-466a-a33c-96086c766ae2"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:38.511Z",
-      "completedAt": "2026-04-09T18:15:38.695Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "UPSERT_PLAN:yes-or-no-api-4:API_KEY": {
       "actionId": "UPSERT_PLAN:yes-or-no-api-4:API_KEY",
       "kind": "UPSERT_PLAN",
       "sourceId": "yes-or-no-api-4",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_API:yes-or-no-api-4"
       ],
-      "targetIds": {
-        "apiId": "10633c96-086c-466a-a33c-96086c766ae2",
-        "planId": "af5d6073-fb31-4e6d-9d60-73fb31ee6db6",
-        "planKey": "API_KEY"
-      },
-      "reconcileHints": {
-        "apiId": "10633c96-086c-466a-a33c-96086c766ae2",
-        "planId": "af5d6073-fb31-4e6d-9d60-73fb31ee6db6",
-        "planKey": "API_KEY"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:38.698Z",
-      "completedAt": "2026-04-09T18:15:38.936Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "VERIFY_PLAN:yes-or-no-api-4:API_KEY": {
       "actionId": "VERIFY_PLAN:yes-or-no-api-4:API_KEY",
       "kind": "VERIFY_PLAN",
       "sourceId": "yes-or-no-api-4",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_PLAN:yes-or-no-api-4:API_KEY"
       ],
-      "targetIds": {
-        "apiId": "10633c96-086c-466a-a33c-96086c766ae2",
-        "planId": "af5d6073-fb31-4e6d-9d60-73fb31ee6db6",
-        "planKey": "API_KEY"
-      },
-      "reconcileHints": {
-        "apiId": "10633c96-086c-466a-a33c-96086c766ae2",
-        "planId": "af5d6073-fb31-4e6d-9d60-73fb31ee6db6",
-        "planKey": "API_KEY"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:38.939Z",
-      "completedAt": "2026-04-09T18:15:39.056Z"
+      "startedAt": null,
+      "completedAt": null
     },
     "VERIFY_API:yes-or-no-api-4": {
       "actionId": "VERIFY_API:yes-or-no-api-4",
       "kind": "VERIFY_API",
       "sourceId": "yes-or-no-api-4",
       "plannedStatus": "READY",
-      "status": "SUCCEEDED",
+      "status": "PENDING",
       "dependencies": [
         "UPSERT_API:yes-or-no-api-4",
         "VERIFY_PLAN:yes-or-no-api-4:API_KEY"
       ],
-      "targetIds": {
-        "apiId": "10633c96-086c-466a-a33c-96086c766ae2"
-      },
-      "reconcileHints": {
-        "apiId": "10633c96-086c-466a-a33c-96086c766ae2"
-      },
+      "targetIds": {},
+      "reconcileHints": {},
       "lastError": null,
-      "startedAt": "2026-04-09T18:15:39.059Z",
-      "completedAt": "2026-04-09T18:15:39.121Z"
+      "startedAt": null,
+      "completedAt": null
     }
   }
 }

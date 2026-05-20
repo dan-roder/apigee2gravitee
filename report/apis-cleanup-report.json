@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-04-17T17:47:02.373Z",
+  "generatedAt": "2026-05-20T15:43:47.565Z",
   "summary": {
     "requested": 23,
-    "deleted": 23,
-    "skipped": 0,
+    "deleted": 0,
+    "skipped": 23,
     "failed": 0
   },
   "targets": [
