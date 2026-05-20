@@ -1,144 +1,30 @@
 {
-  "generatedAt": "2026-05-20T18:13:37.128Z",
+  "generatedAt": "2026-05-20T19:24:34.310Z",
   "summary": {
     "checkedUsers": 21,
     "checkedApplications": 25,
     "checkedSubscriptions": 31,
-    "blockers": 86,
+    "blockers": 67,
     "warnings": 0
   },
   "mismatches": [
     {
       "severity": "blocker",
-      "code": "USER_MISSING",
-      "sourceId": "danny.rivera@540.co",
-      "message": "User danny.rivera@540.co is missing"
-    },
-    {
-      "severity": "blocker",
-      "code": "USER_MISSING",
-      "sourceId": "dev10@540.co",
-      "message": "User dev10@540.co is missing"
-    },
-    {
-      "severity": "blocker",
-      "code": "USER_MISSING",
-      "sourceId": "dev11@540.co",
-      "message": "User dev11@540.co is missing"
-    },
-    {
-      "severity": "blocker",
-      "code": "USER_MISSING",
-      "sourceId": "dev12@540.co",
-      "message": "User dev12@540.co is missing"
-    },
-    {
-      "severity": "blocker",
-      "code": "USER_MISSING",
-      "sourceId": "dev13@540.co",
-      "message": "User dev13@540.co is missing"
-    },
-    {
-      "severity": "blocker",
-      "code": "USER_MISSING",
-      "sourceId": "dev14@540.co",
-      "message": "User dev14@540.co is missing"
-    },
-    {
-      "severity": "blocker",
-      "code": "USER_MISSING",
-      "sourceId": "dev15@540.co",
-      "message": "User dev15@540.co is missing"
-    },
-    {
-      "severity": "blocker",
-      "code": "USER_MISSING",
-      "sourceId": "dev16@540.co",
-      "message": "User dev16@540.co is missing"
-    },
-    {
-      "severity": "blocker",
-      "code": "USER_MISSING",
-      "sourceId": "dev17@540.co",
-      "message": "User dev17@540.co is missing"
-    },
-    {
-      "severity": "blocker",
-      "code": "USER_MISSING",
-      "sourceId": "dev18@540.co",
-      "message": "User dev18@540.co is missing"
-    },
-    {
-      "severity": "blocker",
-      "code": "USER_MISSING",
-      "sourceId": "dev19@540.co",
-      "message": "User dev19@540.co is missing"
-    },
-    {
-      "severity": "blocker",
-      "code": "USER_MISSING",
-      "sourceId": "dev1@540.co",
-      "message": "User dev1@540.co is missing"
-    },
-    {
-      "severity": "blocker",
-      "code": "USER_MISSING",
-      "sourceId": "dev20@540.co",
-      "message": "User dev20@540.co is missing"
-    },
-    {
-      "severity": "blocker",
-      "code": "USER_MISSING",
-      "sourceId": "dev2@540.co",
-      "message": "User dev2@540.co is missing"
-    },
-    {
-      "severity": "blocker",
-      "code": "USER_MISSING",
-      "sourceId": "dev4@540.co",
-      "message": "User dev4@540.co is missing"
-    },
-    {
-      "severity": "blocker",
-      "code": "USER_MISSING",
-      "sourceId": "dev5@540.co",
-      "message": "User dev5@540.co is missing"
-    },
-    {
-      "severity": "blocker",
-      "code": "USER_MISSING",
-      "sourceId": "dev6@540.co",
-      "message": "User dev6@540.co is missing"
-    },
-    {
-      "severity": "blocker",
-      "code": "USER_MISSING",
-      "sourceId": "dev7@540.co",
-      "message": "User dev7@540.co is missing"
-    },
-    {
-      "severity": "blocker",
-      "code": "USER_MISSING",
-      "sourceId": "dev8@540.co",
-      "message": "User dev8@540.co is missing"
-    },
-    {
-      "severity": "blocker",
-      "code": "USER_MISSING",
-      "sourceId": "dev9@540.co",
-      "message": "User dev9@540.co is missing"
-    },
-    {
-      "severity": "blocker",
-      "code": "USER_MISSING",
-      "sourceId": "erik.severson@540.co",
-      "message": "User erik.severson@540.co is missing"
-    },
-    {
-      "severity": "blocker",
-      "code": "APPLICATION_MISSING",
+      "code": "APPLICATION_METADATA_MISMATCH",
       "sourceId": "danny.rivera@540.co/cats-dev-app",
-      "message": "Application cats-dev-app is missing"
+      "message": "Application cats-dev-app metadata developerEmail is undefined instead of danny.rivera@540.co"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "danny.rivera@540.co/cats-dev-app",
+      "message": "Application cats-dev-app metadata sourceId is undefined instead of danny.rivera@540.co/cats-dev-app"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "danny.rivera@540.co/cats-dev-app",
+      "message": "Application cats-dev-app metadata DisplayName is undefined instead of cats-dev-app"
     },
     {
       "severity": "blocker",

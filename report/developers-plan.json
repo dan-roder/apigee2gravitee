@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-20T18:15:41.328Z",
+  "generatedAt": "2026-05-20T19:24:25.748Z",
   "kind": "DevelopersMigrationManifest",
   "source": {
     "irDir": "/Users/daniel.roder/Sites/apigee2gravitee/ir",
@@ -45,17 +45,20 @@
     "operatorActions": {
       "byKind": {
         "UPSERT_USER": {
-          "CREATE": 21
+          "REUSE": 18,
+          "CREATE": 3
         },
         "UPSERT_APPLICATION": {
-          "CREATE": 25
+          "REUSE": 1,
+          "CREATE": 24
         },
         "UPSERT_SUBSCRIPTION": {
           "CREATE": 31
         }
       },
       "byOperation": {
-        "CREATE": 77
+        "REUSE": 19,
+        "CREATE": 58
       },
       "blockedReasons": {}
     }
@@ -4950,7 +4953,7 @@
       "sourceId": "danny.rivera@540.co",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "active",
       "lookup": {
         "email": "danny.rivera@540.co"
@@ -4984,7 +4987,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "userId": "ac2423e5-721d-484d-a423-e5721d584d9a"
+      }
     },
     {
       "actionId": "VERIFY_USER:danny.rivera@540.co",
@@ -5023,7 +5028,7 @@
       "sourceId": "dev10@540.co",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "active",
       "lookup": {
         "email": "dev10@540.co"
@@ -5057,7 +5062,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "userId": "796dbc71-1625-475a-adbc-711625575a2a"
+      }
     },
     {
       "actionId": "VERIFY_USER:dev10@540.co",
@@ -5096,7 +5103,7 @@
       "sourceId": "dev11@540.co",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "active",
       "lookup": {
         "email": "dev11@540.co"
@@ -5130,7 +5137,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "userId": "931e5209-f089-465c-9e52-09f089665c55"
+      }
     },
     {
       "actionId": "VERIFY_USER:dev11@540.co",
@@ -5242,7 +5251,7 @@
       "sourceId": "dev13@540.co",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "active",
       "lookup": {
         "email": "dev13@540.co"
@@ -5276,7 +5285,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "userId": "4886cb8c-9af5-4123-86cb-8c9af531237d"
+      }
     },
     {
       "actionId": "VERIFY_USER:dev13@540.co",
@@ -5315,7 +5326,7 @@
       "sourceId": "dev14@540.co",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "active",
       "lookup": {
         "email": "dev14@540.co"
@@ -5349,7 +5360,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "userId": "17b8548a-cabb-4282-b854-8acabb9282ea"
+      }
     },
     {
       "actionId": "VERIFY_USER:dev14@540.co",
@@ -5388,7 +5401,7 @@
       "sourceId": "dev15@540.co",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "active",
       "lookup": {
         "email": "dev15@540.co"
@@ -5422,7 +5435,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "userId": "0a98f339-24b3-48d4-98f3-3924b3d8d494"
+      }
     },
     {
       "actionId": "VERIFY_USER:dev15@540.co",
@@ -5461,7 +5476,7 @@
       "sourceId": "dev16@540.co",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "active",
       "lookup": {
         "email": "dev16@540.co"
@@ -5495,7 +5510,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "userId": "f5b29857-5e20-4588-b298-575e202588a8"
+      }
     },
     {
       "actionId": "VERIFY_USER:dev16@540.co",
@@ -5534,7 +5551,7 @@
       "sourceId": "dev17@540.co",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "active",
       "lookup": {
         "email": "dev17@540.co"
@@ -5568,7 +5585,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "userId": "9f6604c9-6c3d-46ca-a604-c96c3d76ca6c"
+      }
     },
     {
       "actionId": "VERIFY_USER:dev17@540.co",
@@ -5607,7 +5626,7 @@
       "sourceId": "dev18@540.co",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "active",
       "lookup": {
         "email": "dev18@540.co"
@@ -5641,7 +5660,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "userId": "9f5ef433-da1c-4f1e-9ef4-33da1ccf1e78"
+      }
     },
     {
       "actionId": "VERIFY_USER:dev18@540.co",
@@ -5680,7 +5701,7 @@
       "sourceId": "dev19@540.co",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "active",
       "lookup": {
         "email": "dev19@540.co"
@@ -5714,7 +5735,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "userId": "3c8d3705-b676-4638-8d37-05b676363880"
+      }
     },
     {
       "actionId": "VERIFY_USER:dev19@540.co",
@@ -5753,7 +5776,7 @@
       "sourceId": "dev1@540.co",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "active",
       "lookup": {
         "email": "dev1@540.co"
@@ -5787,7 +5810,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "userId": "3c46546c-c5e5-4902-8654-6cc5e57902df"
+      }
     },
     {
       "actionId": "VERIFY_USER:dev1@540.co",
@@ -5972,7 +5997,7 @@
       "sourceId": "dev4@540.co",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "active",
       "lookup": {
         "email": "dev4@540.co"
@@ -6006,7 +6031,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "userId": "50befd95-bf65-487f-befd-95bf65b87f06"
+      }
     },
     {
       "actionId": "VERIFY_USER:dev4@540.co",
@@ -6045,7 +6072,7 @@
       "sourceId": "dev5@540.co",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "active",
       "lookup": {
         "email": "dev5@540.co"
@@ -6079,7 +6106,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "userId": "c129d7a0-110d-4a3c-a9d7-a0110d7a3c3d"
+      }
     },
     {
       "actionId": "VERIFY_USER:dev5@540.co",
@@ -6118,7 +6147,7 @@
       "sourceId": "dev6@540.co",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "active",
       "lookup": {
         "email": "dev6@540.co"
@@ -6152,7 +6181,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "userId": "05b07483-8992-44d7-b074-83899274d725"
+      }
     },
     {
       "actionId": "VERIFY_USER:dev6@540.co",
@@ -6191,7 +6222,7 @@
       "sourceId": "dev7@540.co",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "active",
       "lookup": {
         "email": "dev7@540.co"
@@ -6225,7 +6256,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "userId": "386dab0e-932b-4980-adab-0e932be98054"
+      }
     },
     {
       "actionId": "VERIFY_USER:dev7@540.co",
@@ -6264,7 +6297,7 @@
       "sourceId": "dev8@540.co",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "active",
       "lookup": {
         "email": "dev8@540.co"
@@ -6298,7 +6331,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "userId": "995aaad5-f117-494f-9aaa-d5f117494fd5"
+      }
     },
     {
       "actionId": "VERIFY_USER:dev8@540.co",
@@ -6337,7 +6372,7 @@
       "sourceId": "dev9@540.co",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "active",
       "lookup": {
         "email": "dev9@540.co"
@@ -6371,7 +6406,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "userId": "ea989efb-af79-498e-989e-fbaf79298ee0"
+      }
     },
     {
       "actionId": "VERIFY_USER:dev9@540.co",
@@ -6410,7 +6447,7 @@
       "sourceId": "erik.severson@540.co",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "active",
       "lookup": {
         "email": "erik.severson@540.co"
@@ -6444,7 +6481,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "userId": "dd7782b0-40a3-4e48-b782-b040a30e4815"
+      }
     },
     {
       "actionId": "VERIFY_USER:erik.severson@540.co",
@@ -6485,7 +6524,7 @@
         "UPSERT_USER:danny.rivera@540.co"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "approved",
       "lookup": {
         "name": "cats-dev-app",
@@ -6520,7 +6559,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "applicationId": "c2f06877-a620-49ef-b068-77a620a9ef18"
+      }
     },
     {
       "actionId": "VERIFY_APPLICATION:danny.rivera@540.co/cats-dev-app",
