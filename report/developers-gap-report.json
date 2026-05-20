@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-20T20:20:34.459Z",
+  "generatedAt": "2026-05-20T21:20:43.050Z",
   "summary": {
     "users": 21,
     "applications": 25,
@@ -735,7 +735,8 @@
       "VERIFY_SUBSCRIPTION": 31
     },
     "actionsByStatus": {
-      "READY": 185
+      "READY": 158,
+      "BLOCKED": 27
     },
     "operatorActions": {
       "byKind": {
@@ -748,15 +749,19 @@
           "CREATE": 4
         },
         "UPSERT_SUBSCRIPTION": {
-          "CREATE": 14,
-          "REUSE": 17
+          "REUSE": 18,
+          "CREATE": 4,
+          "BLOCK": 9
         }
       },
       "byOperation": {
-        "REUSE": 56,
-        "CREATE": 21
+        "REUSE": 57,
+        "CREATE": 11,
+        "BLOCK": 9
       },
-      "blockedReasons": {}
+      "blockedReasons": {
+        "TARGET_PLAN_SECURITY_MISMATCH": 9
+      }
     }
   },
   "operatorGuidance": {

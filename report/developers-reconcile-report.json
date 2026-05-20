@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-05-20T19:44:16.806Z",
+  "generatedAt": "2026-05-20T21:21:26.324Z",
   "summary": {
     "checkedUsers": 21,
     "checkedApplications": 25,
     "checkedSubscriptions": 31,
-    "blockers": 70,
+    "blockers": 102,
     "warnings": 0
   },
   "mismatches": [
@@ -46,15 +46,39 @@
     },
     {
       "severity": "blocker",
-      "code": "APPLICATION_MISSING",
+      "code": "APPLICATION_METADATA_MISMATCH",
       "sourceId": "dev10@540.co/dev10-app",
-      "message": "Application dev10-app is missing"
+      "message": "Application dev10-app metadata developerEmail is undefined instead of dev10@540.co"
     },
     {
       "severity": "blocker",
-      "code": "APPLICATION_MISSING",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "dev10@540.co/dev10-app",
+      "message": "Application dev10-app metadata sourceId is undefined instead of dev10@540.co/dev10-app"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "dev10@540.co/dev10-app",
+      "message": "Application dev10-app metadata DisplayName is undefined instead of dev10-app"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
       "sourceId": "dev11@540.co/dev11-app",
-      "message": "Application dev11-app is missing"
+      "message": "Application dev11-app metadata developerEmail is undefined instead of dev11@540.co"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "dev11@540.co/dev11-app",
+      "message": "Application dev11-app metadata sourceId is undefined instead of dev11@540.co/dev11-app"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "dev11@540.co/dev11-app",
+      "message": "Application dev11-app metadata DisplayName is undefined instead of dev11-app"
     },
     {
       "severity": "blocker",
@@ -64,57 +88,201 @@
     },
     {
       "severity": "blocker",
-      "code": "APPLICATION_MISSING",
+      "code": "APPLICATION_METADATA_MISMATCH",
       "sourceId": "dev13@540.co/dev13-app",
-      "message": "Application dev13-app is missing"
+      "message": "Application dev13-app metadata developerEmail is undefined instead of dev13@540.co"
     },
     {
       "severity": "blocker",
-      "code": "APPLICATION_MISSING",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "dev13@540.co/dev13-app",
+      "message": "Application dev13-app metadata sourceId is undefined instead of dev13@540.co/dev13-app"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "dev13@540.co/dev13-app",
+      "message": "Application dev13-app metadata DisplayName is undefined instead of dev13-app"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
       "sourceId": "dev14@540.co/dev14-app",
-      "message": "Application dev14-app is missing"
+      "message": "Application dev14-app metadata developerEmail is undefined instead of dev14@540.co"
     },
     {
       "severity": "blocker",
-      "code": "APPLICATION_MISSING",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "dev14@540.co/dev14-app",
+      "message": "Application dev14-app metadata sourceId is undefined instead of dev14@540.co/dev14-app"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "dev14@540.co/dev14-app",
+      "message": "Application dev14-app metadata DisplayName is undefined instead of dev14-app"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
       "sourceId": "dev15@540.co/dev15-app",
-      "message": "Application dev15-app is missing"
+      "message": "Application dev15-app metadata developerEmail is undefined instead of dev15@540.co"
     },
     {
       "severity": "blocker",
-      "code": "APPLICATION_MISSING",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "dev15@540.co/dev15-app",
+      "message": "Application dev15-app metadata sourceId is undefined instead of dev15@540.co/dev15-app"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "dev15@540.co/dev15-app",
+      "message": "Application dev15-app metadata DisplayName is undefined instead of dev15-app"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
       "sourceId": "dev16@540.co/dev16-app",
-      "message": "Application dev16-app is missing"
+      "message": "Application dev16-app metadata developerEmail is undefined instead of dev16@540.co"
     },
     {
       "severity": "blocker",
-      "code": "APPLICATION_MISSING",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "dev16@540.co/dev16-app",
+      "message": "Application dev16-app metadata sourceId is undefined instead of dev16@540.co/dev16-app"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "dev16@540.co/dev16-app",
+      "message": "Application dev16-app metadata DisplayName is undefined instead of dev16-app"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
       "sourceId": "dev17@540.co/dev17-app",
-      "message": "Application dev17-app is missing"
+      "message": "Application dev17-app metadata developerEmail is undefined instead of dev17@540.co"
     },
     {
       "severity": "blocker",
-      "code": "APPLICATION_MISSING",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "dev17@540.co/dev17-app",
+      "message": "Application dev17-app metadata sourceId is undefined instead of dev17@540.co/dev17-app"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "dev17@540.co/dev17-app",
+      "message": "Application dev17-app metadata DisplayName is undefined instead of dev17-app"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
       "sourceId": "dev18@540.co/dev18-app",
-      "message": "Application dev18-app is missing"
+      "message": "Application dev18-app metadata developerEmail is undefined instead of dev18@540.co"
     },
     {
       "severity": "blocker",
-      "code": "APPLICATION_MISSING",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "dev18@540.co/dev18-app",
+      "message": "Application dev18-app metadata sourceId is undefined instead of dev18@540.co/dev18-app"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "dev18@540.co/dev18-app",
+      "message": "Application dev18-app metadata DisplayName is undefined instead of dev18-app"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
       "sourceId": "dev19@540.co/dev19-app",
-      "message": "Application dev19-app is missing"
+      "message": "Application dev19-app metadata developerEmail is undefined instead of dev19@540.co"
     },
     {
       "severity": "blocker",
-      "code": "APPLICATION_MISSING",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "dev19@540.co/dev19-app",
+      "message": "Application dev19-app metadata sourceId is undefined instead of dev19@540.co/dev19-app"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "dev19@540.co/dev19-app",
+      "message": "Application dev19-app metadata DisplayName is undefined instead of dev19-app"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "dev19@540.co/dev19-app",
+      "message": "Application dev19-app metadata dod_designation is undefined instead of Contractor"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "dev19@540.co/dev19-app",
+      "message": "Application dev19-app metadata dod_organization_list is undefined instead of Navy"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "dev19@540.co/dev19-app",
+      "message": "Application dev19-app metadata dod_service is undefined instead of Navy"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "dev19@540.co/dev19-app",
+      "message": "Application dev19-app metadata dod_sub_org is undefined instead of NAVSEA"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
       "sourceId": "dev1@540.co/kanye-dev-app",
-      "message": "Application kanye-dev-app is missing"
+      "message": "Application kanye-dev-app metadata developerEmail is undefined instead of dev1@540.co"
     },
     {
       "severity": "blocker",
-      "code": "APPLICATION_MISSING",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "dev1@540.co/kanye-dev-app",
+      "message": "Application kanye-dev-app metadata sourceId is undefined instead of dev1@540.co/kanye-dev-app"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "dev1@540.co/kanye-dev-app",
+      "message": "Application kanye-dev-app metadata DisplayName is undefined instead of kanye-dev-app"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "dev1@540.co/kanye-dev-app",
+      "message": "Application kanye-dev-app metadata organization_list is undefined instead of wwwwww"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "dev1@540.co/kanye-dev-app",
+      "message": "Application kanye-dev-app metadata sub_org is undefined instead of ppppppp"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
       "sourceId": "dev1@540.co/wizards-dev-app",
-      "message": "Application wizards-dev-app is missing"
+      "message": "Application wizards-dev-app metadata developerEmail is undefined instead of dev1@540.co"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "dev1@540.co/wizards-dev-app",
+      "message": "Application wizards-dev-app metadata sourceId is undefined instead of dev1@540.co/wizards-dev-app"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "dev1@540.co/wizards-dev-app",
+      "message": "Application wizards-dev-app metadata DisplayName is undefined instead of wizards-dev-app"
     },
     {
       "severity": "blocker",
@@ -136,105 +304,195 @@
     },
     {
       "severity": "blocker",
-      "code": "APPLICATION_MISSING",
+      "code": "APPLICATION_METADATA_MISMATCH",
       "sourceId": "dev4@540.co/dev4-app",
-      "message": "Application dev4-app is missing"
+      "message": "Application dev4-app metadata developerEmail is undefined instead of dev4@540.co"
     },
     {
       "severity": "blocker",
-      "code": "APPLICATION_MISSING",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "dev4@540.co/dev4-app",
+      "message": "Application dev4-app metadata sourceId is undefined instead of dev4@540.co/dev4-app"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "dev4@540.co/dev4-app",
+      "message": "Application dev4-app metadata DisplayName is undefined instead of dev4-app"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
       "sourceId": "dev5@540.co/dev5-app",
-      "message": "Application dev5-app is missing"
+      "message": "Application dev5-app metadata developerEmail is undefined instead of dev5@540.co"
     },
     {
       "severity": "blocker",
-      "code": "APPLICATION_MISSING",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "dev5@540.co/dev5-app",
+      "message": "Application dev5-app metadata sourceId is undefined instead of dev5@540.co/dev5-app"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "dev5@540.co/dev5-app",
+      "message": "Application dev5-app metadata DisplayName is undefined instead of dev5-app"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
       "sourceId": "dev6@540.co/dev6-app",
-      "message": "Application dev6-app is missing"
+      "message": "Application dev6-app metadata developerEmail is undefined instead of dev6@540.co"
     },
     {
       "severity": "blocker",
-      "code": "APPLICATION_MISSING",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "dev6@540.co/dev6-app",
+      "message": "Application dev6-app metadata sourceId is undefined instead of dev6@540.co/dev6-app"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "dev6@540.co/dev6-app",
+      "message": "Application dev6-app metadata DisplayName is undefined instead of dev6-app"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
       "sourceId": "dev7@540.co/dev7-app",
-      "message": "Application dev7-app is missing"
+      "message": "Application dev7-app metadata developerEmail is undefined instead of dev7@540.co"
     },
     {
       "severity": "blocker",
-      "code": "APPLICATION_MISSING",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "dev7@540.co/dev7-app",
+      "message": "Application dev7-app metadata sourceId is undefined instead of dev7@540.co/dev7-app"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "dev7@540.co/dev7-app",
+      "message": "Application dev7-app metadata DisplayName is undefined instead of dev7-app"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
       "sourceId": "dev8@540.co/dev8-app",
-      "message": "Application dev8-app is missing"
+      "message": "Application dev8-app metadata developerEmail is undefined instead of dev8@540.co"
     },
     {
       "severity": "blocker",
-      "code": "APPLICATION_MISSING",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "dev8@540.co/dev8-app",
+      "message": "Application dev8-app metadata sourceId is undefined instead of dev8@540.co/dev8-app"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "dev8@540.co/dev8-app",
+      "message": "Application dev8-app metadata DisplayName is undefined instead of dev8-app"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
       "sourceId": "dev9@540.co/dev9-app",
-      "message": "Application dev9-app is missing"
+      "message": "Application dev9-app metadata developerEmail is undefined instead of dev9@540.co"
     },
     {
       "severity": "blocker",
-      "code": "APPLICATION_MISSING",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "dev9@540.co/dev9-app",
+      "message": "Application dev9-app metadata sourceId is undefined instead of dev9@540.co/dev9-app"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "dev9@540.co/dev9-app",
+      "message": "Application dev9-app metadata DisplayName is undefined instead of dev9-app"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
       "sourceId": "erik.severson@540.co/hogwarts-houses-dev-app",
-      "message": "Application hogwarts-houses-dev-app is missing"
+      "message": "Application hogwarts-houses-dev-app metadata developerEmail is undefined instead of erik.severson@540.co"
     },
     {
       "severity": "blocker",
-      "code": "APPLICATION_MISSING",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "erik.severson@540.co/hogwarts-houses-dev-app",
+      "message": "Application hogwarts-houses-dev-app metadata sourceId is undefined instead of erik.severson@540.co/hogwarts-houses-dev-app"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "erik.severson@540.co/hogwarts-houses-dev-app",
+      "message": "Application hogwarts-houses-dev-app metadata DisplayName is undefined instead of hogwarts-houses-dev-app"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "erik.severson@540.co/hogwarts-houses-dev-app",
+      "message": "Application hogwarts-houses-dev-app metadata organization_list is undefined instead of ccccccc"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "erik.severson@540.co/hogwarts-houses-dev-app",
+      "message": "Application hogwarts-houses-dev-app metadata sub_org is undefined instead of bbbbbbb"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
       "sourceId": "erik.severson@540.co/misc-dev-app",
-      "message": "Application misc-dev-app is missing"
+      "message": "Application misc-dev-app metadata developerEmail is undefined instead of erik.severson@540.co"
     },
     {
       "severity": "blocker",
-      "code": "APPLICATION_MISSING",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "erik.severson@540.co/misc-dev-app",
+      "message": "Application misc-dev-app metadata sourceId is undefined instead of erik.severson@540.co/misc-dev-app"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "erik.severson@540.co/misc-dev-app",
+      "message": "Application misc-dev-app metadata DisplayName is undefined instead of misc-dev-app"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "erik.severson@540.co/misc-dev-app",
+      "message": "Application misc-dev-app metadata organization_list is undefined instead of eeeeeeee"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "erik.severson@540.co/misc-dev-app",
+      "message": "Application misc-dev-app metadata sub_org is undefined instead of vvvvvv"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
       "sourceId": "erik.severson@540.co/yes-or-no-dev-app",
-      "message": "Application yes-or-no-dev-app is missing"
+      "message": "Application yes-or-no-dev-app metadata developerEmail is undefined instead of erik.severson@540.co"
     },
     {
       "severity": "blocker",
-      "code": "SUBSCRIPTION_MISSING",
-      "sourceId": "danny.rivera@540.co/cats-dev-app/idWhL2ATXfup5AyPWo9Z3Oakj1exc0KY/cats-api-product/cats-api-7::API Key Plan",
-      "message": "Subscription danny.rivera@540.co/cats-dev-app/idWhL2ATXfup5AyPWo9Z3Oakj1exc0KY/cats-api-product/cats-api-7::API Key Plan is missing"
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "erik.severson@540.co/yes-or-no-dev-app",
+      "message": "Application yes-or-no-dev-app metadata sourceId is undefined instead of erik.severson@540.co/yes-or-no-dev-app"
     },
     {
       "severity": "blocker",
-      "code": "SUBSCRIPTION_MISSING",
-      "sourceId": "dev10@540.co/dev10-app/wKwAhwPsH53KIyYkAh7rdGfdqYDGdEg4/wizards-api-product/wizards-api-9::API Key Plan",
-      "message": "Subscription dev10@540.co/dev10-app/wKwAhwPsH53KIyYkAh7rdGfdqYDGdEg4/wizards-api-product/wizards-api-9::API Key Plan is missing"
-    },
-    {
-      "severity": "blocker",
-      "code": "SUBSCRIPTION_MISSING",
-      "sourceId": "dev11@540.co/dev11-app/dpnogixgA3HA7xW4ltgBsjycZHiYH6AN/yes-or-no-api-product/yes-or-no-api-4::API Key Plan",
-      "message": "Subscription dev11@540.co/dev11-app/dpnogixgA3HA7xW4ltgBsjycZHiYH6AN/yes-or-no-api-product/yes-or-no-api-4::API Key Plan is missing"
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "erik.severson@540.co/yes-or-no-dev-app",
+      "message": "Application yes-or-no-dev-app metadata DisplayName is undefined instead of yes-or-no-dev-app"
     },
     {
       "severity": "blocker",
       "code": "SUBSCRIPTION_MISSING",
       "sourceId": "dev12@540.co/dev12-app/eySNY5g1UKFxFXMu2OVJKLh08vzHfyQE/wizards-api-product/wizards-api-9::API Key Plan",
       "message": "Subscription dev12@540.co/dev12-app/eySNY5g1UKFxFXMu2OVJKLh08vzHfyQE/wizards-api-product/wizards-api-9::API Key Plan is missing"
-    },
-    {
-      "severity": "blocker",
-      "code": "SUBSCRIPTION_MISSING",
-      "sourceId": "dev13@540.co/dev13-app/f1CsoHJ1RzHpz3anpxN3bGM03TvcKVtL/cats-api-product/cats-api-7::API Key Plan",
-      "message": "Subscription dev13@540.co/dev13-app/f1CsoHJ1RzHpz3anpxN3bGM03TvcKVtL/cats-api-product/cats-api-7::API Key Plan is missing"
-    },
-    {
-      "severity": "blocker",
-      "code": "SUBSCRIPTION_MISSING",
-      "sourceId": "dev14@540.co/dev14-app/IKVvym1wyxJMI1mpiJT7Mr16AF1R6bxS/chuck-norris-api-product/chuck-norris-api-10::API Key Plan",
-      "message": "Subscription dev14@540.co/dev14-app/IKVvym1wyxJMI1mpiJT7Mr16AF1R6bxS/chuck-norris-api-product/chuck-norris-api-10::API Key Plan is missing"
-    },
-    {
-      "severity": "blocker",
-      "code": "SUBSCRIPTION_MISSING",
-      "sourceId": "dev15@540.co/dev15-app/UdYYt10ftgvrhQBGWQMMRkvHQgEylPLI/dog-breeds-api-product/dog-breeds-api-6::API Key Plan",
-      "message": "Subscription dev15@540.co/dev15-app/UdYYt10ftgvrhQBGWQMMRkvHQgEylPLI/dog-breeds-api-product/dog-breeds-api-6::API Key Plan is missing"
-    },
-    {
-      "severity": "blocker",
-      "code": "SUBSCRIPTION_MISSING",
-      "sourceId": "dev16@540.co/dev16-app/m1QTvGvifr92Dh2xLRfB5EDZAH9bm7F3/hogwarts-houses-api-product/hogwarts-houses-api-8::API Key Plan",
-      "message": "Subscription dev16@540.co/dev16-app/m1QTvGvifr92Dh2xLRfB5EDZAH9bm7F3/hogwarts-houses-api-product/hogwarts-houses-api-8::API Key Plan is missing"
     },
     {
       "severity": "blocker",
@@ -275,30 +533,6 @@
     {
       "severity": "blocker",
       "code": "SUBSCRIPTION_MISSING",
-      "sourceId": "dev18@540.co/dev18-app/n99YzKWIIz03KCMYHY6E5a0WzxeAp87m/wizards-api-product/wizards-api-9::API Key Plan",
-      "message": "Subscription dev18@540.co/dev18-app/n99YzKWIIz03KCMYHY6E5a0WzxeAp87m/wizards-api-product/wizards-api-9::API Key Plan is missing"
-    },
-    {
-      "severity": "blocker",
-      "code": "SUBSCRIPTION_MISSING",
-      "sourceId": "dev19@540.co/dev19-app/ISYpfIK2eWM6yW8GCG4EpLUARgxZuBHJ/yes-or-no-api-product/yes-or-no-api-4::API Key Plan",
-      "message": "Subscription dev19@540.co/dev19-app/ISYpfIK2eWM6yW8GCG4EpLUARgxZuBHJ/yes-or-no-api-product/yes-or-no-api-4::API Key Plan is missing"
-    },
-    {
-      "severity": "blocker",
-      "code": "SUBSCRIPTION_MISSING",
-      "sourceId": "dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan",
-      "message": "Subscription dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan is missing"
-    },
-    {
-      "severity": "blocker",
-      "code": "SUBSCRIPTION_MISSING",
-      "sourceId": "dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan",
-      "message": "Subscription dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan is missing"
-    },
-    {
-      "severity": "blocker",
-      "code": "SUBSCRIPTION_MISSING",
       "sourceId": "dev20@540.co/dev20-app/5GQlGWs2xVnA3khGeRHyL45YrqmHvPOd/dog-breeds-api-product/dog-breeds-api-6::API Key Plan",
       "message": "Subscription dev20@540.co/dev20-app/5GQlGWs2xVnA3khGeRHyL45YrqmHvPOd/dog-breeds-api-product/dog-breeds-api-6::API Key Plan is missing"
     },
@@ -313,36 +547,6 @@
       "code": "SUBSCRIPTION_MISSING",
       "sourceId": "dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan",
       "message": "Subscription dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan is missing"
-    },
-    {
-      "severity": "blocker",
-      "code": "SUBSCRIPTION_MISSING",
-      "sourceId": "dev4@540.co/dev4-app/GPz0xIjF8TzAFFYeH1KWavbrxNDd94ds/cats-api-product/cats-api-7::API Key Plan",
-      "message": "Subscription dev4@540.co/dev4-app/GPz0xIjF8TzAFFYeH1KWavbrxNDd94ds/cats-api-product/cats-api-7::API Key Plan is missing"
-    },
-    {
-      "severity": "blocker",
-      "code": "SUBSCRIPTION_MISSING",
-      "sourceId": "dev5@540.co/dev5-app/1bSPzHDZ6Gh2GJHaJWixroGIgZNAmGqi/chuck-norris-api-product/chuck-norris-api-10::API Key Plan",
-      "message": "Subscription dev5@540.co/dev5-app/1bSPzHDZ6Gh2GJHaJWixroGIgZNAmGqi/chuck-norris-api-product/chuck-norris-api-10::API Key Plan is missing"
-    },
-    {
-      "severity": "blocker",
-      "code": "SUBSCRIPTION_MISSING",
-      "sourceId": "dev6@540.co/dev6-app/fjmSGPKixNkQZnd3YNnQKdA3IRy5L9jS/dog-breeds-api-product/dog-breeds-api-6::API Key Plan",
-      "message": "Subscription dev6@540.co/dev6-app/fjmSGPKixNkQZnd3YNnQKdA3IRy5L9jS/dog-breeds-api-product/dog-breeds-api-6::API Key Plan is missing"
-    },
-    {
-      "severity": "blocker",
-      "code": "SUBSCRIPTION_MISSING",
-      "sourceId": "dev7@540.co/dev7-app/6A00n8CbKNDMn3aa7nyIrCiOOMdapYBq/hogwarts-houses-api-product/hogwarts-houses-api-8::API Key Plan",
-      "message": "Subscription dev7@540.co/dev7-app/6A00n8CbKNDMn3aa7nyIrCiOOMdapYBq/hogwarts-houses-api-product/hogwarts-houses-api-8::API Key Plan is missing"
-    },
-    {
-      "severity": "blocker",
-      "code": "SUBSCRIPTION_MISSING",
-      "sourceId": "dev8@540.co/dev8-app/2EZDhVGA27FH4rGd20Ji74KSxqiGbX4d/kanye-api-product/kanye-rest-api-5::API Key Plan",
-      "message": "Subscription dev8@540.co/dev8-app/2EZDhVGA27FH4rGd20Ji74KSxqiGbX4d/kanye-api-product/kanye-rest-api-5::API Key Plan is missing"
     },
     {
       "severity": "blocker",
@@ -382,12 +586,6 @@
     },
     {
       "severity": "blocker",
-      "code": "SUBSCRIPTION_MISSING",
-      "sourceId": "erik.severson@540.co/hogwarts-houses-dev-app/7ShONGlRpUY1M69dgXQju7dxWE0sj7Xp/hogwarts-houses-api-product/hogwarts-houses-api-8::API Key Plan",
-      "message": "Subscription erik.severson@540.co/hogwarts-houses-dev-app/7ShONGlRpUY1M69dgXQju7dxWE0sj7Xp/hogwarts-houses-api-product/hogwarts-houses-api-8::API Key Plan is missing"
-    },
-    {
-      "severity": "blocker",
       "code": "TARGET_PLAN_SECURITY_MISMATCH",
       "sourceId": "erik.severson@540.co/misc-dev-app/0z84VGVfj0BCkk83GzOhsZoKxjlQC7dU/misc-api-product/apigee-hello-api-1::Keyless Plan",
       "message": "Subscription erik.severson@540.co/misc-dev-app/0z84VGVfj0BCkk83GzOhsZoKxjlQC7dU/misc-api-product/apigee-hello-api-1::Keyless Plan resolved to plan security keyless instead of api-key"
@@ -421,12 +619,6 @@
       "code": "SUBSCRIPTION_MISSING",
       "sourceId": "erik.severson@540.co/misc-dev-app/0z84VGVfj0BCkk83GzOhsZoKxjlQC7dU/misc-api-product/car-makes-api-3::Keyless Plan",
       "message": "Subscription erik.severson@540.co/misc-dev-app/0z84VGVfj0BCkk83GzOhsZoKxjlQC7dU/misc-api-product/car-makes-api-3::Keyless Plan is missing"
-    },
-    {
-      "severity": "blocker",
-      "code": "SUBSCRIPTION_MISSING",
-      "sourceId": "erik.severson@540.co/yes-or-no-dev-app/QSRznbGGCwoLG1Dh7wan20huCGKbDn5W/yes-or-no-api-product/yes-or-no-api-4::API Key Plan",
-      "message": "Subscription erik.severson@540.co/yes-or-no-dev-app/QSRznbGGCwoLG1Dh7wan20huCGKbDn5W/yes-or-no-api-product/yes-or-no-api-4::API Key Plan is missing"
     }
   ]
 }

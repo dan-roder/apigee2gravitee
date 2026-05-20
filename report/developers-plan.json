@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-20T20:20:34.446Z",
+  "generatedAt": "2026-05-20T21:20:43.037Z",
   "kind": "DevelopersMigrationManifest",
   "source": {
     "irDir": "/Users/daniel.roder/Sites/apigee2gravitee/ir",
@@ -40,7 +40,8 @@
       "VERIFY_SUBSCRIPTION": 31
     },
     "actionsByStatus": {
-      "READY": 185
+      "READY": 158,
+      "BLOCKED": 27
     },
     "operatorActions": {
       "byKind": {
@@ -53,15 +54,19 @@
           "CREATE": 4
         },
         "UPSERT_SUBSCRIPTION": {
-          "CREATE": 14,
-          "REUSE": 17
+          "REUSE": 18,
+          "CREATE": 4,
+          "BLOCK": 9
         }
       },
       "byOperation": {
-        "REUSE": 56,
-        "CREATE": 21
+        "REUSE": 57,
+        "CREATE": 11,
+        "BLOCK": 9
       },
-      "blockedReasons": {}
+      "blockedReasons": {
+        "TARGET_PLAN_SECURITY_MISMATCH": 9
+      }
     }
   },
   "records": {
@@ -8604,7 +8609,8 @@
         "targetPlan": "API Key Plan",
         "targetPlanId": "8243bcf4-377a-421b-83bc-f4377a321b1d",
         "targetIndex": 0,
-        "targetKey": "cats-api-7::API Key Plan"
+        "targetKey": "cats-api-7::API Key Plan",
+        "planSecurity": "api-key"
       },
       "continuity": {},
       "skipConditions": [],
@@ -8626,7 +8632,7 @@
         "RESOLVE_PLAN:danny.rivera@540.co/cats-dev-app/idWhL2ATXfup5AyPWo9Z3Oakj1exc0KY/cats-api-product/cats-api-7::API Key Plan"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "ACCEPTED",
       "lookup": {
         "applicationSourceId": "danny.rivera@540.co/cats-dev-app",
@@ -8657,7 +8663,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "subscriptionId": "96215dca-7bb5-4ad4-a15d-ca7bb5bad4aa"
+      }
     },
     {
       "actionId": "VERIFY_SUBSCRIPTION:danny.rivera@540.co/cats-dev-app/idWhL2ATXfup5AyPWo9Z3Oakj1exc0KY/cats-api-product/cats-api-7::API Key Plan",
@@ -8717,7 +8725,8 @@
         "targetPlan": "API Key Plan",
         "targetPlanId": "589c71e0-0770-4580-9c71-e0077015806b",
         "targetIndex": 0,
-        "targetKey": "wizards-api-9::API Key Plan"
+        "targetKey": "wizards-api-9::API Key Plan",
+        "planSecurity": "api-key"
       },
       "continuity": {},
       "skipConditions": [],
@@ -8832,7 +8841,8 @@
         "targetPlan": "API Key Plan",
         "targetPlanId": "9ae81624-fbd6-415f-a816-24fbd6a15fc9",
         "targetIndex": 0,
-        "targetKey": "yes-or-no-api-4::API Key Plan"
+        "targetKey": "yes-or-no-api-4::API Key Plan",
+        "planSecurity": "api-key"
       },
       "continuity": {},
       "skipConditions": [],
@@ -8947,7 +8957,8 @@
         "targetPlan": "API Key Plan",
         "targetPlanId": "589c71e0-0770-4580-9c71-e0077015806b",
         "targetIndex": 0,
-        "targetKey": "wizards-api-9::API Key Plan"
+        "targetKey": "wizards-api-9::API Key Plan",
+        "planSecurity": "api-key"
       },
       "continuity": {},
       "skipConditions": [],
@@ -9060,7 +9071,8 @@
         "targetPlan": "API Key Plan",
         "targetPlanId": "8243bcf4-377a-421b-83bc-f4377a321b1d",
         "targetIndex": 0,
-        "targetKey": "cats-api-7::API Key Plan"
+        "targetKey": "cats-api-7::API Key Plan",
+        "planSecurity": "api-key"
       },
       "continuity": {},
       "skipConditions": [],
@@ -9175,7 +9187,8 @@
         "targetPlan": "API Key Plan",
         "targetPlanId": "6d3b4998-cee4-412a-bb49-98cee4f12ad5",
         "targetIndex": 0,
-        "targetKey": "chuck-norris-api-10::API Key Plan"
+        "targetKey": "chuck-norris-api-10::API Key Plan",
+        "planSecurity": "api-key"
       },
       "continuity": {},
       "skipConditions": [],
@@ -9290,7 +9303,8 @@
         "targetPlan": "API Key Plan",
         "targetPlanId": "e7af7151-7eb1-43a4-af71-517eb143a4a2",
         "targetIndex": 0,
-        "targetKey": "dog-breeds-api-6::API Key Plan"
+        "targetKey": "dog-breeds-api-6::API Key Plan",
+        "planSecurity": "api-key"
       },
       "continuity": {},
       "skipConditions": [],
@@ -9405,7 +9419,8 @@
         "targetPlan": "API Key Plan",
         "targetPlanId": "7c03dde1-a653-48b3-83dd-e1a65368b345",
         "targetIndex": 0,
-        "targetKey": "hogwarts-houses-api-8::API Key Plan"
+        "targetKey": "hogwarts-houses-api-8::API Key Plan",
+        "planSecurity": "api-key"
       },
       "continuity": {},
       "skipConditions": [],
@@ -9501,8 +9516,8 @@
       "dependencies": [
         "UPSERT_APPLICATION:dev17@540.co/dev17-app"
       ],
-      "plannedStatus": "READY",
-      "operation": "REUSE",
+      "plannedStatus": "BLOCKED",
+      "operation": "BLOCK",
       "desiredState": null,
       "lookup": {
         "productName": "misc-api-product",
@@ -9520,13 +9535,27 @@
         "targetPlan": "Keyless Plan",
         "targetPlanId": "e470787c-6691-4ef9-b078-7c66910ef98e",
         "targetIndex": 0,
-        "targetKey": "apigee-hello-api-1::Keyless Plan"
+        "targetKey": "apigee-hello-api-1::Keyless Plan",
+        "planSecurity": "keyless"
       },
       "continuity": {},
       "skipConditions": [],
-      "failConditions": [],
-      "blockers": [],
-      "warnings": [],
+      "failConditions": [
+        "TARGET_PLAN_SECURITY_MISMATCH"
+      ],
+      "blockers": [
+        "TARGET_PLAN_SECURITY_MISMATCH"
+      ],
+      "warnings": [
+        {
+          "code": "TARGET_PLAN_SECURITY_MISMATCH",
+          "message": "Mapped plan security keyless is not compatible with misc-api-product credentials.",
+          "productName": "misc-api-product",
+          "sourceId": "dev17@540.co/dev17-app/pMqT6e7teG8l4rdrwA63e37N5A8HKW2h/misc-api-product/apigee-hello-api-1::Keyless Plan",
+          "targetPlanId": "e470787c-6691-4ef9-b078-7c66910ef98e",
+          "targetPlan": "Keyless Plan"
+        }
+      ],
       "manualReviewReasons": [],
       "targetHint": {
         "planId": "e470787c-6691-4ef9-b078-7c66910ef98e",
@@ -9541,8 +9570,8 @@
         "UPSERT_APPLICATION:dev17@540.co/dev17-app",
         "RESOLVE_PLAN:dev17@540.co/dev17-app/pMqT6e7teG8l4rdrwA63e37N5A8HKW2h/misc-api-product/apigee-hello-api-1::Keyless Plan"
       ],
-      "plannedStatus": "READY",
-      "operation": "CREATE",
+      "plannedStatus": "BLOCKED",
+      "operation": "BLOCK",
       "desiredState": "ACCEPTED",
       "lookup": {
         "applicationSourceId": "dev17@540.co/dev17-app",
@@ -9569,9 +9598,22 @@
         "sourceCredentialId": "dev17@540.co/dev17-app/pMqT6e7teG8l4rdrwA63e37N5A8HKW2h"
       },
       "skipConditions": [],
-      "failConditions": [],
-      "blockers": [],
-      "warnings": [],
+      "failConditions": [
+        "TARGET_PLAN_SECURITY_MISMATCH"
+      ],
+      "blockers": [
+        "TARGET_PLAN_SECURITY_MISMATCH"
+      ],
+      "warnings": [
+        {
+          "code": "TARGET_PLAN_SECURITY_MISMATCH",
+          "message": "Mapped plan security keyless is not compatible with misc-api-product credentials.",
+          "productName": "misc-api-product",
+          "sourceId": "dev17@540.co/dev17-app/pMqT6e7teG8l4rdrwA63e37N5A8HKW2h/misc-api-product/apigee-hello-api-1::Keyless Plan",
+          "targetPlanId": "e470787c-6691-4ef9-b078-7c66910ef98e",
+          "targetPlan": "Keyless Plan"
+        }
+      ],
       "manualReviewReasons": [
         "MULTI_TARGET_PRODUCT_MAPPING"
       ],
@@ -9584,7 +9626,7 @@
       "dependencies": [
         "UPSERT_SUBSCRIPTION:dev17@540.co/dev17-app/pMqT6e7teG8l4rdrwA63e37N5A8HKW2h/misc-api-product/apigee-hello-api-1::Keyless Plan"
       ],
-      "plannedStatus": "READY",
+      "plannedStatus": "BLOCKED",
       "operation": "VERIFY",
       "desiredState": null,
       "lookup": {
@@ -9605,8 +9647,19 @@
       },
       "skipConditions": [],
       "failConditions": [],
-      "blockers": [],
-      "warnings": [],
+      "blockers": [
+        "TARGET_PLAN_SECURITY_MISMATCH"
+      ],
+      "warnings": [
+        {
+          "code": "TARGET_PLAN_SECURITY_MISMATCH",
+          "message": "Mapped plan security keyless is not compatible with misc-api-product credentials.",
+          "productName": "misc-api-product",
+          "sourceId": "dev17@540.co/dev17-app/pMqT6e7teG8l4rdrwA63e37N5A8HKW2h/misc-api-product/apigee-hello-api-1::Keyless Plan",
+          "targetPlanId": "e470787c-6691-4ef9-b078-7c66910ef98e",
+          "targetPlan": "Keyless Plan"
+        }
+      ],
       "manualReviewReasons": [
         "MULTI_TARGET_PRODUCT_MAPPING"
       ]
@@ -9618,8 +9671,8 @@
       "dependencies": [
         "UPSERT_APPLICATION:dev17@540.co/dev17-app"
       ],
-      "plannedStatus": "READY",
-      "operation": "REUSE",
+      "plannedStatus": "BLOCKED",
+      "operation": "BLOCK",
       "desiredState": null,
       "lookup": {
         "productName": "misc-api-product",
@@ -9637,13 +9690,27 @@
         "targetPlan": "Keyless Plan",
         "targetPlanId": "597158dd-206f-4630-b158-dd206f763084",
         "targetIndex": 1,
-        "targetKey": "cat-fact-api-2::Keyless Plan"
+        "targetKey": "cat-fact-api-2::Keyless Plan",
+        "planSecurity": "keyless"
       },
       "continuity": {},
       "skipConditions": [],
-      "failConditions": [],
-      "blockers": [],
-      "warnings": [],
+      "failConditions": [
+        "TARGET_PLAN_SECURITY_MISMATCH"
+      ],
+      "blockers": [
+        "TARGET_PLAN_SECURITY_MISMATCH"
+      ],
+      "warnings": [
+        {
+          "code": "TARGET_PLAN_SECURITY_MISMATCH",
+          "message": "Mapped plan security keyless is not compatible with misc-api-product credentials.",
+          "productName": "misc-api-product",
+          "sourceId": "dev17@540.co/dev17-app/pMqT6e7teG8l4rdrwA63e37N5A8HKW2h/misc-api-product/cat-fact-api-2::Keyless Plan",
+          "targetPlanId": "597158dd-206f-4630-b158-dd206f763084",
+          "targetPlan": "Keyless Plan"
+        }
+      ],
       "manualReviewReasons": [],
       "targetHint": {
         "planId": "597158dd-206f-4630-b158-dd206f763084",
@@ -9658,8 +9725,8 @@
         "UPSERT_APPLICATION:dev17@540.co/dev17-app",
         "RESOLVE_PLAN:dev17@540.co/dev17-app/pMqT6e7teG8l4rdrwA63e37N5A8HKW2h/misc-api-product/cat-fact-api-2::Keyless Plan"
       ],
-      "plannedStatus": "READY",
-      "operation": "CREATE",
+      "plannedStatus": "BLOCKED",
+      "operation": "BLOCK",
       "desiredState": "ACCEPTED",
       "lookup": {
         "applicationSourceId": "dev17@540.co/dev17-app",
@@ -9686,9 +9753,22 @@
         "sourceCredentialId": "dev17@540.co/dev17-app/pMqT6e7teG8l4rdrwA63e37N5A8HKW2h"
       },
       "skipConditions": [],
-      "failConditions": [],
-      "blockers": [],
-      "warnings": [],
+      "failConditions": [
+        "TARGET_PLAN_SECURITY_MISMATCH"
+      ],
+      "blockers": [
+        "TARGET_PLAN_SECURITY_MISMATCH"
+      ],
+      "warnings": [
+        {
+          "code": "TARGET_PLAN_SECURITY_MISMATCH",
+          "message": "Mapped plan security keyless is not compatible with misc-api-product credentials.",
+          "productName": "misc-api-product",
+          "sourceId": "dev17@540.co/dev17-app/pMqT6e7teG8l4rdrwA63e37N5A8HKW2h/misc-api-product/cat-fact-api-2::Keyless Plan",
+          "targetPlanId": "597158dd-206f-4630-b158-dd206f763084",
+          "targetPlan": "Keyless Plan"
+        }
+      ],
       "manualReviewReasons": [
         "MULTI_TARGET_PRODUCT_MAPPING"
       ],
@@ -9701,7 +9781,7 @@
       "dependencies": [
         "UPSERT_SUBSCRIPTION:dev17@540.co/dev17-app/pMqT6e7teG8l4rdrwA63e37N5A8HKW2h/misc-api-product/cat-fact-api-2::Keyless Plan"
       ],
-      "plannedStatus": "READY",
+      "plannedStatus": "BLOCKED",
       "operation": "VERIFY",
       "desiredState": null,
       "lookup": {
@@ -9722,8 +9802,19 @@
       },
       "skipConditions": [],
       "failConditions": [],
-      "blockers": [],
-      "warnings": [],
+      "blockers": [
+        "TARGET_PLAN_SECURITY_MISMATCH"
+      ],
+      "warnings": [
+        {
+          "code": "TARGET_PLAN_SECURITY_MISMATCH",
+          "message": "Mapped plan security keyless is not compatible with misc-api-product credentials.",
+          "productName": "misc-api-product",
+          "sourceId": "dev17@540.co/dev17-app/pMqT6e7teG8l4rdrwA63e37N5A8HKW2h/misc-api-product/cat-fact-api-2::Keyless Plan",
+          "targetPlanId": "597158dd-206f-4630-b158-dd206f763084",
+          "targetPlan": "Keyless Plan"
+        }
+      ],
       "manualReviewReasons": [
         "MULTI_TARGET_PRODUCT_MAPPING"
       ]
@@ -9735,8 +9826,8 @@
       "dependencies": [
         "UPSERT_APPLICATION:dev17@540.co/dev17-app"
       ],
-      "plannedStatus": "READY",
-      "operation": "REUSE",
+      "plannedStatus": "BLOCKED",
+      "operation": "BLOCK",
       "desiredState": null,
       "lookup": {
         "productName": "misc-api-product",
@@ -9754,13 +9845,27 @@
         "targetPlan": "Keyless Plan",
         "targetPlanId": "0b22bc89-5db5-431e-a2bc-895db5f31e95",
         "targetIndex": 2,
-        "targetKey": "car-makes-api-3::Keyless Plan"
+        "targetKey": "car-makes-api-3::Keyless Plan",
+        "planSecurity": "keyless"
       },
       "continuity": {},
       "skipConditions": [],
-      "failConditions": [],
-      "blockers": [],
-      "warnings": [],
+      "failConditions": [
+        "TARGET_PLAN_SECURITY_MISMATCH"
+      ],
+      "blockers": [
+        "TARGET_PLAN_SECURITY_MISMATCH"
+      ],
+      "warnings": [
+        {
+          "code": "TARGET_PLAN_SECURITY_MISMATCH",
+          "message": "Mapped plan security keyless is not compatible with misc-api-product credentials.",
+          "productName": "misc-api-product",
+          "sourceId": "dev17@540.co/dev17-app/pMqT6e7teG8l4rdrwA63e37N5A8HKW2h/misc-api-product/car-makes-api-3::Keyless Plan",
+          "targetPlanId": "0b22bc89-5db5-431e-a2bc-895db5f31e95",
+          "targetPlan": "Keyless Plan"
+        }
+      ],
       "manualReviewReasons": [],
       "targetHint": {
         "planId": "0b22bc89-5db5-431e-a2bc-895db5f31e95",
@@ -9775,8 +9880,8 @@
         "UPSERT_APPLICATION:dev17@540.co/dev17-app",
         "RESOLVE_PLAN:dev17@540.co/dev17-app/pMqT6e7teG8l4rdrwA63e37N5A8HKW2h/misc-api-product/car-makes-api-3::Keyless Plan"
       ],
-      "plannedStatus": "READY",
-      "operation": "CREATE",
+      "plannedStatus": "BLOCKED",
+      "operation": "BLOCK",
       "desiredState": "ACCEPTED",
       "lookup": {
         "applicationSourceId": "dev17@540.co/dev17-app",
@@ -9803,9 +9908,22 @@
         "sourceCredentialId": "dev17@540.co/dev17-app/pMqT6e7teG8l4rdrwA63e37N5A8HKW2h"
       },
       "skipConditions": [],
-      "failConditions": [],
-      "blockers": [],
-      "warnings": [],
+      "failConditions": [
+        "TARGET_PLAN_SECURITY_MISMATCH"
+      ],
+      "blockers": [
+        "TARGET_PLAN_SECURITY_MISMATCH"
+      ],
+      "warnings": [
+        {
+          "code": "TARGET_PLAN_SECURITY_MISMATCH",
+          "message": "Mapped plan security keyless is not compatible with misc-api-product credentials.",
+          "productName": "misc-api-product",
+          "sourceId": "dev17@540.co/dev17-app/pMqT6e7teG8l4rdrwA63e37N5A8HKW2h/misc-api-product/car-makes-api-3::Keyless Plan",
+          "targetPlanId": "0b22bc89-5db5-431e-a2bc-895db5f31e95",
+          "targetPlan": "Keyless Plan"
+        }
+      ],
       "manualReviewReasons": [
         "MULTI_TARGET_PRODUCT_MAPPING"
       ],
@@ -9818,7 +9936,7 @@
       "dependencies": [
         "UPSERT_SUBSCRIPTION:dev17@540.co/dev17-app/pMqT6e7teG8l4rdrwA63e37N5A8HKW2h/misc-api-product/car-makes-api-3::Keyless Plan"
       ],
-      "plannedStatus": "READY",
+      "plannedStatus": "BLOCKED",
       "operation": "VERIFY",
       "desiredState": null,
       "lookup": {
@@ -9839,8 +9957,19 @@
       },
       "skipConditions": [],
       "failConditions": [],
-      "blockers": [],
-      "warnings": [],
+      "blockers": [
+        "TARGET_PLAN_SECURITY_MISMATCH"
+      ],
+      "warnings": [
+        {
+          "code": "TARGET_PLAN_SECURITY_MISMATCH",
+          "message": "Mapped plan security keyless is not compatible with misc-api-product credentials.",
+          "productName": "misc-api-product",
+          "sourceId": "dev17@540.co/dev17-app/pMqT6e7teG8l4rdrwA63e37N5A8HKW2h/misc-api-product/car-makes-api-3::Keyless Plan",
+          "targetPlanId": "0b22bc89-5db5-431e-a2bc-895db5f31e95",
+          "targetPlan": "Keyless Plan"
+        }
+      ],
       "manualReviewReasons": [
         "MULTI_TARGET_PRODUCT_MAPPING"
       ]
@@ -9871,7 +10000,8 @@
         "targetPlan": "API Key Plan",
         "targetPlanId": "589c71e0-0770-4580-9c71-e0077015806b",
         "targetIndex": 0,
-        "targetKey": "wizards-api-9::API Key Plan"
+        "targetKey": "wizards-api-9::API Key Plan",
+        "planSecurity": "api-key"
       },
       "continuity": {},
       "skipConditions": [],
@@ -9986,7 +10116,8 @@
         "targetPlan": "API Key Plan",
         "targetPlanId": "9ae81624-fbd6-415f-a816-24fbd6a15fc9",
         "targetIndex": 0,
-        "targetKey": "yes-or-no-api-4::API Key Plan"
+        "targetKey": "yes-or-no-api-4::API Key Plan",
+        "planSecurity": "api-key"
       },
       "continuity": {},
       "skipConditions": [],
@@ -10101,7 +10232,8 @@
         "targetPlan": "API Key Plan",
         "targetPlanId": "7ac7160f-b292-4f9e-8716-0fb292af9e80",
         "targetIndex": 0,
-        "targetKey": "kanye-rest-api-5::API Key Plan"
+        "targetKey": "kanye-rest-api-5::API Key Plan",
+        "planSecurity": "api-key"
       },
       "continuity": {},
       "skipConditions": [],
@@ -10216,7 +10348,8 @@
         "targetPlan": "API Key Plan",
         "targetPlanId": "589c71e0-0770-4580-9c71-e0077015806b",
         "targetIndex": 0,
-        "targetKey": "wizards-api-9::API Key Plan"
+        "targetKey": "wizards-api-9::API Key Plan",
+        "planSecurity": "api-key"
       },
       "continuity": {},
       "skipConditions": [],
@@ -10331,7 +10464,8 @@
         "targetPlan": "API Key Plan",
         "targetPlanId": "e7af7151-7eb1-43a4-af71-517eb143a4a2",
         "targetIndex": 0,
-        "targetKey": "dog-breeds-api-6::API Key Plan"
+        "targetKey": "dog-breeds-api-6::API Key Plan",
+        "planSecurity": "api-key"
       },
       "continuity": {},
       "skipConditions": [],
@@ -10444,7 +10578,8 @@
         "targetPlan": "API Key Plan",
         "targetPlanId": "6d3b4998-cee4-412a-bb49-98cee4f12ad5",
         "targetIndex": 0,
-        "targetKey": "chuck-norris-api-10::API Key Plan"
+        "targetKey": "chuck-norris-api-10::API Key Plan",
+        "planSecurity": "api-key"
       },
       "continuity": {},
       "skipConditions": [],
@@ -10557,7 +10692,8 @@
         "targetPlan": "API Key Plan",
         "targetPlanId": "e7af7151-7eb1-43a4-af71-517eb143a4a2",
         "targetIndex": 0,
-        "targetKey": "dog-breeds-api-6::API Key Plan"
+        "targetKey": "dog-breeds-api-6::API Key Plan",
+        "planSecurity": "api-key"
       },
       "continuity": {},
       "skipConditions": [],
@@ -10670,7 +10806,8 @@
         "targetPlan": "API Key Plan",
         "targetPlanId": "8243bcf4-377a-421b-83bc-f4377a321b1d",
         "targetIndex": 0,
-        "targetKey": "cats-api-7::API Key Plan"
+        "targetKey": "cats-api-7::API Key Plan",
+        "planSecurity": "api-key"
       },
       "continuity": {},
       "skipConditions": [],
@@ -10785,7 +10922,8 @@
         "targetPlan": "API Key Plan",
         "targetPlanId": "6d3b4998-cee4-412a-bb49-98cee4f12ad5",
         "targetIndex": 0,
-        "targetKey": "chuck-norris-api-10::API Key Plan"
+        "targetKey": "chuck-norris-api-10::API Key Plan",
+        "planSecurity": "api-key"
       },
       "continuity": {},
       "skipConditions": [],
@@ -10900,7 +11038,8 @@
         "targetPlan": "API Key Plan",
         "targetPlanId": "e7af7151-7eb1-43a4-af71-517eb143a4a2",
         "targetIndex": 0,
-        "targetKey": "dog-breeds-api-6::API Key Plan"
+        "targetKey": "dog-breeds-api-6::API Key Plan",
+        "planSecurity": "api-key"
       },
       "continuity": {},
       "skipConditions": [],
@@ -11015,7 +11154,8 @@
         "targetPlan": "API Key Plan",
         "targetPlanId": "7c03dde1-a653-48b3-83dd-e1a65368b345",
         "targetIndex": 0,
-        "targetKey": "hogwarts-houses-api-8::API Key Plan"
+        "targetKey": "hogwarts-houses-api-8::API Key Plan",
+        "planSecurity": "api-key"
       },
       "continuity": {},
       "skipConditions": [],
@@ -11130,7 +11270,8 @@
         "targetPlan": "API Key Plan",
         "targetPlanId": "7ac7160f-b292-4f9e-8716-0fb292af9e80",
         "targetIndex": 0,
-        "targetKey": "kanye-rest-api-5::API Key Plan"
+        "targetKey": "kanye-rest-api-5::API Key Plan",
+        "planSecurity": "api-key"
       },
       "continuity": {},
       "skipConditions": [],
@@ -11226,8 +11367,8 @@
       "dependencies": [
         "UPSERT_APPLICATION:dev9@540.co/dev9-app"
       ],
-      "plannedStatus": "READY",
-      "operation": "REUSE",
+      "plannedStatus": "BLOCKED",
+      "operation": "BLOCK",
       "desiredState": null,
       "lookup": {
         "productName": "misc-api-product",
@@ -11245,13 +11386,27 @@
         "targetPlan": "Keyless Plan",
         "targetPlanId": "e470787c-6691-4ef9-b078-7c66910ef98e",
         "targetIndex": 0,
-        "targetKey": "apigee-hello-api-1::Keyless Plan"
+        "targetKey": "apigee-hello-api-1::Keyless Plan",
+        "planSecurity": "keyless"
       },
       "continuity": {},
       "skipConditions": [],
-      "failConditions": [],
-      "blockers": [],
-      "warnings": [],
+      "failConditions": [
+        "TARGET_PLAN_SECURITY_MISMATCH"
+      ],
+      "blockers": [
+        "TARGET_PLAN_SECURITY_MISMATCH"
+      ],
+      "warnings": [
+        {
+          "code": "TARGET_PLAN_SECURITY_MISMATCH",
+          "message": "Mapped plan security keyless is not compatible with misc-api-product credentials.",
+          "productName": "misc-api-product",
+          "sourceId": "dev9@540.co/dev9-app/YfxmmAlPSTTgXurgxHmztR8WQmV7GeGv/misc-api-product/apigee-hello-api-1::Keyless Plan",
+          "targetPlanId": "e470787c-6691-4ef9-b078-7c66910ef98e",
+          "targetPlan": "Keyless Plan"
+        }
+      ],
       "manualReviewReasons": [],
       "targetHint": {
         "planId": "e470787c-6691-4ef9-b078-7c66910ef98e",
@@ -11266,8 +11421,8 @@
         "UPSERT_APPLICATION:dev9@540.co/dev9-app",
         "RESOLVE_PLAN:dev9@540.co/dev9-app/YfxmmAlPSTTgXurgxHmztR8WQmV7GeGv/misc-api-product/apigee-hello-api-1::Keyless Plan"
       ],
-      "plannedStatus": "READY",
-      "operation": "CREATE",
+      "plannedStatus": "BLOCKED",
+      "operation": "BLOCK",
       "desiredState": "ACCEPTED",
       "lookup": {
         "applicationSourceId": "dev9@540.co/dev9-app",
@@ -11294,9 +11449,22 @@
         "sourceCredentialId": "dev9@540.co/dev9-app/YfxmmAlPSTTgXurgxHmztR8WQmV7GeGv"
       },
       "skipConditions": [],
-      "failConditions": [],
-      "blockers": [],
-      "warnings": [],
+      "failConditions": [
+        "TARGET_PLAN_SECURITY_MISMATCH"
+      ],
+      "blockers": [
+        "TARGET_PLAN_SECURITY_MISMATCH"
+      ],
+      "warnings": [
+        {
+          "code": "TARGET_PLAN_SECURITY_MISMATCH",
+          "message": "Mapped plan security keyless is not compatible with misc-api-product credentials.",
+          "productName": "misc-api-product",
+          "sourceId": "dev9@540.co/dev9-app/YfxmmAlPSTTgXurgxHmztR8WQmV7GeGv/misc-api-product/apigee-hello-api-1::Keyless Plan",
+          "targetPlanId": "e470787c-6691-4ef9-b078-7c66910ef98e",
+          "targetPlan": "Keyless Plan"
+        }
+      ],
       "manualReviewReasons": [
         "MULTI_TARGET_PRODUCT_MAPPING"
       ],
@@ -11309,7 +11477,7 @@
       "dependencies": [
         "UPSERT_SUBSCRIPTION:dev9@540.co/dev9-app/YfxmmAlPSTTgXurgxHmztR8WQmV7GeGv/misc-api-product/apigee-hello-api-1::Keyless Plan"
       ],
-      "plannedStatus": "READY",
+      "plannedStatus": "BLOCKED",
       "operation": "VERIFY",
       "desiredState": null,
       "lookup": {
@@ -11330,8 +11498,19 @@
       },
       "skipConditions": [],
       "failConditions": [],
-      "blockers": [],
-      "warnings": [],
+      "blockers": [
+        "TARGET_PLAN_SECURITY_MISMATCH"
+      ],
+      "warnings": [
+        {
+          "code": "TARGET_PLAN_SECURITY_MISMATCH",
+          "message": "Mapped plan security keyless is not compatible with misc-api-product credentials.",
+          "productName": "misc-api-product",
+          "sourceId": "dev9@540.co/dev9-app/YfxmmAlPSTTgXurgxHmztR8WQmV7GeGv/misc-api-product/apigee-hello-api-1::Keyless Plan",
+          "targetPlanId": "e470787c-6691-4ef9-b078-7c66910ef98e",
+          "targetPlan": "Keyless Plan"
+        }
+      ],
       "manualReviewReasons": [
         "MULTI_TARGET_PRODUCT_MAPPING"
       ]
@@ -11343,8 +11522,8 @@
       "dependencies": [
         "UPSERT_APPLICATION:dev9@540.co/dev9-app"
       ],
-      "plannedStatus": "READY",
-      "operation": "REUSE",
+      "plannedStatus": "BLOCKED",
+      "operation": "BLOCK",
       "desiredState": null,
       "lookup": {
         "productName": "misc-api-product",
@@ -11362,13 +11541,27 @@
         "targetPlan": "Keyless Plan",
         "targetPlanId": "597158dd-206f-4630-b158-dd206f763084",
         "targetIndex": 1,
-        "targetKey": "cat-fact-api-2::Keyless Plan"
+        "targetKey": "cat-fact-api-2::Keyless Plan",
+        "planSecurity": "keyless"
       },
       "continuity": {},
       "skipConditions": [],
-      "failConditions": [],
-      "blockers": [],
-      "warnings": [],
+      "failConditions": [
+        "TARGET_PLAN_SECURITY_MISMATCH"
+      ],
+      "blockers": [
+        "TARGET_PLAN_SECURITY_MISMATCH"
+      ],
+      "warnings": [
+        {
+          "code": "TARGET_PLAN_SECURITY_MISMATCH",
+          "message": "Mapped plan security keyless is not compatible with misc-api-product credentials.",
+          "productName": "misc-api-product",
+          "sourceId": "dev9@540.co/dev9-app/YfxmmAlPSTTgXurgxHmztR8WQmV7GeGv/misc-api-product/cat-fact-api-2::Keyless Plan",
+          "targetPlanId": "597158dd-206f-4630-b158-dd206f763084",
+          "targetPlan": "Keyless Plan"
+        }
+      ],
       "manualReviewReasons": [],
       "targetHint": {
         "planId": "597158dd-206f-4630-b158-dd206f763084",
@@ -11383,8 +11576,8 @@
         "UPSERT_APPLICATION:dev9@540.co/dev9-app",
         "RESOLVE_PLAN:dev9@540.co/dev9-app/YfxmmAlPSTTgXurgxHmztR8WQmV7GeGv/misc-api-product/cat-fact-api-2::Keyless Plan"
       ],
-      "plannedStatus": "READY",
-      "operation": "CREATE",
+      "plannedStatus": "BLOCKED",
+      "operation": "BLOCK",
       "desiredState": "ACCEPTED",
       "lookup": {
         "applicationSourceId": "dev9@540.co/dev9-app",
@@ -11411,9 +11604,22 @@
         "sourceCredentialId": "dev9@540.co/dev9-app/YfxmmAlPSTTgXurgxHmztR8WQmV7GeGv"
       },
       "skipConditions": [],
-      "failConditions": [],
-      "blockers": [],
-      "warnings": [],
+      "failConditions": [
+        "TARGET_PLAN_SECURITY_MISMATCH"
+      ],
+      "blockers": [
+        "TARGET_PLAN_SECURITY_MISMATCH"
+      ],
+      "warnings": [
+        {
+          "code": "TARGET_PLAN_SECURITY_MISMATCH",
+          "message": "Mapped plan security keyless is not compatible with misc-api-product credentials.",
+          "productName": "misc-api-product",
+          "sourceId": "dev9@540.co/dev9-app/YfxmmAlPSTTgXurgxHmztR8WQmV7GeGv/misc-api-product/cat-fact-api-2::Keyless Plan",
+          "targetPlanId": "597158dd-206f-4630-b158-dd206f763084",
+          "targetPlan": "Keyless Plan"
+        }
+      ],
       "manualReviewReasons": [
         "MULTI_TARGET_PRODUCT_MAPPING"
       ],
@@ -11426,7 +11632,7 @@
       "dependencies": [
         "UPSERT_SUBSCRIPTION:dev9@540.co/dev9-app/YfxmmAlPSTTgXurgxHmztR8WQmV7GeGv/misc-api-product/cat-fact-api-2::Keyless Plan"
       ],
-      "plannedStatus": "READY",
+      "plannedStatus": "BLOCKED",
       "operation": "VERIFY",
       "desiredState": null,
       "lookup": {
@@ -11447,8 +11653,19 @@
       },
       "skipConditions": [],
       "failConditions": [],
-      "blockers": [],
-      "warnings": [],
+      "blockers": [
+        "TARGET_PLAN_SECURITY_MISMATCH"
+      ],
+      "warnings": [
+        {
+          "code": "TARGET_PLAN_SECURITY_MISMATCH",
+          "message": "Mapped plan security keyless is not compatible with misc-api-product credentials.",
+          "productName": "misc-api-product",
+          "sourceId": "dev9@540.co/dev9-app/YfxmmAlPSTTgXurgxHmztR8WQmV7GeGv/misc-api-product/cat-fact-api-2::Keyless Plan",
+          "targetPlanId": "597158dd-206f-4630-b158-dd206f763084",
+          "targetPlan": "Keyless Plan"
+        }
+      ],
       "manualReviewReasons": [
         "MULTI_TARGET_PRODUCT_MAPPING"
       ]
@@ -11460,8 +11677,8 @@
       "dependencies": [
         "UPSERT_APPLICATION:dev9@540.co/dev9-app"
       ],
-      "plannedStatus": "READY",
-      "operation": "REUSE",
+      "plannedStatus": "BLOCKED",
+      "operation": "BLOCK",
       "desiredState": null,
       "lookup": {
         "productName": "misc-api-product",
@@ -11479,13 +11696,27 @@
         "targetPlan": "Keyless Plan",
         "targetPlanId": "0b22bc89-5db5-431e-a2bc-895db5f31e95",
         "targetIndex": 2,
-        "targetKey": "car-makes-api-3::Keyless Plan"
+        "targetKey": "car-makes-api-3::Keyless Plan",
+        "planSecurity": "keyless"
       },
       "continuity": {},
       "skipConditions": [],
-      "failConditions": [],
-      "blockers": [],
-      "warnings": [],
+      "failConditions": [
+        "TARGET_PLAN_SECURITY_MISMATCH"
+      ],
+      "blockers": [
+        "TARGET_PLAN_SECURITY_MISMATCH"
+      ],
+      "warnings": [
+        {
+          "code": "TARGET_PLAN_SECURITY_MISMATCH",
+          "message": "Mapped plan security keyless is not compatible with misc-api-product credentials.",
+          "productName": "misc-api-product",
+          "sourceId": "dev9@540.co/dev9-app/YfxmmAlPSTTgXurgxHmztR8WQmV7GeGv/misc-api-product/car-makes-api-3::Keyless Plan",
+          "targetPlanId": "0b22bc89-5db5-431e-a2bc-895db5f31e95",
+          "targetPlan": "Keyless Plan"
+        }
+      ],
       "manualReviewReasons": [],
       "targetHint": {
         "planId": "0b22bc89-5db5-431e-a2bc-895db5f31e95",
@@ -11500,8 +11731,8 @@
         "UPSERT_APPLICATION:dev9@540.co/dev9-app",
         "RESOLVE_PLAN:dev9@540.co/dev9-app/YfxmmAlPSTTgXurgxHmztR8WQmV7GeGv/misc-api-product/car-makes-api-3::Keyless Plan"
       ],
-      "plannedStatus": "READY",
-      "operation": "CREATE",
+      "plannedStatus": "BLOCKED",
+      "operation": "BLOCK",
       "desiredState": "ACCEPTED",
       "lookup": {
         "applicationSourceId": "dev9@540.co/dev9-app",
@@ -11528,9 +11759,22 @@
         "sourceCredentialId": "dev9@540.co/dev9-app/YfxmmAlPSTTgXurgxHmztR8WQmV7GeGv"
       },
       "skipConditions": [],
-      "failConditions": [],
-      "blockers": [],
-      "warnings": [],
+      "failConditions": [
+        "TARGET_PLAN_SECURITY_MISMATCH"
+      ],
+      "blockers": [
+        "TARGET_PLAN_SECURITY_MISMATCH"
+      ],
+      "warnings": [
+        {
+          "code": "TARGET_PLAN_SECURITY_MISMATCH",
+          "message": "Mapped plan security keyless is not compatible with misc-api-product credentials.",
+          "productName": "misc-api-product",
+          "sourceId": "dev9@540.co/dev9-app/YfxmmAlPSTTgXurgxHmztR8WQmV7GeGv/misc-api-product/car-makes-api-3::Keyless Plan",
+          "targetPlanId": "0b22bc89-5db5-431e-a2bc-895db5f31e95",
+          "targetPlan": "Keyless Plan"
+        }
+      ],
       "manualReviewReasons": [
         "MULTI_TARGET_PRODUCT_MAPPING"
       ],
@@ -11543,7 +11787,7 @@
       "dependencies": [
         "UPSERT_SUBSCRIPTION:dev9@540.co/dev9-app/YfxmmAlPSTTgXurgxHmztR8WQmV7GeGv/misc-api-product/car-makes-api-3::Keyless Plan"
       ],
-      "plannedStatus": "READY",
+      "plannedStatus": "BLOCKED",
       "operation": "VERIFY",
       "desiredState": null,
       "lookup": {
@@ -11564,8 +11808,19 @@
       },
       "skipConditions": [],
       "failConditions": [],
-      "blockers": [],
-      "warnings": [],
+      "blockers": [
+        "TARGET_PLAN_SECURITY_MISMATCH"
+      ],
+      "warnings": [
+        {
+          "code": "TARGET_PLAN_SECURITY_MISMATCH",
+          "message": "Mapped plan security keyless is not compatible with misc-api-product credentials.",
+          "productName": "misc-api-product",
+          "sourceId": "dev9@540.co/dev9-app/YfxmmAlPSTTgXurgxHmztR8WQmV7GeGv/misc-api-product/car-makes-api-3::Keyless Plan",
+          "targetPlanId": "0b22bc89-5db5-431e-a2bc-895db5f31e95",
+          "targetPlan": "Keyless Plan"
+        }
+      ],
       "manualReviewReasons": [
         "MULTI_TARGET_PRODUCT_MAPPING"
       ]
@@ -11596,7 +11851,8 @@
         "targetPlan": "API Key Plan",
         "targetPlanId": "7c03dde1-a653-48b3-83dd-e1a65368b345",
         "targetIndex": 0,
-        "targetKey": "hogwarts-houses-api-8::API Key Plan"
+        "targetKey": "hogwarts-houses-api-8::API Key Plan",
+        "planSecurity": "api-key"
       },
       "continuity": {},
       "skipConditions": [],
@@ -11692,8 +11948,8 @@
       "dependencies": [
         "UPSERT_APPLICATION:erik.severson@540.co/misc-dev-app"
       ],
-      "plannedStatus": "READY",
-      "operation": "REUSE",
+      "plannedStatus": "BLOCKED",
+      "operation": "BLOCK",
       "desiredState": null,
       "lookup": {
         "productName": "misc-api-product",
@@ -11711,13 +11967,27 @@
         "targetPlan": "Keyless Plan",
         "targetPlanId": "e470787c-6691-4ef9-b078-7c66910ef98e",
         "targetIndex": 0,
-        "targetKey": "apigee-hello-api-1::Keyless Plan"
+        "targetKey": "apigee-hello-api-1::Keyless Plan",
+        "planSecurity": "keyless"
       },
       "continuity": {},
       "skipConditions": [],
-      "failConditions": [],
-      "blockers": [],
-      "warnings": [],
+      "failConditions": [
+        "TARGET_PLAN_SECURITY_MISMATCH"
+      ],
+      "blockers": [
+        "TARGET_PLAN_SECURITY_MISMATCH"
+      ],
+      "warnings": [
+        {
+          "code": "TARGET_PLAN_SECURITY_MISMATCH",
+          "message": "Mapped plan security keyless is not compatible with misc-api-product credentials.",
+          "productName": "misc-api-product",
+          "sourceId": "erik.severson@540.co/misc-dev-app/0z84VGVfj0BCkk83GzOhsZoKxjlQC7dU/misc-api-product/apigee-hello-api-1::Keyless Plan",
+          "targetPlanId": "e470787c-6691-4ef9-b078-7c66910ef98e",
+          "targetPlan": "Keyless Plan"
+        }
+      ],
       "manualReviewReasons": [],
       "targetHint": {
         "planId": "e470787c-6691-4ef9-b078-7c66910ef98e",
@@ -11732,8 +12002,8 @@
         "UPSERT_APPLICATION:erik.severson@540.co/misc-dev-app",
         "RESOLVE_PLAN:erik.severson@540.co/misc-dev-app/0z84VGVfj0BCkk83GzOhsZoKxjlQC7dU/misc-api-product/apigee-hello-api-1::Keyless Plan"
       ],
-      "plannedStatus": "READY",
-      "operation": "CREATE",
+      "plannedStatus": "BLOCKED",
+      "operation": "BLOCK",
       "desiredState": "ACCEPTED",
       "lookup": {
         "applicationSourceId": "erik.severson@540.co/misc-dev-app",
@@ -11760,9 +12030,22 @@
         "sourceCredentialId": "erik.severson@540.co/misc-dev-app/0z84VGVfj0BCkk83GzOhsZoKxjlQC7dU"
       },
       "skipConditions": [],
-      "failConditions": [],
-      "blockers": [],
-      "warnings": [],
+      "failConditions": [
+        "TARGET_PLAN_SECURITY_MISMATCH"
+      ],
+      "blockers": [
+        "TARGET_PLAN_SECURITY_MISMATCH"
+      ],
+      "warnings": [
+        {
+          "code": "TARGET_PLAN_SECURITY_MISMATCH",
+          "message": "Mapped plan security keyless is not compatible with misc-api-product credentials.",
+          "productName": "misc-api-product",
+          "sourceId": "erik.severson@540.co/misc-dev-app/0z84VGVfj0BCkk83GzOhsZoKxjlQC7dU/misc-api-product/apigee-hello-api-1::Keyless Plan",
+          "targetPlanId": "e470787c-6691-4ef9-b078-7c66910ef98e",
+          "targetPlan": "Keyless Plan"
+        }
+      ],
       "manualReviewReasons": [
         "MULTI_TARGET_PRODUCT_MAPPING"
       ],
@@ -11775,7 +12058,7 @@
       "dependencies": [
         "UPSERT_SUBSCRIPTION:erik.severson@540.co/misc-dev-app/0z84VGVfj0BCkk83GzOhsZoKxjlQC7dU/misc-api-product/apigee-hello-api-1::Keyless Plan"
       ],
-      "plannedStatus": "READY",
+      "plannedStatus": "BLOCKED",
       "operation": "VERIFY",
       "desiredState": null,
       "lookup": {
@@ -11796,8 +12079,19 @@
       },
       "skipConditions": [],
       "failConditions": [],
-      "blockers": [],
-      "warnings": [],
+      "blockers": [
+        "TARGET_PLAN_SECURITY_MISMATCH"
+      ],
+      "warnings": [
+        {
+          "code": "TARGET_PLAN_SECURITY_MISMATCH",
+          "message": "Mapped plan security keyless is not compatible with misc-api-product credentials.",
+          "productName": "misc-api-product",
+          "sourceId": "erik.severson@540.co/misc-dev-app/0z84VGVfj0BCkk83GzOhsZoKxjlQC7dU/misc-api-product/apigee-hello-api-1::Keyless Plan",
+          "targetPlanId": "e470787c-6691-4ef9-b078-7c66910ef98e",
+          "targetPlan": "Keyless Plan"
+        }
+      ],
       "manualReviewReasons": [
         "MULTI_TARGET_PRODUCT_MAPPING"
       ]
@@ -11809,8 +12103,8 @@
       "dependencies": [
         "UPSERT_APPLICATION:erik.severson@540.co/misc-dev-app"
       ],
-      "plannedStatus": "READY",
-      "operation": "REUSE",
+      "plannedStatus": "BLOCKED",
+      "operation": "BLOCK",
       "desiredState": null,
       "lookup": {
         "productName": "misc-api-product",
@@ -11828,13 +12122,27 @@
         "targetPlan": "Keyless Plan",
         "targetPlanId": "597158dd-206f-4630-b158-dd206f763084",
         "targetIndex": 1,
-        "targetKey": "cat-fact-api-2::Keyless Plan"
+        "targetKey": "cat-fact-api-2::Keyless Plan",
+        "planSecurity": "keyless"
       },
       "continuity": {},
       "skipConditions": [],
-      "failConditions": [],
-      "blockers": [],
-      "warnings": [],
+      "failConditions": [
+        "TARGET_PLAN_SECURITY_MISMATCH"
+      ],
+      "blockers": [
+        "TARGET_PLAN_SECURITY_MISMATCH"
+      ],
+      "warnings": [
+        {
+          "code": "TARGET_PLAN_SECURITY_MISMATCH",
+          "message": "Mapped plan security keyless is not compatible with misc-api-product credentials.",
+          "productName": "misc-api-product",
+          "sourceId": "erik.severson@540.co/misc-dev-app/0z84VGVfj0BCkk83GzOhsZoKxjlQC7dU/misc-api-product/cat-fact-api-2::Keyless Plan",
+          "targetPlanId": "597158dd-206f-4630-b158-dd206f763084",
+          "targetPlan": "Keyless Plan"
+        }
+      ],
       "manualReviewReasons": [],
       "targetHint": {
         "planId": "597158dd-206f-4630-b158-dd206f763084",
@@ -11849,8 +12157,8 @@
         "UPSERT_APPLICATION:erik.severson@540.co/misc-dev-app",
         "RESOLVE_PLAN:erik.severson@540.co/misc-dev-app/0z84VGVfj0BCkk83GzOhsZoKxjlQC7dU/misc-api-product/cat-fact-api-2::Keyless Plan"
       ],
-      "plannedStatus": "READY",
-      "operation": "CREATE",
+      "plannedStatus": "BLOCKED",
+      "operation": "BLOCK",
       "desiredState": "ACCEPTED",
       "lookup": {
         "applicationSourceId": "erik.severson@540.co/misc-dev-app",
@@ -11877,9 +12185,22 @@
         "sourceCredentialId": "erik.severson@540.co/misc-dev-app/0z84VGVfj0BCkk83GzOhsZoKxjlQC7dU"
       },
       "skipConditions": [],
-      "failConditions": [],
-      "blockers": [],
-      "warnings": [],
+      "failConditions": [
+        "TARGET_PLAN_SECURITY_MISMATCH"
+      ],
+      "blockers": [
+        "TARGET_PLAN_SECURITY_MISMATCH"
+      ],
+      "warnings": [
+        {
+          "code": "TARGET_PLAN_SECURITY_MISMATCH",
+          "message": "Mapped plan security keyless is not compatible with misc-api-product credentials.",
+          "productName": "misc-api-product",
+          "sourceId": "erik.severson@540.co/misc-dev-app/0z84VGVfj0BCkk83GzOhsZoKxjlQC7dU/misc-api-product/cat-fact-api-2::Keyless Plan",
+          "targetPlanId": "597158dd-206f-4630-b158-dd206f763084",
+          "targetPlan": "Keyless Plan"
+        }
+      ],
       "manualReviewReasons": [
         "MULTI_TARGET_PRODUCT_MAPPING"
       ],
@@ -11892,7 +12213,7 @@
       "dependencies": [
         "UPSERT_SUBSCRIPTION:erik.severson@540.co/misc-dev-app/0z84VGVfj0BCkk83GzOhsZoKxjlQC7dU/misc-api-product/cat-fact-api-2::Keyless Plan"
       ],
-      "plannedStatus": "READY",
+      "plannedStatus": "BLOCKED",
       "operation": "VERIFY",
       "desiredState": null,
       "lookup": {
@@ -11913,8 +12234,19 @@
       },
       "skipConditions": [],
       "failConditions": [],
-      "blockers": [],
-      "warnings": [],
+      "blockers": [
+        "TARGET_PLAN_SECURITY_MISMATCH"
+      ],
+      "warnings": [
+        {
+          "code": "TARGET_PLAN_SECURITY_MISMATCH",
+          "message": "Mapped plan security keyless is not compatible with misc-api-product credentials.",
+          "productName": "misc-api-product",
+          "sourceId": "erik.severson@540.co/misc-dev-app/0z84VGVfj0BCkk83GzOhsZoKxjlQC7dU/misc-api-product/cat-fact-api-2::Keyless Plan",
+          "targetPlanId": "597158dd-206f-4630-b158-dd206f763084",
+          "targetPlan": "Keyless Plan"
+        }
+      ],
       "manualReviewReasons": [
         "MULTI_TARGET_PRODUCT_MAPPING"
       ]
@@ -11926,8 +12258,8 @@
       "dependencies": [
         "UPSERT_APPLICATION:erik.severson@540.co/misc-dev-app"
       ],
-      "plannedStatus": "READY",
-      "operation": "REUSE",
+      "plannedStatus": "BLOCKED",
+      "operation": "BLOCK",
       "desiredState": null,
       "lookup": {
         "productName": "misc-api-product",
@@ -11945,13 +12277,27 @@
         "targetPlan": "Keyless Plan",
         "targetPlanId": "0b22bc89-5db5-431e-a2bc-895db5f31e95",
         "targetIndex": 2,
-        "targetKey": "car-makes-api-3::Keyless Plan"
+        "targetKey": "car-makes-api-3::Keyless Plan",
+        "planSecurity": "keyless"
       },
       "continuity": {},
       "skipConditions": [],
-      "failConditions": [],
-      "blockers": [],
-      "warnings": [],
+      "failConditions": [
+        "TARGET_PLAN_SECURITY_MISMATCH"
+      ],
+      "blockers": [
+        "TARGET_PLAN_SECURITY_MISMATCH"
+      ],
+      "warnings": [
+        {
+          "code": "TARGET_PLAN_SECURITY_MISMATCH",
+          "message": "Mapped plan security keyless is not compatible with misc-api-product credentials.",
+          "productName": "misc-api-product",
+          "sourceId": "erik.severson@540.co/misc-dev-app/0z84VGVfj0BCkk83GzOhsZoKxjlQC7dU/misc-api-product/car-makes-api-3::Keyless Plan",
+          "targetPlanId": "0b22bc89-5db5-431e-a2bc-895db5f31e95",
+          "targetPlan": "Keyless Plan"
+        }
+      ],
       "manualReviewReasons": [],
       "targetHint": {
         "planId": "0b22bc89-5db5-431e-a2bc-895db5f31e95",
@@ -11966,8 +12312,8 @@
         "UPSERT_APPLICATION:erik.severson@540.co/misc-dev-app",
         "RESOLVE_PLAN:erik.severson@540.co/misc-dev-app/0z84VGVfj0BCkk83GzOhsZoKxjlQC7dU/misc-api-product/car-makes-api-3::Keyless Plan"
       ],
-      "plannedStatus": "READY",
-      "operation": "CREATE",
+      "plannedStatus": "BLOCKED",
+      "operation": "BLOCK",
       "desiredState": "ACCEPTED",
       "lookup": {
         "applicationSourceId": "erik.severson@540.co/misc-dev-app",
@@ -11994,9 +12340,22 @@
         "sourceCredentialId": "erik.severson@540.co/misc-dev-app/0z84VGVfj0BCkk83GzOhsZoKxjlQC7dU"
       },
       "skipConditions": [],
-      "failConditions": [],
-      "blockers": [],
-      "warnings": [],
+      "failConditions": [
+        "TARGET_PLAN_SECURITY_MISMATCH"
+      ],
+      "blockers": [
+        "TARGET_PLAN_SECURITY_MISMATCH"
+      ],
+      "warnings": [
+        {
+          "code": "TARGET_PLAN_SECURITY_MISMATCH",
+          "message": "Mapped plan security keyless is not compatible with misc-api-product credentials.",
+          "productName": "misc-api-product",
+          "sourceId": "erik.severson@540.co/misc-dev-app/0z84VGVfj0BCkk83GzOhsZoKxjlQC7dU/misc-api-product/car-makes-api-3::Keyless Plan",
+          "targetPlanId": "0b22bc89-5db5-431e-a2bc-895db5f31e95",
+          "targetPlan": "Keyless Plan"
+        }
+      ],
       "manualReviewReasons": [
         "MULTI_TARGET_PRODUCT_MAPPING"
       ],
@@ -12009,7 +12368,7 @@
       "dependencies": [
         "UPSERT_SUBSCRIPTION:erik.severson@540.co/misc-dev-app/0z84VGVfj0BCkk83GzOhsZoKxjlQC7dU/misc-api-product/car-makes-api-3::Keyless Plan"
       ],
-      "plannedStatus": "READY",
+      "plannedStatus": "BLOCKED",
       "operation": "VERIFY",
       "desiredState": null,
       "lookup": {
@@ -12030,8 +12389,19 @@
       },
       "skipConditions": [],
       "failConditions": [],
-      "blockers": [],
-      "warnings": [],
+      "blockers": [
+        "TARGET_PLAN_SECURITY_MISMATCH"
+      ],
+      "warnings": [
+        {
+          "code": "TARGET_PLAN_SECURITY_MISMATCH",
+          "message": "Mapped plan security keyless is not compatible with misc-api-product credentials.",
+          "productName": "misc-api-product",
+          "sourceId": "erik.severson@540.co/misc-dev-app/0z84VGVfj0BCkk83GzOhsZoKxjlQC7dU/misc-api-product/car-makes-api-3::Keyless Plan",
+          "targetPlanId": "0b22bc89-5db5-431e-a2bc-895db5f31e95",
+          "targetPlan": "Keyless Plan"
+        }
+      ],
       "manualReviewReasons": [
         "MULTI_TARGET_PRODUCT_MAPPING"
       ]
@@ -12062,7 +12432,8 @@
         "targetPlan": "API Key Plan",
         "targetPlanId": "9ae81624-fbd6-415f-a816-24fbd6a15fc9",
         "targetIndex": 0,
-        "targetKey": "yes-or-no-api-4::API Key Plan"
+        "targetKey": "yes-or-no-api-4::API Key Plan",
+        "planSecurity": "api-key"
       },
       "continuity": {},
       "skipConditions": [],
