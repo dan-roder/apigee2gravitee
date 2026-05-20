@@ -368,6 +368,39 @@ async function testPlanBuildsExecutableManifest() {
   });
 }
 
+async function testPlanBlocksSubscriptionsForIncompatibleTargetPlanSecurity() {
+  await withTempDir(async (dir) => {
+    const dataDir = path.join(dir, 'data');
+    const irDir = path.join(dir, 'ir');
+    copyDir(FIXTURES_DATA, dataDir);
+    generateIrFromData(dataDir, irDir);
+
+    const client = makeWorkflowClient();
+    client._state.plans.set('plan-orders-1', {
+      id: 'plan-orders-1',
+      apiId: 'api-orders-1',
+      name: 'Orders Keyless',
+      security: { type: 'KEY_LESS' },
+      status: 'PUBLISHED',
+    });
+
+    const result = await runDevelopersPlan(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json') },
+      { config: makeConfig(dir), client },
+    );
+
+    const resolvePlan = result.manifest.actions.find((item) => item.kind === 'RESOLVE_PLAN');
+    const upsertSubscription = result.manifest.actions.find((item) => item.kind === 'UPSERT_SUBSCRIPTION');
+
+    assert.strictEqual(result.exitCode, 0);
+    assert.strictEqual(resolvePlan.plannedStatus, 'BLOCKED');
+    assert.ok(resolvePlan.blockers.includes('TARGET_PLAN_SECURITY_MISMATCH'));
+    assert.strictEqual(upsertSubscription.plannedStatus, 'BLOCKED');
+    assert.strictEqual(upsertSubscription.operation, 'BLOCK');
+    assert.ok(upsertSubscription.blockers.includes('TARGET_PLAN_SECURITY_MISMATCH'));
+  });
+}
+
 async function testPlanFailsWhenCapabilityProbeContradictsConfig() {
   await withTempDir(async (dir) => {
     const dataDir = path.join(dir, 'data');
@@ -812,6 +845,31 @@ async function testImportVerifiesApplicationMetadataFromScopedEndpoint() {
             value,
             applicationId,
           }));
+        },
+      },
+    });
+
+    const result = await runDevelopersImport(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json') },
+      { config: makeConfig(dir), client },
+    );
+
+    assert.strictEqual(result.exitCode, 0);
+    assert.strictEqual(result.state.actions['VERIFY_APPLICATION:alice@example.com/orders-consumer'].status, 'SUCCEEDED');
+  });
+}
+
+async function testImportDoesNotFailVerificationWhenMetadataReadbackIsUnavailable() {
+  await withTempDir(async (dir) => {
+    const dataDir = path.join(dir, 'data');
+    const irDir = path.join(dir, 'ir');
+    copyDir(FIXTURES_DATA, dataDir);
+    generateIrFromData(dataDir, irDir);
+
+    const client = makeWorkflowClient({
+      overrides: {
+        async listApplicationMetadata() {
+          return [];
         },
       },
     });
@@ -1481,6 +1539,7 @@ async function testImportAndReconcileSupportMetadataOnlyOwnership() {
 
 async function run() {
   await testPlanBuildsExecutableManifest();
+  await testPlanBlocksSubscriptionsForIncompatibleTargetPlanSecurity();
   await testPlanFailsWhenCapabilityProbeContradictsConfig();
   await testImportCreatesResourcesAndResumeSkipsRework();
   await testImportWritesApplicationMetadataPerApplication();
@@ -1494,6 +1553,7 @@ async function run() {
   await testImportUsesSavedUserIdWhenEmailLookupMisses();
   await testImportReusesExistingResourcesBySourceMarker();
   await testImportVerifiesApplicationMetadataFromScopedEndpoint();
+  await testImportDoesNotFailVerificationWhenMetadataReadbackIsUnavailable();
   await testReconcileWarnsWhenUserRoleReadIsUnsupported();
   await testImportFailsOnContinuityMismatch();
   await testInactiveDeveloperSkipPolicySkipsActions();

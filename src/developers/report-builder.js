@@ -1,5 +1,12 @@
 'use strict';
 
+const {
+  classifyPlanSecurity,
+  evaluatePlanSuitability,
+  isPlanStatusSuitable,
+  summarizeProductCredentialType,
+} = require('./target-matching');
+
 function addSummaryCount(map, key) {
   map[key] = (map[key] || 0) + 1;
 }
@@ -251,6 +258,25 @@ function resolveSubscriptionOperation(subscription, targetState) {
   };
 }
 
+function resolvePlanBlockers(domain, subscription, plan) {
+  if (!subscription.planMapping) return ['PLAN_MAPPING_MISSING'];
+  if (!plan) return [];
+
+  const blockers = [];
+  const credentialProfile = summarizeProductCredentialType(domain, subscription.productName);
+  const planSecurity = classifyPlanSecurity(plan);
+  const suitability = evaluatePlanSuitability(plan, credentialProfile);
+
+  if (planSecurity !== 'unknown' && !suitability.suitable) {
+    blockers.push(suitability.advisoryCode || 'TARGET_PLAN_SECURITY_MISMATCH');
+  }
+  if (!isPlanStatusSuitable(plan)) {
+    blockers.push('TARGET_PLAN_STATUS_UNSUITABLE');
+  }
+
+  return Array.from(new Set(blockers));
+}
+
 function buildPlan(domain, preflight, config, targetState = {
   usersByEmail: new Map(),
   applicationsBySourceId: new Map(),
@@ -348,23 +374,41 @@ function buildPlan(domain, preflight, config, targetState = {
     const appSourceId = `${subscription.developerEmail}/${subscription.appName}`;
     const plan = targetState.plansBySourceId.get(subscription.sourceId);
     const resolution = resolveSubscriptionOperation(subscription, targetState);
+    const planBlockers = resolvePlanBlockers(domain, subscription, plan);
+    const planWarnings = plan && planBlockers.includes('TARGET_PLAN_SECURITY_MISMATCH')
+      ? [{
+        code: 'TARGET_PLAN_SECURITY_MISMATCH',
+        message: `Mapped plan security ${classifyPlanSecurity(plan)} is not compatible with ${subscription.productName} credentials.`,
+        productName: subscription.productName,
+        sourceId: subscription.sourceId,
+        targetPlanId: plan.id || subscription.planMapping?.targetPlanId || null,
+        targetPlan: plan.name || subscription.planMapping?.targetPlan || null,
+      }]
+      : [];
+    const planResolutionStatus = planBlockers.length > 0 ? 'BLOCKED' : (subscription.planMapping ? 'READY' : 'BLOCKED');
+    const subscriptionStatus = planBlockers.length > 0 ? 'BLOCKED' : resolution.plannedStatus;
+    const subscriptionOperation = planBlockers.length > 0 ? 'BLOCK' : resolution.operation;
 
     const resolvePlanAction = action(`RESOLVE_PLAN:${subscription.sourceId}`, 'RESOLVE_PLAN', subscription.sourceId, {
       dependencies: [`UPSERT_APPLICATION:${appSourceId}`],
-      plannedStatus: subscription.planMapping ? 'READY' : 'BLOCKED',
-      operation: plan ? 'REUSE' : 'RESOLVE',
+      plannedStatus: planResolutionStatus,
+      operation: planBlockers.length > 0 ? 'BLOCK' : (plan ? 'REUSE' : 'RESOLVE'),
       lookup: subscription.planMapping || {},
-      payload: subscription.planMapping || {},
-      blockers: subscription.planMapping ? [] : ['PLAN_MAPPING_MISSING'],
+      payload: {
+        ...(subscription.planMapping || {}),
+        planSecurity: plan ? classifyPlanSecurity(plan) : null,
+      },
+      blockers: planBlockers,
+      warnings: planWarnings,
       targetHint: plan ? { planId: plan.id, apiId: plan.apiId || subscription.planMapping?.targetApiId || null } : {},
-      failConditions: subscription.planMapping ? [] : ['PLAN_MAPPING_MISSING'],
+      failConditions: planBlockers,
     });
     actions.push(resolvePlanAction);
 
     const upsertSubscription = action(`UPSERT_SUBSCRIPTION:${subscription.sourceId}`, 'UPSERT_SUBSCRIPTION', subscription.sourceId, {
       dependencies: [`UPSERT_APPLICATION:${appSourceId}`, resolvePlanAction.actionId],
-      plannedStatus: resolution.plannedStatus,
-      operation: resolution.operation,
+      plannedStatus: subscriptionStatus,
+      operation: subscriptionOperation,
       desiredState: subscription.desiredStatus,
       lookup: {
         applicationSourceId: appSourceId,
@@ -382,11 +426,11 @@ function buildPlan(domain, preflight, config, targetState = {
         sourceConsumerKey: subscription.consumerKey,
         sourceCredentialId: subscription.credentialId,
       },
-      blockers: [...subscription.blockers, ...(resolution.blockers || [])],
-      warnings: [...subscription.warnings],
+      blockers: [...subscription.blockers, ...(resolution.blockers || []), ...planBlockers],
+      warnings: [...subscription.warnings, ...planWarnings],
       manualReviewReasons: [...subscription.manualReviewReasons],
       skipConditions: resolution.skipConditions || [],
-      failConditions: resolution.blockers || [],
+      failConditions: [...(resolution.blockers || []), ...planBlockers],
       targetHint: resolution.targetId ? { subscriptionId: resolution.targetId } : {},
     });
     actions.push(upsertSubscription);

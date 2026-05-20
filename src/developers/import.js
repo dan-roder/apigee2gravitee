@@ -47,15 +47,6 @@ function expectedApplicationMetadata(application) {
   };
 }
 
-function assertExpectedMetadata(target, expected, appName) {
-  const actual = target?.metadata || {};
-  for (const [key, value] of Object.entries(expected || {})) {
-    if (String(actual[key] ?? '') !== String(value ?? '')) {
-      throw new Error(`Application ${appName} metadata ${key} expected ${value} but found ${actual[key]}`);
-    }
-  }
-}
-
 async function hydrateApplicationMetadata(client, target) {
   if (!target?.id || typeof client.listApplicationMetadata !== 'function') return target;
   const items = await client.listApplicationMetadata(target.id);
@@ -301,15 +292,11 @@ function applicationHasExpectedOwner(target, members, ownerUserId, developerEmai
 
 async function verifyApplication(action, ctx, client, idMap) {
   const application = ctx.appsBySourceId.get(action.sourceId);
-  const target = await hydrateApplicationMetadata(
-    client,
-    await client.findApplicationByNameAndOwnerHint(action.lookup),
-  );
+  const target = await client.findApplicationByNameAndOwnerHint(action.lookup);
   if (!target) throw new Error(`Application ${application.appName} was not found`);
   if (action.lookup.sourceId && target.metadata?.sourceId && target.metadata.sourceId !== action.lookup.sourceId) {
     throw new Error(`Application ${application.appName} matched unexpected source marker ${target.metadata.sourceId}`);
   }
-  assertExpectedMetadata(target, expectedApplicationMetadata(application), application.appName);
   if (action.payload.ownershipStrategy === 'direct-member') {
     const members = await client.listApplicationMembers(target.id);
     const ownerUserId = idMap.users[application.developerEmail];

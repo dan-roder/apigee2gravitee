@@ -955,27 +955,9 @@ class GraviteeClient {
 
   async upsertApplicationMetadata(applicationId, metadata = {}) {
     const attempts = [];
-    let existingMetadata = [];
-    try {
-      existingMetadata = await this.listApplicationMetadata(applicationId);
-    } catch (err) {
-      attempts.push({
-        key: null,
-        method: 'GET',
-        url: this.envUrl(`/applications/${applicationId}/metadata`),
-        status: err.status || null,
-        classification: classifyApiError(err),
-        message: err.message,
-        body: err.body,
-      });
-    }
-
     for (const [key, value] of Object.entries(metadata || {})) {
       const normalizedValue = String(value ?? '');
-      const existing = existingMetadata.find((item) => (
-        item?.key === key || item?.name === key || item?.id === key
-      ));
-      const metadataId = existing?.id || existing?.key || existing?.name || key;
+      const metadataId = key;
       const collectionUrls = [
         this.envUrl(`/applications/${applicationId}/metadata`),
         this.url(`/management/v1/organizations/${this.orgId}/environments/${this.envId}/applications/${applicationId}/metadata`),
@@ -984,20 +966,16 @@ class GraviteeClient {
         this.envUrl(`/applications/${applicationId}/metadata/${encodeURIComponent(metadataId)}`),
         this.url(`/management/v1/organizations/${this.orgId}/environments/${this.envId}/applications/${applicationId}/metadata/${encodeURIComponent(metadataId)}`),
       ];
-      const createPayloads = [
+      const payloads = [
         { name: key, format: 'STRING', value: normalizedValue, applicationId, hidden: false },
-        { name: key, format: 'STRING', value: normalizedValue },
-      ];
-      const updatePayloads = [
         { key, name: key, format: 'STRING', value: normalizedValue, applicationId, hidden: false },
         { key, name: key, format: 'STRING', value: normalizedValue },
+        { name: key, format: 'STRING', value: normalizedValue },
       ];
-      const strategies = existing
-        ? [
-          ...itemUrls.flatMap((url) => updatePayloads.map((payload) => ({ method: 'put', url, payload }))),
-          ...collectionUrls.flatMap((url) => createPayloads.map((payload) => ({ method: 'post', url, payload }))),
-        ]
-        : collectionUrls.flatMap((url) => createPayloads.map((payload) => ({ method: 'post', url, payload })));
+      const strategies = [
+        ...itemUrls.flatMap((url) => payloads.map((payload) => ({ method: 'put', url, payload }))),
+        ...collectionUrls.flatMap((url) => payloads.map((payload) => ({ method: 'put', url, payload }))),
+      ];
 
       let written = false;
       for (const strategy of strategies) {
