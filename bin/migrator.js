@@ -355,6 +355,7 @@ ${fmt.bold('Subcommands:')}
   configure-roles          Fetch live Gravitee roles and write the chosen defaults into config
   discover-targets         Inspect live Gravitee APIs/plans and propose productPlanMap candidates
   select-apps              Interactively choose which developer apps to import
+  sync-live-ids            Inspect live users/apps/subscriptions and refresh developers-id-map.json
   sync-api-targets         Refresh productPlanMap API/plan ids from state/apis-id-map.json
   resolve-config-ids       Resolve API/plan ids in productPlanMap by name
   validate-config-targets  Check productPlanMap targets against live Gravitee
@@ -382,6 +383,7 @@ ${fmt.bold('Examples:')}
   migrator developers discover-targets --ir-dir ./ir --config ./config/developers.config.resolved.json --gravitee-token "$GRAVITEE_TOKEN" --write-config --prompt-matches
   migrator developers select-apps --ir-dir ./ir --config ./config/developers.config.resolved.json --write-config
   migrator developers select-apps --ir-dir ./ir --config ./config/developers.config.resolved.json --clear-selection
+  migrator developers sync-live-ids --ir-dir ./ir --config ./config/developers.config.resolved.json --gravitee-token "$GRAVITEE_TOKEN" --write-id-map
   migrator developers sync-api-targets --config ./config/developers.config.resolved.json
   migrator developers resolve-config-ids --config ./config/developers.config.json --gravitee-token "$GRAVITEE_TOKEN"
   migrator developers validate-config-targets --config ./config/developers.config.resolved.json --gravitee-token "$GRAVITEE_TOKEN"

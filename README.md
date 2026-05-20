@@ -582,6 +582,8 @@ node bin/migrator.js developers reconcile --ir-dir ./ir --config ./config/develo
 
 `developers select-apps`: used when operators need to choose exactly which Apigee developer applications should be imported. It lists apps as `developerEmail/appName` with developer status, app status, credential count, and referenced API products, then writes the selected identifiers to `filters.includeApps` when `--write-config` is provided. Use `--output-config <path>` to write a separate selected config, or `--clear-selection` to empty `filters.includeApps` and return to importing all apps allowed by other filters.
 
+`developers sync-live-ids`: used when Gravitee already has users, applications, or subscriptions and the local `state/developers-id-map.json` needs to be inspected or refreshed before update/delete commands. It writes `report/developers-live-id-sync-report.json` by default and is report-only unless `--write-id-map` is provided. Add `--clear-missing` with `--write-id-map` to null out saved IDs that no longer resolve in Gravitee.
+
 `developers resolve-config-ids`: before `developers analyze` when your config still contains placeholder `targetApiId` and `targetPlanId` values. It resolves Gravitee API ids by `targetApi` name and plan ids by `targetPlan` name, then writes a sibling file such as `config/developers.config.resolved.json`.
 
 `developers validate-config-targets`: used after that to confirm every `productPlanMap` target matches a live Gravitee API and plan exactly. It accepts id-based matches, exact/normalized name matches, and alias matches when `matchMode: "alias"` is configured. It writes `report/developers-config-targets-report.json` by default, treats missing or ambiguous API/plan matches as blockers, and reports intentional array-based product mappings under `productsWithMultipleValidTargets` rather than implying they still need operator selection.
@@ -739,6 +741,7 @@ node bin/migrator.js developers reconcile \
 
 - remove subscriptions, then applications, then users for resources this tool can positively identify as imported
 - prefer the saved `state/developers-id-map.json`
+- use `developers sync-live-ids --write-id-map` to refresh saved UUIDs from live Gravitee before deleting manually created or previously imported resources
 - fall back to conservative source-marker and email lookups when ids are missing
 - leave unrelated Gravitee users and applications untouched
 - write `report/developers-cleanup-report.json` with cleanup counts, targets, and failures
@@ -751,6 +754,7 @@ For a full step-by-step controlled pilot, see [`docs/developers-pilot-runbook.md
 report/developers-plan.json
 report/developers-gap-report.json
 report/developers-app-selection-report.json
+report/developers-live-id-sync-report.json
 report/developers-sync-api-targets-report.json
 report/developers-target-catalog.json
 report/developers-cleanup-report.json

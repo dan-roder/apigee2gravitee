@@ -30,6 +30,7 @@ function resolveOutputPaths(config) {
     plan: path.join(reportDir, 'developers-plan.json'),
     gapReport: path.join(reportDir, 'developers-gap-report.json'),
     appSelectionReport: path.join(reportDir, 'developers-app-selection-report.json'),
+    liveIdSyncReport: path.join(reportDir, 'developers-live-id-sync-report.json'),
     syncReport: path.join(reportDir, 'developers-sync-api-targets-report.json'),
     targetCatalog: path.join(reportDir, 'developers-target-catalog.json'),
     reconcileReport: path.join(reportDir, 'developers-reconcile-report.json'),

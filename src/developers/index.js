@@ -11,6 +11,7 @@ const { runConfigureDevelopersRoles } = require('./configure-roles');
 const { runSyncDevelopersApiTargets } = require('./sync-api-targets');
 const { runDiscoverDevelopersTargets } = require('./discover-targets');
 const { runSelectDevelopersApps } = require('./select-apps');
+const { runSyncDevelopersLiveIds } = require('./sync-live-ids');
 
 function printFindings(findings, fmt, label) {
   if (findings.length === 0) return;
@@ -237,6 +238,32 @@ async function runDevelopersCommand(subcommand, flags, fmt) {
     console.log('');
     console.log(fmt.info('Next step: validate selected app product targets before analyze/import:'));
     console.log(`  ${fmt.dim('node bin/migrator.js developers validate-config-targets --ir-dir ./ir --config ./config/developers.config.resolved.json --gravitee-token "$GRAVITEE_TOKEN"')}`);
+    return result.exitCode;
+  }
+
+  if (subcommand === 'sync-live-ids') {
+    const result = await runSyncDevelopersLiveIds(flags);
+    if (result.validationErrors) {
+      console.log(fmt.err('Developers config validation failed'));
+      for (const err of result.validationErrors) console.log(`  - ${err}`);
+      return 1;
+    }
+    if (result.error) {
+      console.log(fmt.err(result.error));
+      return result.exitCode;
+    }
+
+    console.log(fmt.header('Developers sync-live-ids'));
+    console.log('');
+    console.log(`[sync] users: ${result.report.summary.users.matched || 0} matched, ${result.report.summary.users.updated || 0} changed, ${result.report.summary.users.missing || 0} missing`);
+    console.log(`[sync] apps: ${result.report.summary.applications.matched || 0} matched, ${result.report.summary.applications.updated || 0} changed, ${result.report.summary.applications.missing || 0} missing`);
+    console.log(`[sync] subscriptions: ${result.report.summary.subscriptions.matched || 0} matched, ${result.report.summary.subscriptions.updated || 0} changed, ${result.report.summary.subscriptions.missing || 0} missing`);
+    console.log('');
+    console.log(`  Report:     ${fmt.dim(result.reportPath)}`);
+    console.log(`  Id map:     ${fmt.dim(result.outputPaths.idMap)}`);
+    if (!result.wroteIdMap) {
+      console.log(fmt.info('Report only. Rerun with --write-id-map to refresh state/developers-id-map.json.'));
+    }
     return result.exitCode;
   }
 
