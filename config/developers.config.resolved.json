@@ -172,5 +172,8 @@
     "environment": [
       "703d7d91-a208-45b1-bd7d-91a208f5b1fc"
     ]
+  },
+  "_meta": {
+    "path": "/Users/daniel.roder/Sites/apigee2gravitee/config/developers.config.resolved.json"
   }
 }

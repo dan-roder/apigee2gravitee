@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-20T16:04:34.319Z",
+  "generatedAt": "2026-05-20T20:18:40.571Z",
   "configPath": "/Users/daniel.roder/Sites/apigee2gravitee/config/developers.config.resolved.json",
   "summary": {
     "products": 10,
@@ -331,8 +331,7 @@
       "productName": "misc-product",
       "activeProduct": false,
       "sourceProxyNames": [
-        "hello-api",
-        "facts-api"
+        "apigee-hello"
       ],
       "credentialProfile": {
         "productName": "misc-product",
@@ -343,7 +342,20 @@
       },
       "status": "BLOCKED",
       "exactCandidates": [],
-      "candidates": []
+      "candidates": [
+        {
+          "targetApi": "apigee-hello",
+          "targetApiId": "c78de823-83c1-4cf9-8de8-2383c14cf9e7",
+          "targetPlan": "Keyless Plan",
+          "targetPlanId": "cd6e6125-3c21-4155-ae61-253c21f1559a",
+          "matchMode": "exact",
+          "score": 0,
+          "securityType": "keyless",
+          "planStatus": "PUBLISHED",
+          "suitable": false,
+          "suitabilityCode": "TARGET_PLAN_SECURITY_MISMATCH"
+        }
+      ]
     },
     {
       "productName": "orders-product",
@@ -485,8 +497,7 @@
       "details": {
         "credentialType": "api-key",
         "sourceProxyNames": [
-          "hello-api",
-          "facts-api"
+          "apigee-hello"
         ]
       }
     },
