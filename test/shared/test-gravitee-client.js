@@ -237,12 +237,12 @@ async function testUpsertApplicationMetadataUsesApplicationScopedEndpoint() {
     {
       method: 'POST',
       url: 'https://gravitee.example.com/management/organizations/DEFAULT/environments/DEFAULT/applications/app-1/metadata',
-      body: { name: 'sourceId', format: 'STRING', value: 'alice@example.com/orders-consumer' },
+      body: { name: 'sourceId', format: 'STRING', value: 'alice@example.com/orders-consumer', applicationId: 'app-1', hidden: false },
     },
     {
       method: 'POST',
       url: 'https://gravitee.example.com/management/organizations/DEFAULT/environments/DEFAULT/applications/app-1/metadata',
-      body: { name: 'DisplayName', format: 'STRING', value: 'Orders Consumer' },
+      body: { name: 'DisplayName', format: 'STRING', value: 'Orders Consumer', applicationId: 'app-1', hidden: false },
     },
   ]);
 }
@@ -275,7 +275,7 @@ async function testUpsertApplicationMetadataUpdatesExistingKeysByMetadataId() {
     {
       method: 'PUT',
       url: 'https://gravitee.example.com/management/organizations/DEFAULT/environments/DEFAULT/applications/app-1/metadata/sourceId',
-      body: { key: 'sourceId', name: 'sourceId', format: 'STRING', value: 'alice@example.com/orders-consumer' },
+      body: { key: 'sourceId', name: 'sourceId', format: 'STRING', value: 'alice@example.com/orders-consumer', applicationId: 'app-1', hidden: false },
     },
   ]);
 }
@@ -492,6 +492,23 @@ async function testTransferApplicationOwnershipFallsBackAcrossPayloadShapes() {
   assert.strictEqual(response._strategy, 'v1-transfer-user');
 }
 
+async function testTransferApplicationOwnershipTreatsExistingMembershipAsSuccess() {
+  const client = new GraviteeClient({ baseUrl: 'https://gravitee.example.com', orgId: 'DEFAULT', envId: 'DEFAULT', token: 'token' });
+  client.post = async (url) => {
+    const err = new Error(`POST ${url} → HTTP 400`);
+    err.status = 400;
+    err.body = {
+      message: 'A Membership for member : USER user-1 and ref : APPLICATION app-1 already exists.',
+      technicalCode: 'api.exists',
+    };
+    throw err;
+  };
+
+  const response = await client.transferApplicationOwnership('app-1', { userId: 'user-1', role: 'OWNER' });
+  assert.strictEqual(response.ok, true);
+  assert.strictEqual(response._strategy, 'v1-transfer-userId-referenceType-already-existing');
+}
+
 async function testCloseOrPauseSubscriptionFallsBackAcrossCompatibilityStrategies() {
   const client = new GraviteeClient({ baseUrl: 'https://gravitee.example.com', orgId: 'DEFAULT', envId: 'DEFAULT', token: 'token' });
   const calls = [];
@@ -566,6 +583,7 @@ async function run() {
   await testAssignUserRolesFallsBackAcrossPayloadShapes();
   await testAssignUserRolesUsesReferencePayloadWhenRoleIdsProvided();
   await testTransferApplicationOwnershipFallsBackAcrossPayloadShapes();
+  await testTransferApplicationOwnershipTreatsExistingMembershipAsSuccess();
   await testCloseOrPauseSubscriptionFallsBackAcrossCompatibilityStrategies();
   console.log('test-gravitee-client.js passed');
 }

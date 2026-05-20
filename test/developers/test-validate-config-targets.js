@@ -157,7 +157,7 @@ async function testValidateConfigTargetsSupportsAliasMatching() {
   });
 }
 
-async function testValidateConfigTargetsWarnsOnSecurityMismatchForOAuthCredentials() {
+async function testValidateConfigTargetsBlocksOnSecurityMismatchForOAuthCredentials() {
   await withTempDir(async (dir) => {
     const dataDir = path.join(dir, 'data');
     const irDir = path.join(dir, 'ir');
@@ -172,8 +172,10 @@ async function testValidateConfigTargetsWarnsOnSecurityMismatchForOAuthCredentia
       { client: makeClient() },
     );
 
-    assert.strictEqual(result.exitCode, 0);
-    assert.ok(result.report.findings.some((item) => item.code === 'TARGET_PLAN_SECURITY_MISMATCH'));
+    assert.strictEqual(result.exitCode, 2);
+    assert.ok(result.report.findings.some((item) => (
+      item.severity === 'blocker' && item.code === 'TARGET_PLAN_SECURITY_MISMATCH'
+    )));
   });
 }
 
@@ -280,7 +282,7 @@ async function testValidateConfigTargetsSeparatesIntentionalMultiTargetMappingsF
 async function run() {
   await testValidateConfigTargetsSucceedsWithExactMatches();
   await testValidateConfigTargetsSupportsAliasMatching();
-  await testValidateConfigTargetsWarnsOnSecurityMismatchForOAuthCredentials();
+  await testValidateConfigTargetsBlocksOnSecurityMismatchForOAuthCredentials();
   await testValidateConfigTargetsBlocksOnAmbiguousAndUnsuitablePlans();
   await testValidateConfigTargetsDowngradesInactiveProductBlockersToWarnings();
   await testValidateConfigTargetsSeparatesIntentionalMultiTargetMappingsFromSelection();

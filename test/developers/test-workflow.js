@@ -564,6 +564,7 @@ async function testImportRollsBackOrReusesUserAfterRoleAssignmentFailure() {
         },
       },
     });
+    client._state.roles.set('user-saved', new Set(['ORGANIZATION:USER', 'ENVIRONMENT:API_CONSUMER']));
 
     const first = await runDevelopersImport(
       { 'ir-dir': irDir, 'config': path.join(dir, 'config.json'), 'users-only': true },
@@ -691,6 +692,45 @@ async function testImportContinuesIndependentActionsAfterUserFailureByDefault() 
     assert.strictEqual(result.exitCode, 4);
     assert.strictEqual(result.state.actions['UPSERT_USER:alice@example.com'].status, 'FAILED');
     assert.strictEqual(result.state.actions['UPSERT_APPLICATION:bob@example.com/bob-app'].status, 'SUCCEEDED');
+  });
+}
+
+async function testImportUsesSavedUserIdWhenEmailLookupMisses() {
+  await withTempDir(async (dir) => {
+    const dataDir = path.join(dir, 'data');
+    const irDir = path.join(dir, 'ir');
+    copyDir(FIXTURES_DATA, dataDir);
+    generateIrFromData(dataDir, irDir);
+
+    const client = makeWorkflowClient({
+      overrides: {
+        async findUserByEmail() { return null; },
+        async getUser(userId) {
+          if (userId === 'user-saved') return { id: 'user-saved', email: 'alice@example.com' };
+          return null;
+        },
+        async createUser() {
+          throw new Error('createUser should not be called when saved id resolves');
+        },
+      },
+    });
+    const config = makeConfig(dir);
+    const idMapPath = path.join(dir, 'state', 'developers-id-map.json');
+    writeJson(idMapPath, {
+      generatedAt: new Date().toISOString(),
+      users: { 'alice@example.com': 'user-saved' },
+      applications: {},
+      subscriptions: {},
+    });
+
+    const result = await runDevelopersImport(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json'), 'users-only': true },
+      { config, client },
+    );
+
+    assert.strictEqual(result.exitCode, 0);
+    assert.strictEqual(result.idMap.users['alice@example.com'], 'user-saved');
+    assert.strictEqual(result.state.actions['UPSERT_USER:alice@example.com'].status, 'SUCCEEDED');
   });
 }
 
@@ -1451,6 +1491,7 @@ async function run() {
   await testImportSucceedsWhenUserRoleReadIsUnsupported();
   await testImportReusesUserAfterCreateConflict();
   await testImportContinuesIndependentActionsAfterUserFailureByDefault();
+  await testImportUsesSavedUserIdWhenEmailLookupMisses();
   await testImportReusesExistingResourcesBySourceMarker();
   await testImportVerifiesApplicationMetadataFromScopedEndpoint();
   await testReconcileWarnsWhenUserRoleReadIsUnsupported();

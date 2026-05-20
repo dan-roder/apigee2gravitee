@@ -168,7 +168,7 @@ async function resolvePlanTarget(target, api, client, productName, targetIndex, 
 
   const suitability = evaluatePlanSuitability(plan, credentialProfile);
   if (!suitability.suitable) {
-    findings.push(makeFinding('warning', 'TARGET_PLAN_SECURITY_MISMATCH', productName, targetIndex, `Plan ${plan.name} security ${classifyPlanSecurity(plan)} is not suitable for ${credentialProfile.primaryCredentialType} credentials`, {
+    findings.push(makeFinding('blocker', 'TARGET_PLAN_SECURITY_MISMATCH', productName, targetIndex, `Plan ${plan.name} security ${classifyPlanSecurity(plan)} is not suitable for ${credentialProfile.primaryCredentialType} credentials`, {
       planId: plan.id,
       planName: plan.name,
       planSecurityType: classifyPlanSecurity(plan),

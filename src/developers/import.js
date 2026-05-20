@@ -145,6 +145,8 @@ async function ensureUser(action, ctx, client, idMap) {
         displayName: user.userName || user.email,
       })
       : existing;
+  } else if (idMap.users?.[user.sourceId] && typeof client.getUser === 'function') {
+    target = await client.getUser(idMap.users[user.sourceId]);
   } else if (action.operation === 'CREATE') {
     try {
       target = await client.createUser({
@@ -225,7 +227,10 @@ async function ensureUser(action, ctx, client, idMap) {
 
 async function verifyUser(action, ctx, client, idMap) {
   const user = ctx.usersBySourceId.get(action.sourceId);
-  const target = await client.findUserByEmail(user.email);
+  let target = await client.findUserByEmail(user.email);
+  if (!target && idMap.users?.[user.sourceId] && typeof client.getUser === 'function') {
+    target = await client.getUser(idMap.users[user.sourceId]);
+  }
   if (!target) {
     throw new Error(`User ${user.email} was not found`);
   }
@@ -398,7 +403,10 @@ async function executeAction(action, ctx, client, idMap, state) {
 async function runDevelopersImport(flags, deps = {}) {
   const result = await prepareDevelopersWorkflow(flags, deps);
   if (result.validationErrors) return result;
-  persistPlanningArtifacts(result, { preserveRuntimeState: !!(flags.resume || flags.force) });
+  persistPlanningArtifacts(result, {
+    preserveRuntimeState: !!(flags.resume || flags.force),
+    preserveIdMap: true,
+  });
 
   if (result.preflight.blockers.length > 0 && !flags.force) {
     return {

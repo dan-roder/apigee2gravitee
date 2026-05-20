@@ -162,13 +162,14 @@ async function prepareDevelopersWorkflow(flags, deps = {}) {
 function persistPlanningArtifacts(result, options = {}) {
   const {
     preserveRuntimeState = false,
+    preserveIdMap = preserveRuntimeState,
   } = options;
   writeJson(result.outputPaths.plan, result.manifest);
   writeJson(result.outputPaths.gapReport, result.gapReport);
   if (!preserveRuntimeState || !fs.existsSync(result.outputPaths.state)) {
     writeJson(result.outputPaths.state, result.state);
   }
-  if (!preserveRuntimeState || !fs.existsSync(result.outputPaths.idMap)) {
+  if (!preserveIdMap || !fs.existsSync(result.outputPaths.idMap)) {
     writeJson(result.outputPaths.idMap, result.idMap);
   }
   writeNdjson(result.outputPaths.log, result.events);

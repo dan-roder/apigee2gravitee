@@ -925,8 +925,32 @@ class GraviteeClient {
   }
 
   async listApplicationMetadata(applicationId) {
-    const body = await this.get(this.envUrl(`/applications/${applicationId}/metadata`));
-    return normalizeCollection(body);
+    const attempts = [];
+    for (const url of [
+      this.envUrl(`/applications/${applicationId}/metadata`),
+      this.url(`/management/v1/organizations/${this.orgId}/environments/${this.envId}/applications/${applicationId}/metadata`),
+    ]) {
+      try {
+        const body = await this.get(url);
+        return normalizeCollection(body);
+      } catch (err) {
+        attempts.push({
+          method: 'GET',
+          url,
+          status: err.status || null,
+          classification: classifyApiError(err),
+          message: err.message,
+          body: err.body,
+        });
+      }
+    }
+    const fallbackError = new Error(
+      attempts.map((attempt) => `${attempt.method} ${attempt.url}: ${attempt.message}${attempt.body ? `: ${formatErrorBody(attempt.body)}` : ''}`).join(' | ')
+    );
+    fallbackError.name = 'GraviteeApplicationMetadataCompatibilityError';
+    fallbackError.classification = 'compatibility';
+    fallbackError.attempts = attempts;
+    throw fallbackError;
   }
 
   async upsertApplicationMetadata(applicationId, metadata = {}) {
@@ -952,26 +976,28 @@ class GraviteeClient {
         item?.key === key || item?.name === key || item?.id === key
       ));
       const metadataId = existing?.id || existing?.key || existing?.name || key;
+      const collectionUrls = [
+        this.envUrl(`/applications/${applicationId}/metadata`),
+        this.url(`/management/v1/organizations/${this.orgId}/environments/${this.envId}/applications/${applicationId}/metadata`),
+      ];
+      const itemUrls = [
+        this.envUrl(`/applications/${applicationId}/metadata/${encodeURIComponent(metadataId)}`),
+        this.url(`/management/v1/organizations/${this.orgId}/environments/${this.envId}/applications/${applicationId}/metadata/${encodeURIComponent(metadataId)}`),
+      ];
+      const createPayloads = [
+        { name: key, format: 'STRING', value: normalizedValue, applicationId, hidden: false },
+        { name: key, format: 'STRING', value: normalizedValue },
+      ];
+      const updatePayloads = [
+        { key, name: key, format: 'STRING', value: normalizedValue, applicationId, hidden: false },
+        { key, name: key, format: 'STRING', value: normalizedValue },
+      ];
       const strategies = existing
         ? [
-          {
-            method: 'put',
-            url: this.envUrl(`/applications/${applicationId}/metadata/${encodeURIComponent(metadataId)}`),
-            payload: { key, name: key, format: 'STRING', value: normalizedValue },
-          },
-          {
-            method: 'post',
-            url: this.envUrl(`/applications/${applicationId}/metadata`),
-            payload: { name: key, format: 'STRING', value: normalizedValue },
-          },
+          ...itemUrls.flatMap((url) => updatePayloads.map((payload) => ({ method: 'put', url, payload }))),
+          ...collectionUrls.flatMap((url) => createPayloads.map((payload) => ({ method: 'post', url, payload }))),
         ]
-        : [
-          {
-            method: 'post',
-            url: this.envUrl(`/applications/${applicationId}/metadata`),
-            payload: { name: key, format: 'STRING', value: normalizedValue },
-          },
-        ];
+        : collectionUrls.flatMap((url) => createPayloads.map((payload) => ({ method: 'post', url, payload })));
 
       let written = false;
       for (const strategy of strategies) {
@@ -1059,6 +1085,11 @@ class GraviteeClient {
         }
         return response;
       } catch (err) {
+        const technicalCode = err?.body?.technicalCode || err?.technicalCode || null;
+        const message = `${err?.message || ''} ${err?.body?.message || ''}`;
+        if (err?.status === 400 && (technicalCode === 'api.exists' || /membership .*already exists/i.test(message))) {
+          return { ok: true, _strategy: `${strategy.name}-already-existing` };
+        }
         attempts.push({
           strategy: strategy.name,
           status: err.status || null,
