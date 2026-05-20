@@ -292,6 +292,33 @@ function addDeveloperWithoutApps(dataDir, email = 'noapps@example.com') {
   });
 }
 
+function addDeveloperWithApp(dataDir, email, appName, products) {
+  writeJson(path.join(dataDir, 'devs', email, `${email}.json`), {
+    email,
+    firstName: 'Test',
+    lastName: 'Developer',
+    userName: email,
+    status: 'active',
+    apps: [appName],
+    attributes: [],
+  });
+  writeJson(path.join(dataDir, 'apps', email, `${appName}.json`), {
+    name: appName,
+    appId: `${appName}-uuid`,
+    status: 'approved',
+    callbackUrl: '',
+    attributes: [],
+    credentials: [{
+      consumerKey: `${appName}-key`,
+      consumerSecret: `${appName}-secret`,
+      status: 'approved',
+      expiresAt: -1,
+      scopes: [],
+      apiProducts: products.map((product) => ({ apiproduct: product, status: 'approved' })),
+    }],
+  });
+}
+
 function addBillingProductToData(dataDir) {
   writeJson(path.join(dataDir, 'products', 'billing-product.json'), {
     name: 'billing-product',
@@ -630,6 +657,40 @@ async function testImportReusesUserAfterCreateConflict() {
     assert.strictEqual(result.exitCode, 0);
     assert.strictEqual(result.idMap.users['alice@example.com'], 'user-existing-after-conflict');
     assert.strictEqual(result.state.actions['UPSERT_USER:alice@example.com'].status, 'SUCCEEDED');
+  });
+}
+
+async function testImportContinuesIndependentActionsAfterUserFailureByDefault() {
+  await withTempDir(async (dir) => {
+    const dataDir = path.join(dir, 'data');
+    const irDir = path.join(dir, 'ir');
+    copyDir(FIXTURES_DATA, dataDir);
+    addDeveloperWithApp(dataDir, 'bob@example.com', 'bob-app', ['orders-product']);
+    generateIrFromData(dataDir, irDir);
+
+    const client = makeWorkflowClient({
+      overrides: {
+        async createUser(payload) {
+          if (payload.email === 'alice@example.com') {
+            const err = new Error('create user failed');
+            err.status = 400;
+            throw err;
+          }
+          const user = { id: `user-${this._state.users.size + 1}`, email: payload.email };
+          this._state.users.set(payload.email, user);
+          return user;
+        },
+      },
+    });
+
+    const result = await runDevelopersImport(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json') },
+      { config: makeConfig(dir), client },
+    );
+
+    assert.strictEqual(result.exitCode, 4);
+    assert.strictEqual(result.state.actions['UPSERT_USER:alice@example.com'].status, 'FAILED');
+    assert.strictEqual(result.state.actions['UPSERT_APPLICATION:bob@example.com/bob-app'].status, 'SUCCEEDED');
   });
 }
 
@@ -1389,6 +1450,7 @@ async function run() {
   await testImportRollsBackOrReusesUserAfterRoleAssignmentFailure();
   await testImportSucceedsWhenUserRoleReadIsUnsupported();
   await testImportReusesUserAfterCreateConflict();
+  await testImportContinuesIndependentActionsAfterUserFailureByDefault();
   await testImportReusesExistingResourcesBySourceMarker();
   await testImportVerifiesApplicationMetadataFromScopedEndpoint();
   await testReconcileWarnsWhenUserRoleReadIsUnsupported();

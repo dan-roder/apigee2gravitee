@@ -415,7 +415,7 @@ async function runDevelopersImport(flags, deps = {}) {
   }
   const idMap = readJsonIfExists(result.outputPaths.idMap) || result.idMap;
   const events = [...result.events];
-  const maxErrors = Number(flags['max-errors'] || 1);
+  const maxErrors = flags['max-errors'] === undefined ? Infinity : Number(flags['max-errors']);
   let errorCount = 0;
 
   persistRuntimeArtifacts(result.outputPaths, state, idMap, events);
