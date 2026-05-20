@@ -39,12 +39,6 @@ function buildImportContext(result) {
   };
 }
 
-function collectRequiredApplicationCustomFields(domain) {
-  return Array.from(new Set(
-    domain.applications.flatMap((application) => Object.keys(application.metadata || {})),
-  )).sort((a, b) => a.localeCompare(b));
-}
-
 function expectedApplicationMetadata(application) {
   return {
     developerEmail: application.developerEmail,
@@ -95,24 +89,6 @@ function formatRuntimeError(err) {
     )).join(' | '));
   }
   return parts.filter(Boolean).join(' :: ');
-}
-
-async function ensureRequiredApplicationCustomFields(domain, client, events) {
-  const requiredFields = collectRequiredApplicationCustomFields(domain);
-  if (requiredFields.length === 0 || typeof client.ensureApplicationCustomFields !== 'function') {
-    return { requiredFields, created: [], skipped: [], failed: [] };
-  }
-
-  const outcome = await client.ensureApplicationCustomFields(requiredFields);
-  events.push({
-    ts: new Date().toISOString(),
-    type: 'import.custom_fields',
-    requiredFields,
-    created: outcome.created,
-    skipped: outcome.skipped,
-    failed: outcome.failed,
-  });
-  return { requiredFields, ...outcome };
 }
 
 function inactivePolicySatisfied(target, policy) {
@@ -267,6 +243,9 @@ async function ensureApplication(action, ctx, client, idMap) {
     }
   }
   if (applicationId) setIdMapValue(idMap, action.kind, action.sourceId, applicationId);
+  if (applicationId && ['CREATE', 'UPDATE'].includes(action.operation) && typeof client.upsertApplicationMetadata === 'function') {
+    await client.upsertApplicationMetadata(applicationId, metadata);
+  }
   return { applicationId };
 }
 
@@ -403,19 +382,7 @@ async function runDevelopersImport(flags, deps = {}) {
   const maxErrors = Number(flags['max-errors'] || 1);
   let errorCount = 0;
 
-  const customFieldProvisioning = flags['users-only']
-    ? { requiredFields: [], created: [], skipped: [], failed: [] }
-    : await ensureRequiredApplicationCustomFields(result.domain, result.client, events);
   persistRuntimeArtifacts(result.outputPaths, state, idMap, events);
-  if (customFieldProvisioning.failed.length > 0 && !flags.force) {
-    return {
-      ...result,
-      state,
-      idMap,
-      customFieldProvisioning,
-      exitCode: 4,
-    };
-  }
 
   for (const action of result.manifest.actions) {
     if (!shouldIncludeAction(action, flags)) continue;
@@ -480,13 +447,11 @@ async function runDevelopersImport(flags, deps = {}) {
     ...result,
     state,
     idMap,
-    customFieldProvisioning,
     exitCode,
   };
 }
 
 module.exports = {
-  collectRequiredApplicationCustomFields,
   expectedApplicationMetadata,
   runDevelopersImport,
 };

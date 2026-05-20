@@ -178,6 +178,78 @@ async function testCreateApplicationCustomFieldUsesApplicationsMetadataEndpoint(
   assert.strictEqual(called.body.format, 'STRING');
 }
 
+async function testUpsertApplicationMetadataUsesApplicationScopedEndpoint() {
+  const client = new GraviteeClient({ baseUrl: 'https://gravitee.example.com', orgId: 'DEFAULT', envId: 'DEFAULT', token: 'token' });
+  const calls = [];
+  client.get = async (url) => {
+    calls.push({ method: 'GET', url });
+    return [];
+  };
+  client.put = async (url, body) => {
+    calls.push({ method: 'PUT', url, body });
+    return { ok: true };
+  };
+  client.post = async (url, body) => {
+    calls.push({ method: 'POST', url, body });
+    return { ok: true };
+  };
+
+  await client.upsertApplicationMetadata('app-1', {
+    sourceId: 'alice@example.com/orders-consumer',
+    DisplayName: 'Orders Consumer',
+  });
+
+  assert.deepStrictEqual(calls, [
+    {
+      method: 'GET',
+      url: 'https://gravitee.example.com/management/organizations/DEFAULT/environments/DEFAULT/applications/app-1/metadata',
+    },
+    {
+      method: 'POST',
+      url: 'https://gravitee.example.com/management/organizations/DEFAULT/environments/DEFAULT/applications/app-1/metadata',
+      body: { name: 'sourceId', format: 'STRING', value: 'alice@example.com/orders-consumer' },
+    },
+    {
+      method: 'POST',
+      url: 'https://gravitee.example.com/management/organizations/DEFAULT/environments/DEFAULT/applications/app-1/metadata',
+      body: { name: 'DisplayName', format: 'STRING', value: 'Orders Consumer' },
+    },
+  ]);
+}
+
+async function testUpsertApplicationMetadataUpdatesExistingKeysByMetadataId() {
+  const client = new GraviteeClient({ baseUrl: 'https://gravitee.example.com', orgId: 'DEFAULT', envId: 'DEFAULT', token: 'token' });
+  const calls = [];
+  client.get = async (url) => {
+    calls.push({ method: 'GET', url });
+    return [{ key: 'sourceId', name: 'sourceId' }];
+  };
+  client.put = async (url, body) => {
+    calls.push({ method: 'PUT', url, body });
+    return { ok: true };
+  };
+  client.post = async (url, body) => {
+    calls.push({ method: 'POST', url, body });
+    return { ok: true };
+  };
+
+  await client.upsertApplicationMetadata('app-1', {
+    sourceId: 'alice@example.com/orders-consumer',
+  });
+
+  assert.deepStrictEqual(calls, [
+    {
+      method: 'GET',
+      url: 'https://gravitee.example.com/management/organizations/DEFAULT/environments/DEFAULT/applications/app-1/metadata',
+    },
+    {
+      method: 'PUT',
+      url: 'https://gravitee.example.com/management/organizations/DEFAULT/environments/DEFAULT/applications/app-1/metadata/sourceId',
+      body: { key: 'sourceId', name: 'sourceId', format: 'STRING', value: 'alice@example.com/orders-consumer' },
+    },
+  ]);
+}
+
 async function testListRolesUsesScopedConfigurationEndpoints() {
   const client = new GraviteeClient({ baseUrl: 'https://gravitee.example.com', orgId: 'DEFAULT', envId: 'DEFAULT', token: 'token' });
   const calls = [];
@@ -452,6 +524,8 @@ async function run() {
   await testFindPlanResolvesApiByNameWhenIdMissing();
   await testCreateApiPlanNormalizesPlanPayload();
   await testCreateApplicationCustomFieldUsesApplicationsMetadataEndpoint();
+  await testUpsertApplicationMetadataUsesApplicationScopedEndpoint();
+  await testUpsertApplicationMetadataUpdatesExistingKeysByMetadataId();
   await testListRolesUsesScopedConfigurationEndpoints();
   await testListRolesByScopeFallsBackToLegacyRoleScopesEndpoint();
   await testGetUserRolesReturnsNullWhenUnsupportedLookupAllowed();

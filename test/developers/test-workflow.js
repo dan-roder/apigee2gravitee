@@ -128,6 +128,7 @@ function makeWorkflowClient(options = {}) {
       createApplication: 0,
       createSubscription: 0,
       createCustomField: 0,
+      upsertApplicationMetadata: 0,
       deleteSubscription: 0,
       deleteApplication: 0,
       deleteUser: 0,
@@ -187,6 +188,14 @@ function makeWorkflowClient(options = {}) {
       const app = { id: applicationId, name: payload.name, metadata: payload.metadata };
       state.applications.set(applicationId, app);
       return app;
+    },
+    async upsertApplicationMetadata(applicationId, metadata) {
+      state.counts.upsertApplicationMetadata += Object.keys(metadata || {}).length;
+      const app = state.applications.get(applicationId);
+      if (app) {
+        app.metadata = { ...(app.metadata || {}), ...(metadata || {}) };
+      }
+      return { ok: true };
     },
     async addApplicationMember(applicationId, payload) {
       const members = state.members.get(applicationId) || [];
@@ -381,7 +390,7 @@ async function testImportCreatesResourcesAndResumeSkipsRework() {
       sourceId: 'alice@example.com/orders-consumer',
       environment: 'production',
     });
-    assert.deepStrictEqual(first.customFieldProvisioning.requiredFields, ['environment']);
+    assert.strictEqual(client._state.counts.upsertApplicationMetadata, 3);
     assert.ok(Object.values(first.state.actions).some((item) => item.status === 'SUCCEEDED'));
 
     const second = await runDevelopersImport(
@@ -396,18 +405,14 @@ async function testImportCreatesResourcesAndResumeSkipsRework() {
   });
 }
 
-async function testImportRequiresApplicationMetadataFieldsForAppAttributes() {
+async function testImportWritesApplicationMetadataPerApplication() {
   await withTempDir(async (dir) => {
     const dataDir = path.join(dir, 'data');
     const irDir = path.join(dir, 'ir');
     copyDir(FIXTURES_DATA, dataDir);
     generateIrFromData(dataDir, irDir);
 
-    const client = makeWorkflowClient({
-      overrides: {
-        async listCustomFields() { return new Set(); },
-      },
-    });
+    const client = makeWorkflowClient();
     client._state.customFields.clear();
 
     const result = await runDevelopersImport(
@@ -416,13 +421,14 @@ async function testImportRequiresApplicationMetadataFieldsForAppAttributes() {
     );
 
     assert.strictEqual(result.exitCode, 0);
-    assert.deepStrictEqual(result.customFieldProvisioning.requiredFields, ['environment']);
-    assert.strictEqual(client._state.counts.createCustomField, 1);
-    assert.ok(client._state.customFields.has('environment'));
+    assert.strictEqual(client._state.counts.createCustomField, 0);
+    assert.strictEqual(client._state.counts.upsertApplicationMetadata, 3);
+    const application = Array.from(client._state.applications.values())[0];
+    assert.strictEqual(application.metadata.environment, 'production');
   });
 }
 
-async function testImportDoesNotRequireApplicationMetadataFieldsWithoutAppAttributes() {
+async function testImportOnlyWritesToolMetadataWithoutAppAttributes() {
   await withTempDir(async (dir) => {
     const dataDir = path.join(dir, 'data');
     const irDir = path.join(dir, 'ir');
@@ -439,8 +445,8 @@ async function testImportDoesNotRequireApplicationMetadataFieldsWithoutAppAttrib
     );
 
     assert.strictEqual(result.exitCode, 0);
-    assert.deepStrictEqual(result.customFieldProvisioning.requiredFields, []);
     assert.strictEqual(client._state.counts.createCustomField, 0);
+    assert.strictEqual(client._state.counts.upsertApplicationMetadata, 2);
   });
 }
 
@@ -470,7 +476,8 @@ async function testApplicationMetadataReservedAndDuplicateKeys() {
     assert.strictEqual(application.metadata.developerEmail, 'alice@example.com');
     assert.strictEqual(application.metadata.team, 'second');
     assert.strictEqual(application.metadata['empty-value'], '');
-    assert.deepStrictEqual(result.customFieldProvisioning.requiredFields, ['empty-value', 'team']);
+    assert.strictEqual(client._state.counts.createCustomField, 0);
+    assert.strictEqual(client._state.counts.upsertApplicationMetadata, 4);
     const plannedApplication = result.domain.applications[0];
     assert.ok(plannedApplication.warnings.includes('APPLICATION_METADATA_RESERVED_KEY:sourceId'));
     assert.ok(plannedApplication.warnings.includes('APPLICATION_METADATA_RESERVED_KEY:developerEmail'));
@@ -1272,8 +1279,8 @@ async function run() {
   await testPlanBuildsExecutableManifest();
   await testPlanFailsWhenCapabilityProbeContradictsConfig();
   await testImportCreatesResourcesAndResumeSkipsRework();
-  await testImportRequiresApplicationMetadataFieldsForAppAttributes();
-  await testImportDoesNotRequireApplicationMetadataFieldsWithoutAppAttributes();
+  await testImportWritesApplicationMetadataPerApplication();
+  await testImportOnlyWritesToolMetadataWithoutAppAttributes();
   await testApplicationMetadataReservedAndDuplicateKeys();
   await testImportSkipsDevelopersWithoutApps();
   await testImportRollsBackOrReusesUserAfterRoleAssignmentFailure();

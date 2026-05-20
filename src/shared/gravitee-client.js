@@ -883,6 +883,90 @@ class GraviteeClient {
     return this.put(this.envUrl(`/applications/${applicationId}`), payload);
   }
 
+  async listApplicationMetadata(applicationId) {
+    const body = await this.get(this.envUrl(`/applications/${applicationId}/metadata`));
+    return normalizeCollection(body);
+  }
+
+  async upsertApplicationMetadata(applicationId, metadata = {}) {
+    const attempts = [];
+    let existingMetadata = [];
+    try {
+      existingMetadata = await this.listApplicationMetadata(applicationId);
+    } catch (err) {
+      attempts.push({
+        key: null,
+        method: 'GET',
+        url: this.envUrl(`/applications/${applicationId}/metadata`),
+        status: err.status || null,
+        classification: classifyApiError(err),
+        message: err.message,
+        body: err.body,
+      });
+    }
+
+    for (const [key, value] of Object.entries(metadata || {})) {
+      const normalizedValue = String(value ?? '');
+      const existing = existingMetadata.find((item) => (
+        item?.key === key || item?.name === key || item?.id === key
+      ));
+      const metadataId = existing?.id || existing?.key || existing?.name || key;
+      const strategies = existing
+        ? [
+          {
+            method: 'put',
+            url: this.envUrl(`/applications/${applicationId}/metadata/${encodeURIComponent(metadataId)}`),
+            payload: { key, name: key, format: 'STRING', value: normalizedValue },
+          },
+          {
+            method: 'post',
+            url: this.envUrl(`/applications/${applicationId}/metadata`),
+            payload: { name: key, format: 'STRING', value: normalizedValue },
+          },
+        ]
+        : [
+          {
+            method: 'post',
+            url: this.envUrl(`/applications/${applicationId}/metadata`),
+            payload: { name: key, format: 'STRING', value: normalizedValue },
+          },
+        ];
+
+      let written = false;
+      for (const strategy of strategies) {
+        try {
+          await this[strategy.method](strategy.url, strategy.payload);
+          written = true;
+          break;
+        } catch (err) {
+          attempts.push({
+            key,
+            method: strategy.method.toUpperCase(),
+            url: strategy.url,
+            status: err.status || null,
+            classification: classifyApiError(err),
+            message: err.message,
+            body: err.body,
+          });
+        }
+      }
+
+      if (!written) {
+        const fallbackError = new Error(
+          attempts
+            .filter((attempt) => attempt.key === key)
+            .map((attempt) => `${attempt.method} ${attempt.key}: ${attempt.message}${attempt.body ? `: ${formatErrorBody(attempt.body)}` : ''}`)
+            .join(' | ')
+        );
+        fallbackError.name = 'GraviteeApplicationMetadataCompatibilityError';
+        fallbackError.classification = 'compatibility';
+        fallbackError.attempts = attempts.filter((attempt) => attempt.key === key);
+        throw fallbackError;
+      }
+    }
+    return { ok: true };
+  }
+
   async deleteApplication(applicationId) {
     return this.delete(this.envUrl(`/applications/${applicationId}`));
   }
