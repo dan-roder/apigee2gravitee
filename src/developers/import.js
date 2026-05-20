@@ -103,6 +103,11 @@ function inactivePolicySatisfied(target, policy) {
   return true;
 }
 
+function isUserExistsError(err) {
+  const technicalCode = err?.body?.technicalCode || err?.body?.technical_code || err?.technicalCode || null;
+  return err?.status === 400 && technicalCode === 'user.exists';
+}
+
 async function ensureUser(action, ctx, client, idMap) {
   const user = ctx.usersBySourceId.get(action.sourceId);
   let target = null;
@@ -123,13 +128,23 @@ async function ensureUser(action, ctx, client, idMap) {
       })
       : existing;
   } else if (action.operation === 'CREATE') {
-    target = await client.createUser({
-      email: user.email,
-      firstname: user.firstName,
-      lastname: user.lastName,
-      displayName: user.userName || user.email,
-    });
-    createdThisRun = true;
+    try {
+      target = await client.createUser({
+        email: user.email,
+        firstname: user.firstName,
+        lastname: user.lastName,
+        displayName: user.userName || user.email,
+      });
+      createdThisRun = true;
+    } catch (err) {
+      if (!isUserExistsError(err)) throw err;
+      target = await client.findUserByEmail(user.email);
+      if (!target) {
+        const lookupError = new Error(`User ${user.email} already exists but could not be resolved after create conflict`);
+        lookupError.cause = err;
+        throw lookupError;
+      }
+    }
   } else if (action.operation === 'UPDATE') {
     if (!existing) {
       throw new Error(`User ${user.email} could not be updated because it does not exist`);

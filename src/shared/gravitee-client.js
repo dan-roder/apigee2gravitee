@@ -633,39 +633,49 @@ class GraviteeClient {
   }
 
   async findUserByEmail(email) {
-    const firstUrl = new URL(this.orgUrl('/users'));
-    firstUrl.searchParams.set('query', email);
-    const firstBody = await this.get(firstUrl.toString());
-    const firstItems = normalizeCollection(firstBody);
-    const exactFirstMatch = firstItems.find((item) => item.email === email) || null;
-    if (exactFirstMatch) return exactFirstMatch;
+    const findInCollection = async (url) => {
+      const firstUrl = new URL(url);
+      const firstBody = await this.get(firstUrl.toString());
+      const firstItems = normalizeCollection(firstBody);
+      const exactFirstMatch = firstItems.find((item) => item.email === email) || null;
+      if (exactFirstMatch) return exactFirstMatch;
 
-    const pageInfo = extractPagination(firstBody);
-    if (!pageInfo.total || firstItems.length >= pageInfo.total) {
-      return null;
-    }
-
-    let nextPage = pageInfo.page !== null ? pageInfo.page + 1 : 2;
-    const pageSize = pageInfo.size || 100;
-    while (pageInfo.total && ((nextPage - 1) * pageSize) < pageInfo.total) {
-      const nextUrl = new URL(firstUrl.toString());
-      nextUrl.searchParams.set('page', String(nextPage));
-      nextUrl.searchParams.set('size', String(pageSize));
-      const pageBody = await this.get(nextUrl.toString());
-      const pageItems = normalizeCollection(pageBody);
-      if (pageItems.length === 0) break;
-      const exactMatch = pageItems.find((item) => item.email === email) || null;
-      if (exactMatch) return exactMatch;
-
-      const nextInfo = extractPagination(pageBody);
-      if (nextInfo.page !== null) {
-        nextPage = nextInfo.page + 1;
-      } else {
-        nextPage += 1;
+      const pageInfo = extractPagination(firstBody);
+      if (!pageInfo.total || firstItems.length >= pageInfo.total) {
+        return null;
       }
-    }
 
-    return null;
+      let nextPage = pageInfo.page !== null ? pageInfo.page + 1 : 2;
+      const pageSize = pageInfo.size || 100;
+      while (pageInfo.total && ((nextPage - 1) * pageSize) < pageInfo.total) {
+        const nextUrl = new URL(firstUrl.toString());
+        nextUrl.searchParams.set('page', String(nextPage));
+        nextUrl.searchParams.set('size', String(pageSize));
+        const pageBody = await this.get(nextUrl.toString());
+        const pageItems = normalizeCollection(pageBody);
+        if (pageItems.length === 0) break;
+        const exactMatch = pageItems.find((item) => item.email === email) || null;
+        if (exactMatch) return exactMatch;
+
+        const nextInfo = extractPagination(pageBody);
+        if (nextInfo.page !== null) {
+          nextPage = nextInfo.page + 1;
+        } else {
+          nextPage += 1;
+        }
+      }
+
+      return null;
+    };
+
+    const queryUrl = new URL(this.orgUrl('/users'));
+    queryUrl.searchParams.set('query', email);
+    const queryMatch = await findInCollection(queryUrl);
+    if (queryMatch) return queryMatch;
+
+    // Some APIM versions enforce unique emails on create but do not return the
+    // user from the filtered search endpoint, so fall back to a paginated scan.
+    return findInCollection(this.orgUrl('/users'));
   }
 
   async getUser(userId) {

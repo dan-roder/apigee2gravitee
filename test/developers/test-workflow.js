@@ -581,6 +581,49 @@ async function testImportSucceedsWhenUserRoleReadIsUnsupported() {
   });
 }
 
+async function testImportReusesUserAfterCreateConflict() {
+  await withTempDir(async (dir) => {
+    const dataDir = path.join(dir, 'data');
+    const irDir = path.join(dir, 'ir');
+    copyDir(FIXTURES_DATA, dataDir);
+    generateIrFromData(dataDir, irDir);
+
+    let lookupCount = 0;
+    const existingUser = { id: 'user-existing-after-conflict', email: 'alice@example.com' };
+    const client = makeWorkflowClient({
+      overrides: {
+        async findUserByEmail(email) {
+          lookupCount += 1;
+          if (email === 'alice@example.com' && lookupCount > 1) return existingUser;
+          return null;
+        },
+        async createUser(payload) {
+          if (payload.email === 'alice@example.com') {
+            const err = new Error('POST http://localhost:8083/management/organizations/DEFAULT/users -> HTTP 400');
+            err.status = 400;
+            err.body = {
+              message: 'A user [alice@example.com] already exists for organization DEFAULT.',
+              technicalCode: 'user.exists',
+              http_status: 400,
+            };
+            throw err;
+          }
+          return makeWorkflowClient().createUser(payload);
+        },
+      },
+    });
+
+    const result = await runDevelopersImport(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json'), 'users-only': true },
+      { config: makeConfig(dir), client },
+    );
+
+    assert.strictEqual(result.exitCode, 0);
+    assert.strictEqual(result.idMap.users['alice@example.com'], 'user-existing-after-conflict');
+    assert.strictEqual(result.state.actions['UPSERT_USER:alice@example.com'].status, 'SUCCEEDED');
+  });
+}
+
 async function testImportReusesExistingResourcesBySourceMarker() {
   await withTempDir(async (dir) => {
     const dataDir = path.join(dir, 'data');
@@ -1285,6 +1328,7 @@ async function run() {
   await testImportSkipsDevelopersWithoutApps();
   await testImportRollsBackOrReusesUserAfterRoleAssignmentFailure();
   await testImportSucceedsWhenUserRoleReadIsUnsupported();
+  await testImportReusesUserAfterCreateConflict();
   await testImportReusesExistingResourcesBySourceMarker();
   await testReconcileWarnsWhenUserRoleReadIsUnsupported();
   await testImportFailsOnContinuityMismatch();
