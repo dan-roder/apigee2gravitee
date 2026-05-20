@@ -51,6 +51,67 @@ function recommendNextScope(manifest, preflight) {
   return null;
 }
 
+function summarizeApplicationMetadata(domain) {
+  const inventory = domain.inventories?.['app-attributes']?.attributes || [];
+  const selectedAppIds = new Set(domain.applications.map((application) => application.sourceId));
+  const selectedAttributes = [];
+  const selectedAttributeNames = new Set(domain.applications.flatMap((application) => Object.keys(application.metadata || {})));
+
+  for (const item of inventory) {
+    const apps = (item.apps || []).filter((appId) => selectedAppIds.has(appId));
+    if (apps.length === 0) continue;
+    selectedAttributes.push({
+      name: item.name,
+      metadataKey: item.name,
+      appCount: apps.length,
+      occurrenceCount: item.occurrenceCount,
+      apps,
+      sampleValues: item.sampleValues || [],
+      emptyValueCount: item.emptyValueCount || 0,
+      nonEmptyValueCount: item.nonEmptyValueCount || 0,
+      recommendedAction: item.recommendedAction || null,
+      riskFlags: item.riskFlags || [],
+    });
+  }
+
+  for (const name of selectedAttributeNames) {
+    if (!selectedAttributes.some((item) => item.name === name)) {
+      const apps = domain.applications
+        .filter((application) => Object.prototype.hasOwnProperty.call(application.metadata || {}, name))
+        .map((application) => application.sourceId)
+        .sort();
+      selectedAttributes.push({
+        name,
+        metadataKey: name,
+        appCount: apps.length,
+        occurrenceCount: apps.length,
+        apps,
+        sampleValues: [],
+        emptyValueCount: 0,
+        nonEmptyValueCount: apps.length,
+        recommendedAction: 'MAP_VERBATIM',
+        riskFlags: [],
+      });
+    }
+  }
+
+  selectedAttributes.sort((a, b) => a.name.localeCompare(b.name));
+  return {
+    attributes: selectedAttributes,
+    summary: {
+      attributeCount: selectedAttributes.length,
+      appCount: selectedAppIds.size,
+      mappedMetadataKeys: selectedAttributes.map((item) => item.metadataKey),
+      riskFlagCounts: selectedAttributes.reduce((acc, item) => {
+        for (const flag of item.riskFlags || []) {
+          acc[flag] = (acc[flag] || 0) + 1;
+        }
+        return acc;
+      }, {}),
+    },
+  };
+}
+
 function action(actionId, kind, sourceId, payload = {}) {
   return {
     actionId,
@@ -252,6 +313,7 @@ function buildPlan(domain, preflight, config, targetState = {
         ownerEmail: application.developerEmail,
         callbackUrl: application.callbackUrl,
         attributes: application.attributes,
+        metadata: application.metadata,
         customFields: application.customFields,
         ownershipStrategy: application.ownershipStrategy,
         apiKeyMode: config.policies.defaultApplication,
@@ -273,6 +335,7 @@ function buildPlan(domain, preflight, config, targetState = {
       payload: {
         ownershipStrategy: application.ownershipStrategy,
         ownerEmail: application.developerEmail,
+        expectedMetadata: application.metadata,
       },
       blockers: [...upsert.blockers],
       warnings: [...upsert.warnings],
@@ -426,6 +489,7 @@ function buildGapReport(domain, preflight, config, manifest = null) {
   )).length;
 
   const manualReviewFindings = preflight.findings.filter(isManualReviewFinding);
+  const applicationMetadata = summarizeApplicationMetadata(domain);
 
   return {
     generatedAt: new Date().toISOString(),
@@ -447,10 +511,12 @@ function buildGapReport(domain, preflight, config, manifest = null) {
       oauthRelevantSecretCount,
       missingProtectedSecretCount,
       oauthSecretManualReviewCount,
+      applicationMetadataAttributeCount: applicationMetadata.summary.attributeCount,
     },
     findings: preflight.findings,
     manualReviewFindings,
     continuityRisks,
+    applicationMetadata,
     capabilitySnapshot: config.capabilities,
     manifestSummary: manifest?.summary || null,
     operatorGuidance: {
@@ -475,4 +541,5 @@ module.exports = {
   buildPlan,
   buildGapReport,
   buildReconcileReport,
+  summarizeApplicationMetadata,
 };

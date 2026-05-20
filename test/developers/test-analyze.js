@@ -161,6 +161,12 @@ async function testAnalyzeSucceedsAndWritesOutputs() {
     assert.strictEqual(result.exitCode, 0);
     assert.strictEqual(result.plan.summary.users, 1);
     assert.strictEqual(result.plan.summary.subscriptions, 1);
+    assert.strictEqual(result.gapReport.summary.applicationMetadataAttributeCount, 1);
+    assert.deepStrictEqual(result.gapReport.applicationMetadata.summary.mappedMetadataKeys, ['environment']);
+    assert.strictEqual(result.gapReport.applicationMetadata.attributes[0].name, 'environment');
+    assert.deepStrictEqual(result.plan.records.applications[0].metadata, { environment: 'production' });
+    const appAction = result.plan.actions.find((item) => item.kind === 'UPSERT_APPLICATION');
+    assert.deepStrictEqual(appAction.payload.metadata, { environment: 'production' });
     assert.ok(fs.existsSync(result.outputPaths.plan));
     assert.ok(fs.existsSync(result.outputPaths.gapReport));
     assert.ok(fs.existsSync(result.outputPaths.state));

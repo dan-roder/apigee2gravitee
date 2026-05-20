@@ -15,16 +15,31 @@ function indexBy(items, keyFn) {
 function normalizeAttributes(attributes = []) {
   return attributes.map((attr) => ({
     name: attr.name,
-    value: attr.value,
+    value: attr.value ?? '',
   }));
 }
 
-function mapCustomFields(attributes, customFieldMap = {}) {
-  return normalizeAttributes(attributes).map((attr) => ({
-    sourceName: attr.name,
-    targetName: customFieldMap[attr.name] || attr.name,
-    value: attr.value,
-  }));
+const RESERVED_APPLICATION_METADATA_KEYS = new Set(['sourceId', 'developerEmail']);
+
+function buildApplicationMetadata(attributes = []) {
+  const metadata = {};
+  const warnings = [];
+  const seen = new Set();
+
+  for (const attr of normalizeAttributes(attributes)) {
+    if (!attr.name) continue;
+    if (RESERVED_APPLICATION_METADATA_KEYS.has(attr.name)) {
+      warnings.push(`APPLICATION_METADATA_RESERVED_KEY:${attr.name}`);
+      continue;
+    }
+    if (seen.has(attr.name)) {
+      warnings.push(`DUPLICATE_APPLICATION_METADATA_KEY:${attr.name}`);
+    }
+    seen.add(attr.name);
+    metadata[attr.name] = String(attr.value ?? '');
+  }
+
+  return { metadata, warnings };
 }
 
 function filterByRules(items, includeSet, excludeSet, keyFn) {
@@ -140,6 +155,7 @@ function loadDeveloperDomain(irDir, config) {
 
   const applications = apps.map((app) => {
     const sourceId = `${app.developer_email}/${app.name}`;
+    const metadataMapping = buildApplicationMetadata(app.attributes);
     return {
       sourceId,
       kind: 'MigratedApplication',
@@ -150,6 +166,7 @@ function loadDeveloperDomain(irDir, config) {
       status: app.status || 'approved',
       callbackUrl: app.callback_url || '',
       attributes: normalizeAttributes(app.attributes),
+      metadata: metadataMapping.metadata,
       customFields: [],
       credentialIds: (app.credentials || []).map((credential) => `${app.developer_email}/${app.name}/${credential.consumer_key}`),
       customFieldCandidates: [],
@@ -160,7 +177,7 @@ function loadDeveloperDomain(irDir, config) {
         sourceId,
       },
       blockers: [],
-      warnings: [],
+      warnings: metadataMapping.warnings,
       manualReviewReasons: [],
     };
   });
@@ -318,4 +335,8 @@ function loadDeveloperDomain(irDir, config) {
   };
 }
 
-module.exports = { loadDeveloperDomain };
+module.exports = {
+  RESERVED_APPLICATION_METADATA_KEYS,
+  buildApplicationMetadata,
+  loadDeveloperDomain,
+};

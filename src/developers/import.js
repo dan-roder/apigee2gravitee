@@ -40,7 +40,26 @@ function buildImportContext(result) {
 }
 
 function collectRequiredApplicationCustomFields(domain) {
-  return [];
+  return Array.from(new Set(
+    domain.applications.flatMap((application) => Object.keys(application.metadata || {})),
+  )).sort((a, b) => a.localeCompare(b));
+}
+
+function expectedApplicationMetadata(application) {
+  return {
+    developerEmail: application.developerEmail,
+    sourceId: application.sourceId,
+    ...(application.metadata || {}),
+  };
+}
+
+function assertExpectedMetadata(target, expected, appName) {
+  const actual = target?.metadata || {};
+  for (const [key, value] of Object.entries(expected || {})) {
+    if (String(actual[key] ?? '') !== String(value ?? '')) {
+      throw new Error(`Application ${appName} metadata ${key} expected ${value} but found ${actual[key]}`);
+    }
+  }
 }
 
 function persistRuntimeArtifacts(outputPaths, state, idMap, events) {
@@ -217,19 +236,20 @@ async function verifyUser(action, ctx, client, idMap) {
 
 async function ensureApplication(action, ctx, client, idMap) {
   const application = ctx.appsBySourceId.get(action.sourceId);
+  const metadata = expectedApplicationMetadata(application);
   let target = null;
   if (action.operation === 'CREATE') {
     target = await client.createApplication({
       name: application.appName,
       description: `Migrated application for ${application.developerEmail}`,
-      metadata: { developerEmail: application.developerEmail, sourceId: application.sourceId },
+      metadata,
     });
   } else if (action.operation === 'UPDATE') {
     const existing = await client.findApplicationByNameAndOwnerHint(action.lookup);
     target = await client.updateApplication(existing.id, {
       name: application.appName,
       description: `Migrated application for ${application.developerEmail}`,
-      metadata: { developerEmail: application.developerEmail, sourceId: application.sourceId },
+      metadata,
     });
   } else {
     target = await client.findApplicationByNameAndOwnerHint(action.lookup);
@@ -269,6 +289,7 @@ async function verifyApplication(action, ctx, client, idMap) {
   if (action.lookup.sourceId && target.metadata?.sourceId && target.metadata.sourceId !== action.lookup.sourceId) {
     throw new Error(`Application ${application.appName} matched unexpected source marker ${target.metadata.sourceId}`);
   }
+  assertExpectedMetadata(target, expectedApplicationMetadata(application), application.appName);
   if (action.payload.ownershipStrategy === 'direct-member') {
     const members = await client.listApplicationMembers(target.id);
     const ownerUserId = idMap.users[application.developerEmail];
@@ -464,4 +485,8 @@ async function runDevelopersImport(flags, deps = {}) {
   };
 }
 
-module.exports = { runDevelopersImport };
+module.exports = {
+  collectRequiredApplicationCustomFields,
+  expectedApplicationMetadata,
+  runDevelopersImport,
+};

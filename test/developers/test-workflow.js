@@ -295,6 +295,13 @@ function addBillingProductToData(dataDir) {
   writeJson(appPath, app);
 }
 
+function setAppAttributes(dataDir, attributes) {
+  const appPath = path.join(dataDir, 'apps', 'alice@example.com', 'orders-consumer.json');
+  const app = readJson(appPath);
+  app.attributes = attributes;
+  writeJson(appPath, app);
+}
+
 async function testPlanBuildsExecutableManifest() {
   await withTempDir(async (dir) => {
     const dataDir = path.join(dir, 'data');
@@ -368,6 +375,13 @@ async function testImportCreatesResourcesAndResumeSkipsRework() {
     assert.strictEqual(client._state.counts.createUser, 1);
     assert.strictEqual(client._state.counts.createApplication, 1);
     assert.strictEqual(client._state.counts.createSubscription, 1);
+    const application = Array.from(client._state.applications.values())[0];
+    assert.deepStrictEqual(application.metadata, {
+      developerEmail: 'alice@example.com',
+      sourceId: 'alice@example.com/orders-consumer',
+      environment: 'production',
+    });
+    assert.deepStrictEqual(first.customFieldProvisioning.requiredFields, ['environment']);
     assert.ok(Object.values(first.state.actions).some((item) => item.status === 'SUCCEEDED'));
 
     const second = await runDevelopersImport(
@@ -382,7 +396,7 @@ async function testImportCreatesResourcesAndResumeSkipsRework() {
   });
 }
 
-async function testImportDoesNotRequireApplicationCustomFields() {
+async function testImportRequiresApplicationMetadataFieldsForAppAttributes() {
   await withTempDir(async (dir) => {
     const dataDir = path.join(dir, 'data');
     const irDir = path.join(dir, 'ir');
@@ -402,8 +416,65 @@ async function testImportDoesNotRequireApplicationCustomFields() {
     );
 
     assert.strictEqual(result.exitCode, 0);
+    assert.deepStrictEqual(result.customFieldProvisioning.requiredFields, ['environment']);
+    assert.strictEqual(client._state.counts.createCustomField, 1);
+    assert.ok(client._state.customFields.has('environment'));
+  });
+}
+
+async function testImportDoesNotRequireApplicationMetadataFieldsWithoutAppAttributes() {
+  await withTempDir(async (dir) => {
+    const dataDir = path.join(dir, 'data');
+    const irDir = path.join(dir, 'ir');
+    copyDir(FIXTURES_DATA, dataDir);
+    setAppAttributes(dataDir, []);
+    generateIrFromData(dataDir, irDir);
+
+    const client = makeWorkflowClient();
+    client._state.customFields.clear();
+
+    const result = await runDevelopersImport(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json') },
+      { config: makeConfig(dir), client },
+    );
+
+    assert.strictEqual(result.exitCode, 0);
     assert.deepStrictEqual(result.customFieldProvisioning.requiredFields, []);
     assert.strictEqual(client._state.counts.createCustomField, 0);
+  });
+}
+
+async function testApplicationMetadataReservedAndDuplicateKeys() {
+  await withTempDir(async (dir) => {
+    const dataDir = path.join(dir, 'data');
+    const irDir = path.join(dir, 'ir');
+    copyDir(FIXTURES_DATA, dataDir);
+    setAppAttributes(dataDir, [
+      { name: 'sourceId', value: 'bad-source' },
+      { name: 'developerEmail', value: 'bad-owner@example.com' },
+      { name: 'team', value: 'first' },
+      { name: 'team', value: 'second' },
+      { name: 'empty-value', value: null },
+    ]);
+    generateIrFromData(dataDir, irDir);
+
+    const client = makeWorkflowClient();
+    const result = await runDevelopersImport(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json') },
+      { config: makeConfig(dir), client },
+    );
+
+    assert.strictEqual(result.exitCode, 0);
+    const application = Array.from(client._state.applications.values())[0];
+    assert.strictEqual(application.metadata.sourceId, 'alice@example.com/orders-consumer');
+    assert.strictEqual(application.metadata.developerEmail, 'alice@example.com');
+    assert.strictEqual(application.metadata.team, 'second');
+    assert.strictEqual(application.metadata['empty-value'], '');
+    assert.deepStrictEqual(result.customFieldProvisioning.requiredFields, ['empty-value', 'team']);
+    const plannedApplication = result.domain.applications[0];
+    assert.ok(plannedApplication.warnings.includes('APPLICATION_METADATA_RESERVED_KEY:sourceId'));
+    assert.ok(plannedApplication.warnings.includes('APPLICATION_METADATA_RESERVED_KEY:developerEmail'));
+    assert.ok(plannedApplication.warnings.includes('DUPLICATE_APPLICATION_METADATA_KEY:team'));
   });
 }
 
@@ -516,7 +587,7 @@ async function testImportReusesExistingResourcesBySourceMarker() {
     client._state.applications.set('app-existing', {
       id: 'app-existing',
       name: 'orders-consumer',
-      metadata: { developerEmail: 'alice@example.com', sourceId: 'alice@example.com/orders-consumer' },
+      metadata: { developerEmail: 'alice@example.com', sourceId: 'alice@example.com/orders-consumer', environment: 'production' },
     });
     client._state.subscriptions.set('app-existing:api-orders-1:plan-orders-1', {
       id: 'sub-existing',
@@ -785,6 +856,7 @@ async function testReconcileDetectsPartiallyDriftedTargetResources() {
 
     const application = Array.from(client._state.applications.values())[0];
     application.metadata.sourceId = 'alice@example.com/drifted-app';
+    application.metadata.environment = 'staging';
 
     const subscription = Array.from(client._state.subscriptions.values())[0];
     subscription.plan.id = 'plan-drifted';
@@ -803,6 +875,7 @@ async function testReconcileDetectsPartiallyDriftedTargetResources() {
     assert.strictEqual(result.exitCode, 6);
     assert.ok(result.report.mismatches.some((item) => item.code === 'USER_ID_MAP_MISMATCH'));
     assert.ok(result.report.mismatches.some((item) => item.code === 'APPLICATION_SOURCE_MARKER_MISMATCH'));
+    assert.ok(result.report.mismatches.some((item) => item.code === 'APPLICATION_METADATA_MISMATCH'));
     assert.ok(result.report.mismatches.some((item) => item.code === 'SUBSCRIPTION_PLAN_MISMATCH'));
     assert.ok(result.report.mismatches.some((item) => item.code === 'SUBSCRIPTION_API_MISMATCH'));
   });
@@ -1199,7 +1272,9 @@ async function run() {
   await testPlanBuildsExecutableManifest();
   await testPlanFailsWhenCapabilityProbeContradictsConfig();
   await testImportCreatesResourcesAndResumeSkipsRework();
-  await testImportDoesNotRequireApplicationCustomFields();
+  await testImportRequiresApplicationMetadataFieldsForAppAttributes();
+  await testImportDoesNotRequireApplicationMetadataFieldsWithoutAppAttributes();
+  await testApplicationMetadataReservedAndDuplicateKeys();
   await testImportSkipsDevelopersWithoutApps();
   await testImportRollsBackOrReusesUserAfterRoleAssignmentFailure();
   await testImportSucceedsWhenUserRoleReadIsUnsupported();

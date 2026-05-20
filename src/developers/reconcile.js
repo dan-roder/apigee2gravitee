@@ -4,6 +4,7 @@ const { prepareDevelopersWorkflow, persistPlanningArtifacts } = require('./workf
 const { buildReconcileReport } = require('./report-builder');
 const { readJsonIfExists, writeJson, writeNdjson } = require('./state-store');
 const { summarizeProductCredentialType, evaluatePlanSuitability, classifyPlanSecurity } = require('./target-matching');
+const { expectedApplicationMetadata } = require('./import');
 
 function inactivePolicySatisfied(target, policy) {
   if (!target || !policy || policy === 'skip') return true;
@@ -97,6 +98,17 @@ async function runDevelopersReconcile(flags, deps = {}) {
     }
     if (application.lookupHints.sourceId && target.metadata?.sourceId && target.metadata.sourceId !== application.lookupHints.sourceId) {
       mismatches.push({ severity: 'blocker', code: 'APPLICATION_SOURCE_MARKER_MISMATCH', sourceId: application.sourceId, message: `Application ${application.appName} has mismatched source marker ${target.metadata.sourceId}` });
+    }
+    const expectedMetadata = expectedApplicationMetadata(application);
+    for (const [key, value] of Object.entries(expectedMetadata)) {
+      if (String(target.metadata?.[key] ?? '') !== String(value ?? '')) {
+        mismatches.push({
+          severity: 'blocker',
+          code: 'APPLICATION_METADATA_MISMATCH',
+          sourceId: application.sourceId,
+          message: `Application ${application.appName} metadata ${key} is ${target.metadata?.[key]} instead of ${value}`,
+        });
+      }
     }
     if (application.ownershipStrategy === 'direct-member') {
       const members = await result.client.listApplicationMembers(target.id);

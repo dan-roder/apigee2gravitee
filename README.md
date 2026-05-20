@@ -468,7 +468,7 @@ Then review each config block:
 | `capabilities.oauthClientValuePreservation` | Yes | `unknown` | Your attestation of whether OAuth client values/secrets can be preserved: `supported`, `unsupported`, or `unknown`. |
 | `capabilities.applicationOwnership` | Yes | `direct-member` | How the tool should represent app ownership: `direct-member`, `metadata-only`, or `unknown`. Current validated runs use `direct-member` so the developer actually owns the imported application. |
 | `productPlanMap` | Yes | Example entries for `orders-product` and `misc-product` | The source-product to target-API/plan mapping used to build subscriptions. This is the most important operators-managed block in the config. |
-| `customFieldMap` | Optional | `{ "team": "team", "department": "department", "contact": "contact" }` | Reserved mapping for developer/app attributes to Gravitee custom fields. Current workflow no longer requires custom fields for successful import, so this is optional. |
+| `customFieldMap` | Optional | `{ "team": "team", "department": "department", "contact": "contact" }` | Reserved mapping for developer attributes. Apigee app attributes are discovered from the export and imported into Gravitee application metadata using their original attribute names. |
 | `filters.includeDevelopers` | Optional | `[]` | Limit the run to specific developer emails. Useful for pilots and smoke tests. |
 | `filters.excludeDevelopers` | Optional | `[]` | Exclude specific developer emails from the run. |
 | `filters.includeApps` | Optional | `[]`; written by `developers select-apps --write-config` when using interactive app selection | Limit the run to specific applications using `developerEmail/appName` identifiers. An empty list means all apps allowed by the other filters are included. |
@@ -550,6 +550,7 @@ Practical notes:
 - Use `developers select-apps --write-config` before validation/analyze/import when you want an auditable allow-list of exactly which Apigee applications should be migrated.
 - Use array targets for products that grant access to multiple proxies; the tool will create one Gravitee subscription per target entry.
 - Current validated runs use `capabilities.applicationOwnership: "direct-member"`, so imported applications are owned by the migrated developer rather than just carrying owner metadata.
+- Apigee app custom attributes are imported into Gravitee application metadata with the same key names. The importer reserves `sourceId` and `developerEmail` for its own lookup markers, and `developers analyze` reports discovered app metadata under `applicationMetadata`.
 
 If a source product is missing from `productPlanMap`, `developers analyze` should fail preflight.
 
@@ -725,6 +726,7 @@ node bin/migrator.js developers reconcile \
 - skip Apigee developers that do not own any imported applications
 - persist action status after each step for resume support
 - persist deterministic source markers on migrated applications so reruns do not depend only on name matching
+- preserve Apigee app attributes as Gravitee application metadata using the original attribute names
 - stop on continuity-critical failures and continue through non-critical failures until `--max-errors` is reached
 
 `developers reconcile` will:
