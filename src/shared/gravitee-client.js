@@ -675,7 +675,22 @@ class GraviteeClient {
 
     // Some APIM versions enforce unique emails on create but do not return the
     // user from the filtered search endpoint, so fall back to a paginated scan.
-    return findInCollection(this.orgUrl('/users'));
+    const scanMatch = await findInCollection(this.orgUrl('/users'));
+    if (scanMatch) return scanMatch;
+
+    // As a final compatibility fallback, some deployments accept the email as
+    // the user path identifier even when list/search does not expose it.
+    const encodedEmail = encodeURIComponent(email);
+    for (const url of [this.orgUrl(`/users/${encodedEmail}`), this.envUrl(`/users/${encodedEmail}`)]) {
+      try {
+        const user = await this.get(url);
+        if (user?.email === email || user?.id || user?.userId) return user;
+      } catch (_) {
+        // Keep trying compatibility fallbacks before reporting no match.
+      }
+    }
+
+    return null;
   }
 
   async getUser(userId) {
@@ -866,6 +881,22 @@ class GraviteeClient {
 
   async findApplicationByNameAndOwnerHint({ name, ownerHint, sourceId }) {
     const items = await this.listApplications();
+    for (const item of items) {
+      if (item?.id && (!item.metadata || Object.keys(item.metadata).length === 0)) {
+        try {
+          const metadataItems = await this.listApplicationMetadata(item.id);
+          item.metadata = {};
+          for (const metadata of metadataItems || []) {
+            const key = metadata?.key || metadata?.name || metadata?.id || null;
+            if (!key) continue;
+            item.metadata[key] = metadata?.value ?? metadata?.defaultValue ?? '';
+          }
+        } catch (_) {
+          // Application lists may omit metadata, and some deployments may not
+          // allow metadata reads for every app. Fall back to name/owner matching.
+        }
+      }
+    }
     if (sourceId) {
       const bySourceId = items.find((item) => item.metadata?.sourceId === sourceId);
       if (bySourceId) return bySourceId;

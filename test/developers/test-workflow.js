@@ -197,6 +197,15 @@ function makeWorkflowClient(options = {}) {
       }
       return { ok: true };
     },
+    async listApplicationMetadata(applicationId) {
+      const app = state.applications.get(applicationId);
+      return Object.entries(app?.metadata || {}).map(([key, value]) => ({
+        key,
+        name: key,
+        value,
+        applicationId,
+      }));
+    },
     async addApplicationMember(applicationId, payload) {
       const members = state.members.get(applicationId) || [];
       members.push({ userId: payload.user });
@@ -662,6 +671,57 @@ async function testImportReusesExistingResourcesBySourceMarker() {
       result.idMap.subscriptions['alice@example.com/orders-consumer/abc123def456/orders-product/orders-api::Orders API Key'],
       'sub-existing',
     );
+  });
+}
+
+async function testImportVerifiesApplicationMetadataFromScopedEndpoint() {
+  await withTempDir(async (dir) => {
+    const dataDir = path.join(dir, 'data');
+    const irDir = path.join(dir, 'ir');
+    copyDir(FIXTURES_DATA, dataDir);
+    generateIrFromData(dataDir, irDir);
+
+    const scopedMetadataByApplication = new Map();
+    const client = makeWorkflowClient({
+      overrides: {
+        async createApplication(payload) {
+          this._state.counts.createApplication += 1;
+          const app = { id: `app-${this._state.counts.createApplication}`, name: payload.name };
+          this._state.applications.set(app.id, app);
+          return app;
+        },
+        async findApplicationByNameAndOwnerHint({ name, ownerHint, sourceId }) {
+          const apps = Array.from(this._state.applications.values());
+          for (const app of apps) {
+            app.metadata = { ...(app.metadata || {}), ...(scopedMetadataByApplication.get(app.id) || {}) };
+          }
+          return apps.find((item) => item.metadata?.sourceId === sourceId)
+            || apps.find((item) => item.name === name && item.metadata?.developerEmail === ownerHint)
+            || null;
+        },
+        async upsertApplicationMetadata(applicationId, metadata) {
+          this._state.counts.upsertApplicationMetadata += Object.keys(metadata || {}).length;
+          scopedMetadataByApplication.set(applicationId, { ...(scopedMetadataByApplication.get(applicationId) || {}), ...(metadata || {}) });
+          return { ok: true };
+        },
+        async listApplicationMetadata(applicationId) {
+          return Object.entries(scopedMetadataByApplication.get(applicationId) || {}).map(([key, value]) => ({
+            key,
+            name: key,
+            value,
+            applicationId,
+          }));
+        },
+      },
+    });
+
+    const result = await runDevelopersImport(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json') },
+      { config: makeConfig(dir), client },
+    );
+
+    assert.strictEqual(result.exitCode, 0);
+    assert.strictEqual(result.state.actions['VERIFY_APPLICATION:alice@example.com/orders-consumer'].status, 'SUCCEEDED');
   });
 }
 
@@ -1330,6 +1390,7 @@ async function run() {
   await testImportSucceedsWhenUserRoleReadIsUnsupported();
   await testImportReusesUserAfterCreateConflict();
   await testImportReusesExistingResourcesBySourceMarker();
+  await testImportVerifiesApplicationMetadataFromScopedEndpoint();
   await testReconcileWarnsWhenUserRoleReadIsUnsupported();
   await testImportFailsOnContinuityMismatch();
   await testInactiveDeveloperSkipPolicySkipsActions();

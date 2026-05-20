@@ -56,6 +56,24 @@ function assertExpectedMetadata(target, expected, appName) {
   }
 }
 
+async function hydrateApplicationMetadata(client, target) {
+  if (!target?.id || typeof client.listApplicationMetadata !== 'function') return target;
+  const items = await client.listApplicationMetadata(target.id);
+  const scopedMetadata = {};
+  for (const item of items || []) {
+    const key = item?.key || item?.name || item?.id || null;
+    if (!key) continue;
+    scopedMetadata[key] = item?.value ?? item?.defaultValue ?? '';
+  }
+  return {
+    ...target,
+    metadata: {
+      ...(target.metadata || {}),
+      ...scopedMetadata,
+    },
+  };
+}
+
 function persistRuntimeArtifacts(outputPaths, state, idMap, events) {
   writeJson(outputPaths.state, state);
   writeJson(outputPaths.idMap, idMap);
@@ -278,7 +296,10 @@ function applicationHasExpectedOwner(target, members, ownerUserId, developerEmai
 
 async function verifyApplication(action, ctx, client, idMap) {
   const application = ctx.appsBySourceId.get(action.sourceId);
-  const target = await client.findApplicationByNameAndOwnerHint(action.lookup);
+  const target = await hydrateApplicationMetadata(
+    client,
+    await client.findApplicationByNameAndOwnerHint(action.lookup),
+  );
   if (!target) throw new Error(`Application ${application.appName} was not found`);
   if (action.lookup.sourceId && target.metadata?.sourceId && target.metadata.sourceId !== action.lookup.sourceId) {
     throw new Error(`Application ${application.appName} matched unexpected source marker ${target.metadata.sourceId}`);
@@ -468,5 +489,6 @@ async function runDevelopersImport(flags, deps = {}) {
 
 module.exports = {
   expectedApplicationMetadata,
+  hydrateApplicationMetadata,
   runDevelopersImport,
 };

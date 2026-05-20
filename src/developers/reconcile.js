@@ -4,7 +4,7 @@ const { prepareDevelopersWorkflow, persistPlanningArtifacts } = require('./workf
 const { buildReconcileReport } = require('./report-builder');
 const { readJsonIfExists, writeJson, writeNdjson } = require('./state-store');
 const { summarizeProductCredentialType, evaluatePlanSuitability, classifyPlanSecurity } = require('./target-matching');
-const { expectedApplicationMetadata } = require('./import');
+const { expectedApplicationMetadata, hydrateApplicationMetadata } = require('./import');
 
 function inactivePolicySatisfied(target, policy) {
   if (!target || !policy || policy === 'skip') return true;
@@ -88,7 +88,10 @@ async function runDevelopersReconcile(flags, deps = {}) {
       continue;
     }
     const expectedApplicationId = idMap.applications[application.sourceId];
-    const target = await result.client.findApplicationByNameAndOwnerHint(application.lookupHints);
+    const target = await hydrateApplicationMetadata(
+      result.client,
+      await result.client.findApplicationByNameAndOwnerHint(application.lookupHints),
+    );
     if (!target) {
       mismatches.push({ severity: 'blocker', code: 'APPLICATION_MISSING', sourceId: application.sourceId, message: `Application ${application.appName} is missing` });
       continue;
