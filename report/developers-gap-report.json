@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-20T19:48:03.990Z",
+  "generatedAt": "2026-05-20T19:53:40.292Z",
   "summary": {
     "users": 21,
     "applications": 25,
@@ -744,16 +744,17 @@
           "CREATE": 3
         },
         "UPSERT_APPLICATION": {
-          "REUSE": 1,
-          "CREATE": 24
+          "REUSE": 21,
+          "CREATE": 4
         },
         "UPSERT_SUBSCRIPTION": {
-          "CREATE": 31
+          "CREATE": 14,
+          "REUSE": 17
         }
       },
       "byOperation": {
-        "REUSE": 19,
-        "CREATE": 58
+        "REUSE": 56,
+        "CREATE": 21
       },
       "blockedReasons": {}
     }
