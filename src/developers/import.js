@@ -47,6 +47,13 @@ function expectedApplicationMetadata(application) {
   };
 }
 
+function getMetadataValue(metadata = {}, key) {
+  if (Object.prototype.hasOwnProperty.call(metadata, key)) return metadata[key];
+  const normalizedKey = String(key || '').toLowerCase();
+  const matchedKey = Object.keys(metadata || {}).find((item) => item.toLowerCase() === normalizedKey);
+  return matchedKey ? metadata[matchedKey] : undefined;
+}
+
 async function hydrateApplicationMetadata(client, target) {
   if (!target?.id || typeof client.listApplicationMetadata !== 'function') return target;
   let items = [];
@@ -293,8 +300,9 @@ async function ensureApplication(action, ctx, client, idMap) {
   }
 
   const applicationId = target?.id || target?.applicationId || null;
-  if (target?.metadata?.sourceId && target.metadata.sourceId !== application.sourceId) {
-    throw new Error(`Application ${application.appName} matched unexpected source marker ${target.metadata.sourceId}`);
+  const targetSourceId = getMetadataValue(target?.metadata, 'sourceId');
+  if (targetSourceId && targetSourceId !== application.sourceId) {
+    throw new Error(`Application ${application.appName} matched unexpected source marker ${targetSourceId}`);
   }
   if (applicationId && action.payload.ownershipStrategy === 'direct-member') {
     const ownerUserId = idMap.users[application.developerEmail];
@@ -331,8 +339,9 @@ async function verifyApplication(action, ctx, client, idMap) {
   const application = ctx.appsBySourceId.get(action.sourceId);
   const target = await client.findApplicationByNameAndOwnerHint(action.lookup);
   if (!target) throw new Error(`Application ${application.appName} was not found`);
-  if (action.lookup.sourceId && target.metadata?.sourceId && target.metadata.sourceId !== action.lookup.sourceId) {
-    throw new Error(`Application ${application.appName} matched unexpected source marker ${target.metadata.sourceId}`);
+  const targetSourceId = getMetadataValue(target.metadata, 'sourceId');
+  if (action.lookup.sourceId && targetSourceId && targetSourceId !== action.lookup.sourceId) {
+    throw new Error(`Application ${application.appName} matched unexpected source marker ${targetSourceId}`);
   }
   if (action.payload.ownershipStrategy === 'direct-member') {
     const members = await client.listApplicationMembers(target.id);
@@ -521,6 +530,7 @@ async function runDevelopersImport(flags, deps = {}) {
 
 module.exports = {
   expectedApplicationMetadata,
+  getMetadataValue,
   hydrateApplicationMetadata,
   runDevelopersImport,
 };

@@ -4,7 +4,7 @@ const { prepareDevelopersWorkflow, persistPlanningArtifacts } = require('./workf
 const { buildReconcileReport } = require('./report-builder');
 const { readJsonIfExists, writeJson, writeNdjson } = require('./state-store');
 const { summarizeProductCredentialType, evaluatePlanSuitability, classifyPlanSecurity } = require('./target-matching');
-const { expectedApplicationMetadata, hydrateApplicationMetadata } = require('./import');
+const { expectedApplicationMetadata, getMetadataValue, hydrateApplicationMetadata } = require('./import');
 
 function inactivePolicySatisfied(target, policy) {
   if (!target || !policy || policy === 'skip') return true;
@@ -117,25 +117,27 @@ async function runDevelopersReconcile(flags, deps = {}) {
     if (expectedApplicationId && target.id !== expectedApplicationId) {
       mismatches.push({ severity: 'blocker', code: 'APPLICATION_ID_MAP_MISMATCH', sourceId: application.sourceId, message: `Application ${application.appName} resolved to ${target.id} instead of ${expectedApplicationId}` });
     }
-    if (application.lookupHints.sourceId && target.metadata?.sourceId && target.metadata.sourceId !== application.lookupHints.sourceId) {
-      mismatches.push({ severity: 'blocker', code: 'APPLICATION_SOURCE_MARKER_MISMATCH', sourceId: application.sourceId, message: `Application ${application.appName} has mismatched source marker ${target.metadata.sourceId}` });
+    const targetSourceId = getMetadataValue(target.metadata, 'sourceId');
+    if (application.lookupHints.sourceId && targetSourceId && targetSourceId !== application.lookupHints.sourceId) {
+      mismatches.push({ severity: 'blocker', code: 'APPLICATION_SOURCE_MARKER_MISMATCH', sourceId: application.sourceId, message: `Application ${application.appName} has mismatched source marker ${targetSourceId}` });
     }
     const expectedMetadata = expectedApplicationMetadata(application);
     let applicationMetadataMismatchCount = 0;
     for (const [key, value] of Object.entries(expectedMetadata)) {
-      if (String(target.metadata?.[key] ?? '') !== String(value ?? '')) {
+      const actualValue = getMetadataValue(target.metadata, key);
+      if (String(actualValue ?? '') !== String(value ?? '')) {
         applicationMetadataMismatchCount += 1;
         metadataDiagnostics.summary.metadataMismatchKeys += 1;
         mismatches.push({
           severity: 'blocker',
           code: 'APPLICATION_METADATA_MISMATCH',
           sourceId: application.sourceId,
-          message: `Application ${application.appName} metadata ${key} is ${target.metadata?.[key]} instead of ${value}`,
+          message: `Application ${application.appName} metadata ${key} is ${actualValue} instead of ${value}`,
           diagnostics: {
             applicationId: target.id || expectedApplicationId || null,
             key,
             expectedValue: String(value ?? ''),
-            actualValue: target.metadata?.[key],
+            actualValue,
             metadataKeysReturned: Object.keys(target.metadata || {}).sort(),
             metadataReadStrategy: target.metadataDiagnostics?.readStrategy || null,
           },

@@ -1238,6 +1238,46 @@ async function testReconcileDetectsPartiallyDriftedTargetResources() {
   });
 }
 
+async function testReconcileAcceptsLowercaseApplicationMetadataKeys() {
+  await withTempDir(async (dir) => {
+    const dataDir = path.join(dir, 'data');
+    const irDir = path.join(dir, 'ir');
+    copyDir(FIXTURES_DATA, dataDir);
+    generateIrFromData(dataDir, irDir);
+
+    const client = makeWorkflowClient({
+      overrides: {
+        async upsertApplicationMetadata(applicationId, metadata) {
+          this._state.counts.upsertApplicationMetadata += Object.keys(metadata || {}).length;
+          const app = this._state.applications.get(applicationId);
+          if (app) {
+            app.metadata = {
+              ...(app.metadata || {}),
+              ...Object.fromEntries(Object.entries(metadata || {}).map(([key, value]) => [key.toLowerCase(), value])),
+            };
+          }
+          return { ok: true };
+        },
+      },
+    });
+    const config = makeConfig(dir);
+
+    const imported = await runDevelopersImport(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json') },
+      { config, client },
+    );
+    assert.strictEqual(imported.exitCode, 0);
+
+    const result = await runDevelopersReconcile(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json') },
+      { config, client },
+    );
+
+    assert.strictEqual(result.exitCode, 0);
+    assert.ok(!result.report.mismatches.some((item) => item.code === 'APPLICATION_METADATA_MISMATCH'));
+  });
+}
+
 async function testReconcileUsesSavedUserIdWhenEmailLookupMissesPaginatedUserSearch() {
   await withTempDir(async (dir) => {
     const dataDir = path.join(dir, 'data');
@@ -1651,6 +1691,7 @@ async function run() {
   await testImportFailsWhenApplicationReuseMatchesWrongSourceMarker();
   await testReconcileDetectsMismatches();
   await testReconcileDetectsPartiallyDriftedTargetResources();
+  await testReconcileAcceptsLowercaseApplicationMetadataKeys();
   await testReconcileUsesSavedUserIdWhenEmailLookupMissesPaginatedUserSearch();
   await testDeleteImportedRemovesSubscriptionsApplicationsAndUsers();
   await testDeleteImportedFallsBackToClosingSubscriptionsWhenDeleteUnsupported();

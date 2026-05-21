@@ -114,6 +114,19 @@ async function testFindApplicationPrefersSourceMarker() {
   assert.strictEqual(app.id, 'app-2');
 }
 
+async function testFindApplicationMatchesLowercaseMetadataKeys() {
+  const client = new GraviteeClient({ baseUrl: 'https://gravitee.example.com', orgId: 'DEFAULT', envId: 'DEFAULT', token: 'token' });
+  client.listApplications = async () => ([
+    { id: 'app-1', name: 'Orders', metadata: { sourceid: 'alice@example.com/Orders', developeremail: 'alice@example.com' } },
+  ]);
+  const app = await client.findApplicationByNameAndOwnerHint({
+    name: 'Orders',
+    ownerHint: 'alice@example.com',
+    sourceId: 'alice@example.com/Orders',
+  });
+  assert.strictEqual(app.id, 'app-1');
+}
+
 async function testNormalizeCollectionSupportsItemsShape() {
   const items = normalizeCollection({ items: [{ id: 'a' }] });
   assert.deepStrictEqual(items, [{ id: 'a' }]);
@@ -585,6 +598,7 @@ async function run() {
   await testCreateSubscriptionUsesV2Endpoint();
   await testFindPlanByIdUsesExpectedEndpoint();
   await testFindApplicationPrefersSourceMarker();
+  await testFindApplicationMatchesLowercaseMetadataKeys();
   await testNormalizeCollectionSupportsItemsShape();
   await testFindApiByNameFiltersExactName();
   await testListApisFollowsPaginatedResponses();

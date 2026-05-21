@@ -898,7 +898,11 @@ class GraviteeClient {
       }
     }
     if (sourceId) {
-      const bySourceId = items.find((item) => item.metadata?.sourceId === sourceId);
+      const bySourceId = items.find((item) => {
+        const metadata = item.metadata || {};
+        const sourceIdKey = Object.keys(metadata).find((key) => key.toLowerCase() === 'sourceid');
+        return sourceIdKey && metadata[sourceIdKey] === sourceId;
+      });
       if (bySourceId) return bySourceId;
     }
     return items.find((item) => (
@@ -906,7 +910,8 @@ class GraviteeClient {
         !ownerHint ||
         item.owner?.displayName === ownerHint ||
         item.owner?.email === ownerHint ||
-        item.metadata?.developerEmail === ownerHint
+        item.metadata?.developerEmail === ownerHint ||
+        item.metadata?.developeremail === ownerHint
       )
     )) || items.find((item) => item.name === name) || null;
   }
