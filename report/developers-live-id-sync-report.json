@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-21T18:08:58.937Z",
+  "generatedAt": "2026-05-21T18:53:10.436Z",
   "command": "developers sync-live-ids",
   "wroteIdMap": true,
   "clearMissing": false,
@@ -7,8 +7,7 @@
   "summary": {
     "users": {
       "total": 21,
-      "matched": 18,
-      "missing-with-existing-id": 3
+      "matched": 21
     },
     "applications": {
       "total": 25,
@@ -22,8 +21,7 @@
     },
     "all": {
       "total": 77,
-      "matched": 57,
-      "missing-with-existing-id": 3,
+      "matched": 60,
       "missing": 17
     }
   },
@@ -59,9 +57,9 @@
       "kind": "user",
       "sourceId": "dev12@540.co",
       "previousId": "27dd356c-0578-43cc-9d35-6c057853cc04",
-      "liveId": null,
-      "status": "missing-with-existing-id",
-      "strategy": "email",
+      "liveId": "27dd356c-0578-43cc-9d35-6c057853cc04",
+      "status": "matched",
+      "strategy": "previous-id",
       "email": "dev12@540.co"
     },
     {
@@ -140,18 +138,18 @@
       "kind": "user",
       "sourceId": "dev20@540.co",
       "previousId": "3976af4b-2390-4280-b6af-4b23905280d5",
-      "liveId": null,
-      "status": "missing-with-existing-id",
-      "strategy": "email",
+      "liveId": "3976af4b-2390-4280-b6af-4b23905280d5",
+      "status": "matched",
+      "strategy": "previous-id",
       "email": "dev20@540.co"
     },
     {
       "kind": "user",
       "sourceId": "dev2@540.co",
       "previousId": "e8165cbd-2c5a-4b8d-965c-bd2c5a2b8dd0",
-      "liveId": null,
-      "status": "missing-with-existing-id",
-      "strategy": "email",
+      "liveId": "e8165cbd-2c5a-4b8d-965c-bd2c5a2b8dd0",
+      "status": "matched",
+      "strategy": "previous-id",
       "email": "dev2@540.co"
     },
     {

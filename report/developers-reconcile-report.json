@@ -1,31 +1,13 @@
 {
-  "generatedAt": "2026-05-21T18:19:50.219Z",
+  "generatedAt": "2026-05-21T18:58:18.288Z",
   "summary": {
     "checkedUsers": 21,
     "checkedApplications": 25,
     "checkedSubscriptions": 31,
-    "blockers": 102,
+    "blockers": 109,
     "warnings": 0
   },
   "mismatches": [
-    {
-      "severity": "blocker",
-      "code": "USER_MISSING",
-      "sourceId": "dev12@540.co",
-      "message": "User dev12@540.co is missing"
-    },
-    {
-      "severity": "blocker",
-      "code": "USER_MISSING",
-      "sourceId": "dev20@540.co",
-      "message": "User dev20@540.co is missing"
-    },
-    {
-      "severity": "blocker",
-      "code": "USER_MISSING",
-      "sourceId": "dev2@540.co",
-      "message": "User dev2@540.co is missing"
-    },
     {
       "severity": "blocker",
       "code": "APPLICATION_METADATA_MISMATCH",
@@ -82,9 +64,21 @@
     },
     {
       "severity": "blocker",
-      "code": "APPLICATION_MISSING",
+      "code": "APPLICATION_METADATA_MISMATCH",
       "sourceId": "dev12@540.co/dev12-app",
-      "message": "Application dev12-app is missing"
+      "message": "Application dev12-app metadata developerEmail is undefined instead of dev12@540.co"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "dev12@540.co/dev12-app",
+      "message": "Application dev12-app metadata sourceId is undefined instead of dev12@540.co/dev12-app"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "dev12@540.co/dev12-app",
+      "message": "Application dev12-app metadata DisplayName is undefined instead of dev12-app"
     },
     {
       "severity": "blocker",
@@ -286,21 +280,93 @@
     },
     {
       "severity": "blocker",
-      "code": "APPLICATION_MISSING",
+      "code": "APPLICATION_METADATA_MISMATCH",
       "sourceId": "dev20@540.co/dev20-app",
-      "message": "Application dev20-app is missing"
+      "message": "Application dev20-app metadata developerEmail is undefined instead of dev20@540.co"
     },
     {
       "severity": "blocker",
-      "code": "APPLICATION_MISSING",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "dev20@540.co/dev20-app",
+      "message": "Application dev20-app metadata sourceId is undefined instead of dev20@540.co/dev20-app"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "dev20@540.co/dev20-app",
+      "message": "Application dev20-app metadata DisplayName is undefined instead of dev20-app"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "dev20@540.co/dev20-app",
+      "message": "Application dev20-app metadata dod_designation is undefined instead of Contractor"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "dev20@540.co/dev20-app",
+      "message": "Application dev20-app metadata dod_organization_list is undefined instead of Air Force"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "dev20@540.co/dev20-app",
+      "message": "Application dev20-app metadata dod_service is undefined instead of Air Force"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "dev20@540.co/dev20-app",
+      "message": "Application dev20-app metadata dod_sub_org is undefined instead of AFRSO"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
       "sourceId": "dev2@540.co/chuck-norris-dev-app",
-      "message": "Application chuck-norris-dev-app is missing"
+      "message": "Application chuck-norris-dev-app metadata developerEmail is undefined instead of dev2@540.co"
     },
     {
       "severity": "blocker",
-      "code": "APPLICATION_MISSING",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "dev2@540.co/chuck-norris-dev-app",
+      "message": "Application chuck-norris-dev-app metadata sourceId is undefined instead of dev2@540.co/chuck-norris-dev-app"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "dev2@540.co/chuck-norris-dev-app",
+      "message": "Application chuck-norris-dev-app metadata DisplayName is undefined instead of chuck-norris-dev-app"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "dev2@540.co/chuck-norris-dev-app",
+      "message": "Application chuck-norris-dev-app metadata organization_list is undefined instead of bbbbbbbbb"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "dev2@540.co/chuck-norris-dev-app",
+      "message": "Application chuck-norris-dev-app metadata sub_org is undefined instead of hhhhhhhh"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
       "sourceId": "dev2@540.co/dog-breeds-dev-app",
-      "message": "Application dog-breeds-dev-app is missing"
+      "message": "Application dog-breeds-dev-app metadata developerEmail is undefined instead of dev2@540.co"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "dev2@540.co/dog-breeds-dev-app",
+      "message": "Application dog-breeds-dev-app metadata sourceId is undefined instead of dev2@540.co/dog-breeds-dev-app"
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_METADATA_MISMATCH",
+      "sourceId": "dev2@540.co/dog-breeds-dev-app",
+      "message": "Application dog-breeds-dev-app metadata DisplayName is undefined instead of dog-breeds-dev-app"
     },
     {
       "severity": "blocker",
@@ -490,12 +556,6 @@
     },
     {
       "severity": "blocker",
-      "code": "SUBSCRIPTION_MISSING",
-      "sourceId": "dev12@540.co/dev12-app/eySNY5g1UKFxFXMu2OVJKLh08vzHfyQE/wizards-api-product/wizards-api-9::API Key Plan",
-      "message": "Subscription dev12@540.co/dev12-app/eySNY5g1UKFxFXMu2OVJKLh08vzHfyQE/wizards-api-product/wizards-api-9::API Key Plan is missing"
-    },
-    {
-      "severity": "blocker",
       "code": "TARGET_PLAN_SECURITY_MISMATCH",
       "sourceId": "dev17@540.co/dev17-app/pMqT6e7teG8l4rdrwA63e37N5A8HKW2h/misc-api-product/apigee-hello-api-1::Keyless Plan",
       "message": "Subscription dev17@540.co/dev17-app/pMqT6e7teG8l4rdrwA63e37N5A8HKW2h/misc-api-product/apigee-hello-api-1::Keyless Plan resolved to plan security keyless instead of api-key"
@@ -529,24 +589,6 @@
       "code": "SUBSCRIPTION_MISSING",
       "sourceId": "dev17@540.co/dev17-app/pMqT6e7teG8l4rdrwA63e37N5A8HKW2h/misc-api-product/car-makes-api-3::Keyless Plan",
       "message": "Subscription dev17@540.co/dev17-app/pMqT6e7teG8l4rdrwA63e37N5A8HKW2h/misc-api-product/car-makes-api-3::Keyless Plan is missing"
-    },
-    {
-      "severity": "blocker",
-      "code": "SUBSCRIPTION_MISSING",
-      "sourceId": "dev20@540.co/dev20-app/5GQlGWs2xVnA3khGeRHyL45YrqmHvPOd/dog-breeds-api-product/dog-breeds-api-6::API Key Plan",
-      "message": "Subscription dev20@540.co/dev20-app/5GQlGWs2xVnA3khGeRHyL45YrqmHvPOd/dog-breeds-api-product/dog-breeds-api-6::API Key Plan is missing"
-    },
-    {
-      "severity": "blocker",
-      "code": "SUBSCRIPTION_MISSING",
-      "sourceId": "dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan",
-      "message": "Subscription dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan is missing"
-    },
-    {
-      "severity": "blocker",
-      "code": "SUBSCRIPTION_MISSING",
-      "sourceId": "dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan",
-      "message": "Subscription dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan is missing"
     },
     {
       "severity": "blocker",

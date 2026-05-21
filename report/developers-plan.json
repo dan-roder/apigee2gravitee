@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-21T18:19:06.864Z",
+  "generatedAt": "2026-05-21T18:57:29.430Z",
   "kind": "DevelopersMigrationManifest",
   "source": {
     "irDir": "/Users/daniel.roder/Sites/apigee2gravitee/ir",
@@ -50,18 +50,16 @@
           "CREATE": 3
         },
         "UPSERT_APPLICATION": {
-          "REUSE": 21,
-          "CREATE": 4
+          "REUSE": 25
         },
         "UPSERT_SUBSCRIPTION": {
-          "REUSE": 18,
-          "CREATE": 4,
+          "REUSE": 22,
           "BLOCK": 9
         }
       },
       "byOperation": {
-        "REUSE": 57,
-        "CREATE": 11,
+        "REUSE": 65,
+        "CREATE": 3,
         "BLOCK": 9
       },
       "blockedReasons": {
@@ -6761,7 +6759,7 @@
         "UPSERT_USER:dev12@540.co"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "approved",
       "lookup": {
         "name": "dev12-app",
@@ -6796,7 +6794,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "applicationId": "bd966ade-a001-4ad2-966a-dea0015ad27b"
+      }
     },
     {
       "actionId": "VERIFY_APPLICATION:dev12@540.co/dev12-app",
@@ -7577,7 +7577,7 @@
         "UPSERT_USER:dev20@540.co"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "approved",
       "lookup": {
         "name": "dev20-app",
@@ -7632,7 +7632,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "applicationId": "d55fd279-6a12-4fd1-9fd2-796a128fd15f"
+      }
     },
     {
       "actionId": "VERIFY_APPLICATION:dev20@540.co/dev20-app",
@@ -7676,7 +7678,7 @@
         "UPSERT_USER:dev2@540.co"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "approved",
       "lookup": {
         "name": "chuck-norris-dev-app",
@@ -7731,7 +7733,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "applicationId": "7352d865-e8b8-4987-92d8-65e8b8b9876d"
+      }
     },
     {
       "actionId": "VERIFY_APPLICATION:dev2@540.co/chuck-norris-dev-app",
@@ -7775,7 +7779,7 @@
         "UPSERT_USER:dev2@540.co"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "approved",
       "lookup": {
         "name": "dog-breeds-dev-app",
@@ -7810,7 +7814,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "applicationId": "891a3775-564c-4124-9a37-75564cb12417"
+      }
     },
     {
       "actionId": "VERIFY_APPLICATION:dev2@540.co/dog-breeds-dev-app",
@@ -8980,7 +8986,7 @@
         "RESOLVE_PLAN:dev12@540.co/dev12-app/eySNY5g1UKFxFXMu2OVJKLh08vzHfyQE/wizards-api-product/wizards-api-9::API Key Plan"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "ACCEPTED",
       "lookup": {
         "applicationSourceId": "dev12@540.co/dev12-app",
@@ -9011,7 +9017,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "subscriptionId": "93df898d-4b44-4d01-9f89-8d4b443d017c"
+      }
     },
     {
       "actionId": "VERIFY_SUBSCRIPTION:dev12@540.co/dev12-app/eySNY5g1UKFxFXMu2OVJKLh08vzHfyQE/wizards-api-product/wizards-api-9::API Key Plan",
@@ -10487,7 +10495,7 @@
         "RESOLVE_PLAN:dev20@540.co/dev20-app/5GQlGWs2xVnA3khGeRHyL45YrqmHvPOd/dog-breeds-api-product/dog-breeds-api-6::API Key Plan"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "ACCEPTED",
       "lookup": {
         "applicationSourceId": "dev20@540.co/dev20-app",
@@ -10518,7 +10526,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "subscriptionId": "72a42f0a-3cae-4c0d-a42f-0a3cae8c0dad"
+      }
     },
     {
       "actionId": "VERIFY_SUBSCRIPTION:dev20@540.co/dev20-app/5GQlGWs2xVnA3khGeRHyL45YrqmHvPOd/dog-breeds-api-product/dog-breeds-api-6::API Key Plan",
@@ -10601,7 +10611,7 @@
         "RESOLVE_PLAN:dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "ACCEPTED",
       "lookup": {
         "applicationSourceId": "dev2@540.co/chuck-norris-dev-app",
@@ -10632,7 +10642,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "subscriptionId": "610dc2b4-f372-4b79-8dc2-b4f3720b7924"
+      }
     },
     {
       "actionId": "VERIFY_SUBSCRIPTION:dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/chuck-norris-api-product/chuck-norris-api-10::API Key Plan",
@@ -10715,7 +10727,7 @@
         "RESOLVE_PLAN:dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "ACCEPTED",
       "lookup": {
         "applicationSourceId": "dev2@540.co/dog-breeds-dev-app",
@@ -10746,7 +10758,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "subscriptionId": "145a4dca-fc96-4c5c-9a4d-cafc962c5cb7"
+      }
     },
     {
       "actionId": "VERIFY_SUBSCRIPTION:dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/dog-breeds-api-product/dog-breeds-api-6::API Key Plan",
