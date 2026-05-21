@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-21T18:57:29.442Z",
+  "generatedAt": "2026-05-21T20:01:53.938Z",
   "summary": {
     "users": 21,
     "applications": 25,
@@ -508,73 +508,89 @@
       {
         "name": "dod_designation",
         "metadataKey": "dod_designation",
-        "appCount": 2,
-        "occurrenceCount": 2,
+        "appCount": 4,
+        "occurrenceCount": 4,
         "apps": [
+          "dev17@540.co/dev17-app",
+          "dev18@540.co/dev18-app",
           "dev19@540.co/dev19-app",
           "dev20@540.co/dev20-app"
         ],
         "sampleValues": [
-          "Contractor"
+          "Civilian",
+          "Contractor",
+          "Military"
         ],
         "emptyValueCount": 0,
-        "nonEmptyValueCount": 2,
+        "nonEmptyValueCount": 4,
         "recommendedAction": "MAP_VERBATIM",
         "riskFlags": []
       },
       {
         "name": "dod_organization_list",
         "metadataKey": "dod_organization_list",
-        "appCount": 2,
-        "occurrenceCount": 2,
+        "appCount": 4,
+        "occurrenceCount": 4,
         "apps": [
+          "dev17@540.co/dev17-app",
+          "dev18@540.co/dev18-app",
           "dev19@540.co/dev19-app",
           "dev20@540.co/dev20-app"
         ],
         "sampleValues": [
           "Air Force",
+          "Army",
           "Navy"
         ],
         "emptyValueCount": 0,
-        "nonEmptyValueCount": 2,
+        "nonEmptyValueCount": 4,
         "recommendedAction": "MAP_VERBATIM",
         "riskFlags": []
       },
       {
         "name": "dod_service",
         "metadataKey": "dod_service",
-        "appCount": 2,
-        "occurrenceCount": 2,
+        "appCount": 4,
+        "occurrenceCount": 4,
         "apps": [
+          "dev17@540.co/dev17-app",
+          "dev18@540.co/dev18-app",
           "dev19@540.co/dev19-app",
           "dev20@540.co/dev20-app"
         ],
         "sampleValues": [
           "Air Force",
+          "Army",
           "Navy"
         ],
         "emptyValueCount": 0,
-        "nonEmptyValueCount": 2,
+        "nonEmptyValueCount": 4,
         "recommendedAction": "MAP_VERBATIM",
         "riskFlags": []
       },
       {
         "name": "dod_sub_org",
         "metadataKey": "dod_sub_org",
-        "appCount": 2,
-        "occurrenceCount": 2,
+        "appCount": 4,
+        "occurrenceCount": 4,
         "apps": [
+          "dev17@540.co/dev17-app",
+          "dev18@540.co/dev18-app",
           "dev19@540.co/dev19-app",
           "dev20@540.co/dev20-app"
         ],
         "sampleValues": [
+          "ACES",
+          "AFIMSC",
           "AFRSO",
           "NAVSEA"
         ],
         "emptyValueCount": 0,
-        "nonEmptyValueCount": 2,
+        "nonEmptyValueCount": 4,
         "recommendedAction": "MAP_VERBATIM",
-        "riskFlags": []
+        "riskFlags": [
+          "HIGH_CARDINALITY"
+        ]
       },
       {
         "name": "Notes",
@@ -705,7 +721,7 @@
         "sub_org"
       ],
       "riskFlagCounts": {
-        "HIGH_CARDINALITY": 5,
+        "HIGH_CARDINALITY": 6,
         "EMPTY_ONLY": 1
       }
     }
@@ -741,20 +757,18 @@
     "operatorActions": {
       "byKind": {
         "UPSERT_USER": {
-          "REUSE": 18,
-          "CREATE": 3
+          "CREATE": 21
         },
         "UPSERT_APPLICATION": {
-          "REUSE": 25
+          "CREATE": 25
         },
         "UPSERT_SUBSCRIPTION": {
-          "REUSE": 22,
+          "CREATE": 22,
           "BLOCK": 9
         }
       },
       "byOperation": {
-        "REUSE": 65,
-        "CREATE": 3,
+        "CREATE": 68,
         "BLOCK": 9
       },
       "blockedReasons": {

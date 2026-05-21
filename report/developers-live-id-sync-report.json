@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-21T18:53:10.436Z",
+  "generatedAt": "2026-05-21T20:00:35.138Z",
   "command": "developers sync-live-ids",
   "wroteIdMap": true,
   "clearMissing": false,
@@ -11,18 +11,16 @@
     },
     "applications": {
       "total": 25,
-      "matched": 21,
-      "missing": 4
+      "missing": 25
     },
     "subscriptions": {
       "total": 31,
-      "matched": 18,
-      "missing": 13
+      "missing": 31
     },
     "all": {
       "total": 77,
-      "matched": 60,
-      "missing": 17
+      "matched": 21,
+      "missing": 56
     }
   },
   "users": [
@@ -32,7 +30,7 @@
       "previousId": "d3ea33b7-9a23-41bc-aa33-b79a23f1bc00",
       "liveId": "d3ea33b7-9a23-41bc-aa33-b79a23f1bc00",
       "status": "matched",
-      "strategy": "email",
+      "strategy": "previous-id",
       "email": "danny.rivera@540.co"
     },
     {
@@ -41,7 +39,7 @@
       "previousId": "d277a14d-258f-4965-b7a1-4d258f89652c",
       "liveId": "d277a14d-258f-4965-b7a1-4d258f89652c",
       "status": "matched",
-      "strategy": "email",
+      "strategy": "previous-id",
       "email": "dev10@540.co"
     },
     {
@@ -50,7 +48,7 @@
       "previousId": "b87ef948-a76e-47a2-bef9-48a76ee7a295",
       "liveId": "b87ef948-a76e-47a2-bef9-48a76ee7a295",
       "status": "matched",
-      "strategy": "email",
+      "strategy": "previous-id",
       "email": "dev11@540.co"
     },
     {
@@ -68,7 +66,7 @@
       "previousId": "2b8b8d0e-9a38-4119-8b8d-0e9a3881190a",
       "liveId": "2b8b8d0e-9a38-4119-8b8d-0e9a3881190a",
       "status": "matched",
-      "strategy": "email",
+      "strategy": "previous-id",
       "email": "dev13@540.co"
     },
     {
@@ -77,7 +75,7 @@
       "previousId": "4e26b621-0290-474e-a6b6-210290c74e7e",
       "liveId": "4e26b621-0290-474e-a6b6-210290c74e7e",
       "status": "matched",
-      "strategy": "email",
+      "strategy": "previous-id",
       "email": "dev14@540.co"
     },
     {
@@ -86,7 +84,7 @@
       "previousId": "ebae4faa-588e-44b3-ae4f-aa588ee4b3c0",
       "liveId": "ebae4faa-588e-44b3-ae4f-aa588ee4b3c0",
       "status": "matched",
-      "strategy": "email",
+      "strategy": "previous-id",
       "email": "dev15@540.co"
     },
     {
@@ -95,7 +93,7 @@
       "previousId": "dc7741fa-e7ce-48c8-b741-fae7ce18c87f",
       "liveId": "dc7741fa-e7ce-48c8-b741-fae7ce18c87f",
       "status": "matched",
-      "strategy": "email",
+      "strategy": "previous-id",
       "email": "dev16@540.co"
     },
     {
@@ -104,7 +102,7 @@
       "previousId": "09894ef8-151e-45d1-894e-f8151ef5d1e4",
       "liveId": "09894ef8-151e-45d1-894e-f8151ef5d1e4",
       "status": "matched",
-      "strategy": "email",
+      "strategy": "previous-id",
       "email": "dev17@540.co"
     },
     {
@@ -113,7 +111,7 @@
       "previousId": "9017de5e-4536-4fec-97de-5e4536efeca1",
       "liveId": "9017de5e-4536-4fec-97de-5e4536efeca1",
       "status": "matched",
-      "strategy": "email",
+      "strategy": "previous-id",
       "email": "dev18@540.co"
     },
     {
@@ -122,7 +120,7 @@
       "previousId": "db9fb995-c9fa-450b-9fb9-95c9fad50b49",
       "liveId": "db9fb995-c9fa-450b-9fb9-95c9fad50b49",
       "status": "matched",
-      "strategy": "email",
+      "strategy": "previous-id",
       "email": "dev19@540.co"
     },
     {
@@ -131,7 +129,7 @@
       "previousId": "4ba2009e-ce2c-4b7c-a200-9ece2c7b7c35",
       "liveId": "4ba2009e-ce2c-4b7c-a200-9ece2c7b7c35",
       "status": "matched",
-      "strategy": "email",
+      "strategy": "previous-id",
       "email": "dev1@540.co"
     },
     {
@@ -158,7 +156,7 @@
       "previousId": "314ac089-3d03-4a53-8ac0-893d033a5393",
       "liveId": "314ac089-3d03-4a53-8ac0-893d033a5393",
       "status": "matched",
-      "strategy": "email",
+      "strategy": "previous-id",
       "email": "dev4@540.co"
     },
     {
@@ -167,7 +165,7 @@
       "previousId": "7fd2263c-f45e-470d-9226-3cf45ed70da3",
       "liveId": "7fd2263c-f45e-470d-9226-3cf45ed70da3",
       "status": "matched",
-      "strategy": "email",
+      "strategy": "previous-id",
       "email": "dev5@540.co"
     },
     {
@@ -176,7 +174,7 @@
       "previousId": "ae0b9a33-ae84-403e-8b9a-33ae84c03ebd",
       "liveId": "ae0b9a33-ae84-403e-8b9a-33ae84c03ebd",
       "status": "matched",
-      "strategy": "email",
+      "strategy": "previous-id",
       "email": "dev6@540.co"
     },
     {
@@ -185,7 +183,7 @@
       "previousId": "4f7aa435-ff55-4206-baa4-35ff555206d5",
       "liveId": "4f7aa435-ff55-4206-baa4-35ff555206d5",
       "status": "matched",
-      "strategy": "email",
+      "strategy": "previous-id",
       "email": "dev7@540.co"
     },
     {
@@ -194,7 +192,7 @@
       "previousId": "f0fa160f-a8f6-47ed-ba16-0fa8f667ed48",
       "liveId": "f0fa160f-a8f6-47ed-ba16-0fa8f667ed48",
       "status": "matched",
-      "strategy": "email",
+      "strategy": "previous-id",
       "email": "dev8@540.co"
     },
     {
@@ -203,7 +201,7 @@
       "previousId": "8e238f83-a5e6-4dd7-a38f-83a5e66dd71b",
       "liveId": "8e238f83-a5e6-4dd7-a38f-83a5e66dd71b",
       "status": "matched",
-      "strategy": "email",
+      "strategy": "previous-id",
       "email": "dev9@540.co"
     },
     {
@@ -212,7 +210,7 @@
       "previousId": "68891340-701f-417c-8913-40701fa17c0e",
       "liveId": "68891340-701f-417c-8913-40701fa17c0e",
       "status": "matched",
-      "strategy": "email",
+      "strategy": "previous-id",
       "email": "erik.severson@540.co"
     }
   ],
@@ -220,9 +218,9 @@
     {
       "kind": "application",
       "sourceId": "danny.rivera@540.co/cats-dev-app",
-      "previousId": "02c6b546-6e80-42da-86b5-466e8062da49",
-      "liveId": "02c6b546-6e80-42da-86b5-466e8062da49",
-      "status": "matched",
+      "previousId": null,
+      "liveId": null,
+      "status": "missing",
       "strategy": "source-marker-or-owner-name",
       "developerEmail": "danny.rivera@540.co",
       "appName": "cats-dev-app"
@@ -230,9 +228,9 @@
     {
       "kind": "application",
       "sourceId": "dev10@540.co/dev10-app",
-      "previousId": "112c3e51-85f8-490a-ac3e-5185f8390a2c",
-      "liveId": "112c3e51-85f8-490a-ac3e-5185f8390a2c",
-      "status": "matched",
+      "previousId": null,
+      "liveId": null,
+      "status": "missing",
       "strategy": "source-marker-or-owner-name",
       "developerEmail": "dev10@540.co",
       "appName": "dev10-app"
@@ -240,9 +238,9 @@
     {
       "kind": "application",
       "sourceId": "dev11@540.co/dev11-app",
-      "previousId": "515aa203-cb66-467e-9aa2-03cb66b67ecd",
-      "liveId": "515aa203-cb66-467e-9aa2-03cb66b67ecd",
-      "status": "matched",
+      "previousId": null,
+      "liveId": null,
+      "status": "missing",
       "strategy": "source-marker-or-owner-name",
       "developerEmail": "dev11@540.co",
       "appName": "dev11-app"
@@ -260,9 +258,9 @@
     {
       "kind": "application",
       "sourceId": "dev13@540.co/dev13-app",
-      "previousId": "f96e6dee-c749-497a-ae6d-eec749a97a4e",
-      "liveId": "f96e6dee-c749-497a-ae6d-eec749a97a4e",
-      "status": "matched",
+      "previousId": null,
+      "liveId": null,
+      "status": "missing",
       "strategy": "source-marker-or-owner-name",
       "developerEmail": "dev13@540.co",
       "appName": "dev13-app"
@@ -270,9 +268,9 @@
     {
       "kind": "application",
       "sourceId": "dev14@540.co/dev14-app",
-      "previousId": "8b5a6a69-7113-4c24-9a6a-6971135c24bc",
-      "liveId": "8b5a6a69-7113-4c24-9a6a-6971135c24bc",
-      "status": "matched",
+      "previousId": null,
+      "liveId": null,
+      "status": "missing",
       "strategy": "source-marker-or-owner-name",
       "developerEmail": "dev14@540.co",
       "appName": "dev14-app"
@@ -280,9 +278,9 @@
     {
       "kind": "application",
       "sourceId": "dev15@540.co/dev15-app",
-      "previousId": "4b83c9aa-12c6-4d3b-83c9-aa12c6ad3be1",
-      "liveId": "4b83c9aa-12c6-4d3b-83c9-aa12c6ad3be1",
-      "status": "matched",
+      "previousId": null,
+      "liveId": null,
+      "status": "missing",
       "strategy": "source-marker-or-owner-name",
       "developerEmail": "dev15@540.co",
       "appName": "dev15-app"
@@ -290,9 +288,9 @@
     {
       "kind": "application",
       "sourceId": "dev16@540.co/dev16-app",
-      "previousId": "36d53e24-8a1d-49a0-953e-248a1d49a08d",
-      "liveId": "36d53e24-8a1d-49a0-953e-248a1d49a08d",
-      "status": "matched",
+      "previousId": null,
+      "liveId": null,
+      "status": "missing",
       "strategy": "source-marker-or-owner-name",
       "developerEmail": "dev16@540.co",
       "appName": "dev16-app"
@@ -300,9 +298,9 @@
     {
       "kind": "application",
       "sourceId": "dev17@540.co/dev17-app",
-      "previousId": "9ecaf674-e386-4059-8af6-74e386b059bb",
-      "liveId": "9ecaf674-e386-4059-8af6-74e386b059bb",
-      "status": "matched",
+      "previousId": null,
+      "liveId": null,
+      "status": "missing",
       "strategy": "source-marker-or-owner-name",
       "developerEmail": "dev17@540.co",
       "appName": "dev17-app"
@@ -310,9 +308,9 @@
     {
       "kind": "application",
       "sourceId": "dev18@540.co/dev18-app",
-      "previousId": "ed268e22-7f8d-459c-a68e-227f8dc59cc3",
-      "liveId": "ed268e22-7f8d-459c-a68e-227f8dc59cc3",
-      "status": "matched",
+      "previousId": null,
+      "liveId": null,
+      "status": "missing",
       "strategy": "source-marker-or-owner-name",
       "developerEmail": "dev18@540.co",
       "appName": "dev18-app"
@@ -320,9 +318,9 @@
     {
       "kind": "application",
       "sourceId": "dev19@540.co/dev19-app",
-      "previousId": "3e65f3cb-66cf-4d13-a5f3-cb66cf3d13ee",
-      "liveId": "3e65f3cb-66cf-4d13-a5f3-cb66cf3d13ee",
-      "status": "matched",
+      "previousId": null,
+      "liveId": null,
+      "status": "missing",
       "strategy": "source-marker-or-owner-name",
       "developerEmail": "dev19@540.co",
       "appName": "dev19-app"
@@ -330,9 +328,9 @@
     {
       "kind": "application",
       "sourceId": "dev1@540.co/kanye-dev-app",
-      "previousId": "c0b6eaf9-a870-4e54-b6ea-f9a8701e549a",
-      "liveId": "c0b6eaf9-a870-4e54-b6ea-f9a8701e549a",
-      "status": "matched",
+      "previousId": null,
+      "liveId": null,
+      "status": "missing",
       "strategy": "source-marker-or-owner-name",
       "developerEmail": "dev1@540.co",
       "appName": "kanye-dev-app"
@@ -340,9 +338,9 @@
     {
       "kind": "application",
       "sourceId": "dev1@540.co/wizards-dev-app",
-      "previousId": "8843d7f5-f8a6-49e8-83d7-f5f8a6c9e87d",
-      "liveId": "8843d7f5-f8a6-49e8-83d7-f5f8a6c9e87d",
-      "status": "matched",
+      "previousId": null,
+      "liveId": null,
+      "status": "missing",
       "strategy": "source-marker-or-owner-name",
       "developerEmail": "dev1@540.co",
       "appName": "wizards-dev-app"
@@ -380,9 +378,9 @@
     {
       "kind": "application",
       "sourceId": "dev4@540.co/dev4-app",
-      "previousId": "9294f131-2757-4fcb-94f1-312757dfcbef",
-      "liveId": "9294f131-2757-4fcb-94f1-312757dfcbef",
-      "status": "matched",
+      "previousId": null,
+      "liveId": null,
+      "status": "missing",
       "strategy": "source-marker-or-owner-name",
       "developerEmail": "dev4@540.co",
       "appName": "dev4-app"
@@ -390,9 +388,9 @@
     {
       "kind": "application",
       "sourceId": "dev5@540.co/dev5-app",
-      "previousId": "4f352352-3b75-4294-b523-523b75b29490",
-      "liveId": "4f352352-3b75-4294-b523-523b75b29490",
-      "status": "matched",
+      "previousId": null,
+      "liveId": null,
+      "status": "missing",
       "strategy": "source-marker-or-owner-name",
       "developerEmail": "dev5@540.co",
       "appName": "dev5-app"
@@ -400,9 +398,9 @@
     {
       "kind": "application",
       "sourceId": "dev6@540.co/dev6-app",
-      "previousId": "958b8424-d336-4706-8b84-24d336c706d4",
-      "liveId": "958b8424-d336-4706-8b84-24d336c706d4",
-      "status": "matched",
+      "previousId": null,
+      "liveId": null,
+      "status": "missing",
       "strategy": "source-marker-or-owner-name",
       "developerEmail": "dev6@540.co",
       "appName": "dev6-app"
@@ -410,9 +408,9 @@
     {
       "kind": "application",
       "sourceId": "dev7@540.co/dev7-app",
-      "previousId": "b9efcdaf-401c-41dd-afcd-af401c51dd08",
-      "liveId": "b9efcdaf-401c-41dd-afcd-af401c51dd08",
-      "status": "matched",
+      "previousId": null,
+      "liveId": null,
+      "status": "missing",
       "strategy": "source-marker-or-owner-name",
       "developerEmail": "dev7@540.co",
       "appName": "dev7-app"
@@ -420,9 +418,9 @@
     {
       "kind": "application",
       "sourceId": "dev8@540.co/dev8-app",
-      "previousId": "9862df16-e46f-4637-a2df-16e46fa63790",
-      "liveId": "9862df16-e46f-4637-a2df-16e46fa63790",
-      "status": "matched",
+      "previousId": null,
+      "liveId": null,
+      "status": "missing",
       "strategy": "source-marker-or-owner-name",
       "developerEmail": "dev8@540.co",
       "appName": "dev8-app"
@@ -430,9 +428,9 @@
     {
       "kind": "application",
       "sourceId": "dev9@540.co/dev9-app",
-      "previousId": "48ea630f-2c9e-452a-aa63-0f2c9e552a95",
-      "liveId": "48ea630f-2c9e-452a-aa63-0f2c9e552a95",
-      "status": "matched",
+      "previousId": null,
+      "liveId": null,
+      "status": "missing",
       "strategy": "source-marker-or-owner-name",
       "developerEmail": "dev9@540.co",
       "appName": "dev9-app"
@@ -440,9 +438,9 @@
     {
       "kind": "application",
       "sourceId": "erik.severson@540.co/hogwarts-houses-dev-app",
-      "previousId": "20ad2e0b-e847-4030-ad2e-0be847c030ed",
-      "liveId": "20ad2e0b-e847-4030-ad2e-0be847c030ed",
-      "status": "matched",
+      "previousId": null,
+      "liveId": null,
+      "status": "missing",
       "strategy": "source-marker-or-owner-name",
       "developerEmail": "erik.severson@540.co",
       "appName": "hogwarts-houses-dev-app"
@@ -450,9 +448,9 @@
     {
       "kind": "application",
       "sourceId": "erik.severson@540.co/misc-dev-app",
-      "previousId": "94265b6e-adba-419a-a65b-6eadbae19ace",
-      "liveId": "94265b6e-adba-419a-a65b-6eadbae19ace",
-      "status": "matched",
+      "previousId": null,
+      "liveId": null,
+      "status": "missing",
       "strategy": "source-marker-or-owner-name",
       "developerEmail": "erik.severson@540.co",
       "appName": "misc-dev-app"
@@ -460,9 +458,9 @@
     {
       "kind": "application",
       "sourceId": "erik.severson@540.co/yes-or-no-dev-app",
-      "previousId": "414b7528-4794-4212-8b75-284794521276",
-      "liveId": "414b7528-4794-4212-8b75-284794521276",
-      "status": "matched",
+      "previousId": null,
+      "liveId": null,
+      "status": "missing",
       "strategy": "source-marker-or-owner-name",
       "developerEmail": "erik.severson@540.co",
       "appName": "yes-or-no-dev-app"
@@ -472,12 +470,12 @@
     {
       "kind": "subscription",
       "sourceId": "danny.rivera@540.co/cats-dev-app/idWhL2ATXfup5AyPWo9Z3Oakj1exc0KY/cats-api-product/cats-api-7::API Key Plan",
-      "previousId": "96215dca-7bb5-4ad4-a15d-ca7bb5bad4aa",
-      "liveId": "96215dca-7bb5-4ad4-a15d-ca7bb5bad4aa",
-      "status": "matched",
+      "previousId": null,
+      "liveId": null,
+      "status": "missing",
       "strategy": "application-plan",
       "applicationSourceId": "danny.rivera@540.co/cats-dev-app",
-      "applicationId": "02c6b546-6e80-42da-86b5-466e8062da49",
+      "applicationId": null,
       "productName": "cats-api-product",
       "planId": "8243bcf4-377a-421b-83bc-f4377a321b1d",
       "apiId": "63a370e7-7d6e-4ddb-a370-e77d6e3ddbc3"
@@ -485,12 +483,12 @@
     {
       "kind": "subscription",
       "sourceId": "dev10@540.co/dev10-app/wKwAhwPsH53KIyYkAh7rdGfdqYDGdEg4/wizards-api-product/wizards-api-9::API Key Plan",
-      "previousId": "e271ab43-da5f-4c2e-b1ab-43da5fbc2e58",
-      "liveId": "e271ab43-da5f-4c2e-b1ab-43da5fbc2e58",
-      "status": "matched",
+      "previousId": null,
+      "liveId": null,
+      "status": "missing",
       "strategy": "application-plan",
       "applicationSourceId": "dev10@540.co/dev10-app",
-      "applicationId": "112c3e51-85f8-490a-ac3e-5185f8390a2c",
+      "applicationId": null,
       "productName": "wizards-api-product",
       "planId": "589c71e0-0770-4580-9c71-e0077015806b",
       "apiId": "07dfa49e-dc23-4048-9fa4-9edc236048a6"
@@ -498,12 +496,12 @@
     {
       "kind": "subscription",
       "sourceId": "dev11@540.co/dev11-app/dpnogixgA3HA7xW4ltgBsjycZHiYH6AN/yes-or-no-api-product/yes-or-no-api-4::API Key Plan",
-      "previousId": "a2c843b2-eccc-4995-8843-b2eccc5995c2",
-      "liveId": "a2c843b2-eccc-4995-8843-b2eccc5995c2",
-      "status": "matched",
+      "previousId": null,
+      "liveId": null,
+      "status": "missing",
       "strategy": "application-plan",
       "applicationSourceId": "dev11@540.co/dev11-app",
-      "applicationId": "515aa203-cb66-467e-9aa2-03cb66b67ecd",
+      "applicationId": null,
       "productName": "yes-or-no-api-product",
       "planId": "9ae81624-fbd6-415f-a816-24fbd6a15fc9",
       "apiId": "bf68aeeb-d4db-4656-a8ae-ebd4db4656a5"
@@ -524,12 +522,12 @@
     {
       "kind": "subscription",
       "sourceId": "dev13@540.co/dev13-app/f1CsoHJ1RzHpz3anpxN3bGM03TvcKVtL/cats-api-product/cats-api-7::API Key Plan",
-      "previousId": "dfaa2956-dace-4b7c-aa29-56daceeb7cfa",
-      "liveId": "dfaa2956-dace-4b7c-aa29-56daceeb7cfa",
-      "status": "matched",
+      "previousId": null,
+      "liveId": null,
+      "status": "missing",
       "strategy": "application-plan",
       "applicationSourceId": "dev13@540.co/dev13-app",
-      "applicationId": "f96e6dee-c749-497a-ae6d-eec749a97a4e",
+      "applicationId": null,
       "productName": "cats-api-product",
       "planId": "8243bcf4-377a-421b-83bc-f4377a321b1d",
       "apiId": "63a370e7-7d6e-4ddb-a370-e77d6e3ddbc3"
@@ -537,12 +535,12 @@
     {
       "kind": "subscription",
       "sourceId": "dev14@540.co/dev14-app/IKVvym1wyxJMI1mpiJT7Mr16AF1R6bxS/chuck-norris-api-product/chuck-norris-api-10::API Key Plan",
-      "previousId": "cfbdef8a-0b66-4b38-bdef-8a0b666b3894",
-      "liveId": "cfbdef8a-0b66-4b38-bdef-8a0b666b3894",
-      "status": "matched",
+      "previousId": null,
+      "liveId": null,
+      "status": "missing",
       "strategy": "application-plan",
       "applicationSourceId": "dev14@540.co/dev14-app",
-      "applicationId": "8b5a6a69-7113-4c24-9a6a-6971135c24bc",
+      "applicationId": null,
       "productName": "chuck-norris-api-product",
       "planId": "6d3b4998-cee4-412a-bb49-98cee4f12ad5",
       "apiId": "25c78c81-954e-455d-878c-81954e255d73"
@@ -550,12 +548,12 @@
     {
       "kind": "subscription",
       "sourceId": "dev15@540.co/dev15-app/UdYYt10ftgvrhQBGWQMMRkvHQgEylPLI/dog-breeds-api-product/dog-breeds-api-6::API Key Plan",
-      "previousId": "0821ed9e-9491-4057-a1ed-9e9491d05717",
-      "liveId": "0821ed9e-9491-4057-a1ed-9e9491d05717",
-      "status": "matched",
+      "previousId": null,
+      "liveId": null,
+      "status": "missing",
       "strategy": "application-plan",
       "applicationSourceId": "dev15@540.co/dev15-app",
-      "applicationId": "4b83c9aa-12c6-4d3b-83c9-aa12c6ad3be1",
+      "applicationId": null,
       "productName": "dog-breeds-api-product",
       "planId": "e7af7151-7eb1-43a4-af71-517eb143a4a2",
       "apiId": "53b1d618-59d2-4a3a-b1d6-1859d2da3a89"
@@ -563,12 +561,12 @@
     {
       "kind": "subscription",
       "sourceId": "dev16@540.co/dev16-app/m1QTvGvifr92Dh2xLRfB5EDZAH9bm7F3/hogwarts-houses-api-product/hogwarts-houses-api-8::API Key Plan",
-      "previousId": "af1e2bfb-d3d7-4e65-9e2b-fbd3d78e65e7",
-      "liveId": "af1e2bfb-d3d7-4e65-9e2b-fbd3d78e65e7",
-      "status": "matched",
+      "previousId": null,
+      "liveId": null,
+      "status": "missing",
       "strategy": "application-plan",
       "applicationSourceId": "dev16@540.co/dev16-app",
-      "applicationId": "36d53e24-8a1d-49a0-953e-248a1d49a08d",
+      "applicationId": null,
       "productName": "hogwarts-houses-api-product",
       "planId": "7c03dde1-a653-48b3-83dd-e1a65368b345",
       "apiId": "59dab35e-953a-4960-9ab3-5e953ae960df"
@@ -581,7 +579,7 @@
       "status": "missing",
       "strategy": "application-plan",
       "applicationSourceId": "dev17@540.co/dev17-app",
-      "applicationId": "9ecaf674-e386-4059-8af6-74e386b059bb",
+      "applicationId": null,
       "productName": "misc-api-product",
       "planId": "e470787c-6691-4ef9-b078-7c66910ef98e",
       "apiId": "a5b183d1-9327-4a9a-b183-d19327ba9ae1"
@@ -594,7 +592,7 @@
       "status": "missing",
       "strategy": "application-plan",
       "applicationSourceId": "dev17@540.co/dev17-app",
-      "applicationId": "9ecaf674-e386-4059-8af6-74e386b059bb",
+      "applicationId": null,
       "productName": "misc-api-product",
       "planId": "597158dd-206f-4630-b158-dd206f763084",
       "apiId": "dcc0417f-18ab-4955-8041-7f18abe95537"
@@ -607,7 +605,7 @@
       "status": "missing",
       "strategy": "application-plan",
       "applicationSourceId": "dev17@540.co/dev17-app",
-      "applicationId": "9ecaf674-e386-4059-8af6-74e386b059bb",
+      "applicationId": null,
       "productName": "misc-api-product",
       "planId": "0b22bc89-5db5-431e-a2bc-895db5f31e95",
       "apiId": "8cf248f0-637a-4ed2-b248-f0637afed2e6"
@@ -615,12 +613,12 @@
     {
       "kind": "subscription",
       "sourceId": "dev18@540.co/dev18-app/n99YzKWIIz03KCMYHY6E5a0WzxeAp87m/wizards-api-product/wizards-api-9::API Key Plan",
-      "previousId": "07b4fe45-3c51-4e8e-b4fe-453c51ce8e8f",
-      "liveId": "07b4fe45-3c51-4e8e-b4fe-453c51ce8e8f",
-      "status": "matched",
+      "previousId": null,
+      "liveId": null,
+      "status": "missing",
       "strategy": "application-plan",
       "applicationSourceId": "dev18@540.co/dev18-app",
-      "applicationId": "ed268e22-7f8d-459c-a68e-227f8dc59cc3",
+      "applicationId": null,
       "productName": "wizards-api-product",
       "planId": "589c71e0-0770-4580-9c71-e0077015806b",
       "apiId": "07dfa49e-dc23-4048-9fa4-9edc236048a6"
@@ -628,12 +626,12 @@
     {
       "kind": "subscription",
       "sourceId": "dev19@540.co/dev19-app/ISYpfIK2eWM6yW8GCG4EpLUARgxZuBHJ/yes-or-no-api-product/yes-or-no-api-4::API Key Plan",
-      "previousId": "f61f4f8e-cc6f-4477-9f4f-8ecc6f747767",
-      "liveId": "f61f4f8e-cc6f-4477-9f4f-8ecc6f747767",
-      "status": "matched",
+      "previousId": null,
+      "liveId": null,
+      "status": "missing",
       "strategy": "application-plan",
       "applicationSourceId": "dev19@540.co/dev19-app",
-      "applicationId": "3e65f3cb-66cf-4d13-a5f3-cb66cf3d13ee",
+      "applicationId": null,
       "productName": "yes-or-no-api-product",
       "planId": "9ae81624-fbd6-415f-a816-24fbd6a15fc9",
       "apiId": "bf68aeeb-d4db-4656-a8ae-ebd4db4656a5"
@@ -641,12 +639,12 @@
     {
       "kind": "subscription",
       "sourceId": "dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/kanye-api-product/kanye-rest-api-5::API Key Plan",
-      "previousId": "020afa0d-bbd9-4634-8afa-0dbbd9e634ea",
-      "liveId": "020afa0d-bbd9-4634-8afa-0dbbd9e634ea",
-      "status": "matched",
+      "previousId": null,
+      "liveId": null,
+      "status": "missing",
       "strategy": "application-plan",
       "applicationSourceId": "dev1@540.co/kanye-dev-app",
-      "applicationId": "c0b6eaf9-a870-4e54-b6ea-f9a8701e549a",
+      "applicationId": null,
       "productName": "kanye-api-product",
       "planId": "7ac7160f-b292-4f9e-8716-0fb292af9e80",
       "apiId": "d40cba62-2887-461e-8cba-622887161ea9"
@@ -654,12 +652,12 @@
     {
       "kind": "subscription",
       "sourceId": "dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/wizards-api-product/wizards-api-9::API Key Plan",
-      "previousId": "1ed6311d-afec-40e0-9631-1dafec90e000",
-      "liveId": "1ed6311d-afec-40e0-9631-1dafec90e000",
-      "status": "matched",
+      "previousId": null,
+      "liveId": null,
+      "status": "missing",
       "strategy": "application-plan",
       "applicationSourceId": "dev1@540.co/wizards-dev-app",
-      "applicationId": "8843d7f5-f8a6-49e8-83d7-f5f8a6c9e87d",
+      "applicationId": null,
       "productName": "wizards-api-product",
       "planId": "589c71e0-0770-4580-9c71-e0077015806b",
       "apiId": "07dfa49e-dc23-4048-9fa4-9edc236048a6"
@@ -706,12 +704,12 @@
     {
       "kind": "subscription",
       "sourceId": "dev4@540.co/dev4-app/GPz0xIjF8TzAFFYeH1KWavbrxNDd94ds/cats-api-product/cats-api-7::API Key Plan",
-      "previousId": "a24bdcfe-3090-45f9-8bdc-fe309005f9c8",
-      "liveId": "a24bdcfe-3090-45f9-8bdc-fe309005f9c8",
-      "status": "matched",
+      "previousId": null,
+      "liveId": null,
+      "status": "missing",
       "strategy": "application-plan",
       "applicationSourceId": "dev4@540.co/dev4-app",
-      "applicationId": "9294f131-2757-4fcb-94f1-312757dfcbef",
+      "applicationId": null,
       "productName": "cats-api-product",
       "planId": "8243bcf4-377a-421b-83bc-f4377a321b1d",
       "apiId": "63a370e7-7d6e-4ddb-a370-e77d6e3ddbc3"
@@ -719,12 +717,12 @@
     {
       "kind": "subscription",
       "sourceId": "dev5@540.co/dev5-app/1bSPzHDZ6Gh2GJHaJWixroGIgZNAmGqi/chuck-norris-api-product/chuck-norris-api-10::API Key Plan",
-      "previousId": "692cbe64-9e5e-4c93-acbe-649e5e6c9342",
-      "liveId": "692cbe64-9e5e-4c93-acbe-649e5e6c9342",
-      "status": "matched",
+      "previousId": null,
+      "liveId": null,
+      "status": "missing",
       "strategy": "application-plan",
       "applicationSourceId": "dev5@540.co/dev5-app",
-      "applicationId": "4f352352-3b75-4294-b523-523b75b29490",
+      "applicationId": null,
       "productName": "chuck-norris-api-product",
       "planId": "6d3b4998-cee4-412a-bb49-98cee4f12ad5",
       "apiId": "25c78c81-954e-455d-878c-81954e255d73"
@@ -732,12 +730,12 @@
     {
       "kind": "subscription",
       "sourceId": "dev6@540.co/dev6-app/fjmSGPKixNkQZnd3YNnQKdA3IRy5L9jS/dog-breeds-api-product/dog-breeds-api-6::API Key Plan",
-      "previousId": "faa67700-c70b-4932-a677-00c70bc93238",
-      "liveId": "faa67700-c70b-4932-a677-00c70bc93238",
-      "status": "matched",
+      "previousId": null,
+      "liveId": null,
+      "status": "missing",
       "strategy": "application-plan",
       "applicationSourceId": "dev6@540.co/dev6-app",
-      "applicationId": "958b8424-d336-4706-8b84-24d336c706d4",
+      "applicationId": null,
       "productName": "dog-breeds-api-product",
       "planId": "e7af7151-7eb1-43a4-af71-517eb143a4a2",
       "apiId": "53b1d618-59d2-4a3a-b1d6-1859d2da3a89"
@@ -745,12 +743,12 @@
     {
       "kind": "subscription",
       "sourceId": "dev7@540.co/dev7-app/6A00n8CbKNDMn3aa7nyIrCiOOMdapYBq/hogwarts-houses-api-product/hogwarts-houses-api-8::API Key Plan",
-      "previousId": "7f6b3806-ad78-4b26-ab38-06ad787b2612",
-      "liveId": "7f6b3806-ad78-4b26-ab38-06ad787b2612",
-      "status": "matched",
+      "previousId": null,
+      "liveId": null,
+      "status": "missing",
       "strategy": "application-plan",
       "applicationSourceId": "dev7@540.co/dev7-app",
-      "applicationId": "b9efcdaf-401c-41dd-afcd-af401c51dd08",
+      "applicationId": null,
       "productName": "hogwarts-houses-api-product",
       "planId": "7c03dde1-a653-48b3-83dd-e1a65368b345",
       "apiId": "59dab35e-953a-4960-9ab3-5e953ae960df"
@@ -758,12 +756,12 @@
     {
       "kind": "subscription",
       "sourceId": "dev8@540.co/dev8-app/2EZDhVGA27FH4rGd20Ji74KSxqiGbX4d/kanye-api-product/kanye-rest-api-5::API Key Plan",
-      "previousId": "b515f2bc-f9a2-4293-95f2-bcf9a21293c5",
-      "liveId": "b515f2bc-f9a2-4293-95f2-bcf9a21293c5",
-      "status": "matched",
+      "previousId": null,
+      "liveId": null,
+      "status": "missing",
       "strategy": "application-plan",
       "applicationSourceId": "dev8@540.co/dev8-app",
-      "applicationId": "9862df16-e46f-4637-a2df-16e46fa63790",
+      "applicationId": null,
       "productName": "kanye-api-product",
       "planId": "7ac7160f-b292-4f9e-8716-0fb292af9e80",
       "apiId": "d40cba62-2887-461e-8cba-622887161ea9"
@@ -776,7 +774,7 @@
       "status": "missing",
       "strategy": "application-plan",
       "applicationSourceId": "dev9@540.co/dev9-app",
-      "applicationId": "48ea630f-2c9e-452a-aa63-0f2c9e552a95",
+      "applicationId": null,
       "productName": "misc-api-product",
       "planId": "e470787c-6691-4ef9-b078-7c66910ef98e",
       "apiId": "a5b183d1-9327-4a9a-b183-d19327ba9ae1"
@@ -789,7 +787,7 @@
       "status": "missing",
       "strategy": "application-plan",
       "applicationSourceId": "dev9@540.co/dev9-app",
-      "applicationId": "48ea630f-2c9e-452a-aa63-0f2c9e552a95",
+      "applicationId": null,
       "productName": "misc-api-product",
       "planId": "597158dd-206f-4630-b158-dd206f763084",
       "apiId": "dcc0417f-18ab-4955-8041-7f18abe95537"
@@ -802,7 +800,7 @@
       "status": "missing",
       "strategy": "application-plan",
       "applicationSourceId": "dev9@540.co/dev9-app",
-      "applicationId": "48ea630f-2c9e-452a-aa63-0f2c9e552a95",
+      "applicationId": null,
       "productName": "misc-api-product",
       "planId": "0b22bc89-5db5-431e-a2bc-895db5f31e95",
       "apiId": "8cf248f0-637a-4ed2-b248-f0637afed2e6"
@@ -810,12 +808,12 @@
     {
       "kind": "subscription",
       "sourceId": "erik.severson@540.co/hogwarts-houses-dev-app/7ShONGlRpUY1M69dgXQju7dxWE0sj7Xp/hogwarts-houses-api-product/hogwarts-houses-api-8::API Key Plan",
-      "previousId": "17f6b227-8032-499a-b6b2-278032699a4a",
-      "liveId": "17f6b227-8032-499a-b6b2-278032699a4a",
-      "status": "matched",
+      "previousId": null,
+      "liveId": null,
+      "status": "missing",
       "strategy": "application-plan",
       "applicationSourceId": "erik.severson@540.co/hogwarts-houses-dev-app",
-      "applicationId": "20ad2e0b-e847-4030-ad2e-0be847c030ed",
+      "applicationId": null,
       "productName": "hogwarts-houses-api-product",
       "planId": "7c03dde1-a653-48b3-83dd-e1a65368b345",
       "apiId": "59dab35e-953a-4960-9ab3-5e953ae960df"
@@ -828,7 +826,7 @@
       "status": "missing",
       "strategy": "application-plan",
       "applicationSourceId": "erik.severson@540.co/misc-dev-app",
-      "applicationId": "94265b6e-adba-419a-a65b-6eadbae19ace",
+      "applicationId": null,
       "productName": "misc-api-product",
       "planId": "e470787c-6691-4ef9-b078-7c66910ef98e",
       "apiId": "a5b183d1-9327-4a9a-b183-d19327ba9ae1"
@@ -841,7 +839,7 @@
       "status": "missing",
       "strategy": "application-plan",
       "applicationSourceId": "erik.severson@540.co/misc-dev-app",
-      "applicationId": "94265b6e-adba-419a-a65b-6eadbae19ace",
+      "applicationId": null,
       "productName": "misc-api-product",
       "planId": "597158dd-206f-4630-b158-dd206f763084",
       "apiId": "dcc0417f-18ab-4955-8041-7f18abe95537"
@@ -854,7 +852,7 @@
       "status": "missing",
       "strategy": "application-plan",
       "applicationSourceId": "erik.severson@540.co/misc-dev-app",
-      "applicationId": "94265b6e-adba-419a-a65b-6eadbae19ace",
+      "applicationId": null,
       "productName": "misc-api-product",
       "planId": "0b22bc89-5db5-431e-a2bc-895db5f31e95",
       "apiId": "8cf248f0-637a-4ed2-b248-f0637afed2e6"
@@ -862,12 +860,12 @@
     {
       "kind": "subscription",
       "sourceId": "erik.severson@540.co/yes-or-no-dev-app/QSRznbGGCwoLG1Dh7wan20huCGKbDn5W/yes-or-no-api-product/yes-or-no-api-4::API Key Plan",
-      "previousId": "44029e8f-e1d9-4f5b-829e-8fe1d92f5b21",
-      "liveId": "44029e8f-e1d9-4f5b-829e-8fe1d92f5b21",
-      "status": "matched",
+      "previousId": null,
+      "liveId": null,
+      "status": "missing",
       "strategy": "application-plan",
       "applicationSourceId": "erik.severson@540.co/yes-or-no-dev-app",
-      "applicationId": "414b7528-4794-4212-8b75-284794521276",
+      "applicationId": null,
       "productName": "yes-or-no-api-product",
       "planId": "9ae81624-fbd6-415f-a816-24fbd6a15fc9",
       "apiId": "bf68aeeb-d4db-4656-a8ae-ebd4db4656a5"
