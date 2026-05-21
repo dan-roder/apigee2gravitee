@@ -220,7 +220,7 @@ async function testUpsertApplicationMetadataUsesApplicationScopedEndpoint() {
     return { ok: true };
   };
 
-  await client.upsertApplicationMetadata('app-1', {
+  const result = await client.upsertApplicationMetadata('app-1', {
     sourceId: 'alice@example.com/orders-consumer',
     DisplayName: 'Orders Consumer',
   });
@@ -237,6 +237,9 @@ async function testUpsertApplicationMetadataUsesApplicationScopedEndpoint() {
       body: { name: 'DisplayName', format: 'STRING', value: 'Orders Consumer', applicationId: 'app-1', hidden: false },
     },
   ]);
+  assert.strictEqual(result.diagnostics.keyCount, 2);
+  assert.strictEqual(result.diagnostics.keys.sourceId.status, 'written');
+  assert.strictEqual(result.diagnostics.keys.sourceId.method, 'PUT');
 }
 
 async function testUpsertApplicationMetadataFallsBackAcrossPutShapes() {
@@ -256,7 +259,7 @@ async function testUpsertApplicationMetadataFallsBackAcrossPutShapes() {
     return { ok: true };
   };
 
-  await client.upsertApplicationMetadata('app-1', {
+  const result = await client.upsertApplicationMetadata('app-1', {
     sourceId: 'alice@example.com/orders-consumer',
   });
 
@@ -272,6 +275,28 @@ async function testUpsertApplicationMetadataFallsBackAcrossPutShapes() {
       body: { key: 'sourceId', name: 'sourceId', format: 'STRING', value: 'alice@example.com/orders-consumer', applicationId: 'app-1', hidden: false },
     },
   ]);
+  assert.strictEqual(result.diagnostics.keys.sourceId.failedAttemptCount, 1);
+  assert.deepStrictEqual(result.diagnostics.keys.sourceId.payloadShape, ['applicationId', 'format', 'hidden', 'key', 'name', 'value']);
+}
+
+async function testListApplicationMetadataWithDiagnosticsReportsReadShape() {
+  const client = new GraviteeClient({ baseUrl: 'https://gravitee.example.com', orgId: 'DEFAULT', envId: 'DEFAULT', token: 'token' });
+  client.get = async () => ({
+    data: [
+      { key: 'sourceId', value: 'alice@example.com/orders-consumer' },
+      { name: 'developerEmail', value: 'alice@example.com' },
+    ],
+    page: 1,
+    size: 2,
+    total: 2,
+  });
+
+  const result = await client.listApplicationMetadataWithDiagnostics('app-1');
+
+  assert.strictEqual(result.items.length, 2);
+  assert.strictEqual(result.diagnostics.readStrategy.itemCount, 2);
+  assert.deepStrictEqual(result.diagnostics.readStrategy.sampleKeys, ['sourceId', 'developerEmail']);
+  assert.deepStrictEqual(result.diagnostics.readStrategy.rawShape, ['data', 'page', 'size', 'total']);
 }
 
 async function testListRolesUsesScopedConfigurationEndpoints() {
@@ -568,6 +593,7 @@ async function run() {
   await testCreateApplicationCustomFieldUsesApplicationsMetadataEndpoint();
   await testUpsertApplicationMetadataUsesApplicationScopedEndpoint();
   await testUpsertApplicationMetadataFallsBackAcrossPutShapes();
+  await testListApplicationMetadataWithDiagnosticsReportsReadShape();
   await testListRolesUsesScopedConfigurationEndpoints();
   await testListRolesByScopeFallsBackToLegacyRoleScopesEndpoint();
   await testGetUserRolesReturnsNullWhenUnsupportedLookupAllowed();

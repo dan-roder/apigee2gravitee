@@ -573,11 +573,12 @@ function buildGapReport(domain, preflight, config, manifest = null) {
   };
 }
 
-function buildReconcileReport(summary, mismatches) {
+function buildReconcileReport(summary, mismatches, diagnostics = {}) {
   return {
     generatedAt: new Date().toISOString(),
     summary,
     mismatches,
+    diagnostics,
   };
 }
 

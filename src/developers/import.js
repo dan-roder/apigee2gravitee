@@ -49,7 +49,15 @@ function expectedApplicationMetadata(application) {
 
 async function hydrateApplicationMetadata(client, target) {
   if (!target?.id || typeof client.listApplicationMetadata !== 'function') return target;
-  const items = await client.listApplicationMetadata(target.id);
+  let items = [];
+  let diagnostics = null;
+  if (typeof client.listApplicationMetadataWithDiagnostics === 'function') {
+    const result = await client.listApplicationMetadataWithDiagnostics(target.id);
+    items = result.items || [];
+    diagnostics = result.diagnostics || null;
+  } else {
+    items = await client.listApplicationMetadata(target.id);
+  }
   const scopedMetadata = {};
   for (const item of items || []) {
     const key = item?.key || item?.name || item?.id || null;
@@ -62,6 +70,7 @@ async function hydrateApplicationMetadata(client, target) {
       ...(target.metadata || {}),
       ...scopedMetadata,
     },
+    metadataDiagnostics: diagnostics,
   };
 }
 
@@ -298,10 +307,12 @@ async function ensureApplication(action, ctx, client, idMap) {
     }
   }
   if (applicationId) setIdMapValue(idMap, action.kind, action.sourceId, applicationId);
+  let metadataDiagnostics = null;
   if (applicationId && typeof client.upsertApplicationMetadata === 'function') {
-    await client.upsertApplicationMetadata(applicationId, metadata);
+    const result = await client.upsertApplicationMetadata(applicationId, metadata);
+    metadataDiagnostics = result?.diagnostics || null;
   }
-  return { applicationId };
+  return { applicationId, metadataDiagnostics };
 }
 
 function applicationHasExpectedOwner(target, members, ownerUserId, developerEmail) {
@@ -330,7 +341,7 @@ async function verifyApplication(action, ctx, client, idMap) {
     if (!found) throw new Error(`Application ${application.appName} is missing expected owner membership`);
   }
   setIdMapValue(idMap, action.kind, action.sourceId, target.id);
-  return { applicationId: target.id };
+  return { applicationId: target.id, metadataDiagnostics: target.metadataDiagnostics || null };
 }
 
 async function resolvePlan(action, client) {

@@ -1229,7 +1229,10 @@ async function testReconcileDetectsPartiallyDriftedTargetResources() {
     assert.strictEqual(result.exitCode, 6);
     assert.ok(result.report.mismatches.some((item) => item.code === 'USER_ID_MAP_MISMATCH'));
     assert.ok(result.report.mismatches.some((item) => item.code === 'APPLICATION_SOURCE_MARKER_MISMATCH'));
-    assert.ok(result.report.mismatches.some((item) => item.code === 'APPLICATION_METADATA_MISMATCH'));
+    const metadataMismatch = result.report.mismatches.find((item) => item.code === 'APPLICATION_METADATA_MISMATCH');
+    assert.ok(metadataMismatch);
+    assert.ok(metadataMismatch.diagnostics);
+    assert.ok(result.report.diagnostics.applicationMetadata.summary.metadataMismatchApplications >= 1);
     assert.ok(result.report.mismatches.some((item) => item.code === 'SUBSCRIPTION_PLAN_MISMATCH'));
     assert.ok(result.report.mismatches.some((item) => item.code === 'SUBSCRIPTION_API_MISMATCH'));
   });

@@ -924,7 +924,7 @@ class GraviteeClient {
     return this.put(this.envUrl(`/applications/${applicationId}`), payload);
   }
 
-  async listApplicationMetadata(applicationId) {
+  async listApplicationMetadataWithDiagnostics(applicationId) {
     const attempts = [];
     for (const url of [
       this.envUrl(`/applications/${applicationId}/metadata`),
@@ -932,7 +932,22 @@ class GraviteeClient {
     ]) {
       try {
         const body = await this.get(url);
-        return normalizeCollection(body);
+        const items = normalizeCollection(body);
+        return {
+          items,
+          diagnostics: {
+            applicationId,
+            readStrategy: {
+              method: 'GET',
+              url,
+              status: 200,
+              itemCount: items.length,
+              rawShape: Array.isArray(body) ? 'array' : (body && typeof body === 'object' ? Object.keys(body).sort() : typeof body),
+              sampleKeys: items.slice(0, 5).map((item) => item?.key || item?.name || item?.id || null).filter(Boolean),
+            },
+            attempts,
+          },
+        };
       } catch (err) {
         attempts.push({
           method: 'GET',
@@ -953,8 +968,18 @@ class GraviteeClient {
     throw fallbackError;
   }
 
+  async listApplicationMetadata(applicationId) {
+    const result = await this.listApplicationMetadataWithDiagnostics(applicationId);
+    return result.items;
+  }
+
   async upsertApplicationMetadata(applicationId, metadata = {}) {
     const attempts = [];
+    const diagnostics = {
+      applicationId,
+      keyCount: Object.keys(metadata || {}).length,
+      keys: {},
+    };
     for (const [key, value] of Object.entries(metadata || {})) {
       const normalizedValue = String(value ?? '');
       const metadataId = key;
@@ -981,6 +1006,14 @@ class GraviteeClient {
       for (const strategy of strategies) {
         try {
           await this[strategy.method](strategy.url, strategy.payload);
+          diagnostics.keys[key] = {
+            status: 'written',
+            method: strategy.method.toUpperCase(),
+            url: strategy.url,
+            payloadShape: Object.keys(strategy.payload).sort(),
+            valueLength: normalizedValue.length,
+            failedAttemptCount: attempts.filter((attempt) => attempt.key === key).length,
+          };
           written = true;
           break;
         } catch (err) {
@@ -1009,7 +1042,7 @@ class GraviteeClient {
         throw fallbackError;
       }
     }
-    return { ok: true };
+    return { ok: true, diagnostics };
   }
 
   async deleteApplication(applicationId) {

@@ -38,6 +38,16 @@ async function runDevelopersReconcile(flags, deps = {}) {
   const state = readJsonIfExists(result.outputPaths.state) || result.state;
   const idMap = readJsonIfExists(result.outputPaths.idMap) || result.idMap;
   const mismatches = [];
+  const metadataDiagnostics = {
+    applications: {},
+    summary: {
+      checkedApplications: 0,
+      metadataReadFailures: 0,
+      metadataMismatchApplications: 0,
+      metadataMismatchKeys: 0,
+      metadataReadStrategies: {},
+    },
+  };
 
   for (const user of result.domain.users) {
     const expectedUserId = idMap.users[user.sourceId];
@@ -96,6 +106,14 @@ async function runDevelopersReconcile(flags, deps = {}) {
       mismatches.push({ severity: 'blocker', code: 'APPLICATION_MISSING', sourceId: application.sourceId, message: `Application ${application.appName} is missing` });
       continue;
     }
+    if (target.metadataDiagnostics) {
+      metadataDiagnostics.applications[application.sourceId] = target.metadataDiagnostics;
+      metadataDiagnostics.summary.checkedApplications += 1;
+      const strategyUrl = target.metadataDiagnostics.readStrategy?.url || 'unknown';
+      metadataDiagnostics.summary.metadataReadStrategies[strategyUrl] = (
+        metadataDiagnostics.summary.metadataReadStrategies[strategyUrl] || 0
+      ) + 1;
+    }
     if (expectedApplicationId && target.id !== expectedApplicationId) {
       mismatches.push({ severity: 'blocker', code: 'APPLICATION_ID_MAP_MISMATCH', sourceId: application.sourceId, message: `Application ${application.appName} resolved to ${target.id} instead of ${expectedApplicationId}` });
     }
@@ -103,15 +121,29 @@ async function runDevelopersReconcile(flags, deps = {}) {
       mismatches.push({ severity: 'blocker', code: 'APPLICATION_SOURCE_MARKER_MISMATCH', sourceId: application.sourceId, message: `Application ${application.appName} has mismatched source marker ${target.metadata.sourceId}` });
     }
     const expectedMetadata = expectedApplicationMetadata(application);
+    let applicationMetadataMismatchCount = 0;
     for (const [key, value] of Object.entries(expectedMetadata)) {
       if (String(target.metadata?.[key] ?? '') !== String(value ?? '')) {
+        applicationMetadataMismatchCount += 1;
+        metadataDiagnostics.summary.metadataMismatchKeys += 1;
         mismatches.push({
           severity: 'blocker',
           code: 'APPLICATION_METADATA_MISMATCH',
           sourceId: application.sourceId,
           message: `Application ${application.appName} metadata ${key} is ${target.metadata?.[key]} instead of ${value}`,
+          diagnostics: {
+            applicationId: target.id || expectedApplicationId || null,
+            key,
+            expectedValue: String(value ?? ''),
+            actualValue: target.metadata?.[key],
+            metadataKeysReturned: Object.keys(target.metadata || {}).sort(),
+            metadataReadStrategy: target.metadataDiagnostics?.readStrategy || null,
+          },
         });
       }
+    }
+    if (applicationMetadataMismatchCount > 0) {
+      metadataDiagnostics.summary.metadataMismatchApplications += 1;
     }
     if (application.ownershipStrategy === 'direct-member') {
       const members = await result.client.listApplicationMembers(target.id);
@@ -187,7 +219,7 @@ async function runDevelopersReconcile(flags, deps = {}) {
     warnings: mismatches.filter((item) => item.severity === 'warning').length,
   };
 
-  const report = buildReconcileReport(summary, mismatches);
+  const report = buildReconcileReport(summary, mismatches, { applicationMetadata: metadataDiagnostics });
   const events = [
     { ts: new Date().toISOString(), type: 'reconcile.summary', ...summary },
     ...mismatches.map((item) => ({ ts: new Date().toISOString(), type: `reconcile.${item.severity}`, ...item })),
