@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-20T19:52:49.608Z",
+  "generatedAt": "2026-05-21T18:08:58.937Z",
   "command": "developers sync-live-ids",
   "wroteIdMap": true,
   "clearMissing": false,
@@ -8,7 +8,7 @@
     "users": {
       "total": 21,
       "matched": 18,
-      "missing": 3
+      "missing-with-existing-id": 3
     },
     "applications": {
       "total": 25,
@@ -17,13 +17,14 @@
     },
     "subscriptions": {
       "total": 31,
-      "missing": 14,
-      "matched": 17
+      "matched": 18,
+      "missing": 13
     },
     "all": {
       "total": 77,
-      "matched": 56,
-      "missing": 21
+      "matched": 57,
+      "missing-with-existing-id": 3,
+      "missing": 17
     }
   },
   "users": [
@@ -57,9 +58,9 @@
     {
       "kind": "user",
       "sourceId": "dev12@540.co",
-      "previousId": null,
+      "previousId": "27dd356c-0578-43cc-9d35-6c057853cc04",
       "liveId": null,
-      "status": "missing",
+      "status": "missing-with-existing-id",
       "strategy": "email",
       "email": "dev12@540.co"
     },
@@ -138,18 +139,18 @@
     {
       "kind": "user",
       "sourceId": "dev20@540.co",
-      "previousId": null,
+      "previousId": "3976af4b-2390-4280-b6af-4b23905280d5",
       "liveId": null,
-      "status": "missing",
+      "status": "missing-with-existing-id",
       "strategy": "email",
       "email": "dev20@540.co"
     },
     {
       "kind": "user",
       "sourceId": "dev2@540.co",
-      "previousId": null,
+      "previousId": "e8165cbd-2c5a-4b8d-965c-bd2c5a2b8dd0",
       "liveId": null,
-      "status": "missing",
+      "status": "missing-with-existing-id",
       "strategy": "email",
       "email": "dev2@540.co"
     },
@@ -221,7 +222,7 @@
     {
       "kind": "application",
       "sourceId": "danny.rivera@540.co/cats-dev-app",
-      "previousId": null,
+      "previousId": "02c6b546-6e80-42da-86b5-466e8062da49",
       "liveId": "02c6b546-6e80-42da-86b5-466e8062da49",
       "status": "matched",
       "strategy": "source-marker-or-owner-name",
@@ -473,9 +474,9 @@
     {
       "kind": "subscription",
       "sourceId": "danny.rivera@540.co/cats-dev-app/idWhL2ATXfup5AyPWo9Z3Oakj1exc0KY/cats-api-product/cats-api-7::API Key Plan",
-      "previousId": null,
-      "liveId": null,
-      "status": "missing",
+      "previousId": "96215dca-7bb5-4ad4-a15d-ca7bb5bad4aa",
+      "liveId": "96215dca-7bb5-4ad4-a15d-ca7bb5bad4aa",
+      "status": "matched",
       "strategy": "application-plan",
       "applicationSourceId": "danny.rivera@540.co/cats-dev-app",
       "applicationId": "02c6b546-6e80-42da-86b5-466e8062da49",
