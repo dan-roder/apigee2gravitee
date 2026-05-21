@@ -49,8 +49,9 @@ function expectedApplicationMetadata(application) {
 
 function getMetadataValue(metadata = {}, key) {
   if (Object.prototype.hasOwnProperty.call(metadata, key)) return metadata[key];
-  const normalizedKey = String(key || '').toLowerCase();
-  const matchedKey = Object.keys(metadata || {}).find((item) => item.toLowerCase() === normalizedKey);
+  const normalizeMetadataKey = (value) => String(value || '').toLowerCase().replace(/[^a-z0-9]+/g, '');
+  const normalizedKey = normalizeMetadataKey(key);
+  const matchedKey = Object.keys(metadata || {}).find((item) => normalizeMetadataKey(item) === normalizedKey);
   return matchedKey ? metadata[matchedKey] : undefined;
 }
 

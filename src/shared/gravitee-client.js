@@ -900,7 +900,7 @@ class GraviteeClient {
     if (sourceId) {
       const bySourceId = items.find((item) => {
         const metadata = item.metadata || {};
-        const sourceIdKey = Object.keys(metadata).find((key) => key.toLowerCase() === 'sourceid');
+        const sourceIdKey = Object.keys(metadata).find((key) => key.toLowerCase().replace(/[^a-z0-9]+/g, '') === 'sourceid');
         return sourceIdKey && metadata[sourceIdKey] === sourceId;
       });
       if (bySourceId) return bySourceId;
