@@ -694,6 +694,49 @@ async function testImportReusesUserAfterCreateConflict() {
   });
 }
 
+async function testImportResolvesUserIdFromCreateConflictBody() {
+  await withTempDir(async (dir) => {
+    const dataDir = path.join(dir, 'data');
+    const irDir = path.join(dir, 'ir');
+    copyDir(FIXTURES_DATA, dataDir);
+    generateIrFromData(dataDir, irDir);
+
+    const client = makeWorkflowClient({
+      overrides: {
+        async findUserByEmail() {
+          return null;
+        },
+        async getUser(userId) {
+          if (userId === 'user-from-conflict') return { id: userId, email: 'alice@example.com' };
+          return null;
+        },
+        async createUser(payload) {
+          if (payload.email === 'alice@example.com') {
+            const err = new Error('POST http://localhost:8083/management/organizations/DEFAULT/users -> HTTP 400');
+            err.status = 400;
+            err.body = {
+              message: 'A user [alice@example.com] already exists for organization DEFAULT.',
+              technicalCode: 'user.exists',
+              userId: 'user-from-conflict',
+            };
+            throw err;
+          }
+          return makeWorkflowClient().createUser(payload);
+        },
+      },
+    });
+
+    const result = await runDevelopersImport(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json'), 'users-only': true },
+      { config: makeConfig(dir), client },
+    );
+
+    assert.strictEqual(result.exitCode, 0);
+    assert.strictEqual(result.idMap.users['alice@example.com'], 'user-from-conflict');
+    assert.strictEqual(result.state.actions['UPSERT_USER:alice@example.com'].status, 'SUCCEEDED');
+  });
+}
+
 async function testImportContinuesIndependentActionsAfterUserFailureByDefault() {
   await withTempDir(async (dir) => {
     const dataDir = path.join(dir, 'data');
@@ -856,6 +899,48 @@ async function testImportVerifiesApplicationMetadataFromScopedEndpoint() {
 
     assert.strictEqual(result.exitCode, 0);
     assert.strictEqual(result.state.actions['VERIFY_APPLICATION:alice@example.com/orders-consumer'].status, 'SUCCEEDED');
+  });
+}
+
+async function testImportUpsertsMetadataForReusedApplications() {
+  await withTempDir(async (dir) => {
+    const dataDir = path.join(dir, 'data');
+    const irDir = path.join(dir, 'ir');
+    copyDir(FIXTURES_DATA, dataDir);
+    generateIrFromData(dataDir, irDir);
+
+    const client = makeWorkflowClient();
+    client._state.users.set('alice@example.com', { id: 'user-existing', email: 'alice@example.com' });
+    client._state.applications.set('app-existing', {
+      id: 'app-existing',
+      name: 'orders-consumer',
+      metadata: { sourceId: 'alice@example.com/orders-consumer' },
+      owner: { id: 'user-existing' },
+    });
+    client._state.members.set('app-existing', [{ userId: 'user-existing' }]);
+
+    const result = await runDevelopersImport(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json') },
+      {
+        config: makeConfig(dir, {
+          capabilities: {
+            silentUserCreation: 'supported',
+            apiKeyValuePreservation: 'supported',
+            oauthClientValuePreservation: 'unknown',
+            applicationOwnership: 'metadata-only',
+          },
+        }),
+        client,
+      },
+    );
+
+    assert.strictEqual(result.exitCode, 0);
+    assert.strictEqual(
+      result.manifest.actions.find((item) => item.actionId === 'UPSERT_APPLICATION:alice@example.com/orders-consumer').operation,
+      'REUSE',
+    );
+    assert.strictEqual(client._state.applications.get('app-existing').metadata.developerEmail, 'alice@example.com');
+    assert.strictEqual(client._state.applications.get('app-existing').metadata.sourceId, 'alice@example.com/orders-consumer');
   });
 }
 
@@ -1050,10 +1135,10 @@ async function testImportFailsWhenApplicationReuseMatchesWrongSourceMarker() {
 
     assert.strictEqual(result.exitCode, 4);
     assert.strictEqual(result.state.actions['UPSERT_USER:alice@example.com'].status, 'SUCCEEDED');
-    assert.strictEqual(result.state.actions['UPSERT_APPLICATION:alice@example.com/orders-consumer'].status, 'SUCCEEDED');
-    assert.strictEqual(result.state.actions['VERIFY_APPLICATION:alice@example.com/orders-consumer'].status, 'FAILED');
+    assert.strictEqual(result.state.actions['UPSERT_APPLICATION:alice@example.com/orders-consumer'].status, 'FAILED');
+    assert.strictEqual(result.state.actions['VERIFY_APPLICATION:alice@example.com/orders-consumer'].status, 'BLOCKED');
     assert.ok(
-      String(result.state.actions['VERIFY_APPLICATION:alice@example.com/orders-consumer'].lastError || '').includes('unexpected source marker'),
+      String(result.state.actions['UPSERT_APPLICATION:alice@example.com/orders-consumer'].lastError || '').includes('unexpected source marker'),
     );
   });
 }
@@ -1549,10 +1634,12 @@ async function run() {
   await testImportRollsBackOrReusesUserAfterRoleAssignmentFailure();
   await testImportSucceedsWhenUserRoleReadIsUnsupported();
   await testImportReusesUserAfterCreateConflict();
+  await testImportResolvesUserIdFromCreateConflictBody();
   await testImportContinuesIndependentActionsAfterUserFailureByDefault();
   await testImportUsesSavedUserIdWhenEmailLookupMisses();
   await testImportReusesExistingResourcesBySourceMarker();
   await testImportVerifiesApplicationMetadataFromScopedEndpoint();
+  await testImportUpsertsMetadataForReusedApplications();
   await testImportDoesNotFailVerificationWhenMetadataReadbackIsUnavailable();
   await testReconcileWarnsWhenUserRoleReadIsUnsupported();
   await testImportFailsOnContinuityMismatch();

@@ -215,6 +215,79 @@ async function testWriteIdMapRefreshesLiveIds() {
   });
 }
 
+async function testWriteIdMapKeepsSearchInvisibleUserWhenPreviousIdResolves() {
+  await withTempDir(async (dir) => {
+    const config = makeConfig(dir);
+    const idMapPath = path.join(dir, 'state', 'developers-id-map.json');
+    writeJson(idMapPath, {
+      generatedAt: 'old',
+      users: { 'alice@example.com': 'user-hidden' },
+      applications: {},
+      subscriptions: {},
+    });
+    const client = {
+      ...makeClient(),
+      async findUserByEmail() { return null; },
+      async getUser(userId) {
+        return userId === 'user-hidden' ? { id: userId, email: 'alice@example.com' } : null;
+      },
+      async findApplicationByNameAndOwnerHint() { return null; },
+    };
+
+    const result = await runSyncDevelopersLiveIds(
+      { 'ir-dir': path.join(dir, 'ir'), config: path.join(dir, 'config.json'), 'write-id-map': true },
+      { config, domain: makeDomain(), client },
+    );
+
+    assert.strictEqual(result.exitCode, 0);
+    assert.strictEqual(result.report.users[0].status, 'matched');
+    assert.strictEqual(result.report.users[0].strategy, 'previous-id');
+    const idMap = readJson(idMapPath);
+    assert.strictEqual(idMap.users['alice@example.com'], 'user-hidden');
+  });
+}
+
+async function testWriteIdMapRecoversSearchInvisibleUserFromPreviousReport() {
+  await withTempDir(async (dir) => {
+    const config = makeConfig(dir);
+    const idMapPath = path.join(dir, 'state', 'developers-id-map.json');
+    writeJson(idMapPath, {
+      generatedAt: 'old',
+      users: { 'alice@example.com': null },
+      applications: {},
+      subscriptions: {},
+    });
+    writeJson(path.join(dir, 'report', 'developers-live-id-sync-report.json'), {
+      users: [{
+        kind: 'user',
+        sourceId: 'alice@example.com',
+        previousId: 'user-from-previous-report',
+        liveId: null,
+        status: 'missing-with-existing-id',
+      }],
+    });
+    const client = {
+      ...makeClient(),
+      async findUserByEmail() { return null; },
+      async getUser(userId) {
+        return userId === 'user-from-previous-report' ? { id: userId, email: 'alice@example.com' } : null;
+      },
+      async findApplicationByNameAndOwnerHint() { return null; },
+    };
+
+    const result = await runSyncDevelopersLiveIds(
+      { 'ir-dir': path.join(dir, 'ir'), config: path.join(dir, 'config.json'), 'write-id-map': true },
+      { config, domain: makeDomain(), client },
+    );
+
+    assert.strictEqual(result.exitCode, 0);
+    assert.strictEqual(result.report.users[0].status, 'matched');
+    assert.strictEqual(result.report.users[0].strategy, 'previous-id');
+    const idMap = readJson(idMapPath);
+    assert.strictEqual(idMap.users['alice@example.com'], 'user-from-previous-report');
+  });
+}
+
 async function testClearMissingNullsMissingIds() {
   await withTempDir(async (dir) => {
     const config = makeConfig(dir);
@@ -248,6 +321,8 @@ async function testClearMissingNullsMissingIds() {
 (async () => {
   await testReportOnlyDoesNotWriteIdMap();
   await testWriteIdMapRefreshesLiveIds();
+  await testWriteIdMapKeepsSearchInvisibleUserWhenPreviousIdResolves();
+  await testWriteIdMapRecoversSearchInvisibleUserFromPreviousReport();
   await testClearMissingNullsMissingIds();
   console.log('test-sync-live-ids.js passed');
 })().catch((err) => {

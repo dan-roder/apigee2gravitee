@@ -50,7 +50,16 @@ async function inspectUsers(domain, client, idMap, options) {
     if (typeof client.findUserByEmail === 'function') {
       found = await client.findUserByEmail(user.email).catch(() => null);
     }
-    const item = makeSyncItem('user', user.sourceId, idMap.users?.[user.sourceId], found?.id || null, 'email', {
+    const previousId = idMap.users?.[user.sourceId] || options.previousUserIds?.[user.sourceId] || null;
+    let strategy = 'email';
+    if (!found && previousId && typeof client.getUser === 'function') {
+      const byPreviousId = await client.getUser(previousId).catch(() => null);
+      if (byPreviousId) {
+        found = byPreviousId;
+        strategy = 'previous-id';
+      }
+    }
+    const item = makeSyncItem('user', user.sourceId, previousId, found?.id || found?.userId || null, strategy, {
       email: user.email,
     });
     items.push(item);
@@ -114,12 +123,17 @@ async function runSyncDevelopersLiveIds(flags, deps = {}) {
   if (result.validationErrors) return result;
 
   const idMap = clone(readJsonIfExists(result.outputPaths.idMap) || result.idMap);
+  const previousReport = readJsonIfExists(result.outputPaths.liveIdSyncReport) || {};
+  const previousUserIds = Object.fromEntries((previousReport.users || [])
+    .filter((item) => item?.sourceId && item?.previousId)
+    .map((item) => [item.sourceId, item.previousId]));
   idMap.users = idMap.users || {};
   idMap.applications = idMap.applications || {};
   idMap.subscriptions = idMap.subscriptions || {};
 
   const options = {
     clearMissing: !!flags['clear-missing'],
+    previousUserIds,
   };
   const users = await inspectUsers(result.domain, result.client, idMap, options);
   const applications = await inspectApplications(result.domain, result.client, idMap, options);

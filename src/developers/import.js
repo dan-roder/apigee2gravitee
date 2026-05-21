@@ -117,6 +117,23 @@ function isUserExistsError(err) {
   return err?.status === 400 && technicalCode === 'user.exists';
 }
 
+function extractUserIdFromExistsError(err) {
+  const body = err?.body || {};
+  const candidates = [
+    body.id,
+    body.userId,
+    body.uuid,
+    body.user?.id,
+    body.user?.userId,
+    body.details?.id,
+    body.details?.userId,
+    body.parameters?.id,
+    body.parameters?.userId,
+  ];
+  const match = candidates.find((value) => typeof value === 'string' && value.trim());
+  return match ? match.trim() : null;
+}
+
 async function ensureUser(action, ctx, client, idMap) {
   const user = ctx.usersBySourceId.get(action.sourceId);
   let target = null;
@@ -150,6 +167,12 @@ async function ensureUser(action, ctx, client, idMap) {
     } catch (err) {
       if (!isUserExistsError(err)) throw err;
       target = await client.findUserByEmail(user.email);
+      if (!target && typeof client.getUser === 'function') {
+        const conflictUserId = extractUserIdFromExistsError(err);
+        if (conflictUserId) {
+          target = await client.getUser(conflictUserId);
+        }
+      }
       if (!target) {
         const lookupError = new Error(`User ${user.email} already exists but could not be resolved after create conflict`);
         lookupError.cause = err;
@@ -261,6 +284,9 @@ async function ensureApplication(action, ctx, client, idMap) {
   }
 
   const applicationId = target?.id || target?.applicationId || null;
+  if (target?.metadata?.sourceId && target.metadata.sourceId !== application.sourceId) {
+    throw new Error(`Application ${application.appName} matched unexpected source marker ${target.metadata.sourceId}`);
+  }
   if (applicationId && action.payload.ownershipStrategy === 'direct-member') {
     const ownerUserId = idMap.users[application.developerEmail];
     if (ownerUserId) {
@@ -272,7 +298,7 @@ async function ensureApplication(action, ctx, client, idMap) {
     }
   }
   if (applicationId) setIdMapValue(idMap, action.kind, action.sourceId, applicationId);
-  if (applicationId && ['CREATE', 'UPDATE'].includes(action.operation) && typeof client.upsertApplicationMetadata === 'function') {
+  if (applicationId && typeof client.upsertApplicationMetadata === 'function') {
     await client.upsertApplicationMetadata(applicationId, metadata);
   }
   return { applicationId };
