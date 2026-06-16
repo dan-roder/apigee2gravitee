@@ -114,6 +114,34 @@ async function testFindUserByEmailFallsBackToUnfilteredScanWhenSearchMisses() {
   ]);
 }
 
+async function testFindUserByEmailTreatsSearchBadRequestAsFallback() {
+  const client = new GraviteeClient({ baseUrl: 'https://gravitee.example.com', orgId: 'DEFAULT', envId: 'DEFAULT', token: 'token' });
+  const calls = [];
+  client.get = async (url) => {
+    calls.push(url);
+    if (url === 'https://gravitee.example.com/management/organizations/DEFAULT/environments/DEFAULT/search/users?q=dev2%40540.co') {
+      return { data: [], page: 1, size: 10, total: 0 };
+    }
+    if (url === 'https://gravitee.example.com/management/organizations/DEFAULT/environments/DEFAULT/search/users?query=dev2%40540.co') {
+      const err = new Error('Bad request');
+      err.status = 400;
+      throw err;
+    }
+    if (url === 'https://gravitee.example.com/management/organizations/DEFAULT/users?query=dev2%40540.co') {
+      return { data: [{ id: 'user-2', email: 'dev2@540.co' }] };
+    }
+    throw new Error(`Unexpected URL ${url}`);
+  };
+
+  const user = await client.findUserByEmail('dev2@540.co');
+  assert.strictEqual(user.id, 'user-2');
+  assert.deepStrictEqual(calls, [
+    'https://gravitee.example.com/management/organizations/DEFAULT/environments/DEFAULT/search/users?q=dev2%40540.co',
+    'https://gravitee.example.com/management/organizations/DEFAULT/environments/DEFAULT/search/users?query=dev2%40540.co',
+    'https://gravitee.example.com/management/organizations/DEFAULT/users?query=dev2%40540.co',
+  ]);
+}
+
 async function testCreateSubscriptionUsesV2Endpoint() {
   const client = new GraviteeClient({ baseUrl: 'https://gravitee.example.com', orgId: 'DEFAULT', envId: 'DEFAULT', token: 'token' });
   let called = null;
@@ -634,6 +662,7 @@ async function run() {
   await testFindUserByEmailUsesEnvironmentSearchEndpointFirst();
   await testFindUserByEmailFollowsPaginatedSearchResults();
   await testFindUserByEmailFallsBackToUnfilteredScanWhenSearchMisses();
+  await testFindUserByEmailTreatsSearchBadRequestAsFallback();
   await testCreateSubscriptionUsesV2Endpoint();
   await testFindPlanByIdUsesExpectedEndpoint();
   await testFindApplicationPrefersSourceMarker();

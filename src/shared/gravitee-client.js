@@ -633,13 +633,14 @@ class GraviteeClient {
   }
 
   async findUserByEmail(email) {
-    const findInCollection = async (url) => {
+    const findInCollection = async (url, options = {}) => {
+      const fallbackStatuses = new Set(options.fallbackStatuses || [404, 405]);
       const firstUrl = new URL(url);
       let firstBody;
       try {
         firstBody = await this.get(firstUrl.toString());
       } catch (err) {
-        if (err?.status === 404 || err?.status === 405) return null;
+        if (fallbackStatuses.has(err?.status)) return null;
         throw err;
       }
       const firstItems = normalizeCollection(firstBody);
@@ -683,7 +684,7 @@ class GraviteeClient {
       searchUrls.push(searchUrl);
     }
     for (const searchUrl of searchUrls) {
-      const searchMatch = await findInCollection(searchUrl);
+      const searchMatch = await findInCollection(searchUrl, { fallbackStatuses: [400, 404, 405] });
       if (searchMatch) return searchMatch;
     }
 
