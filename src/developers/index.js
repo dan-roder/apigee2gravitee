@@ -93,6 +93,56 @@ function printImportProgress(event, fmt) {
   }
 }
 
+function formatCleanupTarget(event) {
+  const parts = [];
+  if (event.resource) parts.push(event.resource);
+  if (event.sourceId) parts.push(event.sourceId);
+  return parts.join(' ');
+}
+
+function printDeleteProgress(event, fmt) {
+  if (event.type === 'prepare_start') {
+    console.log('[cleanup] preparing workflow');
+    return;
+  }
+  if (event.type === 'resolve_start') {
+    console.log('[cleanup] resolving live delete targets');
+    return;
+  }
+  if (event.type === 'start') {
+    console.log(`[cleanup] starting ${event.total || 0} target(s)`);
+    return;
+  }
+  if (event.type === 'complete') {
+    console.log(`[cleanup] completed with ${event.deleted || 0} deleted, ${event.skipped || 0} skipped, ${event.failed || 0} failed`);
+    return;
+  }
+
+  const prefix = event.index && event.total ? `[cleanup ${event.index}/${event.total}]` : '[cleanup]';
+  const targetText = formatCleanupTarget(event);
+  if (event.type === 'resource_start') {
+    console.log(`${prefix} deleting ${targetText}`);
+    return;
+  }
+  if (event.type === 'deleted' || event.type === 'closed') {
+    console.log(`${prefix} ${fmt.ok(event.type === 'closed' ? 'closed' : 'deleted')} ${targetText}`);
+    return;
+  }
+  if (event.type === 'already_missing') {
+    console.log(`${prefix} ${fmt.dim('already missing')} ${targetText}`);
+    return;
+  }
+  if (event.type === 'skipped') {
+    console.log(`${prefix} ${fmt.dim('skipped')} ${targetText}`);
+    if (event.message) console.log(`  ${fmt.dim(event.message)}`);
+    return;
+  }
+  if (event.type === 'failed') {
+    console.log(`${prefix} ${fmt.err('failed')} ${targetText}`);
+    if (event.message) console.log(`  ${fmt.dim(event.message)}`);
+  }
+}
+
 function printValidateTargetHints(report, fmt) {
   if (!report?.findings?.length) return;
   if (report.apisIdMapPresent === false) {
@@ -468,13 +518,16 @@ async function runDevelopersCommand(subcommand, flags, fmt) {
   }
 
   if (subcommand === 'delete-imported') {
-    const result = await runDevelopersDeleteImported(flags);
+    console.log(fmt.header('Developers delete-imported'));
+    console.log('');
+    const result = await runDevelopersDeleteImported(flags, {
+      progress: (event) => printDeleteProgress(event, fmt),
+    });
     if (result.validationErrors) {
       console.log(fmt.err('Developers config validation failed'));
       for (const err of result.validationErrors) console.log(`  - ${err}`);
       return result.exitCode;
     }
-    console.log(fmt.header('Developers delete-imported'));
     console.log('');
     console.log(`[cleanup] ${result.cleanup.summary.deleted} deleted, ${result.cleanup.summary.skipped} skipped, ${result.cleanup.summary.failed} failed`);
     if (result.cleanup.failures.length > 0) {

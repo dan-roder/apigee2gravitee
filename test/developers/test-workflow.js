@@ -1438,13 +1438,19 @@ async function testDeleteImportedRemovesSubscriptionsApplicationsAndUsers() {
     );
 
     assert.strictEqual(imported.exitCode, 0);
+    const progressEvents = [];
 
     const cleaned = await runDevelopersDeleteImported(
       { 'ir-dir': irDir, 'config': path.join(dir, 'config.json') },
-      { config, client },
+      { config, client, progress: (event) => progressEvents.push(event) },
     );
 
     assert.strictEqual(cleaned.exitCode, 0);
+    assert.strictEqual(progressEvents[0].type, 'prepare_start');
+    assert.ok(progressEvents.some((event) => event.type === 'resolve_start'));
+    assert.ok(progressEvents.some((event) => event.type === 'resource_start' && event.resource === 'subscription'));
+    assert.ok(progressEvents.some((event) => event.type === 'deleted' && event.resource === 'application'));
+    assert.strictEqual(progressEvents[progressEvents.length - 1].type, 'complete');
     assert.strictEqual(client._state.counts.deleteSubscription, 1);
     assert.strictEqual(client._state.counts.deleteApplication, 1);
     assert.strictEqual(client._state.counts.deleteUser, 1);

@@ -210,7 +210,35 @@ function buildCleanupReport(summary, failures, targets) {
   };
 }
 
+function createProgressEmitter(progress, targets = null) {
+  if (typeof progress !== 'function') return () => {};
+  const orderedTargets = targets
+    ? [
+      ...targets.subscriptions.map((target) => ({ resource: 'subscription', target })),
+      ...targets.applications.map((target) => ({ resource: 'application', target })),
+      ...targets.users.map((target) => ({ resource: 'user', target })),
+    ]
+    : [];
+  const targetIndexes = new Map(orderedTargets.map((item, index) => [`${item.resource}:${item.target.sourceId}`, index + 1]));
+  const total = orderedTargets.length;
+  return (event) => {
+    const target = event.target || null;
+    const resource = event.resource || null;
+    const key = resource && target ? `${resource}:${target.sourceId}` : null;
+    progress({
+      total,
+      index: key ? targetIndexes.get(key) || null : null,
+      resource,
+      sourceId: target?.sourceId || null,
+      target,
+      ...event,
+    });
+  };
+}
+
 async function runDevelopersDeleteImported(flags, deps = {}) {
+  let emitProgress = createProgressEmitter(deps.progress);
+  emitProgress({ type: 'prepare_start' });
   const result = await prepareDevelopersWorkflow(flags, deps);
   if (result.validationErrors) return result;
   persistPlanningArtifacts(result, { preserveRuntimeState: true });
@@ -218,7 +246,10 @@ async function runDevelopersDeleteImported(flags, deps = {}) {
   const idMap = readJsonIfExists(result.outputPaths.idMap) || result.idMap;
   const state = readJsonIfExists(result.outputPaths.state) || result.state;
   const events = [...result.events];
+  emitProgress({ type: 'resolve_start' });
   const targets = await resolveDeleteTargets(result, idMap, state);
+  emitProgress = createProgressEmitter(deps.progress, targets);
+  emitProgress({ type: 'start' });
 
   const summary = {
     requested: countTargets(targets),
@@ -232,9 +263,11 @@ async function runDevelopersDeleteImported(flags, deps = {}) {
     if (flags['dry-run']) {
       summary.skipped += 1;
       events.push(makeEvent('cleanup.subscription.dry_run', target));
+      emitProgress({ type: 'skipped', resource: 'subscription', target, status: 'SKIPPED', message: 'dry run' });
       continue;
     }
     try {
+      emitProgress({ type: 'resource_start', resource: 'subscription', target, status: 'RUNNING' });
       if (typeof result.client.deleteSubscription === 'function') {
         await result.client.deleteSubscription({ apiId: target.apiId, subscriptionId: target.subscriptionId });
       } else if (typeof result.client.closeOrPauseSubscription === 'function') {
@@ -243,6 +276,7 @@ async function runDevelopersDeleteImported(flags, deps = {}) {
       idMap.subscriptions[target.sourceId] = null;
       summary.deleted += 1;
       events.push(makeEvent('cleanup.subscription.deleted', target));
+      emitProgress({ type: 'deleted', resource: 'subscription', target, status: 'DELETED' });
     } catch (err) {
       if (err.status === 405 && typeof result.client.closeOrPauseSubscription === 'function') {
         try {
@@ -250,12 +284,14 @@ async function runDevelopersDeleteImported(flags, deps = {}) {
           idMap.subscriptions[target.sourceId] = null;
           summary.deleted += 1;
           events.push(makeEvent('cleanup.subscription.closed', target));
+          emitProgress({ type: 'closed', resource: 'subscription', target, status: 'DELETED' });
           continue;
         } catch (closeErr) {
           const message = formatCleanupError(closeErr, 'subscription');
           summary.failed += 1;
           failures.push({ ...target, error: message });
           events.push(makeEvent('cleanup.subscription.failed', { ...target, error: message }));
+          emitProgress({ type: 'failed', resource: 'subscription', target, status: 'FAILED', message });
           continue;
         }
       }
@@ -263,12 +299,14 @@ async function runDevelopersDeleteImported(flags, deps = {}) {
         idMap.subscriptions[target.sourceId] = null;
         summary.skipped += 1;
         events.push(makeEvent('cleanup.subscription.already_missing', target));
+        emitProgress({ type: 'already_missing', resource: 'subscription', target, status: 'SKIPPED' });
         continue;
       }
       summary.failed += 1;
       const message = formatCleanupError(err, 'subscription');
       failures.push({ ...target, error: message });
       events.push(makeEvent('cleanup.subscription.failed', { ...target, error: message }));
+      emitProgress({ type: 'failed', resource: 'subscription', target, status: 'FAILED', message });
     }
   }
 
@@ -276,24 +314,29 @@ async function runDevelopersDeleteImported(flags, deps = {}) {
     if (flags['dry-run']) {
       summary.skipped += 1;
       events.push(makeEvent('cleanup.application.dry_run', target));
+      emitProgress({ type: 'skipped', resource: 'application', target, status: 'SKIPPED', message: 'dry run' });
       continue;
     }
     try {
+      emitProgress({ type: 'resource_start', resource: 'application', target, status: 'RUNNING' });
       await result.client.deleteApplication(target.applicationId);
       idMap.applications[target.sourceId] = null;
       summary.deleted += 1;
       events.push(makeEvent('cleanup.application.deleted', target));
+      emitProgress({ type: 'deleted', resource: 'application', target, status: 'DELETED' });
     } catch (err) {
       if (err.status === 404) {
         idMap.applications[target.sourceId] = null;
         summary.skipped += 1;
         events.push(makeEvent('cleanup.application.already_missing', target));
+        emitProgress({ type: 'already_missing', resource: 'application', target, status: 'SKIPPED' });
         continue;
       }
       summary.failed += 1;
       const message = formatCleanupError(err, 'application');
       failures.push({ ...target, error: message });
       events.push(makeEvent('cleanup.application.failed', { ...target, error: message }));
+      emitProgress({ type: 'failed', resource: 'application', target, status: 'FAILED', message });
     }
   }
 
@@ -301,24 +344,29 @@ async function runDevelopersDeleteImported(flags, deps = {}) {
     if (flags['dry-run']) {
       summary.skipped += 1;
       events.push(makeEvent('cleanup.user.dry_run', target));
+      emitProgress({ type: 'skipped', resource: 'user', target, status: 'SKIPPED', message: 'dry run' });
       continue;
     }
     try {
+      emitProgress({ type: 'resource_start', resource: 'user', target, status: 'RUNNING' });
       await result.client.deleteUser(target.userId);
       idMap.users[target.sourceId] = null;
       summary.deleted += 1;
       events.push(makeEvent('cleanup.user.deleted', target));
+      emitProgress({ type: 'deleted', resource: 'user', target, status: 'DELETED' });
     } catch (err) {
       if (err.status === 404) {
         idMap.users[target.sourceId] = null;
         summary.skipped += 1;
         events.push(makeEvent('cleanup.user.already_missing', target));
+        emitProgress({ type: 'already_missing', resource: 'user', target, status: 'SKIPPED' });
         continue;
       }
       summary.failed += 1;
       const message = formatCleanupError(err, 'user');
       failures.push({ ...target, error: message });
       events.push(makeEvent('cleanup.user.failed', { ...target, error: message }));
+      emitProgress({ type: 'failed', resource: 'user', target, status: 'FAILED', message });
     }
   }
 
@@ -328,6 +376,7 @@ async function runDevelopersDeleteImported(flags, deps = {}) {
   writeJson(result.outputPaths.idMap, idMap);
   writeJson(result.outputPaths.state, state);
   writeNdjson(result.outputPaths.log, events);
+  emitProgress({ type: 'complete', deleted: summary.deleted, skipped: summary.skipped, failed: summary.failed });
 
   return {
     ...result,
