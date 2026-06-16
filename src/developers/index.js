@@ -45,6 +45,54 @@ function printOperatorHints(preflight, fmt) {
   }
 }
 
+function formatProgressAction(event) {
+  const parts = [];
+  if (event.kind) parts.push(event.kind);
+  if (event.operation) parts.push(event.operation);
+  if (event.sourceId) parts.push(event.sourceId);
+  return parts.join(' ');
+}
+
+function printImportProgress(event, fmt) {
+  if (event.type === 'start') {
+    console.log(`[import] starting ${event.total || 0} action(s)`);
+    return;
+  }
+  if (event.type === 'complete') {
+    console.log(`[import] completed with ${event.failed || 0} failed, ${event.blocked || 0} blocked`);
+    return;
+  }
+
+  const prefix = event.index && event.total ? `[import ${event.index}/${event.total}]` : '[import]';
+  const actionText = formatProgressAction(event);
+  if (event.type === 'action_start') {
+    console.log(`${prefix} running ${actionText}`);
+    return;
+  }
+  if (event.type === 'action_succeeded') {
+    console.log(`${prefix} ${fmt.ok('succeeded')} ${actionText}`);
+    return;
+  }
+  if (event.type === 'action_failed') {
+    console.log(`${prefix} ${fmt.err('failed')} ${actionText}`);
+    if (event.message) console.log(`  ${fmt.dim(event.message)}`);
+    return;
+  }
+  if (event.type === 'blocked') {
+    console.log(`${prefix} ${fmt.warn('blocked')} ${actionText}`);
+    if (event.message) console.log(`  ${fmt.dim(event.message)}`);
+    return;
+  }
+  if (event.type === 'skipped' || event.type === 'resume_skipped') {
+    console.log(`${prefix} ${fmt.dim('skipped')} ${actionText}`);
+    return;
+  }
+  if (event.type === 'manual_review') {
+    console.log(`${prefix} ${fmt.warn('manual review')} ${actionText}`);
+    if (event.message) console.log(`  ${fmt.dim(event.message)}`);
+  }
+}
+
 function printValidateTargetHints(report, fmt) {
   if (!report?.findings?.length) return;
   if (report.apisIdMapPresent === false) {
@@ -361,13 +409,16 @@ async function runDevelopersCommand(subcommand, flags, fmt) {
   }
 
   if (subcommand === 'import') {
-    const result = await runDevelopersImport(flags);
+    console.log(fmt.header('Developers import'));
+    console.log('');
+    const result = await runDevelopersImport(flags, {
+      progress: (event) => printImportProgress(event, fmt),
+    });
     if (result.validationErrors) {
       console.log(fmt.err('Developers config validation failed'));
       for (const err of result.validationErrors) console.log(`  - ${err}`);
       return result.exitCode;
     }
-    console.log(fmt.header('Developers import'));
     console.log('');
     const statuses = Object.values(result.state.actions).reduce((acc, item) => {
       acc[item.status] = (acc[item.status] || 0) + 1;

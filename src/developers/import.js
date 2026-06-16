@@ -117,6 +117,24 @@ function formatRuntimeError(err) {
   return parts.filter(Boolean).join(' :: ');
 }
 
+function createProgressEmitter(progress, actions) {
+  if (typeof progress !== 'function') return () => {};
+  const actionIndexes = new Map(actions.map((action, index) => [action.actionId, index + 1]));
+  const total = actions.length;
+  return (event) => {
+    const action = event.action || null;
+    progress({
+      total,
+      index: action ? actionIndexes.get(action.actionId) || null : null,
+      actionId: action?.actionId || null,
+      kind: action?.kind || null,
+      sourceId: action?.sourceId || null,
+      operation: action?.operation || null,
+      ...event,
+    });
+  };
+}
+
 function inactivePolicySatisfied(target, policy) {
   if (!target || !policy || policy === 'skip') return true;
   const status = String(target.status || target.state || '').toLowerCase();
@@ -459,8 +477,11 @@ async function runDevelopersImport(flags, deps = {}) {
   const events = [...result.events];
   const maxErrors = flags['max-errors'] === undefined ? Infinity : Number(flags['max-errors']);
   let errorCount = 0;
+  const includedActions = result.manifest.actions.filter((action) => shouldIncludeAction(action, flags));
+  const emitProgress = createProgressEmitter(deps.progress, includedActions);
 
   persistRuntimeArtifacts(result.outputPaths, state, idMap, events);
+  emitProgress({ type: 'start' });
 
   for (const action of result.manifest.actions) {
     if (!shouldIncludeAction(action, flags)) continue;
@@ -470,32 +491,39 @@ async function runDevelopersImport(flags, deps = {}) {
     if (action.plannedStatus === 'BLOCKED') {
       markActionCompleted(state, action.actionId, 'BLOCKED', { lastError: action.blockers.join(', ') || null });
       persistRuntimeArtifacts(result.outputPaths, state, idMap, events);
+      emitProgress({ type: 'blocked', action, status: 'BLOCKED', message: action.blockers.join(', ') || null });
       continue;
     }
     if (action.plannedStatus === 'SKIPPED' || action.operation === 'SKIP') {
       markActionCompleted(state, action.actionId, 'SKIPPED');
       persistRuntimeArtifacts(result.outputPaths, state, idMap, events);
+      emitProgress({ type: 'skipped', action, status: 'SKIPPED' });
       continue;
     }
     if (action.manualReviewReasons?.length > 0 && action.plannedStatus !== 'READY') {
       markActionCompleted(state, action.actionId, 'MANUAL_REVIEW', { lastError: action.manualReviewReasons.join(', ') });
       persistRuntimeArtifacts(result.outputPaths, state, idMap, events);
+      emitProgress({ type: 'manual_review', action, status: 'MANUAL_REVIEW', message: action.manualReviewReasons.join(', ') });
       continue;
     }
     if (flags.resume && !flags.force && current?.status === 'SUCCEEDED') {
+      emitProgress({ type: 'resume_skipped', action, status: 'SUCCEEDED' });
       continue;
     }
 
     try {
+      emitProgress({ type: 'action_start', action, status: 'RUNNING' });
       markActionStarted(state, action.actionId);
       const targetIds = await executeAction(action, ctx, result.client, idMap, state);
       markActionCompleted(state, action.actionId, 'SUCCEEDED', { targetIds, reconcileHints: targetIds });
       events.push({ ts: new Date().toISOString(), type: 'import.succeeded', actionId: action.actionId, kind: action.kind });
+      emitProgress({ type: 'action_succeeded', action, status: 'SUCCEEDED' });
     } catch (err) {
       errorCount += 1;
       const formattedError = formatRuntimeError(err);
       markActionCompleted(state, action.actionId, 'FAILED', { lastError: formattedError });
       events.push({ ts: new Date().toISOString(), type: 'import.failed', actionId: action.actionId, kind: action.kind, error: formattedError });
+      emitProgress({ type: 'action_failed', action, status: 'FAILED', message: formattedError });
       if (errorCount >= maxErrors || action.kind === 'VERIFY_SUBSCRIPTION') {
         break;
       }
@@ -509,9 +537,11 @@ async function runDevelopersImport(flags, deps = {}) {
       continue;
     }
     if (state.actions[action.actionId].status === 'PENDING') {
+      const lastError = `Dependencies were not satisfied: ${(action.dependencies || []).join(', ') || 'none'}`;
       markActionCompleted(state, action.actionId, 'BLOCKED', {
-        lastError: `Dependencies were not satisfied: ${(action.dependencies || []).join(', ') || 'none'}`,
+        lastError,
       });
+      emitProgress({ type: 'blocked', action, status: 'BLOCKED', message: lastError });
     }
   }
 
@@ -520,6 +550,7 @@ async function runDevelopersImport(flags, deps = {}) {
   const failed = Object.values(state.actions).filter((item) => item.status === 'FAILED').length;
   const blocked = Object.values(state.actions).filter((item) => item.status === 'BLOCKED').length;
   const exitCode = failed > 0 || blocked > 0 ? 4 : 0;
+  emitProgress({ type: 'complete', status: exitCode === 0 ? 'SUCCEEDED' : 'FAILED', failed, blocked });
 
   return {
     ...result,

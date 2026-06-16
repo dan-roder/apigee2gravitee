@@ -443,13 +443,18 @@ async function testImportCreatesResourcesAndResumeSkipsRework() {
 
     const client = makeWorkflowClient();
     const config = makeConfig(dir);
+    const progressEvents = [];
 
     const first = await runDevelopersImport(
       { 'ir-dir': irDir, 'config': path.join(dir, 'config.json') },
-      { config, client },
+      { config, client, progress: (event) => progressEvents.push(event) },
     );
 
     assert.strictEqual(first.exitCode, 0);
+    assert.strictEqual(progressEvents[0].type, 'start');
+    assert.ok(progressEvents.some((event) => event.type === 'action_start' && event.actionId === 'UPSERT_USER:alice@example.com'));
+    assert.ok(progressEvents.some((event) => event.type === 'action_succeeded' && event.actionId === 'UPSERT_USER:alice@example.com'));
+    assert.strictEqual(progressEvents[progressEvents.length - 1].type, 'complete');
     assert.strictEqual(client._state.counts.createUser, 1);
     assert.strictEqual(client._state.counts.createApplication, 1);
     assert.strictEqual(client._state.counts.createSubscription, 1);
