@@ -635,7 +635,13 @@ class GraviteeClient {
   async findUserByEmail(email) {
     const findInCollection = async (url) => {
       const firstUrl = new URL(url);
-      const firstBody = await this.get(firstUrl.toString());
+      let firstBody;
+      try {
+        firstBody = await this.get(firstUrl.toString());
+      } catch (err) {
+        if (err?.status === 404 || err?.status === 405) return null;
+        throw err;
+      }
       const firstItems = normalizeCollection(firstBody);
       const exactFirstMatch = firstItems.find((item) => item.email === email) || null;
       if (exactFirstMatch) return exactFirstMatch;
@@ -667,6 +673,19 @@ class GraviteeClient {
 
       return null;
     };
+
+    // Prefer the environment-scoped user search endpoint documented by APIM v1;
+    // it is more reliable than the older org-level collection query filter.
+    const searchUrls = [];
+    for (const paramName of ['q', 'query']) {
+      const searchUrl = new URL(this.envUrl('/search/users'));
+      searchUrl.searchParams.set(paramName, email);
+      searchUrls.push(searchUrl);
+    }
+    for (const searchUrl of searchUrls) {
+      const searchMatch = await findInCollection(searchUrl);
+      if (searchMatch) return searchMatch;
+    }
 
     const queryUrl = new URL(this.orgUrl('/users'));
     queryUrl.searchParams.set('query', email);

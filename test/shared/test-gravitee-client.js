@@ -11,11 +11,39 @@ async function testFindUserByEmailFiltersResults() {
   assert.strictEqual(user.id, '2');
 }
 
+async function testFindUserByEmailUsesEnvironmentSearchEndpointFirst() {
+  const client = new GraviteeClient({ baseUrl: 'https://gravitee.example.com', orgId: 'DEFAULT', envId: 'DEFAULT', token: 'token' });
+  const calls = [];
+  client.get = async (url) => {
+    calls.push(url);
+    if (url === 'https://gravitee.example.com/management/organizations/DEFAULT/environments/DEFAULT/search/users?q=dev2%40540.co') {
+      return { data: [{ id: 'user-2', email: 'dev2@540.co' }] };
+    }
+    throw new Error(`Unexpected URL ${url}`);
+  };
+
+  const user = await client.findUserByEmail('dev2@540.co');
+  assert.strictEqual(user.id, 'user-2');
+  assert.deepStrictEqual(calls, [
+    'https://gravitee.example.com/management/organizations/DEFAULT/environments/DEFAULT/search/users?q=dev2%40540.co',
+  ]);
+}
+
 async function testFindUserByEmailFollowsPaginatedSearchResults() {
   const client = new GraviteeClient({ baseUrl: 'https://gravitee.example.com', orgId: 'DEFAULT', envId: 'DEFAULT', token: 'token' });
   const calls = [];
   client.get = async (url) => {
     calls.push(url);
+    if (url === 'https://gravitee.example.com/management/organizations/DEFAULT/environments/DEFAULT/search/users?q=dev2%40540.co') {
+      const err = new Error('Not found');
+      err.status = 404;
+      throw err;
+    }
+    if (url === 'https://gravitee.example.com/management/organizations/DEFAULT/environments/DEFAULT/search/users?query=dev2%40540.co') {
+      const err = new Error('Not found');
+      err.status = 404;
+      throw err;
+    }
     if (url === 'https://gravitee.example.com/management/organizations/DEFAULT/users?query=dev2%40540.co') {
       return {
         data: Array.from({ length: 10 }, (_, index) => ({ id: `user-${index + 1}`, email: `dev2${index}@540.co` })),
@@ -41,6 +69,8 @@ async function testFindUserByEmailFollowsPaginatedSearchResults() {
   const user = await client.findUserByEmail('dev2@540.co');
   assert.strictEqual(user.id, 'user-12');
   assert.deepStrictEqual(calls, [
+    'https://gravitee.example.com/management/organizations/DEFAULT/environments/DEFAULT/search/users?q=dev2%40540.co',
+    'https://gravitee.example.com/management/organizations/DEFAULT/environments/DEFAULT/search/users?query=dev2%40540.co',
     'https://gravitee.example.com/management/organizations/DEFAULT/users?query=dev2%40540.co',
     'https://gravitee.example.com/management/organizations/DEFAULT/users?query=dev2%40540.co&page=2&size=10',
   ]);
@@ -51,6 +81,12 @@ async function testFindUserByEmailFallsBackToUnfilteredScanWhenSearchMisses() {
   const calls = [];
   client.get = async (url) => {
     calls.push(url);
+    if (url === 'https://gravitee.example.com/management/organizations/DEFAULT/environments/DEFAULT/search/users?q=dev12%40540.co') {
+      return { data: [], page: 1, size: 10, total: 0 };
+    }
+    if (url === 'https://gravitee.example.com/management/organizations/DEFAULT/environments/DEFAULT/search/users?query=dev12%40540.co') {
+      return { data: [], page: 1, size: 10, total: 0 };
+    }
     if (url === 'https://gravitee.example.com/management/organizations/DEFAULT/users?query=dev12%40540.co') {
       return { data: [], page: 1, size: 10, total: 0 };
     }
@@ -71,6 +107,8 @@ async function testFindUserByEmailFallsBackToUnfilteredScanWhenSearchMisses() {
   const user = await client.findUserByEmail('dev12@540.co');
   assert.strictEqual(user.id, 'user-2');
   assert.deepStrictEqual(calls, [
+    'https://gravitee.example.com/management/organizations/DEFAULT/environments/DEFAULT/search/users?q=dev12%40540.co',
+    'https://gravitee.example.com/management/organizations/DEFAULT/environments/DEFAULT/search/users?query=dev12%40540.co',
     'https://gravitee.example.com/management/organizations/DEFAULT/users?query=dev12%40540.co',
     'https://gravitee.example.com/management/organizations/DEFAULT/users',
   ]);
@@ -593,6 +631,7 @@ async function testCloseOrPauseSubscriptionFallsBackAcrossCompatibilityStrategie
 
 async function run() {
   await testFindUserByEmailFiltersResults();
+  await testFindUserByEmailUsesEnvironmentSearchEndpointFirst();
   await testFindUserByEmailFollowsPaginatedSearchResults();
   await testFindUserByEmailFallsBackToUnfilteredScanWhenSearchMisses();
   await testCreateSubscriptionUsesV2Endpoint();
