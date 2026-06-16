@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-16T15:57:56.165Z",
+  "generatedAt": "2026-06-16T16:08:11.194Z",
   "kind": "DevelopersMigrationManifest",
   "source": {
     "irDir": "/home/ec2-user/apigee2gravitee/ir",
@@ -26,9 +26,9 @@
     "applications": 25,
     "credentials": 25,
     "subscriptions": 25,
-    "blockers": 15,
-    "warnings": 2,
-    "manualReview": 2,
+    "blockers": 8,
+    "warnings": 1,
+    "manualReview": 0,
     "actions": 167,
     "actionsByKind": {
       "UPSERT_USER": 21,
@@ -46,17 +46,19 @@
     "operatorActions": {
       "byKind": {
         "UPSERT_USER": {
-          "CREATE": 21
+          "REUSE": 19,
+          "CREATE": 2
         },
         "UPSERT_APPLICATION": {
-          "CREATE": 25
+          "REUSE": 25
         },
         "UPSERT_SUBSCRIPTION": {
           "BLOCK": 25
         }
       },
       "byOperation": {
-        "CREATE": 46,
+        "REUSE": 44,
+        "CREATE": 2,
         "BLOCK": 25
       },
       "blockedReasons": {
@@ -4062,76 +4064,14 @@
       }
     },
     {
-      "severity": "blocker",
-      "code": "GRAVITEE_AUTH_FAILED",
-      "message": "Gravitee health check failed: GET https://gravitee.advana.aws.540.dev/management/organizations/DEFAULT → HTTP 404",
-      "details": {
-        "status": 404
-      }
-    },
-    {
-      "severity": "blocker",
-      "code": "USER_PROVISIONING_LOOKUP_UNSUPPORTED",
-      "message": "User provisioning probe failed for lookup",
-      "details": {
-        "status": 404,
-        "classification": "unsupported-endpoint",
-        "error": null
-      }
-    },
-    {
-      "severity": "blocker",
-      "code": "USER_PROVISIONING_CREATE_UNSUPPORTED",
-      "message": "User provisioning probe failed for create",
-      "details": {
-        "status": 404,
-        "classification": "unsupported-endpoint",
-        "error": null
-      }
-    },
-    {
-      "severity": "blocker",
-      "code": "APPLICATION_OWNERSHIP_LIST_UNSUPPORTED",
-      "message": "Application ownership probe failed for list",
-      "details": {
-        "status": 404,
-        "classification": "unsupported-endpoint",
-        "error": null
-      }
-    },
-    {
-      "severity": "blocker",
-      "code": "APPLICATION_OWNERSHIP_CREATE_UNSUPPORTED",
-      "message": "Application ownership probe failed for create",
-      "details": {
-        "status": 404,
-        "classification": "unsupported-endpoint",
-        "error": null
-      }
-    },
-    {
-      "severity": "blocker",
-      "code": "SILENT_USER_CREATION_PROBE_FAILED",
-      "message": "Live Gravitee probes did not confirm silent user provisioning support",
-      "details": {}
-    },
-    {
-      "severity": "blocker",
-      "code": "APPLICATION_OWNERSHIP_PROBE_FAILED",
-      "message": "Live Gravitee probes did not confirm direct-member application ownership support",
-      "details": {}
-    },
-    {
       "severity": "warning",
-      "code": "ROLE_LOOKUP_FAILED",
-      "message": "Unable to verify roles via Gravitee API: GET https://gravitee.advana.aws.540.dev/management/organizations/DEFAULT/rolescopes → HTTP 404",
-      "details": {}
-    },
-    {
-      "severity": "warning",
-      "code": "ROLE_LOOKUP_UNVERIFIED",
-      "message": "Role configuration could not be auto-verified",
-      "details": {}
+      "code": "ROLE_CONFIGURATION_FALLBACK",
+      "message": "Configured role ENVIRONMENT:API_CONSUMER was not found in Gravitee; falling back to ENVIRONMENT:USER",
+      "details": {
+        "roleName": "ENVIRONMENT:API_CONSUMER",
+        "fallbackRoleName": "ENVIRONMENT:USER",
+        "scope": "ENVIRONMENT"
+      }
     }
   ],
   "actions": [
@@ -4141,7 +4081,7 @@
       "sourceId": "danny.rivera@540.co",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "active",
       "lookup": {
         "email": "danny.rivera@540.co"
@@ -4168,7 +4108,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "userId": "fce68682-688a-49c0-a686-82688ac9c0c5"
+      }
     },
     {
       "actionId": "VERIFY_USER:danny.rivera@540.co",
@@ -4207,7 +4149,7 @@
       "sourceId": "dev10@540.co",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "active",
       "lookup": {
         "email": "dev10@540.co"
@@ -4234,7 +4176,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "userId": "00196493-d214-4415-9964-93d214c415df"
+      }
     },
     {
       "actionId": "VERIFY_USER:dev10@540.co",
@@ -4273,7 +4217,7 @@
       "sourceId": "dev11@540.co",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "active",
       "lookup": {
         "email": "dev11@540.co"
@@ -4300,7 +4244,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "userId": "2d3d1c4d-e5ec-44b9-bd1c-4de5ec04b99a"
+      }
     },
     {
       "actionId": "VERIFY_USER:dev11@540.co",
@@ -4339,7 +4285,7 @@
       "sourceId": "dev12@540.co",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "active",
       "lookup": {
         "email": "dev12@540.co"
@@ -4366,7 +4312,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "userId": "c74959d5-9460-4942-8959-d59460894205"
+      }
     },
     {
       "actionId": "VERIFY_USER:dev12@540.co",
@@ -4405,7 +4353,7 @@
       "sourceId": "dev13@540.co",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "active",
       "lookup": {
         "email": "dev13@540.co"
@@ -4432,7 +4380,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "userId": "e18d97f8-1052-408f-8d97-f81052308feb"
+      }
     },
     {
       "actionId": "VERIFY_USER:dev13@540.co",
@@ -4471,7 +4421,7 @@
       "sourceId": "dev14@540.co",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "active",
       "lookup": {
         "email": "dev14@540.co"
@@ -4498,7 +4448,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "userId": "7986b489-3608-47f5-86b4-89360887f5ad"
+      }
     },
     {
       "actionId": "VERIFY_USER:dev14@540.co",
@@ -4537,7 +4489,7 @@
       "sourceId": "dev15@540.co",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "active",
       "lookup": {
         "email": "dev15@540.co"
@@ -4564,7 +4516,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "userId": "1efd868c-cb56-414a-bd86-8ccb56514ac5"
+      }
     },
     {
       "actionId": "VERIFY_USER:dev15@540.co",
@@ -4603,7 +4557,7 @@
       "sourceId": "dev16@540.co",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "active",
       "lookup": {
         "email": "dev16@540.co"
@@ -4630,7 +4584,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "userId": "c7ff68f7-1418-42bb-bf68-f71418d2bbf4"
+      }
     },
     {
       "actionId": "VERIFY_USER:dev16@540.co",
@@ -4669,7 +4625,7 @@
       "sourceId": "dev17@540.co",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "active",
       "lookup": {
         "email": "dev17@540.co"
@@ -4696,7 +4652,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "userId": "dad8ee9f-2aad-4604-98ee-9f2aad0604d8"
+      }
     },
     {
       "actionId": "VERIFY_USER:dev17@540.co",
@@ -4735,7 +4693,7 @@
       "sourceId": "dev18@540.co",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "active",
       "lookup": {
         "email": "dev18@540.co"
@@ -4762,7 +4720,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "userId": "8323e023-705a-4a2e-a3e0-23705aaa2eeb"
+      }
     },
     {
       "actionId": "VERIFY_USER:dev18@540.co",
@@ -4801,7 +4761,7 @@
       "sourceId": "dev19@540.co",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "active",
       "lookup": {
         "email": "dev19@540.co"
@@ -4828,7 +4788,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "userId": "47c5b85d-8270-4798-85b8-5d827037986f"
+      }
     },
     {
       "actionId": "VERIFY_USER:dev19@540.co",
@@ -4867,7 +4829,7 @@
       "sourceId": "dev1@540.co",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "active",
       "lookup": {
         "email": "dev1@540.co"
@@ -4894,7 +4856,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "userId": "007b42cb-f14e-4dd3-bb42-cbf14e6dd3c6"
+      }
     },
     {
       "actionId": "VERIFY_USER:dev1@540.co",
@@ -5065,7 +5029,7 @@
       "sourceId": "dev4@540.co",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "active",
       "lookup": {
         "email": "dev4@540.co"
@@ -5092,7 +5056,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "userId": "aacd4440-d085-4c96-8d44-40d0851c9673"
+      }
     },
     {
       "actionId": "VERIFY_USER:dev4@540.co",
@@ -5131,7 +5097,7 @@
       "sourceId": "dev5@540.co",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "active",
       "lookup": {
         "email": "dev5@540.co"
@@ -5158,7 +5124,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "userId": "19fb823a-b471-4ad3-bb82-3ab4719ad3e4"
+      }
     },
     {
       "actionId": "VERIFY_USER:dev5@540.co",
@@ -5197,7 +5165,7 @@
       "sourceId": "dev6@540.co",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "active",
       "lookup": {
         "email": "dev6@540.co"
@@ -5224,7 +5192,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "userId": "e9149b29-9d71-48af-949b-299d7198af6a"
+      }
     },
     {
       "actionId": "VERIFY_USER:dev6@540.co",
@@ -5263,7 +5233,7 @@
       "sourceId": "dev7@540.co",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "active",
       "lookup": {
         "email": "dev7@540.co"
@@ -5290,7 +5260,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "userId": "25ecf9e9-cc4a-4434-acf9-e9cc4a043480"
+      }
     },
     {
       "actionId": "VERIFY_USER:dev7@540.co",
@@ -5329,7 +5301,7 @@
       "sourceId": "dev8@540.co",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "active",
       "lookup": {
         "email": "dev8@540.co"
@@ -5356,7 +5328,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "userId": "d771b485-d23c-486c-b1b4-85d23c286c48"
+      }
     },
     {
       "actionId": "VERIFY_USER:dev8@540.co",
@@ -5395,7 +5369,7 @@
       "sourceId": "dev9@540.co",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "active",
       "lookup": {
         "email": "dev9@540.co"
@@ -5422,7 +5396,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "userId": "cd3b985f-490c-4abe-bb98-5f490ceabe7f"
+      }
     },
     {
       "actionId": "VERIFY_USER:dev9@540.co",
@@ -5461,7 +5437,7 @@
       "sourceId": "erik.severson@540.co",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "active",
       "lookup": {
         "email": "erik.severson@540.co"
@@ -5488,7 +5464,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "userId": "17309bd1-e1c3-4229-b09b-d1e1c3a2299a"
+      }
     },
     {
       "actionId": "VERIFY_USER:erik.severson@540.co",
@@ -5529,7 +5507,7 @@
         "UPSERT_USER:danny.rivera@540.co"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "approved",
       "lookup": {
         "name": "cats-dev-app",
@@ -5564,7 +5542,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "applicationId": "5218c2f9-8709-4db7-98c2-f98709adb741"
+      }
     },
     {
       "actionId": "VERIFY_APPLICATION:danny.rivera@540.co/cats-dev-app",
@@ -5604,7 +5584,7 @@
         "UPSERT_USER:dev10@540.co"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "approved",
       "lookup": {
         "name": "dev10-app",
@@ -5639,7 +5619,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "applicationId": "741188db-651b-4f9f-9188-db651bef9f1b"
+      }
     },
     {
       "actionId": "VERIFY_APPLICATION:dev10@540.co/dev10-app",
@@ -5679,7 +5661,7 @@
         "UPSERT_USER:dev11@540.co"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "approved",
       "lookup": {
         "name": "dev11-app",
@@ -5714,7 +5696,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "applicationId": "d2c9bd7c-46a6-406e-89bd-7c46a6a06ea6"
+      }
     },
     {
       "actionId": "VERIFY_APPLICATION:dev11@540.co/dev11-app",
@@ -5754,7 +5738,7 @@
         "UPSERT_USER:dev12@540.co"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "approved",
       "lookup": {
         "name": "dev12-app",
@@ -5789,7 +5773,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "applicationId": "ddcdfdd6-01a8-471f-8dfd-d601a8671fc5"
+      }
     },
     {
       "actionId": "VERIFY_APPLICATION:dev12@540.co/dev12-app",
@@ -5829,7 +5815,7 @@
         "UPSERT_USER:dev13@540.co"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "approved",
       "lookup": {
         "name": "dev13-app",
@@ -5864,7 +5850,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "applicationId": "23b17692-e1fe-482b-b176-92e1fe282b09"
+      }
     },
     {
       "actionId": "VERIFY_APPLICATION:dev13@540.co/dev13-app",
@@ -5904,7 +5892,7 @@
         "UPSERT_USER:dev14@540.co"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "approved",
       "lookup": {
         "name": "dev14-app",
@@ -5939,7 +5927,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "applicationId": "82725932-7c23-4cf5-b259-327c23acf5ff"
+      }
     },
     {
       "actionId": "VERIFY_APPLICATION:dev14@540.co/dev14-app",
@@ -5979,7 +5969,7 @@
         "UPSERT_USER:dev15@540.co"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "approved",
       "lookup": {
         "name": "dev15-app",
@@ -6014,7 +6004,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "applicationId": "f562177e-6ad9-4886-a217-7e6ad928862f"
+      }
     },
     {
       "actionId": "VERIFY_APPLICATION:dev15@540.co/dev15-app",
@@ -6054,7 +6046,7 @@
         "UPSERT_USER:dev16@540.co"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "approved",
       "lookup": {
         "name": "dev16-app",
@@ -6089,7 +6081,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "applicationId": "bebcc740-5fa0-498e-bcc7-405fa0198e7d"
+      }
     },
     {
       "actionId": "VERIFY_APPLICATION:dev16@540.co/dev16-app",
@@ -6129,7 +6123,7 @@
         "UPSERT_USER:dev17@540.co"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "approved",
       "lookup": {
         "name": "dev17-app",
@@ -6184,7 +6178,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "applicationId": "57c7fa09-c9a2-483d-87fa-09c9a2183d25"
+      }
     },
     {
       "actionId": "VERIFY_APPLICATION:dev17@540.co/dev17-app",
@@ -6228,7 +6224,7 @@
         "UPSERT_USER:dev18@540.co"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "approved",
       "lookup": {
         "name": "dev18-app",
@@ -6283,7 +6279,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "applicationId": "4a4b3d3e-8970-42ae-8b3d-3e8970e2aee2"
+      }
     },
     {
       "actionId": "VERIFY_APPLICATION:dev18@540.co/dev18-app",
@@ -6327,7 +6325,7 @@
         "UPSERT_USER:dev19@540.co"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "approved",
       "lookup": {
         "name": "dev19-app",
@@ -6382,7 +6380,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "applicationId": "26ebd772-be5d-4e2a-abd7-72be5d5e2aea"
+      }
     },
     {
       "actionId": "VERIFY_APPLICATION:dev19@540.co/dev19-app",
@@ -6426,7 +6426,7 @@
         "UPSERT_USER:dev1@540.co"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "approved",
       "lookup": {
         "name": "kanye-dev-app",
@@ -6481,7 +6481,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "applicationId": "e7a37f98-ee9f-4370-a37f-98ee9f13704c"
+      }
     },
     {
       "actionId": "VERIFY_APPLICATION:dev1@540.co/kanye-dev-app",
@@ -6525,7 +6527,7 @@
         "UPSERT_USER:dev1@540.co"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "approved",
       "lookup": {
         "name": "wizards-dev-app",
@@ -6560,7 +6562,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "applicationId": "4c42adc6-29de-4c3f-82ad-c629defc3f1f"
+      }
     },
     {
       "actionId": "VERIFY_APPLICATION:dev1@540.co/wizards-dev-app",
@@ -6600,7 +6604,7 @@
         "UPSERT_USER:dev20@540.co"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "approved",
       "lookup": {
         "name": "dev20-app",
@@ -6655,7 +6659,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "applicationId": "900d3315-79a3-4a91-8d33-1579a3aa9195"
+      }
     },
     {
       "actionId": "VERIFY_APPLICATION:dev20@540.co/dev20-app",
@@ -6699,7 +6705,7 @@
         "UPSERT_USER:dev2@540.co"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "approved",
       "lookup": {
         "name": "chuck-norris-dev-app",
@@ -6754,7 +6760,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "applicationId": "8b2accb6-a6fd-4edf-aacc-b6a6fd0edff6"
+      }
     },
     {
       "actionId": "VERIFY_APPLICATION:dev2@540.co/chuck-norris-dev-app",
@@ -6798,7 +6806,7 @@
         "UPSERT_USER:dev2@540.co"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "approved",
       "lookup": {
         "name": "dog-breeds-dev-app",
@@ -6833,7 +6841,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "applicationId": "12581e05-a8cd-483b-981e-05a8cd283b93"
+      }
     },
     {
       "actionId": "VERIFY_APPLICATION:dev2@540.co/dog-breeds-dev-app",
@@ -6873,7 +6883,7 @@
         "UPSERT_USER:dev4@540.co"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "approved",
       "lookup": {
         "name": "dev4-app",
@@ -6908,7 +6918,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "applicationId": "0230b1d4-2461-45cc-b0b1-d4246155ccea"
+      }
     },
     {
       "actionId": "VERIFY_APPLICATION:dev4@540.co/dev4-app",
@@ -6948,7 +6960,7 @@
         "UPSERT_USER:dev5@540.co"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "approved",
       "lookup": {
         "name": "dev5-app",
@@ -6983,7 +6995,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "applicationId": "46297ea6-a1ad-4f91-a97e-a6a1adef91fd"
+      }
     },
     {
       "actionId": "VERIFY_APPLICATION:dev5@540.co/dev5-app",
@@ -7023,7 +7037,7 @@
         "UPSERT_USER:dev6@540.co"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "approved",
       "lookup": {
         "name": "dev6-app",
@@ -7058,7 +7072,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "applicationId": "bea7c14a-f95d-44b1-a7c1-4af95db4b16e"
+      }
     },
     {
       "actionId": "VERIFY_APPLICATION:dev6@540.co/dev6-app",
@@ -7098,7 +7114,7 @@
         "UPSERT_USER:dev7@540.co"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "approved",
       "lookup": {
         "name": "dev7-app",
@@ -7133,7 +7149,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "applicationId": "178b7859-530f-4969-8b78-59530f1969ed"
+      }
     },
     {
       "actionId": "VERIFY_APPLICATION:dev7@540.co/dev7-app",
@@ -7173,7 +7191,7 @@
         "UPSERT_USER:dev8@540.co"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "approved",
       "lookup": {
         "name": "dev8-app",
@@ -7208,7 +7226,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "applicationId": "34504474-5180-478d-9044-745180c78db1"
+      }
     },
     {
       "actionId": "VERIFY_APPLICATION:dev8@540.co/dev8-app",
@@ -7248,7 +7268,7 @@
         "UPSERT_USER:dev9@540.co"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "approved",
       "lookup": {
         "name": "dev9-app",
@@ -7283,7 +7303,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "applicationId": "e6d3e0f6-dbf1-44af-93e0-f6dbf124af65"
+      }
     },
     {
       "actionId": "VERIFY_APPLICATION:dev9@540.co/dev9-app",
@@ -7323,7 +7345,7 @@
         "UPSERT_USER:erik.severson@540.co"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "approved",
       "lookup": {
         "name": "hogwarts-houses-dev-app",
@@ -7378,7 +7400,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "applicationId": "2d4cdfb3-ed72-4652-8cdf-b3ed720652cf"
+      }
     },
     {
       "actionId": "VERIFY_APPLICATION:erik.severson@540.co/hogwarts-houses-dev-app",
@@ -7422,7 +7446,7 @@
         "UPSERT_USER:erik.severson@540.co"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "approved",
       "lookup": {
         "name": "misc-dev-app",
@@ -7477,7 +7501,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "applicationId": "82db8349-6293-4123-9b83-4962935123d9"
+      }
     },
     {
       "actionId": "VERIFY_APPLICATION:erik.severson@540.co/misc-dev-app",
@@ -7521,7 +7547,7 @@
         "UPSERT_USER:erik.severson@540.co"
       ],
       "plannedStatus": "READY",
-      "operation": "CREATE",
+      "operation": "REUSE",
       "desiredState": "approved",
       "lookup": {
         "name": "yes-or-no-dev-app",
@@ -7556,7 +7582,9 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {}
+      "targetHint": {
+        "applicationId": "4e1fcd57-087c-4319-9fcd-57087cd319a7"
+      }
     },
     {
       "actionId": "VERIFY_APPLICATION:erik.severson@540.co/yes-or-no-dev-app",

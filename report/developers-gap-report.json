@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-06-16T15:57:56.181Z",
+  "generatedAt": "2026-06-16T16:08:11.211Z",
   "summary": {
     "users": 21,
     "applications": 25,
     "credentials": 25,
     "subscriptions": 25,
     "actions": 167,
-    "blockers": 15,
-    "warnings": 2,
-    "manualReview": 2,
+    "blockers": 8,
+    "warnings": 1,
+    "manualReview": 0,
     "inactiveDevelopers": 0,
     "continuityRiskCount": 25,
     "apiKeyContinuityRiskCount": 25,
@@ -86,92 +86,17 @@
       }
     },
     {
-      "severity": "blocker",
-      "code": "GRAVITEE_AUTH_FAILED",
-      "message": "Gravitee health check failed: GET https://gravitee.advana.aws.540.dev/management/organizations/DEFAULT → HTTP 404",
-      "details": {
-        "status": 404
-      }
-    },
-    {
-      "severity": "blocker",
-      "code": "USER_PROVISIONING_LOOKUP_UNSUPPORTED",
-      "message": "User provisioning probe failed for lookup",
-      "details": {
-        "status": 404,
-        "classification": "unsupported-endpoint",
-        "error": null
-      }
-    },
-    {
-      "severity": "blocker",
-      "code": "USER_PROVISIONING_CREATE_UNSUPPORTED",
-      "message": "User provisioning probe failed for create",
-      "details": {
-        "status": 404,
-        "classification": "unsupported-endpoint",
-        "error": null
-      }
-    },
-    {
-      "severity": "blocker",
-      "code": "APPLICATION_OWNERSHIP_LIST_UNSUPPORTED",
-      "message": "Application ownership probe failed for list",
-      "details": {
-        "status": 404,
-        "classification": "unsupported-endpoint",
-        "error": null
-      }
-    },
-    {
-      "severity": "blocker",
-      "code": "APPLICATION_OWNERSHIP_CREATE_UNSUPPORTED",
-      "message": "Application ownership probe failed for create",
-      "details": {
-        "status": 404,
-        "classification": "unsupported-endpoint",
-        "error": null
-      }
-    },
-    {
-      "severity": "blocker",
-      "code": "SILENT_USER_CREATION_PROBE_FAILED",
-      "message": "Live Gravitee probes did not confirm silent user provisioning support",
-      "details": {}
-    },
-    {
-      "severity": "blocker",
-      "code": "APPLICATION_OWNERSHIP_PROBE_FAILED",
-      "message": "Live Gravitee probes did not confirm direct-member application ownership support",
-      "details": {}
-    },
-    {
       "severity": "warning",
-      "code": "ROLE_LOOKUP_FAILED",
-      "message": "Unable to verify roles via Gravitee API: GET https://gravitee.advana.aws.540.dev/management/organizations/DEFAULT/rolescopes → HTTP 404",
-      "details": {}
-    },
-    {
-      "severity": "warning",
-      "code": "ROLE_LOOKUP_UNVERIFIED",
-      "message": "Role configuration could not be auto-verified",
-      "details": {}
+      "code": "ROLE_CONFIGURATION_FALLBACK",
+      "message": "Configured role ENVIRONMENT:API_CONSUMER was not found in Gravitee; falling back to ENVIRONMENT:USER",
+      "details": {
+        "roleName": "ENVIRONMENT:API_CONSUMER",
+        "fallbackRoleName": "ENVIRONMENT:USER",
+        "scope": "ENVIRONMENT"
+      }
     }
   ],
-  "manualReviewFindings": [
-    {
-      "severity": "warning",
-      "code": "ROLE_LOOKUP_FAILED",
-      "message": "Unable to verify roles via Gravitee API: GET https://gravitee.advana.aws.540.dev/management/organizations/DEFAULT/rolescopes → HTTP 404",
-      "details": {}
-    },
-    {
-      "severity": "warning",
-      "code": "ROLE_LOOKUP_UNVERIFIED",
-      "message": "Role configuration could not be auto-verified",
-      "details": {}
-    }
-  ],
+  "manualReviewFindings": [],
   "continuityRisks": [
     {
       "credentialId": "danny.rivera@540.co/cats-dev-app/idWhL2ATXfup5AyPWo9Z3Oakj1exc0KY",
@@ -878,9 +803,9 @@
     "applications": 25,
     "credentials": 25,
     "subscriptions": 25,
-    "blockers": 15,
-    "warnings": 2,
-    "manualReview": 2,
+    "blockers": 8,
+    "warnings": 1,
+    "manualReview": 0,
     "actions": 167,
     "actionsByKind": {
       "UPSERT_USER": 21,
@@ -898,17 +823,19 @@
     "operatorActions": {
       "byKind": {
         "UPSERT_USER": {
-          "CREATE": 21
+          "REUSE": 19,
+          "CREATE": 2
         },
         "UPSERT_APPLICATION": {
-          "CREATE": 25
+          "REUSE": 25
         },
         "UPSERT_SUBSCRIPTION": {
           "BLOCK": 25
         }
       },
       "byOperation": {
-        "CREATE": 46,
+        "REUSE": 44,
+        "CREATE": 2,
         "BLOCK": 25
       },
       "blockedReasons": {
@@ -920,14 +847,7 @@
     "nextSuggestedScope": null,
     "resumeSafe": false,
     "blockerCategories": {
-      "PRODUCT_PLAN_MAPPING_MISSING": 8,
-      "GRAVITEE_AUTH_FAILED": 1,
-      "USER_PROVISIONING_LOOKUP_UNSUPPORTED": 1,
-      "USER_PROVISIONING_CREATE_UNSUPPORTED": 1,
-      "APPLICATION_OWNERSHIP_LIST_UNSUPPORTED": 1,
-      "APPLICATION_OWNERSHIP_CREATE_UNSUPPORTED": 1,
-      "SILENT_USER_CREATION_PROBE_FAILED": 1,
-      "APPLICATION_OWNERSHIP_PROBE_FAILED": 1
+      "PRODUCT_PLAN_MAPPING_MISSING": 8
     }
   }
 }

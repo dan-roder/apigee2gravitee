@@ -1,33 +1,605 @@
 {
-  "generatedAt": "2026-06-16T15:57:40.371Z",
+  "generatedAt": "2026-06-16T16:06:52.814Z",
   "command": "developers sync-live-ids",
+  "status": "complete",
   "wroteIdMap": true,
   "clearMissing": false,
   "idMapPath": "/home/ec2-user/apigee2gravitee/state/developers-id-map.json",
   "summary": {
     "users": {
       "total": 21,
-      "missing-with-existing-id": 21
+      "updated": 19,
+      "missing-with-existing-id": 2
     },
     "applications": {
       "total": 25,
-      "missing-with-existing-id": 25
+      "matched": 25
     },
     "subscriptions": {
       "total": 0
     },
     "all": {
       "total": 46,
-      "missing-with-existing-id": 46
+      "updated": 19,
+      "missing-with-existing-id": 2,
+      "matched": 25
     }
+  },
+  "diagnostics": {
+    "startedAt": "2026-06-16T16:05:45.950Z",
+    "updatedAt": "2026-06-16T16:06:52.814Z",
+    "status": "complete",
+    "inFlight": null,
+    "counts": {
+      "started": 48,
+      "succeeded": 46,
+      "failed": 2,
+      "timedOut": 0
+    },
+    "operations": [
+      {
+        "phase": "users",
+        "operation": "findUserByEmail",
+        "sourceId": "danny.rivera@540.co",
+        "email": "danny.rivera@540.co",
+        "startedAt": "2026-06-16T16:05:45.950Z",
+        "completedAt": "2026-06-16T16:05:46.124Z",
+        "durationMs": 174,
+        "status": "succeeded",
+        "error": null
+      },
+      {
+        "phase": "users",
+        "operation": "findUserByEmail",
+        "sourceId": "dev10@540.co",
+        "email": "dev10@540.co",
+        "startedAt": "2026-06-16T16:05:46.125Z",
+        "completedAt": "2026-06-16T16:05:46.281Z",
+        "durationMs": 156,
+        "status": "succeeded",
+        "error": null
+      },
+      {
+        "phase": "users",
+        "operation": "findUserByEmail",
+        "sourceId": "dev11@540.co",
+        "email": "dev11@540.co",
+        "startedAt": "2026-06-16T16:05:46.282Z",
+        "completedAt": "2026-06-16T16:05:46.438Z",
+        "durationMs": 156,
+        "status": "succeeded",
+        "error": null
+      },
+      {
+        "phase": "users",
+        "operation": "findUserByEmail",
+        "sourceId": "dev12@540.co",
+        "email": "dev12@540.co",
+        "startedAt": "2026-06-16T16:05:46.438Z",
+        "completedAt": "2026-06-16T16:05:46.599Z",
+        "durationMs": 161,
+        "status": "succeeded",
+        "error": null
+      },
+      {
+        "phase": "users",
+        "operation": "findUserByEmail",
+        "sourceId": "dev13@540.co",
+        "email": "dev13@540.co",
+        "startedAt": "2026-06-16T16:05:46.600Z",
+        "completedAt": "2026-06-16T16:05:46.769Z",
+        "durationMs": 169,
+        "status": "succeeded",
+        "error": null
+      },
+      {
+        "phase": "users",
+        "operation": "findUserByEmail",
+        "sourceId": "dev14@540.co",
+        "email": "dev14@540.co",
+        "startedAt": "2026-06-16T16:05:46.769Z",
+        "completedAt": "2026-06-16T16:05:46.926Z",
+        "durationMs": 157,
+        "status": "succeeded",
+        "error": null
+      },
+      {
+        "phase": "users",
+        "operation": "findUserByEmail",
+        "sourceId": "dev15@540.co",
+        "email": "dev15@540.co",
+        "startedAt": "2026-06-16T16:05:46.926Z",
+        "completedAt": "2026-06-16T16:05:47.091Z",
+        "durationMs": 165,
+        "status": "succeeded",
+        "error": null
+      },
+      {
+        "phase": "users",
+        "operation": "findUserByEmail",
+        "sourceId": "dev16@540.co",
+        "email": "dev16@540.co",
+        "startedAt": "2026-06-16T16:05:47.091Z",
+        "completedAt": "2026-06-16T16:05:47.248Z",
+        "durationMs": 157,
+        "status": "succeeded",
+        "error": null
+      },
+      {
+        "phase": "users",
+        "operation": "findUserByEmail",
+        "sourceId": "dev17@540.co",
+        "email": "dev17@540.co",
+        "startedAt": "2026-06-16T16:05:47.249Z",
+        "completedAt": "2026-06-16T16:05:47.403Z",
+        "durationMs": 154,
+        "status": "succeeded",
+        "error": null
+      },
+      {
+        "phase": "users",
+        "operation": "findUserByEmail",
+        "sourceId": "dev18@540.co",
+        "email": "dev18@540.co",
+        "startedAt": "2026-06-16T16:05:47.403Z",
+        "completedAt": "2026-06-16T16:05:47.564Z",
+        "durationMs": 161,
+        "status": "succeeded",
+        "error": null
+      },
+      {
+        "phase": "users",
+        "operation": "findUserByEmail",
+        "sourceId": "dev19@540.co",
+        "email": "dev19@540.co",
+        "startedAt": "2026-06-16T16:05:47.564Z",
+        "completedAt": "2026-06-16T16:05:47.728Z",
+        "durationMs": 164,
+        "status": "succeeded",
+        "error": null
+      },
+      {
+        "phase": "users",
+        "operation": "findUserByEmail",
+        "sourceId": "dev1@540.co",
+        "email": "dev1@540.co",
+        "startedAt": "2026-06-16T16:05:47.729Z",
+        "completedAt": "2026-06-16T16:05:47.883Z",
+        "durationMs": 154,
+        "status": "succeeded",
+        "error": null
+      },
+      {
+        "phase": "users",
+        "operation": "findUserByEmail",
+        "sourceId": "dev20@540.co",
+        "email": "dev20@540.co",
+        "startedAt": "2026-06-16T16:05:47.883Z",
+        "completedAt": "2026-06-16T16:05:48.388Z",
+        "durationMs": 505,
+        "status": "succeeded",
+        "error": null
+      },
+      {
+        "phase": "users",
+        "operation": "getUserByPreviousId",
+        "sourceId": "dev20@540.co",
+        "userId": "e0b13d55-6a74-4f21-b13d-556a74bf21bb",
+        "startedAt": "2026-06-16T16:05:48.388Z",
+        "completedAt": "2026-06-16T16:05:48.563Z",
+        "durationMs": 175,
+        "status": "failed",
+        "error": "GET https://gravitee-api.advana.aws.540.dev/management/organizations/DEFAULT/environments/DEFAULT/users/e0b13d55-6a74-4f21-b13d-556a74bf21bb → HTTP 404: {\"message\":\"User [e0b13d55-6a74-4f21-b13d-556a74bf21bb] cannot be found.\",\"parameters\":{\"user\":\"e0b13d55-6a74-4f21-b13d-556a74bf21bb\"},\"technicalCode\":\"user.notFound\",\"http_status\":404}"
+      },
+      {
+        "phase": "users",
+        "operation": "findUserByEmail",
+        "sourceId": "dev2@540.co",
+        "email": "dev2@540.co",
+        "startedAt": "2026-06-16T16:05:48.563Z",
+        "completedAt": "2026-06-16T16:05:49.063Z",
+        "durationMs": 500,
+        "status": "succeeded",
+        "error": null
+      },
+      {
+        "phase": "users",
+        "operation": "getUserByPreviousId",
+        "sourceId": "dev2@540.co",
+        "userId": "13be1c96-6dc8-4249-be1c-966dc832495f",
+        "startedAt": "2026-06-16T16:05:49.064Z",
+        "completedAt": "2026-06-16T16:05:49.241Z",
+        "durationMs": 177,
+        "status": "failed",
+        "error": "GET https://gravitee-api.advana.aws.540.dev/management/organizations/DEFAULT/environments/DEFAULT/users/13be1c96-6dc8-4249-be1c-966dc832495f → HTTP 404: {\"message\":\"User [13be1c96-6dc8-4249-be1c-966dc832495f] cannot be found.\",\"parameters\":{\"user\":\"13be1c96-6dc8-4249-be1c-966dc832495f\"},\"technicalCode\":\"user.notFound\",\"http_status\":404}"
+      },
+      {
+        "phase": "users",
+        "operation": "findUserByEmail",
+        "sourceId": "dev4@540.co",
+        "email": "dev4@540.co",
+        "startedAt": "2026-06-16T16:05:49.241Z",
+        "completedAt": "2026-06-16T16:05:49.406Z",
+        "durationMs": 165,
+        "status": "succeeded",
+        "error": null
+      },
+      {
+        "phase": "users",
+        "operation": "findUserByEmail",
+        "sourceId": "dev5@540.co",
+        "email": "dev5@540.co",
+        "startedAt": "2026-06-16T16:05:49.407Z",
+        "completedAt": "2026-06-16T16:05:49.570Z",
+        "durationMs": 163,
+        "status": "succeeded",
+        "error": null
+      },
+      {
+        "phase": "users",
+        "operation": "findUserByEmail",
+        "sourceId": "dev6@540.co",
+        "email": "dev6@540.co",
+        "startedAt": "2026-06-16T16:05:49.570Z",
+        "completedAt": "2026-06-16T16:05:49.735Z",
+        "durationMs": 165,
+        "status": "succeeded",
+        "error": null
+      },
+      {
+        "phase": "users",
+        "operation": "findUserByEmail",
+        "sourceId": "dev7@540.co",
+        "email": "dev7@540.co",
+        "startedAt": "2026-06-16T16:05:49.735Z",
+        "completedAt": "2026-06-16T16:05:49.917Z",
+        "durationMs": 182,
+        "status": "succeeded",
+        "error": null
+      },
+      {
+        "phase": "users",
+        "operation": "findUserByEmail",
+        "sourceId": "dev8@540.co",
+        "email": "dev8@540.co",
+        "startedAt": "2026-06-16T16:05:49.918Z",
+        "completedAt": "2026-06-16T16:05:50.090Z",
+        "durationMs": 172,
+        "status": "succeeded",
+        "error": null
+      },
+      {
+        "phase": "users",
+        "operation": "findUserByEmail",
+        "sourceId": "dev9@540.co",
+        "email": "dev9@540.co",
+        "startedAt": "2026-06-16T16:05:50.090Z",
+        "completedAt": "2026-06-16T16:05:50.257Z",
+        "durationMs": 167,
+        "status": "succeeded",
+        "error": null
+      },
+      {
+        "phase": "users",
+        "operation": "findUserByEmail",
+        "sourceId": "erik.severson@540.co",
+        "email": "erik.severson@540.co",
+        "startedAt": "2026-06-16T16:05:50.257Z",
+        "completedAt": "2026-06-16T16:05:50.428Z",
+        "durationMs": 171,
+        "status": "succeeded",
+        "error": null
+      },
+      {
+        "phase": "applications",
+        "operation": "findApplicationByNameAndOwnerHint",
+        "sourceId": "danny.rivera@540.co/cats-dev-app",
+        "appName": "cats-dev-app",
+        "developerEmail": "danny.rivera@540.co",
+        "startedAt": "2026-06-16T16:05:50.428Z",
+        "completedAt": "2026-06-16T16:05:52.894Z",
+        "durationMs": 2466,
+        "status": "succeeded",
+        "error": null
+      },
+      {
+        "phase": "applications",
+        "operation": "findApplicationByNameAndOwnerHint",
+        "sourceId": "dev10@540.co/dev10-app",
+        "appName": "dev10-app",
+        "developerEmail": "dev10@540.co",
+        "startedAt": "2026-06-16T16:05:52.895Z",
+        "completedAt": "2026-06-16T16:05:55.381Z",
+        "durationMs": 2486,
+        "status": "succeeded",
+        "error": null
+      },
+      {
+        "phase": "applications",
+        "operation": "findApplicationByNameAndOwnerHint",
+        "sourceId": "dev11@540.co/dev11-app",
+        "appName": "dev11-app",
+        "developerEmail": "dev11@540.co",
+        "startedAt": "2026-06-16T16:05:55.381Z",
+        "completedAt": "2026-06-16T16:05:57.897Z",
+        "durationMs": 2516,
+        "status": "succeeded",
+        "error": null
+      },
+      {
+        "phase": "applications",
+        "operation": "findApplicationByNameAndOwnerHint",
+        "sourceId": "dev12@540.co/dev12-app",
+        "appName": "dev12-app",
+        "developerEmail": "dev12@540.co",
+        "startedAt": "2026-06-16T16:05:57.897Z",
+        "completedAt": "2026-06-16T16:06:00.405Z",
+        "durationMs": 2508,
+        "status": "succeeded",
+        "error": null
+      },
+      {
+        "phase": "applications",
+        "operation": "findApplicationByNameAndOwnerHint",
+        "sourceId": "dev13@540.co/dev13-app",
+        "appName": "dev13-app",
+        "developerEmail": "dev13@540.co",
+        "startedAt": "2026-06-16T16:06:00.405Z",
+        "completedAt": "2026-06-16T16:06:02.894Z",
+        "durationMs": 2489,
+        "status": "succeeded",
+        "error": null
+      },
+      {
+        "phase": "applications",
+        "operation": "findApplicationByNameAndOwnerHint",
+        "sourceId": "dev14@540.co/dev14-app",
+        "appName": "dev14-app",
+        "developerEmail": "dev14@540.co",
+        "startedAt": "2026-06-16T16:06:02.894Z",
+        "completedAt": "2026-06-16T16:06:05.393Z",
+        "durationMs": 2499,
+        "status": "succeeded",
+        "error": null
+      },
+      {
+        "phase": "applications",
+        "operation": "findApplicationByNameAndOwnerHint",
+        "sourceId": "dev15@540.co/dev15-app",
+        "appName": "dev15-app",
+        "developerEmail": "dev15@540.co",
+        "startedAt": "2026-06-16T16:06:05.393Z",
+        "completedAt": "2026-06-16T16:06:07.874Z",
+        "durationMs": 2481,
+        "status": "succeeded",
+        "error": null
+      },
+      {
+        "phase": "applications",
+        "operation": "findApplicationByNameAndOwnerHint",
+        "sourceId": "dev16@540.co/dev16-app",
+        "appName": "dev16-app",
+        "developerEmail": "dev16@540.co",
+        "startedAt": "2026-06-16T16:06:07.874Z",
+        "completedAt": "2026-06-16T16:06:10.402Z",
+        "durationMs": 2528,
+        "status": "succeeded",
+        "error": null
+      },
+      {
+        "phase": "applications",
+        "operation": "findApplicationByNameAndOwnerHint",
+        "sourceId": "dev17@540.co/dev17-app",
+        "appName": "dev17-app",
+        "developerEmail": "dev17@540.co",
+        "startedAt": "2026-06-16T16:06:10.402Z",
+        "completedAt": "2026-06-16T16:06:12.910Z",
+        "durationMs": 2508,
+        "status": "succeeded",
+        "error": null
+      },
+      {
+        "phase": "applications",
+        "operation": "findApplicationByNameAndOwnerHint",
+        "sourceId": "dev18@540.co/dev18-app",
+        "appName": "dev18-app",
+        "developerEmail": "dev18@540.co",
+        "startedAt": "2026-06-16T16:06:12.910Z",
+        "completedAt": "2026-06-16T16:06:15.387Z",
+        "durationMs": 2477,
+        "status": "succeeded",
+        "error": null
+      },
+      {
+        "phase": "applications",
+        "operation": "findApplicationByNameAndOwnerHint",
+        "sourceId": "dev19@540.co/dev19-app",
+        "appName": "dev19-app",
+        "developerEmail": "dev19@540.co",
+        "startedAt": "2026-06-16T16:06:15.388Z",
+        "completedAt": "2026-06-16T16:06:17.853Z",
+        "durationMs": 2465,
+        "status": "succeeded",
+        "error": null
+      },
+      {
+        "phase": "applications",
+        "operation": "findApplicationByNameAndOwnerHint",
+        "sourceId": "dev1@540.co/kanye-dev-app",
+        "appName": "kanye-dev-app",
+        "developerEmail": "dev1@540.co",
+        "startedAt": "2026-06-16T16:06:17.854Z",
+        "completedAt": "2026-06-16T16:06:20.371Z",
+        "durationMs": 2517,
+        "status": "succeeded",
+        "error": null
+      },
+      {
+        "phase": "applications",
+        "operation": "findApplicationByNameAndOwnerHint",
+        "sourceId": "dev1@540.co/wizards-dev-app",
+        "appName": "wizards-dev-app",
+        "developerEmail": "dev1@540.co",
+        "startedAt": "2026-06-16T16:06:20.371Z",
+        "completedAt": "2026-06-16T16:06:22.842Z",
+        "durationMs": 2471,
+        "status": "succeeded",
+        "error": null
+      },
+      {
+        "phase": "applications",
+        "operation": "findApplicationByNameAndOwnerHint",
+        "sourceId": "dev20@540.co/dev20-app",
+        "appName": "dev20-app",
+        "developerEmail": "dev20@540.co",
+        "startedAt": "2026-06-16T16:06:22.843Z",
+        "completedAt": "2026-06-16T16:06:25.343Z",
+        "durationMs": 2500,
+        "status": "succeeded",
+        "error": null
+      },
+      {
+        "phase": "applications",
+        "operation": "findApplicationByNameAndOwnerHint",
+        "sourceId": "dev2@540.co/chuck-norris-dev-app",
+        "appName": "chuck-norris-dev-app",
+        "developerEmail": "dev2@540.co",
+        "startedAt": "2026-06-16T16:06:25.343Z",
+        "completedAt": "2026-06-16T16:06:27.832Z",
+        "durationMs": 2489,
+        "status": "succeeded",
+        "error": null
+      },
+      {
+        "phase": "applications",
+        "operation": "findApplicationByNameAndOwnerHint",
+        "sourceId": "dev2@540.co/dog-breeds-dev-app",
+        "appName": "dog-breeds-dev-app",
+        "developerEmail": "dev2@540.co",
+        "startedAt": "2026-06-16T16:06:27.833Z",
+        "completedAt": "2026-06-16T16:06:30.346Z",
+        "durationMs": 2513,
+        "status": "succeeded",
+        "error": null
+      },
+      {
+        "phase": "applications",
+        "operation": "findApplicationByNameAndOwnerHint",
+        "sourceId": "dev4@540.co/dev4-app",
+        "appName": "dev4-app",
+        "developerEmail": "dev4@540.co",
+        "startedAt": "2026-06-16T16:06:30.346Z",
+        "completedAt": "2026-06-16T16:06:32.813Z",
+        "durationMs": 2467,
+        "status": "succeeded",
+        "error": null
+      },
+      {
+        "phase": "applications",
+        "operation": "findApplicationByNameAndOwnerHint",
+        "sourceId": "dev5@540.co/dev5-app",
+        "appName": "dev5-app",
+        "developerEmail": "dev5@540.co",
+        "startedAt": "2026-06-16T16:06:32.814Z",
+        "completedAt": "2026-06-16T16:06:35.298Z",
+        "durationMs": 2484,
+        "status": "succeeded",
+        "error": null
+      },
+      {
+        "phase": "applications",
+        "operation": "findApplicationByNameAndOwnerHint",
+        "sourceId": "dev6@540.co/dev6-app",
+        "appName": "dev6-app",
+        "developerEmail": "dev6@540.co",
+        "startedAt": "2026-06-16T16:06:35.298Z",
+        "completedAt": "2026-06-16T16:06:37.787Z",
+        "durationMs": 2489,
+        "status": "succeeded",
+        "error": null
+      },
+      {
+        "phase": "applications",
+        "operation": "findApplicationByNameAndOwnerHint",
+        "sourceId": "dev7@540.co/dev7-app",
+        "appName": "dev7-app",
+        "developerEmail": "dev7@540.co",
+        "startedAt": "2026-06-16T16:06:37.788Z",
+        "completedAt": "2026-06-16T16:06:40.294Z",
+        "durationMs": 2506,
+        "status": "succeeded",
+        "error": null
+      },
+      {
+        "phase": "applications",
+        "operation": "findApplicationByNameAndOwnerHint",
+        "sourceId": "dev8@540.co/dev8-app",
+        "appName": "dev8-app",
+        "developerEmail": "dev8@540.co",
+        "startedAt": "2026-06-16T16:06:40.295Z",
+        "completedAt": "2026-06-16T16:06:42.792Z",
+        "durationMs": 2497,
+        "status": "succeeded",
+        "error": null
+      },
+      {
+        "phase": "applications",
+        "operation": "findApplicationByNameAndOwnerHint",
+        "sourceId": "dev9@540.co/dev9-app",
+        "appName": "dev9-app",
+        "developerEmail": "dev9@540.co",
+        "startedAt": "2026-06-16T16:06:42.792Z",
+        "completedAt": "2026-06-16T16:06:45.281Z",
+        "durationMs": 2489,
+        "status": "succeeded",
+        "error": null
+      },
+      {
+        "phase": "applications",
+        "operation": "findApplicationByNameAndOwnerHint",
+        "sourceId": "erik.severson@540.co/hogwarts-houses-dev-app",
+        "appName": "hogwarts-houses-dev-app",
+        "developerEmail": "erik.severson@540.co",
+        "startedAt": "2026-06-16T16:06:45.282Z",
+        "completedAt": "2026-06-16T16:06:47.753Z",
+        "durationMs": 2471,
+        "status": "succeeded",
+        "error": null
+      },
+      {
+        "phase": "applications",
+        "operation": "findApplicationByNameAndOwnerHint",
+        "sourceId": "erik.severson@540.co/misc-dev-app",
+        "appName": "misc-dev-app",
+        "developerEmail": "erik.severson@540.co",
+        "startedAt": "2026-06-16T16:06:47.754Z",
+        "completedAt": "2026-06-16T16:06:50.349Z",
+        "durationMs": 2595,
+        "status": "succeeded",
+        "error": null
+      },
+      {
+        "phase": "applications",
+        "operation": "findApplicationByNameAndOwnerHint",
+        "sourceId": "erik.severson@540.co/yes-or-no-dev-app",
+        "appName": "yes-or-no-dev-app",
+        "developerEmail": "erik.severson@540.co",
+        "startedAt": "2026-06-16T16:06:50.349Z",
+        "completedAt": "2026-06-16T16:06:52.813Z",
+        "durationMs": 2464,
+        "status": "succeeded",
+        "error": null
+      }
+    ],
+    "completedAt": "2026-06-16T16:06:52.814Z"
   },
   "users": [
     {
       "kind": "user",
       "sourceId": "danny.rivera@540.co",
       "previousId": "5e115ad9-76ea-4170-915a-d976eaa1703b",
-      "liveId": null,
-      "status": "missing-with-existing-id",
+      "liveId": "fce68682-688a-49c0-a686-82688ac9c0c5",
+      "status": "updated",
       "strategy": "email",
       "email": "danny.rivera@540.co"
     },
@@ -35,8 +607,8 @@
       "kind": "user",
       "sourceId": "dev10@540.co",
       "previousId": "e66d572e-6bc8-4685-ad57-2e6bc8468549",
-      "liveId": null,
-      "status": "missing-with-existing-id",
+      "liveId": "00196493-d214-4415-9964-93d214c415df",
+      "status": "updated",
       "strategy": "email",
       "email": "dev10@540.co"
     },
@@ -44,8 +616,8 @@
       "kind": "user",
       "sourceId": "dev11@540.co",
       "previousId": "3b41527f-6761-4af5-8152-7f67614af56d",
-      "liveId": null,
-      "status": "missing-with-existing-id",
+      "liveId": "2d3d1c4d-e5ec-44b9-bd1c-4de5ec04b99a",
+      "status": "updated",
       "strategy": "email",
       "email": "dev11@540.co"
     },
@@ -53,8 +625,8 @@
       "kind": "user",
       "sourceId": "dev12@540.co",
       "previousId": "ffa3fe11-6a1c-4e2f-a3fe-116a1c0e2ffd",
-      "liveId": null,
-      "status": "missing-with-existing-id",
+      "liveId": "c74959d5-9460-4942-8959-d59460894205",
+      "status": "updated",
       "strategy": "email",
       "email": "dev12@540.co"
     },
@@ -62,8 +634,8 @@
       "kind": "user",
       "sourceId": "dev13@540.co",
       "previousId": "776b3d37-a73d-40c3-ab3d-37a73de0c39d",
-      "liveId": null,
-      "status": "missing-with-existing-id",
+      "liveId": "e18d97f8-1052-408f-8d97-f81052308feb",
+      "status": "updated",
       "strategy": "email",
       "email": "dev13@540.co"
     },
@@ -71,8 +643,8 @@
       "kind": "user",
       "sourceId": "dev14@540.co",
       "previousId": "2bf3691f-d415-407e-b369-1fd415007ea9",
-      "liveId": null,
-      "status": "missing-with-existing-id",
+      "liveId": "7986b489-3608-47f5-86b4-89360887f5ad",
+      "status": "updated",
       "strategy": "email",
       "email": "dev14@540.co"
     },
@@ -80,8 +652,8 @@
       "kind": "user",
       "sourceId": "dev15@540.co",
       "previousId": "64dd921e-ebde-4309-9d92-1eebdec30954",
-      "liveId": null,
-      "status": "missing-with-existing-id",
+      "liveId": "1efd868c-cb56-414a-bd86-8ccb56514ac5",
+      "status": "updated",
       "strategy": "email",
       "email": "dev15@540.co"
     },
@@ -89,8 +661,8 @@
       "kind": "user",
       "sourceId": "dev16@540.co",
       "previousId": "acf08f4e-420a-45d4-b08f-4e420af5d421",
-      "liveId": null,
-      "status": "missing-with-existing-id",
+      "liveId": "c7ff68f7-1418-42bb-bf68-f71418d2bbf4",
+      "status": "updated",
       "strategy": "email",
       "email": "dev16@540.co"
     },
@@ -98,8 +670,8 @@
       "kind": "user",
       "sourceId": "dev17@540.co",
       "previousId": "22171b25-c48f-4f58-971b-25c48f8f585d",
-      "liveId": null,
-      "status": "missing-with-existing-id",
+      "liveId": "dad8ee9f-2aad-4604-98ee-9f2aad0604d8",
+      "status": "updated",
       "strategy": "email",
       "email": "dev17@540.co"
     },
@@ -107,8 +679,8 @@
       "kind": "user",
       "sourceId": "dev18@540.co",
       "previousId": "75dc8d27-0a36-43ed-9c8d-270a3643edb5",
-      "liveId": null,
-      "status": "missing-with-existing-id",
+      "liveId": "8323e023-705a-4a2e-a3e0-23705aaa2eeb",
+      "status": "updated",
       "strategy": "email",
       "email": "dev18@540.co"
     },
@@ -116,8 +688,8 @@
       "kind": "user",
       "sourceId": "dev19@540.co",
       "previousId": "114f290c-5221-4704-8f29-0c5221270499",
-      "liveId": null,
-      "status": "missing-with-existing-id",
+      "liveId": "47c5b85d-8270-4798-85b8-5d827037986f",
+      "status": "updated",
       "strategy": "email",
       "email": "dev19@540.co"
     },
@@ -125,8 +697,8 @@
       "kind": "user",
       "sourceId": "dev1@540.co",
       "previousId": "7f6bbf96-714e-4333-abbf-96714ed33383",
-      "liveId": null,
-      "status": "missing-with-existing-id",
+      "liveId": "007b42cb-f14e-4dd3-bb42-cbf14e6dd3c6",
+      "status": "updated",
       "strategy": "email",
       "email": "dev1@540.co"
     },
@@ -152,8 +724,8 @@
       "kind": "user",
       "sourceId": "dev4@540.co",
       "previousId": "06445ef4-a33d-423e-845e-f4a33dc23e1e",
-      "liveId": null,
-      "status": "missing-with-existing-id",
+      "liveId": "aacd4440-d085-4c96-8d44-40d0851c9673",
+      "status": "updated",
       "strategy": "email",
       "email": "dev4@540.co"
     },
@@ -161,8 +733,8 @@
       "kind": "user",
       "sourceId": "dev5@540.co",
       "previousId": "d63618e4-bb5d-4e8b-b618-e4bb5dbe8b3e",
-      "liveId": null,
-      "status": "missing-with-existing-id",
+      "liveId": "19fb823a-b471-4ad3-bb82-3ab4719ad3e4",
+      "status": "updated",
       "strategy": "email",
       "email": "dev5@540.co"
     },
@@ -170,8 +742,8 @@
       "kind": "user",
       "sourceId": "dev6@540.co",
       "previousId": "c6d1d874-2e23-4078-91d8-742e2310781c",
-      "liveId": null,
-      "status": "missing-with-existing-id",
+      "liveId": "e9149b29-9d71-48af-949b-299d7198af6a",
+      "status": "updated",
       "strategy": "email",
       "email": "dev6@540.co"
     },
@@ -179,8 +751,8 @@
       "kind": "user",
       "sourceId": "dev7@540.co",
       "previousId": "362f4637-5347-477d-af46-375347c77dbe",
-      "liveId": null,
-      "status": "missing-with-existing-id",
+      "liveId": "25ecf9e9-cc4a-4434-acf9-e9cc4a043480",
+      "status": "updated",
       "strategy": "email",
       "email": "dev7@540.co"
     },
@@ -188,8 +760,8 @@
       "kind": "user",
       "sourceId": "dev8@540.co",
       "previousId": "b84c0801-235c-47fa-8c08-01235c67fa26",
-      "liveId": null,
-      "status": "missing-with-existing-id",
+      "liveId": "d771b485-d23c-486c-b1b4-85d23c286c48",
+      "status": "updated",
       "strategy": "email",
       "email": "dev8@540.co"
     },
@@ -197,8 +769,8 @@
       "kind": "user",
       "sourceId": "dev9@540.co",
       "previousId": "1f4510f0-7bd0-4bea-8510-f07bd00bea18",
-      "liveId": null,
-      "status": "missing-with-existing-id",
+      "liveId": "cd3b985f-490c-4abe-bb98-5f490ceabe7f",
+      "status": "updated",
       "strategy": "email",
       "email": "dev9@540.co"
     },
@@ -206,8 +778,8 @@
       "kind": "user",
       "sourceId": "erik.severson@540.co",
       "previousId": "1cc83519-edcd-437b-8835-19edcdb37b99",
-      "liveId": null,
-      "status": "missing-with-existing-id",
+      "liveId": "17309bd1-e1c3-4229-b09b-d1e1c3a2299a",
+      "status": "updated",
       "strategy": "email",
       "email": "erik.severson@540.co"
     }
@@ -216,9 +788,9 @@
     {
       "kind": "application",
       "sourceId": "danny.rivera@540.co/cats-dev-app",
-      "previousId": "8cff7d5a-b139-43ef-bf7d-5ab139f3efab",
-      "liveId": null,
-      "status": "missing-with-existing-id",
+      "previousId": null,
+      "liveId": "5218c2f9-8709-4db7-98c2-f98709adb741",
+      "status": "matched",
       "strategy": "source-marker-or-owner-name",
       "developerEmail": "danny.rivera@540.co",
       "appName": "cats-dev-app"
@@ -226,9 +798,9 @@
     {
       "kind": "application",
       "sourceId": "dev10@540.co/dev10-app",
-      "previousId": "8ab50492-5f80-4530-b504-925f80f53003",
-      "liveId": null,
-      "status": "missing-with-existing-id",
+      "previousId": null,
+      "liveId": "741188db-651b-4f9f-9188-db651bef9f1b",
+      "status": "matched",
       "strategy": "source-marker-or-owner-name",
       "developerEmail": "dev10@540.co",
       "appName": "dev10-app"
@@ -236,9 +808,9 @@
     {
       "kind": "application",
       "sourceId": "dev11@540.co/dev11-app",
-      "previousId": "1e9b9f18-7468-4853-9b9f-1874685853c0",
-      "liveId": null,
-      "status": "missing-with-existing-id",
+      "previousId": null,
+      "liveId": "d2c9bd7c-46a6-406e-89bd-7c46a6a06ea6",
+      "status": "matched",
       "strategy": "source-marker-or-owner-name",
       "developerEmail": "dev11@540.co",
       "appName": "dev11-app"
@@ -246,9 +818,9 @@
     {
       "kind": "application",
       "sourceId": "dev12@540.co/dev12-app",
-      "previousId": "521a1658-5f58-4c77-9a16-585f588c774d",
-      "liveId": null,
-      "status": "missing-with-existing-id",
+      "previousId": null,
+      "liveId": "ddcdfdd6-01a8-471f-8dfd-d601a8671fc5",
+      "status": "matched",
       "strategy": "source-marker-or-owner-name",
       "developerEmail": "dev12@540.co",
       "appName": "dev12-app"
@@ -256,9 +828,9 @@
     {
       "kind": "application",
       "sourceId": "dev13@540.co/dev13-app",
-      "previousId": "47de4939-dde0-4645-9e49-39dde066459d",
-      "liveId": null,
-      "status": "missing-with-existing-id",
+      "previousId": null,
+      "liveId": "23b17692-e1fe-482b-b176-92e1fe282b09",
+      "status": "matched",
       "strategy": "source-marker-or-owner-name",
       "developerEmail": "dev13@540.co",
       "appName": "dev13-app"
@@ -266,9 +838,9 @@
     {
       "kind": "application",
       "sourceId": "dev14@540.co/dev14-app",
-      "previousId": "9cec4d1a-a329-4f10-ac4d-1aa329af1048",
-      "liveId": null,
-      "status": "missing-with-existing-id",
+      "previousId": null,
+      "liveId": "82725932-7c23-4cf5-b259-327c23acf5ff",
+      "status": "matched",
       "strategy": "source-marker-or-owner-name",
       "developerEmail": "dev14@540.co",
       "appName": "dev14-app"
@@ -276,9 +848,9 @@
     {
       "kind": "application",
       "sourceId": "dev15@540.co/dev15-app",
-      "previousId": "0b922974-37f4-4dfa-9229-7437f4fdfaf6",
-      "liveId": null,
-      "status": "missing-with-existing-id",
+      "previousId": null,
+      "liveId": "f562177e-6ad9-4886-a217-7e6ad928862f",
+      "status": "matched",
       "strategy": "source-marker-or-owner-name",
       "developerEmail": "dev15@540.co",
       "appName": "dev15-app"
@@ -286,9 +858,9 @@
     {
       "kind": "application",
       "sourceId": "dev16@540.co/dev16-app",
-      "previousId": "368bc496-8b9f-4383-8bc4-968b9f9383d6",
-      "liveId": null,
-      "status": "missing-with-existing-id",
+      "previousId": null,
+      "liveId": "bebcc740-5fa0-498e-bcc7-405fa0198e7d",
+      "status": "matched",
       "strategy": "source-marker-or-owner-name",
       "developerEmail": "dev16@540.co",
       "appName": "dev16-app"
@@ -296,9 +868,9 @@
     {
       "kind": "application",
       "sourceId": "dev17@540.co/dev17-app",
-      "previousId": "e2c946e8-655d-4b67-8946-e8655d4b677c",
-      "liveId": null,
-      "status": "missing-with-existing-id",
+      "previousId": null,
+      "liveId": "57c7fa09-c9a2-483d-87fa-09c9a2183d25",
+      "status": "matched",
       "strategy": "source-marker-or-owner-name",
       "developerEmail": "dev17@540.co",
       "appName": "dev17-app"
@@ -306,9 +878,9 @@
     {
       "kind": "application",
       "sourceId": "dev18@540.co/dev18-app",
-      "previousId": "9e7ec003-bbab-46e5-bec0-03bbabf6e5e8",
-      "liveId": null,
-      "status": "missing-with-existing-id",
+      "previousId": null,
+      "liveId": "4a4b3d3e-8970-42ae-8b3d-3e8970e2aee2",
+      "status": "matched",
       "strategy": "source-marker-or-owner-name",
       "developerEmail": "dev18@540.co",
       "appName": "dev18-app"
@@ -316,9 +888,9 @@
     {
       "kind": "application",
       "sourceId": "dev19@540.co/dev19-app",
-      "previousId": "5a148d2f-0765-4547-948d-2f0765b5477f",
-      "liveId": null,
-      "status": "missing-with-existing-id",
+      "previousId": null,
+      "liveId": "26ebd772-be5d-4e2a-abd7-72be5d5e2aea",
+      "status": "matched",
       "strategy": "source-marker-or-owner-name",
       "developerEmail": "dev19@540.co",
       "appName": "dev19-app"
@@ -326,9 +898,9 @@
     {
       "kind": "application",
       "sourceId": "dev1@540.co/kanye-dev-app",
-      "previousId": "7b3f69e9-2785-4beb-bf69-e92785bbeb5b",
-      "liveId": null,
-      "status": "missing-with-existing-id",
+      "previousId": null,
+      "liveId": "e7a37f98-ee9f-4370-a37f-98ee9f13704c",
+      "status": "matched",
       "strategy": "source-marker-or-owner-name",
       "developerEmail": "dev1@540.co",
       "appName": "kanye-dev-app"
@@ -336,9 +908,9 @@
     {
       "kind": "application",
       "sourceId": "dev1@540.co/wizards-dev-app",
-      "previousId": "39e35ef7-926a-463f-a35e-f7926a563f69",
-      "liveId": null,
-      "status": "missing-with-existing-id",
+      "previousId": null,
+      "liveId": "4c42adc6-29de-4c3f-82ad-c629defc3f1f",
+      "status": "matched",
       "strategy": "source-marker-or-owner-name",
       "developerEmail": "dev1@540.co",
       "appName": "wizards-dev-app"
@@ -346,9 +918,9 @@
     {
       "kind": "application",
       "sourceId": "dev20@540.co/dev20-app",
-      "previousId": "c76f7354-97d8-4faf-af73-5497d88faf36",
-      "liveId": null,
-      "status": "missing-with-existing-id",
+      "previousId": null,
+      "liveId": "900d3315-79a3-4a91-8d33-1579a3aa9195",
+      "status": "matched",
       "strategy": "source-marker-or-owner-name",
       "developerEmail": "dev20@540.co",
       "appName": "dev20-app"
@@ -356,9 +928,9 @@
     {
       "kind": "application",
       "sourceId": "dev2@540.co/chuck-norris-dev-app",
-      "previousId": "b765a056-2e5e-4ee8-a5a0-562e5e5ee80d",
-      "liveId": null,
-      "status": "missing-with-existing-id",
+      "previousId": null,
+      "liveId": "8b2accb6-a6fd-4edf-aacc-b6a6fd0edff6",
+      "status": "matched",
       "strategy": "source-marker-or-owner-name",
       "developerEmail": "dev2@540.co",
       "appName": "chuck-norris-dev-app"
@@ -366,9 +938,9 @@
     {
       "kind": "application",
       "sourceId": "dev2@540.co/dog-breeds-dev-app",
-      "previousId": "af279589-6b3b-4a1e-a795-896b3b2a1ee8",
-      "liveId": null,
-      "status": "missing-with-existing-id",
+      "previousId": null,
+      "liveId": "12581e05-a8cd-483b-981e-05a8cd283b93",
+      "status": "matched",
       "strategy": "source-marker-or-owner-name",
       "developerEmail": "dev2@540.co",
       "appName": "dog-breeds-dev-app"
@@ -376,9 +948,9 @@
     {
       "kind": "application",
       "sourceId": "dev4@540.co/dev4-app",
-      "previousId": "b7c3f67c-cab5-4f82-83f6-7ccab5cf8229",
-      "liveId": null,
-      "status": "missing-with-existing-id",
+      "previousId": null,
+      "liveId": "0230b1d4-2461-45cc-b0b1-d4246155ccea",
+      "status": "matched",
       "strategy": "source-marker-or-owner-name",
       "developerEmail": "dev4@540.co",
       "appName": "dev4-app"
@@ -386,9 +958,9 @@
     {
       "kind": "application",
       "sourceId": "dev5@540.co/dev5-app",
-      "previousId": "2841f06d-1175-4222-81f0-6d1175b222e1",
-      "liveId": null,
-      "status": "missing-with-existing-id",
+      "previousId": null,
+      "liveId": "46297ea6-a1ad-4f91-a97e-a6a1adef91fd",
+      "status": "matched",
       "strategy": "source-marker-or-owner-name",
       "developerEmail": "dev5@540.co",
       "appName": "dev5-app"
@@ -396,9 +968,9 @@
     {
       "kind": "application",
       "sourceId": "dev6@540.co/dev6-app",
-      "previousId": "c2d633ed-bdbe-455f-9633-edbdbe955f5e",
-      "liveId": null,
-      "status": "missing-with-existing-id",
+      "previousId": null,
+      "liveId": "bea7c14a-f95d-44b1-a7c1-4af95db4b16e",
+      "status": "matched",
       "strategy": "source-marker-or-owner-name",
       "developerEmail": "dev6@540.co",
       "appName": "dev6-app"
@@ -406,9 +978,9 @@
     {
       "kind": "application",
       "sourceId": "dev7@540.co/dev7-app",
-      "previousId": "c8865127-abe6-4b56-8651-27abe66b5639",
-      "liveId": null,
-      "status": "missing-with-existing-id",
+      "previousId": null,
+      "liveId": "178b7859-530f-4969-8b78-59530f1969ed",
+      "status": "matched",
       "strategy": "source-marker-or-owner-name",
       "developerEmail": "dev7@540.co",
       "appName": "dev7-app"
@@ -416,9 +988,9 @@
     {
       "kind": "application",
       "sourceId": "dev8@540.co/dev8-app",
-      "previousId": "75ade06c-4d26-4657-ade0-6c4d26c65739",
-      "liveId": null,
-      "status": "missing-with-existing-id",
+      "previousId": null,
+      "liveId": "34504474-5180-478d-9044-745180c78db1",
+      "status": "matched",
       "strategy": "source-marker-or-owner-name",
       "developerEmail": "dev8@540.co",
       "appName": "dev8-app"
@@ -426,9 +998,9 @@
     {
       "kind": "application",
       "sourceId": "dev9@540.co/dev9-app",
-      "previousId": "5b17c0e3-5c3f-4eff-97c0-e35c3faeff2c",
-      "liveId": null,
-      "status": "missing-with-existing-id",
+      "previousId": null,
+      "liveId": "e6d3e0f6-dbf1-44af-93e0-f6dbf124af65",
+      "status": "matched",
       "strategy": "source-marker-or-owner-name",
       "developerEmail": "dev9@540.co",
       "appName": "dev9-app"
@@ -436,9 +1008,9 @@
     {
       "kind": "application",
       "sourceId": "erik.severson@540.co/hogwarts-houses-dev-app",
-      "previousId": "0a6e779d-3918-496b-ae77-9d3918b96bfb",
-      "liveId": null,
-      "status": "missing-with-existing-id",
+      "previousId": null,
+      "liveId": "2d4cdfb3-ed72-4652-8cdf-b3ed720652cf",
+      "status": "matched",
       "strategy": "source-marker-or-owner-name",
       "developerEmail": "erik.severson@540.co",
       "appName": "hogwarts-houses-dev-app"
@@ -446,9 +1018,9 @@
     {
       "kind": "application",
       "sourceId": "erik.severson@540.co/misc-dev-app",
-      "previousId": "f661c478-1bb9-4b3f-a1c4-781bb91b3fc5",
-      "liveId": null,
-      "status": "missing-with-existing-id",
+      "previousId": null,
+      "liveId": "82db8349-6293-4123-9b83-4962935123d9",
+      "status": "matched",
       "strategy": "source-marker-or-owner-name",
       "developerEmail": "erik.severson@540.co",
       "appName": "misc-dev-app"
@@ -456,9 +1028,9 @@
     {
       "kind": "application",
       "sourceId": "erik.severson@540.co/yes-or-no-dev-app",
-      "previousId": "e305c79e-13d2-4931-85c7-9e13d2693160",
-      "liveId": null,
-      "status": "missing-with-existing-id",
+      "previousId": null,
+      "liveId": "4e1fcd57-087c-4319-9fcd-57087cd319a7",
+      "status": "matched",
       "strategy": "source-marker-or-owner-name",
       "developerEmail": "erik.severson@540.co",
       "appName": "yes-or-no-dev-app"
