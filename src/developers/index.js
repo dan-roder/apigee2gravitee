@@ -258,6 +258,10 @@ async function runDevelopersCommand(subcommand, flags, fmt) {
     console.log(`[sync] users: ${result.report.summary.users.matched || 0} matched, ${result.report.summary.users.updated || 0} changed, ${result.report.summary.users.missing || 0} missing`);
     console.log(`[sync] apps: ${result.report.summary.applications.matched || 0} matched, ${result.report.summary.applications.updated || 0} changed, ${result.report.summary.applications.missing || 0} missing`);
     console.log(`[sync] subscriptions: ${result.report.summary.subscriptions.matched || 0} matched, ${result.report.summary.subscriptions.updated || 0} changed, ${result.report.summary.subscriptions.missing || 0} missing`);
+    if (result.report.diagnostics) {
+      const counts = result.report.diagnostics.counts || {};
+      console.log(`[diagnostics] lookups: ${counts.succeeded || 0} succeeded, ${counts.failed || 0} failed, ${counts.timedOut || 0} timed out`);
+    }
     console.log('');
     console.log(`  Report:     ${fmt.dim(result.reportPath)}`);
     console.log(`  Id map:     ${fmt.dim(result.outputPaths.idMap)}`);

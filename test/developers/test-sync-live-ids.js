@@ -318,12 +318,47 @@ async function testClearMissingNullsMissingIds() {
   });
 }
 
+async function testDiagnosticsReportInFlightAndTimeouts() {
+  await withTempDir(async (dir) => {
+    const config = makeConfig(dir);
+    let checkpointSawInFlight = false;
+    const client = {
+      ...makeClient(),
+      async findUserByEmail() {
+        const reportPath = path.join(dir, 'report', 'developers-live-id-sync-report.json');
+        const checkpoint = readJson(reportPath);
+        checkpointSawInFlight = checkpoint.status === 'running'
+          && checkpoint.diagnostics?.inFlight?.operation === 'findUserByEmail';
+        await new Promise((resolve) => setTimeout(resolve, 25));
+        return { id: 'user-late', email: 'alice@example.com' };
+      },
+      async findApplicationByNameAndOwnerHint() { return null; },
+    };
+
+    const result = await runSyncDevelopersLiveIds(
+      {
+        'ir-dir': path.join(dir, 'ir'),
+        config: path.join(dir, 'config.json'),
+        diagnostics: true,
+        'diagnostic-timeout-ms': '5',
+      },
+      { config, domain: makeDomain(), client },
+    );
+
+    assert.strictEqual(result.exitCode, 0);
+    assert.strictEqual(checkpointSawInFlight, true);
+    assert.strictEqual(result.report.diagnostics.counts.timedOut, 1);
+    assert.strictEqual(result.report.users[0].status, 'missing');
+  });
+}
+
 (async () => {
   await testReportOnlyDoesNotWriteIdMap();
   await testWriteIdMapRefreshesLiveIds();
   await testWriteIdMapKeepsSearchInvisibleUserWhenPreviousIdResolves();
   await testWriteIdMapRecoversSearchInvisibleUserFromPreviousReport();
   await testClearMissingNullsMissingIds();
+  await testDiagnosticsReportInFlightAndTimeouts();
   console.log('test-sync-live-ids.js passed');
 })().catch((err) => {
   console.error(err);
