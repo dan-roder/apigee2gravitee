@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-05-20T16:05:01.652Z",
+  "generatedAt": "2026-06-16T18:47:49.016Z",
   "command": "developers select-apps",
-  "irDir": "/Users/daniel.roder/Sites/apigee2gravitee/ir",
-  "configPath": "/Users/daniel.roder/Sites/apigee2gravitee/config/developers.config.resolved.json",
+  "irDir": "/home/ec2-user/apigee2gravitee/ir",
+  "configPath": "/home/ec2-user/apigee2gravitee/config/developers.config.resolved.json",
   "cleared": false,
   "skipped": false,
   "existingIncludeApps": [],

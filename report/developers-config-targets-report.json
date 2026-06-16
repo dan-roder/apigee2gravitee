@@ -1,16 +1,15 @@
 {
-  "generatedAt": "2026-05-21T20:01:08.858Z",
-  "configPath": "/Users/daniel.roder/Sites/apigee2gravitee/config/developers.config.resolved.json",
+  "generatedAt": "2026-06-16T18:47:58.970Z",
+  "configPath": "/home/ec2-user/apigee2gravitee/config/developers.config.resolved.json",
   "apisIdMapPresent": true,
   "summary": {
     "products": 10,
-    "targets": 12,
-    "validTargets": 12,
+    "targets": 13,
+    "validTargets": 13,
     "blockers": 0,
     "warnings": 1,
     "productsWithSingleValidTarget": [
       "orders-product",
-      "misc-product",
       "cats-api-product",
       "chuck-norris-api-product",
       "dog-breeds-api-product",
@@ -21,6 +20,7 @@
     ],
     "productsNeedingSelection": [],
     "productsWithMultipleValidTargets": [
+      "misc-product",
       "misc-api-product"
     ],
     "blockedProducts": []
@@ -81,10 +81,10 @@
       "targetIndex": 0,
       "activeProduct": false,
       "configured": {
-        "targetApi": "apigee-hello",
-        "targetApiId": "c78de823-83c1-4cf9-8de8-2383c14cf9e7",
-        "targetPlan": "Keyless Plan",
-        "targetPlanId": "cd6e6125-3c21-4155-ae61-253c21f1559a",
+        "targetApi": "apigee-hello-api-1",
+        "targetApiId": "2b9f7f53-2dee-4f5c-9f7f-532dee9f5cb1",
+        "targetPlan": "api-key-plan",
+        "targetPlanId": "8f1e49ec-d795-4534-9e49-ecd795053418",
         "matchMode": "exact"
       },
       "credentialProfile": {
@@ -95,25 +95,70 @@
         "sourceCredentials": []
       },
       "resolved": {
-        "apiId": "c78de823-83c1-4cf9-8de8-2383c14cf9e7",
-        "apiName": "apigee-hello",
-        "planId": "cd6e6125-3c21-4155-ae61-253c21f1559a",
-        "planName": "Keyless Plan",
-        "planSecurityType": "keyless",
+        "apiId": "2b9f7f53-2dee-4f5c-9f7f-532dee9f5cb1",
+        "apiName": "apigee-hello-api-1",
+        "planId": "8f1e49ec-d795-4534-9e49-ecd795053418",
+        "planName": "api-key-plan",
+        "planSecurityType": "api-key",
         "planStatus": "PUBLISHED"
       },
       "candidates": {
         "apis": [
           {
-            "id": "c78de823-83c1-4cf9-8de8-2383c14cf9e7",
-            "name": "apigee-hello",
+            "id": "2b9f7f53-2dee-4f5c-9f7f-532dee9f5cb1",
+            "name": "apigee-hello-api-1",
             "matchMode": "id"
           }
         ],
         "plans": [
           {
-            "id": "cd6e6125-3c21-4155-ae61-253c21f1559a",
-            "name": "Keyless Plan",
+            "id": "8f1e49ec-d795-4534-9e49-ecd795053418",
+            "name": "api-key-plan",
+            "matchMode": "id"
+          }
+        ]
+      },
+      "status": "VALID",
+      "findings": []
+    },
+    {
+      "productName": "misc-product",
+      "targetIndex": 1,
+      "activeProduct": false,
+      "configured": {
+        "targetApi": "cat-fact-api-2",
+        "targetApiId": "89884594-070e-4a48-8845-94070eea48d4",
+        "targetPlan": "api-key-plan",
+        "targetPlanId": "08f9eee0-3617-4a77-b9ee-e03617da7744",
+        "matchMode": "exact"
+      },
+      "credentialProfile": {
+        "productName": "misc-product",
+        "credentialTypes": [],
+        "primaryCredentialType": "api-key",
+        "hasMixedCredentialTypes": false,
+        "sourceCredentials": []
+      },
+      "resolved": {
+        "apiId": "89884594-070e-4a48-8845-94070eea48d4",
+        "apiName": "cat-fact-api-2",
+        "planId": "08f9eee0-3617-4a77-b9ee-e03617da7744",
+        "planName": "api-key-plan",
+        "planSecurityType": "api-key",
+        "planStatus": "PUBLISHED"
+      },
+      "candidates": {
+        "apis": [
+          {
+            "id": "89884594-070e-4a48-8845-94070eea48d4",
+            "name": "cat-fact-api-2",
+            "matchMode": "id"
+          }
+        ],
+        "plans": [
+          {
+            "id": "08f9eee0-3617-4a77-b9ee-e03617da7744",
+            "name": "api-key-plan",
             "matchMode": "id"
           }
         ]
@@ -127,9 +172,9 @@
       "activeProduct": true,
       "configured": {
         "targetApi": "cats-api-7",
-        "targetApiId": "63a370e7-7d6e-4ddb-a370-e77d6e3ddbc3",
-        "targetPlan": "API Key Plan",
-        "targetPlanId": "8243bcf4-377a-421b-83bc-f4377a321b1d",
+        "targetApiId": "be73ea39-32fd-4ac8-b3ea-3932fd4ac858",
+        "targetPlan": "api-key-plan",
+        "targetPlanId": "3611d76f-c02e-4182-91d7-6fc02e318294",
         "matchMode": "exact"
       },
       "credentialProfile": {
@@ -146,25 +191,25 @@
         ]
       },
       "resolved": {
-        "apiId": "63a370e7-7d6e-4ddb-a370-e77d6e3ddbc3",
+        "apiId": "be73ea39-32fd-4ac8-b3ea-3932fd4ac858",
         "apiName": "cats-api-7",
-        "planId": "8243bcf4-377a-421b-83bc-f4377a321b1d",
-        "planName": "API Key Plan",
+        "planId": "3611d76f-c02e-4182-91d7-6fc02e318294",
+        "planName": "api-key-plan",
         "planSecurityType": "api-key",
         "planStatus": "PUBLISHED"
       },
       "candidates": {
         "apis": [
           {
-            "id": "63a370e7-7d6e-4ddb-a370-e77d6e3ddbc3",
+            "id": "be73ea39-32fd-4ac8-b3ea-3932fd4ac858",
             "name": "cats-api-7",
             "matchMode": "id"
           }
         ],
         "plans": [
           {
-            "id": "8243bcf4-377a-421b-83bc-f4377a321b1d",
-            "name": "API Key Plan",
+            "id": "3611d76f-c02e-4182-91d7-6fc02e318294",
+            "name": "api-key-plan",
             "matchMode": "id"
           }
         ]
@@ -178,9 +223,9 @@
       "activeProduct": true,
       "configured": {
         "targetApi": "chuck-norris-api-10",
-        "targetApiId": "25c78c81-954e-455d-878c-81954e255d73",
-        "targetPlan": "API Key Plan",
-        "targetPlanId": "6d3b4998-cee4-412a-bb49-98cee4f12ad5",
+        "targetApiId": "927e6ba1-a2e9-4baf-be6b-a1a2e93bafe9",
+        "targetPlan": "api-key-plan",
+        "targetPlanId": "9ff1a423-9700-41a0-b1a4-23970031a07c",
         "matchMode": "exact"
       },
       "credentialProfile": {
@@ -197,25 +242,25 @@
         ]
       },
       "resolved": {
-        "apiId": "25c78c81-954e-455d-878c-81954e255d73",
+        "apiId": "927e6ba1-a2e9-4baf-be6b-a1a2e93bafe9",
         "apiName": "chuck-norris-api-10",
-        "planId": "6d3b4998-cee4-412a-bb49-98cee4f12ad5",
-        "planName": "API Key Plan",
+        "planId": "9ff1a423-9700-41a0-b1a4-23970031a07c",
+        "planName": "api-key-plan",
         "planSecurityType": "api-key",
         "planStatus": "PUBLISHED"
       },
       "candidates": {
         "apis": [
           {
-            "id": "25c78c81-954e-455d-878c-81954e255d73",
+            "id": "927e6ba1-a2e9-4baf-be6b-a1a2e93bafe9",
             "name": "chuck-norris-api-10",
             "matchMode": "id"
           }
         ],
         "plans": [
           {
-            "id": "6d3b4998-cee4-412a-bb49-98cee4f12ad5",
-            "name": "API Key Plan",
+            "id": "9ff1a423-9700-41a0-b1a4-23970031a07c",
+            "name": "api-key-plan",
             "matchMode": "id"
           }
         ]
@@ -229,9 +274,9 @@
       "activeProduct": true,
       "configured": {
         "targetApi": "dog-breeds-api-6",
-        "targetApiId": "53b1d618-59d2-4a3a-b1d6-1859d2da3a89",
-        "targetPlan": "API Key Plan",
-        "targetPlanId": "e7af7151-7eb1-43a4-af71-517eb143a4a2",
+        "targetApiId": "ab671749-e1a6-426a-a717-49e1a6726a5c",
+        "targetPlan": "api-key-plan",
+        "targetPlanId": "d5efd5ec-b283-4d23-afd5-ecb283fd23ac",
         "matchMode": "exact"
       },
       "credentialProfile": {
@@ -249,25 +294,25 @@
         ]
       },
       "resolved": {
-        "apiId": "53b1d618-59d2-4a3a-b1d6-1859d2da3a89",
+        "apiId": "ab671749-e1a6-426a-a717-49e1a6726a5c",
         "apiName": "dog-breeds-api-6",
-        "planId": "e7af7151-7eb1-43a4-af71-517eb143a4a2",
-        "planName": "API Key Plan",
+        "planId": "d5efd5ec-b283-4d23-afd5-ecb283fd23ac",
+        "planName": "api-key-plan",
         "planSecurityType": "api-key",
         "planStatus": "PUBLISHED"
       },
       "candidates": {
         "apis": [
           {
-            "id": "53b1d618-59d2-4a3a-b1d6-1859d2da3a89",
+            "id": "ab671749-e1a6-426a-a717-49e1a6726a5c",
             "name": "dog-breeds-api-6",
             "matchMode": "id"
           }
         ],
         "plans": [
           {
-            "id": "e7af7151-7eb1-43a4-af71-517eb143a4a2",
-            "name": "API Key Plan",
+            "id": "d5efd5ec-b283-4d23-afd5-ecb283fd23ac",
+            "name": "api-key-plan",
             "matchMode": "id"
           }
         ]
@@ -281,9 +326,9 @@
       "activeProduct": true,
       "configured": {
         "targetApi": "hogwarts-houses-api-8",
-        "targetApiId": "59dab35e-953a-4960-9ab3-5e953ae960df",
-        "targetPlan": "API Key Plan",
-        "targetPlanId": "7c03dde1-a653-48b3-83dd-e1a65368b345",
+        "targetApiId": "72fea1e5-8e97-45e1-bea1-e58e9725e101",
+        "targetPlan": "api-key-plan",
+        "targetPlanId": "5f3aeb6c-06a6-4635-baeb-6c06a6163519",
         "matchMode": "exact"
       },
       "credentialProfile": {
@@ -300,25 +345,25 @@
         ]
       },
       "resolved": {
-        "apiId": "59dab35e-953a-4960-9ab3-5e953ae960df",
+        "apiId": "72fea1e5-8e97-45e1-bea1-e58e9725e101",
         "apiName": "hogwarts-houses-api-8",
-        "planId": "7c03dde1-a653-48b3-83dd-e1a65368b345",
-        "planName": "API Key Plan",
+        "planId": "5f3aeb6c-06a6-4635-baeb-6c06a6163519",
+        "planName": "api-key-plan",
         "planSecurityType": "api-key",
         "planStatus": "PUBLISHED"
       },
       "candidates": {
         "apis": [
           {
-            "id": "59dab35e-953a-4960-9ab3-5e953ae960df",
+            "id": "72fea1e5-8e97-45e1-bea1-e58e9725e101",
             "name": "hogwarts-houses-api-8",
             "matchMode": "id"
           }
         ],
         "plans": [
           {
-            "id": "7c03dde1-a653-48b3-83dd-e1a65368b345",
-            "name": "API Key Plan",
+            "id": "5f3aeb6c-06a6-4635-baeb-6c06a6163519",
+            "name": "api-key-plan",
             "matchMode": "id"
           }
         ]
@@ -332,9 +377,9 @@
       "activeProduct": true,
       "configured": {
         "targetApi": "kanye-rest-api-5",
-        "targetApiId": "d40cba62-2887-461e-8cba-622887161ea9",
-        "targetPlan": "API Key Plan",
-        "targetPlanId": "7ac7160f-b292-4f9e-8716-0fb292af9e80",
+        "targetApiId": "41514d92-b3f2-42dd-914d-92b3f2e2ddda",
+        "targetPlan": "api-key-plan",
+        "targetPlanId": "85696198-b379-439a-a961-98b379139a2c",
         "matchMode": "exact"
       },
       "credentialProfile": {
@@ -350,25 +395,25 @@
         ]
       },
       "resolved": {
-        "apiId": "d40cba62-2887-461e-8cba-622887161ea9",
+        "apiId": "41514d92-b3f2-42dd-914d-92b3f2e2ddda",
         "apiName": "kanye-rest-api-5",
-        "planId": "7ac7160f-b292-4f9e-8716-0fb292af9e80",
-        "planName": "API Key Plan",
+        "planId": "85696198-b379-439a-a961-98b379139a2c",
+        "planName": "api-key-plan",
         "planSecurityType": "api-key",
         "planStatus": "PUBLISHED"
       },
       "candidates": {
         "apis": [
           {
-            "id": "d40cba62-2887-461e-8cba-622887161ea9",
+            "id": "41514d92-b3f2-42dd-914d-92b3f2e2ddda",
             "name": "kanye-rest-api-5",
             "matchMode": "id"
           }
         ],
         "plans": [
           {
-            "id": "7ac7160f-b292-4f9e-8716-0fb292af9e80",
-            "name": "API Key Plan",
+            "id": "85696198-b379-439a-a961-98b379139a2c",
+            "name": "api-key-plan",
             "matchMode": "id"
           }
         ]
@@ -382,9 +427,9 @@
       "activeProduct": true,
       "configured": {
         "targetApi": "wizards-api-9",
-        "targetApiId": "07dfa49e-dc23-4048-9fa4-9edc236048a6",
-        "targetPlan": "API Key Plan",
-        "targetPlanId": "589c71e0-0770-4580-9c71-e0077015806b",
+        "targetApiId": "5c261880-e37b-4587-a618-80e37be5872a",
+        "targetPlan": "api-key-plan",
+        "targetPlanId": "89936ea3-d484-4fc6-936e-a3d484afc651",
         "matchMode": "exact"
       },
       "credentialProfile": {
@@ -402,25 +447,25 @@
         ]
       },
       "resolved": {
-        "apiId": "07dfa49e-dc23-4048-9fa4-9edc236048a6",
+        "apiId": "5c261880-e37b-4587-a618-80e37be5872a",
         "apiName": "wizards-api-9",
-        "planId": "589c71e0-0770-4580-9c71-e0077015806b",
-        "planName": "API Key Plan",
+        "planId": "89936ea3-d484-4fc6-936e-a3d484afc651",
+        "planName": "api-key-plan",
         "planSecurityType": "api-key",
         "planStatus": "PUBLISHED"
       },
       "candidates": {
         "apis": [
           {
-            "id": "07dfa49e-dc23-4048-9fa4-9edc236048a6",
+            "id": "5c261880-e37b-4587-a618-80e37be5872a",
             "name": "wizards-api-9",
             "matchMode": "id"
           }
         ],
         "plans": [
           {
-            "id": "589c71e0-0770-4580-9c71-e0077015806b",
-            "name": "API Key Plan",
+            "id": "89936ea3-d484-4fc6-936e-a3d484afc651",
+            "name": "api-key-plan",
             "matchMode": "id"
           }
         ]
@@ -434,9 +479,9 @@
       "activeProduct": true,
       "configured": {
         "targetApi": "yes-or-no-api-4",
-        "targetApiId": "bf68aeeb-d4db-4656-a8ae-ebd4db4656a5",
-        "targetPlan": "API Key Plan",
-        "targetPlanId": "9ae81624-fbd6-415f-a816-24fbd6a15fc9",
+        "targetApiId": "7f88a006-d361-49e1-88a0-06d361b9e127",
+        "targetPlan": "api-key-plan",
+        "targetPlanId": "5b601457-106f-4e91-a014-57106fce9134",
         "matchMode": "exact"
       },
       "credentialProfile": {
@@ -453,25 +498,25 @@
         ]
       },
       "resolved": {
-        "apiId": "bf68aeeb-d4db-4656-a8ae-ebd4db4656a5",
+        "apiId": "7f88a006-d361-49e1-88a0-06d361b9e127",
         "apiName": "yes-or-no-api-4",
-        "planId": "9ae81624-fbd6-415f-a816-24fbd6a15fc9",
-        "planName": "API Key Plan",
+        "planId": "5b601457-106f-4e91-a014-57106fce9134",
+        "planName": "api-key-plan",
         "planSecurityType": "api-key",
         "planStatus": "PUBLISHED"
       },
       "candidates": {
         "apis": [
           {
-            "id": "bf68aeeb-d4db-4656-a8ae-ebd4db4656a5",
+            "id": "7f88a006-d361-49e1-88a0-06d361b9e127",
             "name": "yes-or-no-api-4",
             "matchMode": "id"
           }
         ],
         "plans": [
           {
-            "id": "9ae81624-fbd6-415f-a816-24fbd6a15fc9",
-            "name": "API Key Plan",
+            "id": "5b601457-106f-4e91-a014-57106fce9134",
+            "name": "api-key-plan",
             "matchMode": "id"
           }
         ]
@@ -485,9 +530,9 @@
       "activeProduct": true,
       "configured": {
         "targetApi": "apigee-hello-api-1",
-        "targetApiId": "a5b183d1-9327-4a9a-b183-d19327ba9ae1",
-        "targetPlan": "Keyless Plan",
-        "targetPlanId": "e470787c-6691-4ef9-b078-7c66910ef98e",
+        "targetApiId": "2b9f7f53-2dee-4f5c-9f7f-532dee9f5cb1",
+        "targetPlan": "api-key-plan",
+        "targetPlanId": "8f1e49ec-d795-4534-9e49-ecd795053418",
         "matchMode": "exact"
       },
       "credentialProfile": {
@@ -504,25 +549,25 @@
         ]
       },
       "resolved": {
-        "apiId": "a5b183d1-9327-4a9a-b183-d19327ba9ae1",
+        "apiId": "2b9f7f53-2dee-4f5c-9f7f-532dee9f5cb1",
         "apiName": "apigee-hello-api-1",
-        "planId": "e470787c-6691-4ef9-b078-7c66910ef98e",
-        "planName": "Keyless Plan",
-        "planSecurityType": "keyless",
+        "planId": "8f1e49ec-d795-4534-9e49-ecd795053418",
+        "planName": "api-key-plan",
+        "planSecurityType": "api-key",
         "planStatus": "PUBLISHED"
       },
       "candidates": {
         "apis": [
           {
-            "id": "a5b183d1-9327-4a9a-b183-d19327ba9ae1",
+            "id": "2b9f7f53-2dee-4f5c-9f7f-532dee9f5cb1",
             "name": "apigee-hello-api-1",
             "matchMode": "id"
           }
         ],
         "plans": [
           {
-            "id": "e470787c-6691-4ef9-b078-7c66910ef98e",
-            "name": "Keyless Plan",
+            "id": "8f1e49ec-d795-4534-9e49-ecd795053418",
+            "name": "api-key-plan",
             "matchMode": "id"
           }
         ]
@@ -536,9 +581,9 @@
       "activeProduct": true,
       "configured": {
         "targetApi": "cat-fact-api-2",
-        "targetApiId": "dcc0417f-18ab-4955-8041-7f18abe95537",
-        "targetPlan": "Keyless Plan",
-        "targetPlanId": "597158dd-206f-4630-b158-dd206f763084",
+        "targetApiId": "89884594-070e-4a48-8845-94070eea48d4",
+        "targetPlan": "api-key-plan",
+        "targetPlanId": "08f9eee0-3617-4a77-b9ee-e03617da7744",
         "matchMode": "exact"
       },
       "credentialProfile": {
@@ -555,25 +600,25 @@
         ]
       },
       "resolved": {
-        "apiId": "dcc0417f-18ab-4955-8041-7f18abe95537",
+        "apiId": "89884594-070e-4a48-8845-94070eea48d4",
         "apiName": "cat-fact-api-2",
-        "planId": "597158dd-206f-4630-b158-dd206f763084",
-        "planName": "Keyless Plan",
-        "planSecurityType": "keyless",
+        "planId": "08f9eee0-3617-4a77-b9ee-e03617da7744",
+        "planName": "api-key-plan",
+        "planSecurityType": "api-key",
         "planStatus": "PUBLISHED"
       },
       "candidates": {
         "apis": [
           {
-            "id": "dcc0417f-18ab-4955-8041-7f18abe95537",
+            "id": "89884594-070e-4a48-8845-94070eea48d4",
             "name": "cat-fact-api-2",
             "matchMode": "id"
           }
         ],
         "plans": [
           {
-            "id": "597158dd-206f-4630-b158-dd206f763084",
-            "name": "Keyless Plan",
+            "id": "08f9eee0-3617-4a77-b9ee-e03617da7744",
+            "name": "api-key-plan",
             "matchMode": "id"
           }
         ]
@@ -587,9 +632,9 @@
       "activeProduct": true,
       "configured": {
         "targetApi": "car-makes-api-3",
-        "targetApiId": "8cf248f0-637a-4ed2-b248-f0637afed2e6",
-        "targetPlan": "Keyless Plan",
-        "targetPlanId": "0b22bc89-5db5-431e-a2bc-895db5f31e95",
+        "targetApiId": "b7767841-e5d1-4bc4-b678-41e5d13bc444",
+        "targetPlan": "api-key-plan",
+        "targetPlanId": "e4d8d493-2de0-4233-98d4-932de0423337",
         "matchMode": "exact"
       },
       "credentialProfile": {
@@ -606,25 +651,25 @@
         ]
       },
       "resolved": {
-        "apiId": "8cf248f0-637a-4ed2-b248-f0637afed2e6",
+        "apiId": "b7767841-e5d1-4bc4-b678-41e5d13bc444",
         "apiName": "car-makes-api-3",
-        "planId": "0b22bc89-5db5-431e-a2bc-895db5f31e95",
-        "planName": "Keyless Plan",
-        "planSecurityType": "keyless",
+        "planId": "e4d8d493-2de0-4233-98d4-932de0423337",
+        "planName": "api-key-plan",
+        "planSecurityType": "api-key",
         "planStatus": "PUBLISHED"
       },
       "candidates": {
         "apis": [
           {
-            "id": "8cf248f0-637a-4ed2-b248-f0637afed2e6",
+            "id": "b7767841-e5d1-4bc4-b678-41e5d13bc444",
             "name": "car-makes-api-3",
             "matchMode": "id"
           }
         ],
         "plans": [
           {
-            "id": "0b22bc89-5db5-431e-a2bc-895db5f31e95",
-            "name": "Keyless Plan",
+            "id": "e4d8d493-2de0-4233-98d4-932de0423337",
+            "name": "api-key-plan",
             "matchMode": "id"
           }
         ]

@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-06-16T16:08:11.211Z",
+  "generatedAt": "2026-06-16T18:53:43.314Z",
   "summary": {
     "users": 21,
     "applications": 25,
     "credentials": 25,
-    "subscriptions": 25,
-    "actions": 167,
-    "blockers": 8,
+    "subscriptions": 31,
+    "actions": 185,
+    "blockers": 0,
     "warnings": 1,
     "manualReview": 0,
     "inactiveDevelopers": 0,
@@ -22,77 +22,11 @@
   },
   "findings": [
     {
-      "severity": "blocker",
-      "code": "PRODUCT_PLAN_MAPPING_MISSING",
-      "message": "Missing productPlanMap entry for source product cats-api-product",
-      "details": {
-        "productName": "cats-api-product"
-      }
-    },
-    {
-      "severity": "blocker",
-      "code": "PRODUCT_PLAN_MAPPING_MISSING",
-      "message": "Missing productPlanMap entry for source product chuck-norris-api-product",
-      "details": {
-        "productName": "chuck-norris-api-product"
-      }
-    },
-    {
-      "severity": "blocker",
-      "code": "PRODUCT_PLAN_MAPPING_MISSING",
-      "message": "Missing productPlanMap entry for source product dog-breeds-api-product",
-      "details": {
-        "productName": "dog-breeds-api-product"
-      }
-    },
-    {
-      "severity": "blocker",
-      "code": "PRODUCT_PLAN_MAPPING_MISSING",
-      "message": "Missing productPlanMap entry for source product hogwarts-houses-api-product",
-      "details": {
-        "productName": "hogwarts-houses-api-product"
-      }
-    },
-    {
-      "severity": "blocker",
-      "code": "PRODUCT_PLAN_MAPPING_MISSING",
-      "message": "Missing productPlanMap entry for source product kanye-api-product",
-      "details": {
-        "productName": "kanye-api-product"
-      }
-    },
-    {
-      "severity": "blocker",
-      "code": "PRODUCT_PLAN_MAPPING_MISSING",
-      "message": "Missing productPlanMap entry for source product misc-api-product",
+      "severity": "warning",
+      "code": "PRODUCT_PLAN_MAPPING_MULTI_TARGET",
+      "message": "Source product misc-api-product maps to multiple Gravitee API/plan targets",
       "details": {
         "productName": "misc-api-product"
-      }
-    },
-    {
-      "severity": "blocker",
-      "code": "PRODUCT_PLAN_MAPPING_MISSING",
-      "message": "Missing productPlanMap entry for source product wizards-api-product",
-      "details": {
-        "productName": "wizards-api-product"
-      }
-    },
-    {
-      "severity": "blocker",
-      "code": "PRODUCT_PLAN_MAPPING_MISSING",
-      "message": "Missing productPlanMap entry for source product yes-or-no-api-product",
-      "details": {
-        "productName": "yes-or-no-api-product"
-      }
-    },
-    {
-      "severity": "warning",
-      "code": "ROLE_CONFIGURATION_FALLBACK",
-      "message": "Configured role ENVIRONMENT:API_CONSUMER was not found in Gravitee; falling back to ENVIRONMENT:USER",
-      "details": {
-        "roleName": "ENVIRONMENT:API_CONSUMER",
-        "fallbackRoleName": "ENVIRONMENT:USER",
-        "scope": "ENVIRONMENT"
       }
     }
   ],
@@ -802,52 +736,44 @@
     "users": 21,
     "applications": 25,
     "credentials": 25,
-    "subscriptions": 25,
-    "blockers": 8,
+    "subscriptions": 31,
+    "blockers": 0,
     "warnings": 1,
     "manualReview": 0,
-    "actions": 167,
+    "actions": 185,
     "actionsByKind": {
       "UPSERT_USER": 21,
       "VERIFY_USER": 21,
       "UPSERT_APPLICATION": 25,
       "VERIFY_APPLICATION": 25,
-      "RESOLVE_PLAN": 25,
-      "UPSERT_SUBSCRIPTION": 25,
-      "VERIFY_SUBSCRIPTION": 25
+      "RESOLVE_PLAN": 31,
+      "UPSERT_SUBSCRIPTION": 31,
+      "VERIFY_SUBSCRIPTION": 31
     },
     "actionsByStatus": {
-      "READY": 92,
-      "BLOCKED": 75
+      "READY": 185
     },
     "operatorActions": {
       "byKind": {
         "UPSERT_USER": {
-          "REUSE": 19,
-          "CREATE": 2
+          "CREATE": 21
         },
         "UPSERT_APPLICATION": {
-          "REUSE": 25
+          "CREATE": 25
         },
         "UPSERT_SUBSCRIPTION": {
-          "BLOCK": 25
+          "CREATE": 31
         }
       },
       "byOperation": {
-        "REUSE": 44,
-        "CREATE": 2,
-        "BLOCK": 25
+        "CREATE": 77
       },
-      "blockedReasons": {
-        "PLAN_MAPPING_MISSING": 50
-      }
+      "blockedReasons": {}
     }
   },
   "operatorGuidance": {
-    "nextSuggestedScope": null,
-    "resumeSafe": false,
-    "blockerCategories": {
-      "PRODUCT_PLAN_MAPPING_MISSING": 8
-    }
+    "nextSuggestedScope": "--users-only",
+    "resumeSafe": true,
+    "blockerCategories": {}
   }
 }
