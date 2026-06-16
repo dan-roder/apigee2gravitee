@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-05-21T20:31:49.734Z",
+  "generatedAt": "2026-06-16T15:57:56.181Z",
   "summary": {
     "users": 21,
     "applications": 25,
     "credentials": 25,
-    "subscriptions": 31,
-    "actions": 185,
-    "blockers": 0,
-    "warnings": 1,
-    "manualReview": 0,
+    "subscriptions": 25,
+    "actions": 167,
+    "blockers": 15,
+    "warnings": 2,
+    "manualReview": 2,
     "inactiveDevelopers": 0,
     "continuityRiskCount": 25,
     "apiKeyContinuityRiskCount": 25,
@@ -22,15 +22,156 @@
   },
   "findings": [
     {
-      "severity": "warning",
-      "code": "PRODUCT_PLAN_MAPPING_MULTI_TARGET",
-      "message": "Source product misc-api-product maps to multiple Gravitee API/plan targets",
+      "severity": "blocker",
+      "code": "PRODUCT_PLAN_MAPPING_MISSING",
+      "message": "Missing productPlanMap entry for source product cats-api-product",
+      "details": {
+        "productName": "cats-api-product"
+      }
+    },
+    {
+      "severity": "blocker",
+      "code": "PRODUCT_PLAN_MAPPING_MISSING",
+      "message": "Missing productPlanMap entry for source product chuck-norris-api-product",
+      "details": {
+        "productName": "chuck-norris-api-product"
+      }
+    },
+    {
+      "severity": "blocker",
+      "code": "PRODUCT_PLAN_MAPPING_MISSING",
+      "message": "Missing productPlanMap entry for source product dog-breeds-api-product",
+      "details": {
+        "productName": "dog-breeds-api-product"
+      }
+    },
+    {
+      "severity": "blocker",
+      "code": "PRODUCT_PLAN_MAPPING_MISSING",
+      "message": "Missing productPlanMap entry for source product hogwarts-houses-api-product",
+      "details": {
+        "productName": "hogwarts-houses-api-product"
+      }
+    },
+    {
+      "severity": "blocker",
+      "code": "PRODUCT_PLAN_MAPPING_MISSING",
+      "message": "Missing productPlanMap entry for source product kanye-api-product",
+      "details": {
+        "productName": "kanye-api-product"
+      }
+    },
+    {
+      "severity": "blocker",
+      "code": "PRODUCT_PLAN_MAPPING_MISSING",
+      "message": "Missing productPlanMap entry for source product misc-api-product",
       "details": {
         "productName": "misc-api-product"
       }
+    },
+    {
+      "severity": "blocker",
+      "code": "PRODUCT_PLAN_MAPPING_MISSING",
+      "message": "Missing productPlanMap entry for source product wizards-api-product",
+      "details": {
+        "productName": "wizards-api-product"
+      }
+    },
+    {
+      "severity": "blocker",
+      "code": "PRODUCT_PLAN_MAPPING_MISSING",
+      "message": "Missing productPlanMap entry for source product yes-or-no-api-product",
+      "details": {
+        "productName": "yes-or-no-api-product"
+      }
+    },
+    {
+      "severity": "blocker",
+      "code": "GRAVITEE_AUTH_FAILED",
+      "message": "Gravitee health check failed: GET https://gravitee.advana.aws.540.dev/management/organizations/DEFAULT → HTTP 404",
+      "details": {
+        "status": 404
+      }
+    },
+    {
+      "severity": "blocker",
+      "code": "USER_PROVISIONING_LOOKUP_UNSUPPORTED",
+      "message": "User provisioning probe failed for lookup",
+      "details": {
+        "status": 404,
+        "classification": "unsupported-endpoint",
+        "error": null
+      }
+    },
+    {
+      "severity": "blocker",
+      "code": "USER_PROVISIONING_CREATE_UNSUPPORTED",
+      "message": "User provisioning probe failed for create",
+      "details": {
+        "status": 404,
+        "classification": "unsupported-endpoint",
+        "error": null
+      }
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_OWNERSHIP_LIST_UNSUPPORTED",
+      "message": "Application ownership probe failed for list",
+      "details": {
+        "status": 404,
+        "classification": "unsupported-endpoint",
+        "error": null
+      }
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_OWNERSHIP_CREATE_UNSUPPORTED",
+      "message": "Application ownership probe failed for create",
+      "details": {
+        "status": 404,
+        "classification": "unsupported-endpoint",
+        "error": null
+      }
+    },
+    {
+      "severity": "blocker",
+      "code": "SILENT_USER_CREATION_PROBE_FAILED",
+      "message": "Live Gravitee probes did not confirm silent user provisioning support",
+      "details": {}
+    },
+    {
+      "severity": "blocker",
+      "code": "APPLICATION_OWNERSHIP_PROBE_FAILED",
+      "message": "Live Gravitee probes did not confirm direct-member application ownership support",
+      "details": {}
+    },
+    {
+      "severity": "warning",
+      "code": "ROLE_LOOKUP_FAILED",
+      "message": "Unable to verify roles via Gravitee API: GET https://gravitee.advana.aws.540.dev/management/organizations/DEFAULT/rolescopes → HTTP 404",
+      "details": {}
+    },
+    {
+      "severity": "warning",
+      "code": "ROLE_LOOKUP_UNVERIFIED",
+      "message": "Role configuration could not be auto-verified",
+      "details": {}
     }
   ],
-  "manualReviewFindings": [],
+  "manualReviewFindings": [
+    {
+      "severity": "warning",
+      "code": "ROLE_LOOKUP_FAILED",
+      "message": "Unable to verify roles via Gravitee API: GET https://gravitee.advana.aws.540.dev/management/organizations/DEFAULT/rolescopes → HTTP 404",
+      "details": {}
+    },
+    {
+      "severity": "warning",
+      "code": "ROLE_LOOKUP_UNVERIFIED",
+      "message": "Role configuration could not be auto-verified",
+      "details": {}
+    }
+  ],
   "continuityRisks": [
     {
       "credentialId": "danny.rivera@540.co/cats-dev-app/idWhL2ATXfup5AyPWo9Z3Oakj1exc0KY",
@@ -45,7 +186,7 @@
       "protectedSecretMetaPresent": true,
       "protectedSecretValuePresent": true,
       "protectedSecretMaterialPresent": true,
-      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/danny.rivera@540.co/cats-dev-app/idWhL2ATXfup5AyPWo9Z3Oakj1exc0KY/consumer-secret.txt",
+      "protectedSecretRef": "/home/ec2-user/apigee2gravitee/ir/_protected/credentials/danny.rivera@540.co/cats-dev-app/idWhL2ATXfup5AyPWo9Z3Oakj1exc0KY/consumer-secret.txt",
       "continuityClass": "api-key"
     },
     {
@@ -61,7 +202,7 @@
       "protectedSecretMetaPresent": true,
       "protectedSecretValuePresent": true,
       "protectedSecretMaterialPresent": true,
-      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/dev10@540.co/dev10-app/wKwAhwPsH53KIyYkAh7rdGfdqYDGdEg4/consumer-secret.txt",
+      "protectedSecretRef": "/home/ec2-user/apigee2gravitee/ir/_protected/credentials/dev10@540.co/dev10-app/wKwAhwPsH53KIyYkAh7rdGfdqYDGdEg4/consumer-secret.txt",
       "continuityClass": "api-key"
     },
     {
@@ -77,7 +218,7 @@
       "protectedSecretMetaPresent": true,
       "protectedSecretValuePresent": true,
       "protectedSecretMaterialPresent": true,
-      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/dev11@540.co/dev11-app/dpnogixgA3HA7xW4ltgBsjycZHiYH6AN/consumer-secret.txt",
+      "protectedSecretRef": "/home/ec2-user/apigee2gravitee/ir/_protected/credentials/dev11@540.co/dev11-app/dpnogixgA3HA7xW4ltgBsjycZHiYH6AN/consumer-secret.txt",
       "continuityClass": "api-key"
     },
     {
@@ -93,7 +234,7 @@
       "protectedSecretMetaPresent": true,
       "protectedSecretValuePresent": true,
       "protectedSecretMaterialPresent": true,
-      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/dev12@540.co/dev12-app/eySNY5g1UKFxFXMu2OVJKLh08vzHfyQE/consumer-secret.txt",
+      "protectedSecretRef": "/home/ec2-user/apigee2gravitee/ir/_protected/credentials/dev12@540.co/dev12-app/eySNY5g1UKFxFXMu2OVJKLh08vzHfyQE/consumer-secret.txt",
       "continuityClass": "api-key"
     },
     {
@@ -109,7 +250,7 @@
       "protectedSecretMetaPresent": true,
       "protectedSecretValuePresent": true,
       "protectedSecretMaterialPresent": true,
-      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/dev13@540.co/dev13-app/f1CsoHJ1RzHpz3anpxN3bGM03TvcKVtL/consumer-secret.txt",
+      "protectedSecretRef": "/home/ec2-user/apigee2gravitee/ir/_protected/credentials/dev13@540.co/dev13-app/f1CsoHJ1RzHpz3anpxN3bGM03TvcKVtL/consumer-secret.txt",
       "continuityClass": "api-key"
     },
     {
@@ -125,7 +266,7 @@
       "protectedSecretMetaPresent": true,
       "protectedSecretValuePresent": true,
       "protectedSecretMaterialPresent": true,
-      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/dev14@540.co/dev14-app/IKVvym1wyxJMI1mpiJT7Mr16AF1R6bxS/consumer-secret.txt",
+      "protectedSecretRef": "/home/ec2-user/apigee2gravitee/ir/_protected/credentials/dev14@540.co/dev14-app/IKVvym1wyxJMI1mpiJT7Mr16AF1R6bxS/consumer-secret.txt",
       "continuityClass": "api-key"
     },
     {
@@ -141,7 +282,7 @@
       "protectedSecretMetaPresent": true,
       "protectedSecretValuePresent": true,
       "protectedSecretMaterialPresent": true,
-      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/dev15@540.co/dev15-app/UdYYt10ftgvrhQBGWQMMRkvHQgEylPLI/consumer-secret.txt",
+      "protectedSecretRef": "/home/ec2-user/apigee2gravitee/ir/_protected/credentials/dev15@540.co/dev15-app/UdYYt10ftgvrhQBGWQMMRkvHQgEylPLI/consumer-secret.txt",
       "continuityClass": "api-key"
     },
     {
@@ -157,7 +298,7 @@
       "protectedSecretMetaPresent": true,
       "protectedSecretValuePresent": true,
       "protectedSecretMaterialPresent": true,
-      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/dev16@540.co/dev16-app/m1QTvGvifr92Dh2xLRfB5EDZAH9bm7F3/consumer-secret.txt",
+      "protectedSecretRef": "/home/ec2-user/apigee2gravitee/ir/_protected/credentials/dev16@540.co/dev16-app/m1QTvGvifr92Dh2xLRfB5EDZAH9bm7F3/consumer-secret.txt",
       "continuityClass": "api-key"
     },
     {
@@ -173,7 +314,7 @@
       "protectedSecretMetaPresent": true,
       "protectedSecretValuePresent": true,
       "protectedSecretMaterialPresent": true,
-      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/dev17@540.co/dev17-app/pMqT6e7teG8l4rdrwA63e37N5A8HKW2h/consumer-secret.txt",
+      "protectedSecretRef": "/home/ec2-user/apigee2gravitee/ir/_protected/credentials/dev17@540.co/dev17-app/pMqT6e7teG8l4rdrwA63e37N5A8HKW2h/consumer-secret.txt",
       "continuityClass": "api-key"
     },
     {
@@ -189,7 +330,7 @@
       "protectedSecretMetaPresent": true,
       "protectedSecretValuePresent": true,
       "protectedSecretMaterialPresent": true,
-      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/dev18@540.co/dev18-app/n99YzKWIIz03KCMYHY6E5a0WzxeAp87m/consumer-secret.txt",
+      "protectedSecretRef": "/home/ec2-user/apigee2gravitee/ir/_protected/credentials/dev18@540.co/dev18-app/n99YzKWIIz03KCMYHY6E5a0WzxeAp87m/consumer-secret.txt",
       "continuityClass": "api-key"
     },
     {
@@ -205,7 +346,7 @@
       "protectedSecretMetaPresent": true,
       "protectedSecretValuePresent": true,
       "protectedSecretMaterialPresent": true,
-      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/dev19@540.co/dev19-app/ISYpfIK2eWM6yW8GCG4EpLUARgxZuBHJ/consumer-secret.txt",
+      "protectedSecretRef": "/home/ec2-user/apigee2gravitee/ir/_protected/credentials/dev19@540.co/dev19-app/ISYpfIK2eWM6yW8GCG4EpLUARgxZuBHJ/consumer-secret.txt",
       "continuityClass": "api-key"
     },
     {
@@ -221,7 +362,7 @@
       "protectedSecretMetaPresent": true,
       "protectedSecretValuePresent": true,
       "protectedSecretMaterialPresent": true,
-      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/consumer-secret.txt",
+      "protectedSecretRef": "/home/ec2-user/apigee2gravitee/ir/_protected/credentials/dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/consumer-secret.txt",
       "continuityClass": "api-key"
     },
     {
@@ -237,7 +378,7 @@
       "protectedSecretMetaPresent": true,
       "protectedSecretValuePresent": true,
       "protectedSecretMaterialPresent": true,
-      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/consumer-secret.txt",
+      "protectedSecretRef": "/home/ec2-user/apigee2gravitee/ir/_protected/credentials/dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/consumer-secret.txt",
       "continuityClass": "api-key"
     },
     {
@@ -253,7 +394,7 @@
       "protectedSecretMetaPresent": true,
       "protectedSecretValuePresent": true,
       "protectedSecretMaterialPresent": true,
-      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/dev20@540.co/dev20-app/5GQlGWs2xVnA3khGeRHyL45YrqmHvPOd/consumer-secret.txt",
+      "protectedSecretRef": "/home/ec2-user/apigee2gravitee/ir/_protected/credentials/dev20@540.co/dev20-app/5GQlGWs2xVnA3khGeRHyL45YrqmHvPOd/consumer-secret.txt",
       "continuityClass": "api-key"
     },
     {
@@ -269,7 +410,7 @@
       "protectedSecretMetaPresent": true,
       "protectedSecretValuePresent": true,
       "protectedSecretMaterialPresent": true,
-      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/consumer-secret.txt",
+      "protectedSecretRef": "/home/ec2-user/apigee2gravitee/ir/_protected/credentials/dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/consumer-secret.txt",
       "continuityClass": "api-key"
     },
     {
@@ -285,7 +426,7 @@
       "protectedSecretMetaPresent": true,
       "protectedSecretValuePresent": true,
       "protectedSecretMaterialPresent": true,
-      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/consumer-secret.txt",
+      "protectedSecretRef": "/home/ec2-user/apigee2gravitee/ir/_protected/credentials/dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/consumer-secret.txt",
       "continuityClass": "api-key"
     },
     {
@@ -301,7 +442,7 @@
       "protectedSecretMetaPresent": true,
       "protectedSecretValuePresent": true,
       "protectedSecretMaterialPresent": true,
-      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/dev4@540.co/dev4-app/GPz0xIjF8TzAFFYeH1KWavbrxNDd94ds/consumer-secret.txt",
+      "protectedSecretRef": "/home/ec2-user/apigee2gravitee/ir/_protected/credentials/dev4@540.co/dev4-app/GPz0xIjF8TzAFFYeH1KWavbrxNDd94ds/consumer-secret.txt",
       "continuityClass": "api-key"
     },
     {
@@ -317,7 +458,7 @@
       "protectedSecretMetaPresent": true,
       "protectedSecretValuePresent": true,
       "protectedSecretMaterialPresent": true,
-      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/dev5@540.co/dev5-app/1bSPzHDZ6Gh2GJHaJWixroGIgZNAmGqi/consumer-secret.txt",
+      "protectedSecretRef": "/home/ec2-user/apigee2gravitee/ir/_protected/credentials/dev5@540.co/dev5-app/1bSPzHDZ6Gh2GJHaJWixroGIgZNAmGqi/consumer-secret.txt",
       "continuityClass": "api-key"
     },
     {
@@ -333,7 +474,7 @@
       "protectedSecretMetaPresent": true,
       "protectedSecretValuePresent": true,
       "protectedSecretMaterialPresent": true,
-      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/dev6@540.co/dev6-app/fjmSGPKixNkQZnd3YNnQKdA3IRy5L9jS/consumer-secret.txt",
+      "protectedSecretRef": "/home/ec2-user/apigee2gravitee/ir/_protected/credentials/dev6@540.co/dev6-app/fjmSGPKixNkQZnd3YNnQKdA3IRy5L9jS/consumer-secret.txt",
       "continuityClass": "api-key"
     },
     {
@@ -349,7 +490,7 @@
       "protectedSecretMetaPresent": true,
       "protectedSecretValuePresent": true,
       "protectedSecretMaterialPresent": true,
-      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/dev7@540.co/dev7-app/6A00n8CbKNDMn3aa7nyIrCiOOMdapYBq/consumer-secret.txt",
+      "protectedSecretRef": "/home/ec2-user/apigee2gravitee/ir/_protected/credentials/dev7@540.co/dev7-app/6A00n8CbKNDMn3aa7nyIrCiOOMdapYBq/consumer-secret.txt",
       "continuityClass": "api-key"
     },
     {
@@ -365,7 +506,7 @@
       "protectedSecretMetaPresent": true,
       "protectedSecretValuePresent": true,
       "protectedSecretMaterialPresent": true,
-      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/dev8@540.co/dev8-app/2EZDhVGA27FH4rGd20Ji74KSxqiGbX4d/consumer-secret.txt",
+      "protectedSecretRef": "/home/ec2-user/apigee2gravitee/ir/_protected/credentials/dev8@540.co/dev8-app/2EZDhVGA27FH4rGd20Ji74KSxqiGbX4d/consumer-secret.txt",
       "continuityClass": "api-key"
     },
     {
@@ -381,7 +522,7 @@
       "protectedSecretMetaPresent": true,
       "protectedSecretValuePresent": true,
       "protectedSecretMaterialPresent": true,
-      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/dev9@540.co/dev9-app/YfxmmAlPSTTgXurgxHmztR8WQmV7GeGv/consumer-secret.txt",
+      "protectedSecretRef": "/home/ec2-user/apigee2gravitee/ir/_protected/credentials/dev9@540.co/dev9-app/YfxmmAlPSTTgXurgxHmztR8WQmV7GeGv/consumer-secret.txt",
       "continuityClass": "api-key"
     },
     {
@@ -397,7 +538,7 @@
       "protectedSecretMetaPresent": true,
       "protectedSecretValuePresent": true,
       "protectedSecretMaterialPresent": true,
-      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/erik.severson@540.co/hogwarts-houses-dev-app/7ShONGlRpUY1M69dgXQju7dxWE0sj7Xp/consumer-secret.txt",
+      "protectedSecretRef": "/home/ec2-user/apigee2gravitee/ir/_protected/credentials/erik.severson@540.co/hogwarts-houses-dev-app/7ShONGlRpUY1M69dgXQju7dxWE0sj7Xp/consumer-secret.txt",
       "continuityClass": "api-key"
     },
     {
@@ -413,7 +554,7 @@
       "protectedSecretMetaPresent": true,
       "protectedSecretValuePresent": true,
       "protectedSecretMaterialPresent": true,
-      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/erik.severson@540.co/misc-dev-app/0z84VGVfj0BCkk83GzOhsZoKxjlQC7dU/consumer-secret.txt",
+      "protectedSecretRef": "/home/ec2-user/apigee2gravitee/ir/_protected/credentials/erik.severson@540.co/misc-dev-app/0z84VGVfj0BCkk83GzOhsZoKxjlQC7dU/consumer-secret.txt",
       "continuityClass": "api-key"
     },
     {
@@ -429,7 +570,7 @@
       "protectedSecretMetaPresent": true,
       "protectedSecretValuePresent": true,
       "protectedSecretMaterialPresent": true,
-      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/erik.severson@540.co/yes-or-no-dev-app/QSRznbGGCwoLG1Dh7wan20huCGKbDn5W/consumer-secret.txt",
+      "protectedSecretRef": "/home/ec2-user/apigee2gravitee/ir/_protected/credentials/erik.severson@540.co/yes-or-no-dev-app/QSRznbGGCwoLG1Dh7wan20huCGKbDn5W/consumer-secret.txt",
       "continuityClass": "api-key"
     }
   ],
@@ -736,51 +877,57 @@
     "users": 21,
     "applications": 25,
     "credentials": 25,
-    "subscriptions": 31,
-    "blockers": 0,
-    "warnings": 1,
-    "manualReview": 0,
-    "actions": 185,
+    "subscriptions": 25,
+    "blockers": 15,
+    "warnings": 2,
+    "manualReview": 2,
+    "actions": 167,
     "actionsByKind": {
       "UPSERT_USER": 21,
       "VERIFY_USER": 21,
       "UPSERT_APPLICATION": 25,
       "VERIFY_APPLICATION": 25,
-      "RESOLVE_PLAN": 31,
-      "UPSERT_SUBSCRIPTION": 31,
-      "VERIFY_SUBSCRIPTION": 31
+      "RESOLVE_PLAN": 25,
+      "UPSERT_SUBSCRIPTION": 25,
+      "VERIFY_SUBSCRIPTION": 25
     },
     "actionsByStatus": {
-      "READY": 158,
-      "BLOCKED": 27
+      "READY": 92,
+      "BLOCKED": 75
     },
     "operatorActions": {
       "byKind": {
         "UPSERT_USER": {
-          "REUSE": 18,
-          "CREATE": 3
+          "CREATE": 21
         },
         "UPSERT_APPLICATION": {
-          "REUSE": 25
+          "CREATE": 25
         },
         "UPSERT_SUBSCRIPTION": {
-          "REUSE": 22,
-          "BLOCK": 9
+          "BLOCK": 25
         }
       },
       "byOperation": {
-        "REUSE": 65,
-        "CREATE": 3,
-        "BLOCK": 9
+        "CREATE": 46,
+        "BLOCK": 25
       },
       "blockedReasons": {
-        "TARGET_PLAN_SECURITY_MISMATCH": 9
+        "PLAN_MAPPING_MISSING": 50
       }
     }
   },
   "operatorGuidance": {
-    "nextSuggestedScope": "--users-only",
-    "resumeSafe": true,
-    "blockerCategories": {}
+    "nextSuggestedScope": null,
+    "resumeSafe": false,
+    "blockerCategories": {
+      "PRODUCT_PLAN_MAPPING_MISSING": 8,
+      "GRAVITEE_AUTH_FAILED": 1,
+      "USER_PROVISIONING_LOOKUP_UNSUPPORTED": 1,
+      "USER_PROVISIONING_CREATE_UNSUPPORTED": 1,
+      "APPLICATION_OWNERSHIP_LIST_UNSUPPORTED": 1,
+      "APPLICATION_OWNERSHIP_CREATE_UNSUPPORTED": 1,
+      "SILENT_USER_CREATION_PROBE_FAILED": 1,
+      "APPLICATION_OWNERSHIP_PROBE_FAILED": 1
+    }
   }
 }
