@@ -11,6 +11,7 @@
   },
   "scripts": {
     "init": "node bin/migrator.js init",
+    "test:connection": "node bin/migrator.js test-connection --config ./config/apis.config.json --gravitee-token $GRAVITEE_TOKEN",
     "extractor":    "node bin/migrator.js extract --data-dir ./data --ir-dir ./ir",
     "apis:analyze": "node bin/migrator.js apis analyze --ir-dir ./ir --config ./config/apis.config.example.json --gravitee-token $GRAVITEE_TOKEN",
     "apis:plan":    "node bin/migrator.js apis plan --ir-dir ./ir --config ./config/apis.config.example.json --gravitee-token $GRAVITEE_TOKEN",
@@ -29,7 +30,7 @@
     "developers:delete":  "node bin/migrator.js developers delete-imported --ir-dir ./ir --config ./config/developers.config.resolved.json --gravitee-token $GRAVITEE_TOKEN",
     "developers:sync-api-targets": "node bin/migrator.js developers sync-api-targets --ir-dir ./ir --config ./config/developers.config.resolved.json --gravitee-token $GRAVITEE_TOKEN",
     "test:developers":  "node test/developers/test-analyze.js && node test/developers/test-workflow.js && node test/developers/test-resolve-config-ids.js && node test/developers/test-validate-config-targets.js && node test/developers/test-configure-roles.js && node test/developers/test-sync-api-targets.js && node test/developers/test-discover-targets.js && node test/developers/test-select-apps.js && node test/developers/test-sync-live-ids.js && node test/developers/test-index.js",
-    "test:init":        "node test/init/test-init.js",
+    "test:init":        "node test/init/test-init.js && node test/init/test-connection.js",
     "test:apis":        "node test/apis/test-workflow.js",
     "test:shared":      "node test/shared/test-ir-loader.js && node test/shared/test-gravitee-client.js",
     "test:extractor":   "python3 -m unittest test.extractor.test_extractor -v",

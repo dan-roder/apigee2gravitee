@@ -38,6 +38,22 @@ npm install
 node bin/migrator.js init
 ```
 
+Verify the generated Gravitee URL, organization, environment, and token before
+running migration commands:
+
+```bash
+npm run test:connection
+```
+
+The command reads `./config/apis.config.json` by default and uses
+`GRAVITEE_TOKEN`. You can also run it directly with overrides:
+
+```bash
+node bin/migrator.js test-connection \
+  --config ./config/apis.config.json \
+  --gravitee-token "$GRAVITEE_TOKEN"
+```
+
 `npm install` installs the single Node.js dependency: `sax` (the XML parser used by the mapper).
 
 The Python extractor has **no third-party dependencies** — it uses only Python stdlib (`zipfile`, `xml.etree.ElementTree`, `json`, `os`, `pathlib`).

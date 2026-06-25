@@ -198,6 +198,7 @@ async function runInitCommand(flags = {}, fmt = null, deps = {}) {
       writes,
       hints: [
         'Set GRAVITEE_TOKEN in your shell before running live API or developers commands.',
+        'Run npm run test:connection to verify the configured Gravitee URL, organization, environment, and token.',
         'Review productPlanMap, roles, and capability settings in the developers config before developers analyze/import.',
         'Run extract first to populate ./ir, then use apis analyze/plan/import/reconcile.',
       ],

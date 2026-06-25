@@ -23,6 +23,7 @@ const fs = require('fs');
 const { runDevelopersCommand } = require('../src/developers');
 const { runApisCommand } = require('../src/apis');
 const { runInitCommand } = require('../src/init');
+const { runTestConnectionCommand } = require('../src/test-connection');
 
 // ─── Colours (no dependencies) ───────────────────────────────────────────────
 const c = {
@@ -248,6 +249,7 @@ ${fmt.bold('Usage:')}
 
 ${fmt.bold('Commands:')}
   init       Create starter config files for the full migration workflow
+  test-connection  Verify the configured Gravitee Management API is reachable
   extract    Parse apigee-migrate-tool data/ output into the IR
   apis       Analyze or migrate APIs/plans
   developers Analyze or migrate developers/apps/subscriptions
@@ -261,6 +263,14 @@ ${fmt.bold('init options:')}
   --developers-resolved-config <path>  Output path for resolved developers config
   --force                        Overwrite existing generated files without prompting
 
+${fmt.bold('test-connection options:')}
+  --config <path>                Config containing gravitee settings (default: ./config/apis.config.json)
+  --gravitee-token <token>       Gravitee token (or set GRAVITEE_TOKEN)
+  --gravitee-url <url>           Override gravitee.url from config
+  --org <id>                     Override gravitee.orgId from config
+  --env <id>                     Override gravitee.envId from config
+  --timeout-ms <ms>              Request timeout (default: 10000)
+
 ${fmt.bold('extract options:')}
   --data-dir <path>   Path to apigee-migrate-tool data/ directory  (required)
   --ir-dir   <path>   Output directory for IR JSON files           (default: ./ir)
@@ -271,6 +281,7 @@ ${fmt.bold('extract options:')}
 ${fmt.bold('Examples:')}
   migrator init
   migrator init --gravitee-url http://localhost:8083 --org DEFAULT --env DEFAULT --force
+  migrator test-connection --config ./config/apis.config.json --gravitee-token "$GRAVITEE_TOKEN"
   migrator extract --data-dir ./data --ir-dir ./ir
   migrator extract --data-dir ./data --ir-dir ./ir --org advana --env dev -v
   migrator apis analyze --ir-dir ./ir --config ./config/apis.config.example.json
@@ -305,6 +316,30 @@ ${fmt.bold('Options:')}
 ${fmt.bold('Examples:')}
   migrator init
   migrator init --gravitee-url http://localhost:8083 --org DEFAULT --env DEFAULT --force
+`);
+}
+
+function printTestConnectionHelp() {
+  console.log(`
+${fmt.bold('test-connection')}
+
+${fmt.bold('Usage:')}
+  migrator test-connection [options]
+
+${fmt.bold('Purpose:')}
+  Verify the configured Gravitee base URL, organization, environment, and token
+  before running live migration commands.
+
+${fmt.bold('Options:')}
+  --config <path>                Config containing gravitee settings (default: ./config/apis.config.json)
+  --gravitee-token <token>       Gravitee token (or set GRAVITEE_TOKEN)
+  --gravitee-url <url>           Override gravitee.url from config
+  --org <id>                     Override gravitee.orgId from config
+  --env <id>                     Override gravitee.envId from config
+  --timeout-ms <ms>              Request timeout (default: 10000)
+
+${fmt.bold('Example:')}
+  migrator test-connection --config ./config/apis.config.json --gravitee-token "$GRAVITEE_TOKEN"
 `);
 }
 
@@ -428,6 +463,32 @@ async function main() {
       console.log(`  ${fmt.info(hint)}`);
     }
     process.exit(result.exitCode);
+  }
+
+  if (command === 'test-connection') {
+    if (args.flags.help || args.flags.h) {
+      printTestConnectionHelp();
+      process.exit(0);
+    }
+    console.log(fmt.header('apigee2gravitee — test-connection'));
+    console.log('');
+    try {
+      const result = await runTestConnectionCommand(args.flags);
+      console.log(`  ${fmt.bold('Gravitee URL')}  ${result.gravitee.url}`);
+      console.log(`  ${fmt.bold('Org ID')}        ${result.gravitee.orgId}`);
+      console.log(`  ${fmt.bold('Env ID')}        ${result.gravitee.envId}`);
+      console.log('');
+      console.log(`  ${result.checks.organization.ok ? fmt.ok('Organization endpoint reachable') : fmt.err(`Organization check failed: ${result.checks.organization.error}`)}`);
+      if (result.checks.environment.skipped) {
+        console.log(`  ${fmt.warn('Environment check skipped because the organization check failed')}`);
+      } else {
+        console.log(`  ${result.checks.environment.ok ? fmt.ok('Environment endpoint reachable') : fmt.err(`Environment check failed: ${result.checks.environment.error}`)}`);
+      }
+      process.exit(result.exitCode);
+    } catch (err) {
+      console.log(`  ${fmt.err(err.message)}`);
+      process.exit(1);
+    }
   }
 
   if (command === 'developers') {
