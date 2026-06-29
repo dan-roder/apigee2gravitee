@@ -1,39 +1,71 @@
 {
-  "generatedAt": "2026-06-16T18:53:43.314Z",
+  "generatedAt": "2026-06-29T20:49:56.902Z",
   "summary": {
-    "users": 21,
-    "applications": 25,
-    "credentials": 25,
+    "users": 31,
+    "applications": 31,
+    "credentials": 31,
     "subscriptions": 31,
-    "actions": 185,
-    "blockers": 0,
-    "warnings": 1,
+    "actions": 217,
+    "blockers": 5,
+    "warnings": 0,
     "manualReview": 0,
     "inactiveDevelopers": 0,
-    "continuityRiskCount": 25,
-    "apiKeyContinuityRiskCount": 25,
+    "continuityRiskCount": 31,
+    "apiKeyContinuityRiskCount": 31,
     "oauthContinuityRiskCount": 0,
-    "consumerSecretCount": 25,
-    "protectedSecretMaterialCount": 25,
+    "consumerSecretCount": 31,
+    "protectedSecretMaterialCount": 31,
     "oauthRelevantSecretCount": 0,
     "missingProtectedSecretCount": 0,
     "oauthSecretManualReviewCount": 0,
-    "applicationMetadataAttributeCount": 10
+    "applicationMetadataAttributeCount": 2
   },
   "findings": [
     {
-      "severity": "warning",
-      "code": "PRODUCT_PLAN_MAPPING_MULTI_TARGET",
-      "message": "Source product misc-api-product maps to multiple Gravitee API/plan targets",
+      "severity": "blocker",
+      "code": "PRODUCT_PLAN_MAPPING_MISSING",
+      "message": "Missing productPlanMap entry for source product collibra-api-product",
       "details": {
-        "productName": "misc-api-product"
+        "productName": "collibra-api-product"
+      }
+    },
+    {
+      "severity": "blocker",
+      "code": "PRODUCT_PLAN_MAPPING_MISSING",
+      "message": "Missing productPlanMap entry for source product flight-aware-api-product",
+      "details": {
+        "productName": "flight-aware-api-product"
+      }
+    },
+    {
+      "severity": "blocker",
+      "code": "PRODUCT_PLAN_MAPPING_MISSING",
+      "message": "Missing productPlanMap entry for source product leap-api-product",
+      "details": {
+        "productName": "leap-api-product"
+      }
+    },
+    {
+      "severity": "blocker",
+      "code": "PRODUCT_PLAN_MAPPING_MISSING",
+      "message": "Missing productPlanMap entry for source product llm-gateway-product",
+      "details": {
+        "productName": "llm-gateway-product"
+      }
+    },
+    {
+      "severity": "blocker",
+      "code": "PRODUCT_PLAN_MAPPING_MISSING",
+      "message": "Missing productPlanMap entry for source product maintenance-repair-api-product",
+      "details": {
+        "productName": "maintenance-repair-api-product"
       }
     }
   ],
   "manualReviewFindings": [],
   "continuityRisks": [
     {
-      "credentialId": "danny.rivera@540.co/cats-dev-app/idWhL2ATXfup5AyPWo9Z3Oakj1exc0KY",
+      "credentialId": "developer10@example.com/developer10-migration-app/6f3a06ecf3cfdd3773a7e22f7cfbe303",
       "riskFlags": [
         "API_KEY_CONTINUITY_RISK"
       ],
@@ -45,11 +77,11 @@
       "protectedSecretMetaPresent": true,
       "protectedSecretValuePresent": true,
       "protectedSecretMaterialPresent": true,
-      "protectedSecretRef": "/home/ec2-user/apigee2gravitee/ir/_protected/credentials/danny.rivera@540.co/cats-dev-app/idWhL2ATXfup5AyPWo9Z3Oakj1exc0KY/consumer-secret.txt",
+      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/developer10@example.com/developer10-migration-app/6f3a06ecf3cfdd3773a7e22f7cfbe303/consumer-secret.txt",
       "continuityClass": "api-key"
     },
     {
-      "credentialId": "dev10@540.co/dev10-app/wKwAhwPsH53KIyYkAh7rdGfdqYDGdEg4",
+      "credentialId": "developer11@example.com/developer11-migration-app/2bf7346503fc77a5023aa8b6f7dee9c9",
       "riskFlags": [
         "API_KEY_CONTINUITY_RISK"
       ],
@@ -61,11 +93,11 @@
       "protectedSecretMetaPresent": true,
       "protectedSecretValuePresent": true,
       "protectedSecretMaterialPresent": true,
-      "protectedSecretRef": "/home/ec2-user/apigee2gravitee/ir/_protected/credentials/dev10@540.co/dev10-app/wKwAhwPsH53KIyYkAh7rdGfdqYDGdEg4/consumer-secret.txt",
+      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/developer11@example.com/developer11-migration-app/2bf7346503fc77a5023aa8b6f7dee9c9/consumer-secret.txt",
       "continuityClass": "api-key"
     },
     {
-      "credentialId": "dev11@540.co/dev11-app/dpnogixgA3HA7xW4ltgBsjycZHiYH6AN",
+      "credentialId": "developer12@example.com/developer12-migration-app/db6b4d755d42f3678593f22f83400970",
       "riskFlags": [
         "API_KEY_CONTINUITY_RISK"
       ],
@@ -77,11 +109,11 @@
       "protectedSecretMetaPresent": true,
       "protectedSecretValuePresent": true,
       "protectedSecretMaterialPresent": true,
-      "protectedSecretRef": "/home/ec2-user/apigee2gravitee/ir/_protected/credentials/dev11@540.co/dev11-app/dpnogixgA3HA7xW4ltgBsjycZHiYH6AN/consumer-secret.txt",
+      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/developer12@example.com/developer12-migration-app/db6b4d755d42f3678593f22f83400970/consumer-secret.txt",
       "continuityClass": "api-key"
     },
     {
-      "credentialId": "dev12@540.co/dev12-app/eySNY5g1UKFxFXMu2OVJKLh08vzHfyQE",
+      "credentialId": "developer13@example.com/developer13-migration-app/8a8a5d6cb57fe4241c03c20071eb8b50",
       "riskFlags": [
         "API_KEY_CONTINUITY_RISK"
       ],
@@ -93,11 +125,11 @@
       "protectedSecretMetaPresent": true,
       "protectedSecretValuePresent": true,
       "protectedSecretMaterialPresent": true,
-      "protectedSecretRef": "/home/ec2-user/apigee2gravitee/ir/_protected/credentials/dev12@540.co/dev12-app/eySNY5g1UKFxFXMu2OVJKLh08vzHfyQE/consumer-secret.txt",
+      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/developer13@example.com/developer13-migration-app/8a8a5d6cb57fe4241c03c20071eb8b50/consumer-secret.txt",
       "continuityClass": "api-key"
     },
     {
-      "credentialId": "dev13@540.co/dev13-app/f1CsoHJ1RzHpz3anpxN3bGM03TvcKVtL",
+      "credentialId": "developer14@example.com/developer14-migration-app/0e1eeffca2710ce5522b5e8e84c819f4",
       "riskFlags": [
         "API_KEY_CONTINUITY_RISK"
       ],
@@ -109,11 +141,11 @@
       "protectedSecretMetaPresent": true,
       "protectedSecretValuePresent": true,
       "protectedSecretMaterialPresent": true,
-      "protectedSecretRef": "/home/ec2-user/apigee2gravitee/ir/_protected/credentials/dev13@540.co/dev13-app/f1CsoHJ1RzHpz3anpxN3bGM03TvcKVtL/consumer-secret.txt",
+      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/developer14@example.com/developer14-migration-app/0e1eeffca2710ce5522b5e8e84c819f4/consumer-secret.txt",
       "continuityClass": "api-key"
     },
     {
-      "credentialId": "dev14@540.co/dev14-app/IKVvym1wyxJMI1mpiJT7Mr16AF1R6bxS",
+      "credentialId": "developer15@example.com/developer15-migration-app/83d2ab0708a224ccaf1ce12813bb63ed",
       "riskFlags": [
         "API_KEY_CONTINUITY_RISK"
       ],
@@ -125,11 +157,11 @@
       "protectedSecretMetaPresent": true,
       "protectedSecretValuePresent": true,
       "protectedSecretMaterialPresent": true,
-      "protectedSecretRef": "/home/ec2-user/apigee2gravitee/ir/_protected/credentials/dev14@540.co/dev14-app/IKVvym1wyxJMI1mpiJT7Mr16AF1R6bxS/consumer-secret.txt",
+      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/developer15@example.com/developer15-migration-app/83d2ab0708a224ccaf1ce12813bb63ed/consumer-secret.txt",
       "continuityClass": "api-key"
     },
     {
-      "credentialId": "dev15@540.co/dev15-app/UdYYt10ftgvrhQBGWQMMRkvHQgEylPLI",
+      "credentialId": "developer16@example.com/developer16-migration-app/22837b6bb1567b15c24fef8019fb57e9",
       "riskFlags": [
         "API_KEY_CONTINUITY_RISK"
       ],
@@ -141,11 +173,11 @@
       "protectedSecretMetaPresent": true,
       "protectedSecretValuePresent": true,
       "protectedSecretMaterialPresent": true,
-      "protectedSecretRef": "/home/ec2-user/apigee2gravitee/ir/_protected/credentials/dev15@540.co/dev15-app/UdYYt10ftgvrhQBGWQMMRkvHQgEylPLI/consumer-secret.txt",
+      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/developer16@example.com/developer16-migration-app/22837b6bb1567b15c24fef8019fb57e9/consumer-secret.txt",
       "continuityClass": "api-key"
     },
     {
-      "credentialId": "dev16@540.co/dev16-app/m1QTvGvifr92Dh2xLRfB5EDZAH9bm7F3",
+      "credentialId": "developer17@example.com/developer17-migration-app/e7a3a617b7f408a9b9a46adca33c7667",
       "riskFlags": [
         "API_KEY_CONTINUITY_RISK"
       ],
@@ -157,11 +189,11 @@
       "protectedSecretMetaPresent": true,
       "protectedSecretValuePresent": true,
       "protectedSecretMaterialPresent": true,
-      "protectedSecretRef": "/home/ec2-user/apigee2gravitee/ir/_protected/credentials/dev16@540.co/dev16-app/m1QTvGvifr92Dh2xLRfB5EDZAH9bm7F3/consumer-secret.txt",
+      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/developer17@example.com/developer17-migration-app/e7a3a617b7f408a9b9a46adca33c7667/consumer-secret.txt",
       "continuityClass": "api-key"
     },
     {
-      "credentialId": "dev17@540.co/dev17-app/pMqT6e7teG8l4rdrwA63e37N5A8HKW2h",
+      "credentialId": "developer18@example.com/developer18-migration-app/b05c85e3539a05ebd8ca8a683dcd4385",
       "riskFlags": [
         "API_KEY_CONTINUITY_RISK"
       ],
@@ -173,11 +205,11 @@
       "protectedSecretMetaPresent": true,
       "protectedSecretValuePresent": true,
       "protectedSecretMaterialPresent": true,
-      "protectedSecretRef": "/home/ec2-user/apigee2gravitee/ir/_protected/credentials/dev17@540.co/dev17-app/pMqT6e7teG8l4rdrwA63e37N5A8HKW2h/consumer-secret.txt",
+      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/developer18@example.com/developer18-migration-app/b05c85e3539a05ebd8ca8a683dcd4385/consumer-secret.txt",
       "continuityClass": "api-key"
     },
     {
-      "credentialId": "dev18@540.co/dev18-app/n99YzKWIIz03KCMYHY6E5a0WzxeAp87m",
+      "credentialId": "developer19@example.com/developer19-migration-app/2fe9027ca842c441eddb5dfeb57695e7",
       "riskFlags": [
         "API_KEY_CONTINUITY_RISK"
       ],
@@ -189,11 +221,11 @@
       "protectedSecretMetaPresent": true,
       "protectedSecretValuePresent": true,
       "protectedSecretMaterialPresent": true,
-      "protectedSecretRef": "/home/ec2-user/apigee2gravitee/ir/_protected/credentials/dev18@540.co/dev18-app/n99YzKWIIz03KCMYHY6E5a0WzxeAp87m/consumer-secret.txt",
+      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/developer19@example.com/developer19-migration-app/2fe9027ca842c441eddb5dfeb57695e7/consumer-secret.txt",
       "continuityClass": "api-key"
     },
     {
-      "credentialId": "dev19@540.co/dev19-app/ISYpfIK2eWM6yW8GCG4EpLUARgxZuBHJ",
+      "credentialId": "developer1@example.com/developer1-migration-app/3bd242735e40a08404e3bc31c6099381",
       "riskFlags": [
         "API_KEY_CONTINUITY_RISK"
       ],
@@ -205,11 +237,11 @@
       "protectedSecretMetaPresent": true,
       "protectedSecretValuePresent": true,
       "protectedSecretMaterialPresent": true,
-      "protectedSecretRef": "/home/ec2-user/apigee2gravitee/ir/_protected/credentials/dev19@540.co/dev19-app/ISYpfIK2eWM6yW8GCG4EpLUARgxZuBHJ/consumer-secret.txt",
+      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/developer1@example.com/developer1-migration-app/3bd242735e40a08404e3bc31c6099381/consumer-secret.txt",
       "continuityClass": "api-key"
     },
     {
-      "credentialId": "dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1",
+      "credentialId": "developer20@example.com/developer20-migration-app/6f1464158869ad04c03e656b6e182dbe",
       "riskFlags": [
         "API_KEY_CONTINUITY_RISK"
       ],
@@ -221,11 +253,11 @@
       "protectedSecretMetaPresent": true,
       "protectedSecretValuePresent": true,
       "protectedSecretMaterialPresent": true,
-      "protectedSecretRef": "/home/ec2-user/apigee2gravitee/ir/_protected/credentials/dev1@540.co/kanye-dev-app/om4Zv2FZf16RgYbVgNb2BccHpBbH7Ej1/consumer-secret.txt",
+      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/developer20@example.com/developer20-migration-app/6f1464158869ad04c03e656b6e182dbe/consumer-secret.txt",
       "continuityClass": "api-key"
     },
     {
-      "credentialId": "dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK",
+      "credentialId": "developer21@example.com/developer21-migration-app/06db395fa539a23ed0a856a6ba5a7165",
       "riskFlags": [
         "API_KEY_CONTINUITY_RISK"
       ],
@@ -237,11 +269,11 @@
       "protectedSecretMetaPresent": true,
       "protectedSecretValuePresent": true,
       "protectedSecretMaterialPresent": true,
-      "protectedSecretRef": "/home/ec2-user/apigee2gravitee/ir/_protected/credentials/dev1@540.co/wizards-dev-app/deYGA5oSqN1OnrE0nW61CWn3ydBEevoK/consumer-secret.txt",
+      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/developer21@example.com/developer21-migration-app/06db395fa539a23ed0a856a6ba5a7165/consumer-secret.txt",
       "continuityClass": "api-key"
     },
     {
-      "credentialId": "dev20@540.co/dev20-app/5GQlGWs2xVnA3khGeRHyL45YrqmHvPOd",
+      "credentialId": "developer22@example.com/developer22-migration-app/1dcfc221772f50e53c2c970dc76b8c14",
       "riskFlags": [
         "API_KEY_CONTINUITY_RISK"
       ],
@@ -253,11 +285,11 @@
       "protectedSecretMetaPresent": true,
       "protectedSecretValuePresent": true,
       "protectedSecretMaterialPresent": true,
-      "protectedSecretRef": "/home/ec2-user/apigee2gravitee/ir/_protected/credentials/dev20@540.co/dev20-app/5GQlGWs2xVnA3khGeRHyL45YrqmHvPOd/consumer-secret.txt",
+      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/developer22@example.com/developer22-migration-app/1dcfc221772f50e53c2c970dc76b8c14/consumer-secret.txt",
       "continuityClass": "api-key"
     },
     {
-      "credentialId": "dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3",
+      "credentialId": "developer23@example.com/developer23-migration-app/83e2874dc76bb28400c6857355d6fe88",
       "riskFlags": [
         "API_KEY_CONTINUITY_RISK"
       ],
@@ -269,11 +301,11 @@
       "protectedSecretMetaPresent": true,
       "protectedSecretValuePresent": true,
       "protectedSecretMaterialPresent": true,
-      "protectedSecretRef": "/home/ec2-user/apigee2gravitee/ir/_protected/credentials/dev2@540.co/chuck-norris-dev-app/3A4Pvk4GqPiB05WTJczDoWjch1I9ghE3/consumer-secret.txt",
+      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/developer23@example.com/developer23-migration-app/83e2874dc76bb28400c6857355d6fe88/consumer-secret.txt",
       "continuityClass": "api-key"
     },
     {
-      "credentialId": "dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8",
+      "credentialId": "developer24@example.com/developer24-migration-app/67047169a72ec88e105158a4c2943a69",
       "riskFlags": [
         "API_KEY_CONTINUITY_RISK"
       ],
@@ -285,11 +317,11 @@
       "protectedSecretMetaPresent": true,
       "protectedSecretValuePresent": true,
       "protectedSecretMaterialPresent": true,
-      "protectedSecretRef": "/home/ec2-user/apigee2gravitee/ir/_protected/credentials/dev2@540.co/dog-breeds-dev-app/jJXAiWGvXIwB5PFsumALglFbCeLJPvD8/consumer-secret.txt",
+      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/developer24@example.com/developer24-migration-app/67047169a72ec88e105158a4c2943a69/consumer-secret.txt",
       "continuityClass": "api-key"
     },
     {
-      "credentialId": "dev4@540.co/dev4-app/GPz0xIjF8TzAFFYeH1KWavbrxNDd94ds",
+      "credentialId": "developer25@example.com/developer25-migration-app/ac73d53753d4769719e240e1c03db18e",
       "riskFlags": [
         "API_KEY_CONTINUITY_RISK"
       ],
@@ -301,11 +333,11 @@
       "protectedSecretMetaPresent": true,
       "protectedSecretValuePresent": true,
       "protectedSecretMaterialPresent": true,
-      "protectedSecretRef": "/home/ec2-user/apigee2gravitee/ir/_protected/credentials/dev4@540.co/dev4-app/GPz0xIjF8TzAFFYeH1KWavbrxNDd94ds/consumer-secret.txt",
+      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/developer25@example.com/developer25-migration-app/ac73d53753d4769719e240e1c03db18e/consumer-secret.txt",
       "continuityClass": "api-key"
     },
     {
-      "credentialId": "dev5@540.co/dev5-app/1bSPzHDZ6Gh2GJHaJWixroGIgZNAmGqi",
+      "credentialId": "developer26@example.com/developer26-migration-app/5e82e088fb22aa660bd27048e36f6542",
       "riskFlags": [
         "API_KEY_CONTINUITY_RISK"
       ],
@@ -317,11 +349,11 @@
       "protectedSecretMetaPresent": true,
       "protectedSecretValuePresent": true,
       "protectedSecretMaterialPresent": true,
-      "protectedSecretRef": "/home/ec2-user/apigee2gravitee/ir/_protected/credentials/dev5@540.co/dev5-app/1bSPzHDZ6Gh2GJHaJWixroGIgZNAmGqi/consumer-secret.txt",
+      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/developer26@example.com/developer26-migration-app/5e82e088fb22aa660bd27048e36f6542/consumer-secret.txt",
       "continuityClass": "api-key"
     },
     {
-      "credentialId": "dev6@540.co/dev6-app/fjmSGPKixNkQZnd3YNnQKdA3IRy5L9jS",
+      "credentialId": "developer27@example.com/developer27-migration-app/7522a63ca5b0179ba4d0d959d39389e2",
       "riskFlags": [
         "API_KEY_CONTINUITY_RISK"
       ],
@@ -333,11 +365,11 @@
       "protectedSecretMetaPresent": true,
       "protectedSecretValuePresent": true,
       "protectedSecretMaterialPresent": true,
-      "protectedSecretRef": "/home/ec2-user/apigee2gravitee/ir/_protected/credentials/dev6@540.co/dev6-app/fjmSGPKixNkQZnd3YNnQKdA3IRy5L9jS/consumer-secret.txt",
+      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/developer27@example.com/developer27-migration-app/7522a63ca5b0179ba4d0d959d39389e2/consumer-secret.txt",
       "continuityClass": "api-key"
     },
     {
-      "credentialId": "dev7@540.co/dev7-app/6A00n8CbKNDMn3aa7nyIrCiOOMdapYBq",
+      "credentialId": "developer28@example.com/developer28-migration-app/c5cb96f0b23189353e0c962fd2ce4f47",
       "riskFlags": [
         "API_KEY_CONTINUITY_RISK"
       ],
@@ -349,11 +381,11 @@
       "protectedSecretMetaPresent": true,
       "protectedSecretValuePresent": true,
       "protectedSecretMaterialPresent": true,
-      "protectedSecretRef": "/home/ec2-user/apigee2gravitee/ir/_protected/credentials/dev7@540.co/dev7-app/6A00n8CbKNDMn3aa7nyIrCiOOMdapYBq/consumer-secret.txt",
+      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/developer28@example.com/developer28-migration-app/c5cb96f0b23189353e0c962fd2ce4f47/consumer-secret.txt",
       "continuityClass": "api-key"
     },
     {
-      "credentialId": "dev8@540.co/dev8-app/2EZDhVGA27FH4rGd20Ji74KSxqiGbX4d",
+      "credentialId": "developer29@example.com/developer29-migration-app/d21769d9019730a51291e133c585a86a",
       "riskFlags": [
         "API_KEY_CONTINUITY_RISK"
       ],
@@ -365,11 +397,11 @@
       "protectedSecretMetaPresent": true,
       "protectedSecretValuePresent": true,
       "protectedSecretMaterialPresent": true,
-      "protectedSecretRef": "/home/ec2-user/apigee2gravitee/ir/_protected/credentials/dev8@540.co/dev8-app/2EZDhVGA27FH4rGd20Ji74KSxqiGbX4d/consumer-secret.txt",
+      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/developer29@example.com/developer29-migration-app/d21769d9019730a51291e133c585a86a/consumer-secret.txt",
       "continuityClass": "api-key"
     },
     {
-      "credentialId": "dev9@540.co/dev9-app/YfxmmAlPSTTgXurgxHmztR8WQmV7GeGv",
+      "credentialId": "developer2@example.com/developer2-migration-app/f197efcc276b449817e5c1bd4f03e76c",
       "riskFlags": [
         "API_KEY_CONTINUITY_RISK"
       ],
@@ -381,11 +413,11 @@
       "protectedSecretMetaPresent": true,
       "protectedSecretValuePresent": true,
       "protectedSecretMaterialPresent": true,
-      "protectedSecretRef": "/home/ec2-user/apigee2gravitee/ir/_protected/credentials/dev9@540.co/dev9-app/YfxmmAlPSTTgXurgxHmztR8WQmV7GeGv/consumer-secret.txt",
+      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/developer2@example.com/developer2-migration-app/f197efcc276b449817e5c1bd4f03e76c/consumer-secret.txt",
       "continuityClass": "api-key"
     },
     {
-      "credentialId": "erik.severson@540.co/hogwarts-houses-dev-app/7ShONGlRpUY1M69dgXQju7dxWE0sj7Xp",
+      "credentialId": "developer30@example.com/developer30-migration-app/730039803393ea26456a8f2e8c2b3187",
       "riskFlags": [
         "API_KEY_CONTINUITY_RISK"
       ],
@@ -397,11 +429,11 @@
       "protectedSecretMetaPresent": true,
       "protectedSecretValuePresent": true,
       "protectedSecretMaterialPresent": true,
-      "protectedSecretRef": "/home/ec2-user/apigee2gravitee/ir/_protected/credentials/erik.severson@540.co/hogwarts-houses-dev-app/7ShONGlRpUY1M69dgXQju7dxWE0sj7Xp/consumer-secret.txt",
+      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/developer30@example.com/developer30-migration-app/730039803393ea26456a8f2e8c2b3187/consumer-secret.txt",
       "continuityClass": "api-key"
     },
     {
-      "credentialId": "erik.severson@540.co/misc-dev-app/0z84VGVfj0BCkk83GzOhsZoKxjlQC7dU",
+      "credentialId": "developer3@example.com/developer3-migration-app/1ad147bb10c1f03e2e629f1ed3fa1201",
       "riskFlags": [
         "API_KEY_CONTINUITY_RISK"
       ],
@@ -413,11 +445,11 @@
       "protectedSecretMetaPresent": true,
       "protectedSecretValuePresent": true,
       "protectedSecretMaterialPresent": true,
-      "protectedSecretRef": "/home/ec2-user/apigee2gravitee/ir/_protected/credentials/erik.severson@540.co/misc-dev-app/0z84VGVfj0BCkk83GzOhsZoKxjlQC7dU/consumer-secret.txt",
+      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/developer3@example.com/developer3-migration-app/1ad147bb10c1f03e2e629f1ed3fa1201/consumer-secret.txt",
       "continuityClass": "api-key"
     },
     {
-      "credentialId": "erik.severson@540.co/yes-or-no-dev-app/QSRznbGGCwoLG1Dh7wan20huCGKbDn5W",
+      "credentialId": "developer4@example.com/developer4-migration-app/3b1187dc12e8fbd659449c00de5e4eb8",
       "riskFlags": [
         "API_KEY_CONTINUITY_RISK"
       ],
@@ -429,164 +461,155 @@
       "protectedSecretMetaPresent": true,
       "protectedSecretValuePresent": true,
       "protectedSecretMaterialPresent": true,
-      "protectedSecretRef": "/home/ec2-user/apigee2gravitee/ir/_protected/credentials/erik.severson@540.co/yes-or-no-dev-app/QSRznbGGCwoLG1Dh7wan20huCGKbDn5W/consumer-secret.txt",
+      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/developer4@example.com/developer4-migration-app/3b1187dc12e8fbd659449c00de5e4eb8/consumer-secret.txt",
+      "continuityClass": "api-key"
+    },
+    {
+      "credentialId": "developer5@example.com/developer5-migration-app/283f2ec4297978c65b2d84f767b6fc0f",
+      "riskFlags": [
+        "API_KEY_CONTINUITY_RISK"
+      ],
+      "authHints": [
+        "API_KEY"
+      ],
+      "oauthContinuityRelevant": false,
+      "consumerSecretPresent": true,
+      "protectedSecretMetaPresent": true,
+      "protectedSecretValuePresent": true,
+      "protectedSecretMaterialPresent": true,
+      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/developer5@example.com/developer5-migration-app/283f2ec4297978c65b2d84f767b6fc0f/consumer-secret.txt",
+      "continuityClass": "api-key"
+    },
+    {
+      "credentialId": "developer6@example.com/developer6-migration-app/c595e164faa9ecad15db6afa3eece1f9",
+      "riskFlags": [
+        "API_KEY_CONTINUITY_RISK"
+      ],
+      "authHints": [
+        "API_KEY"
+      ],
+      "oauthContinuityRelevant": false,
+      "consumerSecretPresent": true,
+      "protectedSecretMetaPresent": true,
+      "protectedSecretValuePresent": true,
+      "protectedSecretMaterialPresent": true,
+      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/developer6@example.com/developer6-migration-app/c595e164faa9ecad15db6afa3eece1f9/consumer-secret.txt",
+      "continuityClass": "api-key"
+    },
+    {
+      "credentialId": "developer7@example.com/developer7-migration-app/7985789cf0564856dab60c5da725a40b",
+      "riskFlags": [
+        "API_KEY_CONTINUITY_RISK"
+      ],
+      "authHints": [
+        "API_KEY"
+      ],
+      "oauthContinuityRelevant": false,
+      "consumerSecretPresent": true,
+      "protectedSecretMetaPresent": true,
+      "protectedSecretValuePresent": true,
+      "protectedSecretMaterialPresent": true,
+      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/developer7@example.com/developer7-migration-app/7985789cf0564856dab60c5da725a40b/consumer-secret.txt",
+      "continuityClass": "api-key"
+    },
+    {
+      "credentialId": "developer8@example.com/developer8-migration-app/95ec6c4ff20c386645278dc9b5caecaa",
+      "riskFlags": [
+        "API_KEY_CONTINUITY_RISK"
+      ],
+      "authHints": [
+        "API_KEY"
+      ],
+      "oauthContinuityRelevant": false,
+      "consumerSecretPresent": true,
+      "protectedSecretMetaPresent": true,
+      "protectedSecretValuePresent": true,
+      "protectedSecretMaterialPresent": true,
+      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/developer8@example.com/developer8-migration-app/95ec6c4ff20c386645278dc9b5caecaa/consumer-secret.txt",
+      "continuityClass": "api-key"
+    },
+    {
+      "credentialId": "developer9@example.com/developer9-migration-app/68582fe40cf6029f6451906d803d5066",
+      "riskFlags": [
+        "API_KEY_CONTINUITY_RISK"
+      ],
+      "authHints": [
+        "API_KEY"
+      ],
+      "oauthContinuityRelevant": false,
+      "consumerSecretPresent": true,
+      "protectedSecretMetaPresent": true,
+      "protectedSecretValuePresent": true,
+      "protectedSecretMaterialPresent": true,
+      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/developer9@example.com/developer9-migration-app/68582fe40cf6029f6451906d803d5066/consumer-secret.txt",
+      "continuityClass": "api-key"
+    },
+    {
+      "credentialId": "developer@example.com/developer-migration-app/de5a62673f985295ec7b441c6b92fe20",
+      "riskFlags": [
+        "API_KEY_CONTINUITY_RISK"
+      ],
+      "authHints": [
+        "API_KEY"
+      ],
+      "oauthContinuityRelevant": false,
+      "consumerSecretPresent": true,
+      "protectedSecretMetaPresent": true,
+      "protectedSecretValuePresent": true,
+      "protectedSecretMaterialPresent": true,
+      "protectedSecretRef": "/Users/daniel.roder/Sites/apigee2gravitee/ir/_protected/credentials/developer@example.com/developer-migration-app/de5a62673f985295ec7b441c6b92fe20/consumer-secret.txt",
       "continuityClass": "api-key"
     }
   ],
   "applicationMetadata": {
     "attributes": [
       {
-        "name": "designation",
-        "metadataKey": "designation",
-        "appCount": 4,
-        "occurrenceCount": 4,
-        "apps": [
-          "dev1@540.co/kanye-dev-app",
-          "dev2@540.co/chuck-norris-dev-app",
-          "erik.severson@540.co/hogwarts-houses-dev-app",
-          "erik.severson@540.co/misc-dev-app"
-        ],
-        "sampleValues": [
-          "dddddddddd",
-          "jjjjjjjj",
-          "ttttttttt",
-          "uuuuuuuuu"
-        ],
-        "emptyValueCount": 0,
-        "nonEmptyValueCount": 4,
-        "recommendedAction": "MAP_VERBATIM",
-        "riskFlags": [
-          "HIGH_CARDINALITY"
-        ]
-      },
-      {
         "name": "DisplayName",
         "metadataKey": "DisplayName",
-        "appCount": 25,
-        "occurrenceCount": 25,
+        "appCount": 31,
+        "occurrenceCount": 31,
         "apps": [
-          "danny.rivera@540.co/cats-dev-app",
-          "dev10@540.co/dev10-app",
-          "dev11@540.co/dev11-app",
-          "dev12@540.co/dev12-app",
-          "dev13@540.co/dev13-app",
-          "dev14@540.co/dev14-app",
-          "dev15@540.co/dev15-app",
-          "dev16@540.co/dev16-app",
-          "dev17@540.co/dev17-app",
-          "dev18@540.co/dev18-app",
-          "dev19@540.co/dev19-app",
-          "dev1@540.co/kanye-dev-app",
-          "dev1@540.co/wizards-dev-app",
-          "dev20@540.co/dev20-app",
-          "dev2@540.co/chuck-norris-dev-app",
-          "dev2@540.co/dog-breeds-dev-app",
-          "dev4@540.co/dev4-app",
-          "dev5@540.co/dev5-app",
-          "dev6@540.co/dev6-app",
-          "dev7@540.co/dev7-app",
-          "dev8@540.co/dev8-app",
-          "dev9@540.co/dev9-app",
-          "erik.severson@540.co/hogwarts-houses-dev-app",
-          "erik.severson@540.co/misc-dev-app",
-          "erik.severson@540.co/yes-or-no-dev-app"
+          "developer10@example.com/developer10-migration-app",
+          "developer11@example.com/developer11-migration-app",
+          "developer12@example.com/developer12-migration-app",
+          "developer13@example.com/developer13-migration-app",
+          "developer14@example.com/developer14-migration-app",
+          "developer15@example.com/developer15-migration-app",
+          "developer16@example.com/developer16-migration-app",
+          "developer17@example.com/developer17-migration-app",
+          "developer18@example.com/developer18-migration-app",
+          "developer19@example.com/developer19-migration-app",
+          "developer1@example.com/developer1-migration-app",
+          "developer20@example.com/developer20-migration-app",
+          "developer21@example.com/developer21-migration-app",
+          "developer22@example.com/developer22-migration-app",
+          "developer23@example.com/developer23-migration-app",
+          "developer24@example.com/developer24-migration-app",
+          "developer25@example.com/developer25-migration-app",
+          "developer26@example.com/developer26-migration-app",
+          "developer27@example.com/developer27-migration-app",
+          "developer28@example.com/developer28-migration-app",
+          "developer29@example.com/developer29-migration-app",
+          "developer2@example.com/developer2-migration-app",
+          "developer30@example.com/developer30-migration-app",
+          "developer3@example.com/developer3-migration-app",
+          "developer4@example.com/developer4-migration-app",
+          "developer5@example.com/developer5-migration-app",
+          "developer6@example.com/developer6-migration-app",
+          "developer7@example.com/developer7-migration-app",
+          "developer8@example.com/developer8-migration-app",
+          "developer9@example.com/developer9-migration-app",
+          "developer@example.com/developer-migration-app"
         ],
         "sampleValues": [
-          "cats-dev-app",
-          "chuck-norris-dev-app",
-          "dev10-app",
-          "dev11-app",
-          "dev12-app"
+          "developer-migration-app",
+          "developer1-migration-app",
+          "developer10-migration-app",
+          "developer11-migration-app",
+          "developer12-migration-app"
         ],
         "emptyValueCount": 0,
-        "nonEmptyValueCount": 25,
-        "recommendedAction": "MAP_VERBATIM",
-        "riskFlags": [
-          "HIGH_CARDINALITY"
-        ]
-      },
-      {
-        "name": "dod_designation",
-        "metadataKey": "dod_designation",
-        "appCount": 4,
-        "occurrenceCount": 4,
-        "apps": [
-          "dev17@540.co/dev17-app",
-          "dev18@540.co/dev18-app",
-          "dev19@540.co/dev19-app",
-          "dev20@540.co/dev20-app"
-        ],
-        "sampleValues": [
-          "Civilian",
-          "Contractor",
-          "Military"
-        ],
-        "emptyValueCount": 0,
-        "nonEmptyValueCount": 4,
-        "recommendedAction": "MAP_VERBATIM",
-        "riskFlags": []
-      },
-      {
-        "name": "dod_organization_list",
-        "metadataKey": "dod_organization_list",
-        "appCount": 4,
-        "occurrenceCount": 4,
-        "apps": [
-          "dev17@540.co/dev17-app",
-          "dev18@540.co/dev18-app",
-          "dev19@540.co/dev19-app",
-          "dev20@540.co/dev20-app"
-        ],
-        "sampleValues": [
-          "Air Force",
-          "Army",
-          "Navy"
-        ],
-        "emptyValueCount": 0,
-        "nonEmptyValueCount": 4,
-        "recommendedAction": "MAP_VERBATIM",
-        "riskFlags": []
-      },
-      {
-        "name": "dod_service",
-        "metadataKey": "dod_service",
-        "appCount": 4,
-        "occurrenceCount": 4,
-        "apps": [
-          "dev17@540.co/dev17-app",
-          "dev18@540.co/dev18-app",
-          "dev19@540.co/dev19-app",
-          "dev20@540.co/dev20-app"
-        ],
-        "sampleValues": [
-          "Air Force",
-          "Army",
-          "Navy"
-        ],
-        "emptyValueCount": 0,
-        "nonEmptyValueCount": 4,
-        "recommendedAction": "MAP_VERBATIM",
-        "riskFlags": []
-      },
-      {
-        "name": "dod_sub_org",
-        "metadataKey": "dod_sub_org",
-        "appCount": 4,
-        "occurrenceCount": 4,
-        "apps": [
-          "dev17@540.co/dev17-app",
-          "dev18@540.co/dev18-app",
-          "dev19@540.co/dev19-app",
-          "dev20@540.co/dev20-app"
-        ],
-        "sampleValues": [
-          "ACES",
-          "AFIMSC",
-          "AFRSO",
-          "NAVSEA"
-        ],
-        "emptyValueCount": 0,
-        "nonEmptyValueCount": 4,
+        "nonEmptyValueCount": 31,
         "recommendedAction": "MAP_VERBATIM",
         "riskFlags": [
           "HIGH_CARDINALITY"
@@ -595,134 +618,59 @@
       {
         "name": "Notes",
         "metadataKey": "Notes",
-        "appCount": 25,
-        "occurrenceCount": 25,
+        "appCount": 31,
+        "occurrenceCount": 31,
         "apps": [
-          "danny.rivera@540.co/cats-dev-app",
-          "dev10@540.co/dev10-app",
-          "dev11@540.co/dev11-app",
-          "dev12@540.co/dev12-app",
-          "dev13@540.co/dev13-app",
-          "dev14@540.co/dev14-app",
-          "dev15@540.co/dev15-app",
-          "dev16@540.co/dev16-app",
-          "dev17@540.co/dev17-app",
-          "dev18@540.co/dev18-app",
-          "dev19@540.co/dev19-app",
-          "dev1@540.co/kanye-dev-app",
-          "dev1@540.co/wizards-dev-app",
-          "dev20@540.co/dev20-app",
-          "dev2@540.co/chuck-norris-dev-app",
-          "dev2@540.co/dog-breeds-dev-app",
-          "dev4@540.co/dev4-app",
-          "dev5@540.co/dev5-app",
-          "dev6@540.co/dev6-app",
-          "dev7@540.co/dev7-app",
-          "dev8@540.co/dev8-app",
-          "dev9@540.co/dev9-app",
-          "erik.severson@540.co/hogwarts-houses-dev-app",
-          "erik.severson@540.co/misc-dev-app",
-          "erik.severson@540.co/yes-or-no-dev-app"
-        ],
-        "sampleValues": [],
-        "emptyValueCount": 25,
-        "nonEmptyValueCount": 0,
-        "recommendedAction": "REVIEW_REQUIRED",
-        "riskFlags": [
-          "EMPTY_ONLY"
-        ]
-      },
-      {
-        "name": "organization_list",
-        "metadataKey": "organization_list",
-        "appCount": 4,
-        "occurrenceCount": 4,
-        "apps": [
-          "dev1@540.co/kanye-dev-app",
-          "dev2@540.co/chuck-norris-dev-app",
-          "erik.severson@540.co/hogwarts-houses-dev-app",
-          "erik.severson@540.co/misc-dev-app"
+          "developer10@example.com/developer10-migration-app",
+          "developer11@example.com/developer11-migration-app",
+          "developer12@example.com/developer12-migration-app",
+          "developer13@example.com/developer13-migration-app",
+          "developer14@example.com/developer14-migration-app",
+          "developer15@example.com/developer15-migration-app",
+          "developer16@example.com/developer16-migration-app",
+          "developer17@example.com/developer17-migration-app",
+          "developer18@example.com/developer18-migration-app",
+          "developer19@example.com/developer19-migration-app",
+          "developer1@example.com/developer1-migration-app",
+          "developer20@example.com/developer20-migration-app",
+          "developer21@example.com/developer21-migration-app",
+          "developer22@example.com/developer22-migration-app",
+          "developer23@example.com/developer23-migration-app",
+          "developer24@example.com/developer24-migration-app",
+          "developer25@example.com/developer25-migration-app",
+          "developer26@example.com/developer26-migration-app",
+          "developer27@example.com/developer27-migration-app",
+          "developer28@example.com/developer28-migration-app",
+          "developer29@example.com/developer29-migration-app",
+          "developer2@example.com/developer2-migration-app",
+          "developer30@example.com/developer30-migration-app",
+          "developer3@example.com/developer3-migration-app",
+          "developer4@example.com/developer4-migration-app",
+          "developer5@example.com/developer5-migration-app",
+          "developer6@example.com/developer6-migration-app",
+          "developer7@example.com/developer7-migration-app",
+          "developer8@example.com/developer8-migration-app",
+          "developer9@example.com/developer9-migration-app",
+          "developer@example.com/developer-migration-app"
         ],
         "sampleValues": [
-          "bbbbbbbbb",
-          "ccccccc",
-          "eeeeeeee",
-          "wwwwww"
+          "Generated for migration import"
         ],
         "emptyValueCount": 0,
-        "nonEmptyValueCount": 4,
+        "nonEmptyValueCount": 31,
         "recommendedAction": "MAP_VERBATIM",
-        "riskFlags": [
-          "HIGH_CARDINALITY"
-        ]
-      },
-      {
-        "name": "service",
-        "metadataKey": "service",
-        "appCount": 4,
-        "occurrenceCount": 4,
-        "apps": [
-          "dev1@540.co/kanye-dev-app",
-          "dev2@540.co/chuck-norris-dev-app",
-          "erik.severson@540.co/hogwarts-houses-dev-app",
-          "erik.severson@540.co/misc-dev-app"
-        ],
-        "sampleValues": [
-          "aaaaaaa",
-          "eeeeee",
-          "llllllllll",
-          "xxxxxx"
-        ],
-        "emptyValueCount": 0,
-        "nonEmptyValueCount": 4,
-        "recommendedAction": "MAP_VERBATIM",
-        "riskFlags": [
-          "HIGH_CARDINALITY"
-        ]
-      },
-      {
-        "name": "sub_org",
-        "metadataKey": "sub_org",
-        "appCount": 4,
-        "occurrenceCount": 4,
-        "apps": [
-          "dev1@540.co/kanye-dev-app",
-          "dev2@540.co/chuck-norris-dev-app",
-          "erik.severson@540.co/hogwarts-houses-dev-app",
-          "erik.severson@540.co/misc-dev-app"
-        ],
-        "sampleValues": [
-          "bbbbbbb",
-          "hhhhhhhh",
-          "ppppppp",
-          "vvvvvv"
-        ],
-        "emptyValueCount": 0,
-        "nonEmptyValueCount": 4,
-        "recommendedAction": "MAP_VERBATIM",
-        "riskFlags": [
-          "HIGH_CARDINALITY"
-        ]
+        "riskFlags": []
       }
     ],
     "summary": {
-      "attributeCount": 10,
-      "appCount": 25,
+      "attributeCount": 2,
+      "appCount": 31,
       "mappedMetadataKeys": [
-        "designation",
         "DisplayName",
-        "dod_designation",
-        "dod_organization_list",
-        "dod_service",
-        "dod_sub_org",
-        "Notes",
-        "organization_list",
-        "service",
-        "sub_org"
+        "Notes"
       ],
       "riskFlagCounts": {
-        "HIGH_CARDINALITY": 6,
-        "EMPTY_ONLY": 1
+        "HIGH_CARDINALITY": 1
       }
     }
   },
@@ -733,47 +681,53 @@
     "applicationOwnership": "direct-member"
   },
   "manifestSummary": {
-    "users": 21,
-    "applications": 25,
-    "credentials": 25,
+    "users": 31,
+    "applications": 31,
+    "credentials": 31,
     "subscriptions": 31,
-    "blockers": 0,
-    "warnings": 1,
+    "blockers": 5,
+    "warnings": 0,
     "manualReview": 0,
-    "actions": 185,
+    "actions": 217,
     "actionsByKind": {
-      "UPSERT_USER": 21,
-      "VERIFY_USER": 21,
-      "UPSERT_APPLICATION": 25,
-      "VERIFY_APPLICATION": 25,
+      "UPSERT_USER": 31,
+      "VERIFY_USER": 31,
+      "UPSERT_APPLICATION": 31,
+      "VERIFY_APPLICATION": 31,
       "RESOLVE_PLAN": 31,
       "UPSERT_SUBSCRIPTION": 31,
       "VERIFY_SUBSCRIPTION": 31
     },
     "actionsByStatus": {
-      "READY": 185
+      "READY": 124,
+      "BLOCKED": 93
     },
     "operatorActions": {
       "byKind": {
         "UPSERT_USER": {
-          "CREATE": 21
+          "CREATE": 31
         },
         "UPSERT_APPLICATION": {
-          "CREATE": 25
+          "CREATE": 31
         },
         "UPSERT_SUBSCRIPTION": {
-          "CREATE": 31
+          "BLOCK": 31
         }
       },
       "byOperation": {
-        "CREATE": 77
+        "CREATE": 62,
+        "BLOCK": 31
       },
-      "blockedReasons": {}
+      "blockedReasons": {
+        "PLAN_MAPPING_MISSING": 62
+      }
     }
   },
   "operatorGuidance": {
-    "nextSuggestedScope": "--users-only",
-    "resumeSafe": true,
-    "blockerCategories": {}
+    "nextSuggestedScope": null,
+    "resumeSafe": false,
+    "blockerCategories": {
+      "PRODUCT_PLAN_MAPPING_MISSING": 5
+    }
   }
 }

@@ -1,6 +1,6 @@
 {
   "gravitee": {
-    "url": "https://gravitee-api.advana.aws.540.dev",
+    "url": "https://gravitee.be.sbx.cdao.us",
     "orgId": "DEFAULT",
     "envId": "DEFAULT"
   },
@@ -44,90 +44,16 @@
     },
     "misc-product": [
       {
-        "targetApi": "apigee-hello-api-1",
-        "targetApiId": "2b9f7f53-2dee-4f5c-9f7f-532dee9f5cb1",
-        "targetPlan": "api-key-plan",
-        "targetPlanId": "8f1e49ec-d795-4534-9e49-ecd795053418",
-        "matchMode": "exact"
+        "targetApi": "hello-api",
+        "targetApiId": "api_hello_123",
+        "targetPlan": "Hello API Key",
+        "targetPlanId": "plan_hello_key_123"
       },
       {
-        "targetApi": "cat-fact-api-2",
-        "targetApiId": "89884594-070e-4a48-8845-94070eea48d4",
-        "targetPlan": "api-key-plan",
-        "targetPlanId": "08f9eee0-3617-4a77-b9ee-e03617da7744",
-        "matchMode": "exact"
-      }
-    ],
-    "cats-api-product": {
-      "targetApi": "cats-api-7",
-      "targetApiId": "be73ea39-32fd-4ac8-b3ea-3932fd4ac858",
-      "targetPlan": "api-key-plan",
-      "targetPlanId": "3611d76f-c02e-4182-91d7-6fc02e318294",
-      "matchMode": "exact"
-    },
-    "chuck-norris-api-product": {
-      "targetApi": "chuck-norris-api-10",
-      "targetApiId": "927e6ba1-a2e9-4baf-be6b-a1a2e93bafe9",
-      "targetPlan": "api-key-plan",
-      "targetPlanId": "9ff1a423-9700-41a0-b1a4-23970031a07c",
-      "matchMode": "exact"
-    },
-    "dog-breeds-api-product": {
-      "targetApi": "dog-breeds-api-6",
-      "targetApiId": "ab671749-e1a6-426a-a717-49e1a6726a5c",
-      "targetPlan": "api-key-plan",
-      "targetPlanId": "d5efd5ec-b283-4d23-afd5-ecb283fd23ac",
-      "matchMode": "exact"
-    },
-    "hogwarts-houses-api-product": {
-      "targetApi": "hogwarts-houses-api-8",
-      "targetApiId": "72fea1e5-8e97-45e1-bea1-e58e9725e101",
-      "targetPlan": "api-key-plan",
-      "targetPlanId": "5f3aeb6c-06a6-4635-baeb-6c06a6163519",
-      "matchMode": "exact"
-    },
-    "kanye-api-product": {
-      "targetApi": "kanye-rest-api-5",
-      "targetApiId": "41514d92-b3f2-42dd-914d-92b3f2e2ddda",
-      "targetPlan": "api-key-plan",
-      "targetPlanId": "85696198-b379-439a-a961-98b379139a2c",
-      "matchMode": "exact"
-    },
-    "wizards-api-product": {
-      "targetApi": "wizards-api-9",
-      "targetApiId": "5c261880-e37b-4587-a618-80e37be5872a",
-      "targetPlan": "api-key-plan",
-      "targetPlanId": "89936ea3-d484-4fc6-936e-a3d484afc651",
-      "matchMode": "exact"
-    },
-    "yes-or-no-api-product": {
-      "targetApi": "yes-or-no-api-4",
-      "targetApiId": "7f88a006-d361-49e1-88a0-06d361b9e127",
-      "targetPlan": "api-key-plan",
-      "targetPlanId": "5b601457-106f-4e91-a014-57106fce9134",
-      "matchMode": "exact"
-    },
-    "misc-api-product": [
-      {
-        "targetApi": "apigee-hello-api-1",
-        "targetApiId": "2b9f7f53-2dee-4f5c-9f7f-532dee9f5cb1",
-        "targetPlan": "api-key-plan",
-        "targetPlanId": "8f1e49ec-d795-4534-9e49-ecd795053418",
-        "matchMode": "exact"
-      },
-      {
-        "targetApi": "cat-fact-api-2",
-        "targetApiId": "89884594-070e-4a48-8845-94070eea48d4",
-        "targetPlan": "api-key-plan",
-        "targetPlanId": "08f9eee0-3617-4a77-b9ee-e03617da7744",
-        "matchMode": "exact"
-      },
-      {
-        "targetApi": "car-makes-api-3",
-        "targetApiId": "b7767841-e5d1-4bc4-b678-41e5d13bc444",
-        "targetPlan": "api-key-plan",
-        "targetPlanId": "e4d8d493-2de0-4233-98d4-932de0423337",
-        "matchMode": "exact"
+        "targetApi": "facts-api",
+        "targetApiId": "api_facts_123",
+        "targetPlan": "Facts API Key",
+        "targetPlanId": "plan_facts_key_123"
       }
     ]
   },
@@ -140,31 +66,37 @@
     "includeDevelopers": [],
     "excludeDevelopers": [],
     "includeApps": [
-      "danny.rivera@540.co/cats-dev-app",
-      "dev1@540.co/kanye-dev-app",
-      "dev1@540.co/wizards-dev-app",
-      "dev10@540.co/dev10-app",
-      "dev11@540.co/dev11-app",
-      "dev12@540.co/dev12-app",
-      "dev13@540.co/dev13-app",
-      "dev14@540.co/dev14-app",
-      "dev15@540.co/dev15-app",
-      "dev16@540.co/dev16-app",
-      "dev17@540.co/dev17-app",
-      "dev18@540.co/dev18-app",
-      "dev19@540.co/dev19-app",
-      "dev2@540.co/chuck-norris-dev-app",
-      "dev2@540.co/dog-breeds-dev-app",
-      "dev20@540.co/dev20-app",
-      "dev4@540.co/dev4-app",
-      "dev5@540.co/dev5-app",
-      "dev6@540.co/dev6-app",
-      "dev7@540.co/dev7-app",
-      "dev8@540.co/dev8-app",
-      "dev9@540.co/dev9-app",
-      "erik.severson@540.co/hogwarts-houses-dev-app",
-      "erik.severson@540.co/misc-dev-app",
-      "erik.severson@540.co/yes-or-no-dev-app"
+      "developer@example.com/developer-migration-app",
+      "developer1@example.com/developer1-migration-app",
+      "developer10@example.com/developer10-migration-app",
+      "developer11@example.com/developer11-migration-app",
+      "developer12@example.com/developer12-migration-app",
+      "developer13@example.com/developer13-migration-app",
+      "developer14@example.com/developer14-migration-app",
+      "developer15@example.com/developer15-migration-app",
+      "developer16@example.com/developer16-migration-app",
+      "developer17@example.com/developer17-migration-app",
+      "developer18@example.com/developer18-migration-app",
+      "developer19@example.com/developer19-migration-app",
+      "developer2@example.com/developer2-migration-app",
+      "developer20@example.com/developer20-migration-app",
+      "developer21@example.com/developer21-migration-app",
+      "developer22@example.com/developer22-migration-app",
+      "developer23@example.com/developer23-migration-app",
+      "developer24@example.com/developer24-migration-app",
+      "developer25@example.com/developer25-migration-app",
+      "developer26@example.com/developer26-migration-app",
+      "developer27@example.com/developer27-migration-app",
+      "developer28@example.com/developer28-migration-app",
+      "developer29@example.com/developer29-migration-app",
+      "developer3@example.com/developer3-migration-app",
+      "developer30@example.com/developer30-migration-app",
+      "developer4@example.com/developer4-migration-app",
+      "developer5@example.com/developer5-migration-app",
+      "developer6@example.com/developer6-migration-app",
+      "developer7@example.com/developer7-migration-app",
+      "developer8@example.com/developer8-migration-app",
+      "developer9@example.com/developer9-migration-app"
     ],
     "excludeApps": []
   },
@@ -174,10 +106,10 @@
   },
   "roleAssignmentIds": {
     "organization": [
-      "4a6c1536-12f5-4c7c-ac15-3612f56c7cc5"
+      "025852e7-972a-42e9-9852-e7972a22e951"
     ],
     "environment": [
-      "b1805b56-b9af-419d-805b-56b9afe19d55"
+      "57048d84-8933-4d0c-848d-848933ed0c41"
     ]
   }
 }

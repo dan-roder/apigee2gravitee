@@ -1,354 +1,439 @@
 {
-  "generatedAt": "2026-06-16T18:47:49.016Z",
+  "generatedAt": "2026-06-29T20:47:07.672Z",
   "command": "developers select-apps",
-  "irDir": "/home/ec2-user/apigee2gravitee/ir",
-  "configPath": "/home/ec2-user/apigee2gravitee/config/developers.config.resolved.json",
+  "irDir": "/Users/daniel.roder/Sites/apigee2gravitee/ir",
+  "configPath": "/Users/daniel.roder/Sites/apigee2gravitee/config/developers.config.resolved.json",
   "cleared": false,
   "skipped": false,
   "existingIncludeApps": [],
   "summary": {
-    "totalAppsDiscovered": 25,
-    "selectedApps": 25,
+    "totalAppsDiscovered": 31,
+    "selectedApps": 31,
     "excludedApps": 0,
-    "selectedDevelopers": 21,
-    "productsCovered": 8,
-    "missingProductPlanMappings": 0
+    "selectedDevelopers": 31,
+    "productsCovered": 5,
+    "missingProductPlanMappings": 5
   },
   "selectedApps": [
     {
-      "sourceId": "danny.rivera@540.co/cats-dev-app",
-      "developerEmail": "danny.rivera@540.co",
-      "appName": "cats-dev-app",
+      "sourceId": "developer@example.com/developer-migration-app",
+      "developerEmail": "developer@example.com",
+      "appName": "developer-migration-app",
       "appStatus": "approved",
       "developerStatus": "active",
       "credentialCount": 1,
       "products": [
-        "cats-api-product"
+        "leap-api-product"
       ],
       "preselected": false
     },
     {
-      "sourceId": "dev1@540.co/kanye-dev-app",
-      "developerEmail": "dev1@540.co",
-      "appName": "kanye-dev-app",
+      "sourceId": "developer1@example.com/developer1-migration-app",
+      "developerEmail": "developer1@example.com",
+      "appName": "developer1-migration-app",
       "appStatus": "approved",
       "developerStatus": "active",
       "credentialCount": 1,
       "products": [
-        "kanye-api-product"
+        "collibra-api-product"
       ],
       "preselected": false
     },
     {
-      "sourceId": "dev1@540.co/wizards-dev-app",
-      "developerEmail": "dev1@540.co",
-      "appName": "wizards-dev-app",
+      "sourceId": "developer10@example.com/developer10-migration-app",
+      "developerEmail": "developer10@example.com",
+      "appName": "developer10-migration-app",
       "appStatus": "approved",
       "developerStatus": "active",
       "credentialCount": 1,
       "products": [
-        "wizards-api-product"
+        "llm-gateway-product"
       ],
       "preselected": false
     },
     {
-      "sourceId": "dev10@540.co/dev10-app",
-      "developerEmail": "dev10@540.co",
-      "appName": "dev10-app",
+      "sourceId": "developer11@example.com/developer11-migration-app",
+      "developerEmail": "developer11@example.com",
+      "appName": "developer11-migration-app",
       "appStatus": "approved",
       "developerStatus": "active",
       "credentialCount": 1,
       "products": [
-        "wizards-api-product"
+        "maintenance-repair-api-product"
       ],
       "preselected": false
     },
     {
-      "sourceId": "dev11@540.co/dev11-app",
-      "developerEmail": "dev11@540.co",
-      "appName": "dev11-app",
+      "sourceId": "developer12@example.com/developer12-migration-app",
+      "developerEmail": "developer12@example.com",
+      "appName": "developer12-migration-app",
       "appStatus": "approved",
       "developerStatus": "active",
       "credentialCount": 1,
       "products": [
-        "yes-or-no-api-product"
+        "flight-aware-api-product"
       ],
       "preselected": false
     },
     {
-      "sourceId": "dev12@540.co/dev12-app",
-      "developerEmail": "dev12@540.co",
-      "appName": "dev12-app",
+      "sourceId": "developer13@example.com/developer13-migration-app",
+      "developerEmail": "developer13@example.com",
+      "appName": "developer13-migration-app",
       "appStatus": "approved",
       "developerStatus": "active",
       "credentialCount": 1,
       "products": [
-        "wizards-api-product"
+        "llm-gateway-product"
       ],
       "preselected": false
     },
     {
-      "sourceId": "dev13@540.co/dev13-app",
-      "developerEmail": "dev13@540.co",
-      "appName": "dev13-app",
+      "sourceId": "developer14@example.com/developer14-migration-app",
+      "developerEmail": "developer14@example.com",
+      "appName": "developer14-migration-app",
       "appStatus": "approved",
       "developerStatus": "active",
       "credentialCount": 1,
       "products": [
-        "cats-api-product"
+        "collibra-api-product"
       ],
       "preselected": false
     },
     {
-      "sourceId": "dev14@540.co/dev14-app",
-      "developerEmail": "dev14@540.co",
-      "appName": "dev14-app",
+      "sourceId": "developer15@example.com/developer15-migration-app",
+      "developerEmail": "developer15@example.com",
+      "appName": "developer15-migration-app",
       "appStatus": "approved",
       "developerStatus": "active",
       "credentialCount": 1,
       "products": [
-        "chuck-norris-api-product"
+        "maintenance-repair-api-product"
       ],
       "preselected": false
     },
     {
-      "sourceId": "dev15@540.co/dev15-app",
-      "developerEmail": "dev15@540.co",
-      "appName": "dev15-app",
+      "sourceId": "developer16@example.com/developer16-migration-app",
+      "developerEmail": "developer16@example.com",
+      "appName": "developer16-migration-app",
       "appStatus": "approved",
       "developerStatus": "active",
       "credentialCount": 1,
       "products": [
-        "dog-breeds-api-product"
+        "flight-aware-api-product"
       ],
       "preselected": false
     },
     {
-      "sourceId": "dev16@540.co/dev16-app",
-      "developerEmail": "dev16@540.co",
-      "appName": "dev16-app",
+      "sourceId": "developer17@example.com/developer17-migration-app",
+      "developerEmail": "developer17@example.com",
+      "appName": "developer17-migration-app",
       "appStatus": "approved",
       "developerStatus": "active",
       "credentialCount": 1,
       "products": [
-        "hogwarts-houses-api-product"
+        "llm-gateway-product"
       ],
       "preselected": false
     },
     {
-      "sourceId": "dev17@540.co/dev17-app",
-      "developerEmail": "dev17@540.co",
-      "appName": "dev17-app",
+      "sourceId": "developer18@example.com/developer18-migration-app",
+      "developerEmail": "developer18@example.com",
+      "appName": "developer18-migration-app",
       "appStatus": "approved",
       "developerStatus": "active",
       "credentialCount": 1,
       "products": [
-        "misc-api-product"
+        "flight-aware-api-product"
       ],
       "preselected": false
     },
     {
-      "sourceId": "dev18@540.co/dev18-app",
-      "developerEmail": "dev18@540.co",
-      "appName": "dev18-app",
+      "sourceId": "developer19@example.com/developer19-migration-app",
+      "developerEmail": "developer19@example.com",
+      "appName": "developer19-migration-app",
       "appStatus": "approved",
       "developerStatus": "active",
       "credentialCount": 1,
       "products": [
-        "wizards-api-product"
+        "flight-aware-api-product"
       ],
       "preselected": false
     },
     {
-      "sourceId": "dev19@540.co/dev19-app",
-      "developerEmail": "dev19@540.co",
-      "appName": "dev19-app",
+      "sourceId": "developer2@example.com/developer2-migration-app",
+      "developerEmail": "developer2@example.com",
+      "appName": "developer2-migration-app",
       "appStatus": "approved",
       "developerStatus": "active",
       "credentialCount": 1,
       "products": [
-        "yes-or-no-api-product"
+        "maintenance-repair-api-product"
       ],
       "preselected": false
     },
     {
-      "sourceId": "dev2@540.co/chuck-norris-dev-app",
-      "developerEmail": "dev2@540.co",
-      "appName": "chuck-norris-dev-app",
+      "sourceId": "developer20@example.com/developer20-migration-app",
+      "developerEmail": "developer20@example.com",
+      "appName": "developer20-migration-app",
       "appStatus": "approved",
       "developerStatus": "active",
       "credentialCount": 1,
       "products": [
-        "chuck-norris-api-product"
+        "llm-gateway-product"
       ],
       "preselected": false
     },
     {
-      "sourceId": "dev2@540.co/dog-breeds-dev-app",
-      "developerEmail": "dev2@540.co",
-      "appName": "dog-breeds-dev-app",
+      "sourceId": "developer21@example.com/developer21-migration-app",
+      "developerEmail": "developer21@example.com",
+      "appName": "developer21-migration-app",
       "appStatus": "approved",
       "developerStatus": "active",
       "credentialCount": 1,
       "products": [
-        "dog-breeds-api-product"
+        "leap-api-product"
       ],
       "preselected": false
     },
     {
-      "sourceId": "dev20@540.co/dev20-app",
-      "developerEmail": "dev20@540.co",
-      "appName": "dev20-app",
+      "sourceId": "developer22@example.com/developer22-migration-app",
+      "developerEmail": "developer22@example.com",
+      "appName": "developer22-migration-app",
       "appStatus": "approved",
       "developerStatus": "active",
       "credentialCount": 1,
       "products": [
-        "dog-breeds-api-product"
+        "flight-aware-api-product"
       ],
       "preselected": false
     },
     {
-      "sourceId": "dev4@540.co/dev4-app",
-      "developerEmail": "dev4@540.co",
-      "appName": "dev4-app",
+      "sourceId": "developer23@example.com/developer23-migration-app",
+      "developerEmail": "developer23@example.com",
+      "appName": "developer23-migration-app",
       "appStatus": "approved",
       "developerStatus": "active",
       "credentialCount": 1,
       "products": [
-        "cats-api-product"
+        "collibra-api-product"
       ],
       "preselected": false
     },
     {
-      "sourceId": "dev5@540.co/dev5-app",
-      "developerEmail": "dev5@540.co",
-      "appName": "dev5-app",
+      "sourceId": "developer24@example.com/developer24-migration-app",
+      "developerEmail": "developer24@example.com",
+      "appName": "developer24-migration-app",
       "appStatus": "approved",
       "developerStatus": "active",
       "credentialCount": 1,
       "products": [
-        "chuck-norris-api-product"
+        "llm-gateway-product"
       ],
       "preselected": false
     },
     {
-      "sourceId": "dev6@540.co/dev6-app",
-      "developerEmail": "dev6@540.co",
-      "appName": "dev6-app",
+      "sourceId": "developer25@example.com/developer25-migration-app",
+      "developerEmail": "developer25@example.com",
+      "appName": "developer25-migration-app",
       "appStatus": "approved",
       "developerStatus": "active",
       "credentialCount": 1,
       "products": [
-        "dog-breeds-api-product"
+        "maintenance-repair-api-product"
       ],
       "preselected": false
     },
     {
-      "sourceId": "dev7@540.co/dev7-app",
-      "developerEmail": "dev7@540.co",
-      "appName": "dev7-app",
+      "sourceId": "developer26@example.com/developer26-migration-app",
+      "developerEmail": "developer26@example.com",
+      "appName": "developer26-migration-app",
       "appStatus": "approved",
       "developerStatus": "active",
       "credentialCount": 1,
       "products": [
-        "hogwarts-houses-api-product"
+        "leap-api-product"
       ],
       "preselected": false
     },
     {
-      "sourceId": "dev8@540.co/dev8-app",
-      "developerEmail": "dev8@540.co",
-      "appName": "dev8-app",
+      "sourceId": "developer27@example.com/developer27-migration-app",
+      "developerEmail": "developer27@example.com",
+      "appName": "developer27-migration-app",
       "appStatus": "approved",
       "developerStatus": "active",
       "credentialCount": 1,
       "products": [
-        "kanye-api-product"
+        "flight-aware-api-product"
       ],
       "preselected": false
     },
     {
-      "sourceId": "dev9@540.co/dev9-app",
-      "developerEmail": "dev9@540.co",
-      "appName": "dev9-app",
+      "sourceId": "developer28@example.com/developer28-migration-app",
+      "developerEmail": "developer28@example.com",
+      "appName": "developer28-migration-app",
       "appStatus": "approved",
       "developerStatus": "active",
       "credentialCount": 1,
       "products": [
-        "misc-api-product"
+        "collibra-api-product"
       ],
       "preselected": false
     },
     {
-      "sourceId": "erik.severson@540.co/hogwarts-houses-dev-app",
-      "developerEmail": "erik.severson@540.co",
-      "appName": "hogwarts-houses-dev-app",
+      "sourceId": "developer29@example.com/developer29-migration-app",
+      "developerEmail": "developer29@example.com",
+      "appName": "developer29-migration-app",
       "appStatus": "approved",
       "developerStatus": "active",
       "credentialCount": 1,
       "products": [
-        "hogwarts-houses-api-product"
+        "llm-gateway-product"
       ],
       "preselected": false
     },
     {
-      "sourceId": "erik.severson@540.co/misc-dev-app",
-      "developerEmail": "erik.severson@540.co",
-      "appName": "misc-dev-app",
+      "sourceId": "developer3@example.com/developer3-migration-app",
+      "developerEmail": "developer3@example.com",
+      "appName": "developer3-migration-app",
       "appStatus": "approved",
       "developerStatus": "active",
       "credentialCount": 1,
       "products": [
-        "misc-api-product"
+        "llm-gateway-product"
       ],
       "preselected": false
     },
     {
-      "sourceId": "erik.severson@540.co/yes-or-no-dev-app",
-      "developerEmail": "erik.severson@540.co",
-      "appName": "yes-or-no-dev-app",
+      "sourceId": "developer30@example.com/developer30-migration-app",
+      "developerEmail": "developer30@example.com",
+      "appName": "developer30-migration-app",
       "appStatus": "approved",
       "developerStatus": "active",
       "credentialCount": 1,
       "products": [
-        "yes-or-no-api-product"
+        "maintenance-repair-api-product"
+      ],
+      "preselected": false
+    },
+    {
+      "sourceId": "developer4@example.com/developer4-migration-app",
+      "developerEmail": "developer4@example.com",
+      "appName": "developer4-migration-app",
+      "appStatus": "approved",
+      "developerStatus": "active",
+      "credentialCount": 1,
+      "products": [
+        "collibra-api-product"
+      ],
+      "preselected": false
+    },
+    {
+      "sourceId": "developer5@example.com/developer5-migration-app",
+      "developerEmail": "developer5@example.com",
+      "appName": "developer5-migration-app",
+      "appStatus": "approved",
+      "developerStatus": "active",
+      "credentialCount": 1,
+      "products": [
+        "collibra-api-product"
+      ],
+      "preselected": false
+    },
+    {
+      "sourceId": "developer6@example.com/developer6-migration-app",
+      "developerEmail": "developer6@example.com",
+      "appName": "developer6-migration-app",
+      "appStatus": "approved",
+      "developerStatus": "active",
+      "credentialCount": 1,
+      "products": [
+        "maintenance-repair-api-product"
+      ],
+      "preselected": false
+    },
+    {
+      "sourceId": "developer7@example.com/developer7-migration-app",
+      "developerEmail": "developer7@example.com",
+      "appName": "developer7-migration-app",
+      "appStatus": "approved",
+      "developerStatus": "active",
+      "credentialCount": 1,
+      "products": [
+        "collibra-api-product"
+      ],
+      "preselected": false
+    },
+    {
+      "sourceId": "developer8@example.com/developer8-migration-app",
+      "developerEmail": "developer8@example.com",
+      "appName": "developer8-migration-app",
+      "appStatus": "approved",
+      "developerStatus": "active",
+      "credentialCount": 1,
+      "products": [
+        "flight-aware-api-product"
+      ],
+      "preselected": false
+    },
+    {
+      "sourceId": "developer9@example.com/developer9-migration-app",
+      "developerEmail": "developer9@example.com",
+      "appName": "developer9-migration-app",
+      "appStatus": "approved",
+      "developerStatus": "active",
+      "credentialCount": 1,
+      "products": [
+        "maintenance-repair-api-product"
       ],
       "preselected": false
     }
   ],
   "excludedApps": [],
   "selectedDevelopers": [
-    "danny.rivera@540.co",
-    "dev1@540.co",
-    "dev10@540.co",
-    "dev11@540.co",
-    "dev12@540.co",
-    "dev13@540.co",
-    "dev14@540.co",
-    "dev15@540.co",
-    "dev16@540.co",
-    "dev17@540.co",
-    "dev18@540.co",
-    "dev19@540.co",
-    "dev2@540.co",
-    "dev20@540.co",
-    "dev4@540.co",
-    "dev5@540.co",
-    "dev6@540.co",
-    "dev7@540.co",
-    "dev8@540.co",
-    "dev9@540.co",
-    "erik.severson@540.co"
+    "developer@example.com",
+    "developer1@example.com",
+    "developer10@example.com",
+    "developer11@example.com",
+    "developer12@example.com",
+    "developer13@example.com",
+    "developer14@example.com",
+    "developer15@example.com",
+    "developer16@example.com",
+    "developer17@example.com",
+    "developer18@example.com",
+    "developer19@example.com",
+    "developer2@example.com",
+    "developer20@example.com",
+    "developer21@example.com",
+    "developer22@example.com",
+    "developer23@example.com",
+    "developer24@example.com",
+    "developer25@example.com",
+    "developer26@example.com",
+    "developer27@example.com",
+    "developer28@example.com",
+    "developer29@example.com",
+    "developer3@example.com",
+    "developer30@example.com",
+    "developer4@example.com",
+    "developer5@example.com",
+    "developer6@example.com",
+    "developer7@example.com",
+    "developer8@example.com",
+    "developer9@example.com"
   ],
   "productsCovered": [
-    "cats-api-product",
-    "chuck-norris-api-product",
-    "dog-breeds-api-product",
-    "hogwarts-houses-api-product",
-    "kanye-api-product",
-    "misc-api-product",
-    "wizards-api-product",
-    "yes-or-no-api-product"
+    "collibra-api-product",
+    "flight-aware-api-product",
+    "leap-api-product",
+    "llm-gateway-product",
+    "maintenance-repair-api-product"
   ],
-  "missingProductPlanMappings": []
+  "missingProductPlanMappings": [
+    "collibra-api-product",
+    "flight-aware-api-product",
+    "leap-api-product",
+    "llm-gateway-product",
+    "maintenance-repair-api-product"
+  ]
 }
