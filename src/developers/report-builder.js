@@ -30,18 +30,21 @@ function summarizeOperatorActions(actions) {
   const byKind = {};
   const byOperation = {};
   const blockedReasons = {};
+  const deferredReasons = {};
 
   for (const item of actions) {
     if (item.kind.startsWith('VERIFY_') || item.kind === 'RESOLVE_PLAN') continue;
     addNestedSummaryCount(byKind, item.kind, item.operation || item.plannedStatus);
     addSummaryCount(byOperation, item.operation || item.plannedStatus);
     for (const blocker of item.blockers || []) addSummaryCount(blockedReasons, blocker);
+    for (const reason of item.deferReasons || []) addSummaryCount(deferredReasons, reason);
   }
 
   return {
     byKind,
     byOperation,
     blockedReasons,
+    deferredReasons,
   };
 }
 
@@ -236,9 +239,9 @@ function resolveSubscriptionOperation(subscription, targetState) {
 
   if (!subscription.planMapping) {
     return {
-      plannedStatus: 'BLOCKED',
-      operation: 'BLOCK',
-      blockers: ['PLAN_MAPPING_MISSING'],
+      plannedStatus: 'DEFERRED',
+      operation: 'DEFER',
+      deferReasons: ['PLAN_MAPPING_MISSING'],
     };
   }
 
@@ -259,7 +262,7 @@ function resolveSubscriptionOperation(subscription, targetState) {
 }
 
 function resolvePlanBlockers(domain, subscription, plan) {
-  if (!subscription.planMapping) return ['PLAN_MAPPING_MISSING'];
+  if (!subscription.planMapping) return [];
   if (!plan) return [];
 
   const blockers = [];
@@ -277,12 +280,37 @@ function resolvePlanBlockers(domain, subscription, plan) {
   return Array.from(new Set(blockers));
 }
 
+function targetIdsUnresolved(mapping) {
+  if (!mapping) return false;
+  return !mapping.targetApiId
+    || !mapping.targetPlanId
+    || String(mapping.targetApiId).startsWith('REPLACE_WITH_')
+    || String(mapping.targetPlanId).startsWith('REPLACE_WITH_');
+}
+
+function resolveSubscriptionDeferralReasons(subscription, plan, planIssues, targetState) {
+  const reasons = [];
+  if (!subscription.planMapping) reasons.push('PLAN_MAPPING_MISSING');
+  if (targetIdsUnresolved(subscription.planMapping)) reasons.push('TARGET_IDS_UNRESOLVED');
+  if (
+    subscription.planMapping
+    && targetState.planLookupAttempted?.has(subscription.sourceId)
+    && !plan
+  ) {
+    reasons.push('TARGET_PLAN_UNAVAILABLE');
+  }
+  reasons.push(...planIssues);
+  return Array.from(new Set(reasons));
+}
+
 function buildPlan(domain, preflight, config, targetState = {
   usersByEmail: new Map(),
   applicationsBySourceId: new Map(),
   plansBySourceId: new Map(),
   subscriptionsBySourceId: new Map(),
   apiKeysBySubscriptionSourceId: new Map(),
+  planLookupAttempted: new Set(),
+  planLookupErrors: new Map(),
 }) {
   const actions = [];
 
@@ -375,6 +403,7 @@ function buildPlan(domain, preflight, config, targetState = {
     const plan = targetState.plansBySourceId.get(subscription.sourceId);
     const resolution = resolveSubscriptionOperation(subscription, targetState);
     const planBlockers = resolvePlanBlockers(domain, subscription, plan);
+    const deferReasons = resolveSubscriptionDeferralReasons(subscription, plan, planBlockers, targetState);
     const planWarnings = plan && planBlockers.includes('TARGET_PLAN_SECURITY_MISMATCH')
       ? [{
         code: 'TARGET_PLAN_SECURITY_MISMATCH',
@@ -385,23 +414,25 @@ function buildPlan(domain, preflight, config, targetState = {
         targetPlan: plan.name || subscription.planMapping?.targetPlan || null,
       }]
       : [];
-    const planResolutionStatus = planBlockers.length > 0 ? 'BLOCKED' : (subscription.planMapping ? 'READY' : 'BLOCKED');
-    const subscriptionStatus = planBlockers.length > 0 ? 'BLOCKED' : resolution.plannedStatus;
-    const subscriptionOperation = planBlockers.length > 0 ? 'BLOCK' : resolution.operation;
+    const deferred = deferReasons.length > 0;
+    const planResolutionStatus = deferred ? 'DEFERRED' : 'READY';
+    const subscriptionStatus = deferred ? 'DEFERRED' : resolution.plannedStatus;
+    const subscriptionOperation = deferred ? 'DEFER' : resolution.operation;
 
     const resolvePlanAction = action(`RESOLVE_PLAN:${subscription.sourceId}`, 'RESOLVE_PLAN', subscription.sourceId, {
       dependencies: [`UPSERT_APPLICATION:${appSourceId}`],
       plannedStatus: planResolutionStatus,
-      operation: planBlockers.length > 0 ? 'BLOCK' : (plan ? 'REUSE' : 'RESOLVE'),
+      operation: deferred ? 'DEFER' : (plan ? 'REUSE' : 'RESOLVE'),
       lookup: subscription.planMapping || {},
       payload: {
         ...(subscription.planMapping || {}),
         planSecurity: plan ? classifyPlanSecurity(plan) : null,
       },
-      blockers: planBlockers,
+      blockers: [],
+      deferReasons,
       warnings: planWarnings,
       targetHint: plan ? { planId: plan.id, apiId: plan.apiId || subscription.planMapping?.targetApiId || null } : {},
-      failConditions: planBlockers,
+      failConditions: [],
     });
     actions.push(resolvePlanAction);
 
@@ -426,11 +457,12 @@ function buildPlan(domain, preflight, config, targetState = {
         sourceConsumerKey: subscription.consumerKey,
         sourceCredentialId: subscription.credentialId,
       },
-      blockers: [...subscription.blockers, ...(resolution.blockers || []), ...planBlockers],
+      blockers: [...subscription.blockers],
+      deferReasons,
       warnings: [...subscription.warnings, ...planWarnings],
       manualReviewReasons: [...subscription.manualReviewReasons],
       skipConditions: resolution.skipConditions || [],
-      failConditions: [...(resolution.blockers || []), ...planBlockers],
+      failConditions: [],
       targetHint: resolution.targetId ? { subscriptionId: resolution.targetId } : {},
     });
     actions.push(upsertSubscription);
@@ -447,6 +479,7 @@ function buildPlan(domain, preflight, config, targetState = {
       },
       continuity: upsertSubscription.continuity,
       blockers: [...upsertSubscription.blockers],
+      deferReasons: [...upsertSubscription.deferReasons],
       warnings: [...upsertSubscription.warnings],
       manualReviewReasons: [...upsertSubscription.manualReviewReasons],
     });
@@ -481,6 +514,8 @@ function buildPlan(domain, preflight, config, targetState = {
       actionsByKind,
       actionsByStatus,
       operatorActions: summarizeOperatorActions(actions),
+      deferredSubscriptions: actions.filter((item) => item.kind === 'UPSERT_SUBSCRIPTION' && item.plannedStatus === 'DEFERRED').length,
+      deferredActions: actions.filter((item) => item.plannedStatus === 'DEFERRED').length,
     },
     records: {
       users: domain.users,
@@ -542,6 +577,9 @@ function buildGapReport(domain, preflight, config, manifest = null) {
       applications: domain.applications.length,
       credentials: domain.credentials.length,
       subscriptions: domain.subscriptions.length,
+      deferredSubscriptions: manifest?.summary?.deferredSubscriptions || 0,
+      deferredActions: manifest?.summary?.deferredActions || 0,
+      deferredReasons: manifest?.summary?.operatorActions?.deferredReasons || {},
       actions: manifest?.actions?.length || 0,
       blockers: preflight.blockers.length,
       warnings: preflight.warnings.length,

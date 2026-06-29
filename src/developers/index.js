@@ -59,7 +59,7 @@ function printImportProgress(event, fmt) {
     return;
   }
   if (event.type === 'complete') {
-    console.log(`[import] completed with ${event.failed || 0} failed, ${event.blocked || 0} blocked`);
+    console.log(`[import] completed with ${event.failed || 0} failed, ${event.blocked || 0} blocked, ${event.deferred || 0} deferred`);
     return;
   }
 
@@ -80,6 +80,11 @@ function printImportProgress(event, fmt) {
   }
   if (event.type === 'blocked') {
     console.log(`${prefix} ${fmt.warn('blocked')} ${actionText}`);
+    if (event.message) console.log(`  ${fmt.dim(event.message)}`);
+    return;
+  }
+  if (event.type === 'deferred') {
+    console.log(`${prefix} ${fmt.warn('deferred')} ${actionText}`);
     if (event.message) console.log(`  ${fmt.dim(event.message)}`);
     return;
   }
@@ -171,11 +176,11 @@ function printDiscoverTargetHints(report, fmt) {
   if (!report) return;
 
   console.log('');
-  console.log(fmt.info('Next step: validate the discovered targets before analyze/import:'));
+  console.log(fmt.info('Validate discovered targets before expecting subscriptions to import:'));
   console.log(`  ${fmt.dim('node bin/migrator.js developers validate-config-targets --ir-dir ./ir --config ./config/developers.config.resolved.json --gravitee-token "$GRAVITEE_TOKEN"')}`);
 
   if ((report.summary?.blockers || 0) > 0) {
-    console.log(`  ${fmt.dim('Only proceed to analyze/import after validate-config-targets reports 0 blockers for the current dataset.')}`);
+    console.log(`  ${fmt.dim('Users and applications can still import; unresolved product subscriptions will be deferred.')}`);
   }
 }
 
@@ -334,7 +339,7 @@ async function runDevelopersCommand(subcommand, flags, fmt) {
       console.log(`  Output:      ${fmt.dim(result.outputPath)}`);
     }
     console.log('');
-    console.log(fmt.info('Next step: validate selected app product targets before analyze/import:'));
+    console.log(fmt.info('Next step for subscription readiness: validate selected app product targets:'));
     console.log(`  ${fmt.dim('node bin/migrator.js developers validate-config-targets --ir-dir ./ir --config ./config/developers.config.resolved.json --gravitee-token "$GRAVITEE_TOKEN"')}`);
     return result.exitCode;
   }
@@ -413,7 +418,7 @@ async function runDevelopersCommand(subcommand, flags, fmt) {
       console.log(fmt.header('Developers plan'));
       console.log('');
       console.log(`[plan] ${result.manifest.actions.length} actions generated`);
-      console.log(`[plan] ${result.manifest.summary.actionsByStatus.READY || 0} ready, ${result.manifest.summary.actionsByStatus.BLOCKED || 0} blocked, ${result.manifest.summary.actionsByStatus.SKIPPED || 0} skipped, ${result.manifest.summary.manualReview || 0} manual review`);
+      console.log(`[plan] ${result.manifest.summary.actionsByStatus.READY || 0} ready, ${result.manifest.summary.actionsByStatus.BLOCKED || 0} blocked, ${result.manifest.summary.actionsByStatus.DEFERRED || 0} deferred, ${result.manifest.summary.actionsByStatus.SKIPPED || 0} skipped, ${result.manifest.summary.manualReview || 0} manual review`);
       const nextScope = result.gapReport?.operatorGuidance?.nextSuggestedScope;
       if (nextScope) console.log(`[plan] next suggested scope: ${nextScope}`);
       printOperatorHints(result.preflight, fmt);
@@ -474,10 +479,15 @@ async function runDevelopersCommand(subcommand, flags, fmt) {
       acc[item.status] = (acc[item.status] || 0) + 1;
       return acc;
     }, {});
-    console.log(`[import] ${statuses.SUCCEEDED || 0} succeeded, ${statuses.FAILED || 0} failed, ${statuses.BLOCKED || 0} blocked, ${statuses.SKIPPED || 0} skipped, ${statuses.MANUAL_REVIEW || 0} manual review`);
+    console.log(`[import] ${statuses.SUCCEEDED || 0} succeeded, ${statuses.FAILED || 0} failed, ${statuses.BLOCKED || 0} blocked, ${statuses.DEFERRED || 0} deferred, ${statuses.SKIPPED || 0} skipped, ${statuses.MANUAL_REVIEW || 0} manual review`);
     console.log('');
     console.log('  Planned operations:');
     printObjectCounts(result.manifest.summary.operatorActions?.byOperation, fmt, '   -');
+    if ((statuses.DEFERRED || 0) > 0) {
+      console.log('');
+      console.log('  Deferred subscription reasons:');
+      printObjectCounts(result.manifest.summary.operatorActions?.deferredReasons, fmt, '   -');
+    }
     if ((result.preflight.blockers || []).length > 0) {
       console.log('');
       console.log('  Blocking categories:');
@@ -501,7 +511,7 @@ async function runDevelopersCommand(subcommand, flags, fmt) {
     }
     console.log(fmt.header('Developers reconcile'));
     console.log('');
-    console.log(`[reconcile] ${result.report.summary.checkedUsers} users, ${result.report.summary.checkedApplications} apps, ${result.report.summary.checkedSubscriptions} subscriptions checked`);
+    console.log(`[reconcile] ${result.report.summary.checkedUsers} users, ${result.report.summary.checkedApplications} apps, ${result.report.summary.checkedSubscriptions} subscriptions checked, ${result.report.summary.deferredSubscriptions || 0} deferred`);
     console.log(`[reconcile] ${result.report.summary.blockers} blocker(s), ${result.report.summary.warnings} warning(s)`);
     if (result.report.mismatches.length > 0) {
       console.log('');

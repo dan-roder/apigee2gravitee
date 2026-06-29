@@ -26,7 +26,7 @@ function shouldIncludeAction(action, flags) {
 
 function dependenciesSatisfied(action, state) {
   return (action.dependencies || []).every((dependencyId) => (
-    ['SUCCEEDED', 'SKIPPED', 'BLOCKED', 'MANUAL_REVIEW'].includes(state.actions[dependencyId]?.status)
+    ['SUCCEEDED', 'SKIPPED', 'DEFERRED', 'BLOCKED', 'MANUAL_REVIEW'].includes(state.actions[dependencyId]?.status)
   ));
 }
 
@@ -90,7 +90,7 @@ function persistRuntimeArtifacts(outputPaths, state, idMap, events) {
 
 function resetStateForResume(state) {
   for (const actionState of Object.values(state.actions || {})) {
-    if (['FAILED', 'BLOCKED', 'RUNNING'].includes(actionState.status)) {
+    if (['FAILED', 'DEFERRED', 'BLOCKED', 'RUNNING'].includes(actionState.status)) {
       actionState.status = actionState.plannedStatus === 'READY' ? 'PENDING' : actionState.plannedStatus;
       actionState.lastError = null;
       actionState.startedAt = null;
@@ -494,6 +494,23 @@ async function runDevelopersImport(flags, deps = {}) {
       emitProgress({ type: 'blocked', action, status: 'BLOCKED', message: action.blockers.join(', ') || null });
       continue;
     }
+    if (action.plannedStatus === 'DEFERRED' || action.operation === 'DEFER') {
+      const message = (action.deferReasons || []).join(', ') || 'Subscription target is not ready';
+      markActionCompleted(state, action.actionId, 'DEFERRED', {
+        deferReasons: action.deferReasons || [],
+        lastError: message,
+      });
+      events.push({
+        ts: new Date().toISOString(),
+        type: 'import.deferred',
+        actionId: action.actionId,
+        kind: action.kind,
+        reasons: action.deferReasons || [],
+      });
+      persistRuntimeArtifacts(result.outputPaths, state, idMap, events);
+      emitProgress({ type: 'deferred', action, status: 'DEFERRED', message });
+      continue;
+    }
     if (action.plannedStatus === 'SKIPPED' || action.operation === 'SKIP') {
       markActionCompleted(state, action.actionId, 'SKIPPED');
       persistRuntimeArtifacts(result.outputPaths, state, idMap, events);
@@ -549,8 +566,9 @@ async function runDevelopersImport(flags, deps = {}) {
 
   const failed = Object.values(state.actions).filter((item) => item.status === 'FAILED').length;
   const blocked = Object.values(state.actions).filter((item) => item.status === 'BLOCKED').length;
+  const deferred = Object.values(state.actions).filter((item) => item.status === 'DEFERRED').length;
   const exitCode = failed > 0 || blocked > 0 ? 4 : 0;
-  emitProgress({ type: 'complete', status: exitCode === 0 ? 'SUCCEEDED' : 'FAILED', failed, blocked });
+  emitProgress({ type: 'complete', status: exitCode === 0 ? 'SUCCEEDED' : 'FAILED', failed, blocked, deferred });
 
   return {
     ...result,

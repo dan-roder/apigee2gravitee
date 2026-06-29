@@ -483,7 +483,7 @@ Then review each config block:
 | `capabilities.apiKeyValuePreservation` | Yes | `unknown` | Your attestation of whether imported subscriptions can preserve existing API key values: `supported`, `unsupported`, or `unknown`. |
 | `capabilities.oauthClientValuePreservation` | Yes | `unknown` | Your attestation of whether OAuth client values/secrets can be preserved: `supported`, `unsupported`, or `unknown`. |
 | `capabilities.applicationOwnership` | Yes | `direct-member` | How the tool should represent app ownership: `direct-member`, `metadata-only`, or `unknown`. Current validated runs use `direct-member` so the developer actually owns the imported application. |
-| `productPlanMap` | Yes | Example entries for `orders-product` and `misc-product` | The source-product to target-API/plan mapping used to build subscriptions. This is the most important operators-managed block in the config. |
+| `productPlanMap` | Optional for users/apps; required per subscription | Example entries for `orders-product` and `misc-product`; `{}` is valid | The source-product to target-API/plan mapping used to build subscriptions. Missing or unavailable targets defer only affected subscriptions and do not block users/applications. |
 | `customFieldMap` | Optional | `{ "team": "team", "department": "department", "contact": "contact" }` | Reserved mapping for developer attributes. Apigee app attributes are discovered from the export and imported into Gravitee application metadata using their original attribute names. |
 | `filters.includeDevelopers` | Optional | `[]` | Limit the run to specific developer emails. Useful for pilots and smoke tests. |
 | `filters.excludeDevelopers` | Optional | `[]` | Exclude specific developer emails from the run. |
@@ -502,7 +502,7 @@ At minimum, you should set or confirm:
 
 Then run `developers configure-roles` against the target Gravitee deployment to fill in the right `roles.*` and `roleAssignmentIds.*` for that environment.
 
-After which, run `developers discover-targets` to fill `productPlanMap`
+When target APIs and plans are available, run `developers discover-targets` to fill `productPlanMap`. This can happen before the first import or after users and applications have already been imported.
 
 Example `productPlanMap` entry:
 
@@ -560,7 +560,7 @@ Each target entry may also include:
 
 Practical notes:
 
-- `targetApiId` and `targetPlanId` may start as placeholders, but `developers analyze` will block until they resolve to live Gravitee ids.
+- `targetApiId` and `targetPlanId` may start as placeholders. Affected subscriptions remain `DEFERRED` until they resolve to suitable live Gravitee targets.
 - Use `developers sync-api-targets` after this repo’s `apis import` workflow. Skip if APIs were manually created.
 - Use `developers discover-targets --prompt-matches --write-config` when APIs/plans were imported manually or naming differs from the Apigee source.
 - Use `developers select-apps --write-config` before validation/analyze/import when you want an auditable allow-list of exactly which Apigee applications should be migrated.
@@ -568,7 +568,7 @@ Practical notes:
 - Current validated runs use `capabilities.applicationOwnership: "direct-member"`, so imported applications are owned by the migrated developer rather than just carrying owner metadata.
 - Apigee app custom attributes are imported into Gravitee application metadata with the same key names. The importer reserves `sourceId` and `developerEmail` for its own lookup markers, and `developers analyze` reports discovered app metadata under `applicationMetadata`.
 
-If a source product is missing from `productPlanMap`, `developers analyze` should fail preflight.
+If a source product is missing from `productPlanMap`, users and applications still import. The related subscription actions are recorded as `DEFERRED` with `PLAN_MAPPING_MISSING`, and a later normal import retries them automatically.
 
 A starter mapping stub is available at [`config/developers.product-plan-map.from-data.example.json`](./config/developers.product-plan-map.from-data.example.json), and a full local starter config is available at [`config/developers.config.json`](./config/developers.config.json). Both mirror the extracted Apigee product-to-proxy relationships and use placeholder Gravitee API and plan ids to fill in.
 
@@ -602,9 +602,9 @@ node bin/migrator.js developers reconcile --ir-dir ./ir --config ./config/develo
 
 `developers resolve-config-ids`: before `developers analyze` when your config still contains placeholder `targetApiId` and `targetPlanId` values. It resolves Gravitee API ids by `targetApi` name and plan ids by `targetPlan` name, then writes a sibling file such as `config/developers.config.resolved.json`.
 
-`developers validate-config-targets`: used after that to confirm every `productPlanMap` target matches a live Gravitee API and plan exactly. It accepts id-based matches, exact/normalized name matches, and alias matches when `matchMode: "alias"` is configured. It writes `report/developers-config-targets-report.json` by default, treats missing or ambiguous API/plan matches as blockers, and reports intentional array-based product mappings under `productsWithMultipleValidTargets` rather than implying they still need operator selection.
+`developers validate-config-targets`: confirms every configured `productPlanMap` target matches a live Gravitee API and plan exactly. It accepts id-based matches, exact/normalized name matches, and alias matches when `matchMode: "alias"` is configured. Its blockers indicate that those subscriptions are not ready; they do not prevent the default import from creating users and applications.
 
-`developers analyze`: fails fast when any `productPlanMap` target still has placeholder or missing `targetApiId` or `targetPlanId` values. The intended operator sequence is:
+`developers analyze`: reports missing, unresolved, unavailable, or unsuitable subscription targets and marks their subscription actions `DEFERRED`. It still fails fast for global blockers such as connectivity, authentication, role, user-provisioning, or application-ownership failures.
 
 ```bash
 node bin/migrator.js developers resolve-config-ids --config ./config/developers.config.json --gravitee-token "$GRAVITEE_TOKEN"
@@ -718,6 +718,8 @@ node bin/migrator.js developers reconcile \
 - `--force`
 - `--max-errors <n>`
 
+The default import is partial-safe: it creates all eligible users and applications, creates subscriptions with valid live targets, and defers only subscriptions whose APIs/plans are unavailable. `DEFERRED` actions do not make the import fail. Rerun the same import after adding mappings or APIs/plans to create the outstanding subscriptions.
+
 ### What the commands do
 
 `developers analyze` will:
@@ -726,7 +728,7 @@ node bin/migrator.js developers reconcile \
 - verify IR readability
 - confirm target connectivity and auth
 - probe the live Gravitee user, application, plan, subscription, and API key surfaces used by the migration workflow
-- fail if any required product-to-plan mappings are missing
+- warn and defer affected subscriptions when product-to-plan mappings or live targets are missing
 - fail if `reuse-or-create-silently` is configured but `capabilities.silentUserCreation` is not `supported`
 - fail when live capability probes contradict required one-to-one behaviors
 - read credential-level subscription intent from `ir/references/subscription-intent.json`

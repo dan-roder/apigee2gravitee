@@ -61,7 +61,8 @@ function testPrintDiscoverTargetHintsShowsValidationNextStep() {
   });
 
   assert.ok(lines.some((line) => line.includes('validate-config-targets')));
-  assert.ok(lines.some((line) => line.includes('Only proceed to analyze/import')));
+  assert.ok(lines.some((line) => line.includes('Users and applications can still import')));
+  assert.ok(lines.some((line) => line.includes('subscriptions will be deferred')));
 }
 
 function run() {

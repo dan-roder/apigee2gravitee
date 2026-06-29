@@ -53,6 +53,7 @@ function initializeStateFromManifest(manifest, mode = 'plan') {
       dependencies: item.dependencies || [],
       targetIds: {},
       reconcileHints: {},
+      deferReasons: item.deferReasons || [],
       lastError: null,
       startedAt: null,
       completedAt: null,
@@ -82,9 +83,13 @@ function mergeSavedActionState(initialState, savedState) {
   const merged = JSON.parse(JSON.stringify(initialState));
   for (const [actionId, saved] of Object.entries(savedState.actions)) {
     if (merged.actions[actionId]) {
+      const planned = merged.actions[actionId];
       merged.actions[actionId] = {
-        ...merged.actions[actionId],
+        ...planned,
         ...saved,
+        plannedStatus: planned.plannedStatus,
+        dependencies: planned.dependencies,
+        deferReasons: planned.deferReasons,
       };
     }
   }

@@ -175,7 +175,7 @@ async function testAnalyzeSucceedsAndWritesOutputs() {
   });
 }
 
-async function testAnalyzeFailsWhenProductMappingMissing() {
+async function testAnalyzeDefersWhenProductMappingMissing() {
   await withTempDir(async (dir) => {
     const dataDir = path.join(dir, 'data');
     const irDir = path.join(dir, 'ir');
@@ -188,7 +188,11 @@ async function testAnalyzeFailsWhenProductMappingMissing() {
       { config, client: makeClient() },
     );
 
-    assert.strictEqual(result.exitCode, 1);
+    assert.strictEqual(result.exitCode, 0);
+    assert.ok(result.preflight.warnings.some((item) => item.code === 'PRODUCT_PLAN_MAPPING_MISSING'));
+    assert.strictEqual(result.plan.summary.deferredSubscriptions, 1);
+    assert.strictEqual(result.plan.summary.deferredActions, 3);
+    assert.strictEqual(result.plan.summary.operatorActions.deferredReasons.PLAN_MAPPING_MISSING, 1);
   });
 }
 
@@ -218,7 +222,7 @@ async function testAnalyzeFailsWhenSilentUserCreationUnsupported() {
   });
 }
 
-async function testAnalyzeFailsWhenTargetIdsAreUnresolved() {
+async function testAnalyzeDefersWhenTargetIdsAreUnresolved() {
   await withTempDir(async (dir) => {
     const dataDir = path.join(dir, 'data');
     const irDir = path.join(dir, 'ir');
@@ -241,8 +245,10 @@ async function testAnalyzeFailsWhenTargetIdsAreUnresolved() {
       { config, client: makeClient() },
     );
 
-    assert.strictEqual(result.exitCode, 3);
-    assert.ok(result.preflight.blockers.some((item) => item.code === 'PRODUCT_PLAN_TARGET_IDS_UNRESOLVED'));
+    assert.strictEqual(result.exitCode, 0);
+    assert.ok(result.preflight.warnings.some((item) => item.code === 'PRODUCT_PLAN_TARGET_IDS_UNRESOLVED'));
+    assert.strictEqual(result.plan.summary.deferredSubscriptions, 1);
+    assert.strictEqual(result.plan.summary.operatorActions.deferredReasons.TARGET_IDS_UNRESOLVED, 1);
   });
 }
 
@@ -650,9 +656,9 @@ async function testSingleProductCanMapToMultipleTargets() {
 
 async function run() {
   await testAnalyzeSucceedsAndWritesOutputs();
-  await testAnalyzeFailsWhenProductMappingMissing();
+  await testAnalyzeDefersWhenProductMappingMissing();
   await testAnalyzeFailsWhenSilentUserCreationUnsupported();
-  await testAnalyzeFailsWhenTargetIdsAreUnresolved();
+  await testAnalyzeDefersWhenTargetIdsAreUnresolved();
   await testAnalyzeDoesNotRequireCustomFields();
   await testAnalyzeSkipsDevelopersWithoutApps();
   await testAnalyzeDoesNotWarnAboutOAuthContinuityWhenNoOAuthCredentialsExist();

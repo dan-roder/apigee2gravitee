@@ -60,9 +60,9 @@ function checkProductPlanMappings(domain, config) {
 
   for (const productName of Array.from(missing).sort()) {
     findings.push(issue(
-      'blocker',
+      'warning',
       'PRODUCT_PLAN_MAPPING_MISSING',
-      `Missing productPlanMap entry for source product ${productName}`,
+      `Missing productPlanMap entry for source product ${productName}; affected subscriptions will be deferred`,
       { productName },
     ));
   }
@@ -78,9 +78,9 @@ function checkProductPlanMappings(domain, config) {
 
   for (const target of unresolvedTargets) {
     findings.push(issue(
-      'blocker',
+      'warning',
       'PRODUCT_PLAN_TARGET_IDS_UNRESOLVED',
-      `Source product ${target.productName} must resolve targetApiId and targetPlanId before analyze`,
+      `Source product ${target.productName} has unresolved target ids; affected subscriptions will be deferred`,
       target,
     ));
   }

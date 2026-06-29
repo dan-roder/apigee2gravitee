@@ -122,10 +122,6 @@ function validateProductPlanMap(map, errors, options = {}) {
     return;
   }
   const entries = Object.entries(map);
-  if (entries.length === 0 && !options.allowEmpty) {
-    errors.push('productPlanMap must contain at least one product mapping');
-    return;
-  }
   for (const [productName, entry] of entries) {
     if (Array.isArray(entry)) {
       if (entry.length === 0) {

@@ -393,11 +393,11 @@ async function testPlanBlocksSubscriptionsForIncompatibleTargetPlanSecurity() {
     const upsertSubscription = result.manifest.actions.find((item) => item.kind === 'UPSERT_SUBSCRIPTION');
 
     assert.strictEqual(result.exitCode, 0);
-    assert.strictEqual(resolvePlan.plannedStatus, 'BLOCKED');
-    assert.ok(resolvePlan.blockers.includes('TARGET_PLAN_SECURITY_MISMATCH'));
-    assert.strictEqual(upsertSubscription.plannedStatus, 'BLOCKED');
-    assert.strictEqual(upsertSubscription.operation, 'BLOCK');
-    assert.ok(upsertSubscription.blockers.includes('TARGET_PLAN_SECURITY_MISMATCH'));
+    assert.strictEqual(resolvePlan.plannedStatus, 'DEFERRED');
+    assert.ok(resolvePlan.deferReasons.includes('TARGET_PLAN_SECURITY_MISMATCH'));
+    assert.strictEqual(upsertSubscription.plannedStatus, 'DEFERRED');
+    assert.strictEqual(upsertSubscription.operation, 'DEFER');
+    assert.ok(upsertSubscription.deferReasons.includes('TARGET_PLAN_SECURITY_MISMATCH'));
   });
 }
 
@@ -1643,6 +1643,149 @@ async function testMultiProductImportAndReconcile() {
   });
 }
 
+async function testEmptyProductMapImportsUsersAndApplicationsAndDefersSubscriptions() {
+  await withTempDir(async (dir) => {
+    const dataDir = path.join(dir, 'data');
+    const irDir = path.join(dir, 'ir');
+    copyDir(FIXTURES_DATA, dataDir);
+    generateIrFromData(dataDir, irDir);
+
+    const client = makeWorkflowClient();
+    const config = makeConfig(dir, { productPlanMap: {} });
+    const imported = await runDevelopersImport(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json') },
+      { config, client },
+    );
+
+    assert.strictEqual(imported.exitCode, 0);
+    assert.strictEqual(client._state.counts.createUser, 1);
+    assert.strictEqual(client._state.counts.createApplication, 1);
+    assert.strictEqual(client._state.counts.createSubscription, 0);
+    assert.strictEqual(imported.manifest.summary.deferredSubscriptions, 1);
+    assert.strictEqual(imported.manifest.summary.deferredActions, 3);
+    assert.strictEqual(
+      Object.values(imported.state.actions).filter((item) => item.status === 'DEFERRED').length,
+      3,
+    );
+    assert.ok(
+      fs.readFileSync(imported.outputPaths.log, 'utf8').includes('"type":"import.deferred"'),
+    );
+
+    const reconciled = await runDevelopersReconcile(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json') },
+      { config, client },
+    );
+    assert.strictEqual(reconciled.exitCode, 0);
+    assert.strictEqual(reconciled.report.summary.checkedSubscriptions, 0);
+    assert.strictEqual(reconciled.report.summary.deferredSubscriptions, 1);
+    assert.ok(reconciled.report.mismatches.some((item) => (
+      item.code === 'SUBSCRIPTION_DEFERRED'
+      && item.reasons.includes('PLAN_MAPPING_MISSING')
+    )));
+
+    const cleaned = await runDevelopersDeleteImported(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json') },
+      { config, client },
+    );
+    assert.strictEqual(cleaned.exitCode, 0);
+    assert.strictEqual(cleaned.cleanup.summary.deleted, 2);
+    assert.strictEqual(client._state.counts.deleteApplication, 1);
+    assert.strictEqual(client._state.counts.deleteUser, 1);
+  });
+}
+
+async function testMixedTargetsImportAvailableSubscriptionAndRetryDeferredSubscription() {
+  await withTempDir(async (dir) => {
+    const dataDir = path.join(dir, 'data');
+    const irDir = path.join(dir, 'ir');
+    copyDir(FIXTURES_DATA, dataDir);
+    addBillingProductToData(dataDir);
+    generateIrFromData(dataDir, irDir);
+
+    const client = makeWorkflowClient();
+    const partialConfig = makeConfig(dir);
+    const first = await runDevelopersImport(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json') },
+      { config: partialConfig, client },
+    );
+
+    assert.strictEqual(first.exitCode, 0);
+    assert.strictEqual(client._state.counts.createSubscription, 1);
+    assert.strictEqual(first.manifest.summary.deferredSubscriptions, 1);
+    assert.strictEqual(first.manifest.summary.operatorActions.deferredReasons.PLAN_MAPPING_MISSING, 1);
+
+    const completeConfig = makeConfig(dir, {
+      productPlanMap: {
+        ...partialConfig.productPlanMap,
+        'billing-product': {
+          targetApi: 'billing-api',
+          targetApiId: 'api-billing-1',
+          targetPlan: 'Billing API Key',
+          targetPlanId: 'plan-billing-1',
+        },
+      },
+    });
+    const second = await runDevelopersImport(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json'), resume: true },
+      { config: completeConfig, client },
+    );
+
+    assert.strictEqual(second.exitCode, 0);
+    assert.strictEqual(second.manifest.summary.deferredSubscriptions, 0);
+    assert.strictEqual(client._state.counts.createUser, 1);
+    assert.strictEqual(client._state.counts.createApplication, 1);
+    assert.strictEqual(client._state.counts.createSubscription, 2);
+  });
+}
+
+async function testUnavailableConfiguredPlanDefersSubscription() {
+  await withTempDir(async (dir) => {
+    const dataDir = path.join(dir, 'data');
+    const irDir = path.join(dir, 'ir');
+    copyDir(FIXTURES_DATA, dataDir);
+    generateIrFromData(dataDir, irDir);
+
+    const client = makeWorkflowClient();
+    const config = makeConfig(dir, {
+      productPlanMap: {
+        'orders-product': {
+          targetApi: 'missing-api',
+          targetApiId: 'api-missing',
+          targetPlan: 'Missing Plan',
+          targetPlanId: 'plan-missing',
+        },
+      },
+    });
+    const imported = await runDevelopersImport(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json') },
+      { config, client },
+    );
+
+    assert.strictEqual(imported.exitCode, 0);
+    assert.strictEqual(client._state.counts.createUser, 1);
+    assert.strictEqual(client._state.counts.createApplication, 1);
+    assert.strictEqual(client._state.counts.createSubscription, 0);
+    assert.strictEqual(imported.manifest.summary.operatorActions.deferredReasons.TARGET_PLAN_UNAVAILABLE, 1);
+
+    client._state.plans.set('plan-missing', {
+      id: 'plan-missing',
+      apiId: 'api-missing',
+      name: 'Missing Plan',
+      security: { type: 'API_KEY' },
+      status: 'PUBLISHED',
+    });
+    const retried = await runDevelopersImport(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json'), resume: true },
+      { config, client },
+    );
+    assert.strictEqual(retried.exitCode, 0);
+    assert.strictEqual(retried.manifest.summary.deferredSubscriptions, 0);
+    assert.strictEqual(client._state.counts.createUser, 1);
+    assert.strictEqual(client._state.counts.createApplication, 1);
+    assert.strictEqual(client._state.counts.createSubscription, 1);
+  });
+}
+
 async function testMultiTargetProductImportAndReconcile() {
   await withTempDir(async (dir) => {
     const dataDir = path.join(dir, 'data');
@@ -1758,6 +1901,9 @@ async function run() {
   await testDeleteImportedSurfacesGraviteeUnavailableErrors();
   await testFullDeleteAndReimportCycleRemainsDeterministic();
   await testMultiProductImportAndReconcile();
+  await testEmptyProductMapImportsUsersAndApplicationsAndDefersSubscriptions();
+  await testMixedTargetsImportAvailableSubscriptionAndRetryDeferredSubscription();
+  await testUnavailableConfiguredPlanDefersSubscription();
   await testMultiTargetProductImportAndReconcile();
   await testImportAndReconcileSupportMetadataOnlyOwnership();
   console.log('test-workflow.js passed');

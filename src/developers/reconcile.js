@@ -38,6 +38,10 @@ async function runDevelopersReconcile(flags, deps = {}) {
   const state = readJsonIfExists(result.outputPaths.state) || result.state;
   const idMap = readJsonIfExists(result.outputPaths.idMap) || result.idMap;
   const mismatches = [];
+  const actionsById = new Map(result.manifest.actions.map((action) => [action.actionId, action]));
+  let checkedSubscriptions = 0;
+  let deferredSubscriptions = 0;
+  const deferredReasons = {};
   const metadataDiagnostics = {
     applications: {},
     summary: {
@@ -158,6 +162,21 @@ async function runDevelopersReconcile(flags, deps = {}) {
   }
 
   for (const subscription of result.domain.subscriptions) {
+    const subscriptionAction = actionsById.get(`UPSERT_SUBSCRIPTION:${subscription.sourceId}`);
+    if (subscriptionAction?.plannedStatus === 'DEFERRED') {
+      deferredSubscriptions += 1;
+      for (const reason of subscriptionAction.deferReasons || []) {
+        deferredReasons[reason] = (deferredReasons[reason] || 0) + 1;
+      }
+      mismatches.push({
+        severity: 'warning',
+        code: 'SUBSCRIPTION_DEFERRED',
+        sourceId: subscription.sourceId,
+        message: `Subscription ${subscription.sourceId} is deferred until its target API and plan are available`,
+        reasons: subscriptionAction.deferReasons || [],
+      });
+      continue;
+    }
     if (subscription.recommendedAction === 'SKIP_SUBSCRIPTION') continue;
     if (subscription.developerStatus !== 'active' && result.config.policies.inactiveDeveloper === 'skip') {
       if (idMap.subscriptions[subscription.sourceId]) {
@@ -166,6 +185,7 @@ async function runDevelopersReconcile(flags, deps = {}) {
       continue;
     }
     const plan = await result.client.findPlan(subscription.planMapping);
+    checkedSubscriptions += 1;
     if (!plan) {
       mismatches.push({ severity: 'blocker', code: 'PLAN_UNRESOLVED', sourceId: subscription.sourceId, message: `Target plan could not be resolved for ${subscription.productName}` });
       continue;
@@ -216,7 +236,9 @@ async function runDevelopersReconcile(flags, deps = {}) {
   const summary = {
     checkedUsers: result.domain.users.length,
     checkedApplications: result.domain.applications.length,
-    checkedSubscriptions: result.domain.subscriptions.length,
+    checkedSubscriptions,
+    deferredSubscriptions,
+    deferredReasons,
     blockers: mismatches.filter((item) => item.severity === 'blocker').length,
     warnings: mismatches.filter((item) => item.severity === 'warning').length,
   };

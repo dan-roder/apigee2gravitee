@@ -27,6 +27,8 @@ async function resolveTargetState(domain, config, client) {
     plansBySourceId: new Map(),
     subscriptionsBySourceId: new Map(),
     apiKeysBySubscriptionSourceId: new Map(),
+    planLookupAttempted: new Set(),
+    planLookupErrors: new Map(),
   };
 
   if (!client) return state;
@@ -56,10 +58,13 @@ async function resolveTargetState(domain, config, client) {
   for (const subscription of domain.subscriptions) {
     const mapping = subscription.planMapping;
     if (typeof client.findPlan === 'function' && mapping) {
+      state.planLookupAttempted.add(subscription.sourceId);
       try {
         const plan = await client.findPlan(mapping);
         if (plan) state.plansBySourceId.set(subscription.sourceId, plan);
-      } catch (_) {}
+      } catch (err) {
+        state.planLookupErrors.set(subscription.sourceId, err?.message || String(err));
+      }
     }
 
     const application = state.applicationsBySourceId.get(`${subscription.developerEmail}/${subscription.appName}`);
