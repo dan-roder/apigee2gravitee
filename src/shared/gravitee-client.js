@@ -983,13 +983,49 @@ class GraviteeClient {
     return this.put(this.envUrl(`/applications/${applicationId}`), payload);
   }
 
-  async getApplicationNotificationSettings(applicationId) {
-    const url = this.portalUrl(`/applications/${applicationId}/notifications`);
-    const body = await this.get(url);
-    return {
-      ...normalizeApplicationNotificationSettings(body),
-      url,
-    };
+  applicationNotificationEndpoints(applicationId, preferredUrl = null) {
+    const endpoints = [
+      {
+        strategy: 'management',
+        url: this.envUrl(`/applications/${applicationId}/notifications`),
+      },
+      {
+        strategy: 'portal',
+        url: this.portalUrl(`/applications/${applicationId}/notifications`),
+      },
+    ];
+    if (!preferredUrl) return endpoints;
+    return endpoints.sort((left) => (left.url === preferredUrl ? -1 : 0));
+  }
+
+  async getApplicationNotificationSettings(applicationId, options = {}) {
+    const attempts = [];
+    let lastError = null;
+    for (const endpoint of this.applicationNotificationEndpoints(applicationId, options.preferredUrl)) {
+      try {
+        const body = await this.get(endpoint.url);
+        attempts.push({ method: 'GET', status: 200, strategy: endpoint.strategy, url: endpoint.url });
+        return {
+          ...normalizeApplicationNotificationSettings(body),
+          url: endpoint.url,
+          strategy: endpoint.strategy,
+          attempts,
+        };
+      } catch (err) {
+        lastError = err;
+        attempts.push({
+          method: 'GET',
+          status: err.status || null,
+          strategy: endpoint.strategy,
+          url: endpoint.url,
+          classification: classifyApiError(err),
+          message: err.message,
+          body: err.body,
+        });
+      }
+    }
+    lastError.attempts = attempts;
+    throw lastError;
   }
 
   async ensureApplicationNotification(applicationId, hook) {
@@ -998,22 +1034,18 @@ class GraviteeClient {
     try {
       settings = await this.getApplicationNotificationSettings(applicationId);
     } catch (err) {
-      attempts.push({
-        method: 'GET',
-        status: err.status || null,
-        classification: classifyApiError(err),
-        message: err.message,
-        body: err.body,
-      });
+      attempts.push(...(err.attempts || []));
       err.attempts = attempts;
       throw err;
     }
+    attempts.push(...settings.attempts);
 
     const expectedHooks = Array.from(new Set([...settings.hooks, hook]));
     const diagnostics = {
       applicationId,
       hook,
       url: settings.url,
+      strategy: settings.strategy,
       responseShape: settings.shape,
       existingHooks: settings.hooks,
       expectedHooks,
@@ -1026,7 +1058,7 @@ class GraviteeClient {
     const payload = buildApplicationNotificationPayload(settings, expectedHooks);
     try {
       await this.put(settings.url, payload);
-      attempts.push({ method: 'PUT', status: 200, payloadShape: settings.shape });
+      attempts.push({ method: 'PUT', status: 200, url: settings.url, strategy: settings.strategy, payloadShape: settings.shape });
     } catch (err) {
       attempts.push({
         method: 'PUT',
@@ -1041,11 +1073,11 @@ class GraviteeClient {
     }
 
     try {
-      const readback = await this.getApplicationNotificationSettings(applicationId);
+      const readback = await this.getApplicationNotificationSettings(applicationId, { preferredUrl: settings.url });
       diagnostics.readbackShape = readback.shape;
       diagnostics.readbackHooks = readback.hooks;
       diagnostics.verified = readback.hooks.includes(hook);
-      attempts.push({ method: 'GET', status: 200, phase: 'readback' });
+      attempts.push(...readback.attempts.map((attempt) => ({ ...attempt, phase: 'readback' })));
       return {
         ok: true,
         verified: diagnostics.verified,
@@ -1053,14 +1085,7 @@ class GraviteeClient {
         diagnostics,
       };
     } catch (err) {
-      attempts.push({
-        method: 'GET',
-        phase: 'readback',
-        status: err.status || null,
-        classification: classifyApiError(err),
-        message: err.message,
-        body: err.body,
-      });
+      attempts.push(...(err.attempts || []).map((attempt) => ({ ...attempt, phase: 'readback' })));
       diagnostics.readbackError = err.message;
       return { ok: true, verified: false, hooks: expectedHooks, diagnostics };
     }

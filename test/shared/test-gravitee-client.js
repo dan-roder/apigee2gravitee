@@ -215,7 +215,7 @@ async function testApplicationNotificationSettingsNormalizeSupportedShapes() {
 
 async function testEnsureApplicationNotificationPreservesExistingHooks() {
   const client = new GraviteeClient({ baseUrl: 'https://gravitee.example.com', orgId: 'DEFAULT', envId: 'DEFAULT', token: 'token' });
-  const url = 'https://gravitee.example.com/portal/environments/DEFAULT/applications/app-1/notifications';
+  const url = 'https://gravitee.example.com/management/organizations/DEFAULT/environments/DEFAULT/applications/app-1/notifications';
   const gets = [
     { notifications: ['SUBSCRIPTION_CREATED'], enabled: true },
     { notifications: ['SUBSCRIPTION_CREATED', 'SUBSCRIPTION_ACCEPTED'], enabled: true },
@@ -239,6 +239,31 @@ async function testEnsureApplicationNotificationPreservesExistingHooks() {
       enabled: true,
     },
   });
+  assert.strictEqual(result.diagnostics.strategy, 'management');
+}
+
+async function testApplicationNotificationFallsBackToPortalEndpoint() {
+  const client = new GraviteeClient({ baseUrl: 'https://gravitee.example.com', orgId: 'DEFAULT', envId: 'DEFAULT', token: 'token' });
+  const managementUrl = 'https://gravitee.example.com/management/organizations/DEFAULT/environments/DEFAULT/applications/app-1/notifications';
+  const portalUrl = 'https://gravitee.example.com/portal/environments/DEFAULT/applications/app-1/notifications';
+  const calls = [];
+  client.get = async (url) => {
+    calls.push({ method: 'GET', url });
+    if (url === managementUrl) {
+      const err = new Error('Not found');
+      err.status = 404;
+      throw err;
+    }
+    return ['SUBSCRIPTION_ACCEPTED'];
+  };
+
+  const result = await client.ensureApplicationNotification('app-1', 'SUBSCRIPTION_ACCEPTED');
+  assert.strictEqual(result.verified, true);
+  assert.strictEqual(result.diagnostics.strategy, 'portal');
+  assert.deepStrictEqual(calls, [
+    { method: 'GET', url: managementUrl },
+    { method: 'GET', url: portalUrl },
+  ]);
 }
 
 async function testNormalizeCollectionSupportsItemsShape() {
@@ -717,6 +742,7 @@ async function run() {
   await testFindApplicationMatchesLowercaseMetadataKeys();
   await testApplicationNotificationSettingsNormalizeSupportedShapes();
   await testEnsureApplicationNotificationPreservesExistingHooks();
+  await testApplicationNotificationFallsBackToPortalEndpoint();
   await testNormalizeCollectionSupportsItemsShape();
   await testFindApiByNameFiltersExactName();
   await testListApisFollowsPaginatedResponses();
