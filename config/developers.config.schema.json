@@ -179,6 +179,16 @@
         }
       }
     },
+    "applicationNotifications": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "subscriptionAccepted": {
+          "type": "boolean",
+          "default": true
+        }
+      }
+    },
     "customFieldMap": {
       "type": "object",
       "additionalProperties": {

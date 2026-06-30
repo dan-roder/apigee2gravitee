@@ -339,7 +339,40 @@ async function ensureApplication(action, ctx, client, idMap) {
     const result = await client.upsertApplicationMetadata(applicationId, metadata);
     metadataDiagnostics = result?.diagnostics || null;
   }
-  return { applicationId, metadataDiagnostics };
+  let notificationDiagnostics = null;
+  const warnings = [];
+  if (applicationId && action.payload.expectedNotifications?.subscriptionAccepted) {
+    if (typeof client.ensureApplicationNotification !== 'function') {
+      warnings.push({
+        code: 'APPLICATION_NOTIFICATION_CONFIGURATION_FAILED',
+        message: 'Gravitee client does not support application notification configuration',
+      });
+    } else {
+      try {
+        const result = await client.ensureApplicationNotification(applicationId, 'SUBSCRIPTION_ACCEPTED');
+        notificationDiagnostics = result?.diagnostics || null;
+        if (!result?.verified) {
+          warnings.push({
+            code: 'APPLICATION_NOTIFICATION_UNVERIFIED',
+            message: 'Subscription Accepted notification was written but could not be verified',
+          });
+        }
+      } catch (err) {
+        notificationDiagnostics = {
+          applicationId,
+          hook: 'SUBSCRIPTION_ACCEPTED',
+          verified: false,
+          error: formatRuntimeError(err),
+          attempts: err.attempts || [],
+        };
+        warnings.push({
+          code: 'APPLICATION_NOTIFICATION_CONFIGURATION_FAILED',
+          message: notificationDiagnostics.error,
+        });
+      }
+    }
+  }
+  return { applicationId, metadataDiagnostics, notificationDiagnostics, warnings };
 }
 
 function applicationHasExpectedOwner(target, members, ownerUserId, developerEmail) {
@@ -369,7 +402,53 @@ async function verifyApplication(action, ctx, client, idMap) {
     if (!found) throw new Error(`Application ${application.appName} is missing expected owner membership`);
   }
   setIdMapValue(idMap, action.kind, action.sourceId, target.id);
-  return { applicationId: target.id, metadataDiagnostics: target.metadataDiagnostics || null };
+  let notificationDiagnostics = null;
+  const warnings = [];
+  if (action.payload.expectedNotifications?.subscriptionAccepted) {
+    if (typeof client.getApplicationNotificationSettings !== 'function') {
+      warnings.push({
+        code: 'APPLICATION_NOTIFICATION_UNVERIFIED',
+        message: 'Gravitee client does not support reading application notification settings',
+      });
+    } else {
+      try {
+        const settings = await client.getApplicationNotificationSettings(target.id);
+        const verified = settings.hooks.includes('SUBSCRIPTION_ACCEPTED');
+        notificationDiagnostics = {
+          applicationId: target.id,
+          hook: 'SUBSCRIPTION_ACCEPTED',
+          verified,
+          responseShape: settings.shape,
+          hooks: settings.hooks,
+          url: settings.url,
+        };
+        if (!verified) {
+          warnings.push({
+            code: 'APPLICATION_NOTIFICATION_MISMATCH',
+            message: 'Application is missing the Subscription Accepted notification',
+          });
+        }
+      } catch (err) {
+        notificationDiagnostics = {
+          applicationId: target.id,
+          hook: 'SUBSCRIPTION_ACCEPTED',
+          verified: false,
+          error: formatRuntimeError(err),
+          attempts: err.attempts || [],
+        };
+        warnings.push({
+          code: 'APPLICATION_NOTIFICATION_UNVERIFIED',
+          message: notificationDiagnostics.error,
+        });
+      }
+    }
+  }
+  return {
+    applicationId: target.id,
+    metadataDiagnostics: target.metadataDiagnostics || null,
+    notificationDiagnostics,
+    warnings,
+  };
 }
 
 async function resolvePlan(action, client) {
@@ -534,6 +613,16 @@ async function runDevelopersImport(flags, deps = {}) {
       const targetIds = await executeAction(action, ctx, result.client, idMap, state);
       markActionCompleted(state, action.actionId, 'SUCCEEDED', { targetIds, reconcileHints: targetIds });
       events.push({ ts: new Date().toISOString(), type: 'import.succeeded', actionId: action.actionId, kind: action.kind });
+      for (const warning of targetIds?.warnings || []) {
+        events.push({
+          ts: new Date().toISOString(),
+          type: 'import.warning',
+          actionId: action.actionId,
+          kind: action.kind,
+          sourceId: action.sourceId,
+          ...warning,
+        });
+      }
       emitProgress({ type: 'action_succeeded', action, status: 'SUCCEEDED' });
     } catch (err) {
       errorCount += 1;

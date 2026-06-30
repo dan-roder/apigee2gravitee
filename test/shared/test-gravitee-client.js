@@ -2,7 +2,12 @@
 
 const assert = require('assert');
 
-const { GraviteeClient, normalizeCollection } = require('../../src/shared/gravitee-client');
+const {
+  GraviteeClient,
+  normalizeCollection,
+  normalizeApplicationNotificationSettings,
+  buildApplicationNotificationPayload,
+} = require('../../src/shared/gravitee-client');
 
 async function testFindUserByEmailFiltersResults() {
   const client = new GraviteeClient({ baseUrl: 'https://gravitee.example.com', orgId: 'DEFAULT', envId: 'DEFAULT', token: 'token' });
@@ -191,6 +196,49 @@ async function testFindApplicationMatchesLowercaseMetadataKeys() {
     sourceId: 'alice@example.com/Orders',
   });
   assert.strictEqual(app.id, 'app-1');
+}
+
+async function testApplicationNotificationSettingsNormalizeSupportedShapes() {
+  assert.deepStrictEqual(
+    normalizeApplicationNotificationSettings(['SUBSCRIPTION_CREATED']),
+    { hooks: ['SUBSCRIPTION_CREATED'], shape: 'array', raw: ['SUBSCRIPTION_CREATED'] },
+  );
+  const objectBody = { hooks: ['SUBSCRIPTION_CREATED'], enabled: true };
+  const normalized = normalizeApplicationNotificationSettings(objectBody);
+  assert.deepStrictEqual(normalized.hooks, ['SUBSCRIPTION_CREATED']);
+  assert.strictEqual(normalized.shape, 'hooks');
+  assert.deepStrictEqual(
+    buildApplicationNotificationPayload(normalized, ['SUBSCRIPTION_CREATED', 'SUBSCRIPTION_ACCEPTED']),
+    { hooks: ['SUBSCRIPTION_CREATED', 'SUBSCRIPTION_ACCEPTED'], enabled: true },
+  );
+}
+
+async function testEnsureApplicationNotificationPreservesExistingHooks() {
+  const client = new GraviteeClient({ baseUrl: 'https://gravitee.example.com', orgId: 'DEFAULT', envId: 'DEFAULT', token: 'token' });
+  const url = 'https://gravitee.example.com/portal/environments/DEFAULT/applications/app-1/notifications';
+  const gets = [
+    { notifications: ['SUBSCRIPTION_CREATED'], enabled: true },
+    { notifications: ['SUBSCRIPTION_CREATED', 'SUBSCRIPTION_ACCEPTED'], enabled: true },
+  ];
+  let putCall = null;
+  client.get = async (calledUrl) => {
+    assert.strictEqual(calledUrl, url);
+    return gets.shift();
+  };
+  client.put = async (calledUrl, body) => {
+    putCall = { url: calledUrl, body };
+    return {};
+  };
+
+  const result = await client.ensureApplicationNotification('app-1', 'SUBSCRIPTION_ACCEPTED');
+  assert.strictEqual(result.verified, true);
+  assert.deepStrictEqual(putCall, {
+    url,
+    body: {
+      notifications: ['SUBSCRIPTION_CREATED', 'SUBSCRIPTION_ACCEPTED'],
+      enabled: true,
+    },
+  });
 }
 
 async function testNormalizeCollectionSupportsItemsShape() {
@@ -667,6 +715,8 @@ async function run() {
   await testFindPlanByIdUsesExpectedEndpoint();
   await testFindApplicationPrefersSourceMarker();
   await testFindApplicationMatchesLowercaseMetadataKeys();
+  await testApplicationNotificationSettingsNormalizeSupportedShapes();
+  await testEnsureApplicationNotificationPreservesExistingHooks();
   await testNormalizeCollectionSupportsItemsShape();
   await testFindApiByNameFiltersExactName();
   await testListApisFollowsPaginatedResponses();

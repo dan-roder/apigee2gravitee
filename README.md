@@ -483,6 +483,7 @@ Then review each config block:
 | `capabilities.apiKeyValuePreservation` | Yes | `unknown` | Your attestation of whether imported subscriptions can preserve existing API key values: `supported`, `unsupported`, or `unknown`. |
 | `capabilities.oauthClientValuePreservation` | Yes | `unknown` | Your attestation of whether OAuth client values/secrets can be preserved: `supported`, `unsupported`, or `unknown`. |
 | `capabilities.applicationOwnership` | Yes | `direct-member` | How the tool should represent app ownership: `direct-member`, `metadata-only`, or `unknown`. Current validated runs use `direct-member` so the developer actually owns the imported application. |
+| `applicationNotifications.subscriptionAccepted` | Optional | `true` | Ensures every imported application enables Gravitee's `SUBSCRIPTION_ACCEPTED` notification. Set to `false` to disable enforcement. Notification failures warn without failing application import. |
 | `productPlanMap` | Optional for users/apps; required per subscription | Example entries for `orders-product` and `misc-product`; `{}` is valid | The source-product to target-API/plan mapping used to build subscriptions. Missing or unavailable targets defer only affected subscriptions and do not block users/applications. |
 | `customFieldMap` | Optional | `{ "team": "team", "department": "department", "contact": "contact" }` | Reserved mapping for developer attributes. Apigee app attributes are discovered from the export and imported into Gravitee application metadata using their original attribute names. |
 | `filters.includeDevelopers` | Optional | `[]` | Limit the run to specific developer emails. Useful for pilots and smoke tests. |
@@ -567,6 +568,7 @@ Practical notes:
 - Use array targets for products that grant access to multiple proxies; the tool will create one Gravitee subscription per target entry.
 - Current validated runs use `capabilities.applicationOwnership: "direct-member"`, so imported applications are owned by the migrated developer rather than just carrying owner metadata.
 - Apigee app custom attributes are imported into Gravitee application metadata with the same key names. The importer reserves `sourceId` and `developerEmail` for its own lookup markers, and `developers analyze` reports discovered app metadata under `applicationMetadata`.
+- The importer enables the application-level `SUBSCRIPTION_ACCEPTED` hook through Gravitee's Portal API after ownership is established. Actual email delivery also requires the target Gravitee environment's email notifier and notification template configuration.
 
 If a source product is missing from `productPlanMap`, users and applications still import. The related subscription actions are recorded as `DEFERRED` with `PLAN_MAPPING_MISSING`, and a later normal import retries them automatically.
 

@@ -28,6 +28,9 @@
     "oauthClientValuePreservation": "unknown",
     "applicationOwnership": "direct-member"
   },
+  "applicationNotifications": {
+    "subscriptionAccepted": true
+  },
   "productPlanMap": {
     "orders-product": {
       "targetApi": "orders-api",

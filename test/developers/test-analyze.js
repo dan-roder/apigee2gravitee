@@ -167,6 +167,11 @@ async function testAnalyzeSucceedsAndWritesOutputs() {
     assert.deepStrictEqual(result.plan.records.applications[0].metadata, { environment: 'production' });
     const appAction = result.plan.actions.find((item) => item.kind === 'UPSERT_APPLICATION');
     assert.deepStrictEqual(appAction.payload.metadata, { environment: 'production' });
+    assert.strictEqual(result.config.applicationNotifications.subscriptionAccepted, true);
+    assert.deepStrictEqual(appAction.payload.expectedNotifications, {
+      subscriptionAccepted: true,
+      hooks: ['SUBSCRIPTION_ACCEPTED'],
+    });
     assert.ok(fs.existsSync(result.outputPaths.plan));
     assert.ok(fs.existsSync(result.outputPaths.gapReport));
     assert.ok(fs.existsSync(result.outputPaths.state));

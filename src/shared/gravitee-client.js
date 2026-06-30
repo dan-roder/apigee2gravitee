@@ -56,6 +56,36 @@ function normalizeCollection(body) {
   return [];
 }
 
+function normalizeApplicationNotificationSettings(body) {
+  const normalizeHooks = (items) => Array.from(new Set((items || []).map((item) => {
+    if (typeof item === 'string') return item;
+    return item?.hook || item?.type || item?.name || item?.id || null;
+  }).filter(Boolean)));
+
+  if (Array.isArray(body)) {
+    return { hooks: normalizeHooks(body), shape: 'array', raw: body };
+  }
+  if (body && typeof body === 'object') {
+    for (const key of ['hooks', 'notifications', 'enabledNotifications']) {
+      if (Array.isArray(body[key])) {
+        return { hooks: normalizeHooks(body[key]), shape: key, raw: body };
+      }
+    }
+  }
+  const err = new Error('Unsupported application notification settings response shape');
+  err.name = 'GraviteeApplicationNotificationCompatibilityError';
+  err.body = body;
+  throw err;
+}
+
+function buildApplicationNotificationPayload(settings, hooks) {
+  if (settings.shape === 'array') return hooks;
+  if (['hooks', 'notifications', 'enabledNotifications'].includes(settings.shape)) {
+    return { ...settings.raw, [settings.shape]: hooks };
+  }
+  throw new Error(`Unsupported application notification settings shape ${settings.shape}`);
+}
+
 function extractPagination(body) {
   const pagination = body?.pagination && typeof body.pagination === 'object' ? body.pagination : {};
   const page = body?.page ?? body?.currentPage ?? body?.pageNumber ?? pagination.page ?? pagination.currentPage ?? pagination.pageNumber;
@@ -263,6 +293,10 @@ class GraviteeClient {
   /** Shorthand: /management/organizations/{orgId}/environments/{envId}/... */
   envUrl(path = '') {
     return this.url(`/management/organizations/${this.orgId}/environments/${this.envId}${path}`);
+  }
+
+  portalUrl(path = '') {
+    return this.url(`/portal/environments/${this.envId}${path}`);
   }
 
   /** Shorthand: /management/v2/organizations/{orgId}/environments/{envId}/... */
@@ -949,6 +983,89 @@ class GraviteeClient {
     return this.put(this.envUrl(`/applications/${applicationId}`), payload);
   }
 
+  async getApplicationNotificationSettings(applicationId) {
+    const url = this.portalUrl(`/applications/${applicationId}/notifications`);
+    const body = await this.get(url);
+    return {
+      ...normalizeApplicationNotificationSettings(body),
+      url,
+    };
+  }
+
+  async ensureApplicationNotification(applicationId, hook) {
+    const attempts = [];
+    let settings;
+    try {
+      settings = await this.getApplicationNotificationSettings(applicationId);
+    } catch (err) {
+      attempts.push({
+        method: 'GET',
+        status: err.status || null,
+        classification: classifyApiError(err),
+        message: err.message,
+        body: err.body,
+      });
+      err.attempts = attempts;
+      throw err;
+    }
+
+    const expectedHooks = Array.from(new Set([...settings.hooks, hook]));
+    const diagnostics = {
+      applicationId,
+      hook,
+      url: settings.url,
+      responseShape: settings.shape,
+      existingHooks: settings.hooks,
+      expectedHooks,
+      writeRequired: !settings.hooks.includes(hook),
+      verified: settings.hooks.includes(hook),
+      attempts,
+    };
+    if (diagnostics.verified) return { ok: true, verified: true, hooks: settings.hooks, diagnostics };
+
+    const payload = buildApplicationNotificationPayload(settings, expectedHooks);
+    try {
+      await this.put(settings.url, payload);
+      attempts.push({ method: 'PUT', status: 200, payloadShape: settings.shape });
+    } catch (err) {
+      attempts.push({
+        method: 'PUT',
+        status: err.status || null,
+        classification: classifyApiError(err),
+        message: err.message,
+        body: err.body,
+        payloadShape: settings.shape,
+      });
+      err.attempts = attempts;
+      throw err;
+    }
+
+    try {
+      const readback = await this.getApplicationNotificationSettings(applicationId);
+      diagnostics.readbackShape = readback.shape;
+      diagnostics.readbackHooks = readback.hooks;
+      diagnostics.verified = readback.hooks.includes(hook);
+      attempts.push({ method: 'GET', status: 200, phase: 'readback' });
+      return {
+        ok: true,
+        verified: diagnostics.verified,
+        hooks: readback.hooks,
+        diagnostics,
+      };
+    } catch (err) {
+      attempts.push({
+        method: 'GET',
+        phase: 'readback',
+        status: err.status || null,
+        classification: classifyApiError(err),
+        message: err.message,
+        body: err.body,
+      });
+      diagnostics.readbackError = err.message;
+      return { ok: true, verified: false, hooks: expectedHooks, diagnostics };
+    }
+  }
+
   async listApplicationMetadataWithDiagnostics(applicationId) {
     const attempts = [];
     for (const url of [
@@ -1589,4 +1706,6 @@ module.exports = {
   GraviteeApiError,
   normalizeCollection,
   classifyApiError,
+  normalizeApplicationNotificationSettings,
+  buildApplicationNotificationPayload,
 };

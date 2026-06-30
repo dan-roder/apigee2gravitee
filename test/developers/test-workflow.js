@@ -123,6 +123,7 @@ function makeWorkflowClient(options = {}) {
     ]),
     subscriptions: new Map(),
     apiKeys: new Map(),
+    applicationNotifications: new Map(),
     counts: {
       createUser: 0,
       createApplication: 0,
@@ -132,6 +133,7 @@ function makeWorkflowClient(options = {}) {
       deleteSubscription: 0,
       deleteApplication: 0,
       deleteUser: 0,
+      ensureApplicationNotification: 0,
     },
   };
 
@@ -225,6 +227,31 @@ function makeWorkflowClient(options = {}) {
       }
       state.members.set(applicationId, members);
       return { ok: true };
+    },
+    async ensureApplicationNotification(applicationId, hook) {
+      state.counts.ensureApplicationNotification += 1;
+      const hooks = state.applicationNotifications.get(applicationId) || [];
+      const nextHooks = Array.from(new Set([...hooks, hook]));
+      state.applicationNotifications.set(applicationId, nextHooks);
+      return {
+        ok: true,
+        verified: true,
+        hooks: nextHooks,
+        diagnostics: {
+          applicationId,
+          hook,
+          verified: true,
+          responseShape: 'array',
+          expectedHooks: nextHooks,
+        },
+      };
+    },
+    async getApplicationNotificationSettings(applicationId) {
+      return {
+        hooks: state.applicationNotifications.get(applicationId) || [],
+        shape: 'array',
+        url: `https://gravitee.example.com/portal/environments/DEFAULT/applications/${applicationId}/notifications`,
+      };
     },
     async listApplicationMembers(applicationId) { return state.members.get(applicationId) || []; },
     async findPlan(mapping) {
@@ -499,6 +526,123 @@ async function testImportWritesApplicationMetadataPerApplication() {
     assert.strictEqual(client._state.counts.upsertApplicationMetadata, 3);
     const application = Array.from(client._state.applications.values())[0];
     assert.strictEqual(application.metadata.environment, 'production');
+  });
+}
+
+async function testImportEnsuresSubscriptionAcceptedNotificationForCreatedAndReusedApps() {
+  await withTempDir(async (dir) => {
+    const dataDir = path.join(dir, 'data');
+    const irDir = path.join(dir, 'ir');
+    copyDir(FIXTURES_DATA, dataDir);
+    generateIrFromData(dataDir, irDir);
+
+    const client = makeWorkflowClient();
+    const config = makeConfig(dir);
+    const first = await runDevelopersImport(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json') },
+      { config, client },
+    );
+    assert.strictEqual(first.exitCode, 0);
+    assert.strictEqual(client._state.counts.ensureApplicationNotification, 1);
+    assert.deepStrictEqual(
+      Array.from(client._state.applicationNotifications.values())[0],
+      ['SUBSCRIPTION_ACCEPTED'],
+    );
+
+    const second = await runDevelopersImport(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json') },
+      { config, client },
+    );
+    assert.strictEqual(second.exitCode, 0);
+    assert.strictEqual(client._state.counts.createApplication, 1);
+    assert.strictEqual(client._state.counts.ensureApplicationNotification, 2);
+  });
+}
+
+async function testApplicationNotificationCanBeDisabled() {
+  await withTempDir(async (dir) => {
+    const dataDir = path.join(dir, 'data');
+    const irDir = path.join(dir, 'ir');
+    copyDir(FIXTURES_DATA, dataDir);
+    generateIrFromData(dataDir, irDir);
+
+    const client = makeWorkflowClient();
+    const config = makeConfig(dir, {
+      applicationNotifications: { subscriptionAccepted: false },
+    });
+    const imported = await runDevelopersImport(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json') },
+      { config, client },
+    );
+
+    assert.strictEqual(imported.exitCode, 0);
+    assert.strictEqual(imported.config.applicationNotifications.subscriptionAccepted, false);
+    assert.strictEqual(client._state.counts.ensureApplicationNotification, 0);
+  });
+}
+
+async function testApplicationNotificationFailureWarnsAndContinues() {
+  await withTempDir(async (dir) => {
+    const dataDir = path.join(dir, 'data');
+    const irDir = path.join(dir, 'ir');
+    copyDir(FIXTURES_DATA, dataDir);
+    generateIrFromData(dataDir, irDir);
+
+    const client = makeWorkflowClient({
+      overrides: {
+        async ensureApplicationNotification() {
+          const err = new Error('Portal notification endpoint forbidden');
+          err.status = 403;
+          throw err;
+        },
+      },
+    });
+    const imported = await runDevelopersImport(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json') },
+      { config: makeConfig(dir), client },
+    );
+
+    assert.strictEqual(imported.exitCode, 0);
+    assert.strictEqual(
+      imported.state.actions['UPSERT_APPLICATION:alice@example.com/orders-consumer'].status,
+      'SUCCEEDED',
+    );
+    assert.ok(
+      fs.readFileSync(imported.outputPaths.log, 'utf8')
+        .includes('APPLICATION_NOTIFICATION_CONFIGURATION_FAILED'),
+    );
+  });
+}
+
+async function testReconcileWarnsWhenSubscriptionAcceptedNotificationIsMissing() {
+  await withTempDir(async (dir) => {
+    const dataDir = path.join(dir, 'data');
+    const irDir = path.join(dir, 'ir');
+    copyDir(FIXTURES_DATA, dataDir);
+    generateIrFromData(dataDir, irDir);
+
+    const client = makeWorkflowClient();
+    const config = makeConfig(dir);
+    const imported = await runDevelopersImport(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json') },
+      { config, client },
+    );
+    assert.strictEqual(imported.exitCode, 0);
+    const applicationId = imported.idMap.applications['alice@example.com/orders-consumer'];
+    client._state.applicationNotifications.set(applicationId, []);
+
+    const reconciled = await runDevelopersReconcile(
+      { 'ir-dir': irDir, 'config': path.join(dir, 'config.json') },
+      { config, client },
+    );
+    assert.strictEqual(reconciled.exitCode, 0);
+    assert.ok(reconciled.report.mismatches.some((item) => (
+      item.code === 'APPLICATION_NOTIFICATION_MISMATCH'
+    )));
+    assert.strictEqual(
+      reconciled.report.diagnostics.applicationNotifications.summary.mismatchedApplications,
+      1,
+    );
   });
 }
 
@@ -1872,6 +2016,10 @@ async function run() {
   await testPlanFailsWhenCapabilityProbeContradictsConfig();
   await testImportCreatesResourcesAndResumeSkipsRework();
   await testImportWritesApplicationMetadataPerApplication();
+  await testImportEnsuresSubscriptionAcceptedNotificationForCreatedAndReusedApps();
+  await testApplicationNotificationCanBeDisabled();
+  await testApplicationNotificationFailureWarnsAndContinues();
+  await testReconcileWarnsWhenSubscriptionAcceptedNotificationIsMissing();
   await testImportOnlyWritesToolMetadataWithoutAppAttributes();
   await testApplicationMetadataReservedAndDuplicateKeys();
   await testImportSkipsDevelopersWithoutApps();

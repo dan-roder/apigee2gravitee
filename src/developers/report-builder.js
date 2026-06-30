@@ -371,6 +371,12 @@ function buildPlan(domain, preflight, config, targetState = {
         customFields: application.customFields,
         ownershipStrategy: application.ownershipStrategy,
         apiKeyMode: config.policies.defaultApplication,
+        expectedNotifications: {
+          subscriptionAccepted: config.applicationNotifications?.subscriptionAccepted !== false,
+          hooks: config.applicationNotifications?.subscriptionAccepted !== false
+            ? ['SUBSCRIPTION_ACCEPTED']
+            : [],
+        },
       },
       blockers: [...application.blockers, ...(resolution.blockers || [])],
       warnings: [...application.warnings],
@@ -390,6 +396,12 @@ function buildPlan(domain, preflight, config, targetState = {
         ownershipStrategy: application.ownershipStrategy,
         ownerEmail: application.developerEmail,
         expectedMetadata: application.metadata,
+        expectedNotifications: {
+          subscriptionAccepted: config.applicationNotifications?.subscriptionAccepted !== false,
+          hooks: config.applicationNotifications?.subscriptionAccepted !== false
+            ? ['SUBSCRIPTION_ACCEPTED']
+            : [],
+        },
       },
       blockers: [...upsert.blockers],
       warnings: [...upsert.warnings],

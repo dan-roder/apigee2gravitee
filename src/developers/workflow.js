@@ -3,7 +3,7 @@
 const path = require('path');
 const fs = require('fs');
 
-const { loadDevelopersConfig, validateDevelopersConfig } = require('./config');
+const { applyDevelopersConfigDefaults, loadDevelopersConfig, validateDevelopersConfig } = require('./config');
 const { loadDeveloperDomain } = require('./developer-loader');
 const { validateAnalyzePreflight } = require('./preflight-validator');
 const { buildPlan, buildGapReport } = require('./report-builder');
@@ -120,7 +120,9 @@ function buildPlanningEvents(domain, preflight, manifest) {
 
 async function prepareDevelopersWorkflow(flags, deps = {}) {
   const irDir = path.resolve(flags['ir-dir'] || './ir');
-  const config = deps.config || loadDevelopersConfig(flags['config'], flags);
+  const config = applyDevelopersConfigDefaults(
+    deps.config || loadDevelopersConfig(flags['config'], flags),
+  );
   const validation = validateDevelopersConfig(config);
   if (!validation.valid) {
     return {

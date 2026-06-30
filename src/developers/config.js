@@ -25,6 +25,15 @@ function clone(value) {
   return JSON.parse(JSON.stringify(value));
 }
 
+function applyDevelopersConfigDefaults(config) {
+  const next = clone(config);
+  next.applicationNotifications = {
+    ...(next.applicationNotifications || {}),
+    subscriptionAccepted: next.applicationNotifications?.subscriptionAccepted !== false,
+  };
+  return next;
+}
+
 function overrideIfPresent(target, key, value) {
   if (value !== undefined && value !== null && value !== '') {
     target[key] = value;
@@ -40,7 +49,7 @@ function loadDevelopersConfig(configPath, flags = {}) {
     throw new Error(`config not found: ${configPath}`);
   }
 
-  const config = clone(readJson(absolutePath));
+  const config = applyDevelopersConfigDefaults(readJson(absolutePath));
   config._meta = { path: absolutePath };
 
   config.gravitee = config.gravitee || {};
@@ -192,6 +201,22 @@ function validateDevelopersConfig(config, options = {}) {
   validateCapabilities(config.capabilities, errors);
   validateRoleAssignmentIds(config.roleAssignmentIds, errors);
 
+  if (
+    config.applicationNotifications !== undefined
+    && (
+      !config.applicationNotifications
+      || typeof config.applicationNotifications !== 'object'
+      || Array.isArray(config.applicationNotifications)
+    )
+  ) {
+    errors.push('applicationNotifications must be an object');
+  } else if (
+    config.applicationNotifications?.subscriptionAccepted !== undefined
+    && typeof config.applicationNotifications.subscriptionAccepted !== 'boolean'
+  ) {
+    errors.push('applicationNotifications.subscriptionAccepted must be a boolean');
+  }
+
   if (config.customFieldMap !== undefined && (typeof config.customFieldMap !== 'object' || Array.isArray(config.customFieldMap))) {
     errors.push('customFieldMap must be an object');
   }
@@ -212,6 +237,7 @@ function validateDevelopersConfig(config, options = {}) {
 }
 
 module.exports = {
+  applyDevelopersConfigDefaults,
   loadDevelopersConfig,
   validateDevelopersConfig,
 };

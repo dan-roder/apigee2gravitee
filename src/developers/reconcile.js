@@ -52,6 +52,15 @@ async function runDevelopersReconcile(flags, deps = {}) {
       metadataReadStrategies: {},
     },
   };
+  const notificationDiagnostics = {
+    applications: {},
+    summary: {
+      configuredApplications: 0,
+      verifiedApplications: 0,
+      mismatchedApplications: 0,
+      unsupportedApplications: 0,
+    },
+  };
 
   for (const user of result.domain.users) {
     const expectedUserId = idMap.users[user.sourceId];
@@ -159,6 +168,59 @@ async function runDevelopersReconcile(flags, deps = {}) {
         mismatches.push({ severity: 'blocker', code: 'APPLICATION_OWNER_MISMATCH', sourceId: application.sourceId, message: `Application ${application.appName} is missing expected owner membership` });
       }
     }
+    if (result.config.applicationNotifications?.subscriptionAccepted !== false) {
+      notificationDiagnostics.summary.configuredApplications += 1;
+      if (typeof result.client.getApplicationNotificationSettings !== 'function') {
+        notificationDiagnostics.summary.unsupportedApplications += 1;
+        mismatches.push({
+          severity: 'warning',
+          code: 'APPLICATION_NOTIFICATION_UNVERIFIED',
+          sourceId: application.sourceId,
+          message: `Application ${application.appName} notification settings could not be read`,
+        });
+      } else {
+        try {
+          const settings = await result.client.getApplicationNotificationSettings(target.id);
+          const verified = settings.hooks.includes('SUBSCRIPTION_ACCEPTED');
+          notificationDiagnostics.applications[application.sourceId] = {
+            applicationId: target.id,
+            expectedHooks: ['SUBSCRIPTION_ACCEPTED'],
+            hooks: settings.hooks,
+            responseShape: settings.shape,
+            url: settings.url,
+            verified,
+          };
+          if (verified) {
+            notificationDiagnostics.summary.verifiedApplications += 1;
+          } else {
+            notificationDiagnostics.summary.mismatchedApplications += 1;
+            mismatches.push({
+              severity: 'warning',
+              code: 'APPLICATION_NOTIFICATION_MISMATCH',
+              sourceId: application.sourceId,
+              message: `Application ${application.appName} is missing the Subscription Accepted notification`,
+              diagnostics: notificationDiagnostics.applications[application.sourceId],
+            });
+          }
+        } catch (err) {
+          notificationDiagnostics.summary.unsupportedApplications += 1;
+          notificationDiagnostics.applications[application.sourceId] = {
+            applicationId: target.id,
+            expectedHooks: ['SUBSCRIPTION_ACCEPTED'],
+            verified: false,
+            error: err.message,
+            attempts: err.attempts || [],
+          };
+          mismatches.push({
+            severity: 'warning',
+            code: 'APPLICATION_NOTIFICATION_UNVERIFIED',
+            sourceId: application.sourceId,
+            message: `Application ${application.appName} notification settings could not be verified: ${err.message}`,
+            diagnostics: notificationDiagnostics.applications[application.sourceId],
+          });
+        }
+      }
+    }
   }
 
   for (const subscription of result.domain.subscriptions) {
@@ -243,7 +305,10 @@ async function runDevelopersReconcile(flags, deps = {}) {
     warnings: mismatches.filter((item) => item.severity === 'warning').length,
   };
 
-  const report = buildReconcileReport(summary, mismatches, { applicationMetadata: metadataDiagnostics });
+  const report = buildReconcileReport(summary, mismatches, {
+    applicationMetadata: metadataDiagnostics,
+    applicationNotifications: notificationDiagnostics,
+  });
   const events = [
     { ts: new Date().toISOString(), type: 'reconcile.summary', ...summary },
     ...mismatches.map((item) => ({ ts: new Date().toISOString(), type: `reconcile.${item.severity}`, ...item })),
