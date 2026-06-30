@@ -215,55 +215,32 @@ async function testApplicationNotificationSettingsNormalizeSupportedShapes() {
 
 async function testEnsureApplicationNotificationPreservesExistingHooks() {
   const client = new GraviteeClient({ baseUrl: 'https://gravitee.example.com', orgId: 'DEFAULT', envId: 'DEFAULT', token: 'token' });
-  const url = 'https://gravitee.example.com/management/organizations/DEFAULT/environments/DEFAULT/applications/app-1/notifications';
+  const url = 'https://gravitee.example.com/management/organizations/DEFAULT/environments/DEFAULT/applications/app-1/notificationsettings';
   const gets = [
-    { notifications: ['SUBSCRIPTION_CREATED'], enabled: true },
-    { notifications: ['SUBSCRIPTION_CREATED', 'SUBSCRIPTION_ACCEPTED'], enabled: true },
+    [{ hooks: ['SUBSCRIPTION_CREATED'] }],
+    [{ hooks: ['SUBSCRIPTION_CREATED'] }, { hooks: ['SUBSCRIPTION_ACCEPTED'] }],
   ];
-  let putCall = null;
+  let postCall = null;
   client.get = async (calledUrl) => {
     assert.strictEqual(calledUrl, url);
     return gets.shift();
   };
-  client.put = async (calledUrl, body) => {
-    putCall = { url: calledUrl, body };
+  client.post = async (calledUrl, body) => {
+    postCall = { url: calledUrl, body };
     return {};
   };
 
   const result = await client.ensureApplicationNotification('app-1', 'SUBSCRIPTION_ACCEPTED');
   assert.strictEqual(result.verified, true);
-  assert.deepStrictEqual(putCall, {
-    url,
-    body: {
-      notifications: ['SUBSCRIPTION_CREATED', 'SUBSCRIPTION_ACCEPTED'],
-      enabled: true,
-    },
-  });
-  assert.strictEqual(result.diagnostics.strategy, 'management');
-}
-
-async function testApplicationNotificationFallsBackToPortalEndpoint() {
-  const client = new GraviteeClient({ baseUrl: 'https://gravitee.example.com', orgId: 'DEFAULT', envId: 'DEFAULT', token: 'token' });
-  const managementUrl = 'https://gravitee.example.com/management/organizations/DEFAULT/environments/DEFAULT/applications/app-1/notifications';
-  const portalUrl = 'https://gravitee.example.com/portal/environments/DEFAULT/applications/app-1/notifications';
-  const calls = [];
-  client.get = async (url) => {
-    calls.push({ method: 'GET', url });
-    if (url === managementUrl) {
-      const err = new Error('Not found');
-      err.status = 404;
-      throw err;
-    }
-    return ['SUBSCRIPTION_ACCEPTED'];
-  };
-
-  const result = await client.ensureApplicationNotification('app-1', 'SUBSCRIPTION_ACCEPTED');
-  assert.strictEqual(result.verified, true);
-  assert.strictEqual(result.diagnostics.strategy, 'portal');
-  assert.deepStrictEqual(calls, [
-    { method: 'GET', url: managementUrl },
-    { method: 'GET', url: portalUrl },
-  ]);
+  assert.strictEqual(postCall.url, url);
+  assert.strictEqual(postCall.body.name, 'Subscription Accepted');
+  assert.strictEqual(postCall.body.referenceType, 'APPLICATION');
+  assert.strictEqual(postCall.body.referenceId, 'app-1');
+  assert.strictEqual(postCall.body.notifier, 'default-email');
+  assert.deepStrictEqual(postCall.body.hooks, ['SUBSCRIPTION_ACCEPTED']);
+  assert.strictEqual(postCall.body.config_type, 'GENERIC');
+  assert.match(postCall.body.id, /^[0-9a-f-]{36}$/);
+  assert.strictEqual(result.diagnostics.strategy, 'management-notification-settings');
 }
 
 async function testNormalizeCollectionSupportsItemsShape() {
@@ -742,7 +719,6 @@ async function run() {
   await testFindApplicationMatchesLowercaseMetadataKeys();
   await testApplicationNotificationSettingsNormalizeSupportedShapes();
   await testEnsureApplicationNotificationPreservesExistingHooks();
-  await testApplicationNotificationFallsBackToPortalEndpoint();
   await testNormalizeCollectionSupportsItemsShape();
   await testFindApiByNameFiltersExactName();
   await testListApisFollowsPaginatedResponses();

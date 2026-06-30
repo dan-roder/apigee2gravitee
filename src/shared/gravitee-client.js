@@ -28,6 +28,7 @@
  */
 
 const https = require('https');
+const { randomUUID } = require('crypto');
 const http  = require('http');
 const { URL } = require('url');
 
@@ -983,49 +984,38 @@ class GraviteeClient {
     return this.put(this.envUrl(`/applications/${applicationId}`), payload);
   }
 
-  applicationNotificationEndpoints(applicationId, preferredUrl = null) {
-    const endpoints = [
-      {
-        strategy: 'management',
-        url: this.envUrl(`/applications/${applicationId}/notifications`),
-      },
-      {
-        strategy: 'portal',
-        url: this.portalUrl(`/applications/${applicationId}/notifications`),
-      },
-    ];
-    if (!preferredUrl) return endpoints;
-    return endpoints.sort((left) => (left.url === preferredUrl ? -1 : 0));
-  }
-
-  async getApplicationNotificationSettings(applicationId, options = {}) {
+  async getApplicationNotificationSettings(applicationId) {
+    const url = this.envUrl(`/applications/${applicationId}/notificationsettings`);
     const attempts = [];
-    let lastError = null;
-    for (const endpoint of this.applicationNotificationEndpoints(applicationId, options.preferredUrl)) {
-      try {
-        const body = await this.get(endpoint.url);
-        attempts.push({ method: 'GET', status: 200, strategy: endpoint.strategy, url: endpoint.url });
-        return {
-          ...normalizeApplicationNotificationSettings(body),
-          url: endpoint.url,
-          strategy: endpoint.strategy,
-          attempts,
-        };
-      } catch (err) {
-        lastError = err;
-        attempts.push({
-          method: 'GET',
-          status: err.status || null,
-          strategy: endpoint.strategy,
-          url: endpoint.url,
-          classification: classifyApiError(err),
-          message: err.message,
-          body: err.body,
-        });
-      }
+    try {
+      const body = await this.get(url);
+      const settings = normalizeCollection(body);
+      const hooks = Array.from(new Set(settings.flatMap((setting) => (
+        Array.isArray(setting?.hooks) ? setting.hooks : []
+      ))));
+      attempts.push({ method: 'GET', status: 200, strategy: 'management-notification-settings', url });
+      return {
+        hooks,
+        settings,
+        shape: 'notification-settings',
+        raw: body,
+        url,
+        strategy: 'management-notification-settings',
+        attempts,
+      };
+    } catch (err) {
+      attempts.push({
+        method: 'GET',
+        status: err.status || null,
+        strategy: 'management-notification-settings',
+        url,
+        classification: classifyApiError(err),
+        message: err.message,
+        body: err.body,
+      });
+      err.attempts = attempts;
+      throw err;
     }
-    lastError.attempts = attempts;
-    throw lastError;
   }
 
   async ensureApplicationNotification(applicationId, hook) {
@@ -1055,13 +1045,24 @@ class GraviteeClient {
     };
     if (diagnostics.verified) return { ok: true, verified: true, hooks: settings.hooks, diagnostics };
 
-    const payload = buildApplicationNotificationPayload(settings, expectedHooks);
+    const payload = {
+      id: randomUUID(),
+      name: hook === 'SUBSCRIPTION_ACCEPTED' ? 'Subscription Accepted' : hook,
+      referenceType: 'APPLICATION',
+      referenceId: applicationId,
+      notifier: 'default-email',
+      hooks: [hook],
+      useSystemProxy: false,
+      config_type: 'GENERIC',
+      config: null,
+      groups: [],
+    };
     try {
-      await this.put(settings.url, payload);
-      attempts.push({ method: 'PUT', status: 200, url: settings.url, strategy: settings.strategy, payloadShape: settings.shape });
+      await this.post(settings.url, payload);
+      attempts.push({ method: 'POST', status: 201, url: settings.url, strategy: settings.strategy, payloadShape: 'notification-setting' });
     } catch (err) {
       attempts.push({
-        method: 'PUT',
+        method: 'POST',
         status: err.status || null,
         classification: classifyApiError(err),
         message: err.message,
@@ -1073,7 +1074,7 @@ class GraviteeClient {
     }
 
     try {
-      const readback = await this.getApplicationNotificationSettings(applicationId, { preferredUrl: settings.url });
+      const readback = await this.getApplicationNotificationSettings(applicationId);
       diagnostics.readbackShape = readback.shape;
       diagnostics.readbackHooks = readback.hooks;
       diagnostics.verified = readback.hooks.includes(hook);
