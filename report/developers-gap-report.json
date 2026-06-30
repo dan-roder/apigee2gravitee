@@ -1,13 +1,18 @@
 {
-  "generatedAt": "2026-06-29T20:49:56.902Z",
+  "generatedAt": "2026-06-30T18:41:55.201Z",
   "summary": {
     "users": 31,
     "applications": 31,
     "credentials": 31,
     "subscriptions": 31,
+    "deferredSubscriptions": 31,
+    "deferredActions": 93,
+    "deferredReasons": {
+      "PLAN_MAPPING_MISSING": 31
+    },
     "actions": 217,
-    "blockers": 5,
-    "warnings": 0,
+    "blockers": 0,
+    "warnings": 5,
     "manualReview": 0,
     "inactiveDevelopers": 0,
     "continuityRiskCount": 31,
@@ -22,41 +27,41 @@
   },
   "findings": [
     {
-      "severity": "blocker",
+      "severity": "warning",
       "code": "PRODUCT_PLAN_MAPPING_MISSING",
-      "message": "Missing productPlanMap entry for source product collibra-api-product",
+      "message": "Missing productPlanMap entry for source product collibra-api-product; affected subscriptions will be deferred",
       "details": {
         "productName": "collibra-api-product"
       }
     },
     {
-      "severity": "blocker",
+      "severity": "warning",
       "code": "PRODUCT_PLAN_MAPPING_MISSING",
-      "message": "Missing productPlanMap entry for source product flight-aware-api-product",
+      "message": "Missing productPlanMap entry for source product flight-aware-api-product; affected subscriptions will be deferred",
       "details": {
         "productName": "flight-aware-api-product"
       }
     },
     {
-      "severity": "blocker",
+      "severity": "warning",
       "code": "PRODUCT_PLAN_MAPPING_MISSING",
-      "message": "Missing productPlanMap entry for source product leap-api-product",
+      "message": "Missing productPlanMap entry for source product leap-api-product; affected subscriptions will be deferred",
       "details": {
         "productName": "leap-api-product"
       }
     },
     {
-      "severity": "blocker",
+      "severity": "warning",
       "code": "PRODUCT_PLAN_MAPPING_MISSING",
-      "message": "Missing productPlanMap entry for source product llm-gateway-product",
+      "message": "Missing productPlanMap entry for source product llm-gateway-product; affected subscriptions will be deferred",
       "details": {
         "productName": "llm-gateway-product"
       }
     },
     {
-      "severity": "blocker",
+      "severity": "warning",
       "code": "PRODUCT_PLAN_MAPPING_MISSING",
-      "message": "Missing productPlanMap entry for source product maintenance-repair-api-product",
+      "message": "Missing productPlanMap entry for source product maintenance-repair-api-product; affected subscriptions will be deferred",
       "details": {
         "productName": "maintenance-repair-api-product"
       }
@@ -685,8 +690,8 @@
     "applications": 31,
     "credentials": 31,
     "subscriptions": 31,
-    "blockers": 5,
-    "warnings": 0,
+    "blockers": 0,
+    "warnings": 5,
     "manualReview": 0,
     "actions": 217,
     "actionsByKind": {
@@ -700,7 +705,7 @@
     },
     "actionsByStatus": {
       "READY": 124,
-      "BLOCKED": 93
+      "DEFERRED": 93
     },
     "operatorActions": {
       "byKind": {
@@ -711,23 +716,24 @@
           "CREATE": 31
         },
         "UPSERT_SUBSCRIPTION": {
-          "BLOCK": 31
+          "DEFER": 31
         }
       },
       "byOperation": {
         "CREATE": 62,
-        "BLOCK": 31
+        "DEFER": 31
       },
-      "blockedReasons": {
-        "PLAN_MAPPING_MISSING": 62
+      "blockedReasons": {},
+      "deferredReasons": {
+        "PLAN_MAPPING_MISSING": 31
       }
-    }
+    },
+    "deferredSubscriptions": 31,
+    "deferredActions": 93
   },
   "operatorGuidance": {
-    "nextSuggestedScope": null,
-    "resumeSafe": false,
-    "blockerCategories": {
-      "PRODUCT_PLAN_MAPPING_MISSING": 5
-    }
+    "nextSuggestedScope": "--users-only",
+    "resumeSafe": true,
+    "blockerCategories": {}
   }
 }

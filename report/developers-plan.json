@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-29T20:49:56.888Z",
+  "generatedAt": "2026-06-30T18:41:55.188Z",
   "kind": "DevelopersMigrationManifest",
   "source": {
     "irDir": "/Users/daniel.roder/Sites/apigee2gravitee/ir",
@@ -26,8 +26,8 @@
     "applications": 31,
     "credentials": 31,
     "subscriptions": 31,
-    "blockers": 5,
-    "warnings": 0,
+    "blockers": 0,
+    "warnings": 5,
     "manualReview": 0,
     "actions": 217,
     "actionsByKind": {
@@ -41,7 +41,7 @@
     },
     "actionsByStatus": {
       "READY": 124,
-      "BLOCKED": 93
+      "DEFERRED": 93
     },
     "operatorActions": {
       "byKind": {
@@ -52,17 +52,20 @@
           "CREATE": 31
         },
         "UPSERT_SUBSCRIPTION": {
-          "BLOCK": 31
+          "DEFER": 31
         }
       },
       "byOperation": {
         "CREATE": 62,
-        "BLOCK": 31
+        "DEFER": 31
       },
-      "blockedReasons": {
-        "PLAN_MAPPING_MISSING": 62
+      "blockedReasons": {},
+      "deferredReasons": {
+        "PLAN_MAPPING_MISSING": 31
       }
-    }
+    },
+    "deferredSubscriptions": 31,
+    "deferredActions": 93
   },
   "records": {
     "users": [
@@ -4850,41 +4853,41 @@
   },
   "findings": [
     {
-      "severity": "blocker",
+      "severity": "warning",
       "code": "PRODUCT_PLAN_MAPPING_MISSING",
-      "message": "Missing productPlanMap entry for source product collibra-api-product",
+      "message": "Missing productPlanMap entry for source product collibra-api-product; affected subscriptions will be deferred",
       "details": {
         "productName": "collibra-api-product"
       }
     },
     {
-      "severity": "blocker",
+      "severity": "warning",
       "code": "PRODUCT_PLAN_MAPPING_MISSING",
-      "message": "Missing productPlanMap entry for source product flight-aware-api-product",
+      "message": "Missing productPlanMap entry for source product flight-aware-api-product; affected subscriptions will be deferred",
       "details": {
         "productName": "flight-aware-api-product"
       }
     },
     {
-      "severity": "blocker",
+      "severity": "warning",
       "code": "PRODUCT_PLAN_MAPPING_MISSING",
-      "message": "Missing productPlanMap entry for source product leap-api-product",
+      "message": "Missing productPlanMap entry for source product leap-api-product; affected subscriptions will be deferred",
       "details": {
         "productName": "leap-api-product"
       }
     },
     {
-      "severity": "blocker",
+      "severity": "warning",
       "code": "PRODUCT_PLAN_MAPPING_MISSING",
-      "message": "Missing productPlanMap entry for source product llm-gateway-product",
+      "message": "Missing productPlanMap entry for source product llm-gateway-product; affected subscriptions will be deferred",
       "details": {
         "productName": "llm-gateway-product"
       }
     },
     {
-      "severity": "blocker",
+      "severity": "warning",
       "code": "PRODUCT_PLAN_MAPPING_MISSING",
-      "message": "Missing productPlanMap entry for source product maintenance-repair-api-product",
+      "message": "Missing productPlanMap entry for source product maintenance-repair-api-product; affected subscriptions will be deferred",
       "details": {
         "productName": "maintenance-repair-api-product"
       }
@@ -9486,8 +9489,8 @@
       "dependencies": [
         "UPSERT_APPLICATION:developer10@example.com/developer10-migration-app"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": null,
       "lookup": {},
       "payload": {
@@ -9495,14 +9498,13 @@
       },
       "continuity": {},
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -9513,8 +9515,8 @@
         "UPSERT_APPLICATION:developer10@example.com/developer10-migration-app",
         "RESOLVE_PLAN:developer10@example.com/developer10-migration-app/6f3a06ecf3cfdd3773a7e22f7cfbe303/llm-gateway-product"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": "ACCEPTED",
       "lookup": {
         "applicationSourceId": "developer10@example.com/developer10-migration-app",
@@ -9533,16 +9535,13 @@
         "sourceCredentialId": "developer10@example.com/developer10-migration-app/6f3a06ecf3cfdd3773a7e22f7cfbe303"
       },
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -9552,7 +9551,7 @@
       "dependencies": [
         "UPSERT_SUBSCRIPTION:developer10@example.com/developer10-migration-app/6f3a06ecf3cfdd3773a7e22f7cfbe303/llm-gateway-product"
       ],
-      "plannedStatus": "BLOCKED",
+      "plannedStatus": "DEFERRED",
       "operation": "VERIFY",
       "desiredState": null,
       "lookup": {
@@ -9573,12 +9572,12 @@
       },
       "skipConditions": [],
       "failConditions": [],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "blockers": [],
       "warnings": [],
-      "manualReviewReasons": []
+      "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ]
     },
     {
       "actionId": "RESOLVE_PLAN:developer11@example.com/developer11-migration-app/2bf7346503fc77a5023aa8b6f7dee9c9/maintenance-repair-api-product",
@@ -9587,8 +9586,8 @@
       "dependencies": [
         "UPSERT_APPLICATION:developer11@example.com/developer11-migration-app"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": null,
       "lookup": {},
       "payload": {
@@ -9596,14 +9595,13 @@
       },
       "continuity": {},
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -9614,8 +9612,8 @@
         "UPSERT_APPLICATION:developer11@example.com/developer11-migration-app",
         "RESOLVE_PLAN:developer11@example.com/developer11-migration-app/2bf7346503fc77a5023aa8b6f7dee9c9/maintenance-repair-api-product"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": "ACCEPTED",
       "lookup": {
         "applicationSourceId": "developer11@example.com/developer11-migration-app",
@@ -9634,16 +9632,13 @@
         "sourceCredentialId": "developer11@example.com/developer11-migration-app/2bf7346503fc77a5023aa8b6f7dee9c9"
       },
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -9653,7 +9648,7 @@
       "dependencies": [
         "UPSERT_SUBSCRIPTION:developer11@example.com/developer11-migration-app/2bf7346503fc77a5023aa8b6f7dee9c9/maintenance-repair-api-product"
       ],
-      "plannedStatus": "BLOCKED",
+      "plannedStatus": "DEFERRED",
       "operation": "VERIFY",
       "desiredState": null,
       "lookup": {
@@ -9674,12 +9669,12 @@
       },
       "skipConditions": [],
       "failConditions": [],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "blockers": [],
       "warnings": [],
-      "manualReviewReasons": []
+      "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ]
     },
     {
       "actionId": "RESOLVE_PLAN:developer12@example.com/developer12-migration-app/db6b4d755d42f3678593f22f83400970/flight-aware-api-product",
@@ -9688,8 +9683,8 @@
       "dependencies": [
         "UPSERT_APPLICATION:developer12@example.com/developer12-migration-app"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": null,
       "lookup": {},
       "payload": {
@@ -9697,14 +9692,13 @@
       },
       "continuity": {},
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -9715,8 +9709,8 @@
         "UPSERT_APPLICATION:developer12@example.com/developer12-migration-app",
         "RESOLVE_PLAN:developer12@example.com/developer12-migration-app/db6b4d755d42f3678593f22f83400970/flight-aware-api-product"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": "ACCEPTED",
       "lookup": {
         "applicationSourceId": "developer12@example.com/developer12-migration-app",
@@ -9735,16 +9729,13 @@
         "sourceCredentialId": "developer12@example.com/developer12-migration-app/db6b4d755d42f3678593f22f83400970"
       },
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -9754,7 +9745,7 @@
       "dependencies": [
         "UPSERT_SUBSCRIPTION:developer12@example.com/developer12-migration-app/db6b4d755d42f3678593f22f83400970/flight-aware-api-product"
       ],
-      "plannedStatus": "BLOCKED",
+      "plannedStatus": "DEFERRED",
       "operation": "VERIFY",
       "desiredState": null,
       "lookup": {
@@ -9775,12 +9766,12 @@
       },
       "skipConditions": [],
       "failConditions": [],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "blockers": [],
       "warnings": [],
-      "manualReviewReasons": []
+      "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ]
     },
     {
       "actionId": "RESOLVE_PLAN:developer13@example.com/developer13-migration-app/8a8a5d6cb57fe4241c03c20071eb8b50/llm-gateway-product",
@@ -9789,8 +9780,8 @@
       "dependencies": [
         "UPSERT_APPLICATION:developer13@example.com/developer13-migration-app"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": null,
       "lookup": {},
       "payload": {
@@ -9798,14 +9789,13 @@
       },
       "continuity": {},
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -9816,8 +9806,8 @@
         "UPSERT_APPLICATION:developer13@example.com/developer13-migration-app",
         "RESOLVE_PLAN:developer13@example.com/developer13-migration-app/8a8a5d6cb57fe4241c03c20071eb8b50/llm-gateway-product"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": "ACCEPTED",
       "lookup": {
         "applicationSourceId": "developer13@example.com/developer13-migration-app",
@@ -9836,16 +9826,13 @@
         "sourceCredentialId": "developer13@example.com/developer13-migration-app/8a8a5d6cb57fe4241c03c20071eb8b50"
       },
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -9855,7 +9842,7 @@
       "dependencies": [
         "UPSERT_SUBSCRIPTION:developer13@example.com/developer13-migration-app/8a8a5d6cb57fe4241c03c20071eb8b50/llm-gateway-product"
       ],
-      "plannedStatus": "BLOCKED",
+      "plannedStatus": "DEFERRED",
       "operation": "VERIFY",
       "desiredState": null,
       "lookup": {
@@ -9876,12 +9863,12 @@
       },
       "skipConditions": [],
       "failConditions": [],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "blockers": [],
       "warnings": [],
-      "manualReviewReasons": []
+      "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ]
     },
     {
       "actionId": "RESOLVE_PLAN:developer14@example.com/developer14-migration-app/0e1eeffca2710ce5522b5e8e84c819f4/collibra-api-product",
@@ -9890,8 +9877,8 @@
       "dependencies": [
         "UPSERT_APPLICATION:developer14@example.com/developer14-migration-app"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": null,
       "lookup": {},
       "payload": {
@@ -9899,14 +9886,13 @@
       },
       "continuity": {},
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -9917,8 +9903,8 @@
         "UPSERT_APPLICATION:developer14@example.com/developer14-migration-app",
         "RESOLVE_PLAN:developer14@example.com/developer14-migration-app/0e1eeffca2710ce5522b5e8e84c819f4/collibra-api-product"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": "ACCEPTED",
       "lookup": {
         "applicationSourceId": "developer14@example.com/developer14-migration-app",
@@ -9937,16 +9923,13 @@
         "sourceCredentialId": "developer14@example.com/developer14-migration-app/0e1eeffca2710ce5522b5e8e84c819f4"
       },
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -9956,7 +9939,7 @@
       "dependencies": [
         "UPSERT_SUBSCRIPTION:developer14@example.com/developer14-migration-app/0e1eeffca2710ce5522b5e8e84c819f4/collibra-api-product"
       ],
-      "plannedStatus": "BLOCKED",
+      "plannedStatus": "DEFERRED",
       "operation": "VERIFY",
       "desiredState": null,
       "lookup": {
@@ -9977,12 +9960,12 @@
       },
       "skipConditions": [],
       "failConditions": [],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "blockers": [],
       "warnings": [],
-      "manualReviewReasons": []
+      "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ]
     },
     {
       "actionId": "RESOLVE_PLAN:developer15@example.com/developer15-migration-app/83d2ab0708a224ccaf1ce12813bb63ed/maintenance-repair-api-product",
@@ -9991,8 +9974,8 @@
       "dependencies": [
         "UPSERT_APPLICATION:developer15@example.com/developer15-migration-app"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": null,
       "lookup": {},
       "payload": {
@@ -10000,14 +9983,13 @@
       },
       "continuity": {},
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -10018,8 +10000,8 @@
         "UPSERT_APPLICATION:developer15@example.com/developer15-migration-app",
         "RESOLVE_PLAN:developer15@example.com/developer15-migration-app/83d2ab0708a224ccaf1ce12813bb63ed/maintenance-repair-api-product"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": "ACCEPTED",
       "lookup": {
         "applicationSourceId": "developer15@example.com/developer15-migration-app",
@@ -10038,16 +10020,13 @@
         "sourceCredentialId": "developer15@example.com/developer15-migration-app/83d2ab0708a224ccaf1ce12813bb63ed"
       },
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -10057,7 +10036,7 @@
       "dependencies": [
         "UPSERT_SUBSCRIPTION:developer15@example.com/developer15-migration-app/83d2ab0708a224ccaf1ce12813bb63ed/maintenance-repair-api-product"
       ],
-      "plannedStatus": "BLOCKED",
+      "plannedStatus": "DEFERRED",
       "operation": "VERIFY",
       "desiredState": null,
       "lookup": {
@@ -10078,12 +10057,12 @@
       },
       "skipConditions": [],
       "failConditions": [],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "blockers": [],
       "warnings": [],
-      "manualReviewReasons": []
+      "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ]
     },
     {
       "actionId": "RESOLVE_PLAN:developer16@example.com/developer16-migration-app/22837b6bb1567b15c24fef8019fb57e9/flight-aware-api-product",
@@ -10092,8 +10071,8 @@
       "dependencies": [
         "UPSERT_APPLICATION:developer16@example.com/developer16-migration-app"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": null,
       "lookup": {},
       "payload": {
@@ -10101,14 +10080,13 @@
       },
       "continuity": {},
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -10119,8 +10097,8 @@
         "UPSERT_APPLICATION:developer16@example.com/developer16-migration-app",
         "RESOLVE_PLAN:developer16@example.com/developer16-migration-app/22837b6bb1567b15c24fef8019fb57e9/flight-aware-api-product"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": "ACCEPTED",
       "lookup": {
         "applicationSourceId": "developer16@example.com/developer16-migration-app",
@@ -10139,16 +10117,13 @@
         "sourceCredentialId": "developer16@example.com/developer16-migration-app/22837b6bb1567b15c24fef8019fb57e9"
       },
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -10158,7 +10133,7 @@
       "dependencies": [
         "UPSERT_SUBSCRIPTION:developer16@example.com/developer16-migration-app/22837b6bb1567b15c24fef8019fb57e9/flight-aware-api-product"
       ],
-      "plannedStatus": "BLOCKED",
+      "plannedStatus": "DEFERRED",
       "operation": "VERIFY",
       "desiredState": null,
       "lookup": {
@@ -10179,12 +10154,12 @@
       },
       "skipConditions": [],
       "failConditions": [],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "blockers": [],
       "warnings": [],
-      "manualReviewReasons": []
+      "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ]
     },
     {
       "actionId": "RESOLVE_PLAN:developer17@example.com/developer17-migration-app/e7a3a617b7f408a9b9a46adca33c7667/llm-gateway-product",
@@ -10193,8 +10168,8 @@
       "dependencies": [
         "UPSERT_APPLICATION:developer17@example.com/developer17-migration-app"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": null,
       "lookup": {},
       "payload": {
@@ -10202,14 +10177,13 @@
       },
       "continuity": {},
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -10220,8 +10194,8 @@
         "UPSERT_APPLICATION:developer17@example.com/developer17-migration-app",
         "RESOLVE_PLAN:developer17@example.com/developer17-migration-app/e7a3a617b7f408a9b9a46adca33c7667/llm-gateway-product"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": "ACCEPTED",
       "lookup": {
         "applicationSourceId": "developer17@example.com/developer17-migration-app",
@@ -10240,16 +10214,13 @@
         "sourceCredentialId": "developer17@example.com/developer17-migration-app/e7a3a617b7f408a9b9a46adca33c7667"
       },
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -10259,7 +10230,7 @@
       "dependencies": [
         "UPSERT_SUBSCRIPTION:developer17@example.com/developer17-migration-app/e7a3a617b7f408a9b9a46adca33c7667/llm-gateway-product"
       ],
-      "plannedStatus": "BLOCKED",
+      "plannedStatus": "DEFERRED",
       "operation": "VERIFY",
       "desiredState": null,
       "lookup": {
@@ -10280,12 +10251,12 @@
       },
       "skipConditions": [],
       "failConditions": [],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "blockers": [],
       "warnings": [],
-      "manualReviewReasons": []
+      "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ]
     },
     {
       "actionId": "RESOLVE_PLAN:developer18@example.com/developer18-migration-app/b05c85e3539a05ebd8ca8a683dcd4385/flight-aware-api-product",
@@ -10294,8 +10265,8 @@
       "dependencies": [
         "UPSERT_APPLICATION:developer18@example.com/developer18-migration-app"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": null,
       "lookup": {},
       "payload": {
@@ -10303,14 +10274,13 @@
       },
       "continuity": {},
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -10321,8 +10291,8 @@
         "UPSERT_APPLICATION:developer18@example.com/developer18-migration-app",
         "RESOLVE_PLAN:developer18@example.com/developer18-migration-app/b05c85e3539a05ebd8ca8a683dcd4385/flight-aware-api-product"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": "ACCEPTED",
       "lookup": {
         "applicationSourceId": "developer18@example.com/developer18-migration-app",
@@ -10341,16 +10311,13 @@
         "sourceCredentialId": "developer18@example.com/developer18-migration-app/b05c85e3539a05ebd8ca8a683dcd4385"
       },
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -10360,7 +10327,7 @@
       "dependencies": [
         "UPSERT_SUBSCRIPTION:developer18@example.com/developer18-migration-app/b05c85e3539a05ebd8ca8a683dcd4385/flight-aware-api-product"
       ],
-      "plannedStatus": "BLOCKED",
+      "plannedStatus": "DEFERRED",
       "operation": "VERIFY",
       "desiredState": null,
       "lookup": {
@@ -10381,12 +10348,12 @@
       },
       "skipConditions": [],
       "failConditions": [],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "blockers": [],
       "warnings": [],
-      "manualReviewReasons": []
+      "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ]
     },
     {
       "actionId": "RESOLVE_PLAN:developer19@example.com/developer19-migration-app/2fe9027ca842c441eddb5dfeb57695e7/flight-aware-api-product",
@@ -10395,8 +10362,8 @@
       "dependencies": [
         "UPSERT_APPLICATION:developer19@example.com/developer19-migration-app"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": null,
       "lookup": {},
       "payload": {
@@ -10404,14 +10371,13 @@
       },
       "continuity": {},
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -10422,8 +10388,8 @@
         "UPSERT_APPLICATION:developer19@example.com/developer19-migration-app",
         "RESOLVE_PLAN:developer19@example.com/developer19-migration-app/2fe9027ca842c441eddb5dfeb57695e7/flight-aware-api-product"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": "ACCEPTED",
       "lookup": {
         "applicationSourceId": "developer19@example.com/developer19-migration-app",
@@ -10442,16 +10408,13 @@
         "sourceCredentialId": "developer19@example.com/developer19-migration-app/2fe9027ca842c441eddb5dfeb57695e7"
       },
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -10461,7 +10424,7 @@
       "dependencies": [
         "UPSERT_SUBSCRIPTION:developer19@example.com/developer19-migration-app/2fe9027ca842c441eddb5dfeb57695e7/flight-aware-api-product"
       ],
-      "plannedStatus": "BLOCKED",
+      "plannedStatus": "DEFERRED",
       "operation": "VERIFY",
       "desiredState": null,
       "lookup": {
@@ -10482,12 +10445,12 @@
       },
       "skipConditions": [],
       "failConditions": [],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "blockers": [],
       "warnings": [],
-      "manualReviewReasons": []
+      "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ]
     },
     {
       "actionId": "RESOLVE_PLAN:developer1@example.com/developer1-migration-app/3bd242735e40a08404e3bc31c6099381/collibra-api-product",
@@ -10496,8 +10459,8 @@
       "dependencies": [
         "UPSERT_APPLICATION:developer1@example.com/developer1-migration-app"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": null,
       "lookup": {},
       "payload": {
@@ -10505,14 +10468,13 @@
       },
       "continuity": {},
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -10523,8 +10485,8 @@
         "UPSERT_APPLICATION:developer1@example.com/developer1-migration-app",
         "RESOLVE_PLAN:developer1@example.com/developer1-migration-app/3bd242735e40a08404e3bc31c6099381/collibra-api-product"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": "ACCEPTED",
       "lookup": {
         "applicationSourceId": "developer1@example.com/developer1-migration-app",
@@ -10543,16 +10505,13 @@
         "sourceCredentialId": "developer1@example.com/developer1-migration-app/3bd242735e40a08404e3bc31c6099381"
       },
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -10562,7 +10521,7 @@
       "dependencies": [
         "UPSERT_SUBSCRIPTION:developer1@example.com/developer1-migration-app/3bd242735e40a08404e3bc31c6099381/collibra-api-product"
       ],
-      "plannedStatus": "BLOCKED",
+      "plannedStatus": "DEFERRED",
       "operation": "VERIFY",
       "desiredState": null,
       "lookup": {
@@ -10583,12 +10542,12 @@
       },
       "skipConditions": [],
       "failConditions": [],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "blockers": [],
       "warnings": [],
-      "manualReviewReasons": []
+      "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ]
     },
     {
       "actionId": "RESOLVE_PLAN:developer20@example.com/developer20-migration-app/6f1464158869ad04c03e656b6e182dbe/llm-gateway-product",
@@ -10597,8 +10556,8 @@
       "dependencies": [
         "UPSERT_APPLICATION:developer20@example.com/developer20-migration-app"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": null,
       "lookup": {},
       "payload": {
@@ -10606,14 +10565,13 @@
       },
       "continuity": {},
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -10624,8 +10582,8 @@
         "UPSERT_APPLICATION:developer20@example.com/developer20-migration-app",
         "RESOLVE_PLAN:developer20@example.com/developer20-migration-app/6f1464158869ad04c03e656b6e182dbe/llm-gateway-product"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": "ACCEPTED",
       "lookup": {
         "applicationSourceId": "developer20@example.com/developer20-migration-app",
@@ -10644,16 +10602,13 @@
         "sourceCredentialId": "developer20@example.com/developer20-migration-app/6f1464158869ad04c03e656b6e182dbe"
       },
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -10663,7 +10618,7 @@
       "dependencies": [
         "UPSERT_SUBSCRIPTION:developer20@example.com/developer20-migration-app/6f1464158869ad04c03e656b6e182dbe/llm-gateway-product"
       ],
-      "plannedStatus": "BLOCKED",
+      "plannedStatus": "DEFERRED",
       "operation": "VERIFY",
       "desiredState": null,
       "lookup": {
@@ -10684,12 +10639,12 @@
       },
       "skipConditions": [],
       "failConditions": [],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "blockers": [],
       "warnings": [],
-      "manualReviewReasons": []
+      "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ]
     },
     {
       "actionId": "RESOLVE_PLAN:developer21@example.com/developer21-migration-app/06db395fa539a23ed0a856a6ba5a7165/leap-api-product",
@@ -10698,8 +10653,8 @@
       "dependencies": [
         "UPSERT_APPLICATION:developer21@example.com/developer21-migration-app"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": null,
       "lookup": {},
       "payload": {
@@ -10707,14 +10662,13 @@
       },
       "continuity": {},
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -10725,8 +10679,8 @@
         "UPSERT_APPLICATION:developer21@example.com/developer21-migration-app",
         "RESOLVE_PLAN:developer21@example.com/developer21-migration-app/06db395fa539a23ed0a856a6ba5a7165/leap-api-product"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": "ACCEPTED",
       "lookup": {
         "applicationSourceId": "developer21@example.com/developer21-migration-app",
@@ -10745,16 +10699,13 @@
         "sourceCredentialId": "developer21@example.com/developer21-migration-app/06db395fa539a23ed0a856a6ba5a7165"
       },
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -10764,7 +10715,7 @@
       "dependencies": [
         "UPSERT_SUBSCRIPTION:developer21@example.com/developer21-migration-app/06db395fa539a23ed0a856a6ba5a7165/leap-api-product"
       ],
-      "plannedStatus": "BLOCKED",
+      "plannedStatus": "DEFERRED",
       "operation": "VERIFY",
       "desiredState": null,
       "lookup": {
@@ -10785,12 +10736,12 @@
       },
       "skipConditions": [],
       "failConditions": [],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "blockers": [],
       "warnings": [],
-      "manualReviewReasons": []
+      "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ]
     },
     {
       "actionId": "RESOLVE_PLAN:developer22@example.com/developer22-migration-app/1dcfc221772f50e53c2c970dc76b8c14/flight-aware-api-product",
@@ -10799,8 +10750,8 @@
       "dependencies": [
         "UPSERT_APPLICATION:developer22@example.com/developer22-migration-app"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": null,
       "lookup": {},
       "payload": {
@@ -10808,14 +10759,13 @@
       },
       "continuity": {},
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -10826,8 +10776,8 @@
         "UPSERT_APPLICATION:developer22@example.com/developer22-migration-app",
         "RESOLVE_PLAN:developer22@example.com/developer22-migration-app/1dcfc221772f50e53c2c970dc76b8c14/flight-aware-api-product"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": "ACCEPTED",
       "lookup": {
         "applicationSourceId": "developer22@example.com/developer22-migration-app",
@@ -10846,16 +10796,13 @@
         "sourceCredentialId": "developer22@example.com/developer22-migration-app/1dcfc221772f50e53c2c970dc76b8c14"
       },
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -10865,7 +10812,7 @@
       "dependencies": [
         "UPSERT_SUBSCRIPTION:developer22@example.com/developer22-migration-app/1dcfc221772f50e53c2c970dc76b8c14/flight-aware-api-product"
       ],
-      "plannedStatus": "BLOCKED",
+      "plannedStatus": "DEFERRED",
       "operation": "VERIFY",
       "desiredState": null,
       "lookup": {
@@ -10886,12 +10833,12 @@
       },
       "skipConditions": [],
       "failConditions": [],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "blockers": [],
       "warnings": [],
-      "manualReviewReasons": []
+      "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ]
     },
     {
       "actionId": "RESOLVE_PLAN:developer23@example.com/developer23-migration-app/83e2874dc76bb28400c6857355d6fe88/collibra-api-product",
@@ -10900,8 +10847,8 @@
       "dependencies": [
         "UPSERT_APPLICATION:developer23@example.com/developer23-migration-app"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": null,
       "lookup": {},
       "payload": {
@@ -10909,14 +10856,13 @@
       },
       "continuity": {},
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -10927,8 +10873,8 @@
         "UPSERT_APPLICATION:developer23@example.com/developer23-migration-app",
         "RESOLVE_PLAN:developer23@example.com/developer23-migration-app/83e2874dc76bb28400c6857355d6fe88/collibra-api-product"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": "ACCEPTED",
       "lookup": {
         "applicationSourceId": "developer23@example.com/developer23-migration-app",
@@ -10947,16 +10893,13 @@
         "sourceCredentialId": "developer23@example.com/developer23-migration-app/83e2874dc76bb28400c6857355d6fe88"
       },
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -10966,7 +10909,7 @@
       "dependencies": [
         "UPSERT_SUBSCRIPTION:developer23@example.com/developer23-migration-app/83e2874dc76bb28400c6857355d6fe88/collibra-api-product"
       ],
-      "plannedStatus": "BLOCKED",
+      "plannedStatus": "DEFERRED",
       "operation": "VERIFY",
       "desiredState": null,
       "lookup": {
@@ -10987,12 +10930,12 @@
       },
       "skipConditions": [],
       "failConditions": [],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "blockers": [],
       "warnings": [],
-      "manualReviewReasons": []
+      "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ]
     },
     {
       "actionId": "RESOLVE_PLAN:developer24@example.com/developer24-migration-app/67047169a72ec88e105158a4c2943a69/llm-gateway-product",
@@ -11001,8 +10944,8 @@
       "dependencies": [
         "UPSERT_APPLICATION:developer24@example.com/developer24-migration-app"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": null,
       "lookup": {},
       "payload": {
@@ -11010,14 +10953,13 @@
       },
       "continuity": {},
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -11028,8 +10970,8 @@
         "UPSERT_APPLICATION:developer24@example.com/developer24-migration-app",
         "RESOLVE_PLAN:developer24@example.com/developer24-migration-app/67047169a72ec88e105158a4c2943a69/llm-gateway-product"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": "ACCEPTED",
       "lookup": {
         "applicationSourceId": "developer24@example.com/developer24-migration-app",
@@ -11048,16 +10990,13 @@
         "sourceCredentialId": "developer24@example.com/developer24-migration-app/67047169a72ec88e105158a4c2943a69"
       },
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -11067,7 +11006,7 @@
       "dependencies": [
         "UPSERT_SUBSCRIPTION:developer24@example.com/developer24-migration-app/67047169a72ec88e105158a4c2943a69/llm-gateway-product"
       ],
-      "plannedStatus": "BLOCKED",
+      "plannedStatus": "DEFERRED",
       "operation": "VERIFY",
       "desiredState": null,
       "lookup": {
@@ -11088,12 +11027,12 @@
       },
       "skipConditions": [],
       "failConditions": [],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "blockers": [],
       "warnings": [],
-      "manualReviewReasons": []
+      "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ]
     },
     {
       "actionId": "RESOLVE_PLAN:developer25@example.com/developer25-migration-app/ac73d53753d4769719e240e1c03db18e/maintenance-repair-api-product",
@@ -11102,8 +11041,8 @@
       "dependencies": [
         "UPSERT_APPLICATION:developer25@example.com/developer25-migration-app"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": null,
       "lookup": {},
       "payload": {
@@ -11111,14 +11050,13 @@
       },
       "continuity": {},
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -11129,8 +11067,8 @@
         "UPSERT_APPLICATION:developer25@example.com/developer25-migration-app",
         "RESOLVE_PLAN:developer25@example.com/developer25-migration-app/ac73d53753d4769719e240e1c03db18e/maintenance-repair-api-product"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": "ACCEPTED",
       "lookup": {
         "applicationSourceId": "developer25@example.com/developer25-migration-app",
@@ -11149,16 +11087,13 @@
         "sourceCredentialId": "developer25@example.com/developer25-migration-app/ac73d53753d4769719e240e1c03db18e"
       },
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -11168,7 +11103,7 @@
       "dependencies": [
         "UPSERT_SUBSCRIPTION:developer25@example.com/developer25-migration-app/ac73d53753d4769719e240e1c03db18e/maintenance-repair-api-product"
       ],
-      "plannedStatus": "BLOCKED",
+      "plannedStatus": "DEFERRED",
       "operation": "VERIFY",
       "desiredState": null,
       "lookup": {
@@ -11189,12 +11124,12 @@
       },
       "skipConditions": [],
       "failConditions": [],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "blockers": [],
       "warnings": [],
-      "manualReviewReasons": []
+      "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ]
     },
     {
       "actionId": "RESOLVE_PLAN:developer26@example.com/developer26-migration-app/5e82e088fb22aa660bd27048e36f6542/leap-api-product",
@@ -11203,8 +11138,8 @@
       "dependencies": [
         "UPSERT_APPLICATION:developer26@example.com/developer26-migration-app"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": null,
       "lookup": {},
       "payload": {
@@ -11212,14 +11147,13 @@
       },
       "continuity": {},
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -11230,8 +11164,8 @@
         "UPSERT_APPLICATION:developer26@example.com/developer26-migration-app",
         "RESOLVE_PLAN:developer26@example.com/developer26-migration-app/5e82e088fb22aa660bd27048e36f6542/leap-api-product"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": "ACCEPTED",
       "lookup": {
         "applicationSourceId": "developer26@example.com/developer26-migration-app",
@@ -11250,16 +11184,13 @@
         "sourceCredentialId": "developer26@example.com/developer26-migration-app/5e82e088fb22aa660bd27048e36f6542"
       },
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -11269,7 +11200,7 @@
       "dependencies": [
         "UPSERT_SUBSCRIPTION:developer26@example.com/developer26-migration-app/5e82e088fb22aa660bd27048e36f6542/leap-api-product"
       ],
-      "plannedStatus": "BLOCKED",
+      "plannedStatus": "DEFERRED",
       "operation": "VERIFY",
       "desiredState": null,
       "lookup": {
@@ -11290,12 +11221,12 @@
       },
       "skipConditions": [],
       "failConditions": [],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "blockers": [],
       "warnings": [],
-      "manualReviewReasons": []
+      "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ]
     },
     {
       "actionId": "RESOLVE_PLAN:developer27@example.com/developer27-migration-app/7522a63ca5b0179ba4d0d959d39389e2/flight-aware-api-product",
@@ -11304,8 +11235,8 @@
       "dependencies": [
         "UPSERT_APPLICATION:developer27@example.com/developer27-migration-app"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": null,
       "lookup": {},
       "payload": {
@@ -11313,14 +11244,13 @@
       },
       "continuity": {},
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -11331,8 +11261,8 @@
         "UPSERT_APPLICATION:developer27@example.com/developer27-migration-app",
         "RESOLVE_PLAN:developer27@example.com/developer27-migration-app/7522a63ca5b0179ba4d0d959d39389e2/flight-aware-api-product"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": "ACCEPTED",
       "lookup": {
         "applicationSourceId": "developer27@example.com/developer27-migration-app",
@@ -11351,16 +11281,13 @@
         "sourceCredentialId": "developer27@example.com/developer27-migration-app/7522a63ca5b0179ba4d0d959d39389e2"
       },
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -11370,7 +11297,7 @@
       "dependencies": [
         "UPSERT_SUBSCRIPTION:developer27@example.com/developer27-migration-app/7522a63ca5b0179ba4d0d959d39389e2/flight-aware-api-product"
       ],
-      "plannedStatus": "BLOCKED",
+      "plannedStatus": "DEFERRED",
       "operation": "VERIFY",
       "desiredState": null,
       "lookup": {
@@ -11391,12 +11318,12 @@
       },
       "skipConditions": [],
       "failConditions": [],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "blockers": [],
       "warnings": [],
-      "manualReviewReasons": []
+      "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ]
     },
     {
       "actionId": "RESOLVE_PLAN:developer28@example.com/developer28-migration-app/c5cb96f0b23189353e0c962fd2ce4f47/collibra-api-product",
@@ -11405,8 +11332,8 @@
       "dependencies": [
         "UPSERT_APPLICATION:developer28@example.com/developer28-migration-app"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": null,
       "lookup": {},
       "payload": {
@@ -11414,14 +11341,13 @@
       },
       "continuity": {},
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -11432,8 +11358,8 @@
         "UPSERT_APPLICATION:developer28@example.com/developer28-migration-app",
         "RESOLVE_PLAN:developer28@example.com/developer28-migration-app/c5cb96f0b23189353e0c962fd2ce4f47/collibra-api-product"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": "ACCEPTED",
       "lookup": {
         "applicationSourceId": "developer28@example.com/developer28-migration-app",
@@ -11452,16 +11378,13 @@
         "sourceCredentialId": "developer28@example.com/developer28-migration-app/c5cb96f0b23189353e0c962fd2ce4f47"
       },
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -11471,7 +11394,7 @@
       "dependencies": [
         "UPSERT_SUBSCRIPTION:developer28@example.com/developer28-migration-app/c5cb96f0b23189353e0c962fd2ce4f47/collibra-api-product"
       ],
-      "plannedStatus": "BLOCKED",
+      "plannedStatus": "DEFERRED",
       "operation": "VERIFY",
       "desiredState": null,
       "lookup": {
@@ -11492,12 +11415,12 @@
       },
       "skipConditions": [],
       "failConditions": [],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "blockers": [],
       "warnings": [],
-      "manualReviewReasons": []
+      "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ]
     },
     {
       "actionId": "RESOLVE_PLAN:developer29@example.com/developer29-migration-app/d21769d9019730a51291e133c585a86a/llm-gateway-product",
@@ -11506,8 +11429,8 @@
       "dependencies": [
         "UPSERT_APPLICATION:developer29@example.com/developer29-migration-app"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": null,
       "lookup": {},
       "payload": {
@@ -11515,14 +11438,13 @@
       },
       "continuity": {},
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -11533,8 +11455,8 @@
         "UPSERT_APPLICATION:developer29@example.com/developer29-migration-app",
         "RESOLVE_PLAN:developer29@example.com/developer29-migration-app/d21769d9019730a51291e133c585a86a/llm-gateway-product"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": "ACCEPTED",
       "lookup": {
         "applicationSourceId": "developer29@example.com/developer29-migration-app",
@@ -11553,16 +11475,13 @@
         "sourceCredentialId": "developer29@example.com/developer29-migration-app/d21769d9019730a51291e133c585a86a"
       },
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -11572,7 +11491,7 @@
       "dependencies": [
         "UPSERT_SUBSCRIPTION:developer29@example.com/developer29-migration-app/d21769d9019730a51291e133c585a86a/llm-gateway-product"
       ],
-      "plannedStatus": "BLOCKED",
+      "plannedStatus": "DEFERRED",
       "operation": "VERIFY",
       "desiredState": null,
       "lookup": {
@@ -11593,12 +11512,12 @@
       },
       "skipConditions": [],
       "failConditions": [],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "blockers": [],
       "warnings": [],
-      "manualReviewReasons": []
+      "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ]
     },
     {
       "actionId": "RESOLVE_PLAN:developer2@example.com/developer2-migration-app/f197efcc276b449817e5c1bd4f03e76c/maintenance-repair-api-product",
@@ -11607,8 +11526,8 @@
       "dependencies": [
         "UPSERT_APPLICATION:developer2@example.com/developer2-migration-app"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": null,
       "lookup": {},
       "payload": {
@@ -11616,14 +11535,13 @@
       },
       "continuity": {},
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -11634,8 +11552,8 @@
         "UPSERT_APPLICATION:developer2@example.com/developer2-migration-app",
         "RESOLVE_PLAN:developer2@example.com/developer2-migration-app/f197efcc276b449817e5c1bd4f03e76c/maintenance-repair-api-product"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": "ACCEPTED",
       "lookup": {
         "applicationSourceId": "developer2@example.com/developer2-migration-app",
@@ -11654,16 +11572,13 @@
         "sourceCredentialId": "developer2@example.com/developer2-migration-app/f197efcc276b449817e5c1bd4f03e76c"
       },
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -11673,7 +11588,7 @@
       "dependencies": [
         "UPSERT_SUBSCRIPTION:developer2@example.com/developer2-migration-app/f197efcc276b449817e5c1bd4f03e76c/maintenance-repair-api-product"
       ],
-      "plannedStatus": "BLOCKED",
+      "plannedStatus": "DEFERRED",
       "operation": "VERIFY",
       "desiredState": null,
       "lookup": {
@@ -11694,12 +11609,12 @@
       },
       "skipConditions": [],
       "failConditions": [],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "blockers": [],
       "warnings": [],
-      "manualReviewReasons": []
+      "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ]
     },
     {
       "actionId": "RESOLVE_PLAN:developer30@example.com/developer30-migration-app/730039803393ea26456a8f2e8c2b3187/maintenance-repair-api-product",
@@ -11708,8 +11623,8 @@
       "dependencies": [
         "UPSERT_APPLICATION:developer30@example.com/developer30-migration-app"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": null,
       "lookup": {},
       "payload": {
@@ -11717,14 +11632,13 @@
       },
       "continuity": {},
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -11735,8 +11649,8 @@
         "UPSERT_APPLICATION:developer30@example.com/developer30-migration-app",
         "RESOLVE_PLAN:developer30@example.com/developer30-migration-app/730039803393ea26456a8f2e8c2b3187/maintenance-repair-api-product"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": "ACCEPTED",
       "lookup": {
         "applicationSourceId": "developer30@example.com/developer30-migration-app",
@@ -11755,16 +11669,13 @@
         "sourceCredentialId": "developer30@example.com/developer30-migration-app/730039803393ea26456a8f2e8c2b3187"
       },
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -11774,7 +11685,7 @@
       "dependencies": [
         "UPSERT_SUBSCRIPTION:developer30@example.com/developer30-migration-app/730039803393ea26456a8f2e8c2b3187/maintenance-repair-api-product"
       ],
-      "plannedStatus": "BLOCKED",
+      "plannedStatus": "DEFERRED",
       "operation": "VERIFY",
       "desiredState": null,
       "lookup": {
@@ -11795,12 +11706,12 @@
       },
       "skipConditions": [],
       "failConditions": [],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "blockers": [],
       "warnings": [],
-      "manualReviewReasons": []
+      "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ]
     },
     {
       "actionId": "RESOLVE_PLAN:developer3@example.com/developer3-migration-app/1ad147bb10c1f03e2e629f1ed3fa1201/llm-gateway-product",
@@ -11809,8 +11720,8 @@
       "dependencies": [
         "UPSERT_APPLICATION:developer3@example.com/developer3-migration-app"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": null,
       "lookup": {},
       "payload": {
@@ -11818,14 +11729,13 @@
       },
       "continuity": {},
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -11836,8 +11746,8 @@
         "UPSERT_APPLICATION:developer3@example.com/developer3-migration-app",
         "RESOLVE_PLAN:developer3@example.com/developer3-migration-app/1ad147bb10c1f03e2e629f1ed3fa1201/llm-gateway-product"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": "ACCEPTED",
       "lookup": {
         "applicationSourceId": "developer3@example.com/developer3-migration-app",
@@ -11856,16 +11766,13 @@
         "sourceCredentialId": "developer3@example.com/developer3-migration-app/1ad147bb10c1f03e2e629f1ed3fa1201"
       },
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -11875,7 +11782,7 @@
       "dependencies": [
         "UPSERT_SUBSCRIPTION:developer3@example.com/developer3-migration-app/1ad147bb10c1f03e2e629f1ed3fa1201/llm-gateway-product"
       ],
-      "plannedStatus": "BLOCKED",
+      "plannedStatus": "DEFERRED",
       "operation": "VERIFY",
       "desiredState": null,
       "lookup": {
@@ -11896,12 +11803,12 @@
       },
       "skipConditions": [],
       "failConditions": [],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "blockers": [],
       "warnings": [],
-      "manualReviewReasons": []
+      "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ]
     },
     {
       "actionId": "RESOLVE_PLAN:developer4@example.com/developer4-migration-app/3b1187dc12e8fbd659449c00de5e4eb8/collibra-api-product",
@@ -11910,8 +11817,8 @@
       "dependencies": [
         "UPSERT_APPLICATION:developer4@example.com/developer4-migration-app"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": null,
       "lookup": {},
       "payload": {
@@ -11919,14 +11826,13 @@
       },
       "continuity": {},
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -11937,8 +11843,8 @@
         "UPSERT_APPLICATION:developer4@example.com/developer4-migration-app",
         "RESOLVE_PLAN:developer4@example.com/developer4-migration-app/3b1187dc12e8fbd659449c00de5e4eb8/collibra-api-product"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": "ACCEPTED",
       "lookup": {
         "applicationSourceId": "developer4@example.com/developer4-migration-app",
@@ -11957,16 +11863,13 @@
         "sourceCredentialId": "developer4@example.com/developer4-migration-app/3b1187dc12e8fbd659449c00de5e4eb8"
       },
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -11976,7 +11879,7 @@
       "dependencies": [
         "UPSERT_SUBSCRIPTION:developer4@example.com/developer4-migration-app/3b1187dc12e8fbd659449c00de5e4eb8/collibra-api-product"
       ],
-      "plannedStatus": "BLOCKED",
+      "plannedStatus": "DEFERRED",
       "operation": "VERIFY",
       "desiredState": null,
       "lookup": {
@@ -11997,12 +11900,12 @@
       },
       "skipConditions": [],
       "failConditions": [],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "blockers": [],
       "warnings": [],
-      "manualReviewReasons": []
+      "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ]
     },
     {
       "actionId": "RESOLVE_PLAN:developer5@example.com/developer5-migration-app/283f2ec4297978c65b2d84f767b6fc0f/collibra-api-product",
@@ -12011,8 +11914,8 @@
       "dependencies": [
         "UPSERT_APPLICATION:developer5@example.com/developer5-migration-app"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": null,
       "lookup": {},
       "payload": {
@@ -12020,14 +11923,13 @@
       },
       "continuity": {},
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -12038,8 +11940,8 @@
         "UPSERT_APPLICATION:developer5@example.com/developer5-migration-app",
         "RESOLVE_PLAN:developer5@example.com/developer5-migration-app/283f2ec4297978c65b2d84f767b6fc0f/collibra-api-product"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": "ACCEPTED",
       "lookup": {
         "applicationSourceId": "developer5@example.com/developer5-migration-app",
@@ -12058,16 +11960,13 @@
         "sourceCredentialId": "developer5@example.com/developer5-migration-app/283f2ec4297978c65b2d84f767b6fc0f"
       },
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -12077,7 +11976,7 @@
       "dependencies": [
         "UPSERT_SUBSCRIPTION:developer5@example.com/developer5-migration-app/283f2ec4297978c65b2d84f767b6fc0f/collibra-api-product"
       ],
-      "plannedStatus": "BLOCKED",
+      "plannedStatus": "DEFERRED",
       "operation": "VERIFY",
       "desiredState": null,
       "lookup": {
@@ -12098,12 +11997,12 @@
       },
       "skipConditions": [],
       "failConditions": [],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "blockers": [],
       "warnings": [],
-      "manualReviewReasons": []
+      "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ]
     },
     {
       "actionId": "RESOLVE_PLAN:developer6@example.com/developer6-migration-app/c595e164faa9ecad15db6afa3eece1f9/maintenance-repair-api-product",
@@ -12112,8 +12011,8 @@
       "dependencies": [
         "UPSERT_APPLICATION:developer6@example.com/developer6-migration-app"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": null,
       "lookup": {},
       "payload": {
@@ -12121,14 +12020,13 @@
       },
       "continuity": {},
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -12139,8 +12037,8 @@
         "UPSERT_APPLICATION:developer6@example.com/developer6-migration-app",
         "RESOLVE_PLAN:developer6@example.com/developer6-migration-app/c595e164faa9ecad15db6afa3eece1f9/maintenance-repair-api-product"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": "ACCEPTED",
       "lookup": {
         "applicationSourceId": "developer6@example.com/developer6-migration-app",
@@ -12159,16 +12057,13 @@
         "sourceCredentialId": "developer6@example.com/developer6-migration-app/c595e164faa9ecad15db6afa3eece1f9"
       },
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -12178,7 +12073,7 @@
       "dependencies": [
         "UPSERT_SUBSCRIPTION:developer6@example.com/developer6-migration-app/c595e164faa9ecad15db6afa3eece1f9/maintenance-repair-api-product"
       ],
-      "plannedStatus": "BLOCKED",
+      "plannedStatus": "DEFERRED",
       "operation": "VERIFY",
       "desiredState": null,
       "lookup": {
@@ -12199,12 +12094,12 @@
       },
       "skipConditions": [],
       "failConditions": [],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "blockers": [],
       "warnings": [],
-      "manualReviewReasons": []
+      "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ]
     },
     {
       "actionId": "RESOLVE_PLAN:developer7@example.com/developer7-migration-app/7985789cf0564856dab60c5da725a40b/collibra-api-product",
@@ -12213,8 +12108,8 @@
       "dependencies": [
         "UPSERT_APPLICATION:developer7@example.com/developer7-migration-app"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": null,
       "lookup": {},
       "payload": {
@@ -12222,14 +12117,13 @@
       },
       "continuity": {},
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -12240,8 +12134,8 @@
         "UPSERT_APPLICATION:developer7@example.com/developer7-migration-app",
         "RESOLVE_PLAN:developer7@example.com/developer7-migration-app/7985789cf0564856dab60c5da725a40b/collibra-api-product"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": "ACCEPTED",
       "lookup": {
         "applicationSourceId": "developer7@example.com/developer7-migration-app",
@@ -12260,16 +12154,13 @@
         "sourceCredentialId": "developer7@example.com/developer7-migration-app/7985789cf0564856dab60c5da725a40b"
       },
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -12279,7 +12170,7 @@
       "dependencies": [
         "UPSERT_SUBSCRIPTION:developer7@example.com/developer7-migration-app/7985789cf0564856dab60c5da725a40b/collibra-api-product"
       ],
-      "plannedStatus": "BLOCKED",
+      "plannedStatus": "DEFERRED",
       "operation": "VERIFY",
       "desiredState": null,
       "lookup": {
@@ -12300,12 +12191,12 @@
       },
       "skipConditions": [],
       "failConditions": [],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "blockers": [],
       "warnings": [],
-      "manualReviewReasons": []
+      "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ]
     },
     {
       "actionId": "RESOLVE_PLAN:developer8@example.com/developer8-migration-app/95ec6c4ff20c386645278dc9b5caecaa/flight-aware-api-product",
@@ -12314,8 +12205,8 @@
       "dependencies": [
         "UPSERT_APPLICATION:developer8@example.com/developer8-migration-app"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": null,
       "lookup": {},
       "payload": {
@@ -12323,14 +12214,13 @@
       },
       "continuity": {},
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -12341,8 +12231,8 @@
         "UPSERT_APPLICATION:developer8@example.com/developer8-migration-app",
         "RESOLVE_PLAN:developer8@example.com/developer8-migration-app/95ec6c4ff20c386645278dc9b5caecaa/flight-aware-api-product"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": "ACCEPTED",
       "lookup": {
         "applicationSourceId": "developer8@example.com/developer8-migration-app",
@@ -12361,16 +12251,13 @@
         "sourceCredentialId": "developer8@example.com/developer8-migration-app/95ec6c4ff20c386645278dc9b5caecaa"
       },
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -12380,7 +12267,7 @@
       "dependencies": [
         "UPSERT_SUBSCRIPTION:developer8@example.com/developer8-migration-app/95ec6c4ff20c386645278dc9b5caecaa/flight-aware-api-product"
       ],
-      "plannedStatus": "BLOCKED",
+      "plannedStatus": "DEFERRED",
       "operation": "VERIFY",
       "desiredState": null,
       "lookup": {
@@ -12401,12 +12288,12 @@
       },
       "skipConditions": [],
       "failConditions": [],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "blockers": [],
       "warnings": [],
-      "manualReviewReasons": []
+      "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ]
     },
     {
       "actionId": "RESOLVE_PLAN:developer9@example.com/developer9-migration-app/68582fe40cf6029f6451906d803d5066/maintenance-repair-api-product",
@@ -12415,8 +12302,8 @@
       "dependencies": [
         "UPSERT_APPLICATION:developer9@example.com/developer9-migration-app"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": null,
       "lookup": {},
       "payload": {
@@ -12424,14 +12311,13 @@
       },
       "continuity": {},
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -12442,8 +12328,8 @@
         "UPSERT_APPLICATION:developer9@example.com/developer9-migration-app",
         "RESOLVE_PLAN:developer9@example.com/developer9-migration-app/68582fe40cf6029f6451906d803d5066/maintenance-repair-api-product"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": "ACCEPTED",
       "lookup": {
         "applicationSourceId": "developer9@example.com/developer9-migration-app",
@@ -12462,16 +12348,13 @@
         "sourceCredentialId": "developer9@example.com/developer9-migration-app/68582fe40cf6029f6451906d803d5066"
       },
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -12481,7 +12364,7 @@
       "dependencies": [
         "UPSERT_SUBSCRIPTION:developer9@example.com/developer9-migration-app/68582fe40cf6029f6451906d803d5066/maintenance-repair-api-product"
       ],
-      "plannedStatus": "BLOCKED",
+      "plannedStatus": "DEFERRED",
       "operation": "VERIFY",
       "desiredState": null,
       "lookup": {
@@ -12502,12 +12385,12 @@
       },
       "skipConditions": [],
       "failConditions": [],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "blockers": [],
       "warnings": [],
-      "manualReviewReasons": []
+      "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ]
     },
     {
       "actionId": "RESOLVE_PLAN:developer@example.com/developer-migration-app/de5a62673f985295ec7b441c6b92fe20/leap-api-product",
@@ -12516,8 +12399,8 @@
       "dependencies": [
         "UPSERT_APPLICATION:developer@example.com/developer-migration-app"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": null,
       "lookup": {},
       "payload": {
@@ -12525,14 +12408,13 @@
       },
       "continuity": {},
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -12543,8 +12425,8 @@
         "UPSERT_APPLICATION:developer@example.com/developer-migration-app",
         "RESOLVE_PLAN:developer@example.com/developer-migration-app/de5a62673f985295ec7b441c6b92fe20/leap-api-product"
       ],
-      "plannedStatus": "BLOCKED",
-      "operation": "BLOCK",
+      "plannedStatus": "DEFERRED",
+      "operation": "DEFER",
       "desiredState": "ACCEPTED",
       "lookup": {
         "applicationSourceId": "developer@example.com/developer-migration-app",
@@ -12563,16 +12445,13 @@
         "sourceCredentialId": "developer@example.com/developer-migration-app/de5a62673f985295ec7b441c6b92fe20"
       },
       "skipConditions": [],
-      "failConditions": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "failConditions": [],
+      "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ],
       "targetHint": {}
     },
     {
@@ -12582,7 +12461,7 @@
       "dependencies": [
         "UPSERT_SUBSCRIPTION:developer@example.com/developer-migration-app/de5a62673f985295ec7b441c6b92fe20/leap-api-product"
       ],
-      "plannedStatus": "BLOCKED",
+      "plannedStatus": "DEFERRED",
       "operation": "VERIFY",
       "desiredState": null,
       "lookup": {
@@ -12603,12 +12482,12 @@
       },
       "skipConditions": [],
       "failConditions": [],
-      "blockers": [
-        "PLAN_MAPPING_MISSING",
-        "PLAN_MAPPING_MISSING"
-      ],
+      "blockers": [],
       "warnings": [],
-      "manualReviewReasons": []
+      "manualReviewReasons": [],
+      "deferReasons": [
+        "PLAN_MAPPING_MISSING"
+      ]
     }
   ]
 }
