@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-30T18:41:55.188Z",
+  "generatedAt": "2026-06-30T19:28:43.860Z",
   "kind": "DevelopersMigrationManifest",
   "source": {
     "irDir": "/Users/daniel.roder/Sites/apigee2gravitee/ir",
@@ -7192,7 +7192,13 @@
         },
         "customFields": [],
         "ownershipStrategy": "direct-member",
-        "apiKeyMode": "must-be-disabled"
+        "apiKeyMode": "must-be-disabled",
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
+        }
       },
       "continuity": {},
       "skipConditions": [],
@@ -7223,6 +7229,12 @@
         "expectedMetadata": {
           "DisplayName": "developer10-migration-app",
           "Notes": "Generated for migration import"
+        },
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
         }
       },
       "continuity": {},
@@ -7267,7 +7279,13 @@
         },
         "customFields": [],
         "ownershipStrategy": "direct-member",
-        "apiKeyMode": "must-be-disabled"
+        "apiKeyMode": "must-be-disabled",
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
+        }
       },
       "continuity": {},
       "skipConditions": [],
@@ -7298,6 +7316,12 @@
         "expectedMetadata": {
           "DisplayName": "developer11-migration-app",
           "Notes": "Generated for migration import"
+        },
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
         }
       },
       "continuity": {},
@@ -7342,7 +7366,13 @@
         },
         "customFields": [],
         "ownershipStrategy": "direct-member",
-        "apiKeyMode": "must-be-disabled"
+        "apiKeyMode": "must-be-disabled",
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
+        }
       },
       "continuity": {},
       "skipConditions": [],
@@ -7373,6 +7403,12 @@
         "expectedMetadata": {
           "DisplayName": "developer12-migration-app",
           "Notes": "Generated for migration import"
+        },
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
         }
       },
       "continuity": {},
@@ -7417,7 +7453,13 @@
         },
         "customFields": [],
         "ownershipStrategy": "direct-member",
-        "apiKeyMode": "must-be-disabled"
+        "apiKeyMode": "must-be-disabled",
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
+        }
       },
       "continuity": {},
       "skipConditions": [],
@@ -7448,6 +7490,12 @@
         "expectedMetadata": {
           "DisplayName": "developer13-migration-app",
           "Notes": "Generated for migration import"
+        },
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
         }
       },
       "continuity": {},
@@ -7492,7 +7540,13 @@
         },
         "customFields": [],
         "ownershipStrategy": "direct-member",
-        "apiKeyMode": "must-be-disabled"
+        "apiKeyMode": "must-be-disabled",
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
+        }
       },
       "continuity": {},
       "skipConditions": [],
@@ -7523,6 +7577,12 @@
         "expectedMetadata": {
           "DisplayName": "developer14-migration-app",
           "Notes": "Generated for migration import"
+        },
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
         }
       },
       "continuity": {},
@@ -7567,7 +7627,13 @@
         },
         "customFields": [],
         "ownershipStrategy": "direct-member",
-        "apiKeyMode": "must-be-disabled"
+        "apiKeyMode": "must-be-disabled",
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
+        }
       },
       "continuity": {},
       "skipConditions": [],
@@ -7598,6 +7664,12 @@
         "expectedMetadata": {
           "DisplayName": "developer15-migration-app",
           "Notes": "Generated for migration import"
+        },
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
         }
       },
       "continuity": {},
@@ -7642,7 +7714,13 @@
         },
         "customFields": [],
         "ownershipStrategy": "direct-member",
-        "apiKeyMode": "must-be-disabled"
+        "apiKeyMode": "must-be-disabled",
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
+        }
       },
       "continuity": {},
       "skipConditions": [],
@@ -7673,6 +7751,12 @@
         "expectedMetadata": {
           "DisplayName": "developer16-migration-app",
           "Notes": "Generated for migration import"
+        },
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
         }
       },
       "continuity": {},
@@ -7717,7 +7801,13 @@
         },
         "customFields": [],
         "ownershipStrategy": "direct-member",
-        "apiKeyMode": "must-be-disabled"
+        "apiKeyMode": "must-be-disabled",
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
+        }
       },
       "continuity": {},
       "skipConditions": [],
@@ -7748,6 +7838,12 @@
         "expectedMetadata": {
           "DisplayName": "developer17-migration-app",
           "Notes": "Generated for migration import"
+        },
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
         }
       },
       "continuity": {},
@@ -7792,7 +7888,13 @@
         },
         "customFields": [],
         "ownershipStrategy": "direct-member",
-        "apiKeyMode": "must-be-disabled"
+        "apiKeyMode": "must-be-disabled",
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
+        }
       },
       "continuity": {},
       "skipConditions": [],
@@ -7823,6 +7925,12 @@
         "expectedMetadata": {
           "DisplayName": "developer18-migration-app",
           "Notes": "Generated for migration import"
+        },
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
         }
       },
       "continuity": {},
@@ -7867,7 +7975,13 @@
         },
         "customFields": [],
         "ownershipStrategy": "direct-member",
-        "apiKeyMode": "must-be-disabled"
+        "apiKeyMode": "must-be-disabled",
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
+        }
       },
       "continuity": {},
       "skipConditions": [],
@@ -7898,6 +8012,12 @@
         "expectedMetadata": {
           "DisplayName": "developer19-migration-app",
           "Notes": "Generated for migration import"
+        },
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
         }
       },
       "continuity": {},
@@ -7942,7 +8062,13 @@
         },
         "customFields": [],
         "ownershipStrategy": "direct-member",
-        "apiKeyMode": "must-be-disabled"
+        "apiKeyMode": "must-be-disabled",
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
+        }
       },
       "continuity": {},
       "skipConditions": [],
@@ -7973,6 +8099,12 @@
         "expectedMetadata": {
           "DisplayName": "developer1-migration-app",
           "Notes": "Generated for migration import"
+        },
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
         }
       },
       "continuity": {},
@@ -8017,7 +8149,13 @@
         },
         "customFields": [],
         "ownershipStrategy": "direct-member",
-        "apiKeyMode": "must-be-disabled"
+        "apiKeyMode": "must-be-disabled",
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
+        }
       },
       "continuity": {},
       "skipConditions": [],
@@ -8048,6 +8186,12 @@
         "expectedMetadata": {
           "DisplayName": "developer20-migration-app",
           "Notes": "Generated for migration import"
+        },
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
         }
       },
       "continuity": {},
@@ -8092,7 +8236,13 @@
         },
         "customFields": [],
         "ownershipStrategy": "direct-member",
-        "apiKeyMode": "must-be-disabled"
+        "apiKeyMode": "must-be-disabled",
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
+        }
       },
       "continuity": {},
       "skipConditions": [],
@@ -8123,6 +8273,12 @@
         "expectedMetadata": {
           "DisplayName": "developer21-migration-app",
           "Notes": "Generated for migration import"
+        },
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
         }
       },
       "continuity": {},
@@ -8167,7 +8323,13 @@
         },
         "customFields": [],
         "ownershipStrategy": "direct-member",
-        "apiKeyMode": "must-be-disabled"
+        "apiKeyMode": "must-be-disabled",
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
+        }
       },
       "continuity": {},
       "skipConditions": [],
@@ -8198,6 +8360,12 @@
         "expectedMetadata": {
           "DisplayName": "developer22-migration-app",
           "Notes": "Generated for migration import"
+        },
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
         }
       },
       "continuity": {},
@@ -8242,7 +8410,13 @@
         },
         "customFields": [],
         "ownershipStrategy": "direct-member",
-        "apiKeyMode": "must-be-disabled"
+        "apiKeyMode": "must-be-disabled",
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
+        }
       },
       "continuity": {},
       "skipConditions": [],
@@ -8273,6 +8447,12 @@
         "expectedMetadata": {
           "DisplayName": "developer23-migration-app",
           "Notes": "Generated for migration import"
+        },
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
         }
       },
       "continuity": {},
@@ -8317,7 +8497,13 @@
         },
         "customFields": [],
         "ownershipStrategy": "direct-member",
-        "apiKeyMode": "must-be-disabled"
+        "apiKeyMode": "must-be-disabled",
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
+        }
       },
       "continuity": {},
       "skipConditions": [],
@@ -8348,6 +8534,12 @@
         "expectedMetadata": {
           "DisplayName": "developer24-migration-app",
           "Notes": "Generated for migration import"
+        },
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
         }
       },
       "continuity": {},
@@ -8392,7 +8584,13 @@
         },
         "customFields": [],
         "ownershipStrategy": "direct-member",
-        "apiKeyMode": "must-be-disabled"
+        "apiKeyMode": "must-be-disabled",
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
+        }
       },
       "continuity": {},
       "skipConditions": [],
@@ -8423,6 +8621,12 @@
         "expectedMetadata": {
           "DisplayName": "developer25-migration-app",
           "Notes": "Generated for migration import"
+        },
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
         }
       },
       "continuity": {},
@@ -8467,7 +8671,13 @@
         },
         "customFields": [],
         "ownershipStrategy": "direct-member",
-        "apiKeyMode": "must-be-disabled"
+        "apiKeyMode": "must-be-disabled",
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
+        }
       },
       "continuity": {},
       "skipConditions": [],
@@ -8498,6 +8708,12 @@
         "expectedMetadata": {
           "DisplayName": "developer26-migration-app",
           "Notes": "Generated for migration import"
+        },
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
         }
       },
       "continuity": {},
@@ -8542,7 +8758,13 @@
         },
         "customFields": [],
         "ownershipStrategy": "direct-member",
-        "apiKeyMode": "must-be-disabled"
+        "apiKeyMode": "must-be-disabled",
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
+        }
       },
       "continuity": {},
       "skipConditions": [],
@@ -8573,6 +8795,12 @@
         "expectedMetadata": {
           "DisplayName": "developer27-migration-app",
           "Notes": "Generated for migration import"
+        },
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
         }
       },
       "continuity": {},
@@ -8617,7 +8845,13 @@
         },
         "customFields": [],
         "ownershipStrategy": "direct-member",
-        "apiKeyMode": "must-be-disabled"
+        "apiKeyMode": "must-be-disabled",
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
+        }
       },
       "continuity": {},
       "skipConditions": [],
@@ -8648,6 +8882,12 @@
         "expectedMetadata": {
           "DisplayName": "developer28-migration-app",
           "Notes": "Generated for migration import"
+        },
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
         }
       },
       "continuity": {},
@@ -8692,7 +8932,13 @@
         },
         "customFields": [],
         "ownershipStrategy": "direct-member",
-        "apiKeyMode": "must-be-disabled"
+        "apiKeyMode": "must-be-disabled",
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
+        }
       },
       "continuity": {},
       "skipConditions": [],
@@ -8723,6 +8969,12 @@
         "expectedMetadata": {
           "DisplayName": "developer29-migration-app",
           "Notes": "Generated for migration import"
+        },
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
         }
       },
       "continuity": {},
@@ -8767,7 +9019,13 @@
         },
         "customFields": [],
         "ownershipStrategy": "direct-member",
-        "apiKeyMode": "must-be-disabled"
+        "apiKeyMode": "must-be-disabled",
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
+        }
       },
       "continuity": {},
       "skipConditions": [],
@@ -8798,6 +9056,12 @@
         "expectedMetadata": {
           "DisplayName": "developer2-migration-app",
           "Notes": "Generated for migration import"
+        },
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
         }
       },
       "continuity": {},
@@ -8842,7 +9106,13 @@
         },
         "customFields": [],
         "ownershipStrategy": "direct-member",
-        "apiKeyMode": "must-be-disabled"
+        "apiKeyMode": "must-be-disabled",
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
+        }
       },
       "continuity": {},
       "skipConditions": [],
@@ -8873,6 +9143,12 @@
         "expectedMetadata": {
           "DisplayName": "developer30-migration-app",
           "Notes": "Generated for migration import"
+        },
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
         }
       },
       "continuity": {},
@@ -8917,7 +9193,13 @@
         },
         "customFields": [],
         "ownershipStrategy": "direct-member",
-        "apiKeyMode": "must-be-disabled"
+        "apiKeyMode": "must-be-disabled",
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
+        }
       },
       "continuity": {},
       "skipConditions": [],
@@ -8948,6 +9230,12 @@
         "expectedMetadata": {
           "DisplayName": "developer3-migration-app",
           "Notes": "Generated for migration import"
+        },
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
         }
       },
       "continuity": {},
@@ -8992,7 +9280,13 @@
         },
         "customFields": [],
         "ownershipStrategy": "direct-member",
-        "apiKeyMode": "must-be-disabled"
+        "apiKeyMode": "must-be-disabled",
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
+        }
       },
       "continuity": {},
       "skipConditions": [],
@@ -9023,6 +9317,12 @@
         "expectedMetadata": {
           "DisplayName": "developer4-migration-app",
           "Notes": "Generated for migration import"
+        },
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
         }
       },
       "continuity": {},
@@ -9067,7 +9367,13 @@
         },
         "customFields": [],
         "ownershipStrategy": "direct-member",
-        "apiKeyMode": "must-be-disabled"
+        "apiKeyMode": "must-be-disabled",
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
+        }
       },
       "continuity": {},
       "skipConditions": [],
@@ -9098,6 +9404,12 @@
         "expectedMetadata": {
           "DisplayName": "developer5-migration-app",
           "Notes": "Generated for migration import"
+        },
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
         }
       },
       "continuity": {},
@@ -9142,7 +9454,13 @@
         },
         "customFields": [],
         "ownershipStrategy": "direct-member",
-        "apiKeyMode": "must-be-disabled"
+        "apiKeyMode": "must-be-disabled",
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
+        }
       },
       "continuity": {},
       "skipConditions": [],
@@ -9173,6 +9491,12 @@
         "expectedMetadata": {
           "DisplayName": "developer6-migration-app",
           "Notes": "Generated for migration import"
+        },
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
         }
       },
       "continuity": {},
@@ -9217,7 +9541,13 @@
         },
         "customFields": [],
         "ownershipStrategy": "direct-member",
-        "apiKeyMode": "must-be-disabled"
+        "apiKeyMode": "must-be-disabled",
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
+        }
       },
       "continuity": {},
       "skipConditions": [],
@@ -9248,6 +9578,12 @@
         "expectedMetadata": {
           "DisplayName": "developer7-migration-app",
           "Notes": "Generated for migration import"
+        },
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
         }
       },
       "continuity": {},
@@ -9292,7 +9628,13 @@
         },
         "customFields": [],
         "ownershipStrategy": "direct-member",
-        "apiKeyMode": "must-be-disabled"
+        "apiKeyMode": "must-be-disabled",
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
+        }
       },
       "continuity": {},
       "skipConditions": [],
@@ -9323,6 +9665,12 @@
         "expectedMetadata": {
           "DisplayName": "developer8-migration-app",
           "Notes": "Generated for migration import"
+        },
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
         }
       },
       "continuity": {},
@@ -9367,7 +9715,13 @@
         },
         "customFields": [],
         "ownershipStrategy": "direct-member",
-        "apiKeyMode": "must-be-disabled"
+        "apiKeyMode": "must-be-disabled",
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
+        }
       },
       "continuity": {},
       "skipConditions": [],
@@ -9398,6 +9752,12 @@
         "expectedMetadata": {
           "DisplayName": "developer9-migration-app",
           "Notes": "Generated for migration import"
+        },
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
         }
       },
       "continuity": {},
@@ -9442,7 +9802,13 @@
         },
         "customFields": [],
         "ownershipStrategy": "direct-member",
-        "apiKeyMode": "must-be-disabled"
+        "apiKeyMode": "must-be-disabled",
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
+        }
       },
       "continuity": {},
       "skipConditions": [],
@@ -9473,6 +9839,12 @@
         "expectedMetadata": {
           "DisplayName": "developer-migration-app",
           "Notes": "Generated for migration import"
+        },
+        "expectedNotifications": {
+          "subscriptionAccepted": true,
+          "hooks": [
+            "SUBSCRIPTION_ACCEPTED"
+          ]
         }
       },
       "continuity": {},
