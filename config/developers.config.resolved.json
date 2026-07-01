@@ -111,5 +111,8 @@
     "environment": [
       "57048d84-8933-4d0c-848d-848933ed0c41"
     ]
+  },
+  "applicationNotifications": {
+    "subscriptionAccepted": true
   }
 }

@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-06-30T19:45:51.035Z",
+  "generatedAt": "2026-07-01T15:54:07.711Z",
   "kind": "DevelopersMigrationManifest",
   "source": {
     "irDir": "/Users/daniel.roder/Sites/apigee2gravitee/ir",
-    "manifestExtractedAt": "2026-06-25T19:38:59.174972Z"
+    "manifestExtractedAt": "2026-07-01T15:43:50.600853Z"
   },
   "policies": {
     "inactiveDeveloper": "import-and-revoke",
@@ -46,19 +46,17 @@
     "operatorActions": {
       "byKind": {
         "UPSERT_USER": {
-          "REUSE": 20,
-          "CREATE": 11
+          "CREATE": 31
         },
         "UPSERT_APPLICATION": {
-          "REUSE": 31
+          "CREATE": 31
         },
         "UPSERT_SUBSCRIPTION": {
           "DEFER": 31
         }
       },
       "byOperation": {
-        "REUSE": 51,
-        "CREATE": 11,
+        "CREATE": 62,
         "DEFER": 31
       },
       "blockedReasons": {},
@@ -792,7 +790,7 @@
         "developerEmail": "developer10@example.com",
         "developerStatus": "active",
         "appName": "developer10-migration-app",
-        "appId": "",
+        "appId": "98b36eea-239a-4164-a76a-a920eb95628e",
         "status": "approved",
         "callbackUrl": "",
         "attributes": [
@@ -803,11 +801,31 @@
           {
             "name": "Notes",
             "value": "Generated for migration import"
+          },
+          {
+            "name": "dod_designation",
+            "value": "Contractor"
+          },
+          {
+            "name": "dod_organization",
+            "value": "CDAO"
+          },
+          {
+            "name": "dod_service",
+            "value": "DoW"
+          },
+          {
+            "name": "dod_sub_org",
+            "value": "Advana"
           }
         ],
         "metadata": {
           "DisplayName": "developer10-migration-app",
-          "Notes": "Generated for migration import"
+          "Notes": "Generated for migration import",
+          "dod_designation": "Contractor",
+          "dod_organization": "CDAO",
+          "dod_service": "DoW",
+          "dod_sub_org": "Advana"
         },
         "customFields": [],
         "credentialIds": [
@@ -830,7 +848,7 @@
         "developerEmail": "developer11@example.com",
         "developerStatus": "active",
         "appName": "developer11-migration-app",
-        "appId": "",
+        "appId": "b534b1dc-a9fd-4410-bb9e-153e4c0571a5",
         "status": "approved",
         "callbackUrl": "",
         "attributes": [
@@ -868,7 +886,7 @@
         "developerEmail": "developer12@example.com",
         "developerStatus": "active",
         "appName": "developer12-migration-app",
-        "appId": "",
+        "appId": "27eb10a9-9cf8-41b4-baee-ae8395ff3b2e",
         "status": "approved",
         "callbackUrl": "",
         "attributes": [
@@ -906,7 +924,7 @@
         "developerEmail": "developer13@example.com",
         "developerStatus": "active",
         "appName": "developer13-migration-app",
-        "appId": "",
+        "appId": "2bf49a2f-7ca1-419a-90ed-e3119b37494f",
         "status": "approved",
         "callbackUrl": "",
         "attributes": [
@@ -944,7 +962,7 @@
         "developerEmail": "developer14@example.com",
         "developerStatus": "active",
         "appName": "developer14-migration-app",
-        "appId": "",
+        "appId": "4229c544-ba01-41d1-bb05-44ceb6ded552",
         "status": "approved",
         "callbackUrl": "",
         "attributes": [
@@ -982,7 +1000,7 @@
         "developerEmail": "developer15@example.com",
         "developerStatus": "active",
         "appName": "developer15-migration-app",
-        "appId": "",
+        "appId": "0b79dc64-f45e-448c-b8e0-6bbae474f374",
         "status": "approved",
         "callbackUrl": "",
         "attributes": [
@@ -1020,7 +1038,7 @@
         "developerEmail": "developer16@example.com",
         "developerStatus": "active",
         "appName": "developer16-migration-app",
-        "appId": "",
+        "appId": "af9bd216-deb9-4bd2-8f27-a361e8e077c1",
         "status": "approved",
         "callbackUrl": "",
         "attributes": [
@@ -1058,7 +1076,7 @@
         "developerEmail": "developer17@example.com",
         "developerStatus": "active",
         "appName": "developer17-migration-app",
-        "appId": "",
+        "appId": "aef0dee1-f7c6-41f8-8116-64d23007f6ec",
         "status": "approved",
         "callbackUrl": "",
         "attributes": [
@@ -1096,7 +1114,7 @@
         "developerEmail": "developer18@example.com",
         "developerStatus": "active",
         "appName": "developer18-migration-app",
-        "appId": "",
+        "appId": "4f08c194-4ad9-4b36-92c3-ffaed135f283",
         "status": "approved",
         "callbackUrl": "",
         "attributes": [
@@ -1134,7 +1152,7 @@
         "developerEmail": "developer19@example.com",
         "developerStatus": "active",
         "appName": "developer19-migration-app",
-        "appId": "",
+        "appId": "a53be1fd-258c-404d-a412-1c5a3bdb89d8",
         "status": "approved",
         "callbackUrl": "",
         "attributes": [
@@ -1172,7 +1190,7 @@
         "developerEmail": "developer1@example.com",
         "developerStatus": "active",
         "appName": "developer1-migration-app",
-        "appId": "",
+        "appId": "1fa27083-85e2-4004-a7be-4aeb5e91b95f",
         "status": "approved",
         "callbackUrl": "",
         "attributes": [
@@ -1183,11 +1201,31 @@
           {
             "name": "Notes",
             "value": "Generated for migration import"
+          },
+          {
+            "name": "dod_designation",
+            "value": "Contractor"
+          },
+          {
+            "name": "dod_organization",
+            "value": "TRANSCOM"
+          },
+          {
+            "name": "dod_service",
+            "value": "Navy"
+          },
+          {
+            "name": "dod_sub_org",
+            "value": "sub org name 2"
           }
         ],
         "metadata": {
           "DisplayName": "developer1-migration-app",
-          "Notes": "Generated for migration import"
+          "Notes": "Generated for migration import",
+          "dod_designation": "Contractor",
+          "dod_organization": "TRANSCOM",
+          "dod_service": "Navy",
+          "dod_sub_org": "sub org name 2"
         },
         "customFields": [],
         "credentialIds": [
@@ -1210,7 +1248,7 @@
         "developerEmail": "developer20@example.com",
         "developerStatus": "active",
         "appName": "developer20-migration-app",
-        "appId": "",
+        "appId": "0421230f-347f-4a44-9372-60fa2d3a4730",
         "status": "approved",
         "callbackUrl": "",
         "attributes": [
@@ -1248,7 +1286,7 @@
         "developerEmail": "developer21@example.com",
         "developerStatus": "active",
         "appName": "developer21-migration-app",
-        "appId": "",
+        "appId": "f5014d03-4a09-4491-8d97-b9f3a7294ab4",
         "status": "approved",
         "callbackUrl": "",
         "attributes": [
@@ -1286,7 +1324,7 @@
         "developerEmail": "developer22@example.com",
         "developerStatus": "active",
         "appName": "developer22-migration-app",
-        "appId": "",
+        "appId": "c13ef0b1-0a49-4859-8cdd-2059786f3b75",
         "status": "approved",
         "callbackUrl": "",
         "attributes": [
@@ -1324,7 +1362,7 @@
         "developerEmail": "developer23@example.com",
         "developerStatus": "active",
         "appName": "developer23-migration-app",
-        "appId": "",
+        "appId": "4c68870e-8cf2-428c-9e1c-6dce701ed1e7",
         "status": "approved",
         "callbackUrl": "",
         "attributes": [
@@ -1362,7 +1400,7 @@
         "developerEmail": "developer24@example.com",
         "developerStatus": "active",
         "appName": "developer24-migration-app",
-        "appId": "",
+        "appId": "91ac5c59-84c4-440c-afba-ffbe5399171e",
         "status": "approved",
         "callbackUrl": "",
         "attributes": [
@@ -1400,7 +1438,7 @@
         "developerEmail": "developer25@example.com",
         "developerStatus": "active",
         "appName": "developer25-migration-app",
-        "appId": "",
+        "appId": "f5eb30e7-0f1d-4e1f-a791-283b84ac1a5b",
         "status": "approved",
         "callbackUrl": "",
         "attributes": [
@@ -1438,7 +1476,7 @@
         "developerEmail": "developer26@example.com",
         "developerStatus": "active",
         "appName": "developer26-migration-app",
-        "appId": "",
+        "appId": "8c0edda1-d31b-480a-9cfa-d347124b0510",
         "status": "approved",
         "callbackUrl": "",
         "attributes": [
@@ -1476,7 +1514,7 @@
         "developerEmail": "developer27@example.com",
         "developerStatus": "active",
         "appName": "developer27-migration-app",
-        "appId": "",
+        "appId": "a8a144a4-5246-41d8-b3bb-90eed9514995",
         "status": "approved",
         "callbackUrl": "",
         "attributes": [
@@ -1514,7 +1552,7 @@
         "developerEmail": "developer28@example.com",
         "developerStatus": "active",
         "appName": "developer28-migration-app",
-        "appId": "",
+        "appId": "e5b19ab7-fcca-4ab6-8be7-7c1b4ddfcd4f",
         "status": "approved",
         "callbackUrl": "",
         "attributes": [
@@ -1552,7 +1590,7 @@
         "developerEmail": "developer29@example.com",
         "developerStatus": "active",
         "appName": "developer29-migration-app",
-        "appId": "",
+        "appId": "f5855dcc-f65e-4c6c-9931-c9ec3c506ed3",
         "status": "approved",
         "callbackUrl": "",
         "attributes": [
@@ -1590,7 +1628,7 @@
         "developerEmail": "developer2@example.com",
         "developerStatus": "active",
         "appName": "developer2-migration-app",
-        "appId": "",
+        "appId": "a7cd7662-b0e0-4054-a4c9-b6bdd6b46232",
         "status": "approved",
         "callbackUrl": "",
         "attributes": [
@@ -1601,11 +1639,31 @@
           {
             "name": "Notes",
             "value": "Generated for migration import"
+          },
+          {
+            "name": "dod_designation",
+            "value": "Contractor"
+          },
+          {
+            "name": "dod_organization",
+            "value": "CDAO"
+          },
+          {
+            "name": "dod_service",
+            "value": "DoD"
+          },
+          {
+            "name": "dod_sub_org",
+            "value": "Advana"
           }
         ],
         "metadata": {
           "DisplayName": "developer2-migration-app",
-          "Notes": "Generated for migration import"
+          "Notes": "Generated for migration import",
+          "dod_designation": "Contractor",
+          "dod_organization": "CDAO",
+          "dod_service": "DoD",
+          "dod_sub_org": "Advana"
         },
         "customFields": [],
         "credentialIds": [
@@ -1628,7 +1686,7 @@
         "developerEmail": "developer30@example.com",
         "developerStatus": "active",
         "appName": "developer30-migration-app",
-        "appId": "",
+        "appId": "baa87c68-134c-429e-8459-fa18100b95e1",
         "status": "approved",
         "callbackUrl": "",
         "attributes": [
@@ -1666,7 +1724,7 @@
         "developerEmail": "developer3@example.com",
         "developerStatus": "active",
         "appName": "developer3-migration-app",
-        "appId": "",
+        "appId": "80760931-d4fc-42e0-88a1-26d00096c409",
         "status": "approved",
         "callbackUrl": "",
         "attributes": [
@@ -1677,11 +1735,31 @@
           {
             "name": "Notes",
             "value": "Generated for migration import"
+          },
+          {
+            "name": "dod_designation",
+            "value": "Contractor"
+          },
+          {
+            "name": "dod_organization",
+            "value": "CDAO"
+          },
+          {
+            "name": "dod_service",
+            "value": "DoW"
+          },
+          {
+            "name": "dod_sub_org",
+            "value": "WDP"
           }
         ],
         "metadata": {
           "DisplayName": "developer3-migration-app",
-          "Notes": "Generated for migration import"
+          "Notes": "Generated for migration import",
+          "dod_designation": "Contractor",
+          "dod_organization": "CDAO",
+          "dod_service": "DoW",
+          "dod_sub_org": "WDP"
         },
         "customFields": [],
         "credentialIds": [
@@ -1704,7 +1782,7 @@
         "developerEmail": "developer4@example.com",
         "developerStatus": "active",
         "appName": "developer4-migration-app",
-        "appId": "",
+        "appId": "416192aa-d2cb-4c8a-b65c-12653a28f58f",
         "status": "approved",
         "callbackUrl": "",
         "attributes": [
@@ -1715,11 +1793,31 @@
           {
             "name": "Notes",
             "value": "Generated for migration import"
+          },
+          {
+            "name": "dod_designation",
+            "value": "Civilian"
+          },
+          {
+            "name": "dod_organization",
+            "value": "CDAO"
+          },
+          {
+            "name": "dod_service",
+            "value": "DoD"
+          },
+          {
+            "name": "dod_sub_org",
+            "value": "Catalog"
           }
         ],
         "metadata": {
           "DisplayName": "developer4-migration-app",
-          "Notes": "Generated for migration import"
+          "Notes": "Generated for migration import",
+          "dod_designation": "Civilian",
+          "dod_organization": "CDAO",
+          "dod_service": "DoD",
+          "dod_sub_org": "Catalog"
         },
         "customFields": [],
         "credentialIds": [
@@ -1742,7 +1840,7 @@
         "developerEmail": "developer5@example.com",
         "developerStatus": "active",
         "appName": "developer5-migration-app",
-        "appId": "",
+        "appId": "333860a2-2658-4d72-9d56-2d770d9bf1d0",
         "status": "approved",
         "callbackUrl": "",
         "attributes": [
@@ -1753,11 +1851,31 @@
           {
             "name": "Notes",
             "value": "Generated for migration import"
+          },
+          {
+            "name": "dod_designation",
+            "value": "Contractor"
+          },
+          {
+            "name": "dod_organization",
+            "value": "CDAO"
+          },
+          {
+            "name": "dod_service",
+            "value": "DoW"
+          },
+          {
+            "name": "dod_sub_org",
+            "value": "Advana"
           }
         ],
         "metadata": {
           "DisplayName": "developer5-migration-app",
-          "Notes": "Generated for migration import"
+          "Notes": "Generated for migration import",
+          "dod_designation": "Contractor",
+          "dod_organization": "CDAO",
+          "dod_service": "DoW",
+          "dod_sub_org": "Advana"
         },
         "customFields": [],
         "credentialIds": [
@@ -1780,7 +1898,7 @@
         "developerEmail": "developer6@example.com",
         "developerStatus": "active",
         "appName": "developer6-migration-app",
-        "appId": "",
+        "appId": "8ee29de3-66fe-4ed5-9182-376ad4b85bfe",
         "status": "approved",
         "callbackUrl": "",
         "attributes": [
@@ -1791,11 +1909,31 @@
           {
             "name": "Notes",
             "value": "Generated for migration import"
+          },
+          {
+            "name": "dod_designation",
+            "value": "Military"
+          },
+          {
+            "name": "dod_organization",
+            "value": "NavSea"
+          },
+          {
+            "name": "dod_service",
+            "value": "Navy"
+          },
+          {
+            "name": "dod_sub_org",
+            "value": "Navy-123"
           }
         ],
         "metadata": {
           "DisplayName": "developer6-migration-app",
-          "Notes": "Generated for migration import"
+          "Notes": "Generated for migration import",
+          "dod_designation": "Military",
+          "dod_organization": "NavSea",
+          "dod_service": "Navy",
+          "dod_sub_org": "Navy-123"
         },
         "customFields": [],
         "credentialIds": [
@@ -1818,7 +1956,7 @@
         "developerEmail": "developer7@example.com",
         "developerStatus": "active",
         "appName": "developer7-migration-app",
-        "appId": "",
+        "appId": "435dcd60-8368-4a4d-ae3f-43bdda83a0b2",
         "status": "approved",
         "callbackUrl": "",
         "attributes": [
@@ -1829,11 +1967,31 @@
           {
             "name": "Notes",
             "value": "Generated for migration import"
+          },
+          {
+            "name": "dod_designation",
+            "value": "Contractor"
+          },
+          {
+            "name": "dod_organization",
+            "value": "NavAir"
+          },
+          {
+            "name": "dod_service",
+            "value": "Navy"
+          },
+          {
+            "name": "dod_sub_org",
+            "value": "ABCDEFG"
           }
         ],
         "metadata": {
           "DisplayName": "developer7-migration-app",
-          "Notes": "Generated for migration import"
+          "Notes": "Generated for migration import",
+          "dod_designation": "Contractor",
+          "dod_organization": "NavAir",
+          "dod_service": "Navy",
+          "dod_sub_org": "ABCDEFG"
         },
         "customFields": [],
         "credentialIds": [
@@ -1856,7 +2014,7 @@
         "developerEmail": "developer8@example.com",
         "developerStatus": "active",
         "appName": "developer8-migration-app",
-        "appId": "",
+        "appId": "e562c094-8507-40e1-a89f-a33ea2bb8845",
         "status": "approved",
         "callbackUrl": "",
         "attributes": [
@@ -1867,11 +2025,31 @@
           {
             "name": "Notes",
             "value": "Generated for migration import"
+          },
+          {
+            "name": "dod_designation",
+            "value": "Civilian"
+          },
+          {
+            "name": "dod_organization",
+            "value": "CDAO"
+          },
+          {
+            "name": "dod_service",
+            "value": "DoW"
+          },
+          {
+            "name": "dod_sub_org",
+            "value": "WDP"
           }
         ],
         "metadata": {
           "DisplayName": "developer8-migration-app",
-          "Notes": "Generated for migration import"
+          "Notes": "Generated for migration import",
+          "dod_designation": "Civilian",
+          "dod_organization": "CDAO",
+          "dod_service": "DoW",
+          "dod_sub_org": "WDP"
         },
         "customFields": [],
         "credentialIds": [
@@ -1894,7 +2072,7 @@
         "developerEmail": "developer9@example.com",
         "developerStatus": "active",
         "appName": "developer9-migration-app",
-        "appId": "",
+        "appId": "c4d5a416-0099-44fc-a2e5-5958aa889b78",
         "status": "approved",
         "callbackUrl": "",
         "attributes": [
@@ -1905,11 +2083,31 @@
           {
             "name": "Notes",
             "value": "Generated for migration import"
+          },
+          {
+            "name": "dod_designation",
+            "value": "Military"
+          },
+          {
+            "name": "dod_organization",
+            "value": "SOCOM"
+          },
+          {
+            "name": "dod_service",
+            "value": "Army"
+          },
+          {
+            "name": "dod_sub_org",
+            "value": "sub org name 1"
           }
         ],
         "metadata": {
           "DisplayName": "developer9-migration-app",
-          "Notes": "Generated for migration import"
+          "Notes": "Generated for migration import",
+          "dod_designation": "Military",
+          "dod_organization": "SOCOM",
+          "dod_service": "Army",
+          "dod_sub_org": "sub org name 1"
         },
         "customFields": [],
         "credentialIds": [
@@ -1932,7 +2130,7 @@
         "developerEmail": "developer@example.com",
         "developerStatus": "active",
         "appName": "developer-migration-app",
-        "appId": "",
+        "appId": "51e6f772-ed71-4aa2-996e-ace54f17eea8",
         "status": "approved",
         "callbackUrl": "",
         "attributes": [
@@ -4902,7 +5100,7 @@
       "sourceId": "developer10@example.com",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "active",
       "lookup": {
         "email": "developer10@example.com"
@@ -4936,9 +5134,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "userId": "0b81fe3b-fdd7-48bd-81fe-3bfdd748bdf0"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_USER:developer10@example.com",
@@ -4977,7 +5173,7 @@
       "sourceId": "developer11@example.com",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "active",
       "lookup": {
         "email": "developer11@example.com"
@@ -5011,9 +5207,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "userId": "db7fa867-fa4b-48a7-bfa8-67fa4b88a7c1"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_USER:developer11@example.com",
@@ -5052,7 +5246,7 @@
       "sourceId": "developer12@example.com",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "active",
       "lookup": {
         "email": "developer12@example.com"
@@ -5086,9 +5280,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "userId": "66ec1587-c90e-464b-ac15-87c90ea64b73"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_USER:developer12@example.com",
@@ -5127,7 +5319,7 @@
       "sourceId": "developer13@example.com",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "active",
       "lookup": {
         "email": "developer13@example.com"
@@ -5161,9 +5353,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "userId": "cacbb498-2708-401d-8bb4-982708d01d22"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_USER:developer13@example.com",
@@ -5202,7 +5392,7 @@
       "sourceId": "developer14@example.com",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "active",
       "lookup": {
         "email": "developer14@example.com"
@@ -5236,9 +5426,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "userId": "d2477078-4383-42ce-8770-784383a2ced2"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_USER:developer14@example.com",
@@ -5277,7 +5465,7 @@
       "sourceId": "developer15@example.com",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "active",
       "lookup": {
         "email": "developer15@example.com"
@@ -5311,9 +5499,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "userId": "f2cdaaa5-15ab-42de-8daa-a515abc2de92"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_USER:developer15@example.com",
@@ -5352,7 +5538,7 @@
       "sourceId": "developer16@example.com",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "active",
       "lookup": {
         "email": "developer16@example.com"
@@ -5386,9 +5572,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "userId": "86e8498e-8ff2-4882-a849-8e8ff2088270"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_USER:developer16@example.com",
@@ -5427,7 +5611,7 @@
       "sourceId": "developer17@example.com",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "active",
       "lookup": {
         "email": "developer17@example.com"
@@ -5461,9 +5645,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "userId": "8ac226e7-e308-4920-8226-e7e308892035"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_USER:developer17@example.com",
@@ -5502,7 +5684,7 @@
       "sourceId": "developer18@example.com",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "active",
       "lookup": {
         "email": "developer18@example.com"
@@ -5536,9 +5718,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "userId": "8f8ac48a-a7a5-4b71-8ac4-8aa7a53b711c"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_USER:developer18@example.com",
@@ -5577,7 +5757,7 @@
       "sourceId": "developer19@example.com",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "active",
       "lookup": {
         "email": "developer19@example.com"
@@ -5611,9 +5791,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "userId": "ef067139-d9c3-4d73-8671-39d9c33d73b9"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_USER:developer19@example.com",
@@ -5652,7 +5830,7 @@
       "sourceId": "developer1@example.com",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "active",
       "lookup": {
         "email": "developer1@example.com"
@@ -5686,9 +5864,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "userId": "82e1b497-7b74-4ba0-a1b4-977b742ba000"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_USER:developer1@example.com",
@@ -6530,7 +6706,7 @@
       "sourceId": "developer30@example.com",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "active",
       "lookup": {
         "email": "developer30@example.com"
@@ -6564,9 +6740,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "userId": "7d121b20-cfe3-4d23-921b-20cfe37d2368"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_USER:developer30@example.com",
@@ -6605,7 +6779,7 @@
       "sourceId": "developer3@example.com",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "active",
       "lookup": {
         "email": "developer3@example.com"
@@ -6639,9 +6813,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "userId": "46314dc8-769a-4f8f-b14d-c8769aaf8f9b"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_USER:developer3@example.com",
@@ -6680,7 +6852,7 @@
       "sourceId": "developer4@example.com",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "active",
       "lookup": {
         "email": "developer4@example.com"
@@ -6714,9 +6886,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "userId": "dd0e9ac6-bf7a-4fa5-8e9a-c6bf7a2fa524"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_USER:developer4@example.com",
@@ -6755,7 +6925,7 @@
       "sourceId": "developer5@example.com",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "active",
       "lookup": {
         "email": "developer5@example.com"
@@ -6789,9 +6959,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "userId": "b9957941-0bb5-47fe-9579-410bb537fe2a"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_USER:developer5@example.com",
@@ -6830,7 +6998,7 @@
       "sourceId": "developer6@example.com",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "active",
       "lookup": {
         "email": "developer6@example.com"
@@ -6864,9 +7032,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "userId": "18d8a074-b956-45b7-98a0-74b956e5b7c8"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_USER:developer6@example.com",
@@ -6905,7 +7071,7 @@
       "sourceId": "developer7@example.com",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "active",
       "lookup": {
         "email": "developer7@example.com"
@@ -6939,9 +7105,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "userId": "a4410f22-eaf3-4b4c-810f-22eaf3db4cd0"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_USER:developer7@example.com",
@@ -6980,7 +7144,7 @@
       "sourceId": "developer8@example.com",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "active",
       "lookup": {
         "email": "developer8@example.com"
@@ -7014,9 +7178,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "userId": "a5cc451f-56dc-4ee9-8c45-1f56dcdee9ba"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_USER:developer8@example.com",
@@ -7055,7 +7217,7 @@
       "sourceId": "developer9@example.com",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "active",
       "lookup": {
         "email": "developer9@example.com"
@@ -7089,9 +7251,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "userId": "e46da870-9355-4014-ada8-709355d014ba"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_USER:developer9@example.com",
@@ -7130,7 +7290,7 @@
       "sourceId": "developer@example.com",
       "dependencies": [],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "active",
       "lookup": {
         "email": "developer@example.com"
@@ -7164,9 +7324,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "userId": "6d32ed20-246d-461b-b2ed-20246dc61b96"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_USER:developer@example.com",
@@ -7207,7 +7365,7 @@
         "UPSERT_USER:developer10@example.com"
       ],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "approved",
       "lookup": {
         "name": "developer10-migration-app",
@@ -7226,11 +7384,31 @@
           {
             "name": "Notes",
             "value": "Generated for migration import"
+          },
+          {
+            "name": "dod_designation",
+            "value": "Contractor"
+          },
+          {
+            "name": "dod_organization",
+            "value": "CDAO"
+          },
+          {
+            "name": "dod_service",
+            "value": "DoW"
+          },
+          {
+            "name": "dod_sub_org",
+            "value": "Advana"
           }
         ],
         "metadata": {
           "DisplayName": "developer10-migration-app",
-          "Notes": "Generated for migration import"
+          "Notes": "Generated for migration import",
+          "dod_designation": "Contractor",
+          "dod_organization": "CDAO",
+          "dod_service": "DoW",
+          "dod_sub_org": "Advana"
         },
         "customFields": [],
         "ownershipStrategy": "direct-member",
@@ -7248,9 +7426,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "applicationId": "25465ac6-fa57-4807-865a-c6fa57d8079c"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_APPLICATION:developer10@example.com/developer10-migration-app",
@@ -7272,7 +7448,11 @@
         "ownerEmail": "developer10@example.com",
         "expectedMetadata": {
           "DisplayName": "developer10-migration-app",
-          "Notes": "Generated for migration import"
+          "Notes": "Generated for migration import",
+          "dod_designation": "Contractor",
+          "dod_organization": "CDAO",
+          "dod_service": "DoW",
+          "dod_sub_org": "Advana"
         },
         "expectedNotifications": {
           "subscriptionAccepted": true,
@@ -7296,7 +7476,7 @@
         "UPSERT_USER:developer11@example.com"
       ],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "approved",
       "lookup": {
         "name": "developer11-migration-app",
@@ -7337,9 +7517,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "applicationId": "246100b9-1b3f-421c-a100-b91b3fd21cdc"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_APPLICATION:developer11@example.com/developer11-migration-app",
@@ -7385,7 +7563,7 @@
         "UPSERT_USER:developer12@example.com"
       ],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "approved",
       "lookup": {
         "name": "developer12-migration-app",
@@ -7426,9 +7604,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "applicationId": "98c84a5f-54ec-4cec-884a-5f54ec9cec47"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_APPLICATION:developer12@example.com/developer12-migration-app",
@@ -7474,7 +7650,7 @@
         "UPSERT_USER:developer13@example.com"
       ],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "approved",
       "lookup": {
         "name": "developer13-migration-app",
@@ -7515,9 +7691,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "applicationId": "e3dbe83e-2758-4e52-9be8-3e27583e52f6"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_APPLICATION:developer13@example.com/developer13-migration-app",
@@ -7563,7 +7737,7 @@
         "UPSERT_USER:developer14@example.com"
       ],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "approved",
       "lookup": {
         "name": "developer14-migration-app",
@@ -7604,9 +7778,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "applicationId": "03303e3d-1780-4439-b03e-3d178014398a"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_APPLICATION:developer14@example.com/developer14-migration-app",
@@ -7652,7 +7824,7 @@
         "UPSERT_USER:developer15@example.com"
       ],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "approved",
       "lookup": {
         "name": "developer15-migration-app",
@@ -7693,9 +7865,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "applicationId": "699d2522-bd50-42ed-9d25-22bd5062ed1e"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_APPLICATION:developer15@example.com/developer15-migration-app",
@@ -7741,7 +7911,7 @@
         "UPSERT_USER:developer16@example.com"
       ],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "approved",
       "lookup": {
         "name": "developer16-migration-app",
@@ -7782,9 +7952,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "applicationId": "4f2318c4-bb74-4a11-a318-c4bb745a1172"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_APPLICATION:developer16@example.com/developer16-migration-app",
@@ -7830,7 +7998,7 @@
         "UPSERT_USER:developer17@example.com"
       ],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "approved",
       "lookup": {
         "name": "developer17-migration-app",
@@ -7871,9 +8039,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "applicationId": "ba0ab854-96fe-4ed5-8ab8-5496feaed5ab"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_APPLICATION:developer17@example.com/developer17-migration-app",
@@ -7919,7 +8085,7 @@
         "UPSERT_USER:developer18@example.com"
       ],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "approved",
       "lookup": {
         "name": "developer18-migration-app",
@@ -7960,9 +8126,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "applicationId": "1be59ac6-9703-429c-a59a-c69703029c4c"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_APPLICATION:developer18@example.com/developer18-migration-app",
@@ -8008,7 +8172,7 @@
         "UPSERT_USER:developer19@example.com"
       ],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "approved",
       "lookup": {
         "name": "developer19-migration-app",
@@ -8049,9 +8213,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "applicationId": "589624ec-a167-4d43-9624-eca1674d431f"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_APPLICATION:developer19@example.com/developer19-migration-app",
@@ -8097,7 +8259,7 @@
         "UPSERT_USER:developer1@example.com"
       ],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "approved",
       "lookup": {
         "name": "developer1-migration-app",
@@ -8116,11 +8278,31 @@
           {
             "name": "Notes",
             "value": "Generated for migration import"
+          },
+          {
+            "name": "dod_designation",
+            "value": "Contractor"
+          },
+          {
+            "name": "dod_organization",
+            "value": "TRANSCOM"
+          },
+          {
+            "name": "dod_service",
+            "value": "Navy"
+          },
+          {
+            "name": "dod_sub_org",
+            "value": "sub org name 2"
           }
         ],
         "metadata": {
           "DisplayName": "developer1-migration-app",
-          "Notes": "Generated for migration import"
+          "Notes": "Generated for migration import",
+          "dod_designation": "Contractor",
+          "dod_organization": "TRANSCOM",
+          "dod_service": "Navy",
+          "dod_sub_org": "sub org name 2"
         },
         "customFields": [],
         "ownershipStrategy": "direct-member",
@@ -8138,9 +8320,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "applicationId": "c07446d1-5d98-44d2-b446-d15d9864d260"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_APPLICATION:developer1@example.com/developer1-migration-app",
@@ -8162,7 +8342,11 @@
         "ownerEmail": "developer1@example.com",
         "expectedMetadata": {
           "DisplayName": "developer1-migration-app",
-          "Notes": "Generated for migration import"
+          "Notes": "Generated for migration import",
+          "dod_designation": "Contractor",
+          "dod_organization": "TRANSCOM",
+          "dod_service": "Navy",
+          "dod_sub_org": "sub org name 2"
         },
         "expectedNotifications": {
           "subscriptionAccepted": true,
@@ -8186,7 +8370,7 @@
         "UPSERT_USER:developer20@example.com"
       ],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "approved",
       "lookup": {
         "name": "developer20-migration-app",
@@ -8227,9 +8411,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "applicationId": "39f900c9-cbd6-47b0-b900-c9cbd6a7b01e"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_APPLICATION:developer20@example.com/developer20-migration-app",
@@ -8275,7 +8457,7 @@
         "UPSERT_USER:developer21@example.com"
       ],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "approved",
       "lookup": {
         "name": "developer21-migration-app",
@@ -8316,9 +8498,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "applicationId": "aa4031e4-f090-43c7-8031-e4f09073c746"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_APPLICATION:developer21@example.com/developer21-migration-app",
@@ -8364,7 +8544,7 @@
         "UPSERT_USER:developer22@example.com"
       ],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "approved",
       "lookup": {
         "name": "developer22-migration-app",
@@ -8405,9 +8585,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "applicationId": "65ca29b4-cf6a-46cc-8a29-b4cf6a46cce3"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_APPLICATION:developer22@example.com/developer22-migration-app",
@@ -8453,7 +8631,7 @@
         "UPSERT_USER:developer23@example.com"
       ],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "approved",
       "lookup": {
         "name": "developer23-migration-app",
@@ -8494,9 +8672,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "applicationId": "710b73b2-ea2c-4de5-8b73-b2ea2c9de5ec"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_APPLICATION:developer23@example.com/developer23-migration-app",
@@ -8542,7 +8718,7 @@
         "UPSERT_USER:developer24@example.com"
       ],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "approved",
       "lookup": {
         "name": "developer24-migration-app",
@@ -8583,9 +8759,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "applicationId": "bb373901-6b97-4a87-b739-016b972a87b8"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_APPLICATION:developer24@example.com/developer24-migration-app",
@@ -8631,7 +8805,7 @@
         "UPSERT_USER:developer25@example.com"
       ],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "approved",
       "lookup": {
         "name": "developer25-migration-app",
@@ -8672,9 +8846,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "applicationId": "d80da944-2d30-4c10-8da9-442d302c100d"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_APPLICATION:developer25@example.com/developer25-migration-app",
@@ -8720,7 +8892,7 @@
         "UPSERT_USER:developer26@example.com"
       ],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "approved",
       "lookup": {
         "name": "developer26-migration-app",
@@ -8761,9 +8933,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "applicationId": "a156750d-459d-4863-9675-0d459de863ba"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_APPLICATION:developer26@example.com/developer26-migration-app",
@@ -8809,7 +8979,7 @@
         "UPSERT_USER:developer27@example.com"
       ],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "approved",
       "lookup": {
         "name": "developer27-migration-app",
@@ -8850,9 +9020,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "applicationId": "ac1c6883-090f-4747-9c68-83090f67472e"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_APPLICATION:developer27@example.com/developer27-migration-app",
@@ -8898,7 +9066,7 @@
         "UPSERT_USER:developer28@example.com"
       ],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "approved",
       "lookup": {
         "name": "developer28-migration-app",
@@ -8939,9 +9107,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "applicationId": "0ade99e9-b067-42be-9e99-e9b067c2be12"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_APPLICATION:developer28@example.com/developer28-migration-app",
@@ -8987,7 +9153,7 @@
         "UPSERT_USER:developer29@example.com"
       ],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "approved",
       "lookup": {
         "name": "developer29-migration-app",
@@ -9028,9 +9194,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "applicationId": "a323c565-e504-49f8-a3c5-65e504b9f87b"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_APPLICATION:developer29@example.com/developer29-migration-app",
@@ -9076,7 +9240,7 @@
         "UPSERT_USER:developer2@example.com"
       ],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "approved",
       "lookup": {
         "name": "developer2-migration-app",
@@ -9095,11 +9259,31 @@
           {
             "name": "Notes",
             "value": "Generated for migration import"
+          },
+          {
+            "name": "dod_designation",
+            "value": "Contractor"
+          },
+          {
+            "name": "dod_organization",
+            "value": "CDAO"
+          },
+          {
+            "name": "dod_service",
+            "value": "DoD"
+          },
+          {
+            "name": "dod_sub_org",
+            "value": "Advana"
           }
         ],
         "metadata": {
           "DisplayName": "developer2-migration-app",
-          "Notes": "Generated for migration import"
+          "Notes": "Generated for migration import",
+          "dod_designation": "Contractor",
+          "dod_organization": "CDAO",
+          "dod_service": "DoD",
+          "dod_sub_org": "Advana"
         },
         "customFields": [],
         "ownershipStrategy": "direct-member",
@@ -9117,9 +9301,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "applicationId": "33a295de-105a-4ee4-a295-de105a3ee4de"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_APPLICATION:developer2@example.com/developer2-migration-app",
@@ -9141,7 +9323,11 @@
         "ownerEmail": "developer2@example.com",
         "expectedMetadata": {
           "DisplayName": "developer2-migration-app",
-          "Notes": "Generated for migration import"
+          "Notes": "Generated for migration import",
+          "dod_designation": "Contractor",
+          "dod_organization": "CDAO",
+          "dod_service": "DoD",
+          "dod_sub_org": "Advana"
         },
         "expectedNotifications": {
           "subscriptionAccepted": true,
@@ -9165,7 +9351,7 @@
         "UPSERT_USER:developer30@example.com"
       ],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "approved",
       "lookup": {
         "name": "developer30-migration-app",
@@ -9206,9 +9392,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "applicationId": "be68fabe-ea1e-4369-a8fa-beea1ea3693f"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_APPLICATION:developer30@example.com/developer30-migration-app",
@@ -9254,7 +9438,7 @@
         "UPSERT_USER:developer3@example.com"
       ],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "approved",
       "lookup": {
         "name": "developer3-migration-app",
@@ -9273,11 +9457,31 @@
           {
             "name": "Notes",
             "value": "Generated for migration import"
+          },
+          {
+            "name": "dod_designation",
+            "value": "Contractor"
+          },
+          {
+            "name": "dod_organization",
+            "value": "CDAO"
+          },
+          {
+            "name": "dod_service",
+            "value": "DoW"
+          },
+          {
+            "name": "dod_sub_org",
+            "value": "WDP"
           }
         ],
         "metadata": {
           "DisplayName": "developer3-migration-app",
-          "Notes": "Generated for migration import"
+          "Notes": "Generated for migration import",
+          "dod_designation": "Contractor",
+          "dod_organization": "CDAO",
+          "dod_service": "DoW",
+          "dod_sub_org": "WDP"
         },
         "customFields": [],
         "ownershipStrategy": "direct-member",
@@ -9295,9 +9499,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "applicationId": "4310e656-824f-4fc7-90e6-56824f4fc7fd"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_APPLICATION:developer3@example.com/developer3-migration-app",
@@ -9319,7 +9521,11 @@
         "ownerEmail": "developer3@example.com",
         "expectedMetadata": {
           "DisplayName": "developer3-migration-app",
-          "Notes": "Generated for migration import"
+          "Notes": "Generated for migration import",
+          "dod_designation": "Contractor",
+          "dod_organization": "CDAO",
+          "dod_service": "DoW",
+          "dod_sub_org": "WDP"
         },
         "expectedNotifications": {
           "subscriptionAccepted": true,
@@ -9343,7 +9549,7 @@
         "UPSERT_USER:developer4@example.com"
       ],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "approved",
       "lookup": {
         "name": "developer4-migration-app",
@@ -9362,11 +9568,31 @@
           {
             "name": "Notes",
             "value": "Generated for migration import"
+          },
+          {
+            "name": "dod_designation",
+            "value": "Civilian"
+          },
+          {
+            "name": "dod_organization",
+            "value": "CDAO"
+          },
+          {
+            "name": "dod_service",
+            "value": "DoD"
+          },
+          {
+            "name": "dod_sub_org",
+            "value": "Catalog"
           }
         ],
         "metadata": {
           "DisplayName": "developer4-migration-app",
-          "Notes": "Generated for migration import"
+          "Notes": "Generated for migration import",
+          "dod_designation": "Civilian",
+          "dod_organization": "CDAO",
+          "dod_service": "DoD",
+          "dod_sub_org": "Catalog"
         },
         "customFields": [],
         "ownershipStrategy": "direct-member",
@@ -9384,9 +9610,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "applicationId": "16969087-941a-434f-9690-87941ad34fb1"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_APPLICATION:developer4@example.com/developer4-migration-app",
@@ -9408,7 +9632,11 @@
         "ownerEmail": "developer4@example.com",
         "expectedMetadata": {
           "DisplayName": "developer4-migration-app",
-          "Notes": "Generated for migration import"
+          "Notes": "Generated for migration import",
+          "dod_designation": "Civilian",
+          "dod_organization": "CDAO",
+          "dod_service": "DoD",
+          "dod_sub_org": "Catalog"
         },
         "expectedNotifications": {
           "subscriptionAccepted": true,
@@ -9432,7 +9660,7 @@
         "UPSERT_USER:developer5@example.com"
       ],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "approved",
       "lookup": {
         "name": "developer5-migration-app",
@@ -9451,11 +9679,31 @@
           {
             "name": "Notes",
             "value": "Generated for migration import"
+          },
+          {
+            "name": "dod_designation",
+            "value": "Contractor"
+          },
+          {
+            "name": "dod_organization",
+            "value": "CDAO"
+          },
+          {
+            "name": "dod_service",
+            "value": "DoW"
+          },
+          {
+            "name": "dod_sub_org",
+            "value": "Advana"
           }
         ],
         "metadata": {
           "DisplayName": "developer5-migration-app",
-          "Notes": "Generated for migration import"
+          "Notes": "Generated for migration import",
+          "dod_designation": "Contractor",
+          "dod_organization": "CDAO",
+          "dod_service": "DoW",
+          "dod_sub_org": "Advana"
         },
         "customFields": [],
         "ownershipStrategy": "direct-member",
@@ -9473,9 +9721,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "applicationId": "e6f71773-5863-42b3-b717-73586342b36e"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_APPLICATION:developer5@example.com/developer5-migration-app",
@@ -9497,7 +9743,11 @@
         "ownerEmail": "developer5@example.com",
         "expectedMetadata": {
           "DisplayName": "developer5-migration-app",
-          "Notes": "Generated for migration import"
+          "Notes": "Generated for migration import",
+          "dod_designation": "Contractor",
+          "dod_organization": "CDAO",
+          "dod_service": "DoW",
+          "dod_sub_org": "Advana"
         },
         "expectedNotifications": {
           "subscriptionAccepted": true,
@@ -9521,7 +9771,7 @@
         "UPSERT_USER:developer6@example.com"
       ],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "approved",
       "lookup": {
         "name": "developer6-migration-app",
@@ -9540,11 +9790,31 @@
           {
             "name": "Notes",
             "value": "Generated for migration import"
+          },
+          {
+            "name": "dod_designation",
+            "value": "Military"
+          },
+          {
+            "name": "dod_organization",
+            "value": "NavSea"
+          },
+          {
+            "name": "dod_service",
+            "value": "Navy"
+          },
+          {
+            "name": "dod_sub_org",
+            "value": "Navy-123"
           }
         ],
         "metadata": {
           "DisplayName": "developer6-migration-app",
-          "Notes": "Generated for migration import"
+          "Notes": "Generated for migration import",
+          "dod_designation": "Military",
+          "dod_organization": "NavSea",
+          "dod_service": "Navy",
+          "dod_sub_org": "Navy-123"
         },
         "customFields": [],
         "ownershipStrategy": "direct-member",
@@ -9562,9 +9832,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "applicationId": "ef8c43d6-7c40-4768-8c43-d67c40f76804"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_APPLICATION:developer6@example.com/developer6-migration-app",
@@ -9586,7 +9854,11 @@
         "ownerEmail": "developer6@example.com",
         "expectedMetadata": {
           "DisplayName": "developer6-migration-app",
-          "Notes": "Generated for migration import"
+          "Notes": "Generated for migration import",
+          "dod_designation": "Military",
+          "dod_organization": "NavSea",
+          "dod_service": "Navy",
+          "dod_sub_org": "Navy-123"
         },
         "expectedNotifications": {
           "subscriptionAccepted": true,
@@ -9610,7 +9882,7 @@
         "UPSERT_USER:developer7@example.com"
       ],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "approved",
       "lookup": {
         "name": "developer7-migration-app",
@@ -9629,11 +9901,31 @@
           {
             "name": "Notes",
             "value": "Generated for migration import"
+          },
+          {
+            "name": "dod_designation",
+            "value": "Contractor"
+          },
+          {
+            "name": "dod_organization",
+            "value": "NavAir"
+          },
+          {
+            "name": "dod_service",
+            "value": "Navy"
+          },
+          {
+            "name": "dod_sub_org",
+            "value": "ABCDEFG"
           }
         ],
         "metadata": {
           "DisplayName": "developer7-migration-app",
-          "Notes": "Generated for migration import"
+          "Notes": "Generated for migration import",
+          "dod_designation": "Contractor",
+          "dod_organization": "NavAir",
+          "dod_service": "Navy",
+          "dod_sub_org": "ABCDEFG"
         },
         "customFields": [],
         "ownershipStrategy": "direct-member",
@@ -9651,9 +9943,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "applicationId": "6e923a98-6a9a-436a-923a-986a9a536a75"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_APPLICATION:developer7@example.com/developer7-migration-app",
@@ -9675,7 +9965,11 @@
         "ownerEmail": "developer7@example.com",
         "expectedMetadata": {
           "DisplayName": "developer7-migration-app",
-          "Notes": "Generated for migration import"
+          "Notes": "Generated for migration import",
+          "dod_designation": "Contractor",
+          "dod_organization": "NavAir",
+          "dod_service": "Navy",
+          "dod_sub_org": "ABCDEFG"
         },
         "expectedNotifications": {
           "subscriptionAccepted": true,
@@ -9699,7 +9993,7 @@
         "UPSERT_USER:developer8@example.com"
       ],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "approved",
       "lookup": {
         "name": "developer8-migration-app",
@@ -9718,11 +10012,31 @@
           {
             "name": "Notes",
             "value": "Generated for migration import"
+          },
+          {
+            "name": "dod_designation",
+            "value": "Civilian"
+          },
+          {
+            "name": "dod_organization",
+            "value": "CDAO"
+          },
+          {
+            "name": "dod_service",
+            "value": "DoW"
+          },
+          {
+            "name": "dod_sub_org",
+            "value": "WDP"
           }
         ],
         "metadata": {
           "DisplayName": "developer8-migration-app",
-          "Notes": "Generated for migration import"
+          "Notes": "Generated for migration import",
+          "dod_designation": "Civilian",
+          "dod_organization": "CDAO",
+          "dod_service": "DoW",
+          "dod_sub_org": "WDP"
         },
         "customFields": [],
         "ownershipStrategy": "direct-member",
@@ -9740,9 +10054,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "applicationId": "d086c0d8-f9b0-4ef4-86c0-d8f9b0bef477"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_APPLICATION:developer8@example.com/developer8-migration-app",
@@ -9764,7 +10076,11 @@
         "ownerEmail": "developer8@example.com",
         "expectedMetadata": {
           "DisplayName": "developer8-migration-app",
-          "Notes": "Generated for migration import"
+          "Notes": "Generated for migration import",
+          "dod_designation": "Civilian",
+          "dod_organization": "CDAO",
+          "dod_service": "DoW",
+          "dod_sub_org": "WDP"
         },
         "expectedNotifications": {
           "subscriptionAccepted": true,
@@ -9788,7 +10104,7 @@
         "UPSERT_USER:developer9@example.com"
       ],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "approved",
       "lookup": {
         "name": "developer9-migration-app",
@@ -9807,11 +10123,31 @@
           {
             "name": "Notes",
             "value": "Generated for migration import"
+          },
+          {
+            "name": "dod_designation",
+            "value": "Military"
+          },
+          {
+            "name": "dod_organization",
+            "value": "SOCOM"
+          },
+          {
+            "name": "dod_service",
+            "value": "Army"
+          },
+          {
+            "name": "dod_sub_org",
+            "value": "sub org name 1"
           }
         ],
         "metadata": {
           "DisplayName": "developer9-migration-app",
-          "Notes": "Generated for migration import"
+          "Notes": "Generated for migration import",
+          "dod_designation": "Military",
+          "dod_organization": "SOCOM",
+          "dod_service": "Army",
+          "dod_sub_org": "sub org name 1"
         },
         "customFields": [],
         "ownershipStrategy": "direct-member",
@@ -9829,9 +10165,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "applicationId": "683ac975-b621-427d-bac9-75b621e27db4"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_APPLICATION:developer9@example.com/developer9-migration-app",
@@ -9853,7 +10187,11 @@
         "ownerEmail": "developer9@example.com",
         "expectedMetadata": {
           "DisplayName": "developer9-migration-app",
-          "Notes": "Generated for migration import"
+          "Notes": "Generated for migration import",
+          "dod_designation": "Military",
+          "dod_organization": "SOCOM",
+          "dod_service": "Army",
+          "dod_sub_org": "sub org name 1"
         },
         "expectedNotifications": {
           "subscriptionAccepted": true,
@@ -9877,7 +10215,7 @@
         "UPSERT_USER:developer@example.com"
       ],
       "plannedStatus": "READY",
-      "operation": "REUSE",
+      "operation": "CREATE",
       "desiredState": "approved",
       "lookup": {
         "name": "developer-migration-app",
@@ -9918,9 +10256,7 @@
       "blockers": [],
       "warnings": [],
       "manualReviewReasons": [],
-      "targetHint": {
-        "applicationId": "136ac2ad-4abd-464c-aac2-ad4abda64cfd"
-      }
+      "targetHint": {}
     },
     {
       "actionId": "VERIFY_APPLICATION:developer@example.com/developer-migration-app",

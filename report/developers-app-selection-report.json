@@ -1,11 +1,43 @@
 {
-  "generatedAt": "2026-06-29T20:47:07.672Z",
+  "generatedAt": "2026-07-01T15:47:48.466Z",
   "command": "developers select-apps",
   "irDir": "/Users/daniel.roder/Sites/apigee2gravitee/ir",
   "configPath": "/Users/daniel.roder/Sites/apigee2gravitee/config/developers.config.resolved.json",
   "cleared": false,
   "skipped": false,
-  "existingIncludeApps": [],
+  "existingIncludeApps": [
+    "developer@example.com/developer-migration-app",
+    "developer1@example.com/developer1-migration-app",
+    "developer10@example.com/developer10-migration-app",
+    "developer11@example.com/developer11-migration-app",
+    "developer12@example.com/developer12-migration-app",
+    "developer13@example.com/developer13-migration-app",
+    "developer14@example.com/developer14-migration-app",
+    "developer15@example.com/developer15-migration-app",
+    "developer16@example.com/developer16-migration-app",
+    "developer17@example.com/developer17-migration-app",
+    "developer18@example.com/developer18-migration-app",
+    "developer19@example.com/developer19-migration-app",
+    "developer2@example.com/developer2-migration-app",
+    "developer20@example.com/developer20-migration-app",
+    "developer21@example.com/developer21-migration-app",
+    "developer22@example.com/developer22-migration-app",
+    "developer23@example.com/developer23-migration-app",
+    "developer24@example.com/developer24-migration-app",
+    "developer25@example.com/developer25-migration-app",
+    "developer26@example.com/developer26-migration-app",
+    "developer27@example.com/developer27-migration-app",
+    "developer28@example.com/developer28-migration-app",
+    "developer29@example.com/developer29-migration-app",
+    "developer3@example.com/developer3-migration-app",
+    "developer30@example.com/developer30-migration-app",
+    "developer4@example.com/developer4-migration-app",
+    "developer5@example.com/developer5-migration-app",
+    "developer6@example.com/developer6-migration-app",
+    "developer7@example.com/developer7-migration-app",
+    "developer8@example.com/developer8-migration-app",
+    "developer9@example.com/developer9-migration-app"
+  ],
   "summary": {
     "totalAppsDiscovered": 31,
     "selectedApps": 31,
@@ -25,7 +57,7 @@
       "products": [
         "leap-api-product"
       ],
-      "preselected": false
+      "preselected": true
     },
     {
       "sourceId": "developer1@example.com/developer1-migration-app",
@@ -37,7 +69,7 @@
       "products": [
         "collibra-api-product"
       ],
-      "preselected": false
+      "preselected": true
     },
     {
       "sourceId": "developer10@example.com/developer10-migration-app",
@@ -49,7 +81,7 @@
       "products": [
         "llm-gateway-product"
       ],
-      "preselected": false
+      "preselected": true
     },
     {
       "sourceId": "developer11@example.com/developer11-migration-app",
@@ -61,7 +93,7 @@
       "products": [
         "maintenance-repair-api-product"
       ],
-      "preselected": false
+      "preselected": true
     },
     {
       "sourceId": "developer12@example.com/developer12-migration-app",
@@ -73,7 +105,7 @@
       "products": [
         "flight-aware-api-product"
       ],
-      "preselected": false
+      "preselected": true
     },
     {
       "sourceId": "developer13@example.com/developer13-migration-app",
@@ -85,7 +117,7 @@
       "products": [
         "llm-gateway-product"
       ],
-      "preselected": false
+      "preselected": true
     },
     {
       "sourceId": "developer14@example.com/developer14-migration-app",
@@ -97,7 +129,7 @@
       "products": [
         "collibra-api-product"
       ],
-      "preselected": false
+      "preselected": true
     },
     {
       "sourceId": "developer15@example.com/developer15-migration-app",
@@ -109,7 +141,7 @@
       "products": [
         "maintenance-repair-api-product"
       ],
-      "preselected": false
+      "preselected": true
     },
     {
       "sourceId": "developer16@example.com/developer16-migration-app",
@@ -121,7 +153,7 @@
       "products": [
         "flight-aware-api-product"
       ],
-      "preselected": false
+      "preselected": true
     },
     {
       "sourceId": "developer17@example.com/developer17-migration-app",
@@ -133,7 +165,7 @@
       "products": [
         "llm-gateway-product"
       ],
-      "preselected": false
+      "preselected": true
     },
     {
       "sourceId": "developer18@example.com/developer18-migration-app",
@@ -145,7 +177,7 @@
       "products": [
         "flight-aware-api-product"
       ],
-      "preselected": false
+      "preselected": true
     },
     {
       "sourceId": "developer19@example.com/developer19-migration-app",
@@ -157,7 +189,7 @@
       "products": [
         "flight-aware-api-product"
       ],
-      "preselected": false
+      "preselected": true
     },
     {
       "sourceId": "developer2@example.com/developer2-migration-app",
@@ -169,7 +201,7 @@
       "products": [
         "maintenance-repair-api-product"
       ],
-      "preselected": false
+      "preselected": true
     },
     {
       "sourceId": "developer20@example.com/developer20-migration-app",
@@ -181,7 +213,7 @@
       "products": [
         "llm-gateway-product"
       ],
-      "preselected": false
+      "preselected": true
     },
     {
       "sourceId": "developer21@example.com/developer21-migration-app",
@@ -193,7 +225,7 @@
       "products": [
         "leap-api-product"
       ],
-      "preselected": false
+      "preselected": true
     },
     {
       "sourceId": "developer22@example.com/developer22-migration-app",
@@ -205,7 +237,7 @@
       "products": [
         "flight-aware-api-product"
       ],
-      "preselected": false
+      "preselected": true
     },
     {
       "sourceId": "developer23@example.com/developer23-migration-app",
@@ -217,7 +249,7 @@
       "products": [
         "collibra-api-product"
       ],
-      "preselected": false
+      "preselected": true
     },
     {
       "sourceId": "developer24@example.com/developer24-migration-app",
@@ -229,7 +261,7 @@
       "products": [
         "llm-gateway-product"
       ],
-      "preselected": false
+      "preselected": true
     },
     {
       "sourceId": "developer25@example.com/developer25-migration-app",
@@ -241,7 +273,7 @@
       "products": [
         "maintenance-repair-api-product"
       ],
-      "preselected": false
+      "preselected": true
     },
     {
       "sourceId": "developer26@example.com/developer26-migration-app",
@@ -253,7 +285,7 @@
       "products": [
         "leap-api-product"
       ],
-      "preselected": false
+      "preselected": true
     },
     {
       "sourceId": "developer27@example.com/developer27-migration-app",
@@ -265,7 +297,7 @@
       "products": [
         "flight-aware-api-product"
       ],
-      "preselected": false
+      "preselected": true
     },
     {
       "sourceId": "developer28@example.com/developer28-migration-app",
@@ -277,7 +309,7 @@
       "products": [
         "collibra-api-product"
       ],
-      "preselected": false
+      "preselected": true
     },
     {
       "sourceId": "developer29@example.com/developer29-migration-app",
@@ -289,7 +321,7 @@
       "products": [
         "llm-gateway-product"
       ],
-      "preselected": false
+      "preselected": true
     },
     {
       "sourceId": "developer3@example.com/developer3-migration-app",
@@ -301,7 +333,7 @@
       "products": [
         "llm-gateway-product"
       ],
-      "preselected": false
+      "preselected": true
     },
     {
       "sourceId": "developer30@example.com/developer30-migration-app",
@@ -313,7 +345,7 @@
       "products": [
         "maintenance-repair-api-product"
       ],
-      "preselected": false
+      "preselected": true
     },
     {
       "sourceId": "developer4@example.com/developer4-migration-app",
@@ -325,7 +357,7 @@
       "products": [
         "collibra-api-product"
       ],
-      "preselected": false
+      "preselected": true
     },
     {
       "sourceId": "developer5@example.com/developer5-migration-app",
@@ -337,7 +369,7 @@
       "products": [
         "collibra-api-product"
       ],
-      "preselected": false
+      "preselected": true
     },
     {
       "sourceId": "developer6@example.com/developer6-migration-app",
@@ -349,7 +381,7 @@
       "products": [
         "maintenance-repair-api-product"
       ],
-      "preselected": false
+      "preselected": true
     },
     {
       "sourceId": "developer7@example.com/developer7-migration-app",
@@ -361,7 +393,7 @@
       "products": [
         "collibra-api-product"
       ],
-      "preselected": false
+      "preselected": true
     },
     {
       "sourceId": "developer8@example.com/developer8-migration-app",
@@ -373,7 +405,7 @@
       "products": [
         "flight-aware-api-product"
       ],
-      "preselected": false
+      "preselected": true
     },
     {
       "sourceId": "developer9@example.com/developer9-migration-app",
@@ -385,7 +417,7 @@
       "products": [
         "maintenance-repair-api-product"
       ],
-      "preselected": false
+      "preselected": true
     }
   ],
   "excludedApps": [],

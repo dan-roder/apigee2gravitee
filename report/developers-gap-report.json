@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-30T19:45:51.048Z",
+  "generatedAt": "2026-07-01T15:54:07.725Z",
   "summary": {
     "users": 31,
     "applications": 31,
@@ -23,7 +23,7 @@
     "oauthRelevantSecretCount": 0,
     "missingProtectedSecretCount": 0,
     "oauthSecretManualReviewCount": 0,
-    "applicationMetadataAttributeCount": 2
+    "applicationMetadataAttributeCount": 6
   },
   "findings": [
     {
@@ -621,6 +621,125 @@
         ]
       },
       {
+        "name": "dod_designation",
+        "metadataKey": "dod_designation",
+        "appCount": 10,
+        "occurrenceCount": 10,
+        "apps": [
+          "developer10@example.com/developer10-migration-app",
+          "developer1@example.com/developer1-migration-app",
+          "developer2@example.com/developer2-migration-app",
+          "developer3@example.com/developer3-migration-app",
+          "developer4@example.com/developer4-migration-app",
+          "developer5@example.com/developer5-migration-app",
+          "developer6@example.com/developer6-migration-app",
+          "developer7@example.com/developer7-migration-app",
+          "developer8@example.com/developer8-migration-app",
+          "developer9@example.com/developer9-migration-app"
+        ],
+        "sampleValues": [
+          "Civilian",
+          "Contractor",
+          "Military"
+        ],
+        "emptyValueCount": 0,
+        "nonEmptyValueCount": 10,
+        "recommendedAction": "MAP_VERBATIM",
+        "riskFlags": []
+      },
+      {
+        "name": "dod_organization",
+        "metadataKey": "dod_organization",
+        "appCount": 10,
+        "occurrenceCount": 10,
+        "apps": [
+          "developer10@example.com/developer10-migration-app",
+          "developer1@example.com/developer1-migration-app",
+          "developer2@example.com/developer2-migration-app",
+          "developer3@example.com/developer3-migration-app",
+          "developer4@example.com/developer4-migration-app",
+          "developer5@example.com/developer5-migration-app",
+          "developer6@example.com/developer6-migration-app",
+          "developer7@example.com/developer7-migration-app",
+          "developer8@example.com/developer8-migration-app",
+          "developer9@example.com/developer9-migration-app"
+        ],
+        "sampleValues": [
+          "CDAO",
+          "NavAir",
+          "NavSea",
+          "SOCOM",
+          "TRANSCOM"
+        ],
+        "emptyValueCount": 0,
+        "nonEmptyValueCount": 10,
+        "recommendedAction": "MAP_VERBATIM",
+        "riskFlags": [
+          "HIGH_CARDINALITY"
+        ]
+      },
+      {
+        "name": "dod_service",
+        "metadataKey": "dod_service",
+        "appCount": 10,
+        "occurrenceCount": 10,
+        "apps": [
+          "developer10@example.com/developer10-migration-app",
+          "developer1@example.com/developer1-migration-app",
+          "developer2@example.com/developer2-migration-app",
+          "developer3@example.com/developer3-migration-app",
+          "developer4@example.com/developer4-migration-app",
+          "developer5@example.com/developer5-migration-app",
+          "developer6@example.com/developer6-migration-app",
+          "developer7@example.com/developer7-migration-app",
+          "developer8@example.com/developer8-migration-app",
+          "developer9@example.com/developer9-migration-app"
+        ],
+        "sampleValues": [
+          "Army",
+          "DoD",
+          "DoW",
+          "Navy"
+        ],
+        "emptyValueCount": 0,
+        "nonEmptyValueCount": 10,
+        "recommendedAction": "MAP_VERBATIM",
+        "riskFlags": [
+          "HIGH_CARDINALITY"
+        ]
+      },
+      {
+        "name": "dod_sub_org",
+        "metadataKey": "dod_sub_org",
+        "appCount": 10,
+        "occurrenceCount": 10,
+        "apps": [
+          "developer10@example.com/developer10-migration-app",
+          "developer1@example.com/developer1-migration-app",
+          "developer2@example.com/developer2-migration-app",
+          "developer3@example.com/developer3-migration-app",
+          "developer4@example.com/developer4-migration-app",
+          "developer5@example.com/developer5-migration-app",
+          "developer6@example.com/developer6-migration-app",
+          "developer7@example.com/developer7-migration-app",
+          "developer8@example.com/developer8-migration-app",
+          "developer9@example.com/developer9-migration-app"
+        ],
+        "sampleValues": [
+          "ABCDEFG",
+          "Advana",
+          "Catalog",
+          "Navy-123",
+          "WDP"
+        ],
+        "emptyValueCount": 0,
+        "nonEmptyValueCount": 10,
+        "recommendedAction": "MAP_VERBATIM",
+        "riskFlags": [
+          "HIGH_CARDINALITY"
+        ]
+      },
+      {
         "name": "Notes",
         "metadataKey": "Notes",
         "appCount": 31,
@@ -668,14 +787,18 @@
       }
     ],
     "summary": {
-      "attributeCount": 2,
+      "attributeCount": 6,
       "appCount": 31,
       "mappedMetadataKeys": [
         "DisplayName",
+        "dod_designation",
+        "dod_organization",
+        "dod_service",
+        "dod_sub_org",
         "Notes"
       ],
       "riskFlagCounts": {
-        "HIGH_CARDINALITY": 1
+        "HIGH_CARDINALITY": 4
       }
     }
   },
@@ -710,19 +833,17 @@
     "operatorActions": {
       "byKind": {
         "UPSERT_USER": {
-          "REUSE": 20,
-          "CREATE": 11
+          "CREATE": 31
         },
         "UPSERT_APPLICATION": {
-          "REUSE": 31
+          "CREATE": 31
         },
         "UPSERT_SUBSCRIPTION": {
           "DEFER": 31
         }
       },
       "byOperation": {
-        "REUSE": 51,
-        "CREATE": 11,
+        "CREATE": 62,
         "DEFER": 31
       },
       "blockedReasons": {},
